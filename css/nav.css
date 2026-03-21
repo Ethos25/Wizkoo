@@ -8,12 +8,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(245,244,240,0.95);
+  background: rgba(10,10,10,0.95);
   backdrop-filter: blur(10px);
   border-bottom: 2px solid var(--saffron);
+  color: var(--paper);
 }
 
-nav .wm { font-size: 32px; }
+nav .wm { font-size: 32px; color: var(--paper); }
 
 .nav-links {
   display: flex;
@@ -25,7 +26,7 @@ nav .wm { font-size: 32px; }
   font-family: 'DM Sans', sans-serif;
   font-weight: 400;
   font-size: 0.88rem;
-  color: var(--ink);
+  color: var(--paper);
   text-decoration: none;
   opacity: 1;
   transition: opacity 0.15s;
@@ -45,8 +46,8 @@ nav .nb {
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   padding: 9px 20px;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--saffron);
+  color: var(--ink);
   border: none;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
@@ -72,7 +73,7 @@ nav .nb:hover { background: var(--saffron); color: var(--ink); }
   display: block;
   width: 100%;
   height: 2px;
-  background: var(--ink);
+  background: var(--paper);
   transition: transform 0.2s, opacity 0.2s;
 }
 
