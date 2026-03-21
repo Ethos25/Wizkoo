@@ -1,6 +1,6 @@
 /* ═══ HERO ═══ */
 .hero {
-  margin-top: 60px;
+  margin: 60px auto 0;
   padding: var(--section-pad) var(--content-pad) var(--section-pad);
   max-width: var(--max-width);
 }
@@ -15,7 +15,7 @@
 .hero .sub-block {
   margin-top: 48px;
   display: grid;
-  grid-template-columns: 480px auto;
+  grid-template-columns: 480px max-content;
   gap: 48px;
   align-items: end;
 }
@@ -392,6 +392,8 @@
   padding: var(--section-pad) var(--content-pad);
   border-top: 1px solid var(--rule);
   max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
 }
 .testimonials .tag { margin-bottom: 32px; }
 .testimonials-grid {
@@ -432,6 +434,8 @@
   padding: var(--section-pad) var(--content-pad);
   border-top: 1px solid var(--rule);
   max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
 }
 .faq-inner { max-width: 720px; }
 .faq-section .tag { margin-bottom: 16px; }
@@ -501,7 +505,7 @@
 .hero { opacity: 1 !important; transform: none !important; }
 
 /* ═══ CTA SECTION ═══ */
-.cta-section { padding: 100px var(--content-pad); max-width: 600px; }
+.cta-section { padding: 100px var(--content-pad); max-width: 600px; margin-left: auto; margin-right: auto; }
 .cta-section h2 {
   font-family: 'Sora', sans-serif;
   font-weight: 200;

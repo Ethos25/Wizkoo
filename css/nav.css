@@ -136,7 +136,8 @@ nav .nb:hover { background: var(--saffron); color: var(--ink); }
   .nav-links { display: none; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   nav { padding: 0 var(--content-pad-mobile); }
   .hamburger { display: flex; }
+  nav .nb { display: none; }
 }
