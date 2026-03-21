@@ -8,12 +8,12 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(250,250,250,0.92);
+  background: rgba(245,244,240,0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 2px solid var(--saffron);
 }
 
-nav .wm { font-size: 24px; }
+nav .wm { font-size: 32px; }
 
 .nav-links {
   display: flex;
@@ -27,7 +27,7 @@ nav .wm { font-size: 24px; }
   font-size: 0.88rem;
   color: var(--ink);
   text-decoration: none;
-  opacity: 0.6;
+  opacity: 1;
   transition: opacity 0.15s;
 }
 .nav-link:hover { opacity: 1; }
@@ -36,7 +36,7 @@ nav .wm { font-size: 24px; }
   border-bottom: 2px solid var(--saffron);
   padding-bottom: 2px;
 }
-.how-it-works { opacity: 0.55; }
+.how-it-works { opacity: 1; }
 
 /* Nav primary button */
 nav .nb {
