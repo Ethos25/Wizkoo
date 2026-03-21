@@ -12,22 +12,19 @@ nav {
   border-bottom: none;
   overflow: hidden;
 }
-
 nav .wm {
   font-size: 28px;
   color: var(--paper);
   flex-shrink: 0;
 }
-
+/* Wordmark i-dot fix for dark nav background */
 nav .wm .i-fix::before { background: var(--ink); }
-
 .nav-links {
   display: flex;
   align-items: center;
   gap: 36px;
   flex-shrink: 0;
 }
-
 .nav-link {
   font-family: 'DM Sans', sans-serif;
   font-weight: 400;
@@ -45,7 +42,7 @@ nav .wm .i-fix::before { background: var(--ink); }
   padding-bottom: 2px;
 }
 .how-it-works { color: rgba(250,250,250,0.5); }
-
+/* Nav primary button */
 nav .nb {
   font-family: 'Sora', sans-serif;
   font-weight: 600;
@@ -67,7 +64,7 @@ nav .nb:hover {
   background: #D4A030;
   transform: translateY(-1px);
 }
-
+/* ─── Hamburger ─── */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -86,7 +83,7 @@ nav .nb:hover {
   background: var(--paper);
   transition: transform 0.2s, opacity 0.2s;
 }
-
+/* ─── Mobile overlay ─── */
 .mobile-overlay {
   display: none;
   position: fixed;
@@ -99,7 +96,6 @@ nav .nb:hover {
   gap: 32px;
 }
 .mobile-overlay.open { display: flex; }
-
 .mobile-close {
   position: absolute;
   top: 20px;
@@ -114,7 +110,6 @@ nav .nb:hover {
   transition: opacity 0.2s;
 }
 .mobile-close:hover { opacity: 1; }
-
 .mobile-links {
   display: flex;
   flex-direction: column;
@@ -132,7 +127,6 @@ nav .nb:hover {
   transition: opacity 0.2s;
 }
 .mobile-links a:hover { opacity: 1; }
-
 .mobile-cta {
   margin-top: 8px;
   font-size: 0.78rem !important;
@@ -140,7 +134,7 @@ nav .nb:hover {
   color: var(--ink) !important;
   padding: 14px 40px !important;
 }
-
+/* ─── Responsive ─── */
 @media (max-width: 900px) {
   .nav-links { display: none; }
   nav .nb { display: none; }
