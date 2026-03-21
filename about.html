@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About wizkoo — Built at the Kitchen Table</title>
+<meta name="description" content="Created by a mother of four boys who brought operational thinking to homeschool. Wizkoo is the product version of what her family uses every day.">
+<meta property="og:title" content="About wizkoo — Built at the Kitchen Table">
+<meta property="og:description" content="Created by a mother of four boys who brought operational thinking to homeschool. Wizkoo is the product version of what her family uses every day.">
+<meta property="og:image" content="assets/wizkoo-og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About wizkoo — Built at the Kitchen Table">
+<meta name="twitter:description" content="Created by a mother of four boys who brought operational thinking to homeschool. Wizkoo is the product version of what her family uses every day.">
+<meta name="twitter:image" content="assets/wizkoo-og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Wizkoo Founder",
+  "jobTitle": "Founder",
+  "description": "Mother of four boys, former COO in financial services, creator of Wizkoo and the ReApproach Education curriculum.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Wizkoo",
+    "url": "https://wizkoo.com"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cumming",
+    "addressRegion": "Georgia"
+  }
+}
+</script>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/footer.css">
+<style>
+  /* ── About page styles ── */
+  .about-hero {
+    margin-top: 60px;
+    padding: var(--section-pad) var(--content-pad);
+    max-width: var(--max-width);
+    border-bottom: 1px solid var(--rule);
+  }
+  .about-hero .tag { margin-bottom: 16px; }
+  .about-hero h1 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 200;
+    font-size: 3.4rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    max-width: 720px;
+  }
+  .about-hero h1 strong { font-weight: 700; }
+  .about-hero .hero-sub {
+    margin-top: 24px;
+    font-size: var(--body-size);
+    font-weight: 400;
+    color: #555;
+    line-height: 1.7;
+    max-width: 580px;
+  }
+
+  .about-body {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 0;
+    max-width: var(--max-width);
+  }
+
+  .about-main {
+    padding: var(--section-pad) var(--content-pad);
+    border-right: 1px solid var(--rule);
+  }
+
+  .about-section { margin-bottom: 56px; }
+  .about-section:last-child { margin-bottom: 0; }
+  .about-section .tag { margin-bottom: 16px; }
+  .about-section h2 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    line-height: 1.25;
+  }
+  .about-section p {
+    font-size: var(--small-size);
+    font-weight: 400;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .about-section p:last-child { margin-bottom: 0; }
+  .about-section p strong { font-weight: 500; color: var(--ink); }
+
+  .phi-list { margin-top: 8px; }
+  .phi-item {
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .phi-item:last-child { border-bottom: 1px solid var(--rule); }
+  .phi-item h3 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--ink); /* saffron failed WCAG contrast on white */
+    margin-bottom: 6px;
+  }
+  .phi-item p {
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .reapproach-block {
+    margin-top: 20px;
+    padding: 20px 24px;
+    background: var(--warm-bg);
+    border-left: 3px solid var(--saffron);
+  }
+  .reapproach-block p {
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+  .reapproach-block strong { color: var(--ink); font-weight: 500; }
+
+  .about-sidebar {
+    padding: var(--section-pad) 40px;
+    background: var(--warm-bg);
+    position: sticky;
+    top: 60px;
+    align-self: start;
+  }
+  .sidebar-quote {
+    font-family: 'Sora', sans-serif;
+    font-weight: 200;
+    font-size: 1.4rem;
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+  .sidebar-quote strong { font-weight: 700; }
+  .sidebar-fact {
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .sidebar-fact .sf-num {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .sidebar-fact .sf-label {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--mid);
+  }
+  .sidebar-cta-wrap {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .sidebar-cta-wrap p {
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .about-body { grid-template-columns: 1fr; }
+    .about-main { border-right: none; border-bottom: 1px solid var(--rule); }
+    .about-sidebar { position: relative; top: 0; }
+  }
+  @media (max-width: 768px) {
+    .about-hero { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
+    .about-hero h1 { font-size: 2.4rem; }
+    .about-main { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
+    .about-sidebar { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
+  }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<!-- ═══ NAV ═══ -->
+<header>
+<nav>
+  <a href="index.html" class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+  <div class="nav-links">
+    <a href="index.html#orientation" class="nav-link how-it-works">How It Works</a>
+    <a href="planner.html" class="nav-link">Plan Generator</a>
+    <a href="games.html" class="nav-link">Games</a>
+    <a href="about.html" class="nav-link active">About</a>
+  </div>
+  <a href="planner.html" class="nb">Build My Family's Week</a>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-overlay">
+    <button class="mobile-close" aria-label="Close menu">✕</button>
+    <div class="mobile-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#orientation">How It Works</a>
+      <a href="planner.html">Plan Generator</a>
+      <a href="games.html">Games</a>
+      <a href="about.html">About</a>
+    </div>
+    <a href="planner.html" class="nb mobile-cta">Build My Family's Week</a>
+  </div>
+</nav>
+</header>
+
+<main id="main-content">
+<!-- ═══ HERO ═══ -->
+<section class="about-hero" aria-label="About Wizkoo">
+  <div class="tag">About Wizkoo</div>
+  <h1>Built at the kitchen table<span class="sp"></span><br>Tested on <strong>four boys</strong><span class="sp"></span><br>Now yours<span class="sp"></span></h1>
+  <p class="hero-sub">Wizkoo started as a private weekly curriculum. Friends started asking for copies. What you're looking at is the product version of what one family uses every single morning.</p>
+</section>
+
+<!-- ═══ BODY ═══ -->
+<div class="about-body" id="about-detail">
+  <div class="about-main">
+
+    <div class="about-section">
+      <div class="tag">The Founder</div>
+      <h2>A mother of four. A former COO. One very busy kitchen table.</h2>
+      <p>She has four boys — ages 2, 3, 4, and 6. Different reading levels. Different attention spans. Different everything. Same table, every morning.</p>
+      <p>Before homeschooling, she spent a decade in financial services as a Chief Operating Officer. She brought operational thinking to the classroom: <strong>systems, sequencing, feedback loops</strong>. She stopped asking "what should we cover this week?" and started asking "how do we build knowledge that lasts?"</p>
+      <p>The answer was thematic threading — one idea pulled through every subject, every day, for an entire week. Week 8 references Week 3. The children don't just learn facts. They build a web.</p>
+      <p>Her friends noticed. They started asking for copies of the plans. Then strangers found her through a homeschool group. Then it became clear: this needed to be a product. <strong>Wizkoo is that product.</strong></p>
+    </div>
+
+    <div class="about-section">
+      <div class="tag">Educational Philosophy</div>
+      <h2>Capability over calendar. Architecture over checklists.</h2>
+      <div class="phi-list">
+        <div class="phi-item">
+          <h3>Thematic Threading</h3>
+          <p>Every subject in a given week connects to one central theme. Volcanoes don't just appear in science — they appear in geography (Atlas), chemistry (Elementum), writing, and math. The child's brain doesn't file subjects separately. It builds a single, coherent picture.</p>
+        </div>
+        <div class="phi-item">
+          <h3>Spiral Learning</h3>
+          <p>Week 8 deliberately references Week 3. This isn't accidental — it's designed. Each plan includes a "spiral connection" callout showing exactly what prior knowledge today's lesson builds on. Knowledge compounds instead of evaporating.</p>
+        </div>
+        <div class="phi-item">
+          <h3>Multi-Child Differentiation</h3>
+          <p>Four children can learn about the same volcano at the same time in the same room — but each child's experience is calibrated to their reading level, age, and developmental stage. Same theme. Different entry points. No child is waiting and no child is lost.</p>
+        </div>
+        <div class="phi-item">
+          <h3>Capability Over Calendar</h3>
+          <p>Wizkoo doesn't ask what grade your child is in. It asks what your child can do and what they're ready for next. Singapore Math foundations. Structured literacy sequencing. NGSS science alignment. But none of it is labeled that way — it's just what works.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <div class="tag">ReApproach Education</div>
+      <h2>Where Wizkoo comes from.</h2>
+      <p>Wizkoo is built by <strong>ReApproach Education</strong>, a home-based instructional program in Cumming, Georgia. ReApproach is the private curriculum practice that Wizkoo's founder has run for her own family since 2022.</p>
+      <div class="reapproach-block">
+        <p><strong>Every plan on Wizkoo was tested in a real home, with real children, before it was made available to yours.</strong> The Atlas countries, the Elementum character voices, the spiral learning connections — all of it ran at the kitchen table first.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="about-sidebar">
+    <div class="sidebar-quote">
+      "Four children. Different ages. Different reading levels. <strong>Same table every morning.</strong> That's who this was built for first."
+    </div>
+    <div class="sidebar-fact">
+      <div class="sf-num">4</div>
+      <div class="sf-label">Children. Ages 2–6.</div>
+    </div>
+    <div class="sidebar-fact">
+      <div class="sf-num">2022</div>
+      <div class="sf-label">When the plans started.</div>
+    </div>
+    <div class="sidebar-fact">
+      <div class="sf-num">52+</div>
+      <div class="sf-label">Weekly themes developed.</div>
+    </div>
+    <div class="sidebar-fact">
+      <div class="sf-num">0</div>
+      <div class="sf-label">Grades. We don't use them.</div>
+    </div>
+    <div class="sidebar-cta-wrap">
+      <p>Ready to see what a week looks like for your family?</p>
+      <a href="planner.html" class="btn-main">See what a week looks like →</a>
+    </div>
+  </aside>
+</div>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+      <div class="footer-tagline">Weekly learning plans for ages 2 to 12.</div>
+      <div class="ft-location">Cumming, Georgia</div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html#orientation">How It Works</a>
+      <a href="planner.html">Plan Generator</a>
+      <a href="games.html">Games</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="footer-social">
+      <div class="footer-social-label">Follow</div>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+    <div class="footer-privacy"><a href="#privacy" style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(250,250,250,0.35);text-decoration:none;border-bottom:1px solid rgba(250,250,250,0.15);padding-bottom:2px;" onmouseover="this.style.color='rgba(250,250,250,0.7)'" onmouseout="this.style.color='rgba(250,250,250,0.35)'">Privacy</a></div>
+    <div class="ft-r">&copy; 2026 Wizkoo</div>
+  </div>
+</footer>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

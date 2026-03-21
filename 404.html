@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — wizkoo</title>
+<meta name="description" content="This page wandered off the map. Even Atlas hasn't found this one yet.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/footer.css">
+<style>
+  .not-found {
+    margin-top: 60px;
+    min-height: calc(100vh - 60px - 180px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--section-pad) var(--content-pad);
+  }
+  .nf-code {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: var(--tag-size);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #767676;
+    margin-bottom: 24px;
+  }
+  .nf-title {
+    font-family: 'Sora', sans-serif;
+    font-weight: 200;
+    font-size: 3rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    max-width: 560px;
+  }
+  .nf-title strong { font-weight: 700; }
+  .nf-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: var(--body-size);
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 40px;
+    max-width: 400px;
+  }
+  @media (max-width: 768px) {
+    .nf-title { font-size: 2rem; }
+    .not-found { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
+  }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<!-- ═══ NAV ═══ -->
+<header>
+<nav>
+  <a href="index.html" class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+  <div class="nav-links">
+    <a href="index.html#orientation" class="nav-link how-it-works">How It Works</a>
+    <a href="planner.html" class="nav-link">Plan Generator</a>
+    <a href="games.html" class="nav-link">Games</a>
+    <a href="about.html" class="nav-link">About</a>
+  </div>
+  <a href="planner.html" class="nb">Build My Family's Week</a>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-overlay">
+    <button class="mobile-close" aria-label="Close menu">✕</button>
+    <div class="mobile-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#orientation">How It Works</a>
+      <a href="planner.html">Plan Generator</a>
+      <a href="games.html">Games</a>
+      <a href="about.html">About</a>
+    </div>
+    <a href="planner.html" class="nb mobile-cta">Build My Family's Week</a>
+  </div>
+</nav>
+</header>
+
+<main id="main-content">
+<div class="not-found">
+  <div class="nf-code">404 — Not Found</div>
+  <h1 class="nf-title">This page wandered<br><strong>off the map<span class="sp"></span></strong></h1>
+  <p class="nf-sub">Even Atlas hasn't found this one yet.</p>
+  <a href="index.html" class="btn-main">Go Home</a>
+</div>
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+      <div class="footer-tagline">Weekly learning plans for ages 2 to 12.</div>
+      <div class="ft-location">Cumming, Georgia</div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html#orientation">How It Works</a>
+      <a href="planner.html">Plan Generator</a>
+      <a href="games.html">Games</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="footer-social">
+      <div class="footer-social-label">Follow</div>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+    <div class="footer-privacy"><a href="#privacy" style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(250,250,250,0.35);text-decoration:none;border-bottom:1px solid rgba(250,250,250,0.15);padding-bottom:2px;" onmouseover="this.style.color='rgba(250,250,250,0.7)'" onmouseout="this.style.color='rgba(250,250,250,0.35)'">Privacy</a></div>
+    <div class="ft-r">&copy; 2026 Wizkoo</div>
+  </div>
+</footer>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

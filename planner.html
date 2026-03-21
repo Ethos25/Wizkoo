@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Family's Week — wizkoo Plan Generator</title>
+<meta name="description" content="Enter your children's names and ages, choose a theme, and get a personalized weekly learning plan in 60 seconds. Free, no account required.">
+<meta property="og:title" content="Build Your Family's Week — wizkoo Plan Generator">
+<meta property="og:description" content="Enter your children's names and ages, choose a theme, and get a personalized weekly learning plan in 60 seconds. Free, no account required.">
+<meta property="og:image" content="assets/wizkoo-og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build Your Family's Week — wizkoo Plan Generator">
+<meta name="twitter:description" content="Enter your children's names and ages, choose a theme, and get a personalized weekly learning plan in 60 seconds. Free, no account required.">
+<meta name="twitter:image" content="assets/wizkoo-og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/planner.css">
+</head>
+<body>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<!-- ═══ NAV ═══ -->
+<header>
+<nav>
+  <a href="index.html" class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+  <div class="nav-links">
+    <a href="index.html#orientation" class="nav-link how-it-works">How It Works</a>
+    <a href="planner.html" class="nav-link active">Plan Generator</a>
+    <a href="games.html" class="nav-link">Games</a>
+    <a href="about.html" class="nav-link">About</a>
+  </div>
+  <a href="planner.html" class="nb">Build My Family's Week</a>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-overlay">
+    <button class="mobile-close" aria-label="Close menu">✕</button>
+    <div class="mobile-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#orientation">How It Works</a>
+      <a href="planner.html">Plan Generator</a>
+      <a href="games.html">Games</a>
+      <a href="about.html">About</a>
+    </div>
+    <a href="planner.html" class="nb mobile-cta">Build My Family's Week</a>
+  </div>
+</nav>
+</header>
+
+<main id="main-content">
+<div class="planner-wrap">
+
+  <!-- ─── Progress Bar ─── -->
+  <nav class="progress-bar" id="progressBar" aria-label="Plan generator steps">
+    <div class="progress-step active" id="ps1" aria-current="step">
+      <div class="step-num" aria-hidden="true">1</div>
+      <div class="step-label">Your Children</div>
+    </div>
+    <div class="progress-divider" aria-hidden="true"></div>
+    <div class="progress-step" id="ps2">
+      <div class="step-num" aria-hidden="true">2</div>
+      <div class="step-label">Your Theme</div>
+    </div>
+    <div class="progress-divider" aria-hidden="true"></div>
+    <div class="progress-step" id="ps3">
+      <div class="step-num" aria-hidden="true">3</div>
+      <div class="step-label">Your Week</div>
+    </div>
+  </nav>
+
+  <!-- ─── Step 1: Children ─── -->
+  <div class="step-container active" id="step1" role="region" aria-label="Step 1: Enter your children">
+    <div class="step-eyebrow">Step 1 of 3</div>
+    <h1 class="step-title">Let's build <strong>your week.</strong></h1>
+    <div class="child-entries" id="childEntries"></div>
+    <button class="btn-add-child" id="addChildBtn">+ Add another child</button>
+    <p class="coppa-notice" style="margin-top:24px;font-size:0.78rem;color:#767676;line-height:1.6;font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.05em;">We don't store your children's information. Plans are generated in your browser and not saved to our servers.</p>
+    <div class="step-actions">
+      <button class="btn-main" onclick="goToStep2()">Next →</button>
+    </div>
+  </div>
+
+  <!-- ─── Step 2: Theme ─── -->
+  <div class="step-container" id="step2" role="region" aria-label="Step 2: Choose your theme">
+    <div class="step-eyebrow">Step 2 of 3</div>
+    <h1 class="step-title">Choose this week's <strong>theme.</strong></h1>
+    <div class="theme-grid" id="themeGrid">
+      <button class="theme-card" onclick="selectTheme(this, 'Volcanoes & The Ring of Fire')">
+        <div class="tc-name">🌋 Volcanoes &amp; The Ring of Fire</div>
+        <div class="tc-desc">Magma, tectonic plates, Iceland geysers, Sulfur in Elementum, Ring of Fire in Atlas.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'The Ocean Floor')">
+        <div class="tc-name">🌊 The Ocean Floor</div>
+        <div class="tc-desc">Deep sea creatures, ocean zones, 5 oceans in Atlas, Oxygen and Hydrogen in Elementum.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'Space & Our Solar System')">
+        <div class="tc-name">🚀 Space &amp; Our Solar System</div>
+        <div class="tc-desc">Planets, stars, gravity, Helium in Elementum, space-exploring nations in Atlas.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'Ancient Egypt')">
+        <div class="tc-name">🏺 Ancient Egypt</div>
+        <div class="tc-desc">Pyramids, pharaohs, the Nile, hieroglyphics, Egypt and neighboring nations in Atlas.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'Weather & Storms')">
+        <div class="tc-name">⛈ Weather &amp; Storms</div>
+        <div class="tc-desc">How storms form, weather patterns, water cycle, Nitrogen and Oxygen in Elementum.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'Insects & Pollinators')">
+        <div class="tc-name">🐝 Insects &amp; Pollinators</div>
+        <div class="tc-desc">Bees, butterflies, pollination, Carbon in Elementum, countries by biodiversity in Atlas.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'The Human Body')">
+        <div class="tc-name">🫀 The Human Body</div>
+        <div class="tc-desc">Organs, bones, blood, Iron and Calcium in Elementum, anatomy through hands-on exploration.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'Music Around the World')">
+        <div class="tc-name">🎵 Music Around the World</div>
+        <div class="tc-desc">Instruments by culture, rhythm, music history, Brazil, Cuba, and Mali in Atlas.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'Bridges & Architecture')">
+        <div class="tc-name">🌉 Bridges &amp; Architecture</div>
+        <div class="tc-desc">Structures, tension, compression, Iron and Steel in Elementum, iconic structures in Atlas.</div>
+      </button>
+      <button class="theme-card" onclick="selectTheme(this, 'Dinosaurs & Fossils')">
+        <div class="tc-name">🦕 Dinosaurs &amp; Fossils</div>
+        <div class="tc-desc">Prehistoric life, fossilization, Carbon dating, fossil-rich countries in Atlas.</div>
+      </button>
+    </div>
+    <div class="theme-divider">or</div>
+    <div class="theme-custom-wrap">
+      <label class="field-label" for="customThemeInput">Enter your own theme</label>
+      <input class="field-input" id="customThemeInput" type="text" placeholder="e.g. The Amazon Rainforest" oninput="onCustomTheme(this)">
+    </div>
+    <div id="themePreview" class="theme-preview" style="display:none;" aria-live="polite"></div>
+    <div id="themeError" class="field-error">Please choose a theme or enter your own.</div>
+    <div class="step-actions">
+      <button class="btn-main" onclick="goToStep3()">Next →</button>
+      <button class="btn-back" onclick="goToStep(1)">← Back</button>
+    </div>
+  </div>
+
+  <!-- ─── Step 3: Week Config ─── -->
+  <div class="step-container" id="step3" role="region" aria-label="Step 3: Design your week">
+    <div class="step-eyebrow">Step 3 of 3</div>
+    <h1 class="step-title">How does your <strong>week look?</strong></h1>
+
+    <div class="week-section">
+      <div class="week-section-title">Which days?</div>
+      <div class="day-checkboxes">
+        <div class="day-cb"><input type="checkbox" id="dMon" value="Monday" checked><label for="dMon">Mon</label></div>
+        <div class="day-cb"><input type="checkbox" id="dTue" value="Tuesday" checked><label for="dTue">Tue</label></div>
+        <div class="day-cb"><input type="checkbox" id="dWed" value="Wednesday" checked><label for="dWed">Wed</label></div>
+        <div class="day-cb"><input type="checkbox" id="dThu" value="Thursday" checked><label for="dThu">Thu</label></div>
+        <div class="day-cb"><input type="checkbox" id="dFri" value="Friday"><label for="dFri">Fri</label></div>
+      </div>
+      <div id="dayError" class="field-error" style="margin-top:8px;">Please select at least one day.</div>
+    </div>
+
+    <div class="week-section">
+      <div class="week-section-title">Start time</div>
+      <div class="field-group" style="max-width:200px;">
+        <select class="field-select" id="startTime">
+          <option value="7:00 AM">7:00 AM</option>
+          <option value="7:30 AM">7:30 AM</option>
+          <option value="8:00 AM">8:00 AM</option>
+          <option value="8:30 AM" selected>8:30 AM</option>
+          <option value="9:00 AM">9:00 AM</option>
+          <option value="9:30 AM">9:30 AM</option>
+          <option value="10:00 AM">10:00 AM</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="week-section">
+      <div class="week-section-title">Session length</div>
+      <div class="session-options">
+        <div class="session-opt"><input type="radio" name="session" id="s1" value="1"><label for="s1">1 hour</label></div>
+        <div class="session-opt"><input type="radio" name="session" id="s2" value="2"><label for="s2">2 hours</label></div>
+        <div class="session-opt"><input type="radio" name="session" id="s3" value="3"><label for="s3">3 hours</label></div>
+        <div class="session-opt"><input type="radio" name="session" id="s4" value="4" checked><label for="s4">4 hours</label></div>
+        <div class="session-opt"><input type="radio" name="session" id="s5" value="5"><label for="s5">5 hours</label></div>
+        <div class="session-opt"><input type="radio" name="session" id="s6" value="6"><label for="s6">6 hours</label></div>
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button class="btn-main" onclick="generatePlan()">Generate My Plan</button>
+      <button class="btn-back" onclick="goToStep(2)">← Back</button>
+    </div>
+  </div>
+
+  <!-- ─── Loading Screen ─── -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-family" id="loadingFamily"></div>
+    <div class="loading-theme" id="loadingTheme"></div>
+    <div class="loading-spinner"></div>
+    <div class="loading-message" id="loadingMessage"></div>
+  </div>
+
+  <!-- ─── Plan Output ─── -->
+  <div class="plan-output" id="planOutput">
+    <div class="plan-output-header">
+      <div class="poh-family" id="outFamily"></div>
+      <div class="poh-meta">
+        <div class="poh-week" id="outWeek">WEEK 1</div>
+        <div class="poh-date" id="outDate"></div>
+      </div>
+    </div>
+    <div class="plan-spiral-callout" id="outSpiral"></div>
+    <div class="plan-days" id="outDays"></div>
+    <div class="plan-actions">
+      <button class="btn-main" onclick="window.print()">Print This Plan</button>
+      <button class="btn-secondary" onclick="resetPlanner()">Build Another Week</button>
+    </div>
+    <div class="plan-share-actions">
+      <a id="emailPlanBtn" href="#" class="btn-share" onclick="emailPlan(event)" aria-label="Email this plan">Email This Plan</a>
+      <button class="btn-share" onclick="copyLinkClick(this)" aria-label="Copy link to plan">Copy Link</button>
+    </div>
+  </div>
+
+</div><!-- end .planner-wrap -->
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+      <div class="footer-tagline">Weekly learning plans for ages 2 to 12.</div>
+      <div class="ft-location">Cumming, Georgia</div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html#orientation">How It Works</a>
+      <a href="planner.html">Plan Generator</a>
+      <a href="games.html">Games</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="footer-social">
+      <div class="footer-social-label">Follow</div>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+    <div class="footer-privacy"><a href="#privacy" style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(250,250,250,0.35);text-decoration:none;border-bottom:1px solid rgba(250,250,250,0.15);padding-bottom:2px;" onmouseover="this.style.color='rgba(250,250,250,0.7)'" onmouseout="this.style.color='rgba(250,250,250,0.35)'">Privacy</a></div>
+    <div class="ft-r">&copy; 2026 Wizkoo</div>
+  </div>
+</footer>
+
+<script src="js/nav.js"></script>
+<script>
+/* ══════════════════════════════════════════════
+   WIZKOO PLAN GENERATOR — V1
+   Hardcoded template engine, no backend required
+══════════════════════════════════════════════ */
+
+// ─── State ───
+const state = {
+  children: [],
+  theme: '',
+  customTheme: '',
+  days: [],
+  startTime: '8:30 AM',
+  sessionLength: 4
+};
+
+// ─── Theme data ───
+const THEMES = {
+  'Volcanoes & The Ring of Fire': {
+    emoji: '🌋',
+    atlasTask: ['Visit Iceland. Find the geysers.', 'Map the Ring of Fire. Count the countries.', 'Find Japan. How many active volcanoes?', 'Locate Indonesia — 76 active volcanoes, the most in the world.'],
+    elementumTask: ['Meet Sulfur. He lives near volcanoes. Why does he smell?', 'Sulfur + Iron combo reaction. What forms?', 'Meet Silicon — the rock inside every volcano.', 'Oxygen + Sulfur: sulfur dioxide. What does it do?'],
+    readingTask: ['Read about Pompeii — what happened in 79 AD?', 'Volcano vocabulary: magma, lava, eruption, tectonic, crater.', 'Read: why do island chains form?', 'Research: what is the difference between magma and lava?'],
+    handsOnTask: ['Baking soda volcano — measure, mix, watch it erupt.', 'Build a Ring of Fire necklace with red and orange beads.', 'Make a clay relief map of Iceland.', 'Create a volcano diagram: label magma chamber, vent, crater.'],
+    mathTask: ['Count: 15 countries in the Ring of Fire. Order them by size.', 'A volcano erupts every 20 minutes. How many times per day?', 'How tall is Mt. Everest vs. Mauna Loa? Compare in feet and meters.', 'Graph: which ocean has the most volcanoes?'],
+    scienceTask: ['"Could a volcano pop up in your backyard?" — Mystery Science', '"Why does Iceland have so many volcanoes?" — plate tectonics video', '"What would happen if Yellowstone erupted?" — science discussion', '"How do volcanologists stay safe?" — career exploration'],
+    sameRoom: {
+      'Reads Well':  ['Write three sentences about why volcanoes form near tectonic plates. Use: magma, eruption, tectonic.', 'Research question: how many active volcanoes are there in the world? Write your answer with evidence.', 'Compare two volcanoes: Mt. St. Helens and Kilauea. How are they different?'],
+      'Reads Some':  ['Match the volcano words to the pictures. Sound out each word: magma, lava, eruption.', 'Read the volcano picture book. Find three things you didn\'t know.', 'Volcano word search. Circle every volcano word you can find.'],
+      'Learning':    ['Red and orange finger painting: make your own lava flow on the big paper.', 'Stamp a world map. Put a sticker on every volcano you can find.', 'Color the volcano diagram. What color is the magma?'],
+      'Explorer':    ['Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz.', 'Play with red and orange playdough. Roll it into a volcano shape.', 'Stack blocks into a mountain. What happens when you push from the top?']
+    }
+  },
+  'The Ocean Floor': {
+    emoji: '🌊',
+    atlasTask: ['Find the Pacific Ocean. Tap all 5 tappable oceans.', 'Visit Tuvalu — the tiny island nation in the Pacific.', 'Find the Mariana Trench: deepest point on Earth.', 'Which ocean is the biggest? The smallest?'],
+    elementumTask: ['Meet Hydrogen and Oxygen — two atoms, one water molecule.', 'Meet Sodium — the salt in seawater.', 'Meet Calcium — the mineral in coral and shells.', 'Oxygen: it\'s in the ocean too. How do fish breathe?'],
+    readingTask: ['Read about ocean zones: sunlight, twilight, midnight, abyss.', 'Vocabulary: habitat, predator, bioluminescence, pressure.', 'Read about the anglerfish. Why does it glow?', 'Research: how do submarines work?'],
+    handsOnTask: ['Density layers: layer oil, water, and corn syrup in a jar.', 'Salt water vs. fresh water: which floats the egg?', 'Make an ocean zone diagram with blue paint — layer the zones.', 'Build a submarine from cardboard. What makes it sink and float?'],
+    mathTask: ['The ocean is 2.5 miles deep on average. How many feet is that?', 'A whale swims 40 miles per day. How far in a week?', 'Count ocean animals by zone. Make a bar chart.', 'The Titanic sank 2.4 miles down. How long to swim back up at 3mph?'],
+    scienceTask: ['"What lives in the deepest part of the ocean?" — Mystery Science', '"How do fish breathe underwater?" — biology video', '"Why is the ocean salty?" — chemistry for kids', '"What would happen if the oceans disappeared?"'],
+    sameRoom: {
+      'Reads Well':  ['Write a field guide entry for your favorite deep sea creature. Include: habitat, diet, and one surprising fact.', 'Research bioluminescence. Write three sentences explaining how animals make their own light.', 'Compare: ocean zone conditions (pressure, temperature, light). Create a table.'],
+      'Reads Some':  ['Read the deep sea picture book. Point to every creature you recognize.', 'Ocean animal word match: connect the word to the picture.', 'Find the fish on the ocean zone diagram. Which zone does it live in?'],
+      'Learning':    ['Blue watercolor painting: make your own ocean. Add creatures with stamps.', 'Sort ocean animal toys by size — smallest to biggest.', 'What lives at the top? What lives at the bottom? Sort the picture cards.'],
+      'Explorer':    ['Water table play: add blue food coloring and plastic sea creatures.', 'Splash in a tub of water. What sinks? What floats?', 'Look at ocean animal photos. Point to the fish. Point to the whale.']
+    }
+  },
+  'Space & Our Solar System': {
+    emoji: '🚀',
+    atlasTask: ['Find Russia — the first country to send a human to space.', 'Visit Kazakhstan: where Yuri Gagarin landed after orbiting Earth.', 'Find Cape Canaveral on the map. Which state is it in?', 'Which countries have active space programs? Find three.'],
+    elementumTask: ['Meet Helium — it makes balloons float AND it\'s the second most common element in the universe.', 'Meet Hydrogen — 75% of all matter in the universe. It powers the sun.', 'Meet Carbon — the building block of all life we\'ve ever found in space.', 'Meet Iron — Earth\'s core is mostly iron. That\'s what makes a compass work.'],
+    readingTask: ['Read about the planets. Which is biggest? Which is smallest?', 'Vocabulary: orbit, gravity, atmosphere, galaxy, light-year.', 'Read about Pluto: why did scientists reclassify it?', 'Research: what is the International Space Station?'],
+    handsOnTask: ['Make a solar system mobile with different-sized balls.', 'Simulate gravity: drop objects of different weights. What do you notice?', 'Build a rocket from a toilet paper roll. Can it stand up straight?', 'Planet painting: mix colors to recreate Jupiter\'s red spot.'],
+    mathTask: ['Order the planets by distance from the sun. Which is furthest?', 'A year on Mercury is 88 days. How old would you be on Mercury?', 'Light travels 186,000 miles per second. How far does it go in one minute?', 'Count the moons of each planet. Which has the most?'],
+    scienceTask: ['"Why does the moon look different every night?" — Mystery Science', '"How do rockets escape gravity?" — physics for kids', '"Could we live on Mars?" — engineering design challenge', '"What would happen if Earth had two moons?"'],
+    sameRoom: {
+      'Reads Well':  ['Write a one-page report about your favorite planet. Include: size, distance from sun, number of moons, and one surprising fact.', 'Research question: could humans ever live on Mars? Write a paragraph with evidence.', 'Design a mission to a planet of your choice. What equipment would you need?'],
+      'Reads Some':  ['Planet book: find your favorite planet. What color is it? How big?', 'Planet word match. Connect each planet name to its picture.', 'Space vocabulary cards: sound out each word. Repeat it three times.'],
+      'Learning':    ['Planet stamp painting: make your own solar system. Line them up in order.', 'Which planet is biggest? Hold up the biggest circle. Which is smallest?', 'Color the solar system diagram. Use a different color for each planet.'],
+      'Explorer':    ['Glow-in-the-dark star stickers: press them on black paper to make a galaxy.', 'Roll playdough into different-sized balls: big sun, tiny Mercury.', 'Look at planet photos. Point to the red one. Point to the ringed one.']
+    }
+  },
+  'Ancient Egypt': {
+    emoji: '🏺',
+    atlasTask: ['Find Egypt. What continent is it on? What ocean is nearby?', 'Trace the Nile River: it flows through 11 countries. Find them all.', 'Find Sudan — home to more pyramids than Egypt.', 'Which countries border Egypt? Name them all.'],
+    elementumTask: ['Meet Gold — the Egyptians used it to bury their pharaohs.', 'Meet Copper — one of the first metals humans used to make tools.', 'Meet Carbon — it\'s in every mummy, in every fossil, in every living thing.', 'Meet Sodium — natron (a sodium salt) was used to preserve mummies.'],
+    readingTask: ['Read about hieroglyphics. Write your name in hieroglyphs.', 'Vocabulary: pharaoh, pyramid, mummy, sarcophagus, Nile, papyrus.', 'Read about Cleopatra. What made her remarkable?', 'Research: how were the pyramids built? What do scientists think today?'],
+    handsOnTask: ['Make a cartouche with your name in hieroglyphics (air-dry clay).', 'Build a pyramid from sugar cubes. How many do you need?', 'Make papyrus paper from newspaper strips and flour paste.', 'Mummify an orange: use salt to dry it out over a week.'],
+    mathTask: ['The Great Pyramid has 2.3 million stones. How many stones per year if it took 20 years?', 'Hieroglyphic numbers: learn the system. Write 247 in hieroglyphs.', 'The Nile is 4,132 miles long. How many times longer is it than your state?', 'Count the pyramids on a map of Egypt. Sudan has more — how many more?'],
+    scienceTask: ['"How were the pyramids built?" — engineering for kids', '"Why do mummies still exist after 3,000 years?" — preservation science', '"What can archaeologists learn from a mummy?" — forensic history', '"How did ancient Egyptians tell time?" — astronomy and sundials'],
+    sameRoom: {
+      'Reads Well':  ['Write a journal entry as a young Egyptian child living in 1500 BC. What do you see? What do you do? What are you afraid of?', 'Research question: why did the Egyptian civilization last for 3,000 years? Write a paragraph.', 'Compare: ancient Egypt vs. ancient Rome. Which was more powerful? Make your argument.'],
+      'Reads Some':  ['Egypt picture book: find the pyramid. Find the pharaoh. Find the Nile.', 'Hieroglyph matching cards: connect the symbol to its meaning.', 'Egypt vocabulary word search: circle pharaoh, pyramid, Nile, mummy.'],
+      'Learning':    ['Sand play: bury small toys and dig them up like an archaeologist.', 'Stamp sarcophagus: use geometric stamps to decorate your paper coffin.', 'Color the pyramid diagram. How many triangles can you find?'],
+      'Explorer':    ['Sensory bin: sand, small rocks, tiny plastic animals — dig for "artifacts."', 'Wrap a doll in strips of white cloth like a mummy.', 'Stack blocks into a pyramid shape. How tall can you go?']
+    }
+  },
+  'Weather & Storms': {
+    emoji: '⛈',
+    atlasTask: ['Find Tornado Alley on the US map. Which states are in it?', 'Visit Bangladesh — one of the countries most affected by cyclones.', 'Find the Sahara Desert. Why doesn\'t it rain there?', 'Which country gets the most rain? Find it on the map.'],
+    elementumTask: ['Meet Nitrogen — 78% of every breath you take is nitrogen.', 'Meet Oxygen — 21% of the air and what makes fire burn.', 'Meet Water (H2O): Hydrogen + Oxygen. The cloud is just water vapor.', 'Meet Carbon Dioxide — what you breathe out, what plants breathe in.'],
+    readingTask: ['Read about the water cycle: evaporation, condensation, precipitation.', 'Vocabulary: cumulus, cirrus, stratus, meteorology, atmosphere, hurricane.', 'Read about the Dust Bowl: what caused it? What did families do?', 'Research: how do meteorologists predict weather?'],
+    handsOnTask: ['Make a cloud in a jar: hot water, ice, and hairspray.', 'Make a rain gauge from a plastic bottle. Track rainfall for a week.', 'Tornado in a bottle: connect two bottles, add glitter, swirl.', 'Barometer from a jar and balloon — measure air pressure changes.'],
+    mathTask: ['Track the temperature every day this week. Find the average.', 'A hurricane has 150mph winds. How far does wind travel in one hour?', 'Rain falls 2 inches per hour. How much falls in 3.5 hours?', 'The water cycle: water takes 3,000 years to complete one full cycle. Calculate how many cycles since Ancient Egypt.'],
+    scienceTask: ['"Why does lightning strike?" — electricity in the atmosphere', '"How do rainbows form?" — light and refraction', '"What\'s inside a tornado?" — storm science', '"Why is the sky blue?" — light scattering explained'],
+    sameRoom: {
+      'Reads Well':  ['Write a weather report for tomorrow as a meteorologist. Include: temperature prediction, cloud type, and probability of rain.', 'Research: how do scientists measure the strength of a hurricane? Write a paragraph explaining the Saffir-Simpson scale.', 'Design an experiment to show evaporation. Write out your hypothesis, method, and expected result.'],
+      'Reads Some':  ['Cloud type matching: connect the cloud photo to its name (cumulus, cirrus, stratus).', 'Weather vocabulary book: draw each type of weather and label it.', 'Water cycle diagram: trace the arrows and say the word at each step.'],
+      'Learning':    ['Watercolor painting: make a stormy sky with gray and blue. Add lightning with yellow crayon.', 'Sort weather picture cards: sunny, rainy, snowy, cloudy, windy.', 'Point to the cloud. Point to the rain. Point to the sun. Point to the rainbow.'],
+      'Explorer':    ['Spray bottle misting: experience "rain" and evaporation with a spritz bottle outdoors.', 'Blow on a pinwheel — the wind makes it spin! How hard can you blow?', 'Watch the clouds through the window. Are they moving? Which way?']
+    }
+  },
+  'Insects & Pollinators': {
+    emoji: '🐝',
+    atlasTask: ['Find Costa Rica — one of the most biodiverse countries on Earth.', 'Visit Brazil: the Amazon holds 10% of all species on Earth.', 'Which countries have the most bee populations? Find two.', 'Find Kenya on the map. It\'s home to over 1,000 bee species.'],
+    elementumTask: ['Meet Carbon — it\'s the backbone of every living thing, including every insect.', 'Meet Nitrogen — it\'s in the proteins that make bee wings and beetle shells.', 'Meet Phosphorus — it\'s in the DNA of every insect on the planet.', 'Meet Calcium — it makes the hard shells (exoskeletons) of beetles and crabs.'],
+    readingTask: ['Read about the honeybee colony: queen, worker, drone. What does each do?', 'Vocabulary: pollinator, pollination, nectar, pollen, metamorphosis, larva.', 'Read about colony collapse disorder. Why are bees disappearing?', 'Research: which insects are most important for food production?'],
+    handsOnTask: ['Make a bee from a toilet paper roll. Add striped pipe cleaners and paper wings.', 'Pollination simulation: use cotton balls (bees) to transfer yellow powder (pollen) between paper flowers.', 'Build a bug hotel from sticks, pinecones, and paper tubes.', 'Dissect a flower: find the stamen, pistil, petals, and sepals.'],
+    mathTask: ['A bee visits 50 flowers per day. How many per week? Per year?', 'A queen bee lays 2,000 eggs per day. How many in a month?', 'Count the insects in your backyard for 10 minutes. Extrapolate per hour.', 'There are 20,000 species of bees. How many per continent if spread evenly?'],
+    scienceTask: ['"Why do bees make honey?" — biology and survival', '"How do butterflies know where to fly?" — migration science', '"Could we survive without insects?" — ecosystem science', '"How does metamorphosis work?" — complete vs. incomplete'],
+    sameRoom: {
+      'Reads Well':  ['Write a persuasive essay: "Why we must protect pollinators." Include three specific reasons with evidence.', 'Research the life cycle of a monarch butterfly. Draw the cycle and label each stage in your own words.', 'Design a pollinator garden for your backyard. Which plants would you choose and why?'],
+      'Reads Some':  ['Insect life cycle book: find the egg, larva, pupa, and adult.', 'Match each insect to what it pollinates. Bee → flower. Moth → which flower?', 'Insect body parts: label the head, thorax, abdomen, and six legs.'],
+      'Learning':    ['Bug stamp painting: stamp bees, butterflies, and beetles on flower paper.', 'Sort insect pictures: flyer, crawler, or swimmer?', 'Finger painting: paint a flower and press a sponge "bee" on it to spread the "pollen."'],
+      'Explorer':    ['Magnifying glass exploration: look at flowers outside up close. What do you see?', 'Sensory bin: dirt, plastic bugs, leaves, and small rocks to dig through.', 'Catch a bug gently. Look at it. Count its legs. Let it go.']
+    }
+  },
+  'The Human Body': {
+    emoji: '🫀',
+    atlasTask: ['Find Switzerland — home to the Red Cross and some of the world\'s best hospitals.', 'Visit Johns Hopkins in the US — one of the most important medical research centers.', 'Which countries have the highest life expectancy? Find the top three.', 'Find where penicillin was discovered. Hint: Alexander Fleming, Scotland.'],
+    elementumTask: ['Meet Iron — it\'s in hemoglobin, the protein that carries oxygen in your blood.', 'Meet Calcium — it makes your bones and teeth hard.', 'Meet Potassium — it makes your heart beat in the right rhythm.', 'Meet Oxygen — your lungs take it from the air. Your blood carries it everywhere.'],
+    readingTask: ['Read about the circulatory system. How far does blood travel in a day?', 'Vocabulary: organ, tissue, cell, artery, vein, capillary, membrane.', 'Read about neurons: how does your brain send messages?', 'Research: what happens inside a bone when it breaks and heals?'],
+    handsOnTask: ['Measure your pulse before and after jumping. How many beats per minute?', 'Make a lung model from a plastic bottle, balloon, and straw.', 'Trace your body on butcher paper and draw in the major organs.', 'Test your reflexes with a ruler drop experiment.'],
+    mathTask: ['Your heart beats 100,000 times per day. How many times per year?', 'Blood travels 12,000 miles per day through your body. How far per hour?', 'You have 206 bones. Count how many are in your hand alone.', 'Calculate your lung capacity using a balloon and water displacement.'],
+    scienceTask: ['"How does your heart pump blood?" — cardiovascular system', '"Why do your eyes see in color?" — optics and the retina', '"What is DNA and why does it matter?" — genetics for kids', '"How do vaccines work?" — immune system science'],
+    sameRoom: {
+      'Reads Well':  ['Write a "user manual" for the heart. Explain what it does, how it works, and what can go wrong.', 'Research question: which organ could you live without? Write a paragraph with evidence.', 'Design an experiment to measure lung capacity. Write your hypothesis and method.'],
+      'Reads Some':  ['Body system book: find the heart. Find the lungs. Find the stomach.', 'Match the organ to its job: heart pumps blood, lungs breathe air, stomach digests food.', 'Skeleton diagram: label the skull, spine, ribs, and leg bones.'],
+      'Learning':    ['Trace your hand on paper. Draw the bones inside. How many fingers?', 'Listening to heartbeat: put your ear on someone\'s chest. What do you hear?', 'Sort "healthy food" vs. "sometimes food" picture cards.'],
+      'Explorer':    ['Heartbeat listening: feel the pulse on your wrist. Bump-bump-bump.', 'Breathing in and out: put your hand on your belly. Watch it rise and fall.', 'Mirror faces: open wide! How many teeth can you count?']
+    }
+  },
+  'Music Around the World': {
+    emoji: '🎵',
+    atlasTask: ['Visit Brazil — birthplace of the samba and bossa nova.', 'Find Cuba: the island where salsa music was born.', 'Visit Mali: home to the griot tradition, West Africa\'s oral historians and musicians.', 'Find Vienna, Austria — the classical music capital of the world.'],
+    elementumTask: ['Meet Copper — it makes the brass in trumpets and trombones.', 'Meet Carbon — it\'s in the wood of every violin, guitar, and piano.', 'Meet Tin — it\'s in the alloy that makes cymbals ring.', 'Meet Silicon — it\'s in the computer chips that make digital music possible.'],
+    readingTask: ['Read about how different cultures use music for celebrations and ceremonies.', 'Vocabulary: rhythm, melody, harmony, pitch, tempo, timbre, notation.', 'Read about Ludwig van Beethoven: he composed his greatest works while deaf.', 'Research: what is a pentatonic scale? Play one on any keyboard.'],
+    handsOnTask: ['Make a rubber band guitar from a shoebox and rubber bands.', 'Make rain sticks from paper tubes and uncooked rice.', 'Create rhythm patterns using body percussion: clap, snap, stomp.', 'Listen to music from 5 different countries. Draw how each one makes you feel.'],
+    mathTask: ['Count the beats: tap along to a song. Is it 3/4 or 4/4 time?', 'A violin string vibrates 440 times per second for the note A. How many per minute?', 'A song is 3 minutes 24 seconds. How many seconds total?', 'There are 88 keys on a piano. How many black keys? How many white?'],
+    scienceTask: ['"How do sound waves travel?" — wave physics for kids', '"Why do instruments sound different from each other?" — timbre and resonance', '"How does your ear work?" — ear anatomy and sound processing', '"What is the science of music?" — mathematics and harmony'],
+    sameRoom: {
+      'Reads Well':  ['Research a musical tradition from a country we visited in Atlas this week. Write a paragraph about its history and what it means to that culture.', 'Write a biography of one musician (classical, jazz, or world music). What made them remarkable?', 'Analyze a piece of music: write about its rhythm, mood, and what instruments you hear.'],
+      'Reads Some':  ['Music from around the world: listen to one song from each continent. Which is your favorite? Write one sentence about why.', 'Instrument families: sort pictures into strings, brass, woodwind, and percussion.', 'Read about a musician and draw a portrait of them.'],
+      'Learning':    ['Instrument color page: color the violin, trumpet, drum, and flute.', 'Music time: clap the rhythm of your favorite song. Fast or slow?', 'Build a shaker from a paper cup and dried beans. Shake it to the beat!'],
+      'Explorer':    ['Drum on pots and pans. What sounds different? What sounds the same?', 'Dance to music from a different country. How does it make your body want to move?', 'Shake, tap, blow: explore three homemade sound-makers.']
+    }
+  },
+  'Bridges & Architecture': {
+    emoji: '🌉',
+    atlasTask: ['Find the Golden Gate Bridge in San Francisco. What state is it in?', 'Visit Japan — home to some of the world\'s most innovative architecture.', 'Find the Burj Khalifa in Dubai. Which country is Dubai in?', 'The Millau Viaduct is in France. Find it. How tall is it?'],
+    elementumTask: ['Meet Iron — the backbone of every steel bridge and skyscraper.', 'Meet Carbon — add it to iron and you get steel, the strongest building material.', 'Meet Silicon — it\'s in the glass of every skyscraper window.', 'Meet Titanium — stronger than steel, lighter than iron. Used in modern architecture.'],
+    readingTask: ['Read about the three types of bridges: beam, arch, and suspension. What makes each strong?', 'Vocabulary: tension, compression, load, span, cantilever, foundation, truss.', 'Read about the engineer who designed the Eiffel Tower — Gustave Eiffel.', 'Research: how do skyscrapers survive earthquakes?'],
+    handsOnTask: ['Build a bridge from index cards and tape. How much weight can it hold?', 'Arch bridge from marshmallows and toothpicks. Test for load-bearing capacity.', 'Stack blocks to make a freestanding tower. How tall before it falls?', 'Egg drop: design a structure to protect an egg dropped from 6 feet.'],
+    mathTask: ['The Golden Gate Bridge is 1.7 miles long. How many feet is that?', 'A skyscraper sways 3 feet in strong wind. How many inches?', 'Your bridge holds 400 pennies. Each penny weighs 2.5 grams. What\'s the total weight?', 'The Eiffel Tower is 1,083 feet tall. How many times taller than your house?'],
+    scienceTask: ['"Why don\'t bridges fall down?" — structural engineering for kids', '"How do architects design earthquake-proof buildings?" — seismic engineering', '"What is the strongest shape in nature?" — geometry and biomimicry', '"How do bridges deal with expanding metal in heat?" — thermodynamics'],
+    sameRoom: {
+      'Reads Well':  ['Research one famous bridge or building. Write a report: who designed it, when was it built, what engineering challenges did they solve?', 'Design your own bridge on paper. Label: deck, towers, cables (if suspension), and supports. Explain your design choices.', 'Write a persuasive letter convincing your city to build a new bridge. Include: design, materials, and cost estimate.'],
+      'Reads Some':  ['Bridge types matching: connect beam, arch, and suspension to their pictures.', 'Read about one bridge. Find three facts. Write one sentence about each.', 'Vocabulary cards: draw a picture for tension, compression, and arch.'],
+      'Learning':    ['Block building: build the tallest tower you can. Count the blocks. What makes it fall?', 'Bridge drawing: draw a bridge over a river. Make it colorful.', 'Sort shapes: which is stronger — triangle or square? Test with paper strips.'],
+      'Explorer':    ['Block stacking: build up! How high before it topples? Try again.', 'Couch cushion bridge: can you walk across without touching the floor?', 'Push and pull: push the block. Pull the block. What is different?']
+    }
+  },
+  'Dinosaurs & Fossils': {
+    emoji: '🦕',
+    atlasTask: ['Find Argentina — where Patagotitan, the largest dinosaur, was found.', 'Visit Mongolia: home to some of the richest fossil fields on Earth.', 'Find the Dinosaur Provincial Park in Canada on the map.', 'Which continents once had dinosaurs? (All of them — even Antarctica!)'],
+    elementumTask: ['Meet Carbon — Carbon-14 dating is how scientists know how old fossils are.', 'Meet Calcium — it\'s in bones and teeth. That\'s why they fossilize.', 'Meet Silicon — silica replaces organic material to create stone fossils.', 'Meet Iron — iron in ancient blood can be detected in 68-million-year-old T. rex bones.'],
+    readingTask: ['Read about the five mass extinction events. Which was the biggest?', 'Vocabulary: fossil, paleontologist, excavation, sediment, Cretaceous, Jurassic, Triassic.', 'Read about Mary Anning — the fossil hunter who made discoveries scientists dismissed for decades.', 'Research: could we ever clone a dinosaur? What does science say?'],
+    handsOnTask: ['Make fossil casts using shells, clay, and plaster of Paris.', 'Excavation dig: hide plastic dinosaurs in a pan of sand/plaster. Excavate carefully.', 'Make a dinosaur timeline on a paper roll. How long ago did T. rex live?', 'Reconstruct a skeleton puzzle from printed bones.'],
+    mathTask: ['T. rex went extinct 66 million years ago. How many years per day is that?', 'A Brachiosaurus was 85 feet long. How many of your height would equal one Brachiosaurus?', 'Carbon-14 has a half-life of 5,730 years. If you start with 100 atoms, how many remain after 11,460 years?', 'T. rex weighed 14,000 lbs. How many of you would equal one T. rex?'],
+    scienceTask: ['"How do we know what color dinosaurs were?" — fossil pigment science', '"What killed the dinosaurs?" — asteroid, volcano, and climate science', '"Are birds really dinosaurs?" — evolutionary biology', '"How do paleontologists dig up fossils?" — field science methods'],
+    sameRoom: {
+      'Reads Well':  ['Write a scientific paper: "The Evidence for Dinosaurs Being Warm-Blooded." Include at least two pieces of evidence.', 'Research a specific dinosaur species. Write a full profile: when it lived, where, what it ate, how big it was, and how it was discovered.', 'If you could travel back to the Cretaceous period, what would you observe? Write a naturalist\'s field journal entry.'],
+      'Reads Some':  ['Dinosaur fact book: find your favorite dinosaur. What did it eat? Was it big or small?', 'Timeline matching: put the dinosaurs in order from oldest to most recent.', 'Vocabulary flashcards: fossil, paleontologist, excavation. Draw each one.'],
+      'Learning':    ['Dinosaur stamp painting: stamp T. rex, triceratops, and brachiosaurus on landscape paper.', 'Sort: carnivore or herbivore? Match the dinosaur to its food.', 'Dig for dinosaur toys in a sandbox. Excavate carefully with a brush.'],
+      'Explorer':    ['Dinosaur sensory bin: kinetic sand with small plastic dinosaurs buried inside.', 'Stomp like a T. rex. Swoop like a pterodactyl. Munch like a Brachiosaurus.', 'Look at dinosaur photos. Which is biggest? Which is scariest?']
+    }
+  }
+};
+
+const PROGRAMS = ['Atlas', 'Elementum', 'Reading', 'Hands-on', 'Math', 'Mystery Science'];
+
+// Day program rotations by session length
+const DAY_PROGRAMS = {
+  1: [['Atlas', 'Elementum'], ['Reading', 'Hands-on'], ['Atlas', 'Math'], ['Elementum', 'Mystery Science'], ['Hands-on', 'Reading']],
+  2: [['Atlas', 'Elementum'], ['Reading', 'Hands-on'], ['Atlas', 'Math'], ['Elementum', 'Mystery Science'], ['Hands-on', 'Reading']],
+  3: [['Atlas', 'Elementum', 'Hands-on'], ['Reading', 'Elementum', 'Mystery Science'], ['Atlas', 'Math', 'Hands-on'], ['Reading', 'Elementum', 'Math'], ['Hands-on', 'Atlas', 'Mystery Science']],
+  4: [['Atlas', 'Elementum', 'Hands-on', 'Reading'], ['Reading', 'Elementum', 'Mystery Science', 'Math'], ['Atlas', 'Math', 'Hands-on', 'Elementum'], ['Reading', 'Elementum', 'Math', 'Atlas'], ['Hands-on', 'Atlas', 'Mystery Science', 'Reading']],
+  5: [['Atlas', 'Elementum', 'Reading', 'Hands-on', 'Math'], ['Reading', 'Elementum', 'Math', 'Mystery Science', 'Atlas'], ['Atlas', 'Math', 'Hands-on', 'Elementum', 'Reading'], ['Reading', 'Elementum', 'Math', 'Atlas', 'Hands-on'], ['Hands-on', 'Atlas', 'Mystery Science', 'Reading', 'Elementum']],
+  6: [['Atlas', 'Elementum', 'Reading', 'Hands-on', 'Math', 'Mystery Science'], ['Reading', 'Elementum', 'Math', 'Mystery Science', 'Atlas', 'Hands-on'], ['Atlas', 'Math', 'Hands-on', 'Elementum', 'Reading', 'Mystery Science'], ['Reading', 'Elementum', 'Math', 'Atlas', 'Hands-on', 'Mystery Science'], ['Hands-on', 'Atlas', 'Mystery Science', 'Reading', 'Elementum', 'Math']]
+};
+
+// Block start offsets (minutes from start time) based on session length
+const BLOCK_GAPS = {
+  1: [0, 35],
+  2: [0, 60],
+  3: [0, 70, 130],
+  4: [0, 90, 150, 210],
+  5: [0, 60, 120, 180, 240],
+  6: [0, 55, 110, 165, 220, 275]
+};
+
+// Theme preview copy (Task 8.3)
+const THEME_PREVIEWS = {
+  'Volcanoes & The Ring of Fire': 'Your children will travel to Iceland, meet Sulfur in Elementum, build a baking soda volcano, and write about Pompeii. The Ring of Fire connects geography, chemistry, history, and hands-on science.',
+  'The Ocean Floor': 'Your children will dive through ocean zones in Atlas, meet Hydrogen and Oxygen in Elementum, build a density layer jar, and discover bioluminescent creatures. One ocean connects every subject.',
+  'Space & Our Solar System': 'Your children will find space-launching nations in Atlas, meet Helium and Hydrogen in Elementum, build a solar system mobile, and debate whether Pluto is a planet. One universe connects every subject.',
+  'Ancient Egypt': 'Your children will explore the Nile in Atlas, meet Gold in Elementum, build a pyramid from sugar cubes, and learn about hieroglyphic writing. One civilization connects every subject.',
+  'Weather & Storms': 'Your children will find Tornado Alley in Atlas, meet Nitrogen and Oxygen in Elementum, make a cloud in a jar, and write a meteorologist\'s weather report. One atmosphere connects every subject.',
+  'Insects & Pollinators': 'Your children will travel to Costa Rica in Atlas, meet Carbon in Elementum, build a bug hotel, and dissect a flower to find the pollen. One ecosystem connects every subject.',
+  'The Human Body': 'Your children will find medical capitals in Atlas, meet Iron and Calcium in Elementum, trace their bodies on butcher paper, and measure their own heartbeat. One body connects every subject.',
+  'Music Around the World': 'Your children will visit Brazil, Cuba, and Mali in Atlas, meet Copper and Carbon in Elementum, make a rubber band guitar, and analyze rhythm from five continents. One frequency connects every subject.',
+  'Bridges & Architecture': 'Your children will find the Golden Gate and Burj Khalifa in Atlas, meet Iron and Carbon in Elementum, build a weight-bearing bridge from index cards, and study how skyscrapers survive earthquakes. One structure connects every subject.',
+  'Dinosaurs & Fossils': 'Your children will find fossil-rich Argentina and Mongolia in Atlas, meet Carbon and Calcium in Elementum, make fossil casts in clay, and debate whether birds are really dinosaurs. One extinction connects every subject.'
+};
+
+// ─── Time helpers ───
+function parseTime(str) {
+  const parts = str.match(/(\d+):(\d+)\s*(AM|PM)/i);
+  let h = parseInt(parts[1]), m = parseInt(parts[2]), period = parts[3].toUpperCase();
+  if (period === 'PM' && h !== 12) h += 12;
+  if (period === 'AM' && h === 12) h = 0;
+  return h * 60 + m;
+}
+function formatTime(totalMins) {
+  let h = Math.floor(totalMins / 60) % 24;
+  let m = totalMins % 60;
+  const period = h >= 12 ? 'PM' : 'AM';
+  if (h > 12) h -= 12;
+  if (h === 0) h = 12;
+  return `${h}:${String(m).padStart(2, '0')} ${period}`;
+}
+function addMins(timeStr, mins) {
+  return formatTime(parseTime(timeStr) + mins);
+}
+
+// ─── State management ───
+let currentStep = 1;
+
+function goToStep(n) {
+  document.getElementById(`step${currentStep}`).classList.remove('active');
+  const prevPS = document.getElementById(`ps${currentStep}`);
+  prevPS.classList.remove('active');
+  prevPS.removeAttribute('aria-current');
+  prevPS.classList.add('done');
+  currentStep = n;
+  document.getElementById(`step${currentStep}`).classList.add('active');
+  const nextPS = document.getElementById(`ps${currentStep}`);
+  nextPS.classList.add('active');
+  nextPS.setAttribute('aria-current', 'step');
+  nextPS.classList.remove('done');
+  window.scrollTo(0, 0);
+}
+
+// ─── Step 1: Children ───
+function renderChildEntry(index, child) {
+  const levels = ['Explorer', 'Learning to Read', 'Reads Some', 'Reads Well'];
+  const isFirst = index === 0;
+  return `
+    <div class="child-entry" id="childEntry${index}">
+      <div class="child-entry-header">
+        Child ${index + 1}
+        ${!isFirst ? `<button class="child-remove" onclick="removeChild(${index})" aria-label="Remove child">✕</button>` : ''}
+      </div>
+      <div class="child-fields">
+        <div class="field-group">
+          <label class="field-label" for="cName${index}">First Name</label>
+          <input class="field-input" id="cName${index}" type="text" placeholder="e.g. Mia" value="${child.name || ''}" oninput="state.children[${index}].name=this.value">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="cAge${index}">Age</label>
+          <input class="field-input" id="cAge${index}" type="number" min="2" max="12" placeholder="2–12" value="${child.age || ''}" oninput="state.children[${index}].age=parseInt(this.value)||''">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="cLevel${index}">Reading Level</label>
+          <select class="field-select" id="cLevel${index}" onchange="state.children[${index}].level=this.value">
+            <option value="" ${!child.level?'selected':''}>Choose…</option>
+            ${levels.map(l => `<option value="${l}" ${child.level===l?'selected':''}>${l}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderChildren() {
+  const container = document.getElementById('childEntries');
+  container.innerHTML = state.children.map((c, i) => renderChildEntry(i, c)).join('');
+  document.getElementById('addChildBtn').style.display = state.children.length >= 6 ? 'none' : 'block';
+}
+
+function addChild() {
+  if (state.children.length < 6) {
+    state.children.push({ name: '', age: '', level: '' });
+    renderChildren();
+  }
+}
+
+function removeChild(index) {
+  state.children.splice(index, 1);
+  renderChildren();
+}
+
+function goToStep2() {
+  // Validate step 1
+  let valid = true;
+  state.children.forEach((c, i) => {
+    const nameEl  = document.getElementById(`cName${i}`);
+    const ageEl   = document.getElementById(`cAge${i}`);
+    const levelEl = document.getElementById(`cLevel${i}`);
+    c.name  = nameEl.value.trim();
+    c.age   = parseInt(ageEl.value) || '';
+    c.level = levelEl.value;
+    [nameEl, ageEl, levelEl].forEach(el => el.classList.remove('error'));
+    if (!c.name)  { nameEl.classList.add('error');  valid = false; }
+    if (!c.age || c.age < 2 || c.age > 12) { ageEl.classList.add('error');  valid = false; }
+    if (!c.level) { levelEl.classList.add('error'); valid = false; }
+  });
+  if (!state.children.length) { valid = false; }
+  if (valid) goToStep(2);
+  else {
+    const firstErr = document.querySelector('.field-input.error, .field-select.error');
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function selectTheme(el, name) {
+  document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.theme = name;
+  state.customTheme = '';
+  document.getElementById('customThemeInput').value = '';
+  document.getElementById('themeError').classList.remove('show');
+  // Show theme preview (Task 8.3)
+  const previewEl = document.getElementById('themePreview');
+  const preview = THEME_PREVIEWS[name];
+  if (preview) {
+    previewEl.textContent = preview;
+    previewEl.style.display = 'block';
+  } else {
+    previewEl.style.display = 'none';
+  }
+}
+
+function onCustomTheme(el) {
+  state.customTheme = el.value.trim();
+  state.theme = '';
+  document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('themePreview').style.display = 'none';
+}
+
+function goToStep3() {
+  const errEl = document.getElementById('themeError');
+  if (!state.theme && !state.customTheme) {
+    errEl.classList.add('show');
+    return;
+  }
+  errEl.classList.remove('show');
+  goToStep(3);
+}
+
+// ─── Plan generation ───
+function generatePlan() {
+  const dayCheckboxes = document.querySelectorAll('.day-checkboxes input:checked');
+  const errEl = document.getElementById('dayError');
+  if (!dayCheckboxes.length) { errEl.classList.add('show'); return; }
+  errEl.classList.remove('show');
+
+  state.days = Array.from(dayCheckboxes).map(cb => cb.value);
+  state.startTime = document.getElementById('startTime').value;
+  state.sessionLength = parseInt(document.querySelector('input[name="session"]:checked').value);
+
+  const effectiveTheme = state.theme || state.customTheme;
+  const childNames = state.children.map(c => c.name).join(', ');
+
+  // Hide steps, show loading
+  document.getElementById(`step${currentStep}`).classList.remove('active');
+  document.getElementById('progressBar').style.display = 'none';
+  const loading = document.getElementById('loadingScreen');
+  loading.classList.add('active');
+  document.getElementById('loadingFamily').textContent = childNames;
+  document.getElementById('loadingTheme').textContent = effectiveTheme;
+
+  const messages = [
+    `Threading ${effectiveTheme} through every subject…`,
+    `Personalizing for ${childNames}…`,
+    `Building spiral connections…`,
+    `Designing hands-on activities…`,
+    `Sequencing your week…`
+  ];
+  let msgIdx = 0;
+  function showNextMessage() {
+    const el = document.getElementById('loadingMessage');
+    el.style.animation = 'none';
+    el.offsetHeight; // reflow
+    el.style.animation = '';
+    el.textContent = messages[msgIdx % messages.length];
+    msgIdx++;
+  }
+  showNextMessage();
+  const msgInterval = setInterval(showNextMessage, 900);
+
+  setTimeout(() => {
+    clearInterval(msgInterval);
+    loading.classList.remove('active');
+    buildAndDisplayPlan(effectiveTheme);
+  }, 3600);
+}
+
+function buildAndDisplayPlan(theme) {
+  const themeData = THEMES[theme] || THEMES['Volcanoes & The Ring of Fire'];
+  const programs = DAY_PROGRAMS[state.sessionLength] || DAY_PROGRAMS[4];
+  const gaps = BLOCK_GAPS[state.sessionLength] || BLOCK_GAPS[4];
+  const baseTime = parseTime(state.startTime);
+  const children = state.children;
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
+
+  // Family display
+  const firstName = children[0].name;
+  _lastFamily = `${firstName}'s Family`;
+  _lastTheme = theme;
+  document.getElementById('outFamily').textContent = _lastFamily;
+  document.getElementById('outDate').textContent = dateStr;
+
+  // Spiral note
+  document.getElementById('outSpiral').innerHTML =
+    `<strong>↩ This is your first plan!</strong> Future plans will connect back to what your children learn this week — each theme builds on what came before. Save this week to establish your spiral.`;
+
+  // Build days
+  const daysEl = document.getElementById('outDays');
+  daysEl.innerHTML = '';
+
+  state.days.forEach((day, dayIdx) => {
+    const dayProgs = programs[dayIdx % programs.length];
+    const isFirst = dayIdx === 0;
+
+    // Build blocks
+    const blocks = dayProgs.map((prog, bi) => {
+      const time = formatTime(baseTime + (gaps[bi] || 0));
+      const desc = getBlockDescription(prog, theme, themeData, children, dayIdx, bi);
+      return { time, program: prog, desc };
+    });
+
+    // Snapshot time = middle block
+    const snapshotIdx = Math.floor(dayProgs.length / 2);
+    const snapshotTime = formatTime(baseTime + (gaps[snapshotIdx] || 0));
+    const snapshotProg = dayProgs[snapshotIdx];
+
+    const dayEl = document.createElement('div');
+    dayEl.className = `plan-day ${isFirst ? 'open' : ''}`;
+    dayEl.innerHTML = `
+      <div class="plan-day-header" onclick="toggleDay(this.parentElement)">
+        <div class="pdh-day">${day}</div>
+        <div class="pdh-theme">${theme}</div>
+        <div class="pdh-toggle">▼</div>
+      </div>
+      <div class="plan-day-body">
+        <div class="pdb-blocks">
+          ${blocks.map(b => `
+            <div class="pdb-block">
+              <div class="pdb-time">${b.time}</div>
+              <div class="pdb-content">
+                <div class="pdb-program">${b.program}</div>
+                <div class="pdb-desc">${b.desc}</div>
+              </div>
+            </div>`).join('')}
+        </div>
+        ${isFirst ? buildSameRoomSnapshot(children, themeData, snapshotTime, snapshotProg, theme) : ''}
+      </div>`;
+    daysEl.appendChild(dayEl);
+  });
+
+  document.getElementById('planOutput').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function getBlockDescription(program, theme, data, children, dayIdx, blockIdx) {
+  const oldest = children.reduce((a,b) => (a.age||0)>(b.age||0)?a:b, children[0]);
+  const youngest = children.reduce((a,b) => (a.age||0)<(b.age||0)?a:b, children[0]);
+  const middle = children.find(c => c !== oldest && c !== youngest) || children[0];
+
+  const cycle = (arr, d, b) => arr[(d * 3 + b) % arr.length];
+
+  switch(program) {
+    case 'Atlas':
+      return formatDesc(cycle(data.atlasTask, dayIdx, blockIdx), oldest, youngest, middle, children);
+    case 'Elementum':
+      return formatDesc(cycle(data.elementumTask, dayIdx, blockIdx), oldest, youngest, middle, children);
+    case 'Reading':
+      if (children.length === 1) {
+        return getReadingActivity(children[0], data, blockIdx);
+      }
+      return children.map(c => `${c.name}: ${getReadingActivity(c, data, blockIdx)}`).join(' ');
+    case 'Hands-on':
+      const handDesc = cycle(data.handsOnTask, dayIdx, blockIdx);
+      return formatDesc(handDesc, oldest, youngest, middle, children);
+    case 'Math':
+      return formatDesc(cycle(data.mathTask, dayIdx, blockIdx), oldest, youngest, middle, children);
+    case 'Mystery Science':
+      return cycle(data.scienceTask, dayIdx, blockIdx);
+    default:
+      return `${children.map(c=>c.name).join(' and ')}: ${theme} exploration.`;
+  }
+}
+
+function getReadingActivity(child, data, idx) {
+  const level = child.level || 'Explorer';
+  const acts = data.sameRoom[level] || data.sameRoom['Explorer'];
+  return acts[idx % acts.length];
+}
+
+function formatDesc(template, oldest, youngest, middle, children) {
+  if (!template) return '';
+  return template
+    .replace(/\{eldest\}/g, oldest.name)
+    .replace(/\{youngest\}/g, youngest.name)
+    .replace(/\{middle\}/g, middle.name)
+    .replace(/\{names\}/g, children.map(c=>c.name).join(', '));
+}
+
+function buildSameRoomSnapshot(children, data, time, program, theme) {
+  const cards = children.map(child => {
+    const level = child.level || 'Explorer';
+    const acts = data.sameRoom[level] || data.sameRoom['Explorer'];
+    const activity = acts[0];
+    return `
+      <div class="srs-card">
+        <div class="srs-name">${child.name}</div>
+        <div class="srs-age">Age ${child.age}</div>
+        <div class="srs-level">${level}</div>
+        <div class="srs-activity">${activity}</div>
+      </div>`;
+  }).join('');
+
+  // Pad to 4 cards if fewer children for visual consistency
+  let paddedCards = cards;
+  if (children.length < 4) {
+    const empties = Array(4 - children.length).fill(`<div class="srs-card" style="opacity:0.2;"><div class="srs-name">—</div><div class="srs-activity">Add another child to see their activity here.</div></div>`).join('');
+    paddedCards += empties;
+  }
+
+  return `
+    <div class="same-room-snapshot">
+      <div class="srs-header">
+        <div class="srs-label">Same Room Snapshot</div>
+        <div class="srs-time">${time} — ${program} — ${theme}</div>
+      </div>
+      <div class="srs-grid">${paddedCards}</div>
+    </div>`;
+}
+
+function toggleDay(dayEl) {
+  dayEl.classList.toggle('open');
+}
+
+function resetPlanner() {
+  state.children = [{ name: '', age: '', level: '' }];
+  state.theme = '';
+  state.customTheme = '';
+  state.days = [];
+  currentStep = 1;
+
+  document.getElementById('planOutput').classList.remove('active');
+  document.getElementById('progressBar').style.display = 'flex';
+  document.querySelectorAll('.progress-step').forEach(ps => ps.classList.remove('active','done'));
+  document.getElementById('ps1').classList.add('active');
+
+  renderChildren();
+  document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('customThemeInput').value = '';
+  document.getElementById('step1').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ─── Email / Copy share (Task 8.4) ───
+let _lastTheme = '';
+let _lastFamily = '';
+
+function emailPlan(e) {
+  e.preventDefault();
+  const subject = encodeURIComponent(`${_lastFamily}'s Week 1 — ${_lastTheme} | wizkoo`);
+  const body = encodeURIComponent(`Here's our learning plan for this week.\n\nView it at wizkoo.com/planner to generate your own!`);
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+}
+
+function copyLinkClick(btn) {
+  const orig = btn.textContent;
+  btn.textContent = 'Coming soon';
+  btn.setAttribute('aria-label', 'Coming soon — link sharing launching soon');
+  setTimeout(() => { btn.textContent = orig; btn.setAttribute('aria-label', 'Copy link to plan'); }, 2000);
+}
+
+// ─── Init ───
+(function init() {
+  state.children = [{ name: '', age: '', level: '' }];
+  renderChildren();
+  document.getElementById('addChildBtn').addEventListener('click', addChild);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+:root {
+  /* ── Colors ── */
+  --saffron: #E8AF38;
+  --saffron-pale: #FFF9EE;
+  --ink: #0A0A0A;
+  --paper: #FAFAFA;
+  --warm-bg: #F5F4F0;
+  --mid: #888;
+  --faint: #CCC;
+  --rule: #E8E8E8;
+
+  /* ── Spacing ── */
+  --section-pad: 80px;
+  --section-pad-mobile: 48px;
+  --content-pad: 48px;
+  --content-pad-mobile: 24px;
+  --max-width: 1200px;
+
+  /* ── Type scale ── */
+  --hero-size: 4.8rem;
+  --hero-size-mobile: 2.4rem;
+  --h2-size: 2.8rem;
+  --h2-size-mobile: 1.8rem;
+  --body-size: 1.05rem;
+  --small-size: 0.95rem;
+  --tag-size: 0.6rem;
+  --button-size: 0.78rem;
+}

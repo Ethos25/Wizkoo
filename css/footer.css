@@ -1,0 +1,102 @@
+/* ═══ FOOTER ═══ */
+footer {
+  background: var(--ink);
+  padding: 56px var(--content-pad);
+  color: var(--paper);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 48px;
+  align-items: start;
+}
+
+.footer-wm { font-size: 24px; color: var(--paper); margin-bottom: 12px; }
+
+.footer-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.88rem;
+  color: rgba(250,250,250,0.45);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.ft-location {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(250,250,250,0.2);
+  margin-top: 8px;
+}
+
+/* Nav column */
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.footer-nav a {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.88rem;
+  color: rgba(250,250,250,0.45);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-nav a:hover { color: var(--paper); }
+
+/* Social column */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.footer-social-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(250,250,250,0.2);
+  margin-bottom: 4px;
+}
+.footer-social a {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.88rem;
+  color: rgba(250,250,250,0.45);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-social a:hover { color: var(--saffron); }
+
+/* Copyright column */
+.ft-r {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(250,250,250,0.15);
+  text-align: right;
+  align-self: end;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  footer { padding: 48px var(--content-pad-mobile); }
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .ft-r { text-align: left; }
+}
+
+@media (max-width: 480px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}

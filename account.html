@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Account — wizkoo</title>
+<meta name="description" content="Manage your family's learning profile, saved plans, and game progress.">
+<meta property="og:title" content="Your Account — wizkoo">
+<meta property="og:description" content="Manage your family's learning profile, saved plans, and game progress.">
+<meta property="og:image" content="assets/wizkoo-og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your Account — wizkoo">
+<meta name="twitter:description" content="Manage your family's learning profile, saved plans, and game progress.">
+<meta name="twitter:image" content="assets/wizkoo-og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/footer.css">
+<style>
+  .account-hero {
+    margin-top: 60px;
+    padding: var(--section-pad) var(--content-pad);
+    max-width: var(--max-width);
+    border-bottom: 1px solid var(--rule);
+  }
+  .account-hero .tag { margin-bottom: 16px; }
+  .account-hero h1 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 200;
+    font-size: 3.2rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  .account-hero h1 strong { font-weight: 700; }
+  .account-hero .hero-sub {
+    margin-top: 20px;
+    font-size: var(--body-size);
+    font-weight: 400;
+    color: #555;
+    line-height: 1.7;
+    max-width: 540px;
+  }
+
+  .account-body {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 0;
+    max-width: var(--max-width);
+  }
+  .account-main {
+    padding: var(--section-pad) var(--content-pad);
+    border-right: 1px solid var(--rule);
+  }
+
+  .coming-soon-card {
+    border: 2px solid var(--ink);
+    padding: 40px;
+    background: #fff;
+    box-shadow: 8px 8px 0 var(--saffron);
+    margin-bottom: 48px;
+  }
+  .csc-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink); /* saffron failed WCAG contrast on white */
+    border: 1px solid var(--saffron);
+    padding: 4px 10px;
+    margin-bottom: 20px;
+  }
+  .coming-soon-card h2 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .coming-soon-card p {
+    font-size: var(--small-size);
+    font-weight: 400;
+    color: #555;
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+  .coming-soon-card .csc-link {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: var(--tag-size);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--faint);
+    padding-bottom: 2px;
+    transition: border-color 0.15s;
+  }
+  .coming-soon-card .csc-link:hover { border-color: var(--saffron); color: var(--saffron); }
+
+  .features-preview { margin-bottom: 48px; }
+  .fp-title {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: var(--tag-size);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #767676; /* darkened from --faint for WCAG contrast */
+    margin-bottom: 20px;
+  }
+  .fp-list { display: flex; flex-direction: column; gap: 0; }
+  .fp-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .fp-item:last-child { border-bottom: 1px solid var(--rule); }
+  .fp-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--warm-bg);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .fp-text h3 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    margin-bottom: 4px;
+  }
+  .fp-text p {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .account-sidebar {
+    padding: var(--section-pad) 40px;
+    background: var(--warm-bg);
+  }
+  .email-capture-card {
+    border: 2px solid var(--ink);
+    padding: 32px;
+    background: #fff;
+    box-shadow: 6px 6px 0 var(--saffron);
+  }
+  .email-capture-card h3 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .email-capture-card p {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .email-form { display: flex; flex-direction: column; gap: 10px; }
+  .email-input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 12px 16px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+    min-height: 44px;
+    transition: border-color 0.15s;
+  }
+  .email-input:focus { border-color: var(--ink); }
+  .email-btn {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: var(--button-size);
+    letter-spacing: 0.06em;
+    padding: 13px 24px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    min-height: 44px;
+    text-align: center;
+  }
+  .email-btn:hover { background: var(--saffron); color: var(--ink); }
+  .email-note {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--faint);
+    text-align: center;
+  }
+  .email-success {
+    display: none;
+    text-align: center;
+    padding: 16px;
+    background: var(--saffron-pale);
+    border: 1px solid var(--saffron);
+    font-size: 0.82rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .sidebar-cta-section {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .sidebar-cta-section p {
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .account-body { grid-template-columns: 1fr; }
+    .account-main { border-right: none; border-bottom: 1px solid var(--rule); }
+  }
+  @media (max-width: 768px) {
+    .account-hero { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
+    .account-hero h1 { font-size: 2.2rem; }
+    .account-main { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
+    .account-sidebar { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
+    .coming-soon-card { padding: 28px; }
+  }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<!-- ═══ NAV ═══ -->
+<header>
+<nav>
+  <a href="index.html" class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+  <div class="nav-links">
+    <a href="index.html#orientation" class="nav-link how-it-works">How It Works</a>
+    <a href="planner.html" class="nav-link">Plan Generator</a>
+    <a href="games.html" class="nav-link">Games</a>
+    <a href="about.html" class="nav-link">About</a>
+  </div>
+  <a href="planner.html" class="nb">Build My Family's Week</a>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-overlay">
+    <button class="mobile-close" aria-label="Close menu">✕</button>
+    <div class="mobile-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#orientation">How It Works</a>
+      <a href="planner.html">Plan Generator</a>
+      <a href="games.html">Games</a>
+      <a href="about.html">About</a>
+    </div>
+    <a href="planner.html" class="nb mobile-cta">Build My Family's Week</a>
+  </div>
+</nav>
+</header>
+
+<main id="main-content">
+<!-- ═══ HERO ═══ -->
+<section class="account-hero" aria-label="Account overview">
+  <div class="tag">Account</div>
+  <h1>Your family's<br><strong>learning home<span class="sp"></span></strong></h1>
+  <p class="hero-sub">A place to save plans, track progress, and pick up exactly where you left off. Account features are on the way — for now, generate plans without one.</p>
+</section>
+
+<!-- ═══ BODY ═══ -->
+<div class="account-body">
+  <div class="account-main">
+
+    <div class="coming-soon-card">
+      <div class="csc-badge">Coming Soon</div>
+      <h2>Account features are in development.</h2>
+      <p>For now, you can generate a complete weekly plan without creating an account. Everything is free to generate, view, and print — no login required. When accounts launch, you'll be able to save your family profiles and pick up where you left off.</p>
+      <a href="planner.html" class="csc-link">In the meantime, build your first plan →</a>
+    </div>
+
+    <div class="features-preview">
+      <div class="fp-title">What's Coming</div>
+      <div class="fp-list">
+        <div class="fp-item">
+          <div class="fp-icon">📋</div>
+          <div class="fp-text">
+            <h3>Saved Plans</h3>
+            <p>Every plan you generate saves automatically. Pull up last week's plan, compare themes, see the full history of what your family has learned.</p>
+          </div>
+        </div>
+        <div class="fp-item">
+          <div class="fp-icon">👧</div>
+          <div class="fp-text">
+            <h3>Child Profiles</h3>
+            <p>Set up each child once — name, age, reading level. Future plans pull from their profiles automatically. As they grow, you update the profile and the plans adapt.</p>
+          </div>
+        </div>
+        <div class="fp-item">
+          <div class="fp-icon">🎮</div>
+          <div class="fp-text">
+            <h3>Game Progress Tracking</h3>
+            <p>See which countries your children have visited in Atlas, which elements they've unlocked in Elementum, and which combo reactions they've discovered.</p>
+          </div>
+        </div>
+        <div class="fp-item">
+          <div class="fp-icon">🔄</div>
+          <div class="fp-text">
+            <h3>Spiral Learning History</h3>
+            <p>The longer you use Wizkoo, the richer the spiral connections become. Your plan history is the data that makes Week 24 reference Week 3 with perfect accuracy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="account-sidebar">
+    <div class="email-capture-card">
+      <h3>Get notified when accounts launch.</h3>
+      <p>Be the first to know when family profiles and saved plans go live. No spam. One email when it's ready.</p>
+      <form class="email-form" onsubmit="handleEmailSubmit(event)">
+        <input class="email-input" type="email" placeholder="your@email.com" required aria-label="Email address">
+        <button type="submit" class="email-btn">Notify Me</button>
+        <div class="email-note">No account needed to start. Just your email.</div>
+      </form>
+      <p style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.08em;color:#767676;line-height:1.6;margin-top:12px;">We only collect parent email addresses. No children's data is stored.</p>
+      <div class="email-success" id="emailSuccess">
+        You're on the list. We'll reach out the moment accounts launch.
+      </div>
+    </div>
+
+    <div class="sidebar-cta-section">
+      <p>Don't want to wait? You can build a complete weekly plan right now, no account required.</p>
+      <a href="planner.html" class="btn-main">Build My Family's Week</a>
+    </div>
+  </aside>
+</div>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+      <div class="footer-tagline">Weekly learning plans for ages 2 to 12.</div>
+      <div class="ft-location">Cumming, Georgia</div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="index.html#orientation">How It Works</a>
+      <a href="planner.html">Plan Generator</a>
+      <a href="games.html">Games</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="footer-social">
+      <div class="footer-social-label">Follow</div>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+    <div class="footer-privacy"><a href="#privacy" style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(250,250,250,0.35);text-decoration:none;border-bottom:1px solid rgba(250,250,250,0.15);padding-bottom:2px;" onmouseover="this.style.color='rgba(250,250,250,0.7)'" onmouseout="this.style.color='rgba(250,250,250,0.35)'">Privacy</a></div>
+    <div class="ft-r">&copy; 2026 Wizkoo</div>
+  </div>
+</footer>
+
+<script src="js/nav.js"></script>
+<script>
+function handleEmailSubmit(e) {
+  e.preventDefault();
+  document.querySelector('.email-form').style.display = 'none';
+  document.getElementById('emailSuccess').style.display = 'block';
+}
+</script>
+</body>
+</html>
