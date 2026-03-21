@@ -1,6 +1,6 @@
 /* ═══ HERO ═══ */
 .hero {
-  margin: 60px auto 0;
+  margin: 64px auto 0;
   padding: var(--section-pad) var(--content-pad) var(--section-pad);
   max-width: var(--max-width);
 }
