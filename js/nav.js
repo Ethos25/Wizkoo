@@ -45,3 +45,12 @@
     }
   });
 })();
+
+// Nav scroll shadow
+(function () {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+})();

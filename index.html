@@ -3,366 +3,1244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>wizkoo — Weekly Learning Plans for Homeschool Families</title>
-<meta name="description" content="One theme threads through science, reading, math, and hands-on exploration. A new plan every week, personalized to each child by name, age, and reading level.">
-<meta property="og:title" content="wizkoo — Weekly Learning Plans for Homeschool Families">
-<meta property="og:description" content="One theme threads through science, reading, math, and hands-on exploration. A new plan every week, personalized to each child by name, age, and reading level.">
-<meta property="og:image" content="assets/wizkoo-og.png">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="wizkoo — Weekly Learning Plans for Homeschool Families">
-<meta name="twitter:description" content="One theme threads through science, reading, math, and hands-on exploration. A new plan every week, personalized to each child by name, age, and reading level.">
-<meta name="twitter:image" content="assets/wizkoo-og.png">
+<title>wizkoo — v26</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Wizkoo",
-  "url": "https://wizkoo.com",
-  "description": "Weekly learning plans for homeschool families. One theme connects every subject.",
-  "foundingLocation": "Cumming, Georgia"
+<style>
+:root{
+  --saffron:#E8AF38;--ink:#0A0A0A;--paper:#FAFAFA;--linen:#F2F0EA;--warm-bg:#ECEAE3;
+  --rule:#E0DED6;--mid:#888;--faint:#CCC;--max-width:1200px;
+  --body-size:0.85rem;--small-size:0.82rem;--tag-size:0.58rem;--button-size:0.68rem;
+  --expo:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.22,1,0.36,1);
 }
-</script>
-<link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/nav.css">
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/homepage.css">
+*{margin:0;padding:0;box-sizing:border-box}
+a{background:transparent;border:none;box-shadow:none;outline:none;-webkit-appearance:none}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size)}
+@media(hover:hover){html,body,a,button,.ech,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
+/* ═══ PLAN CARD WAVES ═══ */
+.pc-wave{padding:10px 20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--warm-bg)}
+.pc-wave-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--saffron)}
+.pc-bl{margin:0;border-bottom:none;border-left:2px solid var(--saffron);margin-left:20px;margin-right:20px;margin-top:1px}
+.pc-bl:last-of-type{margin-bottom:0}
+.pc-break{display:flex;align-items:center;gap:8px;padding:8px 20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.pc-break-icon{font-size:0.7rem;line-height:1}
+.pc-break-text{font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid)}
+.pc-collapsed{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--rule);transition:background .2s;cursor:default}
+.pc-collapsed:hover{background:rgba(232,175,56,0.03)}
+.pc-collapsed-wave{font-family:'Sora',sans-serif;font-weight:600;font-size:0.72rem;color:var(--ink);min-width:52px}
+.pc-collapsed-range{font-family:'Space Mono',monospace;font-size:0.45rem;color:var(--mid);letter-spacing:0.05em}
+.pc-collapsed-subj{font-family:'DM Sans',sans-serif;font-size:0.68rem;color:#666;flex:1}
+.pc-collapsed-count{font-family:'Space Mono',monospace;font-size:0.42rem;color:var(--saffron);letter-spacing:0.08em;text-transform:uppercase}
+
+/* ═══ CUSTOM CURSOR ═══ */
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
+.cursor.visible{opacity:1}
+.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
+
+
+/* ═══ WORDMARK TERMINAL DOT ═══ */
+.wm-dot{display:inline-block;position:relative;margin-left:-0.08em}
+.wm-dot::after{
+  content:'';position:absolute;
+  top:0.1em;right:-0.2em;
+  width:0.22em;height:0.22em;
+  border-radius:50%;background:var(--saffron);
+  transition:transform .3s var(--expo);
+}
+.wm:hover .wm-dot::after{animation:dotReact .4s var(--expo)}
+.nav-wm:hover .wm-dot::after{animation:dotReact .4s var(--expo)}
+@keyframes dotReact{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}
+/* ═══ WORDMARK ═══ */
+.wm{font-family:'Sora',sans-serif;font-weight:800;letter-spacing:-0.04em;display:inline-flex;align-items:baseline;line-height:1;text-decoration:none;color:inherit}
+.wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron);transition:transform .15s}
+/* SLOW graceful backflip: 1.4s with smooth arc */
+.wm:hover .k{animation:kGiggle 0.8s ease-in-out}
+@keyframes kGiggle{
+  0%{transform:rotate(8deg)}
+  6%{transform:rotate(12deg) translateY(-1px)}
+  12%{transform:rotate(5deg)}
+  18%{transform:rotate(13deg) translateY(-1.5px)}
+  24%{transform:rotate(6deg) translateY(0.5px)}
+  30%{transform:rotate(11deg) translateY(-1px)}
+  36%{transform:rotate(7deg)}
+  42%{transform:rotate(10deg) translateY(-0.5px)}
+  50%{transform:rotate(8deg)}
+  58%{transform:rotate(10deg) translateY(-1px)}
+  66%{transform:rotate(7deg)}
+  75%{transform:rotate(9deg) translateY(-0.5px)}
+  85%{transform:rotate(8deg)}
+  100%{transform:rotate(8deg)}
+}
+.wm .i-fix{position:relative;display:inline-block;background:transparent!important}
+.wm .i-fix::before{display:none!important;background:transparent!important}
+.wm .i-fix::after{display:none!important}
+.sp{display:inline-block;width:0.14em;height:0.14em;border-radius:50%;background:var(--saffron);margin-left:0.04em;vertical-align:baseline;position:relative;top:0.01em}
+.tag{font-family:'Space Mono',monospace;font-size:var(--tag-size);letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,250,250,0.25);margin-bottom:12px}
+.tag-light{font-family:'Space Mono',monospace;font-size:var(--tag-size);letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:12px}
+.saffron-rule{height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.35}
+.btn-main{font-family:'Sora',sans-serif;font-weight:600;font-size:var(--button-size);letter-spacing:0.06em;padding:14px 40px;background:var(--ink);color:var(--paper);border:none;box-shadow:6px 6px 0 var(--saffron);transition:transform .25s var(--expo),box-shadow .25s var(--expo);white-space:nowrap;display:inline-block;text-decoration:none}
+.btn-main:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--saffron)}
+
+
+.circle-cta-section{padding:48px 0 56px;display:flex;flex-direction:column;align-items:center;background:var(--linen);position:relative;z-index:1}
+.hero-circle-wrap{margin-top:40px;display:flex;flex-direction:column;align-items:center;opacity:0;animation:fastReveal .6s var(--expo) forwards 3.6s}
+/* ═══ CIRCLE CTA ═══ */
+.btn-circle{
+  width:100px;height:100px;border-radius:50%;
+  background:var(--saffron);color:var(--ink);
+  font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.02em;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  text-decoration:none;border:none;position:relative;
+  box-shadow:0 4px 24px rgba(232,175,56,0.3),0 0 40px rgba(232,175,56,0.12);
+  transition:transform .4s var(--expo),box-shadow .4s var(--expo);
+}
+.btn-circle:hover{transform:scale(1.12);box-shadow:0 8px 40px rgba(232,175,56,0.45),0 0 60px rgba(232,175,56,0.2)}
+.btn-circle .circle-label{font-size:0.82rem}
+.btn-circle .circle-expand{display:none}
+.btn-circle:hover{animation:circBreathe 1.5s ease-in-out infinite;box-shadow:0 8px 40px rgba(232,175,56,0.45),0 0 60px rgba(232,175,56,0.2)}
+.btn-circle::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--saffron);opacity:0;transform:scale(1);transition:none;pointer-events:none}
+.btn-circle:hover::before{animation:circRing 1s var(--expo) forwards}
+@keyframes circBreathe{0%,100%{transform:scale(1.0)}50%{transform:scale(1.08)}}
+@keyframes circRing{0%{opacity:0.5;transform:scale(1)}100%{opacity:0;transform:scale(1.6)}}
+/* Dark version for closing CTA */
+.btn-circle-dark{
+  width:110px;height:110px;border-radius:50%;
+  background:var(--saffron);color:var(--ink);
+  font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;letter-spacing:0.02em;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  text-decoration:none;border:none;position:relative;
+  box-shadow:0 4px 24px rgba(232,175,56,0.35);
+  transition:transform .4s var(--expo),box-shadow .4s var(--expo);
+  margin:0 auto;
+}
+.btn-circle-dark:hover{transform:scale(1.14);box-shadow:0 10px 44px rgba(232,175,56,0.5)}
+.btn-circle-dark .circle-expand{display:none}
+.btn-circle-dark:hover{animation:circBreathe 1.5s ease-in-out infinite;box-shadow:0 10px 44px rgba(232,175,56,0.5),0 0 60px rgba(232,175,56,0.25)}
+.btn-circle-dark::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--saffron);opacity:0;transform:scale(1);pointer-events:none}
+.btn-circle-dark:hover::before{animation:circRing 1s var(--expo) forwards}
+
+
+/* ═══ NAV ═══ */
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform .4s var(--expo)}
+.site-nav.show{transform:translateY(0)}
+.site-nav a:not(.nav-cta-sm),.nav-bar a:not(.nav-cta-sm){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
+.site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
+.nav-bar{width:100%;max-width:var(--max-width);height:100%;padding:0 48px;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:40px}
+.nav-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.04em;color:var(--paper);text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
+.nav-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}
+.nav-wm:hover .k{animation:kGiggle 0.8s ease-in-out}
+.nav-wm .i-fix{position:relative;display:inline-block}
+
+
+.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
+.nav-center span{font-family:'Space Mono',monospace;font-weight:400;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px}
+.nav-center span::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
+.nav-center span:hover{color:rgba(250,250,250,0.8)}
+.nav-center span:hover::after{width:100%}
+.nav-cta-sm{font-family:'Sora',sans-serif;font-weight:600;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;background:var(--saffron)!important;color:var(--ink)!important;text-decoration:none!important;transition:background .3s,transform .2s;white-space:nowrap;flex-shrink:0;border:none!important;box-shadow:none!important;outline:none!important}
+.nav-cta-sm:hover{background:#D4A030;transform:translateY(-1px)}
+
+/* ═══ HERO ═══ */
+.hero-wrapper{position:relative;height:200vh}
+.hero-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--linen)}
+.orb-field{position:absolute;inset:0;pointer-events:none;z-index:0}
+.week-orb{position:absolute;filter:blur(70px);transition:all 2.2s var(--expo);opacity:0}
+.week-orb.scattered{opacity:1}.week-orb.aligned{opacity:1}
+.orb-mon{width:240px;height:200px;border-radius:40%;background:rgba(232,175,56,0.22)}
+.orb-tue{width:180px;height:180px;border-radius:50%;background:rgba(168,130,200,0.13)}
+.orb-wed{width:200px;height:200px;border-radius:50%;background:rgba(100,185,165,0.12)}
+.orb-thu{width:170px;height:170px;border-radius:50%;background:rgba(200,120,120,0.11)}
+.orb-fri{width:190px;height:190px;border-radius:50%;background:rgba(100,160,220,0.11)}
+.orb-label{position:absolute;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(0,0,0,0.12);opacity:0;transition:opacity 1.2s var(--expo) .8s;white-space:nowrap;pointer-events:none;bottom:-16px;left:50%;transform:translateX(-50%)}
+.week-orb.aligned .orb-label{opacity:1}
+
+.hero-content{position:relative;z-index:1;max-width:var(--max-width);margin:0 auto;padding:80px 48px 0 14vw;display:flex;flex-direction:column;justify-content:flex-start}
+.hero-brand{opacity:0;animation:slowReveal 1.8s var(--expo) forwards 1s}
+.hero-brand *{background:transparent!important}
+.hero-brand span.wm{font-size:64px;color:var(--ink)}
+
+@keyframes slowReveal{from{opacity:0}to{opacity:1}}
+@keyframes fastReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#444;margin:16px 0 28px;display:flex;align-items:center;gap:16px;opacity:0;animation:fastReveal .3s var(--expo) forwards 2.6s}
+.hero-sticky h1{font-family:'Sora',sans-serif;font-weight:200;font-size:5rem;line-height:1.04;letter-spacing:-0.04em;color:var(--ink);max-width:780px}
+.hero-line{display:block;overflow:hidden}
+.hero-char{display:inline-block;opacity:0;transform:translateY(28px);animation:charIn .45s var(--expo) forwards}
+@keyframes charIn{to{opacity:1;transform:translateY(0)}}
+.hero-punchline .hero-char{animation:punchIn .8s var(--expo) forwards}
+@keyframes punchIn{0%{opacity:0;transform:translateY(28px);color:var(--saffron)}50%{opacity:1;transform:translateY(0);color:var(--saffron)}100%{opacity:1;transform:translateY(0);color:var(--ink)}}
+.hero-dot-anchor{display:inline-block;position:relative}
+.hero-dot-anchor .sp{opacity:0;transform:scale(0)}
+.hero-dot-anchor.pop .sp{animation:dotBurst .6s var(--expo) forwards}
+@keyframes dotBurst{0%{opacity:1;transform:scale(0)}40%{transform:scale(2)}100%{opacity:1;transform:scale(1)}}
+/* Planned dot is clickable for Easter egg */
+.planned-dot{position:relative;z-index:5}
+
+/* Confetti */
+.confetti-piece{position:fixed;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:9998}
+@keyframes confettiFall{0%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1)}100%{opacity:0;transform:translate(var(--cx),var(--cy)) rotate(720deg) scale(0.2)}}
+
+.hero-sub{margin-top:24px;max-width:520px;opacity:0;animation:fastReveal .6s var(--expo) forwards 3.2s}
+.hero-sub-text{font-size:0.88rem;color:#777;line-height:1.8}
+.hero-cta-group{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.hero-micro{font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid)}
+
+
+
+
+
+
+
+.content-layer{position:relative;z-index:10;background:var(--linen);box-shadow:0 -20px 60px rgba(0,0,0,0.08)}
+
+/* ═══ ALL SECTIONS ═══ */
+.plan-section{background:var(--warm-bg);padding:0 48px 72px;position:relative;overflow:hidden}
+.plan-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0}
+.plan-orb-1{width:200px;height:200px;background:rgba(232,175,56,0.13);top:15%;left:55%;transform:translate(-50%,-50%)}
+.plan-orb-2{width:150px;height:150px;background:rgba(100,185,165,0.07);top:60%;left:35%;transform:translate(-50%,-50%)}
+.plan-center{max-width:600px;margin:0 auto;position:relative;z-index:1}
+
+.plan-eyebrow{text-align:center;padding-top:48px;margin-bottom:32px}
+.plan-eyebrow-text{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--saffron);display:inline-flex;align-items:center;gap:12px}
+.plan-eyebrow-text::before,.plan-eyebrow-text::after{content:'';width:20px;height:1px;background:var(--saffron);opacity:0.4}
+.plan-card{background:#fff;border:1.5px solid var(--ink);box-shadow:0 2px 4px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.06),8px 8px 0 var(--saffron);transition:transform .35s var(--expo),box-shadow .35s var(--expo)}
+.plan-card:hover{transform:translate(-2px,-4px);box-shadow:0 4px 8px rgba(0,0,0,0.06),0 16px 40px rgba(0,0,0,0.1),12px 12px 0 var(--saffron)}
+.plan-card-entrance{opacity:0;transform:translateY(30px) rotate(0.5deg);transition:opacity .9s var(--expo),transform .9s var(--expo)}
+.plan-card-entrance.visible{opacity:1;transform:translateY(0) rotate(0deg)}
+.pc-h{padding:16px 20px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:flex-start}
+.pc-fam{font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem}
+.pc-wk{font-family:'Space Mono',monospace;font-size:0.5rem;color:#999}
+.pc-spiral-top{padding:12px 20px;background:var(--warm-bg);border-bottom:1px solid var(--rule);font-size:0.72rem;line-height:1.6;color:#7A7A72;position:relative}
+.pc-spiral-top strong{font-weight:600;color:var(--ink)}
+.pc-spiral-top::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--saffron);opacity:0}
+.plan-card-entrance.visible .pc-spiral-top::before{animation:spiralPulse 1.5s var(--expo) .8s forwards}
+@keyframes spiralPulse{0%{opacity:0}30%{opacity:1}100%{opacity:0.3}}
+.pc-theme{padding:8px 20px;border-bottom:1px solid var(--rule)}
+.pc-theme-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron)}
+.pc-theme-name{font-family:'Sora',sans-serif;font-weight:200;font-size:0.92rem;margin-top:2px}
+.pc-day{padding:12px 20px;border-bottom:1px solid var(--rule)}.pc-day:last-child{border-bottom:none}
+.pc-day-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:5px}
+.pc-bl{display:flex;align-items:flex-start;gap:8px;padding:4px 8px;margin-bottom:2px;font-size:0.68rem;line-height:1.5;background:rgba(0,0,0,0.02);border-left:2px solid var(--saffron);position:relative;overflow:hidden}
+.pc-bl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(232,175,56,0.05);transition:width .6s var(--expo)}
+.plan-card-entrance.visible .pc-bl::before{width:100%;transition-delay:calc(var(--bl-i,0)*.12s + .5s)}
+.pc-bl>*{position:relative;z-index:1}.pc-bl .tm{font-family:'Space Mono',monospace;font-size:0.48rem;color:#aaa;min-width:32px}
+
+/* ═══ PLAN CARD WAVES ═══ */
+.pc-wave{padding:10px 20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--warm-bg)}
+.pc-wave-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--saffron)}
+.pc-bl{margin:0;border-bottom:none;border-left:2px solid var(--saffron);margin-left:20px;margin-right:20px;margin-top:1px}
+.pc-bl:last-of-type{margin-bottom:0}
+.pc-break{display:flex;align-items:center;gap:8px;padding:8px 20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.pc-break-icon{font-size:0.7rem;line-height:1}
+.pc-break-text{font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid)}
+.pc-collapsed{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--rule);transition:background .2s;cursor:default}
+.pc-collapsed:hover{background:rgba(232,175,56,0.03)}
+.pc-collapsed-wave{font-family:'Sora',sans-serif;font-weight:600;font-size:0.72rem;color:var(--ink);min-width:52px}
+.pc-collapsed-range{font-family:'Space Mono',monospace;font-size:0.45rem;color:var(--mid);letter-spacing:0.05em}
+.pc-collapsed-subj{font-family:'DM Sans',sans-serif;font-size:0.68rem;color:#666;flex:1}
+.pc-collapsed-count{font-family:'Space Mono',monospace;font-size:0.42rem;color:var(--saffron);letter-spacing:0.08em;text-transform:uppercase}
+.pc-more{padding:14px 20px;text-align:center;font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--saffron);transition:background .2s;border-top:1px solid var(--rule)}
+.pc-more:hover{background:rgba(232,175,56,0.04)}
+.plan-founder{max-width:600px;margin:40px auto 0;text-align:center}
+.founder-line{font-family:'Sora',sans-serif;font-weight:300;font-size:1.1rem;line-height:1.4;letter-spacing:-0.02em;text-align:center}.founder-line strong{font-weight:700}
+.founder-detail{font-size:0.78rem;color:#666;line-height:1.6;margin-top:12px;text-align:center}
+.founder-cta{padding-top:28px;display:flex;flex-direction:column;align-items:center}
+.micro-copy{display:block;margin-top:10px;font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid)}
+
+/* ═══ SAME ROOM — contained, sharp edges, high contrast ═══ */
+.same-room-wrap{padding:64px 48px;background:var(--linen)}
+.same-room{max-width:1100px;margin:0 auto;padding:56px 48px;background:#141310;color:var(--paper);position:relative;overflow:hidden;border:1.5px solid rgba(232,175,56,0.12);transition:background .8s var(--expo)}
+.same-room>*{position:relative;z-index:1}
+.sr-header{margin-bottom:12px}
+.same-room .tag{color:var(--saffron);margin-bottom:16px}
+.same-room h2{font-family:'Sora',sans-serif;font-weight:200;font-size:2.2rem;line-height:1.1;letter-spacing:-0.03em}.same-room h2 strong{font-weight:700;color:var(--saffron)}
+.sr-why{font-size:0.82rem;color:rgba(250,250,250,0.5);line-height:1.6;margin:12px 0 32px;max-width:500px}
+.sr-instruction{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-align:center;margin-bottom:16px}
+.sr-track{display:flex;gap:0;border-top:1px solid rgba(255,255,255,0.08);position:relative}
+.sr-card{flex:1;padding:28px 24px;border-right:1px solid rgba(255,255,255,0.06);transition:opacity .4s var(--expo),background .4s var(--expo),transform .3s var(--expo),border-color .3s;opacity:0.4;border-top:2px solid transparent}
+.sr-card:last-child{border-right:none}
+.sr-card.active{opacity:1;background:rgba(250,250,250,0.04);border-top:2px solid var(--saffron);transform:translateY(-2px)}
+.sr-name{font-family:'Sora',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:2px;transition:color .3s,transform .3s var(--expo);transform-origin:left center;color:rgba(250,250,250,0.7)}
+.sr-card.active .sr-name{color:#fff;transform:scale(1.04)}
+.sr-age{font-family:'Space Mono',monospace;font-size:0.48rem;color:rgba(250,250,250,0.3);margin-bottom:6px}
+.sr-level{font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--saffron);border:1px solid rgba(232,175,56,0.3);padding:2px 8px;display:inline-flex;align-items:center;gap:5px;margin-bottom:14px;transition:background .3s,color .3s,border-color .3s}
+.sr-card.active .sr-level{background:var(--saffron);color:#141310;border-color:var(--saffron)}
+.sr-level-dot{width:6px;height:6px;border-radius:50%;border:1px solid currentColor;display:inline-block;flex-shrink:0}
+.sr-level-dot.full{background:currentColor}
+.sr-level-dot.half{background:linear-gradient(to right,currentColor 50%,transparent 50%)}
+.sr-activity{font-size:0.72rem;color:rgba(250,250,250,0.35);line-height:1.6;transition:color .3s,transform .3s var(--expo),opacity .3s;transform:translateY(4px);opacity:0.7}
+.sr-card.active .sr-activity{color:rgba(250,250,250,0.85);transform:translateY(0);opacity:1}
+.sr-beam{display:none}
+
+.orientation{padding:80px 48px;display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:start;max-width:1100px;margin:0 auto}
+.or-title{font-family:'Sora',sans-serif;font-weight:200;font-size:1.9rem;line-height:1.15;letter-spacing:-0.02em}.or-title strong{font-weight:700}
+.or-sub{margin-top:16px;font-size:var(--body-size);color:#666;line-height:1.7}
+.week-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.week-card{background:#fff;border:1.5px solid var(--ink);padding:22px;transition:transform .25s var(--expo),box-shadow .25s var(--expo)}.week-card:hover{transform:translateY(-3px)}
+.week-card.w1{box-shadow:0 2px 8px rgba(0,0,0,0.04)}.week-card.w1:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08)}
+.week-card.w8{box-shadow:4px 4px 0 var(--saffron);border-left:3px solid var(--saffron)}.week-card.w8:hover{box-shadow:6px 6px 0 var(--saffron)}
+.wc-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:6px}
+.wc-theme{font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;margin-bottom:8px}
+.wc-detail{font-size:0.68rem;color:#888;line-height:1.6}
+.wc-spiral{margin-top:8px;padding:6px 10px;background:var(--warm-bg);font-size:0.65rem;font-style:italic;color:#7A7A72;line-height:1.5}
+
+.games-band{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.game-panel{padding:56px 48px;background:var(--linen)}.game-panel:first-child{border-right:1px solid var(--rule)}.game-panel.gp-elem{background:var(--warm-bg)}
+.game-panel .moment{font-family:'Sora',sans-serif;font-weight:200;font-size:1.1rem;line-height:1.4;margin-bottom:16px}.game-panel .moment strong{font-weight:700;color:var(--saffron)}
+.game-panel h3{font-family:'Sora',sans-serif;font-weight:700;font-size:2rem;letter-spacing:-0.04em;margin-bottom:8px;line-height:1}
+.game-panel .gd{font-size:0.72rem;color:var(--mid);line-height:1.7;margin-bottom:16px}
+.g-stats{display:flex;gap:16px}.g-st .v{font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;line-height:1;letter-spacing:-0.02em}.g-st .l{font-family:'Space Mono',monospace;font-size:0.45rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--faint)}
+.elem-chips{display:flex;gap:6px;margin-top:16px;position:relative}
+.ech{border:1.5px solid var(--ink);padding:6px 10px;text-align:center;background:#fff;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.12),inset -1px -1px 2px rgba(255,255,255,0.6);transition:transform .3s var(--expo),box-shadow .3s var(--expo),background .8s}
+.ech:hover{box-shadow:0 2px 8px rgba(0,0,0,0.1),0 0 0 1px var(--saffron);transform:translateY(-3px) rotate(-3deg)}.ech.glow{background:rgba(232,175,56,0.08)}
+.ech .s{font-family:'Sora',sans-serif;font-weight:700;font-size:0.95rem;line-height:1}.ech .n{font-family:'Space Mono',monospace;font-size:0.4rem;text-transform:uppercase;color:#999;margin-top:2px}
+.reaction-spark{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--saffron);opacity:0;pointer-events:none}
+.reaction-spark.active{animation:sparkPop .5s var(--expo) forwards}
+@keyframes sparkPop{0%{opacity:1;transform:scale(0)}40%{transform:scale(2.5)}100%{opacity:0;transform:scale(0)}}
+.panel-link{display:inline-block;margin-top:20px;font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--faint);padding-bottom:2px;transition:border-color .2s,color .2s}.panel-link:hover{border-color:var(--saffron);color:var(--saffron)}
+
+.philo{background:var(--ink);color:var(--paper);padding:80px 48px;display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start;position:relative}
+.philo::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}.philo>*{position:relative;z-index:1}
+.philo-left{position:sticky;top:80px}.philo .tag{color:var(--saffron);margin-bottom:16px}
+.philo h2{font-family:'Sora',sans-serif;font-weight:200;font-size:2rem;line-height:1.12;letter-spacing:-0.02em}.philo h2 strong{font-weight:700;color:var(--saffron)}
+.phi{padding:24px 0;border-top:1px solid rgba(255,255,255,0.06);opacity:0;transform:translateY(16px);transition:opacity .6s var(--expo),transform .6s var(--expo)}.phi.visible{opacity:1;transform:translateY(0)}.phi:last-child{border-bottom:1px solid rgba(255,255,255,0.06)}
+.phi h3{font-family:'Sora',sans-serif;font-weight:600;font-size:0.82rem;color:var(--saffron);margin-bottom:8px}.phi p{font-size:0.72rem;color:rgba(250,250,250,0.35);line-height:1.7}
+
+.faq-section{padding:80px 48px;max-width:var(--max-width);margin:0 auto}.faq-inner{max-width:680px}
+.faq-section h2{font-family:'Sora',sans-serif;font-weight:200;font-size:1.8rem;line-height:1.15;letter-spacing:-0.025em;margin-bottom:36px}.faq-section h2 strong{font-weight:700}
+.faq-list{border-top:1px solid var(--rule)}.faq-item{border-bottom:1px solid var(--rule)}
+.faq-q{width:100%;text-align:left;background:transparent;border:none;padding:18px 0;font-family:'Sora',sans-serif;font-weight:600;font-size:0.82rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.4;transition:color .2s}.faq-q:hover{color:var(--saffron)}
+.faq-q::after{content:'+';font-size:1rem;font-weight:300;color:var(--saffron);flex-shrink:0;transition:transform .3s var(--expo)}.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{padding:0 0 18px;font-size:var(--small-size);color:#555;line-height:1.75;max-width:600px}.faq-a[hidden]{display:none}.faq-a:not([hidden]){display:block;animation:stepFade .3s var(--expo)}
+@keyframes stepFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.cta-dark{background:var(--ink);padding:120px 48px;text-align:center;position:relative;overflow:hidden}
+.cta-dark::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}.cta-dark>*{position:relative;z-index:1}
+.cta-dark h2{font-family:'Sora',sans-serif;font-weight:200;font-size:3.8rem;line-height:1.06;letter-spacing:-0.04em;color:var(--paper);margin:0 auto 24px;max-width:700px}.cta-dark h2 strong{font-weight:700}
+.cta-dark p{font-size:var(--small-size);color:rgba(250,250,250,0.3);margin-bottom:40px}
+.cta-dark .btn-main{background:var(--saffron);color:var(--ink);box-shadow:0 4px 20px rgba(232,175,56,0.3)}.cta-dark .btn-main:hover{box-shadow:0 8px 30px rgba(232,175,56,0.4);transform:translateY(-2px)}
+.cta-reveal{opacity:0;transition:opacity 1.4s var(--expo)}.cta-reveal.visible{opacity:1}
+
+footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px solid rgba(255,255,255,0.04)}
+.footer-inner{max-width:var(--max-width);display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:48px;align-items:start}
+.footer-wm{font-size:18px;color:var(--paper);margin-bottom:10px}
+.footer-tagline{font-size:0.78rem;color:rgba(250,250,250,0.4);line-height:1.5}.ft-location{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,250,250,0.15);margin-top:6px}
+.footer-nav{display:flex;flex-direction:column;gap:10px}.footer-nav span{font-size:0.78rem;color:rgba(250,250,250,0.4);transition:color .2s}.footer-nav span:hover{color:var(--paper)}
+.footer-social{display:flex;flex-direction:column;gap:10px}.footer-social-label{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(250,250,250,0.15)}.footer-social span{font-size:0.78rem;color:rgba(250,250,250,0.4)}.footer-social span:hover{color:var(--saffron)}
+.ft-r{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,250,250,0.1);text-align:right;align-self:end}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--expo),transform .7s var(--expo)}.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:1024px){
+  .hero-sticky h1{font-size:3.4rem}
+  .hero-brand span.wm{font-size:48px}
+  .hero-content{padding-left:8vw}
+  .hero-sub{grid-template-columns:1fr}
+  .orientation{grid-template-columns:1fr}
+  .games-band{grid-template-columns:1fr}
+  .game-panel:first-child{border-right:none;border-bottom:1px solid var(--rule)}
+  .philo{grid-template-columns:1fr}
+  .philo-left{position:relative;top:0}
+  .week-compare{grid-template-columns:1fr}
+  .sr-track{flex-wrap:wrap}
+  .sr-card{flex:1 1 45%}
+  .cta-dark h2{font-size:2.6rem}
+  .ec-headline{font-size:2rem}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+}
+
+@media(max-width:768px){
+  /* ── Hero ── */
+  .hero-sticky h1{font-size:2.2rem;max-width:100%}
+  .hero-brand span.wm{font-size:36px}
+  .hero-content{padding:48px 20px 0 20px}
+  .hero-eyebrow{font-size:0.52rem;letter-spacing:0.12em;margin:12px 0 20px}
+  .hero-sub{margin-top:16px}
+  .hero-sub-text{font-size:0.82rem}
+
+  /* ── Nav ── */
+  .nav-bar{padding:0 16px;gap:16px}
+  .nav-center{gap:14px;display:none}
+  .nav-center span{font-size:7px;letter-spacing:0.1em}
+  .nav-cta-sm{font-size:7px;padding:5px 10px}
+  .nav-bar{justify-content:space-between}
+
+  /* ── Content sections ── */
+  .plan-section{padding:0 20px 40px}
+  .same-room-wrap{padding:24px 16px}
+  .same-room{padding:28px 16px}
+  .same-room h2{font-size:1.6rem}
+  .sr-track{flex-direction:column}
+  .sr-card{flex:none;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .sr-card:last-child{border-bottom:none}
+  .sr-instruction{display:none}
+
+  /* ── Everything Connects ── */
+  .ec-section{padding:48px 20px}
+  .ec-headline{font-size:1.5rem}
+  .ec-hook{font-size:0.88rem}
+  .ec-subjects{flex-direction:column;align-items:stretch}
+  .ec-subj{max-width:100%}
+
+  /* ── Orientation ── */
+  .orientation{padding:40px 20px;gap:24px;grid-template-columns:1fr}
+
+  /* ── Games ── */
+  .games-band{grid-template-columns:1fr}
+  .game-panel{padding:32px 20px}
+  .game-panel:first-child{border-right:none;border-bottom:1px solid var(--rule)}
+  .game-panel h3{font-size:1.5rem}
+
+  /* ── Philosophy ── */
+  .philo{padding:48px 20px;grid-template-columns:1fr;gap:32px}
+  .philo-left{position:relative;top:0}
+  .philo h2{font-size:1.6rem}
+
+  /* ── FAQ ── */
+  .faq-section{padding:48px 20px}
+  .faq-section h2{font-size:1.4rem}
+  .faq-q{padding:16px 0;font-size:0.78rem}
+
+  /* ── CTA ── */
+  .cta-dark{padding:64px 20px}
+  .cta-dark h2{font-size:1.8rem}
+
+  /* ── Identity tags ── */
+  .id-tags-wrap{padding:20px 20px}
+  .id-tags{gap:8px}
+  .id-tag{font-size:0.44rem;padding:8px 12px}
+
+  /* ── Plan card ── */
+  .plan-card{font-size:0.78rem}
+  .pc-h{padding:12px 16px}
+  .pc-bl{padding:4px 6px;margin-left:12px;margin-right:12px;font-size:0.64rem}
+  .pc-collapsed{padding:10px 16px;flex-wrap:wrap;gap:6px}
+  .pc-break{padding:6px 16px}
+
+  /* ── Footer ── */
+  .footer-inner{grid-template-columns:1fr;gap:24px;padding:0}
+  footer{padding:32px 20px}
+  .ft-r{text-align:left}
+
+  /* ── Circle CTA ── */
+  .btn-circle{width:88px;height:88px;font-size:0.76rem}
+  .btn-circle-dark{width:96px;height:96px;font-size:0.82rem}
+
+  /* ── Week compare cards ── */
+  .week-compare{grid-template-columns:1fr}
+}
+
+/* ═══ TOUCH DEVICES ═══ */
+@media(hover:none)and(pointer:coarse){
+  /* Disable custom cursor on touch */
+  .cursor{display:none!important}
+
+  /* Firefly: bump size, pointer-events for tap catch */
+  .firefly{width:7px;height:7px;box-shadow:0 0 10px 4px rgba(232,175,56,0.45),0 0 24px 8px rgba(232,175,56,0.18)}
+
+  /* Tap ripple */
+  .tap-ripple{position:fixed;width:0;height:0;border-radius:50%;border:1.5px solid var(--saffron);pointer-events:none;z-index:9999;mix-blend-mode:exclusion;animation:tapRipple .35s var(--expo) forwards}
+  @keyframes tapRipple{0%{width:0;height:0;opacity:0.7;margin:0}100%{width:44px;height:44px;opacity:0;margin:-22px 0 0 -22px}}
+
+  /* Larger tap targets for FAQ */
+  .faq-q{min-height:48px}
+
+  /* Same Room: tap instruction instead of hover */
+  .sr-instruction{display:block!important;font-size:8px}
+}
+
+/* ═══ FIREFLY ═══ */
+.firefly{position:fixed;width:5px;height:5px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9998;opacity:0;box-shadow:0 0 8px 3px rgba(232,175,56,0.4),0 0 20px 6px rgba(232,175,56,0.15);transition:opacity .8s}
+.firefly.alive{opacity:1}
+.firefly.caught{background:#6BBF6B;box-shadow:0 0 8px 3px rgba(107,191,107,0.5),0 0 20px 6px rgba(107,191,107,0.2)}
+.collision-ring{position:fixed;width:4px;height:4px;border-radius:50%;border:1px solid rgba(107,191,107,0.6);pointer-events:none;z-index:9997;animation:ringExpand .5s var(--expo) forwards}
+@keyframes ringExpand{0%{transform:scale(1);opacity:1}100%{transform:scale(12);opacity:0}}
+.collision-spark{position:fixed;width:3px;height:3px;border-radius:50%;pointer-events:none;z-index:9997}
+@keyframes sparkOut{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--sx),var(--sy))}}
+
+/* ═══ IDENTITY TAGS ═══ */
+.id-tags-wrap{background:var(--warm-bg);padding:36px 48px;position:relative;overflow:hidden}
+.id-tags-glow{position:absolute;width:400px;height:180px;border-radius:50%;filter:blur(80px);pointer-events:none;background:rgba(232,175,56,0.5);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.1;animation:idGlowPulse 8s ease-in-out infinite}
+@keyframes idGlowPulse{0%,100%{opacity:0.08;transform:translate(-50%,-50%) scale(1)}50%{opacity:0.14;transform:translate(-50%,-50%) scale(1.08)}}
+.id-tags{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1}
+.id-tag{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);border:2px solid var(--ink);padding:10px 22px;opacity:0;transform:translateY(12px);background:rgba(255,255,255,0.5);box-shadow:0 2px 6px rgba(0,0,0,0.04),0 1px 2px rgba(0,0,0,0.06);transition:opacity .5s var(--expo),transform .5s var(--expo),border-color .35s,box-shadow .35s,background .35s}
+.id-tag.visible{opacity:0.8;transform:translateY(0)}
+.id-tags:hover .id-tag.visible{opacity:0.45;transform:scale(0.98)}
+.id-tags:hover .id-tag.visible:hover{opacity:1;transform:translateY(-3px) scale(1.03);border-color:var(--saffron);background:rgba(232,175,56,0.12);box-shadow:0 8px 24px rgba(232,175,56,0.12),0 2px 4px rgba(0,0,0,0.06)}
+
+/* ═══ EVERYTHING CONNECTS ═══ */
+.ec-section{background:var(--warm-bg);padding:80px 48px;position:relative;overflow:hidden}
+.ec-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,0,0,0.012) 59px,rgba(0,0,0,0.012) 60px);pointer-events:none}
+.ec-section>*{position:relative;z-index:1}
+.ec-inner{max-width:900px;margin:0 auto}
+.ec-tag{font-family:'Space Mono',monospace;font-size:var(--tag-size);letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:32px;text-align:center}
+.ec-scenario{margin-bottom:56px}
+.ec-scenario:last-child{margin-bottom:0}
+.ec-headline{font-family:'Sora',sans-serif;font-weight:200;font-size:2.4rem;line-height:1.1;letter-spacing:-0.03em;text-align:center;margin-bottom:8px}
+.ec-headline strong{font-weight:700}
+.ec-hook{font-family:'Sora',sans-serif;font-weight:300;font-size:1rem;color:var(--saffron);text-align:center;margin-bottom:28px;letter-spacing:-0.01em}
+.ec-subjects{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:20px}
+.ec-subj{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.1em;text-transform:uppercase;border:1.5px solid var(--ink);padding:8px 14px;background:#fff;line-height:1.5;max-width:280px;opacity:0;transform:translateY(10px);transition:opacity .5s var(--expo),transform .5s var(--expo)}
+.ec-subj .ec-subj-label{color:var(--saffron);font-weight:700;display:block;margin-bottom:2px;font-size:0.42rem;letter-spacing:0.14em}
+.ec-scenario.visible .ec-subj{opacity:1;transform:translateY(0)}
+.ec-scenario.visible .ec-subj:nth-child(1){transition-delay:.1s}
+.ec-scenario.visible .ec-subj:nth-child(2){transition-delay:.18s}
+.ec-scenario.visible .ec-subj:nth-child(3){transition-delay:.26s}
+.ec-scenario.visible .ec-subj:nth-child(4){transition-delay:.34s}
+.ec-scenario.visible .ec-subj:nth-child(5){transition-delay:.42s}
+.ec-scenario.visible .ec-subj:nth-child(6){transition-delay:.50s}
+.ec-divider{width:40px;height:1px;background:var(--saffron);margin:48px auto;opacity:0.3}
+
+/* ═══ PREFERS REDUCED MOTION ═══ */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms!important;animation-delay:0s!important;transition-duration:0.01ms!important}
+  .hero-char{opacity:1!important;transform:none!important}
+  .hero-eyebrow,.hero-sub,.hero-brand,.hero-circle-wrap{opacity:1!important;transform:none!important}
+  .week-orb{opacity:1!important}
+  .firefly{display:none!important}
+  .cursor{display:none!important}
+}
+</style>
 </head>
 <body>
-<a href="#main-content" class="skip-nav">Skip to main content</a>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="firefly" id="firefly"></div>
 
-<!-- ═══ NAV ═══ -->
-<header>
-<nav>
-  <a href="index.html" class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
-  <div class="nav-links">
-    <a href="#orientation" class="nav-link how-it-works">How It Works</a>
-    <a href="planner.html" class="nav-link">Plan Generator</a>
-    <a href="games.html" class="nav-link">Games</a>
-    <a href="about.html" class="nav-link">About</a>
-  </div>
-  <a href="planner.html" class="nb">Build My Family's Week</a>
-  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="mobile-overlay">
-    <button class="mobile-close" aria-label="Close menu">✕</button>
-    <div class="mobile-links">
-      <a href="index.html">Home</a>
-      <a href="#orientation">How It Works</a>
-      <a href="planner.html">Plan Generator</a>
-      <a href="games.html">Games</a>
-      <a href="about.html">About</a>
-    </div>
-    <a href="planner.html" class="nb mobile-cta">Build My Family's Week</a>
-  </div>
-</nav>
-</header>
+<div class="site-nav" id="site-nav" role="navigation">
+  <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><span onclick="document.getElementById('orientation').scrollIntoView({behavior:'smooth'})">How It Works</span><span>Plan Generator</span><span>Games</span><span>About</span></div><a href="#" class="nav-cta-sm">Get Early Access</a></div>
+</div>
 
-<main id="main-content">
-<!-- ═══ HERO ═══ -->
-<section class="hero" aria-label="Hero">
-  <h1>One theme<span class="sp"></span><br>Every subject<span class="sp"></span><br>All week<span class="sp"></span><br><strong>Planned<span class="sp"></span></strong></h1>
-  <div class="sub-block">
-    <div class="sub-text">
-      Your children will learn volcanoes on Monday and still be talking about them on Thursday.
-      <span class="micro">Weekly learning plans for ages 2 to 12. One theme connects every subject.</span>
-    </div>
-    <a href="planner.html" class="btn-main">Build My Family's Week</a>
-  </div>
-</section>
+<div class="hero-wrapper">
+<div class="hero-sticky" id="hero">
+  <div class="orb-field" id="orb-field"><div class="week-orb orb-mon" id="orb-0"><span class="orb-label">Mon</span></div><div class="week-orb orb-tue" id="orb-1"><span class="orb-label">Tue</span></div><div class="week-orb orb-wed" id="orb-2"><span class="orb-label">Wed</span></div><div class="week-orb orb-thu" id="orb-3"><span class="orb-label">Thu</span></div><div class="week-orb orb-fri" id="orb-4"><span class="orb-label">Fri</span></div></div>
+  <div class="hero-content" id="hero-content">
+    <div class="hero-brand"><span class="wm" id="hero-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span></div>
+    <div class="hero-eyebrow">Learning plans. For whatever your family's into.</div>
+    <h1><span class="hero-line" data-text="One theme" data-delay="2.9" data-speed="0.02"></span><span class="hero-line" data-text="Every subject" data-delay="3.2" data-speed="0.02"></span><span class="hero-line" data-text="All week" data-delay="3.5" data-speed="0.02"></span><span class="hero-line hero-punchline" data-text="Done" data-delay="3.9" data-speed="0.05"></span></h1>
+    <div class="hero-sub"><div class="hero-sub-text">Monday's volcano becomes Thursday's science experiment, Friday's art project, and the story they tell grandma.</div><div class="hero-cta-group"></div></div>
 
-<!-- ═══ PLAN SPLIT ═══ -->
-<section class="plan-split fade-in" aria-label="Sample weekly plan">
-  <div class="plan-main">
-    <div class="tag">Week 8 — The Rivera Family</div>
-    <div class="plan-card">
-      <div class="pc-h">
-        <div class="pc-fam">The Rivera Family</div>
-        <div class="pc-wk">WK 8 · MAR 17</div>
-      </div>
-      <div class="pc-spiral-top">
-        <strong>↩ Week 3 connection:</strong> Last week Mia learned Iran invented ice cream. This week: volcanoes in Iran formed the mountains where snow was collected to make that ice cream.
-      </div>
-      <div class="pc-theme">
-        <div class="pc-theme-label">Weekly Theme</div>
-        <div class="pc-theme-name">Volcanoes &amp; The Ring of Fire</div>
-      </div>
-      <div class="pc-day">
-        <div class="pc-day-label">Monday</div>
-        <div class="pc-bl"><span class="tm">08:30</span><span><strong>Atlas</strong> — Visit Iceland. Find the geysers. Mia maps the Ring of Fire.</span></div>
-        <div class="pc-bl"><span class="tm">10:20</span><span><strong>Elementum</strong> — Meet Sulfur. It lives near volcanoes. Why do they smell?</span></div>
-        <div class="pc-bl"><span class="tm">11:30</span><span><strong>Hands-on</strong> — Baking soda volcano. Noah leads the pour. Liam sensory play.</span></div>
-      </div>
-      <div class="pc-day">
-        <div class="pc-day-label">Tuesday</div>
-        <div class="pc-bl"><span class="tm">08:30</span><span><strong>Reading</strong> — Mia reads about Pompeii. Noah matches volcano vocabulary cards.</span></div>
-        <div class="pc-bl"><span class="tm">10:20</span><span><strong>Elementum</strong> — Sulfur + Iron combo reaction. What did you discover?</span></div>
-        <div class="pc-bl"><span class="tm">11:30</span><span><strong>Mystery Science</strong> — "Could a volcano pop up in your backyard?"</span></div>
-      </div>
-    </div>
   </div>
-  <div class="plan-sidebar">
-    <div>
-      <div class="founder-line">Built by <strong>a mother of four</strong> who tested every plan on her own children first.</div>
-      <p class="founder-detail">Four children. Different ages. Different reading levels. Same table every morning. That's who this was built for first.</p>
-    </div>
-    <div class="sidebar-cta">
-      <a href="planner.html" class="btn-main">Build My Family's Week</a>
-      <span class="micro-copy">Free. No account required to start.</span>
-    </div>
-  </div>
-</section>
 
-<!-- ═══ SAME ROOM ═══ -->
-<section class="same-room fade-in" aria-label="Same room differentiation">
+</div>
+</div>
+
+<div class="content-layer">
+<div class="circle-cta-section"><a href="#" class="btn-circle"><span class="circle-label">Plan</span><span class="circle-expand">Get early access</span></a><div class="hero-micro" style="text-align:center;margin-top:14px">Early access is free.</div></div>
+
+<div class="id-tags-wrap">
+<div class="id-tags-glow"></div>
+<div class="id-tags"><span class="id-tag">Homeschool</span><span class="id-tag">Supplement</span><span class="id-tag">Summer</span><span class="id-tag">After School</span></div>
+</div>
+
+<div class="same-room-wrap">
+<section class="same-room reveal" id="same-room">
   <div class="sr-header">
-    <div>
-      <div class="tag">Same theme · Same room · Four different experiences</div>
-      <h2>Tuesday, 10:20 AM<span class="sp"></span><br><strong>Volcanoes &amp; The Ring of Fire</strong><span class="sp"></span></h2>
-    </div>
-    <div class="sr-context">What each child<br>is doing right now</div>
+    <div class="tag">Same room · Same theme</div>
+    <h2>Four children<span class="sp"></span><br><strong>One volcano<span class="sp"></span></strong></h2>
+    <p class="sr-why">Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different.</p>
   </div>
-  <div class="sr-grid">
-    <div class="sr-card">
-      <div class="sr-name">Mia</div>
-      <div class="sr-age">Age 7</div>
-      <div class="sr-level">Reads Well</div>
+  <div class="sr-instruction">Hover across the cards</div>
+  <div class="sr-track" id="sr-track">
+    <div class="sr-beam" id="sr-beam"></div>
+    <div class="sr-card active">
+      <div class="sr-name">Mia</div><div class="sr-age">Age 7</div>
+      <div class="sr-level"><span class="sr-level-dot full"></span> Reads Well</div>
       <div class="sr-activity">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
     </div>
     <div class="sr-card">
-      <div class="sr-name">Noah</div>
-      <div class="sr-age">Age 5</div>
-      <div class="sr-level">Reads Some</div>
+      <div class="sr-name">Noah</div><div class="sr-age">Age 5</div>
+      <div class="sr-level"><span class="sr-level-dot half"></span> Reads Some</div>
       <div class="sr-activity">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
     </div>
     <div class="sr-card">
-      <div class="sr-name">Ava</div>
-      <div class="sr-age">Age 3</div>
-      <div class="sr-level">Learning</div>
-      <div class="sr-activity">Red and orange finger painting: make your own lava flow on the big paper. Tell me what happens when lava touches water.</div>
+      <div class="sr-name">Ava</div><div class="sr-age">Age 3</div>
+      <div class="sr-level"><span class="sr-level-dot"></span> Learning</div>
+      <div class="sr-activity">Red and orange finger painting: make your own lava flow on the big paper.</div>
     </div>
     <div class="sr-card">
-      <div class="sr-name">Liam</div>
-      <div class="sr-age">Age 2</div>
-      <div class="sr-level">Explorer</div>
-      <div class="sr-activity">Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz. What color is it?</div>
+      <div class="sr-name">Liam</div><div class="sr-age">Age 2</div>
+      <div class="sr-level"><span class="sr-level-dot" style="width:4px;height:4px"></span> Explorer</div>
+      <div class="sr-activity">Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz.</div>
     </div>
   </div>
 </section>
+</div>
 
-<!-- ═══ HOW IT WORKS ═══ -->
-<section class="orientation fade-in" id="orientation" aria-label="How it works">
-  <div>
-    <div class="tag">How It Works</div>
-    <div class="or-title"><strong>Enter your children.</strong><br>Choose a theme.<br><strong>See the week.</strong></div>
-    <p class="or-sub">Every week, you choose a theme. Every subject connects through it. Week 8 references Week 3. Knowledge compounds.</p>
-  </div>
-  <div class="week-compare">
-    <div class="week-card w1">
-      <div class="wc-label">Week 1</div>
-      <div class="wc-theme">The Ocean Floor</div>
-      <div class="wc-detail">Mia sorts ocean animals by habitat. Noah traces the letters W-A-T-E-R. Ava blows bubbles and watches them pop. Liam splashes in the water table. First Atlas journey: find the Pacific Ocean.</div>
-    </div>
-    <div class="week-card w8">
-      <div class="wc-label">Week 8</div>
-      <div class="wc-theme">Volcanoes &amp; The Ring of Fire</div>
-      <div class="wc-detail">Complex cross-references. Elementum combo reactions. Multi-source research. Children leading their own presentations.</div>
-      <div class="wc-spiral">↩ Connects to Week 3: tectonic plates that cause tsunamis also build volcanoes.</div>
-    </div>
-  </div>
-</section>
+<section class="ec-section">
+  <div class="ec-inner">
+    <div class="ec-tag">Everything connects</div>
 
-<!-- ═══ GAMES BAND ═══ -->
-<section class="games-band fade-in" aria-label="Proprietary games">
-  <div class="game-panel">
-    <div class="tag">Proprietary Game</div>
-    <p class="moment">"Open Atlas. Visit Iceland. Find the geysers. <strong>What country has the most volcanoes?</strong>"</p>
-    <h3>Atlas</h3>
-    <p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them. 227 countries with deep cultural content written for children by name.</p>
-    <div class="g-stats">
-      <div class="g-st"><div class="v">227</div><div class="l">Countries</div></div>
-      <div class="g-st"><div class="v">9</div><div class="l">Journeys</div></div>
-      <div class="g-st"><div class="v">113</div><div class="l">Challenges</div></div>
-    </div>
-    <a href="games/atlas.html" class="panel-link">Explore Atlas →</a>
-  </div>
-  <div class="game-panel gp-elem">
-    <div class="tag">Proprietary Game</div>
-    <p class="moment">"Noah, Sulfur is grumpy and smells like rotten eggs. But without him, <strong>no volcanoes.</strong>"</p>
-    <h3>Elementum</h3>
-    <p class="gd">118 elements with character personalities that speak to your child by name. Dragon guide Eternatus. 24 combo reactions. Achievement tiers.</p>
-    <div class="g-stats">
-      <div class="g-st"><div class="v">118</div><div class="l">Elements</div></div>
-      <div class="g-st"><div class="v">24</div><div class="l">Combos</div></div>
-      <div class="g-st"><div class="v">10</div><div class="l">Families</div></div>
-    </div>
-    <div class="elem-chips">
-      <div class="ech"><div class="s">S</div><div class="n">Sulfur</div></div>
-      <div class="ech"><div class="s">Fe</div><div class="n">Iron</div></div>
-      <div class="ech"><div class="s">O</div><div class="n">Oxygen</div></div>
-      <div class="ech"><div class="s">Si</div><div class="n">Silicon</div></div>
-    </div>
-    <a href="games/elementum.html" class="panel-link">Explore Elementum →</a>
-  </div>
-</section>
-
-<!-- ═══ PHILOSOPHY ═══ -->
-<section class="philo fade-in" aria-label="Educational philosophy">
-  <div class="philo-left">
-    <div class="tag">Philosophy</div>
-    <h2>Learning is not a checklist<span class="sp"></span><br>It's <strong>architecture</strong><span class="sp"></span></h2>
-  </div>
-  <div>
-    <div class="phi"><h3>Thematic Threading</h3><p>One idea becomes the lens for every subject. Volcanoes teach geography, chemistry, writing, and math. Not as separate boxes. As one connected investigation.</p></div>
-    <div class="phi"><h3>Spiral Learning</h3><p>Week 8 references Week 3. Your child's knowledge compounds. Every new theme connects backward to what they've already explored.</p></div>
-    <div class="phi"><h3>Multi-Child Differentiation</h3><p>Same room. Same theme. Different entry points. Your 7-year-old writes a report while your 2-year-old builds with playdough.</p></div>
-    <div class="phi"><h3>Capability Over Calendar</h3><p>We don't sort children by grade. We meet them where they are. By name, by reading level, by what they're ready for next.</p></div>
-  </div>
-</section>
-
-<!-- ═══ TESTIMONIALS ═══ -->
-<section class="testimonials fade-in" aria-label="What parents are saying">
-  <div class="testimonials-inner">
-    <div class="tag">What parents are saying</div>
-    <div class="testimonials-grid">
-      <article class="testimonial-card">
-        <div class="tc-quote">"I used to spend 4 hours every Sunday planning our week. Now I spend 10 minutes."</div>
-        <div class="tc-attr">— Sarah M., homeschool mom of 3, Austin TX</div>
-      </article>
-      <article class="testimonial-card">
-        <div class="tc-quote">"My 5-year-old asked to 'do school' on a Saturday. That's never happened before."</div>
-        <div class="tc-attr">— David R., supplementing parent, Chicago IL</div>
-      </article>
-      <article class="testimonial-card">
-        <div class="tc-quote">"The spiral connections blew my mind. My daughter referenced something from Week 2 during Week 6 without being prompted."</div>
-        <div class="tc-attr">— Jessica L., homeschool mom of 2, Portland OR</div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FAQ ═══ -->
-<section class="faq-section fade-in" aria-label="Frequently asked questions">
-  <div class="faq-inner">
-    <div class="tag">Questions parents ask</div>
-    <h2>Frequently asked<span class="sp"></span><br>questions<span class="sp"></span></h2>
-    <div class="faq-list" role="list">
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button>
-        <div class="faq-a" hidden>Wizkoo generates plans for children ages 2 to 12. Each child gets activities matched to their age, reading level, and developmental stage. A 2-year-old gets sensory play. A 10-year-old gets research projects. Same theme, same room, different experiences.</div>
+    <div class="ec-scenario reveal">
+      <div class="ec-headline"><strong>Granddad broke his foot.</strong></div>
+      <div class="ec-hook">Guess what everyone learned that week.</div>
+      <div class="ec-subjects">
+        <div class="ec-subj"><span class="ec-subj-label">Reading</span>The biography of Wilhelm Röntgen, who discovered X-rays</div>
+        <div class="ec-subj"><span class="ec-subj-label">Math</span>Measuring bone lengths. Which bone is longest? By how much?</div>
+        <div class="ec-subj"><span class="ec-subj-label">Science</span>How fractures heal. What happens inside a bone?</div>
+        <div class="ec-subj"><span class="ec-subj-label">Atlas</span>Visit Würzburg, Germany, where X-rays were invented</div>
+        <div class="ec-subj"><span class="ec-subj-label">Art</span>Sketch the human skeleton. Label every bone you can name.</div>
+        <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Calcium: the element that builds every bone in your body</div>
       </div>
+    </div>
 
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button>
-        <div class="faq-a" hidden>No. Every activity includes what to do, how long it takes, what done looks like, and what to do if your child resists. The plan does the thinking. You do the parenting.</div>
+    <div class="ec-divider"></div>
+
+    <div class="ec-scenario reveal">
+      <div class="ec-headline"><strong>Your daughter found a turtle</strong> in the backyard.</div>
+      <div class="ec-hook">That became the whole week.</div>
+      <div class="ec-subjects">
+        <div class="ec-subj"><span class="ec-subj-label">Reading</span>Reptile habitats. Where do turtles sleep in winter?</div>
+        <div class="ec-subj"><span class="ec-subj-label">Math</span>Estimate a turtle's age by counting shell rings</div>
+        <div class="ec-subj"><span class="ec-subj-label">Science</span>Cold-blooded vs. warm-blooded. What's the difference?</div>
+        <div class="ec-subj"><span class="ec-subj-label">Atlas</span>Visit the Galápagos Islands. Find the giant tortoises.</div>
+        <div class="ec-subj"><span class="ec-subj-label">Art</span>Watercolor turtle shell patterns. Every shell is unique.</div>
+        <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Carbon: the element inside every shell, every scale, every claw</div>
       </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this if my kids are in school?</button>
-        <div class="faq-a" hidden>Yes. Many parents use Wizkoo for evenings and weekends. You can generate a 1-hour Saturday plan just as easily as a full 6-hour homeschool day.</div>
-      </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy or Outschool?</button>
-        <div class="faq-a" hidden>Khan Academy is a library. Outschool is a marketplace. Wizkoo is an architect. We don't give you content to browse. We give you a plan where every subject connects through one theme, personalized to every child at your table.</div>
-      </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button>
-        <div class="faq-a" hidden>The plan generator is free during our launch period. Wizkoo accounts with saved plans, game progress, and plan history are coming soon.</div>
-      </div>
-
-      <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button>
-        <div class="faq-a" hidden>We don't store your children's information. Plans are generated in your browser. We never collect children's names, ages, or any personal data on our servers.</div>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══ CTA ═══ -->
-<section class="cta-section fade-in" aria-label="Call to action">
-  <h2>Your children<span class="sp"></span> Your theme<span class="sp"></span> Their week<span class="sp"></span></h2>
-  <p>Takes two minutes. No account required. The plan is yours to print, use, and keep.</p>
-  <a href="planner.html" class="btn-main">Build My Family's Week</a>
-</section>
-</main>
+<section class="orientation reveal" id="orientation"><div><div class="tag-light">How It Works</div><div class="or-title"><strong>Enter your children.</strong><br>Choose a theme.<br><strong>See the week.</strong></div><p class="or-sub">Pick any topic. A field trip, a family event, your child's obsession this month. Every subject connects through it. Week 8 references Week 3. Knowledge compounds.</p></div><div class="week-compare"><div class="week-card w1"><div class="wc-label">Week 1</div><div class="wc-theme">The Ocean Floor</div><div class="wc-detail">Mia sorts ocean animals. Noah traces W-A-T-E-R. Ava blows bubbles.</div></div><div class="week-card w8"><div class="wc-label">Week 8</div><div class="wc-theme">Volcanoes &amp; The Ring of Fire</div><div class="wc-detail">Complex cross-references. Elementum combos. Multi-source research.</div><div class="wc-spiral">↩ Week 3: tectonic plates that cause tsunamis also build volcanoes.</div></div></div></section>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="index.html" class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
-      <div class="footer-tagline">Weekly learning plans for ages 2 to 12.</div>
-      <div class="ft-location">Cumming, Georgia</div>
+<div class="saffron-rule"></div>
+
+<section class="plan-section">
+  <div class="plan-orb plan-orb-1"></div>
+  <div class="plan-orb plan-orb-2"></div>
+  <div class="plan-eyebrow"><span class="plan-eyebrow-text">Sample week</span></div>
+  <div class="plan-center">
+    <div class="plan-card-entrance"><div class="plan-card">
+      <div class="pc-h"><div class="pc-fam">The Rivera Family</div><div class="pc-wk">WK 8 · MAR 17</div></div>
+      <div class="pc-spiral-top"><strong>↩ Week 3 connection:</strong> Week 3 taught tectonic plates. Week 8 connects them to volcanoes. Knowledge compounds.</div>
+      <div class="pc-theme"><div class="pc-theme-label">Weekly Theme</div><div class="pc-theme-name">Volcanoes &amp; The Ring of Fire</div></div>
+
+      <div class="pc-wave"><div class="pc-wave-label">Wave 1 · Morning</div></div>
+      <div class="pc-bl" style="--bl-i:0"><span class="tm">8:30</span><span><strong>Reading</strong> — Mia reads about Pompeii. Noah matches volcano vocab cards.</span></div>
+      <div class="pc-bl" style="--bl-i:1"><span class="tm">8:50</span><span><strong>Writing</strong> — Mia writes three sentences using vocab words. Noah traces letters.</span></div>
+      <div class="pc-bl" style="--bl-i:2"><span class="tm">9:10</span><span><strong>Atlas</strong> — Visit Iceland. Find the geysers. Map the Ring of Fire.</span></div>
+      <div class="pc-bl" style="--bl-i:3"><span class="tm">9:30</span><span><strong>Math</strong> — Measure the doorway. Mount Fuji is 233 doorways tall. Draw a volcano to scale.</span></div>
+
+      <div class="pc-break"><span class="pc-break-icon">☕</span><span class="pc-break-text">10:00 · Snack break</span></div>
+
+      <div class="pc-collapsed"><span class="pc-collapsed-wave">Wave 2</span><span class="pc-collapsed-range">10:20–11:20</span><span class="pc-collapsed-subj">Science + Elementum</span><span class="pc-collapsed-count">3 blocks</span></div>
+
+      <div class="pc-break"><span class="pc-break-icon">🏃</span><span class="pc-break-text">11:20 · Movement reset</span></div>
+
+      <div class="pc-collapsed"><span class="pc-collapsed-wave">Wave 3</span><span class="pc-collapsed-range">11:30–12:30</span><span class="pc-collapsed-subj">Hands-on + Exploration</span><span class="pc-collapsed-count">3 blocks</span></div>
+
+      <div class="pc-more">+ 4 more days</div>
+    </div></div>
+    <div class="plan-founder">
+      <div class="founder-line">Built by <strong>a mother of four</strong> who tested every plan on her own children.</div>
+      <p class="founder-detail">Four children. Different ages. Different reading levels. Same table every morning.</p>
+      <div class="founder-cta"><a href="#" class="btn-main">Get Early Access</a><span class="micro-copy">Early access is free.</span></div>
     </div>
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="#orientation">How It Works</a>
-      <a href="planner.html">Plan Generator</a>
-      <a href="games.html">Games</a>
-      <a href="about.html">About</a>
-    </nav>
-    <div class="footer-social">
-      <div class="footer-social-label">Follow</div>
-      <a href="#">Instagram</a>
-      <a href="#">TikTok</a>
-    </div>
-    <div class="footer-privacy"><a href="#privacy" style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(250,250,250,0.35);text-decoration:none;border-bottom:1px solid rgba(250,250,250,0.15);padding-bottom:2px;" onmouseover="this.style.color='rgba(250,250,250,0.7)'" onmouseout="this.style.color='rgba(250,250,250,0.35)'">Privacy</a></div>
-    <div class="ft-r">&copy; 2026 Wizkoo</div>
   </div>
-</footer>
+</section>
 
-<script src="js/nav.js"></script>
+<section class="games-band reveal"><div class="game-panel"><div class="tag-light">Wizkoo Original</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3>Atlas</h3><p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them.</p><span class="panel-link">Explore Atlas →</span></div><div class="game-panel gp-elem"><div class="tag-light">Wizkoo Original</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3>Elementum</h3><p class="gd">118 elements with character personalities. Dragon guide Eternatus. 24 combo reactions.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><span class="panel-link">Explore Elementum →</span></div></section>
+
+<div class="saffron-rule"></div>
+
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Full curriculum, weekend supplement, summer bridge, after-school enrichment. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system. Multi-age differentiation at the same table, spiral learning across weeks, and a plan that remembers what your child learned last month. You could prompt your way there. Or you could type one theme and get there in two minutes.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo is an architect. One theme connects every subject all week.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
+
+<section class="philo"><div class="philo-left reveal"><div class="tag">What We Believe</div><h2>Learning is not a checklist<span class="sp"></span><br>It's <strong>architecture</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>Everything Connects</h3><p>A child who understands one thing deeply will understand everything differently. One idea becomes the lens for every subject.</p></div><div class="phi"><h3>Knowledge Compounds</h3><p>Week 8 should reference Week 3. What your child learned last month should make this month richer. Learning without connection is forgetting.</p></div><div class="phi"><h3>Same Room, Different Minds</h3><p>Four children at one table shouldn't mean four separate curricula. Same theme. Different entry points. That's how a family learns together.</p></div><div class="phi"><h3>Capability Over Calendar</h3><p>We don't sort children by grade. A 5-year-old who reads at a second-grade level gets second-grade reading. Age is a number. Readiness is the measure.</p></div></div></section>
+
+<section class="cta-dark cta-reveal"><h2>Your children<span class="sp"></span><br>Your theme<span class="sp"></span><br><strong>Their week<span class="sp"></span></strong></h2><p>Early access is free. The plan is yours to print, use, and keep.</p><a href="#" class="btn-circle-dark"><span class="circle-label">Plan</span><span class="circle-expand">Get early access</span></a></section>
+</div>
+
+<footer><div class="footer-inner"><div class="footer-brand"><span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div><div class="ft-location">Cumming, Georgia</div><div class="ft-location" style="margin-top:8px;color:rgba(250,250,250,0.25)">Built on the <span style="color:rgba(250,250,250,0.4);border-bottom:1px solid rgba(232,175,56,0.3)">ReApproach Education</span> learning philosophy.</div></div><nav class="footer-nav"><span>How It Works</span><span>Plan Generator</span><span>Games</span><span>About</span></nav><div class="footer-social"><div class="footer-social-label">Connect</div><span>Email</span></div><div class="ft-r">&copy; 2026 Wizkoo · Everything connects.<br><span style="opacity:0.6">Privacy</span></div></div></footer>
+
 <script>
-// ─── FAQ Accordion (Task 8.2) ───
-function toggleFaq(btn) {
-  const answer = btn.nextElementSibling;
-  const isOpen = btn.getAttribute('aria-expanded') === 'true';
-  // Close all
-  document.querySelectorAll('.faq-q').forEach(b => {
-    b.setAttribute('aria-expanded', 'false');
-    b.nextElementSibling.hidden = true;
-    b.parentElement.classList.remove('open');
-  });
-  // Open this one if it was closed
-  if (!isOpen) {
-    btn.setAttribute('aria-expanded', 'true');
-    answer.hidden = false;
-    btn.parentElement.classList.add('open');
+// ═══ CUSTOM CURSOR ═══
+(function(){
+  var c=document.getElementById('cursor'),cx=0,cy=0;window.mx=0;window.my=0;
+  document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
+  document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
+  // Hover detection - only interactive elements, NOT generic spans
+  var hoverEls='a,button,.nav-center span,.footer-nav span,.footer-social span,.ech,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.week-card,.plan-card,.sr-track,.planned-dot,.wm,.nav-wm';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(hoverEls))c.classList.add('hover')});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(hoverEls))c.classList.remove('hover')});
+  // Smooth follow with lag
+  (function tick(){cx+=(window.mx-cx)*0.15;cy+=(window.my-cy)*0.15;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(tick)})();
+})();
+
+// ═══ K TICK SOUND ═══
+var audioCtx;
+document.addEventListener('click',function(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();},{once:false});
+function playGiggle(){
+  if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  var now=audioCtx.currentTime;
+  // First bubble: soft high note
+  var o1=audioCtx.createOscillator(),g1=audioCtx.createGain();
+  o1.type='sine';o1.connect(g1);g1.connect(audioCtx.destination);
+  o1.frequency.setValueAtTime(880,now);
+  o1.frequency.exponentialRampToValueAtTime(1100,now+0.04);
+  o1.frequency.exponentialRampToValueAtTime(660,now+0.08);
+  g1.gain.setValueAtTime(0.04,now);
+  g1.gain.exponentialRampToValueAtTime(0.001,now+0.1);
+  o1.start(now);o1.stop(now+0.1);
+  // Second bubble: slightly higher, delayed
+  var o2=audioCtx.createOscillator(),g2=audioCtx.createGain();
+  o2.type='sine';o2.connect(g2);g2.connect(audioCtx.destination);
+  o2.frequency.setValueAtTime(990,now+0.1);
+  o2.frequency.exponentialRampToValueAtTime(1200,now+0.14);
+  o2.frequency.exponentialRampToValueAtTime(750,now+0.18);
+  g2.gain.setValueAtTime(0.03,now+0.1);
+  g2.gain.exponentialRampToValueAtTime(0.001,now+0.2);
+  o2.start(now+0.1);o2.stop(now+0.2);
+}
+// Attach tick to all wordmarks
+document.querySelectorAll('.wm,.nav-wm').forEach(function(w){
+  w.addEventListener('mouseenter',function(){setTimeout(playGiggle,350)});
+});
+
+// ═══ CONFETTI EASTER EGG ═══
+function spawnConfetti(x,y){
+  var colors=['#E8AF38','#D4A030','#F0C45A','#C49028','#FFD770','#B87D1A'];
+  for(var i=0;i<24;i++){
+    var p=document.createElement('div');p.className='confetti-piece';
+    p.style.left=x+'px';p.style.top=y+'px';
+    p.style.background=colors[i%colors.length];
+    p.style.setProperty('--cx',(Math.random()-0.5)*280+'px');
+    p.style.setProperty('--cy',(Math.random()*-200-60)+'px');
+    p.style.width=(4+Math.random()*5)+'px';p.style.height=p.style.width;
+    p.style.animation='confettiFall '+(0.6+Math.random()*0.5)+'s var(--expo) forwards';
+    document.body.appendChild(p);
+    setTimeout(function(el){el.remove()}.bind(null,p),1200);
   }
 }
 
-// Keyboard support for FAQ
-document.addEventListener('keydown', function(e) {
-  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('faq-q')) {
-    e.preventDefault();
-    toggleFaq(e.target);
-  }
-});
-
-// ─── Fade-in on scroll (Task 8.5) ───
-(function() {
-  const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-in').forEach(function(el) {
-    observer.observe(el);
+// ═══ HERO CHARACTERS ═══
+(function(){
+  var plannedDotId;
+  document.querySelectorAll('.hero-line').forEach(function(line){
+    var text=line.dataset.text,bd=parseFloat(line.dataset.delay),spd=parseFloat(line.dataset.speed),ip=line.classList.contains('hero-punchline'),h='';
+    for(var i=0;i<text.length;i++){var ch=text[i]===' '?'&nbsp;':text[i];h+='<span class="hero-char" style="animation-delay:'+(bd+i*spd)+'s;'+(ip?'font-weight:700;':'')+'">'+ch+'</span>'}
+    var dotId='dot-'+bd;
+    if(ip)plannedDotId=dotId;
+    h+='<span class="hero-dot-anchor'+(ip?' planned-dot':'')+'" id="'+dotId+'"><span class="sp"></span></span>';
+    line.innerHTML=h;
+    setTimeout(function(){document.getElementById(dotId).classList.add('pop')},(bd+text.length*spd+.3)*1000);
   });
+  // Easter egg: click the Planned dot
+  setTimeout(function(){
+    var pd=document.querySelector('.planned-dot');
+    if(pd)pd.addEventListener('click',function(e){
+      var r=pd.getBoundingClientRect();
+      spawnConfetti(r.left+r.width/2,r.top+r.height/2);
+    });
+  },5000);
+})();
+
+// ═══ HERO FAST-LOAD FALLBACK ═══
+(function(){
+  var snapped=false;
+  function snapHero(){
+    if(snapped)return;snapped=true;
+    // Snap all hero chars to visible
+    document.querySelectorAll('.hero-char').forEach(function(c){c.style.animation='none';c.style.opacity='1';c.style.transform='none';if(c.parentElement.classList.contains('hero-punchline'))c.style.color='var(--ink)'});
+    // Snap dots
+    document.querySelectorAll('.hero-dot-anchor').forEach(function(d){d.classList.add('pop');var sp=d.querySelector('.sp');if(sp){sp.style.animation='none';sp.style.opacity='1';sp.style.transform='scale(1)'}});
+    // Snap eyebrow, sub, brand, circle
+    ['hero-eyebrow','hero-sub','hero-brand','hero-circle-wrap'].forEach(function(cls){var el=document.querySelector('.'+cls);if(el){el.style.animation='none';el.style.opacity='1';el.style.transform='none'}});
+    window.removeEventListener('scroll',onEarlyScroll);
+  }
+  function onEarlyScroll(){if(window.scrollY>80)snapHero()}
+  window.addEventListener('scroll',onEarlyScroll,{passive:true});
+  // Remove listener after animation completes naturally
+  setTimeout(function(){window.removeEventListener('scroll',onEarlyScroll)},6000);
+})();
+
+// ═══ ORBS ═══
+(function(){
+  var orbs=document.querySelectorAll('.week-orb');
+  var scatter=[[0.08,0.12],[0.72,0.06],[0.38,0.7],[0.82,0.58],[0.18,0.82]];
+  var aligned=[[0.12,0.46],[0.28,0.46],[0.44,0.46],[0.6,0.46],[0.76,0.46]];
+  var mouseX=0.5,mouseY=0.5,phase='scatter';
+  orbs.forEach(function(o,i){o.style.left=(scatter[i][0]*100)+'%';o.style.top=(scatter[i][1]*100)+'%';o.classList.add('scattered')});
+  setTimeout(function(){phase='aligned';orbs.forEach(function(o,i){o.classList.remove('scattered');o.classList.add('aligned');o.style.left=(aligned[i][0]*100)+'%';o.style.top=(aligned[i][1]*100)+'%'});setTimeout(function(){phase='mouse'},2500)},3800);
+  document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;mouseX=e.clientX/window.innerWidth;mouseY=e.clientY/window.innerHeight});
+  (function tick(){if(phase==='mouse'){orbs.forEach(function(o,i){o.style.left=(aligned[i][0]*100+(mouseX-.5)*((i%2===0)?18:-14))+'%';o.style.top=(aligned[i][1]*100+(mouseY-.5)*((i%2===0)?-12:10))+'%'})}requestAnimationFrame(tick)})();
+})();
+
+// ═══ PARALLAX ═══
+(function(){
+  var content=document.getElementById('hero-content'),orbField=document.getElementById('orb-field');
+  window.addEventListener('scroll',function(){var s=window.scrollY;if(s<window.innerHeight*1.5){content.style.transform='translateY('+(-s*0.25)+'px)';orbField.style.transform='translateY('+(-s*0.5)+'px)'}},{passive:true});
+})();
+
+// ═══ NAV ═══
+(function(){var nav=document.getElementById('site-nav');window.addEventListener('scroll',function(){nav.classList.toggle('show',window.scrollY>window.innerHeight*0.8)},{passive:true})})();
+
+
+
+// ═══ SAME ROOM — mouse + auto-rotate ═══
+(function(){
+  var t=document.getElementById('sr-track'),b=document.getElementById('sr-beam'),cards=t.querySelectorAll('.sr-card'),sec=document.getElementById('same-room');
+  var temps=['#0C0B08','#0E0C09','#0D0A0A','#0A0B0E'];
+  var currentIdx=0,autoTimer=null,isHovering=false;
+
+  function activate(idx){
+    currentIdx=idx;
+    cards.forEach(function(c,i){c.classList.toggle('active',i===idx)});
+    //beam hidden;
+    sec.style.background=temps[idx];
+  }
+
+  function startAuto(){
+    stopAuto();
+    autoTimer=setInterval(function(){
+      if(!isHovering) activate((currentIdx+1)%4);
+    },3500);
+  }
+
+  function stopAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null}}
+
+  t.addEventListener('mousemove',function(e){
+    isHovering=true;stopAuto();
+    var r=t.getBoundingClientRect(),idx=Math.min(3,Math.floor((e.clientX-r.left)/r.width*4));
+    activate(idx);
+  });
+
+  t.addEventListener('mouseleave',function(){
+    isHovering=false;
+    startAuto();
+  });
+
+  // Start auto-rotate by default
+  startAuto();
+})();
+
+// ═══ COUNT UP ═══
+(function(){var counted=false;var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!counted){counted=true;document.querySelectorAll('[data-count]').forEach(function(el){var t=parseInt(el.dataset.count),st=null;function step(ts){if(!st)st=ts;var p=Math.min((ts-st)/1200,1);el.textContent=Math.round((1-Math.pow(1-p,3))*t);if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)})}})},{threshold:0.3});document.querySelectorAll('.games-band').forEach(function(el){obs.observe(el)})})();
+
+// ═══ ELEMENT REACTIONS ═══
+(function(){var chips=document.querySelectorAll('.ech'),spark=document.getElementById('spark'),rx={'S':'Fe','Fe':'S','O':'Si','Si':'O'},gt={};chips.forEach(function(chip){chip.addEventListener('mouseenter',function(){var p=rx[chip.dataset.el];if(!p)return;chips.forEach(function(c){if(c.dataset.el===p){c.style.transform='translateX('+(chip.dataset.el==='S'||chip.dataset.el==='O'?'-':'')+'8px) rotate(-2deg)';var r1=chip.getBoundingClientRect(),r2=c.getBoundingClientRect(),ct=document.getElementById('elem-chips').getBoundingClientRect();spark.style.left=((r1.right+r2.left)/2-ct.left-5)+'px';spark.style.top=((r1.top+r1.bottom)/2-ct.top-5)+'px';spark.classList.add('active');chip.classList.add('glow');c.classList.add('glow');clearTimeout(gt[chip.dataset.el]);clearTimeout(gt[p])}})});chip.addEventListener('mouseleave',function(){var p=rx[chip.dataset.el];chips.forEach(function(c){c.style.transform=''});spark.classList.remove('active');gt[chip.dataset.el]=setTimeout(function(){chip.classList.remove('glow')},2000);if(p)gt[p]=setTimeout(function(){chips.forEach(function(c){if(c.dataset.el===p)c.classList.remove('glow')})},2000)})})})();
+
+// ═══ SCROLL REVEALS ═══
+(function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});document.querySelectorAll('.reveal,.plan-card-entrance,.phi,.cta-reveal').forEach(function(el){obs.observe(el)});
+// Id-tags: staggered reveal via JS so hover doesn't inherit entrance delay
+var tagObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var tags=document.querySelectorAll('.id-tag');tags.forEach(function(tag,i){setTimeout(function(){tag.classList.add('visible')},i*120)});tagObs.disconnect()}})},{threshold:0.1});var tagWrap=document.querySelector('.id-tags-wrap');if(tagWrap)tagObs.observe(tagWrap)})();
+
+function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.hidden=true;b.parentElement.classList.remove('open')});if(!o){btn.setAttribute('aria-expanded','true');a.hidden=false;btn.parentElement.classList.add('open')}}
+
+// ═══ FIREFLY ═══
+(function(){
+  var ff=document.getElementById('firefly');
+  var heroWm=document.getElementById('hero-wm');
+  var wmDot=heroWm?heroWm.querySelector('.wm-dot'):null;
+
+  // Helper: get the exact center of the saffron ::after dot
+  // The dot is position:absolute; top:0.1em; right:-0.2em; width:0.22em; height:0.22em
+  // Center X = span.right + (0.2em - 0.11em) = span.right + 0.09em
+  // Center Y = span.top + 0.1em + 0.11em = span.top + 0.21em
+  function getDotCenter(){
+    if(!wmDot)return{x:window.innerWidth*0.6,y:window.innerHeight*0.3};
+    var r=wmDot.getBoundingClientRect();
+    var fs=parseFloat(getComputedStyle(wmDot).fontSize)||64;
+    return{x:r.right+fs*0.09,y:r.top+fs*0.21};
+  }
+
+  var dotPos=getDotCenter();
+  var ffx=dotPos.x, ffy=dotPos.y;
+  var ffTargetX=ffx, ffTargetY=ffy;
+  var ffVx=0, ffVy=0;
+  var catches=0;
+  var lastMoveTime=Date.now();
+  var idle=false;
+  var looping=false;
+  var loopAngle=0;
+  var dwelling=false;
+  var dwellStart=0;
+  var dwellDuration=1500;
+
+  // Birth sequence state
+  var birthPhase='waiting'; // waiting, descending, tracing, flitting, returning, homeDwell, free
+  var birthStart=0;
+  var birthHomeX=dotPos.x;
+  var birthHomeY=dotPos.y;
+  var eyebrowEl=document.querySelector('.hero-eyebrow');
+  var eyebrowStartX=0, eyebrowEndX=0, eyebrowY=0;
+
+  // Points of interest: cycle through these
+  var pois=[];
+  function updatePois(){
+    pois=[];
+    // Plan circle
+    var pc=document.querySelector('.btn-circle');
+    if(pc){var r=pc.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
+    // Plan card
+    var pk=document.querySelector('.plan-card');
+    if(pk){var r=pk.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+40})}
+    // Same room header
+    var sr=document.querySelector('.sr-track');
+    if(sr){var r=sr.getBoundingClientRect();pois.push({x:r.left+r.width/3,y:r.top+r.height/2})}
+    // Everything Connects headline
+    var ec=document.querySelector('.ec-headline');
+    if(ec){var r=ec.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
+    // Games elementum
+    var el=document.querySelector('.elem-chips');
+    if(el){var r=el.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
+    // Closing CTA
+    var ct=document.querySelector('.btn-circle-dark');
+    if(ct){var r=ct.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
+  }
+
+  var currentPoi=0;
+  var poiTimer=0;
+  var t=0;
+
+  // Perlin-like simplex approximation
+  function noise(x){return Math.sin(x*1.2)*0.5+Math.sin(x*2.7)*0.3+Math.sin(x*4.1)*0.2}
+
+  // Birth sequence: firefly born from terminal dot, traces eyebrow, returns
+  setTimeout(function(){
+    // Pulse the terminal dot
+    var wmDotEl=document.querySelector('#hero-wm .wm-dot');
+    if(wmDotEl){
+      var afterStyle=document.createElement('style');
+      afterStyle.textContent='#hero-wm .wm-dot::after{animation:dotReact 0.6s var(--expo)!important}';
+      document.head.appendChild(afterStyle);
+      setTimeout(function(){afterStyle.remove()},700);
+    }
+    // Calculate eyebrow positions
+    if(eyebrowEl){
+      var ebRect=eyebrowEl.getBoundingClientRect();
+      eyebrowStartX=ebRect.left;
+      eyebrowEndX=ebRect.right;
+      eyebrowY=ebRect.top+ebRect.height/2;
+    }
+    // Recalculate home position fresh
+    var dc=getDotCenter();
+    birthHomeX=dc.x;birthHomeY=dc.y;
+    ffx=birthHomeX;ffy=birthHomeY;
+    ff.classList.add('alive');
+    birthPhase='descending';
+    birthStart=Date.now();
+    updatePois();
+  },4500);
+
+  // Track mouse movement for idle detection
+  document.addEventListener('mousemove',function(){lastMoveTime=Date.now()});
+
+  // Scroll updates POIs
+  window.addEventListener('scroll',function(){updatePois();lastMoveTime=Date.now()},{passive:true});
+
+  function tick(){
+    t+=0.008;
+    var now=Date.now();
+
+    // ─── BIRTH SEQUENCE ───
+    if(birthPhase!=='free'&&birthPhase!=='waiting'){
+      var elapsed=now-birthStart;
+
+      if(birthPhase==='descending'){
+        // Recalculate positions fresh each frame
+        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y
+        if(eyebrowEl){var ebr=eyebrowEl.getBoundingClientRect();eyebrowStartX=ebr.left;eyebrowEndX=ebr.right;eyebrowY=ebr.top+ebr.height/2}
+        // Slow meander from dot toward eyebrow start, 1.8s
+        var descDuration=800;
+        var progress=Math.min(elapsed/descDuration,1);
+        // Very slow ease-in: barely moves at first, then gradually commits to the path
+        var eased=Math.pow(progress,2.5);
+        // Base path from dot to eyebrow start
+        var baseX=birthHomeX+(eyebrowStartX-birthHomeX)*eased;
+        var baseY=birthHomeY+(eyebrowY-birthHomeY)*eased;
+        // Wandering noise that fades as it approaches the target
+        var wander=(1-progress);
+        var noiseX=Math.sin(progress*Math.PI*4.3)*18*wander+Math.sin(progress*Math.PI*7.1)*8*wander;
+        var noiseY=Math.cos(progress*Math.PI*3.7)*14*wander+Math.cos(progress*Math.PI*5.9)*6*wander;
+        ffx=baseX+noiseX;
+        ffy=baseY+noiseY;
+        // Glow slowly builds from dim to warm
+        var glow=0.2+progress*0.3;
+        ff.style.boxShadow='0 0 '+(4+progress*6)+'px '+(1+progress*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(10+progress*8)+'px '+(3+progress*3)+'px rgba(232,175,56,'+(glow*0.3)+')';
+        if(progress>=1){birthPhase='tracing';birthStart=now}
+      }
+      else if(birthPhase==='tracing'){
+        // Slow deliberate trace along eyebrow text, 3.5s
+        var traceDuration=2200;
+        var progress=Math.min(elapsed/traceDuration,1);
+        // Smooth ease-in-out: gentle start, steady middle, gentle end. No discontinuities.
+        var eased=progress<0.5?2*progress*progress:1-Math.pow(-2*progress+2,2)/2;
+        eased=Math.min(eased,1);
+        ffx=eyebrowStartX+(eyebrowEndX-eyebrowStartX)*eased;
+        // Bobbing like a real firefly flitting along words
+        ffy=eyebrowY+Math.sin(progress*Math.PI*6)*3+Math.sin(progress*Math.PI*2.3)*2;
+        // Glow builds to midpoint then holds
+        var glow=Math.min(progress*2,1)*0.5+0.3;
+        ff.style.boxShadow='0 0 '+(8+glow*6)+'px '+(3+glow*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(16+glow*8)+'px '+(5+glow*4)+'px rgba(232,175,56,'+(glow*0.3)+')';
+        if(progress>=1){birthPhase='flitting';birthStart=now}
+      }
+      else if(birthPhase==='flitting'){
+        // Hover at end of eyebrow for 1.2s, flitting in small circles
+        var flitProgress=elapsed/500;
+        ffx=eyebrowEndX-8+Math.sin(flitProgress*Math.PI*5)*6;
+        ffy=eyebrowY+Math.cos(flitProgress*Math.PI*3.5)*5;
+        var pulse=0.6+0.2*Math.sin(elapsed*0.008);
+        ff.style.boxShadow='0 0 12px 5px rgba(232,175,56,'+pulse+'),0 0 24px 8px rgba(232,175,56,'+(pulse*0.35)+')';
+        if(elapsed>500){
+          // Recalculate dot position fresh before returning
+          var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y
+          birthPhase='returning';birthStart=now;
+        }
+      }
+      else if(birthPhase==='returning'){
+        // Recalculate dot position each frame for accuracy
+        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y
+        // Arc back to wordmark dot in 1.4s with upward curve
+        var retDuration=600;
+        var progress=Math.min(elapsed/retDuration,1);
+        var eased=1-Math.pow(1-progress,3);
+        ffx=eyebrowEndX+(birthHomeX-eyebrowEndX)*eased;
+        var arcHeight=-50;
+        var arcY=arcHeight*Math.sin(progress*Math.PI);
+        ffy=eyebrowY+(birthHomeY-eyebrowY)*eased+arcY;
+        var glow=0.8*(1-progress)+0.3;
+        ff.style.boxShadow='0 0 '+(12-progress*6)+'px '+(5-progress*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(24-progress*10)+'px '+(8-progress*4)+'px rgba(232,175,56,'+(glow*0.3)+')';
+        if(progress>=1){birthPhase='homeDwell';birthStart=now;ff.style.boxShadow=''}
+      }
+      else if(birthPhase==='homeDwell'){
+        // Track dot position live
+        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y
+        // Settle at dot for 1s
+        ffx=birthHomeX+Math.sin(t*2)*2;
+        ffy=birthHomeY+Math.cos(t*1.7)*2;
+        var pulse=1+0.3*Math.sin(elapsed*0.006);
+        ff.style.boxShadow='0 0 '+(8*pulse)+'px '+(3*pulse)+'px rgba(232,175,56,'+(0.4*pulse)+'),0 0 '+(20*pulse)+'px '+(6*pulse)+'px rgba(232,175,56,'+(0.15*pulse)+')';
+        if(elapsed>400){birthPhase='free';ff.style.boxShadow='';ffVx=0}
+      }
+
+      ff.style.left=ffx+'px';ff.style.top=ffy+'px';
+      requestAnimationFrame(tick);
+      return; // Skip normal movement during birth
+    }
+
+    // ─── NORMAL BEHAVIOR ───
+    // Idle detection: hide after 3s no movement
+    if(now-lastMoveTime>3000){
+      if(!idle){idle=true;ff.classList.remove('alive')}
+    } else {
+      if(idle){idle=true;ff.classList.add('alive');idle=false}
+    }
+
+    // Pick target: drift toward current POI with noise, dwell on arrival
+    if(pois.length>0){
+      var poi=pois[currentPoi%pois.length];
+      if(poi){
+        var dxPoi=poi.x-ffx,dyPoi=poi.y-ffy;
+        var distPoi=Math.sqrt(dxPoi*dxPoi+dyPoi*dyPoi);
+
+        if(dwelling){
+          // Hovering at POI: subtle float, brightness pulse
+          var dwellElapsed=now-dwellStart;
+          ffTargetX=poi.x+Math.sin(t*2)*3;
+          ffTargetY=poi.y+Math.cos(t*1.7)*3;
+          var pulse=1+0.4*Math.sin(dwellElapsed*0.004);
+          ff.style.boxShadow='0 0 '+(8*pulse)+'px '+(3*pulse)+'px rgba(232,175,56,'+(0.4*pulse)+'),0 0 '+(20*pulse)+'px '+(6*pulse)+'px rgba(232,175,56,'+(0.15*pulse)+')';
+          if(dwellElapsed>dwellDuration){
+            dwelling=false;
+            ff.style.boxShadow='';
+            currentPoi=(currentPoi+1)%pois.length;
+            updatePois();
+            poiTimer=0;
+          }
+        } else {
+          ffTargetX=poi.x+noise(t*0.3)*70;
+          ffTargetY=poi.y;
+          // Check if arrived near POI
+          if(distPoi<25&&Math.abs(ffVx)<1){
+            dwelling=true;
+            dwellStart=now;
+            ffVx=0;
+          }
+          poiTimer++;
+          if(poiTimer>600){poiTimer=0;currentPoi=(currentPoi+1)%pois.length;updatePois()}
+        }
+      }
+    }
+
+    // Loop-de-loop on third catch
+    if(looping){
+      loopAngle+=0.12;
+      ffx+=Math.cos(loopAngle)*8;
+      ffy+=Math.sin(loopAngle)*8;
+      if(loopAngle>Math.PI*2){looping=false;loopAngle=0}
+    } else if(dwelling){
+      // Gentle float toward dwell target
+      ffx+=(ffTargetX-ffx)*0.08;
+      ffy+=(ffTargetY-ffy)*0.08;
+      ffVx=0;
+    } else {
+      // Firefly: slow lateral sweep, Y follows a sine wave not the target
+      var targetDx=ffTargetX-ffx;
+      ffVx+=targetDx*0.003+noise(t*0.4)*0.2;
+      ffVx*=0.98;
+      ffx+=ffVx;
+      // Y: gentle sine undulation anchored near target, NOT chasing it
+      var yBase=ffTargetY;
+      var yWant=yBase+Math.sin(t*0.35)*15;
+      ffy+=(yWant-ffy)*0.015;
+    }
+
+    ff.style.left=ffx+'px';ff.style.top=ffy+'px';
+
+    // Collision with cursor
+    var dx=window.mx-ffx,dy=window.my-ffy;
+    var dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<30&&ff.classList.contains('alive')&&!ff.classList.contains('caught')){
+      catches++;
+      ff.classList.add('caught');
+
+      // Green flash on cursor
+      var cur=document.getElementById('cursor');
+      cur.style.background='#6BBF6B';cur.style.boxShadow='0 0 12px rgba(107,191,107,0.5)';
+      setTimeout(function(){cur.style.background='';cur.style.boxShadow=''},400);
+
+      // Collision ring
+      var ring=document.createElement('div');ring.className='collision-ring';
+      ring.style.left=ffx+'px';ring.style.top=ffy+'px';
+      document.body.appendChild(ring);
+      setTimeout(function(){ring.remove()},500);
+
+      // Sparks
+      var sparkColors=['#E8AF38','#6BBF6B','#D4A030','#8ED08E','#F0C45A'];
+      for(var i=0;i<5;i++){
+        var sp=document.createElement('div');sp.className='collision-spark';
+        sp.style.left=ffx+'px';sp.style.top=ffy+'px';
+        sp.style.background=sparkColors[i%sparkColors.length];
+        sp.style.setProperty('--sx',(Math.random()-0.5)*60+'px');
+        sp.style.setProperty('--sy',(Math.random()-0.5)*60+'px');
+        sp.style.animation='sparkOut 0.4s var(--expo) forwards';
+        document.body.appendChild(sp);
+        setTimeout(function(el){el.remove()}.bind(null,sp),500);
+      }
+
+      // Dart away
+      var angle=Math.random()*Math.PI*2;
+      ffVx=(Math.random()>0.5?1:-1)*7;ffVy=(Math.random()-0.5)*1.5;
+      currentPoi=(currentPoi+1)%Math.max(pois.length,1);
+
+      // Third catch: loop-de-loop
+      if(catches===3){looping=true;loopAngle=0}
+
+      setTimeout(function(){ff.classList.remove('caught')},350);
+    }
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // Expose mx/my from cursor code (they're already global-ish via closure)
+  // We need access to cursor position - patch: use a global
+  window._ffGetMouse=true;
+
+  // ═══ REPLAY BIRTH SEQUENCE ═══
+  window.replayFirefly=function(){
+    if(birthPhase!=='free')return; // don't interrupt an active sequence
+    // Recalculate positions
+    var dc=getDotCenter();
+    birthHomeX=dc.x;birthHomeY=dc.y;
+    if(eyebrowEl){
+      var ebRect=eyebrowEl.getBoundingClientRect();
+      eyebrowStartX=ebRect.left;
+      eyebrowEndX=ebRect.right;
+      eyebrowY=ebRect.top+ebRect.height/2;
+    }
+    // Snap firefly to home, restart sequence
+    ffx=birthHomeX;ffy=birthHomeY;
+    ffVx=0;dwelling=false;looping=false;
+    ff.classList.add('alive');
+    ff.style.boxShadow='';
+    birthPhase='descending';
+    birthStart=Date.now();
+    // Pulse the dot
+    var afterStyle=document.createElement('style');
+    afterStyle.textContent='#hero-wm .wm-dot::after{animation:dotReact 0.6s var(--expo)!important}';
+    document.head.appendChild(afterStyle);
+    setTimeout(function(){afterStyle.remove()},700);
+  };
+  // Click the hero wordmark dot to replay
+  var heroWmDot=document.querySelector('#hero-wm .wm-dot');
+  if(heroWmDot)heroWmDot.addEventListener('click',function(){window.replayFirefly()});
+})();
+
+// Patch cursor code to expose mx/my globally
+
+// ═══ TOUCH ADAPTATIONS ═══
+(function(){
+  var isTouch='ontouchstart' in window||navigator.maxTouchPoints>0;
+  if(!isTouch)return;
+
+  // ── Tap Ripple (cursor replacement) ──
+  document.addEventListener('touchstart',function(e){
+    var t=e.touches[0];
+    var r=document.createElement('div');
+    r.className='tap-ripple';
+    r.style.left=t.clientX+'px';
+    r.style.top=t.clientY+'px';
+    document.body.appendChild(r);
+    setTimeout(function(){r.remove()},400);
+  },{passive:true});
+
+  // ── Same Room: tap to activate cards ──
+  var srCards=document.querySelectorAll('.sr-card');
+  srCards.forEach(function(card,idx){
+    card.addEventListener('click',function(){
+      srCards.forEach(function(c){c.classList.remove('active')});
+      card.classList.add('active');
+      // Update background color
+      var temps=['#0C0B08','#0E0C09','#0D0A0A','#0A0B0E'];
+      var sec=document.getElementById('same-room');
+      if(sec)sec.style.background=temps[idx];
+    });
+  });
+
+  // ── Firefly: tap-to-catch ──
+  document.addEventListener('touchend',function(e){
+    var ff=document.getElementById('firefly');
+    if(!ff||!ff.classList.contains('alive'))return;
+    var t=e.changedTouches[0];
+    var ffRect=ff.getBoundingClientRect();
+    var ffCx=ffRect.left+ffRect.width/2;
+    var ffCy=ffRect.top+ffRect.height/2;
+    var dx=t.clientX-ffCx,dy=t.clientY-ffCy;
+    var dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<45){
+      // Simulate cursor position for the collision detection
+      window.mx=t.clientX;window.my=t.clientY;
+    }
+  },{passive:true});
+
+  // ── Firefly: scroll-based idle (replaces mousemove idle) ──
+  var lastScrollTime=Date.now();
+  window.addEventListener('scroll',function(){lastScrollTime=Date.now()},{passive:true});
+  // Patch: override idle detection for touch devices
+  window._touchIdleCheck=function(){return Date.now()-lastScrollTime>5000};
+
+  // ── Firefly: hide when scrolled deep ──
+  var ff=document.getElementById('firefly');
+  window.addEventListener('scroll',function(){
+    if(!ff)return;
+    if(window.scrollY>window.innerHeight*1.5){
+      if(ff.style.opacity!=='0')ff.style.opacity='0';
+    } else {
+      if(ff.classList.contains('alive')&&ff.style.opacity==='0')ff.style.opacity='';
+    }
+  },{passive:true});
+
+  // ── K giggle: trigger on tap ──
+  document.querySelectorAll('.wm,.nav-wm').forEach(function(w){
+    w.addEventListener('click',function(){if(typeof playGiggle==='function')setTimeout(playGiggle,100)});
+  });
+
+  // ── Update sr-instruction text ──
+  var inst=document.querySelector('.sr-instruction');
+  if(inst)inst.textContent='Tap each child';
 })();
 </script>
 </body>
