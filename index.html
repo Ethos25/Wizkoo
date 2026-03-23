@@ -3,22 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>wizkoo — Learning plans. For whatever your family's into.</title>
-<meta name="description" content="Themed learning plans for children ages 2 to 12. Homeschool, supplement, or summer.">
-
-<!-- Open Graph -->
-<meta property="og:title" content="wizkoo">
-<meta property="og:description" content="Themed learning plans for children ages 2–12.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://wizkoo.com">
-<meta property="og:site_name" content="wizkoo">
-<meta property="og:image" content="https://wizkoo.com/wizkoo-og.png">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="wizkoo">
-<meta name="twitter:description" content="Themed learning plans for children ages 2–12.">
-<meta name="twitter:image" content="https://wizkoo.com/wizkoo-og.png">
+<title>wizkoo — v26</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -171,15 +156,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 .orb-label{position:absolute;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(0,0,0,0.12);opacity:0;transition:opacity 1.2s var(--expo) .8s;white-space:nowrap;pointer-events:none;bottom:-16px;left:50%;transform:translateX(-50%)}
 .week-orb.aligned .orb-label{opacity:1}
 
-.hero-content{position:relative;z-index:1;max-width:var(--max-width);margin:0 auto;padding:80px 48px 0 14vw;display:flex;flex-direction:column;justify-content:flex-start}
+.hero-content{position:relative;z-index:1;max-width:var(--max-width);margin:0 auto;padding:80px 48px 0 clamp(48px,10vw,14vw);display:flex;flex-direction:column;justify-content:flex-start}
 .hero-brand{opacity:0;animation:slowReveal 1.8s var(--expo) forwards 1s}
 .hero-brand *{background:transparent!important}
-.hero-brand span.wm{font-size:64px;color:var(--ink)}
+.hero-brand span.wm{font-size:clamp(48px,4.5vw,64px);color:var(--ink)}
 
 @keyframes slowReveal{from{opacity:0}to{opacity:1}}
 @keyframes fastReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .hero-eyebrow{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#444;margin:16px 0 28px;display:flex;align-items:center;gap:16px;opacity:0;animation:fastReveal .3s var(--expo) forwards 2.6s}
-.hero-sticky h1{font-family:'Sora',sans-serif;font-weight:200;font-size:5rem;line-height:1.04;letter-spacing:-0.04em;color:var(--ink);max-width:780px}
+.hero-sticky h1{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(2.8rem,5vw,5rem);line-height:1.04;letter-spacing:-0.04em;color:var(--ink);max-width:780px}
 .hero-line{display:block;overflow:hidden}
 .hero-char{display:inline-block;opacity:0;transform:translateY(28px);animation:charIn .45s var(--expo) forwards}
 @keyframes charIn{to{opacity:1;transform:translateY(0)}}
@@ -369,10 +354,13 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   /* ── Hero ── */
   .hero-sticky h1{font-size:2.2rem;max-width:100%}
   .hero-brand span.wm{font-size:36px}
-  .hero-content{padding:48px 20px 0 20px}
   .hero-eyebrow{font-size:0.52rem;letter-spacing:0.12em;margin:12px 0 20px}
   .hero-sub{margin-top:16px}
   .hero-sub-text{font-size:0.82rem}
+  .hero-wrapper{height:auto;min-height:auto}
+  .hero-sticky{position:relative;height:auto;min-height:auto}
+  .hero-content{padding:10svh 20px 6svh 20px}
+  .hero-circle-wrap{margin-top:24px}
 
   /* ── Nav ── */
   .nav-bar{padding:0 16px;gap:16px}
@@ -546,7 +534,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 
 <div class="id-tags-wrap">
 <div class="id-tags-glow"></div>
-<div class="id-tags"><span class="id-tag">Homeschool</span><span class="id-tag">Supplement</span><span class="id-tag">Summer</span><span class="id-tag">After School</span></div>
+<div class="id-tags"><span class="id-tag">Homeschool</span><span class="id-tag">Supplement</span><span class="id-tag">Summer</span></div>
 </div>
 
 <div class="same-room-wrap">
@@ -659,7 +647,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 
 <div class="saffron-rule"></div>
 
-<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Full curriculum, weekend supplement, summer bridge, after-school enrichment. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system. Multi-age differentiation at the same table, spiral learning across weeks, and a plan that remembers what your child learned last month. You could prompt your way there. Or you could type one theme and get there in two minutes.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo is an architect. One theme connects every subject all week.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Homeschool, supplement, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system. Multi-age differentiation at the same table, spiral learning across weeks, and a plan that remembers what your child learned last month. You could prompt your way there. Or you could type one theme and get there in two minutes.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo is an architect. One theme connects every subject all week.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
 
 <section class="philo"><div class="philo-left reveal"><div class="tag">What We Believe</div><h2>Learning is not a checklist<span class="sp"></span><br>It's <strong>architecture</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>Everything Connects</h3><p>A child who understands one thing deeply will understand everything differently. One idea becomes the lens for every subject.</p></div><div class="phi"><h3>Knowledge Compounds</h3><p>Week 8 should reference Week 3. What your child learned last month should make this month richer. Learning without connection is forgetting.</p></div><div class="phi"><h3>Same Room, Different Minds</h3><p>Four children at one table shouldn't mean four separate curricula. Same theme. Different entry points. That's how a family learns together.</p></div><div class="phi"><h3>Capability Over Calendar</h3><p>We don't sort children by grade. A 5-year-old who reads at a second-grade level gets second-grade reading. Age is a number. Readiness is the measure.</p></div></div></section>
 
@@ -857,7 +845,7 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
     if(!wmDot)return{x:window.innerWidth*0.6,y:window.innerHeight*0.3};
     var r=wmDot.getBoundingClientRect();
     var fs=parseFloat(getComputedStyle(wmDot).fontSize)||64;
-    return{x:r.right+fs*0.09,y:r.top+fs*0.21};
+    return{x:r.right+fs*0.09,y:r.top+fs*0.15};
   }
 
   var dotPos=getDotCenter();
