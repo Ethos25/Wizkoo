@@ -514,8 +514,23 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 /* ═══ PANEL SOON ═══ */
 .panel-soon{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-top:6px}
 
+/* ═══ FOUNDING FAMILIES CTA ═══ */
+.cta-status{font-family:'Sora',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--saffron);margin-bottom:12px}
+.cta-sub{font-size:0.82rem;color:rgba(250,250,250,0.35);margin-bottom:32px}
+.cta-form{max-width:380px;margin:0 auto}
+.cta-form-row{display:flex;gap:0;border:1.5px solid rgba(232,175,56,0.3);transition:border-color .3s}
+.cta-form-row:focus-within{border-color:var(--saffron)}
+.cta-input{flex:1;background:transparent;border:none;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--paper);outline:none}
+.cta-input::placeholder{color:rgba(250,250,250,0.2)}
+.cta-submit{font-family:'Sora',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.06em;padding:14px 24px;background:var(--saffron);color:var(--ink);border:none;white-space:nowrap;transition:background .2s,transform .2s}
+.cta-submit:hover{background:#D4A030;transform:translateY(-1px)}
+.cta-success{max-width:380px;margin:0 auto}
+.cta-confirmed{font-family:'Sora',sans-serif;font-weight:600;font-size:0.92rem;color:var(--saffron)}
+
 @media(max-width:768px){
   .sr-progress{height:3px}
+  .cta-form-row{flex-direction:column}
+  .cta-submit{width:100%}
 }
 </style>
 <!-- Open Graph -->
@@ -539,7 +554,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><button type="button" onclick="document.getElementById('orientation').scrollIntoView({behavior:'smooth'})">How It Works</button><button type="button">Plan Generator</button><button type="button" onclick="document.querySelector('.games-band').scrollIntoView({behavior:'smooth'})">Games</button><button type="button">About</button></div><a href="#" class="nav-cta-sm">Get Early Access</a></div>
+  <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><button type="button" onclick="document.getElementById('orientation').scrollIntoView({behavior:'smooth'})">How It Works</button><button type="button">Plan Generator</button><button type="button" onclick="document.querySelector('.games-band').scrollIntoView({behavior:'smooth'})">Games</button><button type="button">About</button></div><a href="#early-access" class="nav-cta-sm">Get Notified</a></div>
 </div>
 
 <div class="hero-wrapper">
@@ -557,7 +572,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 </div>
 
 <div class="content-layer">
-<div class="circle-cta-section"><a href="#" class="btn-circle"><span class="circle-label">Plan</span><span class="circle-expand">Get early access</span></a><div class="hero-micro" style="text-align:center;margin-top:14px">Early access is free.</div></div>
+<div class="circle-cta-section"><a href="#early-access" class="btn-circle"><span class="circle-label">Join</span><span class="circle-expand">Get notified</span></a><div class="hero-micro" style="text-align:center;margin-top:14px">Founding families are in. You're next.</div></div>
 
 <div class="id-tags-wrap">
 <div class="id-tags-glow"></div>
@@ -679,7 +694,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
     <div class="plan-founder">
       <div class="founder-line">Built by <strong>a mother of four</strong> who tested every plan on her own children.</div>
       <p class="founder-detail">Four children. Different ages. Different reading levels. Same table every morning.</p>
-      <div class="founder-cta"><a href="#" class="btn-main">Get Early Access</a><span class="micro-copy">Early access is free.</span></div>
+      <div class="founder-cta"><a href="#early-access" class="btn-main">Get Notified</a><span class="micro-copy">Early access opens soon.</span></div>
     </div>
   </div>
 </section>
@@ -692,7 +707,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 
 <section class="philo"><div class="philo-left reveal"><div class="tag">What We Believe</div><h2>Learning is not a checklist<span class="sp"></span><br>It's <strong>architecture</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>Everything Connects</h3><p>A child who understands one thing deeply will understand everything differently. One idea becomes the lens for every subject.</p></div><div class="phi"><h3>Knowledge Compounds</h3><p>Week 8 should reference Week 3. What your child learned last month should make this month richer. Learning without connection is forgetting.</p></div><div class="phi"><h3>Same Room, Different Minds</h3><p>Four children at one table shouldn't mean four separate curricula. Same theme. Different entry points. That's how a family learns together.</p></div><div class="phi"><h3>Capability Over Calendar</h3><p>We don't sort children by grade. A 5-year-old who reads at a second-grade level gets second-grade reading. Age is a number. Readiness is the measure.</p></div></div></section>
 
-<section class="cta-dark cta-reveal"><h2>Your children<span class="sp"></span><br>Your theme<span class="sp"></span><br><strong>Their week<span class="sp"></span></strong></h2><p>Early access is free. The plan is yours to print, use, and keep.</p><a href="#" class="btn-circle-dark"><span class="circle-label">Plan</span><span class="circle-expand">Get early access</span></a></section>
+<section class="cta-dark cta-reveal" id="early-access"><h2>Your children<span class="sp"></span><br>Your theme<span class="sp"></span><br><strong>Their week<span class="sp"></span></strong></h2><p class="cta-status">Live with founding families.</p><p class="cta-sub">Early access opens soon. Leave your email and we'll let you know.</p><form name="early-access" method="POST" data-netlify="true" class="cta-form" id="cta-form"><div class="cta-form-row"><input type="email" name="email" placeholder="Your email" required class="cta-input" aria-label="Email address"><button type="submit" class="cta-submit">Notify me</button></div></form><div class="cta-success" id="cta-success" hidden><p class="cta-confirmed">You're on the list. We'll be in touch soon.</p></div></section>
 </div>
 
 <footer><div class="footer-inner"><div class="footer-brand"><span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div><div class="ft-location">Cumming, Georgia</div><div class="ft-location" style="margin-top:8px;color:rgba(250,250,250,0.25)">Built on the <span style="color:rgba(250,250,250,0.4);border-bottom:1px solid rgba(232,175,56,0.3)">ReApproach Education</span> learning philosophy.</div></div><nav class="footer-nav"><button type="button">How It Works</button><button type="button">Plan Generator</button><button type="button">Games</button><button type="button">About</button></nav><div class="footer-social"><div class="footer-social-label">Connect</div><span>Email</span></div><div class="ft-r">&copy; 2026 Wizkoo · Everything connects.<br><a href="/privacy.html" style="opacity:0.6;color:inherit;text-decoration:none">Privacy</a></div></div></footer>
@@ -878,6 +893,20 @@ function toggleWave(row){
   document.querySelectorAll('.pc-collapsed.open').forEach(function(r){r.classList.remove('open');r.nextElementSibling.classList.remove('open')});
   if(!isOpen){row.classList.add('open');detail.classList.add('open')}
 }
+
+// ═══ EARLY ACCESS FORM ═══
+(function(){
+  var form=document.getElementById('cta-form');
+  var success=document.getElementById('cta-success');
+  if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data=new FormData(form);
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data).toString()})
+    .then(function(){form.hidden=true;success.hidden=false})
+    .catch(function(){form.hidden=true;success.hidden=false});
+  });
+})();
 
 function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.hidden=true;b.parentElement.classList.remove('open')});if(!o){btn.setAttribute('aria-expanded','true');a.hidden=false;btn.parentElement.classList.add('open')}}
 
