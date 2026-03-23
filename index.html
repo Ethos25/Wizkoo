@@ -7,7 +7,7 @@
 <meta name="description" content="Themed learning plans for children ages 2 to 12. Homeschool, supplement, or summer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;600;700;800&family=DM+Sans:wght@400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --saffron:#E8AF38;--ink:#0A0A0A;--paper:#FAFAFA;--linen:#F2F0EA;--warm-bg:#ECEAE3;
@@ -20,21 +20,6 @@ a{background:transparent;border:none;box-shadow:none;outline:none;-webkit-appear
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size)}
 @media(hover:hover){html,body,a,button,.ech,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
-/* ═══ PLAN CARD WAVES ═══ */
-.pc-wave{padding:10px 20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--warm-bg)}
-.pc-wave-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--saffron)}
-.pc-bl{margin:0;border-bottom:none;border-left:2px solid var(--saffron);margin-left:20px;margin-right:20px;margin-top:1px}
-.pc-bl:last-of-type{margin-bottom:0}
-.pc-break{display:flex;align-items:center;gap:8px;padding:8px 20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.pc-break-icon{font-size:0.7rem;line-height:1}
-.pc-break-text{font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid)}
-.pc-collapsed{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--rule);transition:background .2s;cursor:default}
-.pc-collapsed:hover{background:rgba(232,175,56,0.03)}
-.pc-collapsed-wave{font-family:'Sora',sans-serif;font-weight:600;font-size:0.72rem;color:var(--ink);min-width:52px}
-.pc-collapsed-range{font-family:'Space Mono',monospace;font-size:0.45rem;color:var(--mid);letter-spacing:0.05em}
-.pc-collapsed-subj{font-family:'DM Sans',sans-serif;font-size:0.68rem;color:#666;flex:1}
-.pc-collapsed-count{font-family:'Space Mono',monospace;font-size:0.42rem;color:var(--saffron);letter-spacing:0.08em;text-transform:uppercase}
-
 /* ═══ CUSTOM CURSOR ═══ */
 .cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
 .cursor.visible{opacity:1}
@@ -124,7 +109,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 
 
 /* ═══ NAV ═══ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform .4s var(--expo)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(10,10,10,0.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform .4s var(--expo)}
 .site-nav.show{transform:translateY(0)}
 .site-nav a:not(.nav-cta-sm),.nav-bar a:not(.nav-cta-sm){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
@@ -136,10 +121,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 
 
 .nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
-.nav-center span{font-family:'Space Mono',monospace;font-weight:400;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px}
-.nav-center span::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
-.nav-center span:hover{color:rgba(250,250,250,0.8)}
-.nav-center span:hover::after{width:100%}
+.nav-center button{font-family:'Space Mono',monospace;font-weight:400;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px;background:transparent;border:none}
+.nav-center button::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
+.nav-center button:hover{color:rgba(250,250,250,0.8)}
+.nav-center button:hover::after{width:100%}
+.nav-center button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
 .nav-cta-sm{font-family:'Sora',sans-serif;font-weight:600;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;background:var(--saffron)!important;color:var(--ink)!important;text-decoration:none!important;transition:background .3s,transform .2s;white-space:nowrap;flex-shrink:0;border:none!important;box-shadow:none!important;outline:none!important}
 .nav-cta-sm:hover{background:#D4A030;transform:translateY(-1px)}
 
@@ -251,13 +237,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 
 /* ═══ SAME ROOM — contained, sharp edges, high contrast ═══ */
 .same-room-wrap{padding:64px 48px;background:var(--linen)}
-.same-room{max-width:1100px;margin:0 auto;padding:56px 48px;background:#141310;color:var(--paper);position:relative;overflow:hidden;border:1.5px solid rgba(232,175,56,0.12);transition:background .8s var(--expo)}
+.same-room{max-width:1100px;margin:0 auto;padding:56px 48px;background:#141310;color:var(--paper);position:relative;overflow:hidden;border:1.5px solid rgba(232,175,56,0.12);transition:background-color .8s var(--expo)}
 .same-room>*{position:relative;z-index:1}
 .sr-header{margin-bottom:12px}
 .same-room .tag{color:var(--saffron);margin-bottom:16px}
 .same-room h2{font-family:'Sora',sans-serif;font-weight:200;font-size:2.2rem;line-height:1.1;letter-spacing:-0.03em}.same-room h2 strong{font-weight:700;color:var(--saffron)}
 .sr-why{font-size:0.82rem;color:rgba(250,250,250,0.5);line-height:1.6;margin:12px 0 32px;max-width:500px}
-.sr-instruction{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-align:center;margin-bottom:16px}
+.sr-instruction{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-align:center;margin-bottom:16px;display:none}
+@media(hover:hover){.sr-instruction{display:block}}
 .sr-track{display:flex;gap:0;border-top:1px solid rgba(255,255,255,0.08);position:relative}
 .sr-card{flex:1;padding:28px 24px;border-right:1px solid rgba(255,255,255,0.06);transition:opacity .4s var(--expo),background .4s var(--expo),transform .3s var(--expo),border-color .3s;opacity:0.4;border-top:2px solid transparent}
 .sr-card:last-child{border-right:none}
@@ -327,13 +314,15 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 .footer-inner{max-width:var(--max-width);display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:48px;align-items:start}
 .footer-wm{font-size:18px;color:var(--paper);margin-bottom:10px}
 .footer-tagline{font-size:0.78rem;color:rgba(250,250,250,0.4);line-height:1.5}.ft-location{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,250,250,0.15);margin-top:6px}
-.footer-nav{display:flex;flex-direction:column;gap:10px}.footer-nav span{font-size:0.78rem;color:rgba(250,250,250,0.4);transition:color .2s}.footer-nav span:hover{color:var(--paper)}
+.footer-nav{display:flex;flex-direction:column;gap:10px}.footer-nav button{font-size:0.78rem;color:rgba(250,250,250,0.4);transition:color .2s;background:transparent;border:none;text-align:left;padding:0}.footer-nav button:hover{color:var(--paper)}.footer-nav button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
 .footer-social{display:flex;flex-direction:column;gap:10px}.footer-social-label{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(250,250,250,0.15)}.footer-social span{font-size:0.78rem;color:rgba(250,250,250,0.4)}.footer-social span:hover{color:var(--saffron)}
 .ft-r{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,250,250,0.1);text-align:right;align-self:end}
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--expo),transform .7s var(--expo)}.reveal.visible{opacity:1;transform:translateY(0)}
 
 @media(max-width:1024px){
+  .hero-wrapper{height:auto;min-height:auto}
+  .hero-sticky{position:relative;height:auto;min-height:auto}
   .hero-sticky h1{font-size:3.4rem}
   .hero-brand span.wm{font-size:48px}
   .hero-content{padding-left:8vw}
@@ -360,13 +349,13 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   .hero-sub-text{font-size:0.82rem}
   .hero-wrapper{height:auto;min-height:auto}
   .hero-sticky{position:relative;height:auto;min-height:auto}
-  .hero-content{padding:10svh 20px 6svh 20px}
+  .hero-content{padding:10vh 20px 6vh 20px;padding:10svh 20px 6svh 20px}
   .hero-circle-wrap{margin-top:24px}
 
   /* ── Nav ── */
   .nav-bar{padding:0 16px;gap:16px}
   .nav-center{gap:14px;display:none}
-  .nav-center span{font-size:7px;letter-spacing:0.1em}
+  .nav-center button{font-size:7px;letter-spacing:0.1em}
   .nav-cta-sm{font-size:7px;padding:5px 10px}
   .nav-bar{justify-content:space-between}
 
@@ -378,8 +367,6 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   .sr-track{flex-direction:column}
   .sr-card{flex:none;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
   .sr-card:last-child{border-bottom:none}
-  .sr-instruction{display:none}
-
   /* ── Everything Connects ── */
   .ec-section{padding:48px 20px}
   .ec-headline{font-size:1.5rem}
@@ -429,6 +416,8 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 
   /* ── Circle CTA ── */
   .btn-circle{width:88px;height:88px;font-size:0.76rem}
+  .btn-circle .circle-label{font-size:0.62rem}
+  .btn-circle .circle-expand{display:block;font-size:0.42rem;font-family:'Space Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px}
   .btn-circle-dark{width:96px;height:96px;font-size:0.82rem}
 
   /* ── Week compare cards ── */
@@ -450,8 +439,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   /* Larger tap targets for FAQ */
   .faq-q{min-height:48px}
 
-  /* Same Room: tap instruction instead of hover */
-  .sr-instruction{display:block!important;font-size:8px}
+  /* Same Room: auto-rotate handles touch; instruction hidden on touch */
 }
 
 /* ═══ FIREFLY ═══ */
@@ -527,7 +515,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><span onclick="document.getElementById('orientation').scrollIntoView({behavior:'smooth'})">How It Works</span><span>Plan Generator</span><span onclick="document.querySelector('.games-band').scrollIntoView({behavior:'smooth'})">Games</span><span>About</span></div><a href="#" class="nav-cta-sm">Get Early Access</a></div>
+  <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><button type="button" onclick="document.getElementById('orientation').scrollIntoView({behavior:'smooth'})">How It Works</button><button type="button">Plan Generator</button><button type="button" onclick="document.querySelector('.games-band').scrollIntoView({behavior:'smooth'})">Games</button><button type="button">About</button></div><a href="#" class="nav-cta-sm">Get Early Access</a></div>
 </div>
 
 <div class="hero-wrapper">
@@ -536,7 +524,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   <div class="hero-content" id="hero-content">
     <div class="hero-brand"><span class="wm" id="hero-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span></div>
     <div class="hero-eyebrow">Learning plans. For whatever your family's into.</div>
-    <h1><span class="hero-line" data-text="One theme" data-delay="2.9" data-speed="0.02"></span><span class="hero-line" data-text="Every subject" data-delay="3.2" data-speed="0.02"></span><span class="hero-line" data-text="All week" data-delay="3.5" data-speed="0.02"></span><span class="hero-line hero-punchline" data-text="Done" data-delay="3.9" data-speed="0.05"></span></h1>
+    <h1 aria-label="One theme. Every subject. All week. Done."><noscript>One theme. Every subject. All week. Done.</noscript><span class="hero-line" data-text="One theme" data-delay="2.9" data-speed="0.02"></span><span class="hero-line" data-text="Every subject" data-delay="3.2" data-speed="0.02"></span><span class="hero-line" data-text="All week" data-delay="3.5" data-speed="0.02"></span><span class="hero-line hero-punchline" data-text="Done" data-delay="3.9" data-speed="0.05"></span></h1>
     <div class="hero-sub"><div class="hero-sub-text">Monday's volcano becomes Thursday's science experiment, Friday's art project, and the story they tell grandma.</div><div class="hero-cta-group"></div></div>
 
   </div>
@@ -658,18 +646,18 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   </div>
 </section>
 
-<section class="games-band reveal"><div class="game-panel"><div class="tag-light">Wizkoo Original</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3>Atlas</h3><p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them.</p><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">Wizkoo Original</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3>Elementum</h3><p class="gd">118 elements with character personalities. Dragon guide Eternatus. 24 combo reactions.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><span class="panel-link">Explore Elementum →</span></div></section>
+<section class="games-band reveal"><div class="game-panel"><div class="tag-light">Wizkoo Original</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3>Atlas</h3><p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them.</p><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">Wizkoo Original</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3>Elementum</h3><p class="gd">118 elements with character personalities. Dragon guide Eternatus. 24 combo reactions.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><a href="#" class="panel-link">Explore Elementum →</a></div></section>
 
 <div class="saffron-rule"></div>
 
-<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Homeschool, supplement, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system. Multi-age differentiation at the same table, spiral learning across weeks, and a plan that remembers what your child learned last month. You could prompt your way there. Or you could type one theme and get there in two minutes.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo is an architect. One theme connects every subject all week.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Homeschool, supplement, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system. Multi-age differentiation at the same table, spiral learning across weeks, and a plan that remembers what your child learned last month. You could prompt your way there. Or you could type one theme and get there in two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo is an architect. One theme connects every subject all week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
 
 <section class="philo"><div class="philo-left reveal"><div class="tag">What We Believe</div><h2>Learning is not a checklist<span class="sp"></span><br>It's <strong>architecture</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>Everything Connects</h3><p>A child who understands one thing deeply will understand everything differently. One idea becomes the lens for every subject.</p></div><div class="phi"><h3>Knowledge Compounds</h3><p>Week 8 should reference Week 3. What your child learned last month should make this month richer. Learning without connection is forgetting.</p></div><div class="phi"><h3>Same Room, Different Minds</h3><p>Four children at one table shouldn't mean four separate curricula. Same theme. Different entry points. That's how a family learns together.</p></div><div class="phi"><h3>Capability Over Calendar</h3><p>We don't sort children by grade. A 5-year-old who reads at a second-grade level gets second-grade reading. Age is a number. Readiness is the measure.</p></div></div></section>
 
 <section class="cta-dark cta-reveal"><h2>Your children<span class="sp"></span><br>Your theme<span class="sp"></span><br><strong>Their week<span class="sp"></span></strong></h2><p>Early access is free. The plan is yours to print, use, and keep.</p><a href="#" class="btn-circle-dark"><span class="circle-label">Plan</span><span class="circle-expand">Get early access</span></a></section>
 </div>
 
-<footer><div class="footer-inner"><div class="footer-brand"><span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div><div class="ft-location">Cumming, Georgia</div><div class="ft-location" style="margin-top:8px;color:rgba(250,250,250,0.25)">Built on the <span style="color:rgba(250,250,250,0.4);border-bottom:1px solid rgba(232,175,56,0.3)">ReApproach Education</span> learning philosophy.</div></div><nav class="footer-nav"><span>How It Works</span><span>Plan Generator</span><span>Games</span><span>About</span></nav><div class="footer-social"><div class="footer-social-label">Connect</div><span>Email</span></div><div class="ft-r">&copy; 2026 Wizkoo · Everything connects.<br><span style="opacity:0.6">Privacy</span></div></div></footer>
+<footer><div class="footer-inner"><div class="footer-brand"><span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div><div class="ft-location">Cumming, Georgia</div><div class="ft-location" style="margin-top:8px;color:rgba(250,250,250,0.25)">Built on the <span style="color:rgba(250,250,250,0.4);border-bottom:1px solid rgba(232,175,56,0.3)">ReApproach Education</span> learning philosophy.</div></div><nav class="footer-nav"><button type="button">How It Works</button><button type="button">Plan Generator</button><button type="button">Games</button><button type="button">About</button></nav><div class="footer-social"><div class="footer-social-label">Connect</div><span>Email</span></div><div class="ft-r">&copy; 2026 Wizkoo · Everything connects.<br><span style="opacity:0.6">Privacy</span></div></div></footer>
 
 <script>
 // ═══ CUSTOM CURSOR ═══
@@ -678,7 +666,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
   document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
   // Hover detection - only interactive elements, NOT generic spans
-  var hoverEls='a,button,.nav-center span,.footer-nav span,.footer-social span,.ech,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.week-card,.plan-card,.sr-track,.planned-dot,.wm,.nav-wm';
+  var hoverEls='a,button,.footer-social span,.ech,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.week-card,.plan-card,.sr-track,.planned-dot,.wm,.nav-wm';
   document.addEventListener('mouseover',function(e){if(e.target.closest(hoverEls))c.classList.add('hover')});
   document.addEventListener('mouseout',function(e){if(e.target.closest(hoverEls))c.classList.remove('hover')});
   // Smooth follow with lag
@@ -916,31 +904,33 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
   function noise(x){return Math.sin(x*1.2)*0.5+Math.sin(x*2.7)*0.3+Math.sin(x*4.1)*0.2}
 
   // Birth sequence: firefly born from terminal dot, traces eyebrow, returns
-  setTimeout(function(){
-    // Pulse the terminal dot
-    var wmDotEl=document.querySelector('#hero-wm .wm-dot');
-    if(wmDotEl){
-      var afterStyle=document.createElement('style');
-      afterStyle.textContent='#hero-wm .wm-dot::after{animation:dotReact 0.6s var(--expo)!important}';
-      document.head.appendChild(afterStyle);
-      setTimeout(function(){afterStyle.remove()},700);
-    }
-    // Calculate eyebrow positions
-    if(eyebrowEl){
-      var ebRect=eyebrowEl.getBoundingClientRect();
-      eyebrowStartX=ebRect.left;
-      eyebrowEndX=ebRect.right;
-      eyebrowY=ebRect.top+ebRect.height/2;
-    }
-    // Recalculate home position fresh
-    var dc=getDotCenter();
-    birthHomeX=dc.x;birthHomeY=dc.y;
-    ffx=birthHomeX;ffy=birthHomeY;
-    ff.classList.add('alive');
-    birthPhase='descending';
-    birthStart=Date.now();
-    updatePois();
-  },4500);
+  document.fonts.ready.then(function(){
+    setTimeout(function(){
+      // Pulse the terminal dot
+      var wmDotEl=document.querySelector('#hero-wm .wm-dot');
+      if(wmDotEl){
+        var afterStyle=document.createElement('style');
+        afterStyle.textContent='#hero-wm .wm-dot::after{animation:dotReact 0.6s var(--expo)!important}';
+        document.head.appendChild(afterStyle);
+        setTimeout(function(){afterStyle.remove()},700);
+      }
+      // Calculate eyebrow positions
+      if(eyebrowEl){
+        var ebRect=eyebrowEl.getBoundingClientRect();
+        eyebrowStartX=ebRect.left;
+        eyebrowEndX=ebRect.right;
+        eyebrowY=ebRect.top+ebRect.height/2;
+      }
+      // Recalculate home position fresh
+      var dc=getDotCenter();
+      birthHomeX=dc.x;birthHomeY=dc.y;
+      ffx=birthHomeX;ffy=birthHomeY;
+      ff.classList.add('alive');
+      birthPhase='descending';
+      birthStart=Date.now();
+      updatePois();
+    },4500);
+  });
 
   // Track mouse movement for idle detection
   document.addEventListener('mousemove',function(){lastMoveTime=Date.now()});
