@@ -332,7 +332,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   .game-panel:first-child{border-right:none;border-bottom:1px solid var(--rule)}
   .philo{grid-template-columns:1fr}
   .philo-left{position:relative;top:0}
-  .week-compare{grid-template-columns:1fr}
+  .week-compare{grid-template-columns:1fr;max-width:480px;margin:0 auto}
   .sr-track{flex-wrap:wrap}
   .sr-card{flex:1 1 45%}
   .cta-dark h2{font-size:2.6rem}
@@ -493,6 +493,30 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   .firefly{display:none!important}
   .cursor{display:none!important}
 }
+
+/* ═══ SAME ROOM PROGRESS BAR ═══ */
+.sr-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--saffron);width:0;opacity:0;transition:opacity .2s}
+.sr-card.active .sr-progress{opacity:1;animation:srFill 3.5s linear forwards}
+@keyframes srFill{from{width:0}to{width:100%}}
+
+/* ═══ HOW IT WORKS STEPS ═══ */
+.or-steps{margin-top:28px;border-top:1px solid var(--rule);padding-top:20px;display:flex;flex-direction:column;gap:12px}
+.or-step{display:flex;align-items:baseline;gap:14px}
+.or-step-num{font-family:'Sora',sans-serif;font-weight:800;font-size:2rem;color:rgba(232,175,56,0.15);line-height:1;letter-spacing:-0.04em;min-width:36px}
+.or-step-label{font-family:'Sora',sans-serif;font-weight:700;font-size:0.72rem;color:var(--ink)}
+
+/* ═══ PLAN CARD WAVE EXPAND ═══ */
+.pc-chevron{font-family:'Sora',sans-serif;font-size:0.8rem;font-weight:300;color:var(--saffron);margin-left:auto;transition:transform .3s var(--expo)}
+.pc-collapsed.open .pc-chevron{transform:rotate(45deg)}
+.pc-expanded{overflow:hidden;max-height:0;transition:max-height .4s var(--expo);border-bottom:1px solid var(--rule)}
+.pc-expanded.open{max-height:300px}
+
+/* ═══ PANEL SOON ═══ */
+.panel-soon{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-top:6px}
+
+@media(max-width:768px){
+  .sr-progress{height:3px}
+}
 </style>
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -554,21 +578,25 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
       <div class="sr-name">Mia</div><div class="sr-age">Age 7</div>
       <div class="sr-level"><span class="sr-level-dot full"></span> Reads Well</div>
       <div class="sr-activity">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+      <div class="sr-progress"></div>
     </div>
     <div class="sr-card">
       <div class="sr-name">Noah</div><div class="sr-age">Age 5</div>
       <div class="sr-level"><span class="sr-level-dot half"></span> Reads Some</div>
       <div class="sr-activity">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
+      <div class="sr-progress"></div>
     </div>
     <div class="sr-card">
       <div class="sr-name">Ava</div><div class="sr-age">Age 3</div>
       <div class="sr-level"><span class="sr-level-dot"></span> Learning</div>
       <div class="sr-activity">Red and orange finger painting: make your own lava flow on the big paper.</div>
+      <div class="sr-progress"></div>
     </div>
     <div class="sr-card">
       <div class="sr-name">Liam</div><div class="sr-age">Age 2</div>
       <div class="sr-level"><span class="sr-level-dot" style="width:4px;height:4px"></span> Explorer</div>
       <div class="sr-activity">Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz.</div>
+      <div class="sr-progress"></div>
     </div>
   </div>
 </section>
@@ -583,7 +611,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
       <div class="ec-hook">Guess what everyone learned that week.</div>
       <div class="ec-subjects">
         <div class="ec-subj"><span class="ec-subj-label">Reading</span>The biography of Wilhelm Röntgen, who discovered X-rays</div>
-        <div class="ec-subj"><span class="ec-subj-label">Math</span>Measuring bone lengths. Which bone is longest? By how much?</div>
+        <div class="ec-subj"><span class="ec-subj-label">Math</span>Measuring bone lengths: which is longest, and by how much?</div>
         <div class="ec-subj"><span class="ec-subj-label">Science</span>How fractures heal. What happens inside a bone?</div>
         <div class="ec-subj"><span class="ec-subj-label">Atlas</span>Visit Würzburg, Germany, where X-rays were invented</div>
         <div class="ec-subj"><span class="ec-subj-label">Art</span>Sketch the human skeleton. Label every bone you can name.</div>
@@ -599,7 +627,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
       <div class="ec-subjects">
         <div class="ec-subj"><span class="ec-subj-label">Reading</span>Reptile habitats. Where do turtles sleep in winter?</div>
         <div class="ec-subj"><span class="ec-subj-label">Math</span>Estimate a turtle's age by counting shell rings</div>
-        <div class="ec-subj"><span class="ec-subj-label">Science</span>Cold-blooded vs. warm-blooded. What's the difference?</div>
+        <div class="ec-subj"><span class="ec-subj-label">Science</span>Cold-blooded vs. warm-blooded: what's the difference?</div>
         <div class="ec-subj"><span class="ec-subj-label">Atlas</span>Visit the Galápagos Islands. Find the giant tortoises.</div>
         <div class="ec-subj"><span class="ec-subj-label">Art</span>Watercolor turtle shell patterns. Every shell is unique.</div>
         <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Carbon: the element inside every shell, every scale, every claw</div>
@@ -608,7 +636,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   </div>
 </section>
 
-<section class="orientation reveal" id="orientation"><div><div class="tag-light">How It Works</div><div class="or-title"><strong>Enter your children.</strong><br>Choose a theme.<br><strong>See the week.</strong></div><p class="or-sub">Pick any topic. A field trip, a family event, your child's obsession this month. Every subject connects through it. Week 8 references Week 3. Knowledge compounds.</p></div><div class="week-compare"><div class="week-card w1"><div class="wc-label">Week 1</div><div class="wc-theme">The Ocean Floor</div><div class="wc-detail">Mia sorts ocean animals. Noah traces W-A-T-E-R. Ava blows bubbles.</div></div><div class="week-card w8"><div class="wc-label">Week 8</div><div class="wc-theme">Volcanoes &amp; The Ring of Fire</div><div class="wc-detail">Complex cross-references. Elementum combos. Multi-source research.</div><div class="wc-spiral">↩ Week 3: tectonic plates that cause tsunamis also build volcanoes.</div></div></div></section>
+<section class="orientation reveal" id="orientation"><div><div class="tag-light">How It Works</div><div class="or-title"><strong>Enter your children.</strong><br>Choose a theme.<br><strong>See the week.</strong></div><p class="or-sub">Pick any topic. A field trip, a family event, your child's obsession this month. Every subject connects through it. Week 8 references Week 3. Knowledge compounds.</p><div class="or-steps"><div class="or-step"><span class="or-step-num">1</span><span class="or-step-label">Enter your children</span></div><div class="or-step"><span class="or-step-num">2</span><span class="or-step-label">Choose a theme</span></div><div class="or-step"><span class="or-step-num">3</span><span class="or-step-label">See the week</span></div></div></div><div class="week-compare"><div class="week-card w1"><div class="wc-label">Week 1</div><div class="wc-theme">The Ocean Floor</div><div class="wc-detail">Mia sorts ocean animals. Noah traces W-A-T-E-R. Ava blows bubbles.</div></div><div class="week-card w8"><div class="wc-label">Week 8</div><div class="wc-theme">Volcanoes &amp; The Ring of Fire</div><div class="wc-detail">Complex cross-references. Elementum combos. Multi-source research.</div><div class="wc-spiral">↩ Week 3: tectonic plates that cause tsunamis also build volcanoes.</div></div></div></section>
 
 <div class="saffron-rule"></div>
 
@@ -630,13 +658,23 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 
       <div class="pc-break"><span class="pc-break-icon">☕</span><span class="pc-break-text">10:00 · Snack break</span></div>
 
-      <div class="pc-collapsed"><span class="pc-collapsed-wave">Wave 2</span><span class="pc-collapsed-range">10:20–11:20</span><span class="pc-collapsed-subj">Science + Elementum</span><span class="pc-collapsed-count">3 blocks</span></div>
+      <div class="pc-collapsed" onclick="toggleWave(this)" style="cursor:pointer"><span class="pc-collapsed-wave">Wave 2</span><span class="pc-collapsed-range">10:20–11:20</span><span class="pc-collapsed-subj">Science + Elementum</span><span class="pc-collapsed-count">3 blocks</span><span class="pc-chevron">+</span></div>
+      <div class="pc-expanded" id="wave2-detail">
+        <div class="pc-bl" style="--bl-i:0"><span class="tm">10:20</span><span><strong>Science</strong> — How do volcanoes form? Draw the layers: crust, mantle, magma chamber.</span></div>
+        <div class="pc-bl" style="--bl-i:1"><span class="tm">10:40</span><span><strong>Elementum</strong> — Sulfur: the grumpy element. Why do volcanoes smell? Combo: Sulfur + Oxygen.</span></div>
+        <div class="pc-bl" style="--bl-i:2"><span class="tm">11:00</span><span><strong>Experiment</strong> — Baking soda + vinegar eruption. Measure how high. Record in journal.</span></div>
+      </div>
 
       <div class="pc-break"><span class="pc-break-icon">🏃</span><span class="pc-break-text">11:20 · Movement reset</span></div>
 
-      <div class="pc-collapsed"><span class="pc-collapsed-wave">Wave 3</span><span class="pc-collapsed-range">11:30–12:30</span><span class="pc-collapsed-subj">Hands-on + Exploration</span><span class="pc-collapsed-count">3 blocks</span></div>
+      <div class="pc-collapsed" onclick="toggleWave(this)" style="cursor:pointer"><span class="pc-collapsed-wave">Wave 3</span><span class="pc-collapsed-range">11:30–12:30</span><span class="pc-collapsed-subj">Hands-on + Exploration</span><span class="pc-collapsed-count">3 blocks</span><span class="pc-chevron">+</span></div>
+      <div class="pc-expanded" id="wave3-detail">
+        <div class="pc-bl" style="--bl-i:0"><span class="tm">11:30</span><span><strong>Art</strong> — Build a clay volcano cross-section. Paint the magma chamber red.</span></div>
+        <div class="pc-bl" style="--bl-i:1"><span class="tm">11:50</span><span><strong>Atlas</strong> — Fly to Pompeii. What happened in 79 AD? Find Vesuvius on the map.</span></div>
+        <div class="pc-bl" style="--bl-i:2"><span class="tm">12:10</span><span><strong>Journal</strong> — Draw your favorite thing from today. Write one sentence about it.</span></div>
+      </div>
 
-      <div class="pc-more">+ 4 more days</div>
+      <div class="pc-more">+ Tuesday through Friday</div>
     </div></div>
     <div class="plan-founder">
       <div class="founder-line">Built by <strong>a mother of four</strong> who tested every plan on her own children.</div>
@@ -646,18 +684,18 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   </div>
 </section>
 
-<section class="games-band reveal"><div class="game-panel"><div class="tag-light">Wizkoo Original</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3>Atlas</h3><p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them.</p><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">Wizkoo Original</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3>Elementum</h3><p class="gd">118 elements with character personalities. Dragon guide Eternatus. 24 combo reactions.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><a href="#" class="panel-link">Explore Elementum →</a></div></section>
+<section class="games-band reveal"><div class="game-panel"><div class="tag-light">Wizkoo Original</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3>Atlas</h3><p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them.</p><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">Wizkoo Original</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3>Elementum</h3><p class="gd">118 elements with character personalities. Dragon guide Eternatus. 24 combo reactions.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><a href="#" class="panel-link" style="pointer-events:none;opacity:0.35">Explore Elementum →</a><div class="panel-soon">Coming soon</div></div></section>
 
 <div class="saffron-rule"></div>
 
-<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Homeschool, supplement, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system. Multi-age differentiation at the same table, spiral learning across weeks, and a plan that remembers what your child learned last month. You could prompt your way there. Or you could type one theme and get there in two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo is an architect. One theme connects every subject all week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Homeschool, supplement, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo is an architect.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
 
 <section class="philo"><div class="philo-left reveal"><div class="tag">What We Believe</div><h2>Learning is not a checklist<span class="sp"></span><br>It's <strong>architecture</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>Everything Connects</h3><p>A child who understands one thing deeply will understand everything differently. One idea becomes the lens for every subject.</p></div><div class="phi"><h3>Knowledge Compounds</h3><p>Week 8 should reference Week 3. What your child learned last month should make this month richer. Learning without connection is forgetting.</p></div><div class="phi"><h3>Same Room, Different Minds</h3><p>Four children at one table shouldn't mean four separate curricula. Same theme. Different entry points. That's how a family learns together.</p></div><div class="phi"><h3>Capability Over Calendar</h3><p>We don't sort children by grade. A 5-year-old who reads at a second-grade level gets second-grade reading. Age is a number. Readiness is the measure.</p></div></div></section>
 
 <section class="cta-dark cta-reveal"><h2>Your children<span class="sp"></span><br>Your theme<span class="sp"></span><br><strong>Their week<span class="sp"></span></strong></h2><p>Early access is free. The plan is yours to print, use, and keep.</p><a href="#" class="btn-circle-dark"><span class="circle-label">Plan</span><span class="circle-expand">Get early access</span></a></section>
 </div>
 
-<footer><div class="footer-inner"><div class="footer-brand"><span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div><div class="ft-location">Cumming, Georgia</div><div class="ft-location" style="margin-top:8px;color:rgba(250,250,250,0.25)">Built on the <span style="color:rgba(250,250,250,0.4);border-bottom:1px solid rgba(232,175,56,0.3)">ReApproach Education</span> learning philosophy.</div></div><nav class="footer-nav"><button type="button">How It Works</button><button type="button">Plan Generator</button><button type="button">Games</button><button type="button">About</button></nav><div class="footer-social"><div class="footer-social-label">Connect</div><span>Email</span></div><div class="ft-r">&copy; 2026 Wizkoo · Everything connects.<br><span style="opacity:0.6">Privacy</span></div></div></footer>
+<footer><div class="footer-inner"><div class="footer-brand"><span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div><div class="ft-location">Cumming, Georgia</div><div class="ft-location" style="margin-top:8px;color:rgba(250,250,250,0.25)">Built on the <span style="color:rgba(250,250,250,0.4);border-bottom:1px solid rgba(232,175,56,0.3)">ReApproach Education</span> learning philosophy.</div></div><nav class="footer-nav"><button type="button">How It Works</button><button type="button">Plan Generator</button><button type="button">Games</button><button type="button">About</button></nav><div class="footer-social"><div class="footer-social-label">Connect</div><span>Email</span></div><div class="ft-r">&copy; 2026 Wizkoo · Everything connects.<br><a href="/privacy.html" style="opacity:0.6;color:inherit;text-decoration:none">Privacy</a></div></div></footer>
 
 <script>
 // ═══ CUSTOM CURSOR ═══
@@ -792,6 +830,8 @@ function spawnConfetti(x,y){
 
   function activate(idx){
     currentIdx=idx;
+    // Reset all progress bars before switching
+    document.querySelectorAll('.sr-progress').forEach(function(p){p.style.animation='none';p.offsetHeight;p.style.animation=''});
     cards.forEach(function(c,i){c.classList.toggle('active',i===idx)});
     //beam hidden;
     sec.style.background=temps[idx];
@@ -831,6 +871,13 @@ function spawnConfetti(x,y){
 (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});document.querySelectorAll('.reveal,.plan-card-entrance,.phi,.cta-reveal').forEach(function(el){obs.observe(el)});
 // Id-tags: staggered reveal via JS so hover doesn't inherit entrance delay
 var tagObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var tags=document.querySelectorAll('.id-tag');tags.forEach(function(tag,i){setTimeout(function(){tag.classList.add('visible')},i*120)});tagObs.disconnect()}})},{threshold:0.1});var tagWrap=document.querySelector('.id-tags-wrap');if(tagWrap)tagObs.observe(tagWrap)})();
+
+function toggleWave(row){
+  var detail=row.nextElementSibling;
+  var isOpen=row.classList.contains('open');
+  document.querySelectorAll('.pc-collapsed.open').forEach(function(r){r.classList.remove('open');r.nextElementSibling.classList.remove('open')});
+  if(!isOpen){row.classList.add('open');detail.classList.add('open')}
+}
 
 function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.hidden=true;b.parentElement.classList.remove('open')});if(!o){btn.setAttribute('aria-expanded','true');a.hidden=false;btn.parentElement.classList.add('open')}}
 

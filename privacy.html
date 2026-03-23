@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — wizkoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;600;700;800&family=DM+Sans:wght@400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --saffron:#E8AF38;--ink:#0A0A0A;--paper:#FAFAFA;--linen:#F2F0EA;--warm-bg:#ECEAE3;
+  --rule:#E0DED6;--mid:#888;--max-width:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);font-size:0.9rem;line-height:1.7}
+a{color:inherit;text-decoration:none}
+
+/* Nav */
+.site-nav{background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:0 48px;height:48px;display:flex;align-items:center;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,0.04)}
+.nav-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.04em;color:var(--paper);display:inline-flex;align-items:baseline;line-height:1}
+.nav-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}
+.sp{display:inline-block;width:0.14em;height:0.14em;border-radius:50%;background:var(--saffron);margin-left:0.04em;vertical-align:baseline;position:relative;top:0.01em}
+.nav-back{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,250,250,0.3);margin-left:auto;transition:color .2s}
+.nav-back:hover{color:rgba(250,250,250,0.8)}
+
+/* Main */
+.page-wrap{max-width:680px;margin:0 auto;padding:80px 48px 120px}
+.page-tag{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:20px}
+.page-title{font-family:'Sora',sans-serif;font-weight:200;font-size:2.8rem;letter-spacing:-0.04em;line-height:1.1;margin-bottom:48px}
+.page-title strong{font-weight:700}
+.privacy-list{list-style:none;border-top:1px solid var(--rule)}
+.privacy-item{padding:24px 0;border-bottom:1px solid var(--rule);font-size:0.88rem;color:#444;line-height:1.75}
+.privacy-item strong{font-family:'Sora',sans-serif;font-weight:700;font-size:0.78rem;color:var(--ink);display:block;margin-bottom:4px}
+.privacy-item a{border-bottom:1px solid rgba(232,175,56,0.4);color:var(--ink);transition:border-color .2s}
+.privacy-item a:hover{border-color:var(--saffron)}
+
+/* Footer */
+footer{background:var(--ink);padding:48px;color:var(--paper);border-top:1px solid rgba(255,255,255,0.04)}
+.footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap}
+.footer-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.04em;color:var(--paper);display:inline-flex;align-items:baseline;line-height:1}
+.footer-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}
+.footer-tagline{font-size:0.78rem;color:rgba(250,250,250,0.4);margin-top:8px}
+.ft-r{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,250,250,0.1);text-align:right}
+
+@media(max-width:768px){
+  .site-nav{padding:0 20px}
+  .page-wrap{padding:48px 20px 80px}
+  .page-title{font-size:2rem}
+  footer{padding:32px 20px}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .ft-r{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-wm">w<span style="position:relative;display:inline-block">i</span>z<span class="k">k</span>o<span style="position:relative;display:inline-block;margin-left:-0.08em">o<span class="sp"></span></span></a>
+  <a href="/" class="nav-back">← Back to wizkoo</a>
+</nav>
+
+<main class="page-wrap">
+  <div class="page-tag">Legal</div>
+  <h1 class="page-title"><strong>Privacy</strong></h1>
+
+  <ol class="privacy-list">
+    <li class="privacy-item">
+      <strong>No children's data collected.</strong>
+      Wizkoo does not collect personal information from children.
+    </li>
+    <li class="privacy-item">
+      <strong>Plans stay in your browser.</strong>
+      Learning plans generate entirely in your browser. No plan data is sent to or stored on our servers.
+    </li>
+    <li class="privacy-item">
+      <strong>No accounts required.</strong>
+      During early access, no account creation is required. We do not collect names, emails, or any identifying information from children.
+    </li>
+    <li class="privacy-item">
+      <strong>No tracking cookies.</strong>
+      We use no tracking cookies. Essential cookies only, if any.
+    </li>
+    <li class="privacy-item">
+      <strong>Questions?</strong>
+      Contact us at <a href="mailto:privacy@wizkoo.com">privacy@wizkoo.com</a>.
+    </li>
+  </ol>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-wm">w<span style="position:relative;display:inline-block">i</span>z<span class="k">k</span>o<span style="position:relative;display:inline-block;margin-left:-0.08em">o<span class="sp"></span></span></span>
+      <div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div>
+    </div>
+    <div class="ft-r">&copy; 2026 Wizkoo · Everything connects.<br><a href="/privacy.html" style="opacity:0.6;color:inherit;text-decoration:none">Privacy</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
