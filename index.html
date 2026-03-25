@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>wizkoo</title>
-<meta name="description" content="Themed learning plans for children ages 2 to 12. Homeschool, supplement, or summer.">
+<meta name="description" content="Themed learning plans for children ages 2 to 12. Homeschool, after school, or summer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;600;700;800&family=DM+Sans:wght@400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --saffron:#E8AF38;--ink:#0A0A0A;--paper:#FAFAFA;--linen:#F2F0EA;--warm-bg:#ECEAE3;
-  --rule:#E0DED6;--mid:#888;--faint:#CCC;--max-width:1200px;
+  --saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm-bg:#ECEAE3;
+  --rule:#E0DED6;--mid:#666;--faint:#CCC;--max-width:1200px;
   --body-size:0.85rem;--small-size:0.82rem;--tag-size:0.58rem;--button-size:0.68rem;
   --expo:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.22,1,0.36,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 a{background:transparent;border:none;box-shadow:none;outline:none;-webkit-appearance:none}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size)}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size);line-height:1.6}
 @media(hover:hover){html,body,a,button,.ech,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
 /* ═══ CUSTOM CURSOR ═══ */
 .cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
@@ -109,7 +109,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 
 
 /* ═══ NAV ═══ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(10,10,10,0.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform .4s var(--expo)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform .4s var(--expo)}
 .site-nav.show{transform:translateY(0)}
 .site-nav a:not(.nav-cta-sm),.nav-bar a:not(.nav-cta-sm){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
@@ -151,7 +151,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 @keyframes slowReveal{from{opacity:0}to{opacity:1}}
 @keyframes fastReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .hero-eyebrow{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#444;margin:16px 0 28px;display:flex;align-items:center;gap:16px;opacity:0;animation:fastReveal .3s var(--expo) forwards 2.6s}
-.hero-sticky h1{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(2.8rem,5vw,5rem);line-height:1.04;letter-spacing:-0.04em;color:var(--ink);max-width:780px}
+.hero-sticky h1{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(2.8rem,5vw,5rem);line-height:1.1;letter-spacing:-0.03em;color:var(--ink);max-width:780px}
 .hero-line{display:block;overflow:hidden}
 .hero-char{display:inline-block;opacity:0;transform:translateY(28px);animation:charIn .45s var(--expo) forwards}
 @keyframes charIn{to{opacity:1;transform:translateY(0)}}
@@ -207,11 +207,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 .pc-theme-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron)}
 .pc-theme-name{font-family:'Sora',sans-serif;font-weight:200;font-size:0.92rem;margin-top:2px}
 .pc-day{padding:12px 20px;border-bottom:1px solid var(--rule)}.pc-day:last-child{border-bottom:none}
-.pc-day-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:5px}
+.pc-day-label{font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:5px}
 .pc-bl{display:flex;align-items:flex-start;gap:8px;padding:4px 8px;margin-bottom:2px;font-size:0.68rem;line-height:1.5;background:rgba(0,0,0,0.02);border-left:2px solid var(--saffron);position:relative;overflow:hidden}
 .pc-bl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(232,175,56,0.05);transition:width .6s var(--expo)}
 .plan-card-entrance.visible .pc-bl::before{width:100%;transition-delay:calc(var(--bl-i,0)*.12s + .5s)}
-.pc-bl>*{position:relative;z-index:1}.pc-bl .tm{font-family:'Space Mono',monospace;font-size:0.48rem;color:#aaa;min-width:32px}
+.pc-bl>*{position:relative;z-index:1}.pc-bl .tm{font-family:'Space Mono',monospace;font-size:0.48rem;color:#aaa;min-width:40px}
 
 /* ═══ PLAN CARD WAVES ═══ */
 .pc-wave{padding:10px 20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--warm-bg)}
@@ -225,7 +225,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 .pc-collapsed:hover{background:rgba(232,175,56,0.03)}
 .pc-collapsed-wave{font-family:'Sora',sans-serif;font-weight:600;font-size:0.72rem;color:var(--ink);min-width:52px}
 .pc-collapsed-range{font-family:'Space Mono',monospace;font-size:0.45rem;color:var(--mid);letter-spacing:0.05em}
-.pc-collapsed-subj{font-family:'DM Sans',sans-serif;font-size:0.68rem;color:#666;flex:1}
+.pc-collapsed-subj{font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:0.68rem;color:#666;flex:1}
 .pc-collapsed-count{font-family:'Space Mono',monospace;font-size:0.42rem;color:var(--saffron);letter-spacing:0.08em;text-transform:uppercase}
 .pc-more{padding:14px 20px;text-align:center;font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--saffron);transition:background .2s;border-top:1px solid var(--rule)}
 .pc-more:hover{background:rgba(232,175,56,0.04)}
@@ -237,7 +237,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 
 /* ═══ SAME ROOM — contained, sharp edges, high contrast ═══ */
 .same-room-wrap{padding:64px 48px;background:var(--linen)}
-.same-room{max-width:1100px;margin:0 auto;padding:56px 48px;background:#141310;color:var(--paper);position:relative;overflow:hidden;border:1.5px solid rgba(232,175,56,0.12);transition:background-color .8s var(--expo)}
+.same-room{max-width:1100px;margin:0 auto;padding:56px 48px;background:#0C1020;color:var(--paper);position:relative;overflow:hidden;border:1.5px solid rgba(232,175,56,0.12);transition:background-color .8s var(--expo)}
 .same-room>*{position:relative;z-index:1}
 .sr-header{margin-bottom:12px}
 .same-room .tag{color:var(--saffron);margin-bottom:16px}
@@ -270,7 +270,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 .week-card.w8{box-shadow:4px 4px 0 var(--saffron);border-left:3px solid var(--saffron)}.week-card.w8:hover{box-shadow:6px 6px 0 var(--saffron)}
 .wc-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:6px}
 .wc-theme{font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;margin-bottom:8px}
-.wc-detail{font-size:0.68rem;color:#888;line-height:1.6}
+.wc-detail{font-size:0.68rem;color:#666;line-height:1.6}
 .wc-spiral{margin-top:8px;padding:6px 10px;background:var(--warm-bg);font-size:0.65rem;font-style:italic;color:#7A7A72;line-height:1.5}
 
 .games-band{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -310,13 +310,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--linen);color:var(--ink);o
 .cta-dark .btn-main{background:var(--saffron);color:var(--ink);box-shadow:0 4px 20px rgba(232,175,56,0.3)}.cta-dark .btn-main:hover{box-shadow:0 8px 30px rgba(232,175,56,0.4);transform:translateY(-2px)}
 .cta-reveal{opacity:0;transition:opacity 1.4s var(--expo)}.cta-reveal.visible{opacity:1}
 
-footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px solid rgba(255,255,255,0.04)}
-.footer-inner{max-width:var(--max-width);display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:48px;align-items:start}
-.footer-wm{font-size:18px;color:var(--paper);margin-bottom:10px}
-.footer-tagline{font-size:0.78rem;color:rgba(250,250,250,0.4);line-height:1.5}.ft-location{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,250,250,0.15);margin-top:6px}
-.footer-nav{display:flex;flex-direction:column;gap:10px}.footer-nav button{font-size:0.78rem;color:rgba(250,250,250,0.4);transition:color .2s;background:transparent;border:none;text-align:left;padding:0}.footer-nav button:hover{color:var(--paper)}.footer-nav button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
-.footer-social{display:flex;flex-direction:column;gap:10px}.footer-social-label{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(250,250,250,0.15)}.footer-social span{font-size:0.78rem;color:rgba(250,250,250,0.4)}.footer-social span:hover{color:var(--saffron)}
-.ft-r{font-family:'Space Mono',monospace;font-size:0.48rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,250,250,0.1);text-align:right;align-self:end}
+/* ═══ FOOTER — Blueprint-correct colors ═══ */
+footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,0.04)}
+.footer-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.footer-wm{font-size:24px;color:#F0F2F8}
+.footer-tagline{color:#C8CDDA;font-size:0.82rem;line-height:1.7;letter-spacing:0.005em;margin-top:12px}
+.footer-rae{margin-top:16px;font-size:0.72rem;color:#8C91A5;line-height:1.7;letter-spacing:0.005em}
+.footer-rae-link{color:#C8CDDA;text-decoration:none;border-bottom:1px solid rgba(232,175,56,0.3);transition:color .25s,border-color .25s}
+.footer-rae-link:hover{color:#F0F2F8;border-bottom-color:var(--saffron)}
+.footer-email{margin-top:8px}
+.footer-email-link{font-size:0.72rem;color:#8C91A5;text-decoration:none;transition:color .25s}
+.footer-email-link:hover{color:#F0F2F8}
+.footer-right{display:flex;flex-direction:column;justify-content:space-between;height:100%;text-align:right}
+.footer-nav{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.footer-nav button{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;background:transparent;border:none;transition:color .25s;padding:0}
+.footer-nav button:hover{color:#F0F2F8}
+.footer-nav button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
+.ft-r{color:#8C91A5;font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;margin-top:24px;line-height:1.7;text-align:right}
+.footer-privacy{color:#8C91A5;text-decoration:none;transition:color .25s}
+.footer-privacy:hover{color:var(--saffron)}
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--expo),transform .7s var(--expo)}.reveal.visible{opacity:1;transform:translateY(0)}
 
@@ -337,7 +349,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   .sr-card{flex:1 1 45%}
   .cta-dark h2{font-size:2.6rem}
   .ec-headline{font-size:2rem}
-  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px;padding:0}
 }
 
 @media(max-width:768px){
@@ -410,8 +422,10 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   .pc-break{padding:6px 16px}
 
   /* ── Footer ── */
-  .footer-inner{grid-template-columns:1fr;gap:24px;padding:0}
   footer{padding:32px 20px}
+  .footer-inner{grid-template-columns:1fr;gap:32px;padding:0}
+  .footer-right{text-align:left}
+  .footer-nav{align-items:flex-start}
   .ft-r{text-align:left}
 
   /* ── Circle CTA ── */
@@ -422,6 +436,11 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 
   /* ── Week compare cards ── */
   .week-compare{grid-template-columns:1fr}
+}
+
+/* ═══ MOBILE HERO WEIGHT ═══ */
+@media(max-width:480px){
+  .hero-sticky h1{font-weight:300}
 }
 
 /* ═══ TOUCH DEVICES ═══ */
@@ -520,7 +539,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 .cta-form{max-width:380px;margin:0 auto}
 .cta-form-row{display:flex;gap:0;border:1.5px solid rgba(232,175,56,0.3);transition:border-color .3s}
 .cta-form-row:focus-within{border-color:var(--saffron)}
-.cta-input{flex:1;background:transparent;border:none;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--paper);outline:none}
+.cta-input{flex:1;background:transparent;border:none;padding:14px 16px;font-family:'Inter',system-ui,sans-serif;font-size:0.82rem;color:var(--paper);outline:none}
 .cta-input::placeholder{color:rgba(250,250,250,0.2)}
 .cta-submit{font-family:'Sora',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.06em;padding:14px 24px;background:var(--saffron);color:var(--ink);border:none;white-space:nowrap;transition:background .2s,transform .2s}
 .cta-submit:hover{background:#D4A030;transform:translateY(-1px)}
@@ -576,7 +595,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 
 <div class="id-tags-wrap">
 <div class="id-tags-glow"></div>
-<div class="id-tags"><span class="id-tag">Homeschool</span><span class="id-tag">Supplement</span><span class="id-tag">Summer</span></div>
+<div class="id-tags"><span class="id-tag">Homeschool</span><span class="id-tag">After School</span><span class="id-tag">Summer</span></div>
 </div>
 
 <div class="same-room-wrap">
@@ -651,7 +670,7 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   </div>
 </section>
 
-<section class="orientation reveal" id="orientation"><div><div class="tag-light">How It Works</div><div class="or-title"><strong>Enter your children.</strong><br>Choose a theme.<br><strong>See the week.</strong></div><p class="or-sub">Pick any topic. A field trip, a family event, your child's obsession this month. Every subject connects through it. Week 8 references Week 3. Knowledge compounds.</p><div class="or-steps"><div class="or-step"><span class="or-step-num">1</span><span class="or-step-label">Enter your children</span></div><div class="or-step"><span class="or-step-num">2</span><span class="or-step-label">Choose a theme</span></div><div class="or-step"><span class="or-step-num">3</span><span class="or-step-label">See the week</span></div></div></div><div class="week-compare"><div class="week-card w1"><div class="wc-label">Week 1</div><div class="wc-theme">The Ocean Floor</div><div class="wc-detail">Mia sorts ocean animals. Noah traces W-A-T-E-R. Ava blows bubbles.</div></div><div class="week-card w8"><div class="wc-label">Week 8</div><div class="wc-theme">Volcanoes &amp; The Ring of Fire</div><div class="wc-detail">Complex cross-references. Elementum combos. Multi-source research.</div><div class="wc-spiral">↩ Week 3: tectonic plates that cause tsunamis also build volcanoes.</div></div></div></section>
+<section class="orientation reveal" id="orientation"><div><div class="tag-light">How It Works</div><div class="or-title"><strong>Enter your children.</strong><br>Choose a theme.<br><strong>See the week.</strong></div><p class="or-sub">Pick any topic. A field trip, a family event, your child's obsession this month. Every subject connects through it. Week 8 references Week 3. What they learned in January shows up in March.</p><div class="or-steps"><div class="or-step"><span class="or-step-num">1</span><span class="or-step-label">Enter your children</span></div><div class="or-step"><span class="or-step-num">2</span><span class="or-step-label">Choose a theme</span></div><div class="or-step"><span class="or-step-num">3</span><span class="or-step-label">See the week</span></div></div></div><div class="week-compare"><div class="week-card w1"><div class="wc-label">Week 1</div><div class="wc-theme">The Ocean Floor</div><div class="wc-detail">Mia sorts ocean animals. Noah traces W-A-T-E-R. Ava blows bubbles.</div></div><div class="week-card w8"><div class="wc-label">Week 8</div><div class="wc-theme">Volcanoes &amp; The Ring of Fire</div><div class="wc-detail">Complex cross-references. Elementum combos. Multi-source research.</div><div class="wc-spiral">↩ Week 3: tectonic plates that cause tsunamis also build volcanoes.</div></div></div></section>
 
 <div class="saffron-rule"></div>
 
@@ -662,31 +681,32 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
   <div class="plan-center">
     <div class="plan-card-entrance"><div class="plan-card">
       <div class="pc-h"><div class="pc-fam">The Rivera Family</div><div class="pc-wk">WK 8 · MAR 17</div></div>
-      <div class="pc-spiral-top"><strong>↩ Week 3 connection:</strong> Week 3 taught tectonic plates. Week 8 connects them to volcanoes. Knowledge compounds.</div>
+      <div class="pc-spiral-top"><strong>↩ Week 3 connection:</strong> Week 3 taught tectonic plates. Week 8 connects them to volcanoes. What they learned then shows up now.</div>
       <div class="pc-theme"><div class="pc-theme-label">Weekly Theme</div><div class="pc-theme-name">Volcanoes &amp; The Ring of Fire</div></div>
 
+      <div class="pc-context" style="padding:8px 20px;font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--rule)">Sample: 4-hour morning session · Your times adjust</div>
       <div class="pc-wave"><div class="pc-wave-label">Wave 1 · Morning</div></div>
-      <div class="pc-bl" style="--bl-i:0"><span class="tm">8:30</span><span><strong>Reading</strong> — Mia reads about Pompeii. Noah matches volcano vocab cards.</span></div>
-      <div class="pc-bl" style="--bl-i:1"><span class="tm">8:50</span><span><strong>Writing</strong> — Mia writes three sentences using vocab words. Noah traces letters.</span></div>
-      <div class="pc-bl" style="--bl-i:2"><span class="tm">9:10</span><span><strong>Atlas</strong> — Visit Iceland. Find the geysers. Map the Ring of Fire.</span></div>
-      <div class="pc-bl" style="--bl-i:3"><span class="tm">9:30</span><span><strong>Math</strong> — Measure the doorway. Mount Fuji is 233 doorways tall. Draw a volcano to scale.</span></div>
+      <div class="pc-bl" style="--bl-i:0"><span class="tm">20 min</span><span><strong>Reading</strong> — Mia reads about Pompeii. Noah matches volcano vocab cards.</span></div>
+      <div class="pc-bl" style="--bl-i:1"><span class="tm">20 min</span><span><strong>Writing</strong> — Mia writes three sentences using vocab words. Noah traces letters.</span></div>
+      <div class="pc-bl" style="--bl-i:2"><span class="tm">20 min</span><span><strong>Atlas</strong> — Visit Iceland. Find the geysers. Map the Ring of Fire.</span></div>
+      <div class="pc-bl" style="--bl-i:3"><span class="tm">20 min</span><span><strong>Math</strong> — Measure the doorway. Mount Fuji is 233 doorways tall. Draw a volcano to scale.</span></div>
 
-      <div class="pc-break"><span class="pc-break-icon">☕</span><span class="pc-break-text">10:00 · Snack break</span></div>
+      <div class="pc-break"><span class="pc-break-icon">☕</span><span class="pc-break-text">Snack break · 20 min</span></div>
 
-      <div class="pc-collapsed" onclick="toggleWave(this)" style="cursor:pointer"><span class="pc-collapsed-wave">Wave 2</span><span class="pc-collapsed-range">10:20–11:20</span><span class="pc-collapsed-subj">Science + Elementum</span><span class="pc-collapsed-count">3 blocks</span><span class="pc-chevron">+</span></div>
+      <div class="pc-collapsed" onclick="toggleWave(this)" style="cursor:pointer"><span class="pc-collapsed-wave">Wave 2</span><span class="pc-collapsed-range">60 min</span><span class="pc-collapsed-subj">Science + Elementum</span><span class="pc-collapsed-count">3 blocks</span><span class="pc-chevron">+</span></div>
       <div class="pc-expanded" id="wave2-detail">
-        <div class="pc-bl" style="--bl-i:0"><span class="tm">10:20</span><span><strong>Science</strong> — How do volcanoes form? Draw the layers: crust, mantle, magma chamber.</span></div>
-        <div class="pc-bl" style="--bl-i:1"><span class="tm">10:40</span><span><strong>Elementum</strong> — Sulfur: the grumpy element. Why do volcanoes smell? Combo: Sulfur + Oxygen.</span></div>
-        <div class="pc-bl" style="--bl-i:2"><span class="tm">11:00</span><span><strong>Experiment</strong> — Baking soda + vinegar eruption. Measure how high. Record in journal.</span></div>
+        <div class="pc-bl" style="--bl-i:0"><span class="tm">20 min</span><span><strong>Science</strong> — How do volcanoes form? Draw the layers: crust, mantle, magma chamber.</span></div>
+        <div class="pc-bl" style="--bl-i:1"><span class="tm">20 min</span><span><strong>Elementum</strong> — Sulfur: the grumpy element. Why do volcanoes smell? Combo: Sulfur + Oxygen.</span></div>
+        <div class="pc-bl" style="--bl-i:2"><span class="tm">20 min</span><span><strong>Experiment</strong> — Baking soda + vinegar eruption. Measure how high. Record in journal.</span></div>
       </div>
 
-      <div class="pc-break"><span class="pc-break-icon">🏃</span><span class="pc-break-text">11:20 · Movement reset</span></div>
+      <div class="pc-break"><span class="pc-break-icon">🏃</span><span class="pc-break-text">Movement reset · 10 min</span></div>
 
-      <div class="pc-collapsed" onclick="toggleWave(this)" style="cursor:pointer"><span class="pc-collapsed-wave">Wave 3</span><span class="pc-collapsed-range">11:30–12:30</span><span class="pc-collapsed-subj">Hands-on + Exploration</span><span class="pc-collapsed-count">3 blocks</span><span class="pc-chevron">+</span></div>
+      <div class="pc-collapsed" onclick="toggleWave(this)" style="cursor:pointer"><span class="pc-collapsed-wave">Wave 3</span><span class="pc-collapsed-range">60 min</span><span class="pc-collapsed-subj">Hands-on + Exploration</span><span class="pc-collapsed-count">3 blocks</span><span class="pc-chevron">+</span></div>
       <div class="pc-expanded" id="wave3-detail">
-        <div class="pc-bl" style="--bl-i:0"><span class="tm">11:30</span><span><strong>Art</strong> — Build a clay volcano cross-section. Paint the magma chamber red.</span></div>
-        <div class="pc-bl" style="--bl-i:1"><span class="tm">11:50</span><span><strong>Atlas</strong> — Fly to Pompeii. What happened in 79 AD? Find Vesuvius on the map.</span></div>
-        <div class="pc-bl" style="--bl-i:2"><span class="tm">12:10</span><span><strong>Journal</strong> — Draw your favorite thing from today. Write one sentence about it.</span></div>
+        <div class="pc-bl" style="--bl-i:0"><span class="tm">20 min</span><span><strong>Art</strong> — Build a clay volcano cross-section. Paint the magma chamber red.</span></div>
+        <div class="pc-bl" style="--bl-i:1"><span class="tm">20 min</span><span><strong>Atlas</strong> — Fly to Pompeii. What happened in 79 AD? Find Vesuvius on the map.</span></div>
+        <div class="pc-bl" style="--bl-i:2"><span class="tm">20 min</span><span><strong>Journal</strong> — Draw your favorite thing from today. Write one sentence about it.</span></div>
       </div>
 
       <div class="pc-more">+ Tuesday through Friday</div>
@@ -703,14 +723,32 @@ footer{background:var(--ink);padding:48px 48px;color:var(--paper);border-top:1px
 
 <div class="saffron-rule"></div>
 
-<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Homeschool, supplement, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo is an architect.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo builds your week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
 
-<section class="philo"><div class="philo-left reveal"><div class="tag">What We Believe</div><h2>Learning is not a checklist<span class="sp"></span><br>It's <strong>architecture</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>Everything Connects</h3><p>A child who understands one thing deeply will understand everything differently. One idea becomes the lens for every subject.</p></div><div class="phi"><h3>Knowledge Compounds</h3><p>Week 8 should reference Week 3. What your child learned last month should make this month richer. Learning without connection is forgetting.</p></div><div class="phi"><h3>Same Room, Different Minds</h3><p>Four children at one table shouldn't mean four separate curricula. Same theme. Different entry points. That's how a family learns together.</p></div><div class="phi"><h3>Capability Over Calendar</h3><p>We don't sort children by grade. A 5-year-old who reads at a second-grade level gets second-grade reading. Age is a number. Readiness is the measure.</p></div></div></section>
+<section class="philo"><div class="philo-left reveal"><h2>The hard part was never teaching<span class="sp"></span><br>It was knowing <strong>what to teach next</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>He can't read yet. But he's learning from her.</h3><p>When every child studies the same theme at their own level, the 7-year-old becomes the teacher. The 4-year-old becomes the student. The 2-year-old just wants to be in the room. That's not a side effect. That's the whole point.</p></div><div class="phi"><h3>Sunday night is yours again.</h3><p>Type one theme. See the week. Walk into Monday knowing exactly what to do.</p></div><div class="phi"><h3>Your kid was never the one in the textbook.</h3><p>Every curriculum you've tried was built for a child who sits still, finishes worksheets, and fits neatly into a grade. Yours doesn't. This builds a week around the children you actually have. Their ages, their reading levels, the way they actually learn.</p></div><div class="phi"><h3>She's five. She reads like she's seven. We noticed.</h3><p>We don't sort children by birthday. A 5-year-old who reads at a second-grade level gets second-grade reading. A 7-year-old who needs more time with addition gets more time with addition. Age is a line on a form. Readiness is what we build for.</p></div></div></section>
 
 <section class="cta-dark cta-reveal" id="early-access"><h2>Your children<span class="sp"></span><br>Your theme<span class="sp"></span><br><strong>Their week<span class="sp"></span></strong></h2><p class="cta-status">Live with founding families.</p><p class="cta-sub">Early access opens soon. Leave your email and we'll let you know.</p><form name="early-access" method="POST" data-netlify="true" class="cta-form" id="cta-form"><div class="cta-form-row"><input type="email" name="email" placeholder="Your email" required class="cta-input" aria-label="Email address"><button type="submit" class="cta-submit">Notify me</button></div></form><div class="cta-success" id="cta-success" hidden><p class="cta-confirmed">You're on the list. We'll be in touch soon.</p></div></section>
 </div>
 
-<footer><div class="footer-inner"><div class="footer-brand"><span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div><div class="ft-location">Cumming, Georgia</div><div class="ft-location" style="margin-top:8px;color:rgba(250,250,250,0.25)">Built on the <span style="color:rgba(250,250,250,0.4);border-bottom:1px solid rgba(232,175,56,0.3)">ReApproach Education</span> learning philosophy.</div></div><nav class="footer-nav"><button type="button">How It Works</button><button type="button">Plan Generator</button><button type="button">Games</button><button type="button">About</button></nav><div class="footer-social"><div class="footer-social-label">Connect</div><span>Email</span></div><div class="ft-r">&copy; 2026 Wizkoo · Everything connects.<br><a href="/privacy.html" style="opacity:0.6;color:inherit;text-decoration:none">Privacy</a></div></div></footer>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span>
+      <div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div>
+      <div class="footer-rae">A <a href="https://www.reapproacheducation.com" target="_blank" rel="noopener" class="footer-rae-link">ReApproach Education</a> product.</div>
+      <div class="footer-email"><a href="mailto:hello@wizkoo.com" class="footer-email-link">hello@wizkoo.com</a></div>
+    </div>
+    <div class="footer-right">
+      <nav class="footer-nav">
+        <button type="button">How It Works</button>
+        <button type="button">Plan Generator</button>
+        <button type="button">Games</button>
+        <button type="button">About</button>
+      </nav>
+      <div class="ft-r">&copy; 2026 Wizkoo<br><a href="/privacy.html" class="footer-privacy">Privacy</a></div>
+    </div>
+  </div>
+</footer>
 
 <script>
 // ═══ CUSTOM CURSOR ═══
@@ -840,7 +878,7 @@ function spawnConfetti(x,y){
 // ═══ SAME ROOM — mouse + auto-rotate ═══
 (function(){
   var t=document.getElementById('sr-track'),b=document.getElementById('sr-beam'),cards=t.querySelectorAll('.sr-card'),sec=document.getElementById('same-room');
-  var temps=['#0C0B08','#0E0C09','#0D0A0A','#0A0B0E'];
+  var temps=['#0C1020','#0C1020','#0C1020','#0C1020'];
   var currentIdx=0,autoTimer=null,isHovering=false;
 
   function activate(idx){
@@ -1278,7 +1316,7 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
       srCards.forEach(function(c){c.classList.remove('active')});
       card.classList.add('active');
       // Update background color
-      var temps=['#0C0B08','#0E0C09','#0D0A0A','#0A0B0E'];
+      var temps=['#0C1020','#0C1020','#0C1020','#0C1020'];
       var sec=document.getElementById('same-room');
       if(sec)sec.style.background=temps[idx];
     });

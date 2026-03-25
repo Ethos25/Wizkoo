@@ -1,0 +1,26 @@
+{
+  "name": "wizkoo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "serve . -p 3000",
+    "screenshot": "node scripts/screenshot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ethos25/Wizkoo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ethos25/Wizkoo/issues"
+  },
+  "homepage": "https://github.com/Ethos25/Wizkoo#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "serve": "^14.2.6"
+  }
+}
