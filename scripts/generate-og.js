@@ -92,7 +92,7 @@ const HTML = `<!DOCTYPE html>
   .right{
     width:540px;height:630px;
     background:#E8AF38;
-    padding:52px 48px;
+    padding:52px 0;
     display:flex;flex-direction:column;
     justify-content:space-between;
   }
@@ -107,6 +107,7 @@ const HTML = `<!DOCTYPE html>
     flex:1;
     display:flex;
     align-items:center;
+    justify-content:center;
   }
 
   .site{
@@ -117,6 +118,7 @@ const HTML = `<!DOCTYPE html>
     color:#0C1020;
     opacity:0.6;
     text-align:right;
+    padding-right:48px;
   }
 </style>
 </head>
