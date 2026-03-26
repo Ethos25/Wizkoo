@@ -19,7 +19,7 @@
 a{background:transparent;border:none;box-shadow:none;outline:none;-webkit-appearance:none}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size);line-height:1.6}
-@media(hover:hover){html,body,a,button,.ech,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
+@media(hover:hover){html,body,a,button,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
 /* ═══ CUSTOM CURSOR ═══ */
 .cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
 .cursor.visible{opacity:1}
@@ -283,6 +283,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .ech{border:1.5px solid var(--ink);padding:6px 10px;text-align:center;background:#fff;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.12),inset -1px -1px 2px rgba(255,255,255,0.6);transition:transform .3s var(--expo),box-shadow .3s var(--expo),background .8s}
 .ech:hover{box-shadow:0 2px 8px rgba(0,0,0,0.1),0 0 0 1px var(--saffron);transform:translateY(-3px) rotate(-3deg)}.ech.glow{background:rgba(232,175,56,0.08)}
 .ech .s{font-family:'Sora',sans-serif;font-weight:700;font-size:0.95rem;line-height:1}.ech .n{font-family:'Space Mono',monospace;font-size:0.4rem;text-transform:uppercase;color:#999;margin-top:2px}
+.atlas-chips{display:flex;gap:8px;margin:20px 0 16px;flex-wrap:wrap}.ach{width:56px;text-align:center;padding:8px 4px 6px;border:1.5px solid var(--ink);transition:transform 0.25s var(--expo),box-shadow 0.25s var(--expo);cursor:default}.ach:hover{transform:translateY(-2px);box-shadow:3px 3px 0 var(--saffron)}.ach .s{font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;line-height:1.2;color:var(--ink)}.ach .n{font-family:'Space Mono',monospace;font-size:0.36rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--mid);margin-top:2px}
 .reaction-spark{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--saffron);opacity:0;pointer-events:none}
 .reaction-spark.active{animation:sparkPop .5s var(--expo) forwards}
 @keyframes sparkPop{0%{opacity:1;transform:scale(0)}40%{transform:scale(2.5)}100%{opacity:0;transform:scale(0)}}
@@ -719,7 +720,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   </div>
 </section>
 
-<section class="games-band reveal"><div class="game-panel"><div class="tag-light">Wizkoo Original</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3><a href="https://atlas.wizkoo.com" target="_blank" class="panel-heading-link">Atlas</a></h3><p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them.</p><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">Wizkoo Original</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3><a href="https://elementum.wizkoo.com" target="_blank" class="panel-heading-link">Elementum</a></h3><p class="gd">118 elements with character personalities. Dragon guide Eternatus. 24 combo reactions.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><a href="https://elementum.wizkoo.com" class="panel-link" target="_blank">Explore Elementum →</a></div></section>
+<section class="games-band reveal"><div class="game-panel"><div class="tag-light">Wizkoo Original</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3><a href="https://atlas.wizkoo.com" target="_blank" class="panel-heading-link">Atlas</a></h3><p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them.</p><div class="atlas-chips" id="atlas-chips"><div class="ach" data-loc="IS"><div class="s">IS</div><div class="n">Iceland</div></div><div class="ach" data-loc="IT"><div class="s">IT</div><div class="n">Italy</div></div><div class="ach" data-loc="EC"><div class="s">EC</div><div class="n">Ecuador</div></div><div class="ach" data-loc="JP"><div class="s">JP</div><div class="n">Japan</div></div></div><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">Wizkoo Original</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3><a href="https://elementum.wizkoo.com" target="_blank" class="panel-heading-link">Elementum</a></h3><p class="gd">118 elements with character personalities. Dragon guide Eternatus. 24 combo reactions.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><a href="https://elementum.wizkoo.com" class="panel-link" target="_blank">Explore Elementum →</a></div></section>
 
 <div class="saffron-rule"></div>
 
@@ -757,7 +758,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
   document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
   // Hover detection - only interactive elements, NOT generic spans
-  var hoverEls='a,button,.footer-social span,.ech,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.week-card,.plan-card,.sr-track,.planned-dot,.wm,.nav-wm';
+  var hoverEls='a,button,.footer-social span,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.week-card,.plan-card,.sr-track,.planned-dot,.wm,.nav-wm';
   document.addEventListener('mouseover',function(e){if(e.target.closest(hoverEls))c.classList.add('hover')});
   document.addEventListener('mouseout',function(e){if(e.target.closest(hoverEls))c.classList.remove('hover')});
   // Smooth follow with lag
