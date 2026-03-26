@@ -18,12 +18,21 @@ const HTML = `<!DOCTYPE html>
 
   /* ── LEFT PANEL ── */
   .left{
-    width:720px;height:630px;
+    width:660px;height:630px;
     background:#0C1020;
     padding:52px 56px;
     display:flex;flex-direction:column;
     justify-content:space-between;
     position:relative;
+  }
+  /* Warm saffron glow bleeding from the right edge onto the dark panel */
+  .left::after{
+    content:'';
+    position:absolute;
+    top:0;right:0;
+    width:80px;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(232,175,56,0.08));
+    pointer-events:none;
   }
 
   /* Wordmark */
@@ -77,22 +86,11 @@ const HTML = `<!DOCTYPE html>
     letter-spacing:0.18em;
     text-transform:uppercase;
     color:#8C91A5;
-    padding-top:32px;
-    border-top:1px solid rgba(255,255,255,0.08);
-  }
-
-  /* Saffron rule at bottom of left panel */
-  .saffron-line{
-    position:absolute;
-    bottom:0;left:0;right:0;
-    height:3px;
-    background:linear-gradient(90deg,transparent,#E8AF38,transparent);
-    opacity:0.4;
   }
 
   /* ── RIGHT PANEL ── */
   .right{
-    width:480px;height:630px;
+    width:540px;height:630px;
     background:#E8AF38;
     padding:52px 48px;
     display:flex;flex-direction:column;
@@ -141,8 +139,6 @@ const HTML = `<!DOCTYPE html>
 
     <!-- Identity tags -->
     <div class="tags">Homeschool · After School · Summer</div>
-
-    <div class="saffron-line"></div>
   </div>
 
   <div class="right">
