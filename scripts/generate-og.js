@@ -160,7 +160,7 @@ const HTML = `<!DOCTYPE html>
   await page.setContent(HTML, { waitUntil: 'networkidle' });
   // Extra wait for Google Fonts to load
   await page.waitForTimeout(2000);
-  const outPath = path.resolve('assets/wizkoo-og.png');
+  const outPath = path.resolve('wizkoo-og.png');
   await page.screenshot({ path: outPath, fullPage: false });
   console.log('OG image written to:', outPath);
   await browser.close();
