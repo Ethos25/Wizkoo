@@ -706,9 +706,6 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .linen-hero{position:relative;height:100vh;height:100dvh;background:#F2F0EA;display:flex;flex-direction:row;align-items:stretch;overflow:hidden}
 .linen-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,transparent,rgba(16,24,48,0.12));pointer-events:none;z-index:2}
 
-/* Ghost orbital paths — subtle background watermark */
-.ghost-orbs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
-
 /* Left text zone */
 .linen-hero-text{position:relative;z-index:1;flex:0 0 55%;max-width:55%;display:flex;flex-direction:column;padding-top:64px;overflow:hidden}
 
@@ -724,7 +721,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 
 /* Hero CTA circle — luminous 3D saffron sphere */
 .hero-cta-circle{
-  width:clamp(160px,25vw,280px);height:clamp(160px,25vw,280px);
+  width:clamp(120px,18vw,200px);height:clamp(120px,18vw,200px);
   border-radius:50%;
   background:radial-gradient(circle at 38% 35%,#F5D060 0%,#E8AF38 40%,#C8922E 70%,#A07628 100%);
   box-shadow:4px 6px 0 rgba(232,175,56,0.25),0 8px 32px rgba(232,175,56,0.15),0 0 60px rgba(232,175,56,0.1);
@@ -733,9 +730,8 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s cubic-bezier(0.16,1,0.3,1);
   position:relative;
 }
-.hero-cta-circle::before{content:'';position:absolute;inset:-32px;border-radius:50%;background:radial-gradient(circle,rgba(232,175,56,0.14) 0%,transparent 70%);pointer-events:none;z-index:-1}
 .hero-cta-circle:hover{transform:scale(1.04);box-shadow:4px 6px 0 rgba(232,175,56,0.35),0 12px 48px rgba(232,175,56,0.3),0 0 80px rgba(232,175,56,0.2)}
-.hero-cta-circle-text{font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(0.9rem,1.4vw,1.2rem);color:#0C1020;letter-spacing:-0.01em;pointer-events:none}
+.hero-cta-circle-text{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(0.85rem,1.2vw,1.05rem);color:#0C1020;letter-spacing:0.08em;pointer-events:none}
 
 /* See the week link */
 .see-the-week{display:inline-block;margin-top:24px;margin-left:clamp(48px,10vw,14vw);font-family:'Inter',system-ui,sans-serif;font-weight:400;font-size:1rem;color:#4A4850;text-decoration:none;cursor:pointer;opacity:0;transform:translateY(8px)}
@@ -748,12 +744,17 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   .linen-hero{flex-direction:column;height:auto;min-height:100vh;min-height:100dvh;overflow-y:auto}
   .linen-hero-text{flex:none;width:100%;max-width:100%;padding-top:72px;overflow:visible}
   .hero-circle-zone{flex:none;width:100%;max-width:100%;padding:24px 0 40px}
-  .ghost-orbs{display:none}
-  .hero-cta-circle{width:clamp(120px,35vw,180px);height:clamp(120px,35vw,180px)}
+  .hero-cta-circle{width:clamp(100px,28vw,150px);height:clamp(100px,28vw,150px)}
   .linen-hero .arrival-inner{padding:0 20px 12px 20px}
   .linen-hero .hz1-inner{padding:8px 20px 0 20px}
   .see-the-week{margin-left:20px}
 }
+
+/* ── Nav saffron dot (replaces wordmark) ── */
+.nav-home{display:inline-flex;align-items:center;justify-content:center;padding:16px;flex-shrink:0;text-decoration:none;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
+.nav-home-dot{width:12px;height:12px;border-radius:50%;background:#E8AF38;display:inline-block;transition:transform .3s cubic-bezier(0.16,1,0.3,1),box-shadow .3s}
+.nav-home:hover .nav-home-dot{transform:scale(1.5);box-shadow:0 0 8px rgba(232,175,56,0.6)}
+@media(hover:hover){.nav-home{cursor:none}}
 </style>
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -777,18 +778,11 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><a href="planner.html" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div><a href="planner.html" class="nav-cta-sm">Launch</a></div>
+  <div class="nav-bar"><a href="/" class="nav-home" aria-label="Home"><span class="nav-home-dot"></span></a><div class="nav-center"><a href="planner.html" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div></div>
 </div>
 
 <!-- ═══ LINEN HERO ═══ -->
 <section class="linen-hero" id="linen-hero">
-  <!-- Ghost orbital paths: subtle background watermark -->
-  <svg class="ghost-orbs" aria-hidden="true" viewBox="0 0 960 540" preserveAspectRatio="xMidYMid meet">
-    <ellipse cx="500" cy="270" rx="310" ry="178" transform="rotate(-32 500 270)" stroke="#0C1020" stroke-width="1.2" fill="none" stroke-opacity="0.06"/>
-    <ellipse cx="500" cy="270" rx="280" ry="160" transform="rotate(-8 500 270)" stroke="#0C1020" stroke-width="1.0" fill="none" stroke-opacity="0.06"/>
-    <ellipse cx="500" cy="270" rx="240" ry="135" transform="rotate(25 500 270)" stroke="#0C1020" stroke-width="0.8" fill="none" stroke-opacity="0.05"/>
-  </svg>
-
   <!-- Left text zone -->
   <div class="linen-hero-text">
     <!-- Wordmark + descriptor -->
@@ -812,7 +806,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
     <div class="hero-cta-circle" id="hero-cta-circle" role="button" tabindex="0"
          onclick="location.href='#early-access'"
          onkeydown="if(event.key==='Enter')location.href='#early-access'">
-      <span class="hero-cta-circle-text">Join us</span>
+      <span class="hero-cta-circle-text">Join</span>
     </div>
   </div>
 </section>
