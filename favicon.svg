@@ -1,4 +1,70 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <text x="2" y="24" font-family="Sora, sans-serif" font-weight="700" font-size="20" fill="#0A0A0A">w</text>
-  <text x="17" y="24" font-family="Sora, sans-serif" font-weight="700" font-size="20" fill="#E8AF38" transform="rotate(-8 24 18)">k</text>
+  <!-- Dark background -->
+  <rect width="32" height="32" fill="#0C1020" rx="3"/>
+
+  <!--
+    Orbital system centered at (16,16).
+    Scale: 1 unit ≈ 0.9px. Center dot radius = 3.5px.
+    Ellipse rx/ry in SVG units (not em — absolute px at this scale):
+      E1: rx=9.0, ry=2.8,  rotate(-50°)
+      E2: rx=7.1, ry=4.1,  rotate(15°)
+      E3: rx=8.0, ry=3.6,  rotate(70°)
+
+    Dot positions computed via parametric ellipse:
+      x(t) = cx + rx·cos(t)·cos(a) − ry·sin(t)·sin(a)
+      y(t) = cy + rx·cos(t)·sin(a) + ry·sin(t)·cos(a)
+  -->
+
+  <!-- Ellipse 1: rx=9.0, ry=2.8, rotate(-50°) -->
+  <ellipse cx="16" cy="16" rx="9.0" ry="2.8"
+    transform="rotate(-50 16 16)"
+    fill="none" stroke="#7898D0" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Ellipse 2: rx=7.1, ry=4.1, rotate(15°) -->
+  <ellipse cx="16" cy="16" rx="7.1" ry="4.1"
+    transform="rotate(15 16 16)"
+    fill="none" stroke="#7898D0" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Ellipse 3: rx=8.0, ry=3.6, rotate(70°) -->
+  <ellipse cx="16" cy="16" rx="8.0" ry="3.6"
+    transform="rotate(70 16 16)"
+    fill="none" stroke="#7898D0" stroke-width="0.8" opacity="0.5"/>
+
+  <!--
+    6 blue dots — 2 per ellipse, at parametric positions + (16,16) offset.
+
+    E1 (rx=9, ry=2.8, a=-50°=-0.8727):
+      cos(a)=0.6428  sin(a)=-0.7660
+      t=40°:  x=9·.766·.6428 − 2.8·.643·(-.766) = 4.43+1.38 = 5.81 → 21.81
+              y=9·.766·(-.766) + 2.8·.643·.6428 = -5.28+1.16 = -4.12 → 11.88
+      t=205°: x=9·(-.906)·.6428 − 2.8·(-.423)·(-.766) = -5.24−.91 = -6.15 → 9.85
+              y=9·(-.906)·(-.766) + 2.8·(-.423)·.6428 = 6.25−.76 = 5.49 → 21.49
+
+    E2 (rx=7.1, ry=4.1, a=15°=0.2618):
+      cos(a)=0.9659  sin(a)=0.2588
+      t=125°: x=7.1·(-.574)·.9659 − 4.1·.819·.2588 = -3.94−.87 = -4.81 → 11.19
+              y=7.1·(-.574)·.2588 + 4.1·.819·.9659 = -1.06+3.25 = 2.19 → 18.19
+      t=315°: x=7.1·.707·.9659 − 4.1·(-.707)·.2588 = 4.85+.75 = 5.60 → 21.60
+              y=7.1·.707·.2588 + 4.1·(-.707)·.9659 = 1.30−2.80 = -1.50 → 14.50
+
+    E3 (rx=8.0, ry=3.6, a=70°=1.2217):
+      cos(a)=0.3420  sin(a)=0.9397
+      t=80°:  x=8·.174·.3420 − 3.6·.985·.9397 = .476−3.33 = -2.85 → 13.15
+              y=8·.174·.9397 + 3.6·.985·.3420 = 1.308+1.213 = 2.52 → 18.52
+      t=255°: x=8·(-.259)·.3420 − 3.6·(-.966)·.9397 = -.709+3.27 = 2.56 → 18.56
+              y=8·(-.259)·.9397 + 3.6·(-.966)·.3420 = -1.948−1.188 = -3.14 → 12.86
+  -->
+
+  <!-- E1 dots -->
+  <circle cx="21.81" cy="11.88" r="1.1" fill="#7898D0" opacity="0.80"/>
+  <circle cx="9.85"  cy="21.49" r="1.3" fill="#7898D0" opacity="0.72"/>
+  <!-- E2 dots -->
+  <circle cx="11.19" cy="18.19" r="1.0" fill="#7898D0" opacity="0.75"/>
+  <circle cx="21.60" cy="14.50" r="1.2" fill="#7898D0" opacity="0.68"/>
+  <!-- E3 dots -->
+  <circle cx="13.15" cy="18.52" r="1.1" fill="#7898D0" opacity="0.78"/>
+  <circle cx="18.56" cy="12.86" r="1.0" fill="#7898D0" opacity="0.70"/>
+
+  <!-- Saffron center dot — on top of everything -->
+  <circle cx="16" cy="16" r="3.5" fill="#E8AF38"/>
 </svg>

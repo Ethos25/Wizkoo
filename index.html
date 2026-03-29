@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <style>
 :root{
   --saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm-bg:#ECEAE3;
@@ -28,13 +29,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 /* ═══ WORDMARK TERMINAL DOT ═══ */
 .wm-dot{display:inline-block;position:relative;margin-left:-0.08em}
-.wm-dot::after{
-  content:'';position:absolute;
-  top:0.1em;right:-0.2em;
-  width:0.22em;height:0.22em;
-  border-radius:50%;background:var(--saffron);
-  transition:transform .3s var(--expo);
-}
+.wm-dot::after{content:'';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron);transition:transform .3s var(--expo)}
 .wm:hover .wm-dot::after{animation:dotReact .4s var(--expo)}
 .nav-wm:hover .wm-dot::after{animation:dotReact .4s var(--expo)}
 @keyframes dotReact{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}
@@ -109,12 +104,12 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 
 /* ═══ NAV ═══ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform .4s var(--expo)}
-.site-nav.show{transform:translateY(0)}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 300ms ease}
+.site-nav.show{opacity:1;pointer-events:auto}
 .site-nav a:not(.nav-cta-sm),.nav-bar a:not(.nav-cta-sm){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
 .nav-bar{width:100%;max-width:var(--max-width);height:100%;padding:0 48px;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:40px}
-.nav-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.04em;color:var(--paper);text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
+.nav-wm{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .nav-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}
 .nav-wm:hover .k{animation:kGiggle 0.8s ease-in-out}
 .nav-wm .i-fix{position:relative;display:inline-block}
@@ -126,7 +121,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nav-center button:hover{color:rgba(250,250,250,0.8)}
 .nav-center button:hover::after{width:100%}
 .nav-center button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
-.nav-cta-sm{font-family:'Sora',sans-serif;font-weight:600;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;background:var(--saffron)!important;color:var(--ink)!important;text-decoration:none!important;transition:background .3s,transform .2s;white-space:nowrap;flex-shrink:0;border:none!important;box-shadow:none!important;outline:none!important}
+.nav-cta-sm{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:8px 18px;background:var(--saffron)!important;color:var(--ink)!important;text-decoration:none!important;transition:background .3s,transform .2s;white-space:nowrap;flex-shrink:0;border-radius:3px;border:none!important;box-shadow:none!important;outline:none!important}
 .nav-cta-sm:hover{background:#D4A030;transform:translateY(-1px)}
 
 /* ═══ HERO ═══ */
@@ -150,26 +145,47 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 @keyframes slowReveal{from{opacity:0}to{opacity:1}}
 @keyframes fastReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.hero-eyebrow{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#444;margin:16px 0 28px;display:flex;align-items:center;gap:16px;opacity:0;animation:fastReveal .3s var(--expo) forwards 2.6s}
-.hero-sticky h1{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(2.8rem,5vw,5rem);line-height:1.1;letter-spacing:-0.03em;color:var(--ink);max-width:780px}
-.hero-line{display:block;overflow:hidden}
-.hero-char{display:inline-block;opacity:0;transform:translateY(28px);animation:charIn .45s var(--expo) forwards}
-@keyframes charIn{to{opacity:1;transform:translateY(0)}}
-.hero-punchline .hero-char{animation:punchIn .8s var(--expo) forwards}
-@keyframes punchIn{0%{opacity:0;transform:translateY(28px);color:var(--saffron)}50%{opacity:1;transform:translateY(0);color:var(--saffron)}100%{opacity:1;transform:translateY(0);color:var(--ink)}}
+/* ═══ HERO EYEBROW ═══ */
+.hero-eyebrow{margin:0;opacity:0}
+.hero-sticky h1{font-family:'Sora',sans-serif;max-width:720px;margin:0;letter-spacing:-0.03em}
+/* Legacy compat */
+.hero-line{display:block}
 .hero-dot-anchor{display:inline-block;position:relative}
 .hero-dot-anchor .sp{opacity:0;transform:scale(0)}
 .hero-dot-anchor.pop .sp{animation:dotBurst .6s var(--expo) forwards}
 @keyframes dotBurst{0%{opacity:1;transform:scale(0)}40%{transform:scale(2)}100%{opacity:1;transform:scale(1)}}
-/* Planned dot is clickable for Easter egg */
+@keyframes heroIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* ─── Hero Line 1: hook — Sora 200, large ─── */
+.hero-l1{display:block;font-size:clamp(2.25rem,5vw,4rem);font-weight:200;line-height:1.1;letter-spacing:-0.03em;color:var(--ink);margin-bottom:14px;opacity:0;animation:heroIn 500ms cubic-bezier(0.16,1,0.3,1) forwards 3.8s}
+/* ─── Hero Line 2: invitation — Sora 200, significantly smaller ─── */
+.hero-l2{display:block;font-size:clamp(1.375rem,3.2vw,2rem);font-weight:200;line-height:1.1;letter-spacing:-0.03em;color:var(--ink);margin-top:0;margin-bottom:64px;opacity:0;animation:heroIn 500ms cubic-bezier(0.16,1,0.3,1) forwards 4.9s}
+/* ─── Saffron question mark ─── */
+.hero-qmark{display:inline-block;color:var(--saffron);opacity:0;transition:opacity 300ms cubic-bezier(0.16,1,0.3,1)}.hero-qmark.vis{opacity:1}
+/* ─── Subject cascade: labeled cards ─── */
+.hero-cascade{margin-top:0;max-width:640px}
+.hcard{display:flex;align-items:flex-start;gap:16px;background:#FAFAFA;border-radius:4px;padding:14px 16px;border-left:3px solid rgba(120,152,208,0.4);margin-bottom:10px;opacity:0;transform:translateY(8px);transition:opacity 200ms cubic-bezier(0.16,1,0.3,1),transform 200ms cubic-bezier(0.16,1,0.3,1)}
+.hcard:last-child{margin-bottom:0;border-left-color:#E8AF38}
+.hcard.vis{opacity:1;transform:translateY(0)}
+.hcard-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#8C91A5;line-height:1.0;min-width:90px;padding-top:4px;flex-shrink:0}
+.hcard:last-child .hcard-label{color:#E8AF38}
+.hcard-content{font-family:'Inter',system-ui,sans-serif;font-size:1rem;line-height:1.6;color:#4A4850;letter-spacing:0;opacity:0;transition:opacity 300ms cubic-bezier(0.16,1,0.3,1)}
+.hcard:last-child .hcard-content{font-weight:500;color:#0C1020}
+.hcard-content.vis{opacity:1}
+#hcard-6{transition-duration:250ms}
+#hcard-6 .hcard-content{transition-duration:350ms}
+/* ─── Anchor line ─── */
+.hero-anchor{font-family:'Sora',sans-serif;font-size:clamp(1rem,1.5vw,1.25rem);font-weight:200;line-height:1.1;letter-spacing:-0.03em;color:var(--ink);margin-top:40px;max-width:640px;opacity:0}
+.hero-anchor-dot{color:var(--saffron);opacity:0;display:inline;transition:opacity 200ms cubic-bezier(0.16,1,0.3,1)}
+.hero-anchor-dot.vis{opacity:1}
+/* Planned dot Easter egg */
 .planned-dot{position:relative;z-index:5}
 
 /* Confetti */
 .confetti-piece{position:fixed;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:9998}
 @keyframes confettiFall{0%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1)}100%{opacity:0;transform:translate(var(--cx),var(--cy)) rotate(720deg) scale(0.2)}}
 
-.hero-sub{margin-top:24px;max-width:520px;opacity:0;animation:fastReveal .6s var(--expo) forwards 3.2s}
-.hero-sub-text{font-size:0.88rem;color:#777;line-height:1.8}
+.hero-sub{margin-top:36px;max-width:680px;}
+.hero-sub-text{font-size:1rem;color:#777;line-height:1.6}
 .hero-cta-group{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .hero-micro{font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid)}
 
@@ -327,6 +343,11 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .footer-nav button{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;background:transparent;border:none;transition:color .25s;padding:0}
 .footer-nav button:hover{color:#F0F2F8}
 .footer-nav button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
+.footer-nav a{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;text-decoration:none;transition:color .25s;padding:0;text-align:right}
+.footer-nav a:hover{color:#F0F2F8}
+.ft-educator-idx{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(140,145,165,0.6);margin-top:16px;text-align:right}
+.ft-educator-idx a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,145,165,0.25);padding-bottom:1px;transition:color .15s}
+.ft-educator-idx a:hover{color:#F0F2F8}
 .ft-r{color:#8C91A5;font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;margin-top:24px;line-height:1.7;text-align:right}
 .footer-privacy{color:#8C91A5;text-decoration:none;transition:color .25s}
 .footer-privacy:hover{color:var(--saffron)}
@@ -336,7 +357,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 @media(max-width:1024px){
   .hero-wrapper{height:auto;min-height:auto}
   .hero-sticky{position:relative;height:auto;min-height:auto}
-  .hero-sticky h1{font-size:3.4rem}
+  .hero-sticky h1{font-size:inherit}
   .hero-brand span.wm{font-size:48px}
   .hero-content{padding-left:8vw}
   .hero-sub{grid-template-columns:1fr}
@@ -355,11 +376,15 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 
 @media(max-width:768px){
   /* ── Hero ── */
-  .hero-sticky h1{font-size:2.2rem;max-width:100%}
+  .hero-sticky h1{max-width:100%}
   .hero-brand span.wm{font-size:36px}
-  .hero-eyebrow{font-size:0.52rem;letter-spacing:0.12em;margin:12px 0 20px}
-  .hero-sub{margin-top:16px}
-  .hero-sub-text{font-size:0.82rem}
+  .hero-eyebrow{font-size:10px;letter-spacing:0.15em;margin:12px 0 28px}
+  .hero-l2{margin-bottom:48px}
+  .hero-cascade{margin-top:0}
+  .hcard{flex-direction:column;gap:4px;padding:12px 14px}
+  .hcard-label{min-width:auto;padding-top:0;margin-bottom:2px;font-size:9px}
+  .hcard-content{font-size:0.9375rem}
+  .hero-anchor{margin-top:28px;font-size:1rem}
   .hero-wrapper{height:auto;min-height:auto}
   .hero-sticky{position:relative;height:auto;min-height:auto}
   .hero-content{padding:10vh 20px 6vh 20px;padding:10svh 20px 6svh 20px}
@@ -439,9 +464,10 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   .week-compare{grid-template-columns:1fr}
 }
 
-/* ═══ MOBILE HERO WEIGHT ═══ */
+/* ═══ MOBILE HERO SIZE ═══ */
 @media(max-width:480px){
-  .hero-sticky h1{font-weight:300}
+  .hero-l1{font-size:2.25rem}
+  .hero-l2{font-size:1.45rem}
 }
 
 /* ═══ TOUCH DEVICES ═══ */
@@ -470,6 +496,8 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 @keyframes ringExpand{0%{transform:scale(1);opacity:1}100%{transform:scale(12);opacity:0}}
 .collision-spark{position:fixed;width:3px;height:3px;border-radius:50%;pointer-events:none;z-index:9997}
 @keyframes sparkOut{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--sx),var(--sy))}}
+@media(hover:none)and(pointer:coarse){.firefly{width:7px;height:7px;box-shadow:0 0 10px 4px rgba(232,175,56,0.45),0 0 24px 8px rgba(232,175,56,0.18)}}
+@media(prefers-reduced-motion:reduce){.firefly{display:none!important}}
 
 /* ═══ IDENTITY TAGS ═══ */
 .id-tags-wrap{background:var(--warm-bg);padding:36px 48px;position:relative;overflow:hidden}
@@ -509,6 +537,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   *{animation-duration:0.01ms!important;animation-delay:0s!important;transition-duration:0.01ms!important}
   .hero-char{opacity:1!important;transform:none!important}
   .hero-eyebrow,.hero-sub,.hero-brand,.hero-circle-wrap{opacity:1!important;transform:none!important}
+  .hero-l1,.hero-l2,.hero-frag,.hero-anchor,.hero-qmark{opacity:1!important;transform:none!important}
   .week-orb{opacity:1!important}
   .firefly{display:none!important}
   .cursor{display:none!important}
@@ -552,6 +581,146 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   .cta-form-row{flex-direction:column}
   .cta-submit{width:100%}
 }
+
+/* ═══ THE THREAD ═══ */
+.thread-section{background:var(--ink);padding:80px 48px;overflow:hidden;position:relative}
+.thread-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}
+.thread-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.thread-label{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,250,250,0.25);margin-bottom:32px}
+.thread-intro-text{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1.05rem,2vw,1.3rem);color:rgba(250,250,250,0.85);margin-bottom:56px;max-width:580px;line-height:1.45;letter-spacing:-0.02em}
+.thread-flow{display:flex;align-items:flex-end;gap:0;flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px}
+.thread-node{flex-shrink:0;display:flex;flex-direction:column;gap:8px}
+.thread-node-label{font-family:'Space Mono',monospace;font-size:0.4rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--saffron);opacity:0.7}
+.thread-node-word{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.1rem,2.4vw,1.7rem);color:var(--paper);letter-spacing:-0.03em;line-height:1}
+.thread-arrow{align-self:flex-end;padding:0 14px;padding-bottom:6px;color:var(--saffron);opacity:0.35;font-size:1.1rem;flex-shrink:0;font-weight:300}
+.thread-close-text{margin-top:48px;font-size:var(--small-size);color:rgba(250,250,250,0.28);line-height:1.7;border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;max-width:600px}
+
+/* ═══ THE MOMENT ═══ */
+.the-moment{background:var(--warm-bg);padding:100px 48px;position:relative}
+.the-moment-inner{max-width:780px;margin:0 auto}
+.moment-headline{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(1.9rem,3.5vw,3rem);line-height:1.12;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px}
+.moment-headline strong{font-weight:700}
+.moment-body{font-size:0.88rem;color:#666;line-height:1.8;max-width:540px}
+
+/* ═══ LAYERS BAND ═══ */
+.layers-intro{background:var(--linen);padding:56px 48px 0;max-width:1100px;margin:0 auto}
+.layers-intro-text{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1rem,1.8vw,1.2rem);color:var(--mid);line-height:1.5;letter-spacing:-0.01em;max-width:680px}
+.layers-intro-text strong{font-weight:600;color:var(--ink)}
+
+@media(max-width:1024px){
+  .thread-section{padding:56px 32px}
+  .the-moment{padding:72px 32px}
+  .layers-intro{padding:40px 32px 0}
+}
+@media(max-width:768px){
+  .thread-section{padding:48px 20px}
+  .thread-flow{gap:0}
+  .thread-node-word{font-size:1rem}
+  .thread-arrow{padding:0 8px;padding-bottom:4px;font-size:0.9rem}
+  .the-moment{padding:56px 20px}
+  .moment-headline{font-size:1.6rem}
+  .layers-intro{padding:32px 20px 0}
+}
+/* The Science nav link */
+.nav-science{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,242,248,0.7);text-decoration:none;white-space:nowrap;position:relative;padding-bottom:2px;transition:color .25s}
+.nav-science::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
+.nav-science:hover{color:rgba(240,242,248,1)}.nav-science:hover::after{width:100%}
+@media(max-width:768px){.nav-science{display:none}}
+
+/* ═══ ARRIVAL MOMENT ═══ */
+.arrival{background:#F2F0EA;padding:0;position:relative}
+.arrival-inner{width:100%;max-width:1200px;margin:0 auto;padding:36px 48px 16px clamp(48px,10vw,14vw);display:flex;flex-direction:column;align-items:flex-start}
+.arrival-wm{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(48px,4.5vw,64px);letter-spacing:-0.04em;color:#0C1020;display:inline-flex;align-items:baseline;line-height:1;opacity:0;animation:slowReveal 1.8s var(--expo) forwards 0.6s}
+.arrival-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron);transition:transform .15s}
+.arrival-wm:hover .k{animation:kGiggle 0.8s ease-in-out}
+.arrival-wm .i-fix{position:relative;display:inline-block;background:transparent!important}
+.arrival-wm .i-fix::before,.arrival-wm .i-fix::after{display:none!important}
+.arrival-tagline{font-family:'Space Mono',monospace;font-weight:400;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#7A7F93;margin-top:10px;opacity:0;animation:slowReveal 1.2s var(--expo) forwards 0.9s}
+@media(prefers-reduced-motion:reduce){.arrival-wm,.arrival-tagline{opacity:1!important;animation:none!important}}
+@media(max-width:767px){.arrival-wm{font-size:36px}.arrival-tagline{font-size:10px;letter-spacing:0.14em}}
+
+/* ═══ HERO THREE-ZONE ARCHITECTURE ═══ */
+.hero-frame{height:100vh;height:100dvh;display:flex;flex-direction:column}
+.hero-wrapper{flex:1;display:flex;flex-direction:column}
+.hero-sticky{position:relative!important;flex:1;display:flex;flex-direction:column;overflow:visible!important;background:transparent!important;padding:0!important}
+.orb-field{display:none}
+
+/* ── Zone 1: Linen ── */
+.hz1{background:#F2F0EA;padding:0}
+.hz1-inner{max-width:1200px;margin:0 auto;padding:0 48px 0 clamp(48px,10vw,14vw)}
+.hz1-eyebrow{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8C91A5;display:flex;align-items:center;gap:9px;margin-bottom:10px;opacity:0;transform:translateY(12px)}
+.hz-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#E8AF38;flex-shrink:0;display:inline-block}
+.hz1-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.2rem,3.6vw,3.5rem);line-height:1.1;letter-spacing:-0.03em;color:#0C1020;margin:0 0 4px;opacity:0;transform:translateY(12px)}
+.hz-hl-dot{display:inline-block;width:clamp(10px,1.2vw,15px);height:clamp(10px,1.2vw,15px);border-radius:50%;background:#E8AF38;box-shadow:0 0 10px rgba(232,175,56,0.3);margin-left:4px;vertical-align:baseline;transform:translateY(2px);opacity:0}
+.hz1-sub{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1rem,2vw,1.4rem);line-height:1.12;letter-spacing:-0.02em;color:#4A4850;margin:0;opacity:0;transform:translateY(12px)}
+.hz-q-wrap{position:relative;display:inline-block;line-height:1}
+.hz-q-dot{position:absolute;bottom:0.22em;left:50%;transform:translateX(-50%);width:clamp(5px,0.6vw,8px);height:clamp(5px,0.6vw,8px);border-radius:50%;background:#E8AF38;box-shadow:0 0 8px rgba(232,175,56,0.3);opacity:0}
+
+/* ── Zone 2: Dark Strip ── */
+.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);margin-top:8px;padding:28px 0 28px;position:relative;width:100%;overflow:visible;flex:1;display:flex;flex-direction:column}
+.hz2::before{content:'';position:absolute;top:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,rgba(242,240,234,0.12),transparent);pointer-events:none;z-index:1}
+.hz2::after{content:'';position:absolute;bottom:0;left:0;right:0;height:16px;background:linear-gradient(to top,rgba(242,240,234,0.06),transparent);pointer-events:none;z-index:1}
+.hz2-inner{max-width:960px;margin:0 auto;padding:0 32px;opacity:0;position:relative;overflow:visible;flex:1;display:flex;flex-direction:column;min-height:0}
+#hz2-orbital-svg{flex:1;min-height:0;width:100%;height:100%;display:block;overflow:visible}
+.hz2-mob-fallback{display:none;flex-direction:column;align-items:center;gap:0;max-width:340px;width:100%;margin:0 auto;opacity:0}
+.hz2-mob-nucleus{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#FDE9A0 0%,#F0C050 30%,#E8AF38 55%,#C89030 80%,#A07020 100%);box-shadow:0 0 24px rgba(232,175,56,0.4),0 0 48px rgba(232,175,56,0.15);margin:0 auto 24px}
+.hz2-mob-list{width:100%;border-left:1.5px solid rgba(232,175,56,0.3);padding-left:16px;display:flex;flex-direction:column;gap:16px}
+.hz2-mob-item{position:relative}
+.hz2-mob-item::before{content:'';position:absolute;left:-19px;top:6px;width:6px;height:6px;border-radius:50%;background:#E8AF38}
+.hz2-mob-label{font-family:'Sora',sans-serif;font-weight:600;font-size:10px;letter-spacing:0.04em;text-transform:uppercase;color:#E8AF38;display:block;margin-bottom:3px}
+.hz2-mob-text{font-family:'Inter',system-ui,sans-serif;font-size:13px;line-height:1.7;color:#C8CDDA;letter-spacing:0.005em}
+
+/* ── Zone 2: Anchor (inside dark strip) ── */
+.hz2-anchor{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(13px,1.5vw,17px);line-height:1.6;letter-spacing:-0.02em;color:#F0F2F8;text-align:center;padding:6px 32px 2px;display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;transform:translateY(8px)}
+.hz2-anchor-l1{white-space:nowrap}
+.hz2-anchor-l2{white-space:nowrap}
+.hz2-anchor-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#E8AF38;box-shadow:0 0 10px rgba(232,175,56,0.6);margin-left:3px;vertical-align:baseline;transform:translateY(2px);opacity:0}
+
+/* ── Zone 3: Linen Bottom ── */
+.hz3{background:#F2F0EA;padding:12px 48px 16px}
+.hz3-inner{max-width:1100px;margin:0 auto;text-align:center}
+.hz3-cta{display:inline-block;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#0C1020;background:#E8AF38;padding:15px 36px;border-radius:4px;text-decoration:none;border:none;transition:background .2s,transform .2s;opacity:0}
+.hz3-cta:hover{background:#F0BD50;transform:translateY(-1px)}
+.hz3-micro{font-family:'Inter',system-ui,sans-serif;font-weight:400;font-size:12px;color:#8C91A5;margin-top:10px;opacity:0}
+
+/* ── Responsive ── */
+@media(max-width:1024px){.hz2-inner{padding:0 32px}}
+@media(max-width:767px){
+  .arrival-inner{padding:40px 20px 28px 20px}
+  .hz1{padding:0}
+  .hz1-inner{padding:0 20px 0 20px}
+  .hz2{margin-top:16px;padding:28px 0 32px}
+  .hz2-inner{padding:0 16px}
+  .hz3{padding:18px 20px 20px}
+  .hz3-anchor{margin-bottom:16px}
+  #hz2-orbital-svg{display:none}
+  .hz2-mob-fallback{display:flex!important}
+}
+@media(max-width:480px){.arrival-inner{padding:32px 16px 24px 16px}.hz1-inner{padding:0 16px 0 16px}}
+@media(prefers-reduced-motion:reduce){
+  .hz1-eyebrow,.hz1-h1,.hz-hl-dot,.hz1-sub,.hz-q-dot,.hz2-inner,.hz2-anchor,.hz2-anchor-dot,.hz3-cta,.hz3-micro{opacity:1!important;transform:none!important}
+}
+/* ── Short viewport: hide hero wordmark, compress spacing ── */
+@media(max-height:750px){
+  /* Hide hero wordmark and tagline — nav handles branding */
+  #arrival{display:none!important}
+  /* Add top padding to clear the fixed nav bar (~60px tall) */
+  .hz1-inner{padding-top:70px}
+  /* Scale headline down proportionally */
+  .hz1-h1{font-size:clamp(1.6rem,3vw,2.4rem)!important}
+  /* Scale subheadline down to match */
+  .hz1-sub{font-size:clamp(0.85rem,1.6vw,1.1rem)!important}
+  /* Reduce spacing + compress dark strip padding */
+  .hz2{margin-top:4px;padding-top:12px;padding-bottom:8px}
+  /* Compress anchor line and CTA zone */
+  #hz3{padding-top:6px;padding-bottom:8px}
+  /* Scale anchor line text down */
+  .hz2-anchor{font-size:0.85em}
+  /* Scale CTA button down slightly */
+  .hz3-cta{padding:12px 28px;font-size:0.95rem}
+  /* Reduce micro-copy size */
+  .hz3-micro{font-size:0.75rem}
+}
 </style>
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -561,6 +730,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 <meta property="og:image" content="https://wizkoo.com/wizkoo-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<!-- TODO (universe-concept): New OG image planned — saffron dot centered with thin orbital arcs, subject names (Math, Science, History, Geography, Art, Chemistry) positioned along orbital paths. Social share preview becomes a visual diagram of Orbital Learning. Design task for a future session. -->
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@wizkooapp">
@@ -574,87 +744,367 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><button type="button" onclick="document.getElementById('orientation').scrollIntoView({behavior:'smooth'})">How It Works</button><button type="button">Plan Generator</button><button type="button" onclick="document.querySelector('.games-band').scrollIntoView({behavior:'smooth'})">Games</button><button type="button">About</button></div><a href="#early-access" class="nav-cta-sm">Get Notified</a></div>
+  <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><a href="planner.html" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div><a href="planner.html" class="nav-cta-sm">Launch</a></div>
+</div>
+
+<div class="hero-frame">
+<div class="arrival" id="arrival">
+  <div class="arrival-inner">
+    <span class="arrival-wm" id="hero-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span>
+    <div class="arrival-tagline hero-eyebrow">WHERE LIFE BECOMES THE LESSON</div>
+  </div>
 </div>
 
 <div class="hero-wrapper">
 <div class="hero-sticky" id="hero">
-  <div class="orb-field" id="orb-field"><div class="week-orb orb-mon" id="orb-0"><span class="orb-label">Mon</span></div><div class="week-orb orb-tue" id="orb-1"><span class="orb-label">Tue</span></div><div class="week-orb orb-wed" id="orb-2"><span class="orb-label">Wed</span></div><div class="week-orb orb-thu" id="orb-3"><span class="orb-label">Thu</span></div><div class="week-orb orb-fri" id="orb-4"><span class="orb-label">Fri</span></div></div>
-  <div class="hero-content" id="hero-content">
-    <div class="hero-brand"><span class="wm" id="hero-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span></div>
-    <div class="hero-eyebrow">Learning plans. For whatever your family's into.</div>
-    <h1 aria-label="One theme. Every subject. All week. Done."><noscript>One theme. Every subject. All week. Done.</noscript><span class="hero-line" data-text="One theme" data-delay="2.9" data-speed="0.02"></span><span class="hero-line" data-text="Every subject" data-delay="3.2" data-speed="0.02"></span><span class="hero-line" data-text="All week" data-delay="3.5" data-speed="0.02"></span><span class="hero-line hero-punchline" data-text="Done" data-delay="3.9" data-speed="0.05"></span></h1>
-    <div class="hero-sub"><div class="hero-sub-text">Monday's volcano becomes Thursday's science experiment, Friday's art project, and the story they tell grandma.</div><div class="hero-cta-group"></div></div>
-
+  <!-- ═══ ZONE 1: LINEN ═══ -->
+  <div class="hz1" id="hz1">
+    <div class="hz1-inner">
+      <h1 class="hz1-h1" id="hz1-h1" aria-label="Granddad broke his foot">Granddad broke his foot<span class="hz-hl-dot" id="hz-hl-dot" aria-hidden="true"></span></h1>
+      <p class="hz1-sub" id="hz1-sub">Guess what everyone learned that week<span style="color:#4A4850">?</span></p>
+    </div>
   </div>
 
+  <!-- ═══ ZONE 2: DARK STRIP ═══ -->
+  <div class="hz2" id="hz2">
+    <div class="hz2-inner" id="hz2-inner">
+      <svg id="hz2-orbital-svg" viewBox="-10 30 910 465" role="img"
+           aria-label="Orbital diagram showing seven school subjects — reading, writing, math, science, history, geography, and art — all connected to one central theme.">
+        <defs>
+          <radialGradient id="nucleusFire" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#FDE9A0"/>
+            <stop offset="30%"  stop-color="#F0C050"/>
+            <stop offset="55%"  stop-color="#E8AF38"/>
+            <stop offset="80%"  stop-color="#C89030"/>
+            <stop offset="100%" stop-color="#A07020"/>
+          </radialGradient>
+          <radialGradient id="haze1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.12"/>
+            <stop offset="60%"  stop-color="#E8AF38" stop-opacity="0.04"/>
+            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="haze2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.06"/>
+            <stop offset="50%"  stop-color="#E8AF38" stop-opacity="0.02"/>
+            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hz-dot-halo" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hz-dot-core" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#FDE9A0"/>
+            <stop offset="40%"  stop-color="#F0C050"/>
+            <stop offset="100%" stop-color="#E8AF38"/>
+          </radialGradient>
+        </defs>
+
+        <!-- ─── Orbital paths ─── -->
+        <!-- Orbit C (widest, rx=310): solid white — primary, most visible -->
+        <ellipse cx="450" cy="250" rx="310" ry="178" transform="rotate(-32 450 250)" stroke="rgba(240,242,248,0.18)" stroke-width="4" fill="none" opacity="0" class="orb-glow"/>
+        <ellipse cx="450" cy="250" rx="310" ry="178" transform="rotate(-32 450 250)" stroke="rgba(240,242,248,0.18)" stroke-width="1.2" fill="none" class="orb-draw" id="orb-c"/>
+        <!-- Orbit A (medium, rx=280): dashed, ocean blue — secondary depth -->
+        <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)" stroke="#7898D0" stroke-width="4" stroke-opacity="0.03" fill="none" opacity="0" class="orb-glow"/>
+        <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)" stroke="#7898D0" stroke-width="1.0" stroke-opacity="0.12" fill="none" stroke-dasharray="6 8" class="orb-draw" id="orb-a"/>
+        <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)" stroke="#E8AF38" stroke-width="1.0" stroke-opacity="0.2" fill="none" class="orb-draw" id="orb-a-saf"/>
+        <!-- Orbit B (narrowest, rx=240): ultra-faint — tertiary hint -->
+        <ellipse cx="450" cy="250" rx="240" ry="135" transform="rotate(25 450 250)" stroke="rgba(240,242,248,0.08)" stroke-width="4" fill="none" opacity="0" class="orb-glow"/>
+        <ellipse cx="450" cy="250" rx="240" ry="135" transform="rotate(25 450 250)" stroke="rgba(240,242,248,0.08)" stroke-width="0.8" fill="none" opacity="0" id="orb-b"/>
+
+        <!-- ─── Nucleus ─── -->
+        <circle id="hz2-nucl-haze" cx="450" cy="250" r="170" fill="url(#haze2)" opacity="0.5"/>
+        <circle cx="450" cy="250" r="120" fill="url(#haze1)"/>
+        <circle cx="450" cy="250" r="42"  fill="url(#nucleusFire)"/>
+
+        <!-- ─── Connector lines ─── -->
+        <line id="conn-reading" x1="333" y1="114" x2="333" y2="124" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
+        <line id="conn-writing" x1="500" y1="37" x2="510" y2="49" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
+        <line id="conn-math"    x1="728" y1="225" x2="740" y2="225" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
+        <line id="conn-science" x1="610" y1="399" x2="622" y2="399" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
+        <line id="conn-history" x1="424" y1="413" x2="424" y2="427" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
+        <line id="conn-geo"     x1="289" y1="396" x2="273" y2="392" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
+        <line id="conn-art"     x1="173" y1="289" x2="156" y2="285" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
+
+        <!-- ─── Dots: dimensional ember, static on orbital paths ─── -->
+        <!-- READING: ~10 o'clock, upper-left -->
+        <g id="dot-reading" opacity="0" transform="translate(333,114)">
+          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
+        </g>
+        <!-- WRITING: exactly on Orbit C at -60° (12:30 position), calculated: (499.76, 37.13) -->
+        <g id="dot-writing" opacity="0" transform="translate(499.76,37.13)">
+          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
+        </g>
+        <!-- MATH: ~3 o'clock, right -->
+        <g id="dot-math" opacity="0" transform="translate(728,225)">
+          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
+        </g>
+        <!-- SCIENCE: ~5 o'clock, lower-right -->
+        <g id="dot-science" opacity="0" transform="translate(610,399)">
+          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
+        </g>
+        <!-- HISTORY: ~6 o'clock, bottom-center -->
+        <g id="dot-history" opacity="0" transform="translate(424,413)">
+          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
+        </g>
+        <!-- GEOGRAPHY: ~8 o'clock, lower-left -->
+        <g id="dot-geo" opacity="0" transform="translate(289,396)">
+          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
+        </g>
+        <!-- ART: ~9 o'clock, left -->
+        <g id="dot-art" opacity="0" transform="translate(173,289)">
+          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
+        </g>
+
+        <!-- ─── Callout text groups ─── -->
+        <!-- READING: upper-left — text centered BELOW dot at (333,114) -->
+        <g id="callout-reading" opacity="0">
+          <text x="333" y="133" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">READING</text>
+          <text x="333" y="149" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">The man who accidentally</text>
+          <text x="333" y="163" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">saw through his wife's hand.</text>
+        </g>
+        <!-- ART: left-center zone — text-anchor end, right edge 10 units left of dot at (173,289) -->
+        <g id="callout-art" opacity="0">
+          <text x="163" y="258" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="end">ART</text>
+          <text x="163" y="274" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Sketch the human skeleton.</text>
+          <text x="163" y="289" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Label every bone you can name.</text>
+        </g>
+        <!-- GEOGRAPHY: lower-left zone — text anchored adjacent to dot at (289,396) -->
+        <g id="callout-geo" opacity="0">
+          <text x="148" y="363" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em">GEOGRAPHY</text>
+          <text x="148" y="379" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Visit Würzburg, Germany.</text>
+          <text x="148" y="394" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Where X-rays were born.</text>
+        </g>
+        <!-- WRITING: text below-right of dot at (499.76, 37.13) — dot_x+12, dot_y+16/30/43 -->
+        <g id="callout-writing" opacity="0">
+          <text x="512" y="53" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">WRITING</text>
+          <text x="512" y="69" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">A get-well letter to Granddad.</text>
+          <text x="512" y="83" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">What would you say?</text>
+        </g>
+        <!-- MATH: right zone — text to the RIGHT of dot at (728,225) -->
+        <g id="callout-math" opacity="0">
+          <text x="742" y="221" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">MATH</text>
+          <text x="742" y="237" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Measuring bone lengths.</text>
+          <text x="742" y="252" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Which is longest?</text>
+        </g>
+        <!-- SCIENCE: lower-right zone — text to the RIGHT of dot at (610,399) -->
+        <g id="callout-science" opacity="0">
+          <text x="624" y="395" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">SCIENCE</text>
+          <text x="624" y="411" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">How fractures heal.</text>
+          <text x="624" y="426" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Why does a cast work?</text>
+        </g>
+        <!-- HISTORY: bottom-center zone -->
+        <g id="callout-history" opacity="0">
+          <text x="424" y="439" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">HISTORY</text>
+          <text x="424" y="456" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">1895. One accident changed</text>
+          <text x="424" y="471" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">medicine forever.</text>
+        </g>
+      </svg>
+
+      <!-- Anchor thesis line — inside dark strip, three saffron circles, two lines -->
+      <div class="hz2-anchor" id="hz2-anchor">
+        <div class="hz2-anchor-l1"><span style="color:#F0F2F8">One moment</span><span class="hz2-anchor-dot" id="hz2-anchor-dot-1" aria-hidden="true" style="margin-right:14px"></span><span style="color:#E8AF38">Reading, writing, math, science, history, geography, art</span><span class="hz2-anchor-dot" id="hz2-anchor-dot-2" aria-hidden="true"></span></div>
+        <div class="hz2-anchor-l2"><span style="color:#F0F2F8">Connected</span><span class="hz2-anchor-dot" id="hz2-anchor-dot" aria-hidden="true"></span></div>
+      </div>
+
+      <!-- Mobile fallback (shown below 768px) -->
+      <div class="hz2-mob-fallback" id="hz2-mob-fallback">
+        <div class="hz2-mob-nucleus"></div>
+        <div class="hz2-mob-list">
+          <div class="hz2-mob-item"><span class="hz2-mob-label">Reading</span><span class="hz2-mob-text">The man who accidentally saw through his wife's hand.</span></div>
+          <div class="hz2-mob-item"><span class="hz2-mob-label">Writing</span><span class="hz2-mob-text">A get-well letter to Granddad. What would you say?</span></div>
+          <div class="hz2-mob-item"><span class="hz2-mob-label">Math</span><span class="hz2-mob-text">Measuring bone lengths. Which is longest?</span></div>
+          <div class="hz2-mob-item"><span class="hz2-mob-label">Science</span><span class="hz2-mob-text">How fractures heal. Why does a cast work?</span></div>
+          <div class="hz2-mob-item"><span class="hz2-mob-label">History</span><span class="hz2-mob-text">1895: one accident changed medicine forever.</span></div>
+          <div class="hz2-mob-item"><span class="hz2-mob-label">Geography</span><span class="hz2-mob-text">Visit Würzburg, Germany. Where X-rays were born.</span></div>
+          <div class="hz2-mob-item"><span class="hz2-mob-label">Art</span><span class="hz2-mob-text">Sketch the human skeleton. Label every bone you can name.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ZONE 3: LINEN BOTTOM ═══ -->
+  <div class="hz3" id="hz3">
+    <div class="hz3-inner">
+      <a href="planner.html" class="hz3-cta" id="hz3-cta">Build My Family's Week</a>
+      <div class="hz3-micro" id="hz3-micro">Founding families are in. You're next.</div>
+    </div>
+  </div>
+
+  <!-- legacy hero-content placeholder for firefly birth (hidden) -->
+  <div class="hero-content" id="hero-content" style="display:none">
+    <div class="hero-brand"><span class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span></div>
+  </div>
+
+  <!-- dummy anchor for old JS refs -->
+  <div id="hero-orbital-wrap" style="display:none">
+      <svg id="hero-orbital-svg" class="hero-orbital-svg" viewBox="0 0 860 440"
+           role="img" aria-label="Orbital diagram: six subjects — Reading, Math, Science, Geography, Art, Chemistry — all orbiting one event: Granddad broke his foot.">
+        <defs>
+          <!-- Nucleus outer haze: wide soft ambient warmth -->
+          <radialGradient id="nuclHaze" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.17"/>
+            <stop offset="60%"  stop-color="#E8AF38" stop-opacity="0.04"/>
+            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Nucleus secondary haze: slightly denser inner ring -->
+          <radialGradient id="nuclSecHaze" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.09"/>
+            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Core sphere: pure internal luminescence — centered, no directional light -->
+          <radialGradient id="nuclCore" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="#FDE9A0"/>
+            <stop offset="30%"  stop-color="#F0C050"/>
+            <stop offset="55%"  stop-color="#E8AF38"/>
+            <stop offset="80%"  stop-color="#C89030"/>
+            <stop offset="100%" stop-color="#A07020"/>
+          </radialGradient>
+          <!-- Dot halo gradient -->
+          <radialGradient id="dotHalo" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Dot core gradient: tiny ember matching nucleus -->
+          <radialGradient id="dotCore" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#FDE9A0"/>
+            <stop offset="40%"  stop-color="#F0C050"/>
+            <stop offset="100%" stop-color="#E8AF38"/>
+          </radialGradient>
+        </defs>
+
+        <!-- ─── Orbital paths ─── -->
+        <!-- Orbit C: wide, tilted -32°, most visible -->
+        <!-- Glow layer behind C -->
+        <ellipse cx="430" cy="220" rx="275" ry="158" transform="rotate(-32 430 220)"
+                 stroke="#7898D0" stroke-width="6" stroke-opacity="0.07" fill="none"/>
+        <ellipse id="orbit-c" cx="430" cy="220" rx="275" ry="158" transform="rotate(-32 430 220)"
+                 stroke="#7898D0" stroke-width="1.8" stroke-opacity="0.32" fill="none"/>
+        <!-- Orbit A: medium, slight -6° tilt + saffron trace overlay -->
+        <!-- Glow layer behind A -->
+        <ellipse cx="430" cy="220" rx="250" ry="140" transform="rotate(-6 430 220)"
+                 stroke="#7898D0" stroke-width="6" stroke-opacity="0.07" fill="none"/>
+        <ellipse id="orbit-a" cx="430" cy="220" rx="250" ry="140" transform="rotate(-6 430 220)"
+                 stroke="#7898D0" stroke-width="1.5" stroke-opacity="0.28" fill="none"/>
+        <ellipse cx="430" cy="220" rx="250" ry="140" transform="rotate(-6 430 220)"
+                 stroke="#E8AF38" stroke-width="1.4" stroke-opacity="0.22" fill="none"/>
+        <!-- Orbit B: narrow, +24° tilt, dashed -->
+        <!-- Glow layer behind B -->
+        <ellipse cx="430" cy="220" rx="220" ry="125" transform="rotate(24 430 220)"
+                 stroke="#7898D0" stroke-width="6" stroke-opacity="0.06" fill="none"/>
+        <ellipse id="orbit-b" cx="430" cy="220" rx="220" ry="125" transform="rotate(24 430 220)"
+                 stroke="#7898D0" stroke-width="1.3" stroke-opacity="0.22" fill="none"
+                 stroke-dasharray="6 8"/>
+
+        <!-- ─── Nucleus ─── -->
+        <circle id="nucl-outer-haze" cx="430" cy="220" r="128" fill="url(#nuclHaze)" opacity="0.8"/>
+        <circle cx="430" cy="220" r="78" fill="url(#nuclSecHaze)"/>
+        <circle cx="430" cy="220" r="50" fill="url(#nuclCore)"/>
+        <!-- Inner bloom: warm bright ember at dead center -->
+        <circle cx="430" cy="220" r="18" fill="#FDE9A0" fill-opacity="0.17"/>
+        <circle cx="430" cy="220" r="8"  fill="#FFF8E0" fill-opacity="0.13"/>
+
+        <!-- ─── Static connector lines (dot start → callout) ─── -->
+        <!-- READING: upper-left zone -->
+        <line x1="188" y1="75" x2="140" y2="55" stroke="#E8AF38" stroke-width="1" stroke-dasharray="3 5" opacity="0.35"/>
+        <!-- MATH: upper-right zone -->
+        <line x1="650" y1="102" x2="695" y2="62" stroke="#E8AF38" stroke-width="1" stroke-dasharray="3 5" opacity="0.35"/>
+        <!-- SCIENCE: right-middle zone -->
+        <line x1="648" y1="218" x2="695" y2="208" stroke="#E8AF38" stroke-width="1" stroke-dasharray="3 5" opacity="0.35"/>
+        <!-- GEOGRAPHY: lower-right zone -->
+        <line x1="622" y1="348" x2="695" y2="338" stroke="#E8AF38" stroke-width="1" stroke-dasharray="3 5" opacity="0.35"/>
+        <!-- ART: lower-left zone -->
+        <line x1="215" y1="332" x2="165" y2="348" stroke="#E8AF38" stroke-width="1" stroke-dasharray="3 5" opacity="0.35"/>
+        <!-- CHEMISTRY: left-middle zone -->
+        <line x1="212" y1="218" x2="165" y2="210" stroke="#E8AF38" stroke-width="1" stroke-dasharray="3 5" opacity="0.35"/>
+
+        <!-- ─── Orbiting dot groups — GSAP moves these ─── -->
+        <!-- Each dot: halo glow + ember core + inner bloom (layered, matching nucleus material language) -->
+        <g id="dot-reading" opacity="0">
+          <circle r="16"  fill="url(#dotHalo)"/>
+          <circle r="6.5" fill="url(#dotCore)"/>
+          <circle r="2"   fill="#FFF0C0" fill-opacity="0.14"/>
+        </g>
+        <g id="dot-math" opacity="0">
+          <circle r="14"  fill="url(#dotHalo)"/>
+          <circle r="5.5" fill="url(#dotCore)"/>
+          <circle r="2"   fill="#FFF0C0" fill-opacity="0.13"/>
+        </g>
+        <g id="dot-science" opacity="0">
+          <circle r="13"  fill="url(#dotHalo)"/>
+          <circle r="5"   fill="url(#dotCore)"/>
+          <circle r="2"   fill="#FFF0C0" fill-opacity="0.13"/>
+        </g>
+        <g id="dot-geo" opacity="0">
+          <circle r="14"  fill="url(#dotHalo)"/>
+          <circle r="5.5" fill="url(#dotCore)"/>
+          <circle r="2"   fill="#FFF0C0" fill-opacity="0.13"/>
+        </g>
+        <g id="dot-art" opacity="0">
+          <circle r="14"  fill="url(#dotHalo)"/>
+          <circle r="5.5" fill="url(#dotCore)"/>
+          <circle r="2"   fill="#FFF0C0" fill-opacity="0.13"/>
+        </g>
+        <g id="dot-chem" opacity="0">
+          <circle r="17"  fill="url(#dotHalo)"/>
+          <circle r="7"   fill="url(#dotCore)"/>
+          <circle r="2.5" fill="#FFF0C0" fill-opacity="0.15"/>
+        </g>
+
+        <!-- ─── Callout groups — static labels + descriptions ─── -->
+        <!-- READING — upper left, left-aligned from x=12 -->
+        <g id="callout-reading" opacity="0">
+          <text x="12" y="44" font-family="'Space Mono',monospace" font-size="9.5" fill="#8C91A5" letter-spacing="3">READING</text>
+          <text x="12" y="61" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#3A3840">The man who accidentally</text>
+          <text x="12" y="76" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#3A3840">saw through his wife's hand.</text>
+        </g>
+        <!-- MATH — upper right, left-aligned from x=650 -->
+        <g id="callout-math" opacity="0">
+          <text x="650" y="44" font-family="'Space Mono',monospace" font-size="9.5" fill="#8C91A5" letter-spacing="3">MATH</text>
+          <text x="650" y="61" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#4A4850">Measuring bone lengths.</text>
+          <text x="650" y="76" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#4A4850">Which is longest?</text>
+        </g>
+        <!-- SCIENCE — right middle, left-aligned from x=650 -->
+        <g id="callout-science" opacity="0">
+          <text x="650" y="196" font-family="'Space Mono',monospace" font-size="9.5" fill="#8C91A5" letter-spacing="3">SCIENCE</text>
+          <text x="650" y="213" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#4A4850">How fractures heal.</text>
+          <text x="650" y="228" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#4A4850">What's happening inside a bone?</text>
+        </g>
+        <!-- GEOGRAPHY — lower right, left-aligned from x=650 -->
+        <g id="callout-geo" opacity="0">
+          <text x="650" y="325" font-family="'Space Mono',monospace" font-size="9.5" fill="#8C91A5" letter-spacing="3">GEOGRAPHY</text>
+          <text x="650" y="342" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#4A4850">Visit Würzburg, Germany.</text>
+          <text x="650" y="357" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#4A4850">Where X-rays were born.</text>
+        </g>
+        <!-- ART — lower left, left-aligned from x=12 -->
+        <g id="callout-art" opacity="0">
+          <text x="12" y="352" font-family="'Space Mono',monospace" font-size="9.5" fill="#8C91A5" letter-spacing="3">ART</text>
+          <text x="12" y="369" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#4A4850">Sketch the human skeleton.</text>
+          <text x="12" y="384" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#4A4850">Label every bone you can name.</text>
+        </g>
+        <!-- CHEMISTRY — left middle, SAFFRON accent (the punchline) -->
+        <g id="callout-chem" opacity="0">
+          <text x="12" y="196" font-family="'Space Mono',monospace" font-size="9.5" fill="#E8AF38" letter-spacing="3">CHEMISTRY</text>
+          <text x="12" y="213" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#0C1020" font-weight="500">Calcium: the element that builds</text>
+          <text x="12" y="228" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#0C1020" font-weight="500">every bone in your body.</text>
+        </g>
+      </svg>
+    </div>
+
+
 </div>
 </div>
+</div><!-- /.hero-frame -->
 
 <div class="content-layer">
+
+<!-- CIRCLE CTA -->
 <div class="circle-cta-section"><a href="#early-access" class="btn-circle"><span class="circle-label">Join</span><span class="circle-expand">Get notified</span></a><div class="hero-micro" style="text-align:center;margin-top:14px">Founding families are in. You're next.</div></div>
 
-<div class="id-tags-wrap">
-<div class="id-tags-glow"></div>
-<div class="id-tags"><span class="id-tag">Homeschool</span><span class="id-tag">After School</span><span class="id-tag">Summer</span></div>
-</div>
 
-<div class="same-room-wrap">
-<section class="same-room reveal" id="same-room">
-  <div class="sr-header">
-    <div class="tag">Same room · Same theme</div>
-    <h2>Four children<span class="sp"></span><br><strong>One volcano<span class="sp"></span></strong></h2>
-    <p class="sr-why">Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different.</p>
-  </div>
-  <div class="sr-instruction">Hover across the cards</div>
-  <div class="sr-track" id="sr-track">
-    <div class="sr-beam" id="sr-beam"></div>
-    <div class="sr-card active">
-      <div class="sr-name">Mia</div><div class="sr-age">Age 7</div>
-      <div class="sr-level"><span class="sr-level-dot full"></span> Reads Well</div>
-      <div class="sr-activity">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
-      <div class="sr-progress"></div>
-    </div>
-    <div class="sr-card">
-      <div class="sr-name">Noah</div><div class="sr-age">Age 5</div>
-      <div class="sr-level"><span class="sr-level-dot half"></span> Reads Some</div>
-      <div class="sr-activity">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
-      <div class="sr-progress"></div>
-    </div>
-    <div class="sr-card">
-      <div class="sr-name">Ava</div><div class="sr-age">Age 3</div>
-      <div class="sr-level"><span class="sr-level-dot"></span> Learning</div>
-      <div class="sr-activity">Red and orange finger painting: make your own lava flow on the big paper.</div>
-      <div class="sr-progress"></div>
-    </div>
-    <div class="sr-card">
-      <div class="sr-name">Liam</div><div class="sr-age">Age 2</div>
-      <div class="sr-level"><span class="sr-level-dot" style="width:4px;height:4px"></span> Explorer</div>
-      <div class="sr-activity">Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz.</div>
-      <div class="sr-progress"></div>
-    </div>
-  </div>
-</section>
-</div>
-
+<!-- EVERYTHING CONNECTS -->
 <section class="ec-section">
   <div class="ec-inner">
     <div class="ec-tag">Everything connects</div>
-
-    <div class="ec-scenario reveal">
-      <div class="ec-headline"><strong>Granddad broke his foot.</strong></div>
-      <div class="ec-hook">Guess what everyone learned that week.</div>
-      <div class="ec-subjects">
-        <div class="ec-subj"><span class="ec-subj-label">Reading</span>The biography of Wilhelm Röntgen, who discovered X-rays</div>
-        <div class="ec-subj"><span class="ec-subj-label">Math</span>Measuring bone lengths: which is longest, and by how much?</div>
-        <div class="ec-subj"><span class="ec-subj-label">Science</span>How fractures heal. What happens inside a bone?</div>
-        <div class="ec-subj"><span class="ec-subj-label">Atlas</span>Visit Würzburg, Germany, where X-rays were invented</div>
-        <div class="ec-subj"><span class="ec-subj-label">Art</span>Sketch the human skeleton. Label every bone you can name.</div>
-        <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Calcium: the element that builds every bone in your body</div>
-      </div>
-    </div>
-
-    <div class="ec-divider"></div>
 
     <div class="ec-scenario reveal">
       <div class="ec-headline"><strong>Your daughter found a turtle</strong> in the backyard.</div>
@@ -668,17 +1118,43 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
         <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Carbon: the element inside every shell, every scale, every claw</div>
       </div>
     </div>
+
+    <div class="ec-divider"></div>
+
+    <div class="ec-scenario reveal">
+      <div class="ec-headline"><strong>Your son wouldn't stop talking about space.</strong></div>
+      <div class="ec-hook">That became the whole week.</div>
+      <div class="ec-subjects">
+        <div class="ec-subj"><span class="ec-subj-label">Reading</span>The true story of the Apollo 11 mission</div>
+        <div class="ec-subj"><span class="ec-subj-label">Math</span>How far is the moon? Measure it in school buses.</div>
+        <div class="ec-subj"><span class="ec-subj-label">Science</span>Why do astronauts float? What is gravity, really?</div>
+        <div class="ec-subj"><span class="ec-subj-label">Atlas</span>Visit Kazakhstan. Find the launchpad where it all started.</div>
+        <div class="ec-subj"><span class="ec-subj-label">Art</span>Paint the phases of the moon. Observe tonight, draw tomorrow.</div>
+        <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Helium: the element that lifts balloons and powers the sun</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="orientation reveal" id="orientation"><div><div class="tag-light">How It Works</div><div class="or-title"><strong>Enter your children.</strong><br>Choose a theme.<br><strong>See the week.</strong></div><p class="or-sub">Pick any topic. A field trip, a family event, your child's obsession this month. Every subject connects through it. Week 8 references Week 3. What they learned in January shows up in March.</p><div class="or-steps"><div class="or-step"><span class="or-step-num">1</span><span class="or-step-label">Enter your children</span></div><div class="or-step"><span class="or-step-num">2</span><span class="or-step-label">Choose a theme</span></div><div class="or-step"><span class="or-step-num">3</span><span class="or-step-label">See the week</span></div></div></div><div class="week-compare"><div class="week-card w1"><div class="wc-label">Week 1</div><div class="wc-theme">The Ocean Floor</div><div class="wc-detail">Mia sorts ocean animals. Noah traces W-A-T-E-R. Ava blows bubbles.</div></div><div class="week-card w8"><div class="wc-label">Week 8</div><div class="wc-theme">Volcanoes &amp; The Ring of Fire</div><div class="wc-detail">Complex cross-references. Elementum combos. Multi-source research.</div><div class="wc-spiral">↩ Week 3: tectonic plates that cause tsunamis also build volcanoes.</div></div></div></section>
+<!-- THE SYSTEM -->
+<section class="orientation reveal" id="orientation"><div><div class="tag-light">The system</div><div class="or-title"><strong>Enter your children.</strong><br>Choose a theme.<br><strong>See the week.</strong></div><p class="or-sub">Pick any topic. A broken bone, a backyard discovery, your child's obsession this month. Every subject connects through it. Week 8 references Week 3. What they learned in January shows up in March.</p><div class="or-steps"><div class="or-step"><span class="or-step-num">1</span><span class="or-step-label">Enter your children</span></div><div class="or-step"><span class="or-step-num">2</span><span class="or-step-label">Choose a theme</span></div><div class="or-step"><span class="or-step-num">3</span><span class="or-step-label">See the week</span></div></div></div><div class="week-compare"><div class="week-card w1"><div class="wc-label">Week 1</div><div class="wc-theme">The Ocean Floor</div><div class="wc-detail">Mia sorts ocean animals. Noah traces W-A-T-E-R. Ava blows bubbles.</div></div><div class="week-card w8"><div class="wc-label">Week 8</div><div class="wc-theme">Volcanoes &amp; The Ring of Fire</div><div class="wc-detail">Complex cross-references. Elementum combos. Multi-source research.</div><div class="wc-spiral">↩ Week 3: tectonic plates that cause tsunamis also build volcanoes.</div></div></div></section>
+
+<!-- THE LAYERS -->
+<div class="saffron-rule"></div>
+
+<div class="layers-intro reveal">
+  <p class="layers-intro-text">The plan is how you move through the week. <strong>These are the worlds you move through.</strong></p>
+</div>
+
+<section class="games-band reveal" id="layers"><div class="game-panel"><div class="tag-light">The world layer</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3><a href="https://atlas.wizkoo.com" target="_blank" class="panel-heading-link">Atlas</a></h3><p class="gd">227 countries. Heritage, politics, history, geography. Every theme passes through the world. Explore the world that made you.</p><div class="atlas-chips" id="atlas-chips"><div class="ach" data-loc="IS"><div class="s">IS</div><div class="n">Iceland</div></div><div class="ach" data-loc="IT"><div class="s">IT</div><div class="n">Italy</div></div><div class="ach" data-loc="EC"><div class="s">EC</div><div class="n">Ecuador</div></div><div class="ach" data-loc="JP"><div class="s">JP</div><div class="n">Japan</div></div></div><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">The matter layer</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3><a href="https://elementum.wizkoo.com" target="_blank" class="panel-heading-link">Elementum</a></h3><p class="gd">118 elements. Wonder Paths like "What's In Your Body?" Constellation Map. Dragon guide Eternatus. Every theme finds its element.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><a href="https://elementum.wizkoo.com" class="panel-link" target="_blank">Explore Elementum →</a></div></section>
 
 <div class="saffron-rule"></div>
 
+<!-- THE PLAN CARD -->
 <section class="plan-section">
   <div class="plan-orb plan-orb-1"></div>
   <div class="plan-orb plan-orb-2"></div>
-  <div class="plan-eyebrow"><span class="plan-eyebrow-text">Sample week</span></div>
+  <div class="plan-eyebrow"><span class="plan-eyebrow-text">Monday inside the connected system</span></div>
   <div class="plan-center">
     <div class="plan-card-entrance"><div class="plan-card">
       <div class="pc-h"><div class="pc-fam">The Rivera Family</div><div class="pc-wk">WK 8 · MAR 17</div></div>
@@ -715,38 +1191,81 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
     <div class="plan-founder">
       <div class="founder-line">Built by <strong>a mother of four</strong> who tested every plan on her own children.</div>
       <p class="founder-detail">Four children. Different ages. Different reading levels. Same table every morning.</p>
-      <div class="founder-cta"><a href="#early-access" class="btn-main">Get Notified</a><span class="micro-copy">Early access opens soon.</span></div>
+      <div class="founder-cta"><a href="#early-access" class="btn-main">Build My Family's Week</a><span class="micro-copy">Early access opens soon.</span></div>
     </div>
   </div>
 </section>
 
-<section class="games-band reveal"><div class="game-panel"><div class="tag-light">Wizkoo Original</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3><a href="https://atlas.wizkoo.com" target="_blank" class="panel-heading-link">Atlas</a></h3><p class="gd">An interactive world map where your child doesn't just read about volcanoes — they travel to them.</p><div class="atlas-chips" id="atlas-chips"><div class="ach" data-loc="IS"><div class="s">IS</div><div class="n">Iceland</div></div><div class="ach" data-loc="IT"><div class="s">IT</div><div class="n">Italy</div></div><div class="ach" data-loc="EC"><div class="s">EC</div><div class="n">Ecuador</div></div><div class="ach" data-loc="JP"><div class="s">JP</div><div class="n">Japan</div></div></div><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">Wizkoo Original</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3><a href="https://elementum.wizkoo.com" target="_blank" class="panel-heading-link">Elementum</a></h3><p class="gd">118 elements with character personalities. Dragon guide Eternatus. 24 combo reactions.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><a href="https://elementum.wizkoo.com" class="panel-link" target="_blank">Explore Elementum →</a></div></section>
+<!-- SAME ROOM -->
+<div class="same-room-wrap">
+<section class="same-room reveal" id="same-room">
+  <div class="sr-header">
+    <div class="tag">Same table · Same thread</div>
+    <h2>Four children<span class="sp"></span><br><strong>One volcano<span class="sp"></span></strong></h2>
+    <p class="sr-why">Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different with the same idea.</p>
+  </div>
+  <div class="sr-instruction">Hover across the cards</div>
+  <div class="sr-track" id="sr-track">
+    <div class="sr-beam" id="sr-beam"></div>
+    <div class="sr-card active">
+      <div class="sr-name">Mia</div><div class="sr-age">Age 7</div>
+      <div class="sr-level"><span class="sr-level-dot full"></span> Reads Well</div>
+      <div class="sr-activity">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+      <div class="sr-progress"></div>
+    </div>
+    <div class="sr-card">
+      <div class="sr-name">Noah</div><div class="sr-age">Age 5</div>
+      <div class="sr-level"><span class="sr-level-dot half"></span> Reads Some</div>
+      <div class="sr-activity">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
+      <div class="sr-progress"></div>
+    </div>
+    <div class="sr-card">
+      <div class="sr-name">Ava</div><div class="sr-age">Age 3</div>
+      <div class="sr-level"><span class="sr-level-dot"></span> Learning</div>
+      <div class="sr-activity">Red and orange finger painting: make your own lava flow on the big paper.</div>
+      <div class="sr-progress"></div>
+    </div>
+    <div class="sr-card">
+      <div class="sr-name">Liam</div><div class="sr-age">Age 2</div>
+      <div class="sr-level"><span class="sr-level-dot" style="width:4px;height:4px"></span> Explorer</div>
+      <div class="sr-activity">Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz.</div>
+      <div class="sr-progress"></div>
+    </div>
+  </div>
+</section>
+</div>
 
-<div class="saffron-rule"></div>
+<!-- THE MOMENT -->
+<section class="the-moment">
+  <div class="the-moment-inner reveal">
+    <div class="tag-light">The moment</div>
+    <h2 class="moment-headline">In an AI world, the advantage is <strong>knowing that facts connect.</strong></h2>
+    <p class="moment-body">Your child already thinks this way. Math leads somewhere. That country connects to something. The dragon element has a story. Children who learn to move between domains early will carry that for life. The world is finally catching up to the way they already think.</p>
+  </div>
+</section>
 
-<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends only?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library. Outschool is a marketplace. Wizkoo builds your week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
+<!-- FAQ -->
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library of isolated subjects. Outschool is a marketplace of individual classes. Wizkoo connects everything through a single theme and builds the whole week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
 
-<section class="philo"><div class="philo-left reveal"><h2>The hard part was never teaching<span class="sp"></span><br>It was knowing <strong>what to teach next</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>He can't read yet. But he's learning from her.</h3><p>When every child studies the same theme at their own level, the 7-year-old becomes the teacher. The 4-year-old becomes the student. The 2-year-old just wants to be in the room. That's not a side effect. That's the whole point.</p></div><div class="phi"><h3>Sunday night is yours again.</h3><p>Type one theme. See the week. Walk into Monday knowing exactly what to do.</p></div><div class="phi"><h3>Your kid was never the one in the textbook.</h3><p>Every curriculum you've tried was built for a child who sits still, finishes worksheets, and fits neatly into a grade. Yours doesn't. This builds a week around the children you actually have. Their ages, their reading levels, the way they actually learn.</p></div><div class="phi"><h3>She's five. She reads like she's seven. We noticed.</h3><p>We don't sort children by birthday. A 5-year-old who reads at a second-grade level gets second-grade reading. A 7-year-old who needs more time with addition gets more time with addition. Age is a line on a form. Readiness is what we build for.</p></div></div></section>
-
-<section class="cta-dark cta-reveal" id="early-access"><h2>Your children<span class="sp"></span><br>Your theme<span class="sp"></span><br><strong>Their week<span class="sp"></span></strong></h2><p class="cta-status">Live with founding families.</p><p class="cta-sub">Early access opens soon. Leave your email and we'll let you know.</p><form name="early-access" method="POST" data-netlify="true" class="cta-form" id="cta-form"><div class="cta-form-row"><input type="email" name="email" placeholder="Your email" required class="cta-input" aria-label="Email address"><button type="submit" class="cta-submit">Notify me</button></div></form><div class="cta-success" id="cta-success" hidden><p class="cta-confirmed">You're on the list. We'll be in touch soon.</p></div></section>
+<!-- CTA -->
+<section class="cta-dark cta-reveal" id="early-access"><h2>One moment<span class="sp"></span><br>Every subject connected<span class="sp"></span><br><strong>Build your family's week<span class="sp"></span></strong></h2><p class="cta-status">Live with founding families.</p><p class="cta-sub">Early access opens soon. Leave your email and we'll reach out when it's your turn.</p><form name="early-access" method="POST" data-netlify="true" class="cta-form" id="cta-form"><div class="cta-form-row"><input type="email" name="email" placeholder="Your email" required class="cta-input" aria-label="Email address"><button type="submit" class="cta-submit">Build My Family's Week</button></div></form><div class="cta-success" id="cta-success" hidden><p class="cta-confirmed">You're on the list. We'll be in touch soon.</p></div></section>
 </div>
 
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
       <span class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span>
-      <div class="footer-tagline">Weekly learning plans for families with children ages 2 to 12.</div>
-      <div class="footer-rae">A <a href="https://www.reapproacheducation.com" target="_blank" rel="noopener" class="footer-rae-link">ReApproach Education</a> product.</div>
+      <div class="footer-tagline">The connected learning system for families with children ages 2 to 12.</div>
       <div class="footer-email"><a href="mailto:hello@wizkoo.com" class="footer-email-link">hello@wizkoo.com</a></div>
     </div>
     <div class="footer-right">
       <nav class="footer-nav">
-        <button type="button">How It Works</button>
-        <button type="button">Plan Generator</button>
-        <button type="button">Games</button>
-        <button type="button">About</button>
+        <a href="games.html">The Games</a>
+        <a href="planner.html">The Plan</a>
+        <a href="methodology.html">The Science</a>
       </nav>
       <div class="ft-r">&copy; 2026 Wizkoo<br><a href="/privacy.html" class="footer-privacy">Privacy</a></div>
+      <div class="ft-educator-idx">Educator or co-op leader? <a href="mailto:hello@wizkoo.com">Get in touch.</a></div>
     </div>
   </div>
 </footer>
@@ -812,67 +1331,174 @@ function spawnConfetti(x,y){
   }
 }
 
-// ═══ HERO CHARACTERS ═══
+// ═══ HERO THREE-ZONE ANIMATION ═══
 (function(){
-  var plannedDotId;
-  document.querySelectorAll('.hero-line').forEach(function(line){
-    var text=line.dataset.text,bd=parseFloat(line.dataset.delay),spd=parseFloat(line.dataset.speed),ip=line.classList.contains('hero-punchline'),h='';
-    for(var i=0;i<text.length;i++){var ch=text[i]===' '?'&nbsp;':text[i];h+='<span class="hero-char" style="animation-delay:'+(bd+i*spd)+'s;'+(ip?'font-weight:700;':'')+'">'+ch+'</span>'}
-    var dotId='dot-'+bd;
-    if(ip)plannedDotId=dotId;
-    h+='<span class="hero-dot-anchor'+(ip?' planned-dot':'')+'" id="'+dotId+'"><span class="sp"></span></span>';
-    line.innerHTML=h;
-    setTimeout(function(){document.getElementById(dotId).classList.add('pop')},(bd+text.length*spd+.3)*1000);
-  });
-  // Easter egg: click the Planned dot
-  setTimeout(function(){
-    var pd=document.querySelector('.planned-dot');
-    if(pd)pd.addEventListener('click',function(e){
-      var r=pd.getBoundingClientRect();
-      spawnConfetti(r.left+r.width/2,r.top+r.height/2);
+  var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var SUBJECTS=['reading','writing','math','science','history','geo','art'];
+  var EDI='cubic-bezier(0.16,1,0.3,1)';
+
+  function showAll(){
+    ['hz1-h1','hz1-sub'].forEach(function(id){
+      var el=document.getElementById(id);if(el){el.style.opacity='1';el.style.transform='none';}
     });
-  },5000);
-})();
-
-// ═══ HERO FAST-LOAD FALLBACK ═══
-(function(){
-  var snapped=false;
-  function snapHero(){
-    if(snapped)return;snapped=true;
-    // Snap all hero chars to visible
-    document.querySelectorAll('.hero-char').forEach(function(c){c.style.animation='none';c.style.opacity='1';c.style.transform='none';if(c.parentElement.classList.contains('hero-punchline'))c.style.color='var(--ink)'});
-    // Snap dots
-    document.querySelectorAll('.hero-dot-anchor').forEach(function(d){d.classList.add('pop');var sp=d.querySelector('.sp');if(sp){sp.style.animation='none';sp.style.opacity='1';sp.style.transform='scale(1)'}});
-    // Snap eyebrow, sub, brand, circle
-    ['hero-eyebrow','hero-sub','hero-brand','hero-circle-wrap'].forEach(function(cls){var el=document.querySelector('.'+cls);if(el){el.style.animation='none';el.style.opacity='1';el.style.transform='none'}});
-    window.removeEventListener('scroll',onEarlyScroll);
+    var hld=document.getElementById('hz-hl-dot');if(hld)hld.style.opacity='1';
+    var inn=document.getElementById('hz2-inner');if(inn)inn.style.opacity='1';
+    document.querySelectorAll('.orb-draw,.orb-glow').forEach(function(el){
+      el.setAttribute('opacity','1');el.style.strokeDashoffset='0';
+    });
+    var ob=document.getElementById('orb-b');if(ob)ob.setAttribute('opacity','1');
+    SUBJECTS.forEach(function(s){
+      ['dot-'+s,'callout-'+s,'conn-'+s].forEach(function(id){
+        var el=document.getElementById(id);if(el)el.setAttribute('opacity','1');
+      });
+    });
+    var ha=document.getElementById('hz2-anchor');if(ha){ha.style.opacity='1';ha.style.transform='none';}
+    ['hz2-anchor-dot','hz2-anchor-dot-1','hz2-anchor-dot-2'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.opacity='1';});
+    ['hz3-cta','hz3-micro'].forEach(function(id){
+      var el=document.getElementById(id);if(el){el.style.opacity='1';el.style.transform='none';}
+    });
+    var mob=document.getElementById('hz2-mob-fallback');if(mob)mob.style.opacity='1';
   }
-  function onEarlyScroll(){if(window.scrollY>80)snapHero()}
-  window.addEventListener('scroll',onEarlyScroll,{passive:true});
-  // Remove listener after animation completes naturally
-  setTimeout(function(){window.removeEventListener('scroll',onEarlyScroll)},6000);
-})();
 
-// ═══ ORBS ═══
-(function(){
-  var orbs=document.querySelectorAll('.week-orb');
-  var scatter=[[0.08,0.12],[0.72,0.06],[0.38,0.7],[0.82,0.58],[0.18,0.82]];
-  var aligned=[[0.12,0.46],[0.28,0.46],[0.44,0.46],[0.6,0.46],[0.76,0.46]];
-  var mouseX=0.5,mouseY=0.5,phase='scatter';
-  orbs.forEach(function(o,i){o.style.left=(scatter[i][0]*100)+'%';o.style.top=(scatter[i][1]*100)+'%';o.classList.add('scattered')});
-  setTimeout(function(){phase='aligned';orbs.forEach(function(o,i){o.classList.remove('scattered');o.classList.add('aligned');o.style.left=(aligned[i][0]*100)+'%';o.style.top=(aligned[i][1]*100)+'%'});setTimeout(function(){phase='mouse'},2500)},3800);
-  document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;mouseX=e.clientX/window.innerWidth;mouseY=e.clientY/window.innerHeight});
-  (function tick(){if(phase==='mouse'){orbs.forEach(function(o,i){o.style.left=(aligned[i][0]*100+(mouseX-.5)*((i%2===0)?18:-14))+'%';o.style.top=(aligned[i][1]*100+(mouseY-.5)*((i%2===0)?-12:10))+'%'})}requestAnimationFrame(tick)})();
-})();
+  if(reduced){showAll();return;}
 
-// ═══ PARALLAX ═══
-(function(){
-  var content=document.getElementById('hero-content'),orbField=document.getElementById('orb-field');
-  window.addEventListener('scroll',function(){var s=window.scrollY;if(s<window.innerHeight*1.5){content.style.transform='translateY('+(-s*0.25)+'px)';orbField.style.transform='translateY('+(-s*0.5)+'px)'}},{passive:true});
+  function rev(id,ms,dur){
+    setTimeout(function(){
+      var el=document.getElementById(id);if(!el)return;
+      el.style.willChange='opacity,transform';
+      el.style.transition='opacity '+dur+'ms '+EDI+',transform '+dur+'ms '+EDI;
+      el.style.opacity='1';el.style.transform='translateY(0)';
+      setTimeout(function(){el.style.willChange='auto';},dur+50);
+    },ms);
+  }
+  function revO(id,ms,dur){
+    setTimeout(function(){
+      var el=document.getElementById(id);if(!el)return;
+      el.style.willChange='opacity';
+      el.style.transition='opacity '+dur+'ms '+EDI;
+      el.style.opacity='1';
+      setTimeout(function(){el.style.willChange='auto';},dur+50);
+    },ms);
+  }
+
+  // Zone 1 reveals
+  rev('hz1-h1',      2000, 700);
+  revO('hz-hl-dot',  2200, 400);
+  rev('hz1-sub',     2700, 700);
+
+  // Zone 2: dark strip fades in
+  setTimeout(function(){
+    var inn=document.getElementById('hz2-inner');
+    if(inn){inn.style.willChange='opacity';inn.style.transition='opacity 800ms '+EDI;inn.style.opacity='1';setTimeout(function(){inn.style.willChange='auto';},860);}
+  },3200);
+
+  // Initialize stroke-dasharray early so paths start invisible
+  setTimeout(function(){
+    document.querySelectorAll('.orb-draw').forEach(function(el){
+      var len=el.getTotalLength?el.getTotalLength():1500;
+      el._hz_len=len;
+      el.setAttribute('stroke-dasharray',len+' '+len);
+      el.setAttribute('stroke-dashoffset',len);
+    });
+  },100);
+
+  // Glow layers + dashed orbit B fade in with the strip
+  setTimeout(function(){
+    if(typeof gsap!=='undefined'){
+      gsap.to('.orb-glow',{opacity:0.8,duration:1.2,ease:'power1.out',stagger:0.15});
+      gsap.to('#orb-b',{opacity:0.8,duration:1.2,ease:'power1.out'});
+    }
+  },3600);
+
+  // Path draw animation
+  setTimeout(function(){
+    document.querySelectorAll('.orb-draw').forEach(function(el,i){
+      var len=el._hz_len||(el.getTotalLength?el.getTotalLength():1500);
+      if(typeof gsap!=='undefined'){
+        gsap.fromTo(el,{strokeDashoffset:len},{strokeDashoffset:0,duration:3,ease:'power2.inOut',delay:i*0.18});
+      }
+    });
+  },3400);
+
+  // Dots + callouts + connectors stagger (220ms intervals from 3800ms)
+  var dotMs=3800;
+  SUBJECTS.forEach(function(s){
+    (function(t,subj){
+      setTimeout(function(){
+        if(typeof gsap!=='undefined'){
+          gsap.to('#dot-'+subj,    {opacity:1,duration:0.22,ease:'power1.out'});
+          gsap.to('#conn-'+subj,   {opacity:1,duration:0.3, ease:'power1.out',delay:0.03});
+          gsap.to('#callout-'+subj,{opacity:1,duration:0.3, ease:'power1.out',delay:0.05});
+        }
+      },t);
+    })(dotMs,s);
+    dotMs+=220;
+  });
+
+  // hz2 anchor thesis line — appears after orbital diagram settles
+  rev('hz2-anchor',       5500,600);
+  revO('hz2-anchor-dot',  5700,400);
+  revO('hz2-anchor-dot-1',5700,400);
+  revO('hz2-anchor-dot-2',5700,400);
+  // Zone 3 — CTA + micro only
+  revO('hz3-cta',       5800,500);
+  revO('hz3-micro',     6000,500);
+
+  // Mobile fallback
+  setTimeout(function(){
+    var mob=document.getElementById('hz2-mob-fallback');
+    if(mob){mob.style.transition='opacity 600ms '+EDI;mob.style.opacity='1';}
+  },3200);
+
+  // Nucleus haze pulse (GSAP)
+  setTimeout(function(){
+    var haze=document.getElementById('hz2-nucl-haze');
+    if(haze&&typeof gsap!=='undefined'){
+      var ht=gsap.fromTo(haze,{opacity:0.5},{opacity:0.85,duration:4.5,repeat:-1,yoyo:true,ease:'sine.inOut'});
+      var obs=document.getElementById('hz2-inner');
+      if(obs&&'IntersectionObserver'in window){
+        new IntersectionObserver(function(entries){
+          entries.forEach(function(e){e.isIntersecting?ht.resume():ht.pause();});
+        },{threshold:0.1}).observe(obs);
+      }
+    }
+  },3000);
+
+  // Confetti easter egg on headline saffron dot
+  setTimeout(function(){
+    var hd=document.getElementById('hz-hl-dot');
+    if(hd)hd.addEventListener('click',function(){var r=hd.getBoundingClientRect();spawnConfetti(r.left+r.width/2,r.top+r.height/2);});
+  },2500);
+
+  // Fast-load fallback: snap if user scrolls early
+  var snapped=false;
+  function snapAll(){if(snapped)return;snapped=true;showAll();window.removeEventListener('scroll',onEs);}
+  function onEs(){if(window.scrollY>100)snapAll();}
+  window.addEventListener('scroll',onEs,{passive:true});
+  setTimeout(function(){window.removeEventListener('scroll',onEs);},7500);
 })();
 
 // ═══ NAV ═══
-(function(){var nav=document.getElementById('site-nav');window.addEventListener('scroll',function(){nav.classList.toggle('show',window.scrollY>window.innerHeight*0.8)},{passive:true})})();
+(function(){
+  var nav=document.getElementById('site-nav');
+  var arrival=document.getElementById('arrival');
+  var navRevealed=false;
+  window.addEventListener('scroll',function(){
+    if(!navRevealed){
+      // Before nav appears: fade wordmark with scroll progress
+      var fadeProgress=Math.min(window.scrollY/300,1);
+      if(arrival)arrival.style.opacity=1-fadeProgress;
+      // Trigger nav at 80% viewport height
+      if(window.scrollY>window.innerHeight*0.8){
+        navRevealed=true;
+        nav.classList.add('show');
+        // Permanently hide hero wordmark — both doors now closed
+        if(arrival){arrival.style.opacity=0;arrival.style.visibility='hidden';}
+      }
+    }
+    // navRevealed=true: do nothing. Hero stays hidden. Nav stays visible.
+  },{passive:true});
+})();
 
 
 
@@ -949,16 +1575,25 @@ function toggleWave(row){
 
 function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.hidden=true;b.parentElement.classList.remove('open')});if(!o){btn.setAttribute('aria-expanded','true');a.hidden=false;btn.parentElement.classList.add('open')}}
 
+// Global mouse tracking (guard in case cursor IIFE hasn't run)
+if(typeof window.mx==='undefined'){window.mx=0;window.my=0;}
+document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;});
+
 // ═══ FIREFLY ═══
 (function(){
+  console.log('Firefly init');
   var ff=document.getElementById('firefly');
+  console.log('firefly el:', ff);
+  if(!ff){console.warn('Firefly: #firefly element not found');return;}
   var heroWm=document.getElementById('hero-wm');
+  console.log('hero-wm el:', heroWm);
   var wmDot=heroWm?heroWm.querySelector('.wm-dot'):null;
+  console.log('wm-dot el:', wmDot);
+  var eyebrowCheck=document.querySelector('.hero-eyebrow');
+  console.log('hero-eyebrow el:', eyebrowCheck);
+  console.log('window.mx/my:', window.mx, window.my);
 
   // Helper: get the exact center of the saffron ::after dot
-  // The dot is position:absolute; top:0.1em; right:-0.2em; width:0.22em; height:0.22em
-  // Center X = span.right + (0.2em - 0.11em) = span.right + 0.09em
-  // Center Y = span.top + 0.1em + 0.11em = span.top + 0.21em
   function getDotCenter(){
     if(!wmDot)return{x:window.innerWidth*0.6,y:window.innerHeight*0.3};
     var r=wmDot.getBoundingClientRect();
@@ -991,7 +1626,7 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
   var pois=[];
   function updatePois(){
     pois=[];
-    // Plan circle
+    // Plan circle CTA
     var pc=document.querySelector('.btn-circle');
     if(pc){var r=pc.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
     // Plan card
@@ -1003,7 +1638,7 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
     // Everything Connects headline
     var ec=document.querySelector('.ec-headline');
     if(ec){var r=ec.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
-    // Games elementum
+    // Games elementum chips
     var el=document.querySelector('.elem-chips');
     if(el){var r=el.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
     // Closing CTA
@@ -1015,10 +1650,10 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
   var poiTimer=0;
   var t=0;
 
-  // Perlin-like simplex approximation
+  // Perlin-like noise approximation
   function noise(x){return Math.sin(x*1.2)*0.5+Math.sin(x*2.7)*0.3+Math.sin(x*4.1)*0.2}
 
-  // Birth sequence: firefly born from terminal dot, traces eyebrow, returns
+  // ═══ BIRTH SEQUENCE: firefly born from terminal dot, traces tagline, returns ═══
   document.fonts.ready.then(function(){
     setTimeout(function(){
       // Pulse the terminal dot
@@ -1044,7 +1679,7 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
       birthPhase='descending';
       birthStart=Date.now();
       updatePois();
-    },4500);
+    },5500);
   });
 
   // Track mouse movement for idle detection
@@ -1063,59 +1698,51 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
 
       if(birthPhase==='descending'){
         // Recalculate positions fresh each frame
-        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y
+        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
         if(eyebrowEl){var ebr=eyebrowEl.getBoundingClientRect();eyebrowStartX=ebr.left;eyebrowEndX=ebr.right;eyebrowY=ebr.top+ebr.height/2}
-        // Slow meander from dot toward eyebrow start, 1.8s
+        // Slow meander from dot toward eyebrow start, 800ms
         var descDuration=800;
         var progress=Math.min(elapsed/descDuration,1);
-        // Very slow ease-in: barely moves at first, then gradually commits to the path
         var eased=Math.pow(progress,2.5);
-        // Base path from dot to eyebrow start
         var baseX=birthHomeX+(eyebrowStartX-birthHomeX)*eased;
         var baseY=birthHomeY+(eyebrowY-birthHomeY)*eased;
-        // Wandering noise that fades as it approaches the target
         var wander=(1-progress);
         var noiseX=Math.sin(progress*Math.PI*4.3)*18*wander+Math.sin(progress*Math.PI*7.1)*8*wander;
         var noiseY=Math.cos(progress*Math.PI*3.7)*14*wander+Math.cos(progress*Math.PI*5.9)*6*wander;
         ffx=baseX+noiseX;
         ffy=baseY+noiseY;
-        // Glow slowly builds from dim to warm
         var glow=0.2+progress*0.3;
         ff.style.boxShadow='0 0 '+(4+progress*6)+'px '+(1+progress*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(10+progress*8)+'px '+(3+progress*3)+'px rgba(232,175,56,'+(glow*0.3)+')';
         if(progress>=1){birthPhase='tracing';birthStart=now}
       }
       else if(birthPhase==='tracing'){
-        // Slow deliberate trace along eyebrow text, 3.5s
+        // Slow deliberate trace along tagline text, 2200ms
         var traceDuration=2200;
         var progress=Math.min(elapsed/traceDuration,1);
-        // Smooth ease-in-out: gentle start, steady middle, gentle end. No discontinuities.
         var eased=progress<0.5?2*progress*progress:1-Math.pow(-2*progress+2,2)/2;
         eased=Math.min(eased,1);
         ffx=eyebrowStartX+(eyebrowEndX-eyebrowStartX)*eased;
-        // Bobbing like a real firefly flitting along words
         ffy=eyebrowY+Math.sin(progress*Math.PI*6)*3+Math.sin(progress*Math.PI*2.3)*2;
-        // Glow builds to midpoint then holds
         var glow=Math.min(progress*2,1)*0.5+0.3;
         ff.style.boxShadow='0 0 '+(8+glow*6)+'px '+(3+glow*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(16+glow*8)+'px '+(5+glow*4)+'px rgba(232,175,56,'+(glow*0.3)+')';
         if(progress>=1){birthPhase='flitting';birthStart=now}
       }
       else if(birthPhase==='flitting'){
-        // Hover at end of eyebrow for 1.2s, flitting in small circles
+        // Hover at end of tagline for 500ms, flitting in small circles
         var flitProgress=elapsed/500;
         ffx=eyebrowEndX-8+Math.sin(flitProgress*Math.PI*5)*6;
         ffy=eyebrowY+Math.cos(flitProgress*Math.PI*3.5)*5;
         var pulse=0.6+0.2*Math.sin(elapsed*0.008);
         ff.style.boxShadow='0 0 12px 5px rgba(232,175,56,'+pulse+'),0 0 24px 8px rgba(232,175,56,'+(pulse*0.35)+')';
         if(elapsed>500){
-          // Recalculate dot position fresh before returning
-          var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y
+          var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
           birthPhase='returning';birthStart=now;
         }
       }
       else if(birthPhase==='returning'){
         // Recalculate dot position each frame for accuracy
-        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y
-        // Arc back to wordmark dot in 1.4s with upward curve
+        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
+        // Arc back to wordmark dot in 600ms with upward curve
         var retDuration=600;
         var progress=Math.min(elapsed/retDuration,1);
         var eased=1-Math.pow(1-progress,3);
@@ -1129,8 +1756,8 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
       }
       else if(birthPhase==='homeDwell'){
         // Track dot position live
-        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y
-        // Settle at dot for 1s
+        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
+        // Settle at dot for 400ms
         ffx=birthHomeX+Math.sin(t*2)*2;
         ffy=birthHomeY+Math.cos(t*1.7)*2;
         var pulse=1+0.3*Math.sin(elapsed*0.006);
@@ -1143,7 +1770,8 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
       return; // Skip normal movement during birth
     }
 
-    // ─── NORMAL BEHAVIOR ───
+    // ─── NORMAL FREE-ROAMING BEHAVIOR ───
+
     // Idle detection: hide after 3s no movement
     if(now-lastMoveTime>3000){
       if(!idle){idle=true;ff.classList.remove('alive')}
@@ -1204,7 +1832,6 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
       ffVx+=targetDx*0.003+noise(t*0.4)*0.2;
       ffVx*=0.98;
       ffx+=ffVx;
-      // Y: gentle sine undulation anchored near target, NOT chasing it
       var yBase=ffTargetY;
       var yWant=yBase+Math.sin(t*0.35)*15;
       ffy+=(yWant-ffy)*0.015;
@@ -1212,7 +1839,7 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
 
     ff.style.left=ffx+'px';ff.style.top=ffy+'px';
 
-    // Collision with cursor
+    // ─── COLLISION WITH CURSOR ───
     var dx=window.mx-ffx,dy=window.my-ffy;
     var dist=Math.sqrt(dx*dx+dy*dy);
     if(dist<30&&ff.classList.contains('alive')&&!ff.classList.contains('caught')){
@@ -1221,8 +1848,8 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
 
       // Green flash on cursor
       var cur=document.getElementById('cursor');
-      cur.style.background='#6BBF6B';cur.style.boxShadow='0 0 12px rgba(107,191,107,0.5)';
-      setTimeout(function(){cur.style.background='';cur.style.boxShadow=''},400);
+      if(cur){cur.style.background='#6BBF6B';cur.style.boxShadow='0 0 12px rgba(107,191,107,0.5)';
+      setTimeout(function(){cur.style.background='';cur.style.boxShadow=''},400);}
 
       // Collision ring
       var ring=document.createElement('div');ring.className='collision-ring';
@@ -1244,8 +1871,7 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
       }
 
       // Dart away
-      var angle=Math.random()*Math.PI*2;
-      ffVx=(Math.random()>0.5?1:-1)*7;ffVy=(Math.random()-0.5)*1.5;
+      ffVx=(Math.random()>0.5?1:-1)*7;
       currentPoi=(currentPoi+1)%Math.max(pois.length,1);
 
       // Third catch: loop-de-loop
@@ -1258,14 +1884,9 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
   }
   requestAnimationFrame(tick);
 
-  // Expose mx/my from cursor code (they're already global-ish via closure)
-  // We need access to cursor position - patch: use a global
-  window._ffGetMouse=true;
-
-  // ═══ REPLAY BIRTH SEQUENCE ═══
+  // ═══ REPLAY BIRTH SEQUENCE (click wordmark dot to replay) ═══
   window.replayFirefly=function(){
-    if(birthPhase!=='free')return; // don't interrupt an active sequence
-    // Recalculate positions
+    if(birthPhase!=='free')return;
     var dc=getDotCenter();
     birthHomeX=dc.x;birthHomeY=dc.y;
     if(eyebrowEl){
@@ -1274,22 +1895,20 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
       eyebrowEndX=ebRect.right;
       eyebrowY=ebRect.top+ebRect.height/2;
     }
-    // Snap firefly to home, restart sequence
     ffx=birthHomeX;ffy=birthHomeY;
     ffVx=0;dwelling=false;looping=false;
     ff.classList.add('alive');
     ff.style.boxShadow='';
     birthPhase='descending';
     birthStart=Date.now();
-    // Pulse the dot
     var afterStyle=document.createElement('style');
     afterStyle.textContent='#hero-wm .wm-dot::after{animation:dotReact 0.6s var(--expo)!important}';
     document.head.appendChild(afterStyle);
     setTimeout(function(){afterStyle.remove()},700);
   };
-  // Click the hero wordmark dot to replay
-  var heroWmDot=document.querySelector('#hero-wm .wm-dot');
-  if(heroWmDot)heroWmDot.addEventListener('click',function(){window.replayFirefly()});
+  // Click the arrival wordmark dot to replay
+  var arrivalWmDot=document.querySelector('#hero-wm .wm-dot');
+  if(arrivalWmDot)arrivalWmDot.addEventListener('click',function(){window.replayFirefly()});
 })();
 
 // Patch cursor code to expose mx/my globally
@@ -1364,6 +1983,54 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
   // ── Update sr-instruction text ──
   var inst=document.querySelector('.sr-instruction');
   if(inst)inst.textContent='Tap each child';
+})();
+</script>
+
+<script>
+/* ─── CTA Firefly — #early-access section ─── */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cta = document.getElementById('early-access');
+  if (!cta) return;
+  var btn = cta.querySelector('.cta-submit');
+  if (!btn) return;
+
+  var ff = document.createElement('div');
+  ff.style.cssText = 'position:absolute;width:5px;height:5px;border-radius:50%;background:#E8AF38;pointer-events:none;z-index:10;opacity:0;transition:opacity 0.4s ease;box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15);';
+  cta.appendChild(ff);
+
+  var triggered = false;
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting && !triggered) {
+      triggered = true;
+      obs.disconnect();
+      setTimeout(launch, 300);
+    }
+  }, { threshold: 0.4 });
+  obs.observe(cta);
+
+  function launch() {
+    var cr = cta.getBoundingClientRect();
+    var br = btn.getBoundingClientRect();
+    var x0 = (br.left - cr.left) + br.width * 0.15;
+    var y0 = (br.top  - cr.top)  + br.height * 0.5;
+    ff.style.left = x0 + 'px';
+    ff.style.top  = y0 + 'px';
+    requestAnimationFrame(function () { ff.style.opacity = '1'; });
+    var t = 0, start = Date.now(), dur = 2600;
+    (function drift() {
+      t += 0.018;
+      if (Date.now() - start >= dur) {
+        ff.style.transition = 'opacity 0.5s ease';
+        ff.style.opacity = '0';
+        return;
+      }
+      ff.style.left = (x0 + Math.sin(t * 2.1) * 14 + Math.sin(t * 4.7) * 6) + 'px';
+      ff.style.top  = (y0 + Math.cos(t * 1.6) * 10 + Math.cos(t * 3.3) * 4) + 'px';
+      requestAnimationFrame(drift);
+    })();
+  }
 })();
 </script>
 </body>

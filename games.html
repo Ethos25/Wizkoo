@@ -30,27 +30,24 @@
 <!-- ═══ NAV ═══ -->
 <header>
 <nav>
-  <a href="index.html" class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+  <a href="index.html" class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a>
   <div class="nav-links">
-    <a href="index.html#orientation" class="nav-link how-it-works">How It Works</a>
-    <a href="planner.html" class="nav-link">Plan Generator</a>
-    <a href="games.html" class="nav-link active">Games</a>
-    <a href="about.html" class="nav-link">About</a>
+    <a href="planner.html" class="nav-link">The Plan</a>
+    <a href="games.html" class="nav-link active">The Games</a>
+    <a href="methodology.html" class="nav-link">The Science</a>
   </div>
-  <a href="planner.html" class="nb">Build My Family's Week</a>
+  <a href="planner.html" class="nb">Launch</a>
   <button class="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <div class="mobile-overlay">
     <button class="mobile-close" aria-label="Close menu">✕</button>
     <div class="mobile-links">
-      <a href="index.html">Home</a>
-      <a href="index.html#orientation">How It Works</a>
-      <a href="planner.html">Plan Generator</a>
-      <a href="games.html">Games</a>
-      <a href="about.html">About</a>
+      <a href="planner.html">The Plan</a>
+      <a href="games.html">The Games</a>
+      <a href="methodology.html">The Science</a>
     </div>
-    <a href="planner.html" class="nb mobile-cta">Build My Family's Week</a>
+    <a href="planner.html" class="nb mobile-cta">Launch</a>
   </div>
 </nav>
 </header>
@@ -59,7 +56,7 @@
 <!-- ═══ HERO ═══ -->
 <section class="page-hero" aria-label="Games overview">
   <div class="tag">Proprietary Games</div>
-  <h1>Games that teach<br>without feeling like <strong>school<span class="sp"></span></strong></h1>
+  <h1>Games that teach<br>without feeling like <strong style="white-space:nowrap">school<span class="sp"></span></strong></h1>
   <p class="hero-sub">Atlas and Elementum aren't educational supplements bolted onto a curriculum. They are the curriculum. Built from the ground up to thread into every weekly plan by theme, by child, by name.</p>
 </section>
 
@@ -95,7 +92,7 @@
 </div>
 
 <!-- ═══ INTEGRATED CALLOUT ═══ -->
-<div class="games-integrated">
+<div class="games-integrated" id="games-cta">
   <p class="gi-text">These aren't add-ons.<br><strong>They're built into every plan.</strong></p>
   <a href="planner.html" class="btn-main">Build My Family's Week</a>
 </div>
@@ -111,10 +108,9 @@
       <div class="ft-location">Cumming, Georgia</div>
     </div>
     <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="index.html#orientation">How It Works</a>
-      <a href="planner.html">Plan Generator</a>
-      <a href="games.html">Games</a>
-      <a href="about.html">About</a>
+      <a href="games.html">The Games</a>
+      <a href="planner.html">The Plan</a>
+      <a href="methodology.html">The Science</a>
     </nav>
     <div class="footer-social">
       <div class="footer-social-label">Follow</div>
@@ -124,8 +120,60 @@
     <div class="footer-privacy"><a href="#privacy" style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(250,250,250,0.35);text-decoration:none;border-bottom:1px solid rgba(250,250,250,0.15);padding-bottom:2px;" onmouseover="this.style.color='rgba(250,250,250,0.7)'" onmouseout="this.style.color='rgba(250,250,250,0.35)'">Privacy</a></div>
     <div class="ft-r">&copy; 2026 Wizkoo</div>
   </div>
+  <div class="ft-educator">Educator or co-op leader? <a href="mailto:hello@wizkoo.com">Get in touch.</a></div>
 </footer>
 
 <script src="js/nav.js"></script>
+
+<script>
+/* ─── CTA Firefly — games integrated callout ─── */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cta = document.getElementById('games-cta');
+  if (!cta) return;
+  var btn = cta.querySelector('.btn-main');
+  if (!btn) return;
+
+  var prevPos = getComputedStyle(cta).position;
+  if (prevPos === 'static') cta.style.position = 'relative';
+
+  var ff = document.createElement('div');
+  ff.style.cssText = 'position:absolute;width:5px;height:5px;border-radius:50%;background:#E8AF38;pointer-events:none;z-index:10;opacity:0;transition:opacity 0.4s ease;box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15);';
+  cta.appendChild(ff);
+
+  var triggered = false;
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting && !triggered) {
+      triggered = true;
+      obs.disconnect();
+      setTimeout(launch, 200);
+    }
+  }, { threshold: 0.5 });
+  obs.observe(cta);
+
+  function launch() {
+    var cr = cta.getBoundingClientRect();
+    var br = btn.getBoundingClientRect();
+    var x0 = (br.left - cr.left) + br.width * 0.15;
+    var y0 = (br.top  - cr.top)  + br.height * 0.5;
+    ff.style.left = x0 + 'px';
+    ff.style.top  = y0 + 'px';
+    requestAnimationFrame(function () { ff.style.opacity = '1'; });
+    var t = 0, start = Date.now(), dur = 2500;
+    (function drift() {
+      t += 0.018;
+      if (Date.now() - start >= dur) {
+        ff.style.transition = 'opacity 0.5s ease';
+        ff.style.opacity = '0';
+        return;
+      }
+      ff.style.left = (x0 + Math.sin(t * 2.1) * 14 + Math.sin(t * 4.7) * 6) + 'px';
+      ff.style.top  = (y0 + Math.cos(t * 1.6) * 10 + Math.cos(t * 3.3) * 4) + 'px';
+      requestAnimationFrame(drift);
+    })();
+  }
+})();
+</script>
 </body>
 </html>

@@ -33,6 +33,18 @@ footer {
   margin-top: 8px;
 }
 
+/* Reset nav.css position:fixed for footer <nav> elements */
+footer nav {
+  position: static;
+  height: auto;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+  box-shadow: none;
+  justify-content: flex-start;
+}
+
 /* Nav column */
 .footer-nav {
   display: flex;
@@ -83,6 +95,26 @@ footer {
   text-align: right;
   align-self: end;
 }
+
+/* Educator footer line */
+.ft-educator {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(250,250,250,0.35);
+  margin-top: 24px;
+  padding: 0 var(--content-pad);
+  text-align: right;
+}
+.ft-educator a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(250,250,250,0.15);
+  padding-bottom: 1px;
+  transition: color 0.15s;
+}
+.ft-educator a:hover { color: rgba(250,250,250,0.7); }
 
 /* Responsive */
 @media (max-width: 768px) {
