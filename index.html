@@ -105,6 +105,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 /* ═══ NAV ═══ */
 .site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;opacity:1;pointer-events:auto}
+.site-nav.show{opacity:1;pointer-events:auto}
 .site-nav a:not(.nav-cta-sm),.nav-bar a:not(.nav-cta-sm){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
 .nav-bar{width:100%;max-width:var(--max-width);height:100%;padding:0 48px;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:40px}
@@ -639,7 +640,8 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 @media(max-width:767px){.arrival-wm{font-size:36px}.arrival-tagline{font-size:10px;letter-spacing:0.14em}}
 
 /* ═══ HERO THREE-ZONE ARCHITECTURE ═══ */
-.hero-frame{height:100vh;height:100dvh;display:flex;flex-direction:column;background:#F2F0EA}
+.hero-frame{background:#F2F0EA;height:100vh;height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero-frame::after{content:'';position:absolute;bottom:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,transparent,rgba(16,24,48,0.18));pointer-events:none;z-index:1}
 .hero-wrapper{flex:1;display:flex;flex-direction:column}
 .hero-sticky{position:relative!important;flex:1;display:flex;flex-direction:column;overflow:visible!important;background:transparent!important;padding:0!important}
 .orb-field{display:none}
@@ -656,7 +658,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .hz-q-dot{position:absolute;bottom:0.22em;left:50%;transform:translateX(-50%);width:clamp(5px,0.6vw,8px);height:clamp(5px,0.6vw,8px);border-radius:50%;background:#E8AF38;box-shadow:0 0 8px rgba(232,175,56,0.3);opacity:0}
 
 /* ── Zone 2: Dark Strip ── */
-.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);padding:28px 0 28px;position:relative;width:100%;overflow:visible;min-height:80vh;display:flex;flex-direction:column}
+.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);margin-top:0;padding:40px 0 40px;position:relative;width:100%;overflow:visible;min-height:80vh;display:flex;flex-direction:column}
 .hz2::before{content:'';position:absolute;top:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,rgba(242,240,234,0.12),transparent);pointer-events:none;z-index:1}
 .hz2::after{content:'';position:absolute;bottom:0;left:0;right:0;height:16px;background:linear-gradient(to top,rgba(242,240,234,0.06),transparent);pointer-events:none;z-index:1}
 .hz2-inner{max-width:960px;margin:0 auto;padding:0 32px;opacity:0;position:relative;overflow:visible;flex:1;display:flex;flex-direction:column;min-height:0}
@@ -685,7 +687,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 /* ── Responsive ── */
 @media(max-width:1024px){.hz2-inner{padding:0 32px}}
 @media(max-width:767px){
-  .arrival-inner{padding:64px 20px 16px 20px}
+  .arrival-inner{padding:40px 20px 28px 20px}
   .hz1{padding:0}
   .hz1-inner{padding:0 20px 0 20px}
   .hz2{margin-top:16px;padding:28px 0 32px}
@@ -695,7 +697,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   #hz2-orbital-svg{display:none}
   .hz2-mob-fallback{display:flex!important}
 }
-@media(max-width:480px){.arrival-inner{padding:64px 16px 16px 16px}.hz1-inner{padding:0 16px 0 16px}}
+@media(max-width:480px){.arrival-inner{padding:32px 16px 24px 16px}.hz1-inner{padding:0 16px 0 16px}}
 @media(prefers-reduced-motion:reduce){
   .hz1-eyebrow,.hz1-h1,.hz-hl-dot,.hz1-sub,.hz-q-dot,.hz2-inner,.hz2-anchor,.hz2-anchor-dot,.hz3-cta,.hz3-micro{opacity:1!important;transform:none!important}
 }
@@ -729,7 +731,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 <div class="arrival" id="arrival">
   <div class="arrival-inner">
     <span class="arrival-wm" id="hero-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span>
-    <div class="arrival-tagline hero-eyebrow">WHERE LIFE BECOMES THE LESSON</div>
+    <div class="arrival-tagline hero-eyebrow">LEARNING PLANS. BUILT AROUND YOUR PEOPLE.</div>
   </div>
 </div>
 
@@ -740,10 +742,9 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
       <p class="hz1-sub" id="hz1-sub">Guess what everyone learned that week<span style="color:#4A4850">?</span></p>
     </div>
   </div>
-
 </div><!-- /.hero-frame -->
 
-<!-- ═══ ZONE 2: DARK STRIP (standalone) ═══ -->
+<!-- ═══ ZONE 2: DARK STRIP ═══ -->
   <div class="hz2" id="hz2">
     <div class="hz2-inner" id="hz2-inner">
       <svg id="hz2-orbital-svg" viewBox="-10 30 910 465" role="img"
@@ -900,7 +901,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
     </div>
   </div>
 
-<!-- ═══ ZONE 3: LINEN BOTTOM (standalone) ═══ -->
+  <!-- ═══ ZONE 3: LINEN BOTTOM ═══ -->
   <div class="hz3" id="hz3">
     <div class="hz3-inner">
       <a href="planner.html" class="hz3-cta" id="hz3-cta">Build My Family's Week</a>
@@ -1451,46 +1452,9 @@ function spawnConfetti(x,y){
   setTimeout(function(){window.removeEventListener('scroll',onEs);},7500);
 })();
 
+// Nav is always visible — no scroll choreography needed
 
 
-
-// ═══ STORY ROTATION ═══
-(function(){
-  var stories=[
-    'Granddad broke his foot',
-    'She found a turtle in the backyard',
-    'Grandma showed us her childhood photos'
-  ];
-  var storyIndex=0;
-  var headlineEl=document.querySelector('.hz1-h1');
-  if(!headlineEl)return;
-  var dotSpan=headlineEl.querySelector('.hz-hl-dot');
-
-  function rotateStory(){
-    headlineEl.style.transition='opacity 0.75s cubic-bezier(0.16,1,0.3,1)';
-    headlineEl.style.opacity='0';
-    setTimeout(function(){
-      storyIndex=(storyIndex+1)%stories.length;
-      // Replace text node (first child), preserve the saffron dot span
-      var firstChild=headlineEl.firstChild;
-      if(firstChild&&firstChild.nodeType===3){
-        firstChild.textContent=stories[storyIndex];
-      } else {
-        headlineEl.insertBefore(document.createTextNode(stories[storyIndex]),headlineEl.firstChild);
-      }
-      headlineEl.style.opacity='1';
-    },750);
-  }
-
-  var rotationTimer;
-  function startRotation(){rotationTimer=setInterval(rotateStory,8000);}
-
-  headlineEl.addEventListener('mouseenter',function(){clearInterval(rotationTimer);});
-  headlineEl.addEventListener('mouseleave',function(){startRotation();});
-
-  // First story holds for 10s before rotation begins
-  setTimeout(startRotation,10000);
-})();
 
 // ═══ SAME ROOM — mouse + auto-rotate ═══
 (function(){
@@ -1603,6 +1567,10 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   var dwelling=false;
   var dwellStart=0;
   var dwellDuration=1500;
+  // Guide descent state
+  var guidingDown=false;
+  var guideDescentStart=0;
+  var guidePhase='none'; // none | descending | hovering
 
   // Birth sequence state
   var birthPhase='waiting'; // waiting, descending, tracing, flitting, returning, homeDwell, free
@@ -1675,8 +1643,8 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   // Track mouse movement for idle detection
   document.addEventListener('mousemove',function(){lastMoveTime=Date.now()});
 
-  // Scroll updates POIs
-  window.addEventListener('scroll',function(){updatePois();lastMoveTime=Date.now()},{passive:true});
+  // Scroll updates POIs and cancels guide descent
+  window.addEventListener('scroll',function(){updatePois();lastMoveTime=Date.now();guidingDown=false;guidePhase='none';},{passive:true});
 
   function tick(){
     t+=0.008;
@@ -1752,7 +1720,9 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
         ffy=birthHomeY+Math.cos(t*1.7)*2;
         var pulse=1+0.3*Math.sin(elapsed*0.006);
         ff.style.boxShadow='0 0 '+(8*pulse)+'px '+(3*pulse)+'px rgba(232,175,56,'+(0.4*pulse)+'),0 0 '+(20*pulse)+'px '+(6*pulse)+'px rgba(232,175,56,'+(0.15*pulse)+')';
-        if(elapsed>400){birthPhase='free';ff.style.boxShadow='';ffVx=0}
+        if(elapsed>400){birthPhase='free';ff.style.boxShadow='';ffVx=0;
+          setTimeout(function(){if(birthPhase==='free'&&!guidingDown){guidingDown=true;guideDescentStart=Date.now();guidePhase='descending';}},2000);
+        }
       }
 
       ff.style.left=ffx+'px';ff.style.top=ffy+'px';
@@ -1767,6 +1737,24 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
       if(!idle){idle=true;ff.classList.remove('alive')}
     } else {
       if(idle){idle=true;ff.classList.add('alive');idle=false}
+    }
+
+    // Guide descent: gently drift firefly to hero bottom as scroll invitation
+    if(guidingDown){
+      var guideTargetY=window.innerHeight*0.85;
+      var guideElapsed=Date.now()-guideDescentStart;
+      if(guidePhase==='descending'){
+        var guideDur=3500;
+        var guideP=Math.min(guideElapsed/guideDur,1);
+        // Cubic ease — gentle, editorial
+        var guideEased=guideP<0.5?4*guideP*guideP*guideP:1-Math.pow(-2*guideP+2,3)/2;
+        ffTargetY=ffTargetY+(guideTargetY-ffTargetY)*guideEased*0.04;
+        if(guideP>=1){guidePhase='hovering';guideDescentStart=Date.now();}
+      } else if(guidePhase==='hovering'){
+        var hoverT=Date.now()*0.0006;
+        ffTargetX=ffx+(Math.sin(hoverT)*35);
+        ffTargetY=guideTargetY+Math.sin(hoverT*2)*12;
+      }
     }
 
     // Pick target: drift toward current POI with noise, dwell on arrival
