@@ -104,8 +104,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 
 /* ═══ NAV ═══ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 300ms ease}
-.site-nav.show{opacity:1;pointer-events:auto}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;opacity:1;pointer-events:auto}
 .site-nav a:not(.nav-cta-sm),.nav-bar a:not(.nav-cta-sm){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
 .nav-bar{width:100%;max-width:var(--max-width);height:100%;padding:0 48px;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:40px}
@@ -629,7 +628,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 
 /* ═══ ARRIVAL MOMENT ═══ */
 .arrival{background:#F2F0EA;padding:0;position:relative}
-.arrival-inner{width:100%;max-width:1200px;margin:0 auto;padding:36px 48px 16px clamp(48px,10vw,14vw);display:flex;flex-direction:column;align-items:flex-start}
+.arrival-inner{width:100%;max-width:1200px;margin:0 auto;padding:64px 48px 16px clamp(48px,10vw,14vw);display:flex;flex-direction:column;align-items:flex-start}
 .arrival-wm{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(48px,4.5vw,64px);letter-spacing:-0.04em;color:#0C1020;display:inline-flex;align-items:baseline;line-height:1;opacity:0;animation:slowReveal 1.8s var(--expo) forwards 0.6s}
 .arrival-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron);transition:transform .15s}
 .arrival-wm:hover .k{animation:kGiggle 0.8s ease-in-out}
@@ -640,7 +639,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 @media(max-width:767px){.arrival-wm{font-size:36px}.arrival-tagline{font-size:10px;letter-spacing:0.14em}}
 
 /* ═══ HERO THREE-ZONE ARCHITECTURE ═══ */
-.hero-frame{height:100vh;height:100dvh;display:flex;flex-direction:column}
+.hero-frame{height:100vh;height:100dvh;display:flex;flex-direction:column;background:#F2F0EA}
 .hero-wrapper{flex:1;display:flex;flex-direction:column}
 .hero-sticky{position:relative!important;flex:1;display:flex;flex-direction:column;overflow:visible!important;background:transparent!important;padding:0!important}
 .orb-field{display:none}
@@ -657,7 +656,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .hz-q-dot{position:absolute;bottom:0.22em;left:50%;transform:translateX(-50%);width:clamp(5px,0.6vw,8px);height:clamp(5px,0.6vw,8px);border-radius:50%;background:#E8AF38;box-shadow:0 0 8px rgba(232,175,56,0.3);opacity:0}
 
 /* ── Zone 2: Dark Strip ── */
-.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);margin-top:8px;padding:28px 0 28px;position:relative;width:100%;overflow:visible;flex:1;display:flex;flex-direction:column}
+.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);padding:28px 0 28px;position:relative;width:100%;overflow:visible;min-height:80vh;display:flex;flex-direction:column}
 .hz2::before{content:'';position:absolute;top:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,rgba(242,240,234,0.12),transparent);pointer-events:none;z-index:1}
 .hz2::after{content:'';position:absolute;bottom:0;left:0;right:0;height:16px;background:linear-gradient(to top,rgba(242,240,234,0.06),transparent);pointer-events:none;z-index:1}
 .hz2-inner{max-width:960px;margin:0 auto;padding:0 32px;opacity:0;position:relative;overflow:visible;flex:1;display:flex;flex-direction:column;min-height:0}
@@ -686,7 +685,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 /* ── Responsive ── */
 @media(max-width:1024px){.hz2-inner{padding:0 32px}}
 @media(max-width:767px){
-  .arrival-inner{padding:40px 20px 28px 20px}
+  .arrival-inner{padding:64px 20px 16px 20px}
   .hz1{padding:0}
   .hz1-inner{padding:0 20px 0 20px}
   .hz2{margin-top:16px;padding:28px 0 32px}
@@ -696,30 +695,9 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   #hz2-orbital-svg{display:none}
   .hz2-mob-fallback{display:flex!important}
 }
-@media(max-width:480px){.arrival-inner{padding:32px 16px 24px 16px}.hz1-inner{padding:0 16px 0 16px}}
+@media(max-width:480px){.arrival-inner{padding:64px 16px 16px 16px}.hz1-inner{padding:0 16px 0 16px}}
 @media(prefers-reduced-motion:reduce){
   .hz1-eyebrow,.hz1-h1,.hz-hl-dot,.hz1-sub,.hz-q-dot,.hz2-inner,.hz2-anchor,.hz2-anchor-dot,.hz3-cta,.hz3-micro{opacity:1!important;transform:none!important}
-}
-/* ── Short viewport: hide hero wordmark, compress spacing ── */
-@media(max-height:750px){
-  /* Hide hero wordmark and tagline — nav handles branding */
-  #arrival{display:none!important}
-  /* Add top padding to clear the fixed nav bar (~60px tall) */
-  .hz1-inner{padding-top:70px}
-  /* Scale headline down proportionally */
-  .hz1-h1{font-size:clamp(1.6rem,3vw,2.4rem)!important}
-  /* Scale subheadline down to match */
-  .hz1-sub{font-size:clamp(0.85rem,1.6vw,1.1rem)!important}
-  /* Reduce spacing + compress dark strip padding */
-  .hz2{margin-top:4px;padding-top:12px;padding-bottom:8px}
-  /* Compress anchor line and CTA zone */
-  #hz3{padding-top:6px;padding-bottom:8px}
-  /* Scale anchor line text down */
-  .hz2-anchor{font-size:0.85em}
-  /* Scale CTA button down slightly */
-  .hz3-cta{padding:12px 28px;font-size:0.95rem}
-  /* Reduce micro-copy size */
-  .hz3-micro{font-size:0.75rem}
 }
 </style>
 <!-- Open Graph -->
@@ -755,8 +733,6 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   </div>
 </div>
 
-<div class="hero-wrapper">
-<div class="hero-sticky" id="hero">
   <!-- ═══ ZONE 1: LINEN ═══ -->
   <div class="hz1" id="hz1">
     <div class="hz1-inner">
@@ -765,7 +741,9 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
     </div>
   </div>
 
-  <!-- ═══ ZONE 2: DARK STRIP ═══ -->
+</div><!-- /.hero-frame -->
+
+<!-- ═══ ZONE 2: DARK STRIP (standalone) ═══ -->
   <div class="hz2" id="hz2">
     <div class="hz2-inner" id="hz2-inner">
       <svg id="hz2-orbital-svg" viewBox="-10 30 910 465" role="img"
@@ -922,7 +900,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
     </div>
   </div>
 
-  <!-- ═══ ZONE 3: LINEN BOTTOM ═══ -->
+<!-- ═══ ZONE 3: LINEN BOTTOM (standalone) ═══ -->
   <div class="hz3" id="hz3">
     <div class="hz3-inner">
       <a href="planner.html" class="hz3-cta" id="hz3-cta">Build My Family's Week</a>
@@ -1089,11 +1067,6 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
         </g>
       </svg>
     </div>
-
-
-</div>
-</div>
-</div><!-- /.hero-frame -->
 
 <div class="content-layer">
 
@@ -1478,29 +1451,46 @@ function spawnConfetti(x,y){
   setTimeout(function(){window.removeEventListener('scroll',onEs);},7500);
 })();
 
-// ═══ NAV ═══
+
+
+
+// ═══ STORY ROTATION ═══
 (function(){
-  var nav=document.getElementById('site-nav');
-  var arrival=document.getElementById('arrival');
-  var navRevealed=false;
-  window.addEventListener('scroll',function(){
-    if(!navRevealed){
-      // Before nav appears: fade wordmark with scroll progress
-      var fadeProgress=Math.min(window.scrollY/300,1);
-      if(arrival)arrival.style.opacity=1-fadeProgress;
-      // Trigger nav at 80% viewport height
-      if(window.scrollY>window.innerHeight*0.8){
-        navRevealed=true;
-        nav.classList.add('show');
-        // Permanently hide hero wordmark — both doors now closed
-        if(arrival){arrival.style.opacity=0;arrival.style.visibility='hidden';}
+  var stories=[
+    'Granddad broke his foot',
+    'She found a turtle in the backyard',
+    'Grandma showed us her childhood photos'
+  ];
+  var storyIndex=0;
+  var headlineEl=document.querySelector('.hz1-h1');
+  if(!headlineEl)return;
+  var dotSpan=headlineEl.querySelector('.hz-hl-dot');
+
+  function rotateStory(){
+    headlineEl.style.transition='opacity 0.75s cubic-bezier(0.16,1,0.3,1)';
+    headlineEl.style.opacity='0';
+    setTimeout(function(){
+      storyIndex=(storyIndex+1)%stories.length;
+      // Replace text node (first child), preserve the saffron dot span
+      var firstChild=headlineEl.firstChild;
+      if(firstChild&&firstChild.nodeType===3){
+        firstChild.textContent=stories[storyIndex];
+      } else {
+        headlineEl.insertBefore(document.createTextNode(stories[storyIndex]),headlineEl.firstChild);
       }
-    }
-    // navRevealed=true: do nothing. Hero stays hidden. Nav stays visible.
-  },{passive:true});
+      headlineEl.style.opacity='1';
+    },750);
+  }
+
+  var rotationTimer;
+  function startRotation(){rotationTimer=setInterval(rotateStory,8000);}
+
+  headlineEl.addEventListener('mouseenter',function(){clearInterval(rotationTimer);});
+  headlineEl.addEventListener('mouseleave',function(){startRotation();});
+
+  // First story holds for 10s before rotation begins
+  setTimeout(startRotation,10000);
 })();
-
-
 
 // ═══ SAME ROOM — mouse + auto-rotate ═══
 (function(){
