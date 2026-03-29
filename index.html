@@ -104,8 +104,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 
 /* ═══ NAV ═══ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;opacity:1;pointer-events:auto;transition:opacity 300ms ease}
-.site-nav.show{opacity:1;pointer-events:auto}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);pointer-events:none}
+.site-nav.show{transform:translateY(0);pointer-events:auto}
 .site-nav a:not(.nav-cta-sm),.nav-bar a:not(.nav-cta-sm){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
 .nav-bar{width:100%;max-width:var(--max-width);height:100%;padding:0 48px;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:40px}
@@ -707,11 +707,11 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .linen-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,transparent,rgba(16,24,48,0.12));pointer-events:none;z-index:2}
 
 /* Left text zone */
-.linen-hero-text{position:relative;z-index:1;flex:0 0 55%;max-width:55%;display:flex;flex-direction:column;padding-top:64px;overflow:hidden}
+.linen-hero-text{position:relative;z-index:1;flex:0 0 55%;max-width:55%;display:flex;flex-direction:column;padding-top:0;overflow:hidden}
 
 /* Override arrival-inner padding in new hero context */
 .linen-hero .arrival{background:transparent;padding:0;position:static}
-.linen-hero .arrival-inner{padding:0 48px 16px clamp(48px,10vw,14vw);max-width:none;margin:0;width:auto}
+.linen-hero .arrival-inner{padding:36px 48px 16px clamp(48px,10vw,14vw);max-width:none;margin:0;width:auto}
 
 /* Override hz1-inner padding in new hero context */
 .linen-hero .hz1-inner{padding:8px clamp(24px,4vw,48px) 0 clamp(48px,10vw,14vw);max-width:none;margin:0}
@@ -719,25 +719,19 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 /* Right circle zone */
 .hero-circle-zone{position:relative;z-index:1;flex:0 0 45%;max-width:45%;display:flex;align-items:center;justify-content:center}
 
-/* Hero CTA circle — luminous 3D saffron sphere */
+/* Hero CTA circle — matches orbital nucleus exactly */
 .hero-cta-circle{
   width:clamp(120px,18vw,200px);height:clamp(120px,18vw,200px);
   border-radius:50%;
-  background:radial-gradient(circle at 38% 35%,#F5D060 0%,#E8AF38 40%,#C8922E 70%,#A07628 100%);
-  box-shadow:4px 6px 0 rgba(232,175,56,0.25),0 8px 32px rgba(232,175,56,0.15),0 0 60px rgba(232,175,56,0.1);
+  background:radial-gradient(circle at 50% 50%,#FDE9A0 0%,#F0C050 30%,#E8AF38 55%,#C89030 80%,#A07020 100%);
+  box-shadow:0 0 40px rgba(232,175,56,0.12),0 0 80px rgba(232,175,56,0.07);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
   transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s cubic-bezier(0.16,1,0.3,1);
   position:relative;
 }
-.hero-cta-circle:hover{transform:scale(1.04);box-shadow:4px 6px 0 rgba(232,175,56,0.35),0 12px 48px rgba(232,175,56,0.3),0 0 80px rgba(232,175,56,0.2)}
-.hero-cta-circle-text{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(0.85rem,1.2vw,1.05rem);color:#0C1020;letter-spacing:0.08em;pointer-events:none}
+.hero-cta-circle:hover{transform:scale(1.03);box-shadow:0 0 50px rgba(232,175,56,0.18),0 0 100px rgba(232,175,56,0.10)}
+.hero-cta-circle-text{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(0.85rem,1.2vw,1.05rem);color:rgba(12,16,32,0.75);letter-spacing:0.08em;pointer-events:none}
 
-/* See the week link */
-.see-the-week{display:inline-block;margin-top:24px;margin-left:clamp(48px,10vw,14vw);font-family:'Inter',system-ui,sans-serif;font-weight:400;font-size:1rem;color:#4A4850;text-decoration:none;cursor:pointer;opacity:0;transform:translateY(8px)}
-.see-the-week:hover{text-decoration:underline;text-decoration-color:#E8AF38}
-.see-arrow{color:#E8AF38}
-@media(prefers-reduced-motion:reduce){.see-the-week{opacity:1!important;transform:none!important}}
 
 /* Mobile: stack text above circle */
 @media(max-width:768px){
@@ -747,7 +741,6 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   .hero-cta-circle{width:clamp(100px,28vw,150px);height:clamp(100px,28vw,150px)}
   .linen-hero .arrival-inner{padding:0 20px 12px 20px}
   .linen-hero .hz1-inner{padding:8px 20px 0 20px}
-  .see-the-week{margin-left:20px}
 }
 
 /* ── Nav saffron dot (replaces wordmark) ── */
@@ -797,8 +790,6 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
       <h1 class="hz1-h1" id="hz1-h1" aria-label="Granddad broke his foot">Granddad broke his foot<span class="hz-hl-dot" id="hz-hl-dot" aria-hidden="true"></span></h1>
       <p class="hz1-sub" id="hz1-sub">Guess what everyone learned that week<span style="color:#4A4850">?</span></p>
     </div>
-    <!-- See the week link -->
-    <a class="see-the-week" id="see-the-week" href="#hz2">See the week <span class="see-arrow">→</span></a>
   </div>
 
   <!-- Right CTA circle -->
@@ -1378,7 +1369,7 @@ function spawnConfetti(x,y){
   var EDI='cubic-bezier(0.16,1,0.3,1)';
 
   function showAll(){
-    ['hz1-h1','hz1-sub','see-the-week'].forEach(function(id){
+    ['hz1-h1','hz1-sub'].forEach(function(id){
       var el=document.getElementById(id);if(el){el.style.opacity='1';el.style.transform='none';}
     });
     var hld=document.getElementById('hz-hl-dot');if(hld)hld.style.opacity='1';
@@ -1425,7 +1416,6 @@ function spawnConfetti(x,y){
   rev('hz1-h1',        2000, 700);
   revO('hz-hl-dot',    2200, 400);
   rev('hz1-sub',       2700, 700);
-  rev('see-the-week',  3100, 600);
 
   // Zone 2: dark strip fades in
   setTimeout(function(){
@@ -1519,8 +1509,17 @@ function spawnConfetti(x,y){
   setTimeout(function(){window.removeEventListener('scroll',onEs);},7500);
 })();
 
-// ═══ NAV — always visible, no scroll trigger ═══
-// (nav opacity:1 set directly in CSS)
+// ═══ NAV — slides in past 70% hero, one-way door ═══
+(function(){
+  var nav=document.getElementById('site-nav');
+  var navRevealed=false;
+  window.addEventListener('scroll',function(){
+    if(!navRevealed&&window.scrollY>window.innerHeight*0.7){
+      navRevealed=true;
+      nav.classList.add('show');
+    }
+  },{passive:true});
+})();
 
 
 
