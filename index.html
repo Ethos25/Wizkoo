@@ -104,7 +104,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 
 /* ═══ NAV ═══ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 300ms ease}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;opacity:1;pointer-events:auto;transition:opacity 300ms ease}
 .site-nav.show{opacity:1;pointer-events:auto}
 .site-nav a:not(.nav-cta-sm),.nav-bar a:not(.nav-cta-sm){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
@@ -657,10 +657,10 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .hz-q-dot{position:absolute;bottom:0.22em;left:50%;transform:translateX(-50%);width:clamp(5px,0.6vw,8px);height:clamp(5px,0.6vw,8px);border-radius:50%;background:#E8AF38;box-shadow:0 0 8px rgba(232,175,56,0.3);opacity:0}
 
 /* ── Zone 2: Dark Strip ── */
-.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);margin-top:8px;padding:28px 0 28px;position:relative;width:100%;overflow:visible;flex:1;display:flex;flex-direction:column}
+.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);margin-top:0;padding:40px 0 40px;position:relative;width:100%;overflow:visible;min-height:80vh;display:flex;flex-direction:column}
 .hz2::before{content:'';position:absolute;top:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,rgba(242,240,234,0.12),transparent);pointer-events:none;z-index:1}
 .hz2::after{content:'';position:absolute;bottom:0;left:0;right:0;height:16px;background:linear-gradient(to top,rgba(242,240,234,0.06),transparent);pointer-events:none;z-index:1}
-.hz2-inner{max-width:960px;margin:0 auto;padding:0 32px;opacity:0;position:relative;overflow:visible;flex:1;display:flex;flex-direction:column;min-height:0}
+.hz2-inner{max-width:960px;margin:0 auto;padding:0 32px;opacity:0;position:relative;overflow:visible;display:flex;flex-direction:column;min-height:400px}
 #hz2-orbital-svg{flex:1;min-height:0;width:100%;height:100%;display:block;overflow:visible}
 .hz2-mob-fallback{display:none;flex-direction:column;align-items:center;gap:0;max-width:340px;width:100%;margin:0 auto;opacity:0}
 .hz2-mob-nucleus{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#FDE9A0 0%,#F0C050 30%,#E8AF38 55%,#C89030 80%,#A07020 100%);box-shadow:0 0 24px rgba(232,175,56,0.4),0 0 48px rgba(232,175,56,0.15);margin:0 auto 24px}
@@ -700,26 +700,59 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 @media(prefers-reduced-motion:reduce){
   .hz1-eyebrow,.hz1-h1,.hz-hl-dot,.hz1-sub,.hz-q-dot,.hz2-inner,.hz2-anchor,.hz2-anchor-dot,.hz3-cta,.hz3-micro{opacity:1!important;transform:none!important}
 }
-/* ── Short viewport: hide hero wordmark, compress spacing ── */
-@media(max-height:750px){
-  /* Hide hero wordmark and tagline — nav handles branding */
-  #arrival{display:none!important}
-  /* Add top padding to clear the fixed nav bar (~60px tall) */
-  .hz1-inner{padding-top:70px}
-  /* Scale headline down proportionally */
-  .hz1-h1{font-size:clamp(1.6rem,3vw,2.4rem)!important}
-  /* Scale subheadline down to match */
-  .hz1-sub{font-size:clamp(0.85rem,1.6vw,1.1rem)!important}
-  /* Reduce spacing + compress dark strip padding */
-  .hz2{margin-top:4px;padding-top:12px;padding-bottom:8px}
-  /* Compress anchor line and CTA zone */
-  #hz3{padding-top:6px;padding-bottom:8px}
-  /* Scale anchor line text down */
-  .hz2-anchor{font-size:0.85em}
-  /* Scale CTA button down slightly */
-  .hz3-cta{padding:12px 28px;font-size:0.95rem}
-  /* Reduce micro-copy size */
-  .hz3-micro{font-size:0.75rem}
+/* height breakpoint removed — hero is always full viewport */
+
+/* ═══ LINEN HERO — new structure ═══ */
+.linen-hero{position:relative;height:100vh;height:100dvh;background:#F2F0EA;display:flex;flex-direction:row;align-items:stretch;overflow:hidden}
+.linen-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,transparent,rgba(16,24,48,0.12));pointer-events:none;z-index:2}
+
+/* Ghost orbital paths — subtle background watermark */
+.ghost-orbs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+
+/* Left text zone */
+.linen-hero-text{position:relative;z-index:1;flex:0 0 55%;max-width:55%;display:flex;flex-direction:column;padding-top:64px;overflow:hidden}
+
+/* Override arrival-inner padding in new hero context */
+.linen-hero .arrival{background:transparent;padding:0;position:static}
+.linen-hero .arrival-inner{padding:0 48px 16px clamp(48px,10vw,14vw);max-width:none;margin:0;width:auto}
+
+/* Override hz1-inner padding in new hero context */
+.linen-hero .hz1-inner{padding:8px clamp(24px,4vw,48px) 0 clamp(48px,10vw,14vw);max-width:none;margin:0}
+
+/* Right circle zone */
+.hero-circle-zone{position:relative;z-index:1;flex:0 0 45%;max-width:45%;display:flex;align-items:center;justify-content:center}
+
+/* Hero CTA circle — luminous 3D saffron sphere */
+.hero-cta-circle{
+  width:clamp(160px,25vw,280px);height:clamp(160px,25vw,280px);
+  border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,#F5D060 0%,#E8AF38 40%,#C8922E 70%,#A07628 100%);
+  box-shadow:4px 6px 0 rgba(232,175,56,0.25),0 8px 32px rgba(232,175,56,0.15),0 0 60px rgba(232,175,56,0.1);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s cubic-bezier(0.16,1,0.3,1);
+  position:relative;
+}
+.hero-cta-circle::before{content:'';position:absolute;inset:-32px;border-radius:50%;background:radial-gradient(circle,rgba(232,175,56,0.14) 0%,transparent 70%);pointer-events:none;z-index:-1}
+.hero-cta-circle:hover{transform:scale(1.04);box-shadow:4px 6px 0 rgba(232,175,56,0.35),0 12px 48px rgba(232,175,56,0.3),0 0 80px rgba(232,175,56,0.2)}
+.hero-cta-circle-text{font-family:'Inter',system-ui,sans-serif;font-weight:500;font-size:clamp(0.9rem,1.4vw,1.2rem);color:#0C1020;letter-spacing:-0.01em;pointer-events:none}
+
+/* See the week link */
+.see-the-week{display:inline-block;margin-top:24px;margin-left:clamp(48px,10vw,14vw);font-family:'Inter',system-ui,sans-serif;font-weight:400;font-size:1rem;color:#4A4850;text-decoration:none;cursor:pointer;opacity:0;transform:translateY(8px)}
+.see-the-week:hover{text-decoration:underline;text-decoration-color:#E8AF38}
+.see-arrow{color:#E8AF38}
+@media(prefers-reduced-motion:reduce){.see-the-week{opacity:1!important;transform:none!important}}
+
+/* Mobile: stack text above circle */
+@media(max-width:768px){
+  .linen-hero{flex-direction:column;height:auto;min-height:100vh;min-height:100dvh;overflow-y:auto}
+  .linen-hero-text{flex:none;width:100%;max-width:100%;padding-top:72px;overflow:visible}
+  .hero-circle-zone{flex:none;width:100%;max-width:100%;padding:24px 0 40px}
+  .ghost-orbs{display:none}
+  .hero-cta-circle{width:clamp(120px,35vw,180px);height:clamp(120px,35vw,180px)}
+  .linen-hero .arrival-inner{padding:0 20px 12px 20px}
+  .linen-hero .hz1-inner{padding:8px 20px 0 20px}
+  .see-the-week{margin-left:20px}
 }
 </style>
 <!-- Open Graph -->
@@ -747,26 +780,45 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   <div class="nav-bar"><span class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span><div class="nav-center"><a href="planner.html" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div><a href="planner.html" class="nav-cta-sm">Launch</a></div>
 </div>
 
-<div class="hero-frame">
-<div class="arrival" id="arrival">
-  <div class="arrival-inner">
-    <span class="arrival-wm" id="hero-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span>
-    <div class="arrival-tagline hero-eyebrow">WHERE LIFE BECOMES THE LESSON</div>
-  </div>
-</div>
+<!-- ═══ LINEN HERO ═══ -->
+<section class="linen-hero" id="linen-hero">
+  <!-- Ghost orbital paths: subtle background watermark -->
+  <svg class="ghost-orbs" aria-hidden="true" viewBox="0 0 960 540" preserveAspectRatio="xMidYMid meet">
+    <ellipse cx="500" cy="270" rx="310" ry="178" transform="rotate(-32 500 270)" stroke="#0C1020" stroke-width="1.2" fill="none" stroke-opacity="0.06"/>
+    <ellipse cx="500" cy="270" rx="280" ry="160" transform="rotate(-8 500 270)" stroke="#0C1020" stroke-width="1.0" fill="none" stroke-opacity="0.06"/>
+    <ellipse cx="500" cy="270" rx="240" ry="135" transform="rotate(25 500 270)" stroke="#0C1020" stroke-width="0.8" fill="none" stroke-opacity="0.05"/>
+  </svg>
 
-<div class="hero-wrapper">
-<div class="hero-sticky" id="hero">
-  <!-- ═══ ZONE 1: LINEN ═══ -->
-  <div class="hz1" id="hz1">
-    <div class="hz1-inner">
+  <!-- Left text zone -->
+  <div class="linen-hero-text">
+    <!-- Wordmark + descriptor -->
+    <div class="arrival" id="arrival">
+      <div class="arrival-inner">
+        <span class="arrival-wm" id="hero-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span>
+        <div class="arrival-tagline hero-eyebrow">WEEKLY LEARNING PLANS. BUILT AROUND YOUR PEOPLE.</div>
+      </div>
+    </div>
+    <!-- Headline + subheadline -->
+    <div class="hz1-inner" id="hz1">
       <h1 class="hz1-h1" id="hz1-h1" aria-label="Granddad broke his foot">Granddad broke his foot<span class="hz-hl-dot" id="hz-hl-dot" aria-hidden="true"></span></h1>
       <p class="hz1-sub" id="hz1-sub">Guess what everyone learned that week<span style="color:#4A4850">?</span></p>
     </div>
+    <!-- See the week link -->
+    <a class="see-the-week" id="see-the-week" href="#hz2">See the week <span class="see-arrow">→</span></a>
   </div>
 
-  <!-- ═══ ZONE 2: DARK STRIP ═══ -->
-  <div class="hz2" id="hz2">
+  <!-- Right CTA circle -->
+  <div class="hero-circle-zone">
+    <div class="hero-cta-circle" id="hero-cta-circle" role="button" tabindex="0"
+         onclick="location.href='#early-access'"
+         onkeydown="if(event.key==='Enter')location.href='#early-access'">
+      <span class="hero-cta-circle-text">Join us</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ORBITAL SECTION: dark strip, standalone ═══ -->
+<div class="hz2" id="hz2">
     <div class="hz2-inner" id="hz2-inner">
       <svg id="hz2-orbital-svg" viewBox="-10 30 910 465" role="img"
            aria-label="Orbital diagram showing seven school subjects — reading, writing, math, science, history, geography, and art — all connected to one central theme.">
@@ -922,21 +974,20 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
     </div>
   </div>
 
-  <!-- ═══ ZONE 3: LINEN BOTTOM ═══ -->
-  <div class="hz3" id="hz3">
-    <div class="hz3-inner">
-      <a href="planner.html" class="hz3-cta" id="hz3-cta">Build My Family's Week</a>
-      <div class="hz3-micro" id="hz3-micro">Founding families are in. You're next.</div>
-    </div>
+<!-- ═══ CTA ZONE (linen, below orbital) ═══ -->
+<div class="hz3" id="hz3">
+  <div class="hz3-inner">
+    <a href="planner.html" class="hz3-cta" id="hz3-cta">Build My Family's Week</a>
+    <div class="hz3-micro" id="hz3-micro">Founding families are in. You're next.</div>
   </div>
+</div>
 
-  <!-- legacy hero-content placeholder for firefly birth (hidden) -->
-  <div class="hero-content" id="hero-content" style="display:none">
-    <div class="hero-brand"><span class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span></div>
-  </div>
+<!-- legacy hidden divs — firefly birth refs -->
+<div class="hero-content" id="hero-content" style="display:none">
+  <div class="hero-brand"><span class="wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span></div>
+</div>
 
-  <!-- dummy anchor for old JS refs -->
-  <div id="hero-orbital-wrap" style="display:none">
+<div id="hero-orbital-wrap" style="display:none">
       <svg id="hero-orbital-svg" class="hero-orbital-svg" viewBox="0 0 860 440"
            role="img" aria-label="Orbital diagram: six subjects — Reading, Math, Science, Geography, Art, Chemistry — all orbiting one event: Granddad broke his foot.">
         <defs>
@@ -1088,12 +1139,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
           <text x="12" y="228" font-family="'Inter',system-ui,sans-serif" font-size="12" fill="#0C1020" font-weight="500">every bone in your body.</text>
         </g>
       </svg>
-    </div>
-
-
 </div>
-</div>
-</div><!-- /.hero-frame -->
 
 <div class="content-layer">
 
@@ -1338,7 +1384,7 @@ function spawnConfetti(x,y){
   var EDI='cubic-bezier(0.16,1,0.3,1)';
 
   function showAll(){
-    ['hz1-h1','hz1-sub'].forEach(function(id){
+    ['hz1-h1','hz1-sub','see-the-week'].forEach(function(id){
       var el=document.getElementById(id);if(el){el.style.opacity='1';el.style.transform='none';}
     });
     var hld=document.getElementById('hz-hl-dot');if(hld)hld.style.opacity='1';
@@ -1382,9 +1428,10 @@ function spawnConfetti(x,y){
   }
 
   // Zone 1 reveals
-  rev('hz1-h1',      2000, 700);
-  revO('hz-hl-dot',  2200, 400);
-  rev('hz1-sub',     2700, 700);
+  rev('hz1-h1',        2000, 700);
+  revO('hz-hl-dot',    2200, 400);
+  rev('hz1-sub',       2700, 700);
+  rev('see-the-week',  3100, 600);
 
   // Zone 2: dark strip fades in
   setTimeout(function(){
@@ -1478,27 +1525,8 @@ function spawnConfetti(x,y){
   setTimeout(function(){window.removeEventListener('scroll',onEs);},7500);
 })();
 
-// ═══ NAV ═══
-(function(){
-  var nav=document.getElementById('site-nav');
-  var arrival=document.getElementById('arrival');
-  var navRevealed=false;
-  window.addEventListener('scroll',function(){
-    if(!navRevealed){
-      // Before nav appears: fade wordmark with scroll progress
-      var fadeProgress=Math.min(window.scrollY/300,1);
-      if(arrival)arrival.style.opacity=1-fadeProgress;
-      // Trigger nav at 80% viewport height
-      if(window.scrollY>window.innerHeight*0.8){
-        navRevealed=true;
-        nav.classList.add('show');
-        // Permanently hide hero wordmark — both doors now closed
-        if(arrival){arrival.style.opacity=0;arrival.style.visibility='hidden';}
-      }
-    }
-    // navRevealed=true: do nothing. Hero stays hidden. Nav stays visible.
-  },{passive:true});
-})();
+// ═══ NAV — always visible, no scroll trigger ═══
+// (nav opacity:1 set directly in CSS)
 
 
 
@@ -1613,6 +1641,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   var dwelling=false;
   var dwellStart=0;
   var dwellDuration=1500;
+  var orbitAngle=0;
 
   // Birth sequence state
   var birthPhase='waiting'; // waiting, descending, tracing, flitting, returning, homeDwell, free
@@ -1626,6 +1655,9 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   var pois=[];
   function updatePois(){
     pois=[];
+    // Hero CTA circle — primary POI, firefly orbits this after birth
+    var hcc=document.getElementById('hero-cta-circle');
+    if(hcc){var r=hcc.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2,r:r.width/2,orbit:true})}
     // Plan circle CTA
     var pc=document.querySelector('.btn-circle');
     if(pc){var r=pc.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
@@ -1762,7 +1794,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
         ffy=birthHomeY+Math.cos(t*1.7)*2;
         var pulse=1+0.3*Math.sin(elapsed*0.006);
         ff.style.boxShadow='0 0 '+(8*pulse)+'px '+(3*pulse)+'px rgba(232,175,56,'+(0.4*pulse)+'),0 0 '+(20*pulse)+'px '+(6*pulse)+'px rgba(232,175,56,'+(0.15*pulse)+')';
-        if(elapsed>400){birthPhase='free';ff.style.boxShadow='';ffVx=0}
+        if(elapsed>400){birthPhase='free';ff.style.boxShadow='';ffVx=0;currentPoi=0;updatePois();}
       }
 
       ff.style.left=ffx+'px';ff.style.top=ffy+'px';
@@ -1787,13 +1819,25 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
         var distPoi=Math.sqrt(dxPoi*dxPoi+dyPoi*dyPoi);
 
         if(dwelling){
-          // Hovering at POI: subtle float, brightness pulse
           var dwellElapsed=now-dwellStart;
-          ffTargetX=poi.x+Math.sin(t*2)*3;
-          ffTargetY=poi.y+Math.cos(t*1.7)*3;
-          var pulse=1+0.4*Math.sin(dwellElapsed*0.004);
-          ff.style.boxShadow='0 0 '+(8*pulse)+'px '+(3*pulse)+'px rgba(232,175,56,'+(0.4*pulse)+'),0 0 '+(20*pulse)+'px '+(6*pulse)+'px rgba(232,175,56,'+(0.15*pulse)+')';
-          if(dwellElapsed>dwellDuration){
+          var thisDwell=poi.orbit?8000:dwellDuration;
+          if(poi.orbit){
+            // Orbit the CTA circle: elliptical path with slight wobble
+            orbitAngle+=0.012+Math.sin(orbitAngle*1.3)*0.002;
+            var orbitRx=(poi.r||100)+35;
+            var orbitRy=orbitRx*0.65;
+            ffTargetX=poi.x+orbitRx*Math.cos(orbitAngle)+Math.sin(t*0.7)*8;
+            ffTargetY=poi.y+orbitRy*Math.sin(orbitAngle)+Math.cos(t*0.5)*5;
+            var pulse=1+0.2*Math.sin(dwellElapsed*0.005);
+            ff.style.boxShadow='0 0 '+(6*pulse)+'px '+(2*pulse)+'px rgba(232,175,56,'+(0.35*pulse)+'),0 0 '+(16*pulse)+'px '+(4*pulse)+'px rgba(232,175,56,'+(0.12*pulse)+')';
+          } else {
+            // Normal dwell: subtle float near POI
+            ffTargetX=poi.x+Math.sin(t*2)*3;
+            ffTargetY=poi.y+Math.cos(t*1.7)*3;
+            var pulse=1+0.4*Math.sin(dwellElapsed*0.004);
+            ff.style.boxShadow='0 0 '+(8*pulse)+'px '+(3*pulse)+'px rgba(232,175,56,'+(0.4*pulse)+'),0 0 '+(20*pulse)+'px '+(6*pulse)+'px rgba(232,175,56,'+(0.15*pulse)+')';
+          }
+          if(dwellElapsed>thisDwell){
             dwelling=false;
             ff.style.boxShadow='';
             currentPoi=(currentPoi+1)%pois.length;
@@ -1801,12 +1845,14 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
             poiTimer=0;
           }
         } else {
+          var attractDist=poi.orbit?(poi.r||100)+60:25;
           ffTargetX=poi.x+noise(t*0.3)*70;
           ffTargetY=poi.y;
-          // Check if arrived near POI
-          if(distPoi<25&&Math.abs(ffVx)<1){
+          // Enter dwell/orbit when close enough
+          if(distPoi<attractDist&&(!poi.orbit||Math.abs(ffVx)<3)){
             dwelling=true;
             dwellStart=now;
+            if(poi.orbit){orbitAngle=Math.atan2(ffy-poi.y,ffx-poi.x);}
             ffVx=0;
           }
           poiTimer++;
