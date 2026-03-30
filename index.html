@@ -714,7 +714,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .linen-hero .hz1-inner{padding:20px clamp(24px,4vw,48px) 0 clamp(48px,10vw,14vw);max-width:none;margin:0}
 
 /* Right circle zone */
-.hero-circle-zone{position:relative;z-index:100;flex:0 0 45%;max-width:45%;display:flex;align-items:flex-start;justify-content:center}
+.hero-circle-zone{position:relative;z-index:100;flex:0 0 45%;max-width:45%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:20px;padding-top:clamp(48px,8vh,80px)}
 
 /* Hero CTA circle — matches orbital nucleus exactly */
 @keyframes sphere-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.008)}}
@@ -795,7 +795,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   </div>
 
   <!-- Right CTA circle -->
-  <div class="hero-circle-zone" style="flex-direction:column;gap:14px;padding-top:clamp(48px,8vh,80px)">
+  <div class="hero-circle-zone">
     <div class="hero-cta-circle" id="hero-cta-circle" role="button" tabindex="0"
          onclick="location.href='#early-access'"
          onkeydown="if(event.key==='Enter')location.href='#early-access'">
