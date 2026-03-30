@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>wizkoo</title>
-<meta name="description" content="Themed learning plans for children ages 2 to 12. Homeschool, after school, or summer.">
+<title>Wizkoo | Weekly Learning Plans for Families, Ages 2-12</title>
+<meta name="description" content="Type what your kid is into. Get a full week of hands-on learning in 15 seconds. Secular, science-based curriculum with geography and science games. One price, all your kids. Try free.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -122,6 +122,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nav-center button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
 .nav-cta-sm{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:8px 18px;background:var(--saffron)!important;color:var(--ink)!important;text-decoration:none!important;transition:background .3s,transform .2s;white-space:nowrap;flex-shrink:0;border-radius:3px;border:none!important;box-shadow:none!important;outline:none!important}
 .nav-cta-sm:hover{background:#D4A030;transform:translateY(-1px)}
+.nav-launch{font-family:'Space Mono',monospace;font-weight:700;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:var(--saffron);color:var(--ink);text-decoration:none;white-space:nowrap;flex-shrink:0;border-radius:2px;border:none;outline:none;transition:background .2s,transform .2s;display:inline-block}
+.nav-launch:hover{background:#D4A030;transform:translateY(-1px)}
+@media(max-width:768px){.nav-launch{font-size:8px;padding:6px 12px}}
 
 /* ═══ HERO ═══ */
 .hero-wrapper{position:relative;height:200vh}
@@ -656,10 +659,10 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .hz-q-dot{position:absolute;bottom:0.22em;left:50%;transform:translateX(-50%);width:clamp(5px,0.6vw,8px);height:clamp(5px,0.6vw,8px);border-radius:50%;background:#E8AF38;box-shadow:0 0 8px rgba(232,175,56,0.3);opacity:0}
 
 /* ── Zone 2: Dark Strip ── */
-.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);margin-top:0;padding:40px 0 40px;position:relative;width:100%;overflow:visible;min-height:80vh;display:flex;flex-direction:column}
+.hz2{background-color:#101830;background-image:repeating-linear-gradient(135deg,rgba(240,242,248,0.015),rgba(240,242,248,0.015) 1px,transparent 1px,transparent 12px),radial-gradient(ellipse at 50% 50%,#182848 0%,#101830 75%);margin-top:0;padding:48px 0 48px;position:relative;width:100%;overflow:visible;min-height:100dvh;display:flex;flex-direction:column}
 .hz2::before{content:'';position:absolute;top:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,rgba(242,240,234,0.12),transparent);pointer-events:none;z-index:1}
 .hz2::after{content:'';position:absolute;bottom:0;left:0;right:0;height:16px;background:linear-gradient(to top,rgba(242,240,234,0.06),transparent);pointer-events:none;z-index:1}
-.hz2-inner{max-width:960px;margin:0 auto;padding:0 32px;opacity:0;position:relative;overflow:visible;display:flex;flex-direction:column;min-height:400px}
+.hz2-inner{max-width:960px;margin:0 auto;padding:48px 32px;opacity:0;position:relative;overflow:visible;display:flex;flex-direction:column;min-height:528px}
 #hz2-orbital-svg{flex:1;min-height:0;width:100%;height:100%;display:block;overflow:visible}
 .hz2-mob-fallback{display:none;flex-direction:column;align-items:center;gap:0;max-width:340px;width:100%;margin:0 auto;opacity:0}
 .hz2-mob-nucleus{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#FDE9A0 0%,#F0C050 30%,#E8AF38 55%,#C89030 80%,#A07020 100%);box-shadow:0 0 24px rgba(232,175,56,0.4),0 0 48px rgba(232,175,56,0.15);margin:0 auto 24px}
@@ -669,11 +672,6 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .hz2-mob-label{font-family:'Sora',sans-serif;font-weight:600;font-size:10px;letter-spacing:0.04em;text-transform:uppercase;color:#E8AF38;display:block;margin-bottom:3px}
 .hz2-mob-text{font-family:'Inter',system-ui,sans-serif;font-size:13px;line-height:1.7;color:#C8CDDA;letter-spacing:0.005em}
 
-/* ── Zone 2: Anchor (inside dark strip) ── */
-.hz2-anchor{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(13px,1.5vw,17px);line-height:1.6;letter-spacing:-0.02em;color:#F0F2F8;text-align:center;padding:6px 32px 2px;display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;transform:translateY(8px)}
-.hz2-anchor-l1{white-space:nowrap}
-.hz2-anchor-l2{white-space:nowrap}
-.hz2-anchor-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#E8AF38;box-shadow:0 0 10px rgba(232,175,56,0.6);margin-left:3px;vertical-align:baseline;transform:translateY(2px);opacity:0}
 
 /* ── Zone 3: Linen Bottom ── */
 .hz3{background:#F2F0EA;padding:12px 48px 16px}
@@ -697,7 +695,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 }
 @media(max-width:480px){.arrival-inner{padding:32px 16px 24px 16px}.hz1-inner{padding:0 16px 0 16px}}
 @media(prefers-reduced-motion:reduce){
-  .hz1-eyebrow,.hz1-h1,.hz-hl-dot,.hz1-sub,.hz-q-dot,.hz2-inner,.hz2-anchor,.hz2-anchor-dot,.hz3-cta,.hz3-micro{opacity:1!important;transform:none!important}
+  .hz1-eyebrow,.hz1-h1,.hz-hl-dot,.hz1-sub,.hz-q-dot,.hz2-inner,.hz3-cta,.hz3-micro{opacity:1!important;transform:none!important}
 }
 /* height breakpoint removed — hero is always full viewport */
 
@@ -775,7 +773,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="planner.html" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div></div>
+  <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="planner.html" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div><a href="#early-access" class="nav-launch">Launch</a></div>
 </div>
 
 <!-- ═══ LINEN HERO ═══ -->
@@ -797,12 +795,13 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   </div>
 
   <!-- Right CTA circle -->
-  <div class="hero-circle-zone">
+  <div class="hero-circle-zone" style="flex-direction:column;gap:14px;padding-top:clamp(48px,8vh,80px)">
     <div class="hero-cta-circle" id="hero-cta-circle" role="button" tabindex="0"
          onclick="location.href='#early-access'"
          onkeydown="if(event.key==='Enter')location.href='#early-access'">
       <span class="hero-cta-circle-text">Join</span>
     </div>
+    <p style="font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:#4A4850;text-align:center;line-height:1.7;opacity:0.75;max-width:220px;margin:0 auto">No credit card.<br>No per-child pricing.<br>Cancel anytime.</p>
   </div>
 </section>
 
@@ -940,12 +939,6 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
           <text x="424" y="471" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">medicine forever.</text>
         </g>
       </svg>
-
-      <!-- Anchor thesis line — inside dark strip, three saffron circles, two lines -->
-      <div class="hz2-anchor" id="hz2-anchor">
-        <div class="hz2-anchor-l1"><span style="color:#F0F2F8">One moment</span><span class="hz2-anchor-dot" id="hz2-anchor-dot-1" aria-hidden="true" style="margin-right:14px"></span><span style="color:#E8AF38">Reading, writing, math, science, history, geography, art</span><span class="hz2-anchor-dot" id="hz2-anchor-dot-2" aria-hidden="true"></span></div>
-        <div class="hz2-anchor-l2"><span style="color:#F0F2F8">Connected</span><span class="hz2-anchor-dot" id="hz2-anchor-dot" aria-hidden="true"></span></div>
-      </div>
 
       <!-- Mobile fallback (shown below 768px) -->
       <div class="hz2-mob-fallback" id="hz2-mob-fallback">
@@ -1279,10 +1272,10 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 <section class="philo"><div class="philo-left reveal"><h2>The hard part was never teaching<span class="sp"></span><br>It was knowing <strong>what to teach next</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>He can't read yet. But he's learning from her.</h3><p>When every child studies the same theme at their own level, the 7-year-old becomes the teacher. The 4-year-old becomes the student. The 2-year-old just wants to be in the room. That's not a side effect. That's the whole point.</p></div><div class="phi"><h3>Sunday night is yours again.</h3><p>Type one theme. See the week. Walk into Monday knowing exactly what to do.</p></div><div class="phi"><h3>Your kid was never the one in the textbook.</h3><p>Every curriculum you've tried was built for a child who sits still, finishes worksheets, and fits neatly into a grade. Yours doesn't. This builds a week around the children you actually have. Their ages, their reading levels, the way they actually learn.</p></div><div class="phi"><h3>She's five. She reads like she's seven. We noticed.</h3><p>We don't sort children by birthday. A 5-year-old who reads at a second-grade level gets second-grade reading. A 7-year-old who needs more time with addition gets more time with addition. Age is a line on a form. Readiness is what we build for.</p></div></div></section>
 
 <!-- FAQ -->
-<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library of isolated subjects. Outschool is a marketplace of individual classes. Wizkoo connects everything through a single theme and builds the whole week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div></div></div></section>
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library of isolated subjects. Outschool is a marketplace of individual classes. Wizkoo connects everything through a single theme and builds the whole week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
 
 <!-- CTA -->
-<section class="cta-dark cta-reveal" id="early-access"><h2>One moment<span class="sp"></span><br>Every subject connected<span class="sp"></span><br><strong>Build your family's week<span class="sp"></span></strong></h2><p class="cta-status">Live with founding families.</p><p class="cta-sub">Early access opens soon. Leave your email and we'll reach out when it's your turn.</p><form name="early-access" method="POST" data-netlify="true" class="cta-form" id="cta-form"><div class="cta-form-row"><input type="email" name="email" placeholder="Your email" required class="cta-input" aria-label="Email address"><button type="submit" class="cta-submit">Build My Family's Week</button></div></form><div class="cta-success" id="cta-success" hidden><p class="cta-confirmed">You're on the list. We'll be in touch soon.</p></div></section>
+<section class="cta-dark cta-reveal" id="early-access"><h2>One moment<span class="sp"></span><br>Every subject connected<span class="sp"></span></h2><p class="cta-status">Founding families are in. You're next.</p><p class="cta-sub">Early access opens soon. Leave your email and we'll reach out when it's your turn.</p><form name="early-access" method="POST" data-netlify="true" class="cta-form" id="cta-form"><div class="cta-form-row"><input type="email" name="email" placeholder="Your email" required class="cta-input" aria-label="Email address"><button type="submit" class="cta-submit">Build My Family's Week</button></div></form><div class="cta-success" id="cta-success" hidden><p class="cta-confirmed">You're on the list. We'll be in touch soon.</p></div></section>
 </div>
 
 <footer>
@@ -1386,8 +1379,6 @@ function spawnConfetti(x,y){
         var el=document.getElementById(id);if(el)el.setAttribute('opacity','1');
       });
     });
-    var ha=document.getElementById('hz2-anchor');if(ha){ha.style.opacity='1';ha.style.transform='none';}
-    ['hz2-anchor-dot','hz2-anchor-dot-1','hz2-anchor-dot-2'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.opacity='1';});
     ['hz3-cta','hz3-micro'].forEach(function(id){
       var el=document.getElementById(id);if(el){el.style.opacity='1';el.style.transform='none';}
     });
@@ -1469,11 +1460,6 @@ function spawnConfetti(x,y){
     dotMs+=220;
   });
 
-  // hz2 anchor thesis line — appears after orbital diagram settles
-  rev('hz2-anchor',       5500,600);
-  revO('hz2-anchor-dot',  5700,400);
-  revO('hz2-anchor-dot-1',5700,400);
-  revO('hz2-anchor-dot-2',5700,400);
   // Zone 3 — CTA + micro only
   revO('hz3-cta',       5800,500);
   revO('hz3-micro',     6000,500);
