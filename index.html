@@ -717,8 +717,8 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 .hero-circle-zone{position:relative;z-index:100;flex:0 0 45%;max-width:45%;display:flex;align-items:flex-start;justify-content:center}
 
 /* Fear-killer micro-copy — absolutely positioned below the sphere */
-.hero-sphere-micro{position:absolute;top:calc(clamp(90px,12vw,150px) + 14px);left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:#4A4850;text-align:center;line-height:1.8;opacity:0.72;white-space:nowrap;pointer-events:none}
-@media(max-width:768px){.hero-sphere-micro{top:calc(clamp(100px,28vw,150px) + 14px);font-size:0.65rem}}
+.hero-sphere-micro{position:absolute;top:calc(clamp(90px,12vw,150px) + 18px);left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:0.57rem;letter-spacing:0.13em;text-transform:uppercase;color:#8A8688;text-align:center;white-space:nowrap;line-height:1;pointer-events:none}
+@media(max-width:375px){.hero-sphere-micro{line-height:2.2}.hsm-sep{display:none}.hsm-phrase{display:block;text-align:center}}
 
 /* Hero CTA circle — matches orbital nucleus exactly */
 @keyframes sphere-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.008)}}
@@ -805,7 +805,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
          onkeydown="if(event.key==='Enter')location.href='#early-access'">
       <span class="hero-cta-circle-text">Join</span>
     </div>
-    <p class="hero-sphere-micro">No credit card.<br>No per-child pricing.<br>Cancel anytime.</p>
+    <p class="hero-sphere-micro"><span class="hsm-phrase">No credit card</span><span class="hsm-sep">&nbsp;·&nbsp;</span><span class="hsm-phrase">No per-child pricing</span><span class="hsm-sep">&nbsp;·&nbsp;</span><span class="hsm-phrase">Cancel anytime</span></p>
   </div>
 </section>
 
