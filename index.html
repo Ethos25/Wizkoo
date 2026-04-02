@@ -478,7 +478,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   .cursor{display:none!important}
 
   /* Firefly: bump size, pointer-events for tap catch */
-  .firefly{width:7px;height:7px}
+  .firefly{width:7px;height:7px;box-shadow:0 0 10px 4px rgba(232,175,56,0.45),0 0 24px 8px rgba(232,175,56,0.18)}
 
   /* Tap ripple */
   .tap-ripple{position:fixed;width:0;height:0;border-radius:50%;border:1.5px solid var(--saffron);pointer-events:none;z-index:9999;mix-blend-mode:exclusion;animation:tapRipple .35s var(--expo) forwards}
@@ -491,33 +491,14 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 }
 
 /* ═══ FIREFLY ═══ */
-.firefly{position:fixed;width:8px;height:8px;border-radius:50%;background:#E8AF38;pointer-events:none;z-index:9998;opacity:0;overflow:visible;transition:opacity .8s}
+.firefly{position:fixed;width:8px;height:8px;border-radius:50%;background:#E8AF38;pointer-events:none;z-index:9998;opacity:0;box-shadow:0 0 6px 2px rgba(232,175,56,0.5),0 0 12px 4px rgba(232,175,56,0.2);transition:opacity .8s}
 .firefly.alive{opacity:1}
-.firefly.caught{box-shadow:0 0 8px 3px rgba(107,191,107,0.5),0 0 20px 6px rgba(107,191,107,0.2)}
-.firefly.caught .ff-gs{fill:#6BBF6B}
-/* SVG wrapper — centered on 8x8 anchor, tilts with velocity */
-.ff-svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(var(--ff-tilt,0deg));overflow:visible;transition:transform .3s ease}
-/* Wings */
-.ff-wing{fill:rgba(255,255,255,0.15);opacity:0;transition:opacity .3s ease}
-.ff-wt{transform-box:fill-box;transform-origin:left bottom;animation:ffWT .25s ease-in-out infinite}
-.ff-wb{transform-box:fill-box;transform-origin:left top;animation:ffWB .25s ease-in-out infinite}
-.firefly.ff-wings-on .ff-wing{opacity:1}
-.firefly.ff-flying .ff-wt,.firefly.ff-flying .ff-wb{animation-duration:.17s}
-@keyframes ffWT{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-22deg)}}
-@keyframes ffWB{0%,100%{transform:rotate(0deg)}50%{transform:rotate(22deg)}}
-/* Body */
-.ff-body{opacity:0;transition:opacity .4s ease;animation:ffBob 2s ease-in-out infinite}
-.firefly.ff-body-on .ff-body{opacity:1}
-@keyframes ffBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
-/* Glow segment */
-.ff-gs{animation:ffGS 2s ease-in-out infinite}
-@keyframes ffGS{0%,100%{opacity:.65}50%{opacity:1}}
-/* Collision effects */
+.firefly.caught{background:#6BBF6B;box-shadow:0 0 8px 3px rgba(107,191,107,0.5),0 0 20px 6px rgba(107,191,107,0.2)}
 .collision-ring{position:fixed;width:4px;height:4px;border-radius:50%;border:1px solid rgba(107,191,107,0.6);pointer-events:none;z-index:9997;animation:ringExpand .5s var(--expo) forwards}
 @keyframes ringExpand{0%{transform:scale(1);opacity:1}100%{transform:scale(12);opacity:0}}
 .collision-spark{position:fixed;width:3px;height:3px;border-radius:50%;pointer-events:none;z-index:9997}
 @keyframes sparkOut{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--sx),var(--sy))}}
-@media(hover:none)and(pointer:coarse){.firefly{width:7px;height:7px}}
+@media(hover:none)and(pointer:coarse){.firefly{width:7px;height:7px;box-shadow:0 0 10px 4px rgba(232,175,56,0.45),0 0 24px 8px rgba(232,175,56,0.18)}}
 @media(prefers-reduced-motion:reduce){.firefly{display:none!important}}
 
 /* ═══ IDENTITY TAGS ═══ */
@@ -794,7 +775,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 <body>
 <!-- Custom cursor -->
 <div class="cursor" id="cursor"></div>
-<div class="firefly" id="firefly" aria-hidden="true"><svg class="ff-svg" viewBox="0 0 22 14" width="22" height="14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><filter id="ffGF" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path class="ff-wing ff-wt" d="M10,7 C10,3 16,2 17,5 C16,6.5 12,7 10,7Z"/><path class="ff-wing ff-wb" d="M10,7 C10,11 16,12 17,9 C16,7.5 12,7 10,7Z"/><g class="ff-body"><ellipse cx="13" cy="7" rx="6.5" ry="2.4" fill="#1a1a2e"/><ellipse class="ff-gs" cx="17.2" cy="7" rx="2.6" ry="2.2" fill="#E8972C" filter="url(#ffGF)"/><circle cx="6.2" cy="7" r="2.1" fill="#1a1a2e"/><line x1="5.5" y1="5.4" x2="3.3" y2="2.8" stroke="#2a2a4e" stroke-width="0.6" stroke-linecap="round"/><line x1="7.0" y1="5.4" x2="9.2" y2="2.8" stroke="#2a2a4e" stroke-width="0.6" stroke-linecap="round"/></g></svg></div>
+<div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
   <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="planner.html" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div><a href="#early-access" class="nav-launch">Launch</a></div>
@@ -1800,7 +1781,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
         ffy=eyebrowY+Math.sin(progress*Math.PI*6)*3+Math.sin(progress*Math.PI*2.3)*2;
         var glow=Math.min(progress*2,1)*0.5+0.3;
         ff.style.boxShadow='0 0 '+(8+glow*6)+'px '+(3+glow*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(16+glow*8)+'px '+(5+glow*4)+'px rgba(232,175,56,'+(glow*0.3)+')';
-        if(progress>=1){birthPhase='flitting';birthStart=now;ff.classList.add('ff-body-on')}
+        if(progress>=1){birthPhase='flitting';birthStart=now}
       }
       else if(birthPhase==='flitting'){
         // Hover at end of tagline for 500ms, flitting in small circles
@@ -1811,7 +1792,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
         ff.style.boxShadow='0 0 12px 5px rgba(232,175,56,'+pulse+'),0 0 24px 8px rgba(232,175,56,'+(pulse*0.35)+')';
         if(elapsed>500){
           var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
-          birthPhase='returning';birthStart=now;ff.classList.add('ff-wings-on');
+          birthPhase='returning';birthStart=now;
         }
       }
       else if(birthPhase==='returning'){
@@ -1936,10 +1917,6 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
     }
 
     ff.style.left=ffx+'px';ff.style.top=ffy+'px';
-    // ─── FIREFLY TILT + WING SPEED ───
-    var tilt=Math.max(-14,Math.min(14,ffVx*2.5));
-    ff.style.setProperty('--ff-tilt',tilt+'deg');
-    if(Math.abs(ffVx)>1.5)ff.classList.add('ff-flying');else ff.classList.remove('ff-flying');
 
     // ─── COLLISION WITH CURSOR ───
     var dx=window.mx-ffx,dy=window.my-ffy;
@@ -2000,8 +1977,6 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
     ffx=birthHomeX;ffy=birthHomeY;
     ffVx=0;dwelling=false;looping=false;
     ff.classList.add('alive');
-    ff.classList.remove('ff-body-on','ff-wings-on','ff-flying');
-    ff.style.setProperty('--ff-tilt','0deg');
     ff.style.boxShadow='';
     birthPhase='descending';
     birthStart=Date.now();
