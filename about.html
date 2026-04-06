@@ -198,6 +198,7 @@
 </style>
 </head>
 <body>
+<div class="cursor" id="cursor"></div>
 <a href="#main-content" class="skip-nav">Skip to main content</a>
 
 <!-- ═══ NAV ═══ -->
@@ -337,5 +338,28 @@
 </footer>
 
 <script src="js/nav.js"></script>
+<script>
+/* ── Custom cursor ── */
+(function(){
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  var c = document.getElementById('cursor'); if (!c) return;
+  var raf;
+  document.addEventListener('mousemove', function(e){
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(function(){
+      c.style.left = e.clientX + 'px';
+      c.style.top  = e.clientY + 'px';
+      c.classList.add('visible');
+    });
+  });
+  document.addEventListener('mouseover', function(e){
+    var isHover = e.target.closest('a,button,[role="button"],input,select,textarea,label,[onclick],[tabindex],.btn-main,.btn-secondary,.nb');
+    c.classList.toggle('hover', !!isHover);
+  });
+  document.documentElement.addEventListener('mouseleave', function(){
+    c.classList.remove('visible');
+  });
+})();
+</script>
 </body>
 </html>

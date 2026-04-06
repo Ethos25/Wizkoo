@@ -1,3 +1,35 @@
+/* ═══ CUSTOM CURSOR ═══ */
+@media (hover: hover) and (pointer: fine) {
+  html, body, a, button, input, select, textarea,
+  label, [role="button"], [tabindex],
+  .btn-main, .btn-secondary, .nb { cursor: none; }
+}
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--saffron, #E8AF38);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .25s cubic-bezier(0.16,1,0.3,1),
+              height .25s cubic-bezier(0.16,1,0.3,1),
+              opacity .2s;
+  opacity: 0;
+  mix-blend-mode: exclusion;
+}
+.cursor.visible { opacity: 1; }
+.cursor.hover {
+  width: 28px;
+  height: 28px;
+  background: rgba(232, 175, 56, 0.25);
+  border: 1.5px solid var(--saffron, #E8AF38);
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor { display: none !important; }
+}
+
 /* ═══ RESET & BASE ═══ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
