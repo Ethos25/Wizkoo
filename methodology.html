@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orbital Learning — The Science | wizkoo</title>
+<meta name="description" content="Orbital Learning is a methodology where math, science, history, geography, and art all connect through a single theme. The science behind how children learn best.">
+<meta property="og:title" content="Orbital Learning — The Science | wizkoo">
+<meta property="og:description" content="Orbital Learning is a methodology where math, science, history, geography, and art all connect through a single theme.">
+<meta property="og:image" content="assets/wizkoo-og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Orbital Learning — The Science | wizkoo">
+<meta name="twitter:description" content="Orbital Learning is a methodology where math, science, history, geography, and art all connect through a single theme.">
+<meta name="twitter:image" content="assets/wizkoo-og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Inter:wght@400;500&family=Sora:wght@200;300;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/footer.css">
+<style>
+/* ══════════════════════════════════════════════
+   TOKEN OVERRIDES — match index.html color values
+══════════════════════════════════════════════ */
+:root {
+  --ink: #0C1020;
+  --linen: #F2F0EA;
+  --warm-bg: #ECEAE3;
+  --paper: #FAFAFA;
+  --saffron: #E8AF38;
+  --expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --snap: cubic-bezier(0.22, 1, 0.36, 1);
+  --m-col: 680px;
+  --m-narrow: 520px;
+}
+
+/* ══════════════════════════════════════════════
+   BODY — Inter font + warming gradient
+══════════════════════════════════════════════ */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  background: linear-gradient(to bottom, #F3F1EB, #F0EDE6);
+  background-attachment: fixed;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ══ DARK NAV — matches homepage ══ */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200; height: 48px;
+  background: rgba(12,16,32,0.95);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  transform: translateY(-100%);
+  transition: transform 0.3s var(--expo);
+}
+.site-nav.show { transform: translateY(0); }
+.site-nav::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+  opacity: 0.25;
+}
+.nav-bar {
+  display: flex; align-items: center;
+  width: 100%; max-width: 1200px; padding: 0 24px;
+  justify-content: space-between;
+}
+.nav-wm {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 18px;
+  letter-spacing: -0.04em; color: var(--paper); text-decoration: none;
+  white-space: nowrap; flex-shrink: 0;
+  display: inline-flex; align-items: baseline; line-height: 1;
+}
+.nav-wm .k { display: inline-block; transform: rotate(8deg); transform-origin: bottom center; color: var(--saffron); }
+.nav-wm:hover .k { animation: mWmKGiggle 0.8s ease-in-out; }
+@keyframes mWmKGiggle { 0%{transform:rotate(8deg)} 18%{transform:rotate(13deg) translateY(-1.5px)} 50%{transform:rotate(8deg)} 100%{transform:rotate(8deg)} }
+.nav-wm .wm-dot { display: inline-block; position: relative; margin-left: -0.08em; }
+.nav-wm .wm-dot::after { content: ''; position: absolute; top: 0.1em; right: -0.2em; width: 0.22em; height: 0.22em; border-radius: 50%; background: var(--saffron); transition: transform 0.3s ease; }
+.nav-wm:hover .wm-dot::after { animation: mWmDotReact 0.4s ease; }
+@keyframes mWmDotReact { 0%{transform:scale(1)} 40%{transform:scale(1.4)} 100%{transform:scale(1)} }
+.nav-center {
+  display: flex; align-items: center; gap: 28px; flex: 1; justify-content: center;
+}
+.nav-center a {
+  font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(250,250,250,0.3); text-decoration: none;
+  white-space: nowrap; position: relative; padding-bottom: 2px; transition: color 0.25s;
+}
+.nav-center a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--saffron); transition: width 0.3s var(--expo);
+}
+.nav-center a:hover { color: rgba(250,250,250,0.8); }
+.nav-center a:hover::after { width: 100%; }
+.nav-center a.active { color: rgba(250,250,250,0.8); }
+.nav-center a.active::after { width: 100%; }
+.nav-cta-sm {
+  font-family: 'Sora', sans-serif; font-weight: 600; font-size: 8px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 14px; background: var(--saffron); color: var(--ink);
+  text-decoration: none; transition: background 0.3s, transform 0.2s;
+  white-space: nowrap; flex-shrink: 0;
+}
+.nav-cta-sm:hover { background: #D4A030; transform: translateY(-1px); }
+@media (max-width: 768px) { .nav-center { display: none; } }
+
+/* ══════════════════════════════════════════════
+   CUSTOM CURSOR
+══════════════════════════════════════════════ */
+@media (hover: hover) {
+  html, body, a, button, .btn-main { cursor: none; }
+}
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--saffron);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width .25s var(--expo), height .25s var(--expo), margin .25s var(--expo), opacity .2s;
+  opacity: 0;
+}
+.cursor.visible { opacity: 1; }
+.cursor.hover {
+  width: 28px; height: 28px;
+  margin: -10px 0 0 -10px;
+  background: rgba(232, 175, 56, 0.25);
+  border: 1.5px solid var(--saffron);
+}
+
+/* ══════════════════════════════════════════════
+   SAFFRON THREAD
+══════════════════════════════════════════════ */
+.saffron-thread {
+  position: fixed;
+  left: max(8px, calc(50% - 340px));
+  top: 0;
+  width: 1px;
+  height: 100vh;
+  background: #E8AF38;
+  opacity: 0.25;
+  transform-origin: top center;
+  transform: scaleY(0);
+  pointer-events: none;
+  z-index: 150;
+  outline: none;
+  border: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saffron-thread { transform: scaleY(1) !important; }
+}
+
+/* ══════════════════════════════════════════════
+   SHARED LAYOUT
+══════════════════════════════════════════════ */
+.m-section { width: 100%; position: relative; }
+
+.m-col {
+  max-width: var(--m-col);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.m-narrow {
+  max-width: var(--m-narrow);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ══════════════════════════════════════════════
+   SHARED TYPE
+══════════════════════════════════════════════ */
+.m-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.m-headline {
+  font-family: 'Sora', sans-serif;
+  font-weight: 200;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+
+.m-body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: #555;
+  margin-bottom: 1.4em;
+}
+.m-body:last-child { margin-bottom: 0; }
+
+.m-body-light {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: rgba(250, 250, 250, 0.7);
+  margin-bottom: 1.4em;
+}
+.m-body-light:last-child { margin-bottom: 0; }
+
+.m-saffron { color: var(--saffron); }
+
+/* ══════════════════════════════════════════════
+   SCROLL REVEALS
+══════════════════════════════════════════════ */
+.m-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s var(--expo), transform 0.8s var(--expo);
+}
+.m-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.m-reveal[data-delay="1"] { transition-delay: 0.12s; }
+.m-reveal[data-delay="2"] { transition-delay: 0.24s; }
+.m-reveal[data-delay="3"] { transition-delay: 0.36s; }
+.m-reveal[data-delay="4"] { transition-delay: 0.48s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .m-reveal { transition: none; opacity: 1; transform: none; }
+}
+
+/* ══════════════════════════════════════════════
+   DARK RISING SECTIONS
+══════════════════════════════════════════════ */
+.section-dark {
+  position: relative;
+  background: transparent;
+}
+.section-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 500ms var(--expo);
+  z-index: 0;
+}
+.section-dark.rising::before {
+  clip-path: inset(0% 0 0 0);
+}
+.dark-inner {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 300ms ease 500ms;
+}
+.section-dark.rising .dark-inner {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-dark::before { clip-path: inset(0% 0 0 0) !important; transition: none; }
+  .dark-inner { opacity: 1 !important; transition: none; }
+}
+
+/* ══════════════════════════════════════════════
+   SECTION 1 — OPENING HERO
+══════════════════════════════════════════════ */
+.s1-hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  background: rgba(242, 240, 234, 0.97);
+  display: flex;
+  align-items: center;
+  padding-top: 48px;
+}
+
+.s1-inner {
+  max-width: var(--m-col);
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.s1-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 24px;
+  display: block;
+  opacity: 0;
+  animation: s1FadeUp 0.5s var(--expo) forwards 0.3s;
+}
+
+@keyframes s1FadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.s1-title {
+  font-family: 'Sora', sans-serif;
+  font-weight: 200;
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0 0 4px;
+  display: block;
+}
+
+/* Character animation — 30% slower than homepage */
+.meth-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(28px);
+  animation: methCharIn 0.6s var(--expo) forwards;
+}
+@keyframes methCharIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meth-char { animation: none; opacity: 1; transform: none; }
+  .s1-eyebrow { animation: none; opacity: 1; }
+}
+
+/* Origin dot — birth point of saffron thread. HIGH position: near x-height (brand mark) */
+.s1-origin-dot {
+  display: inline-block;
+  width: 0.22em;
+  height: 0.22em;
+  border-radius: 50%;
+  background: var(--saffron);
+  margin-left: 0.06em;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+  opacity: 0;
+  transform: scale(0);
+}
+.s1-origin-dot.pop {
+  animation: originPop 0.7s var(--expo) forwards;
+}
+@keyframes originPop {
+  0%   { opacity: 1; transform: scale(0); }
+  40%  { transform: scale(2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.s1-subtitle {
+  font-family: 'Sora', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: #777;
+  margin: 10px 0 48px;
+  display: block;
+  opacity: 0;
+  animation: s1FadeUp 0.5s var(--expo) forwards 0.6s;
+}
+
+.s1-body-para {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: #555;
+  max-width: 600px;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION 2 — THE PROBLEM
+══════════════════════════════════════════════ */
+.s2-problem {
+  background: rgba(236, 234, 227, 0.97);
+  padding: 80px 0;
+}
+
+.s2-rhythm {
+  margin: 28px 0 32px;
+}
+.s2-rhythm-line {
+  display: block;
+  font-family: 'Sora', sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 2.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* ══════════════════════════════════════════════
+   SECTION 3 — THE UNLOCK (dark, rising)
+══════════════════════════════════════════════ */
+.s3-unlock {
+  padding: 100px 0;
+}
+.s3-unlock .m-headline { color: var(--paper); }
+
+.s3-closing {
+  margin-top: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.85;
+  color: rgba(250, 250, 250, 0.88);
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION 4 — THE DEFINITION
+══════════════════════════════════════════════ */
+.s4-definition {
+  background: rgba(242, 240, 234, 0.97);
+  padding: 80px 0;
+}
+
+.s4-saffron-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--saffron);
+  opacity: 0.35;
+  margin: 0 auto 48px;
+}
+
+/* Subject grid */
+.s4-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(232, 175, 56, 0.15);
+  margin: 32px 0 40px;
+}
+
+.s4-cell {
+  background: rgba(250, 250, 250, 0.7);
+  border-left: 2px solid var(--saffron);
+  padding: 20px 20px 20px 16px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s var(--expo), transform 0.5s var(--expo);
+}
+.s4-cell.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.s4-cell-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.s4-cell-desc {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: #444;
+  line-height: 1.55;
+}
+
+.s4-closing {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s4-cell { transition: none; opacity: 1; transform: none; }
+}
+
+/* ══════════════════════════════════════════════
+   SECTION 5 — WHY IT MATTERS NOW
+══════════════════════════════════════════════ */
+.s5-why {
+  background: rgba(236, 234, 227, 0.97);
+  padding: 80px 0;
+}
+
+.s5-closing-line {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-top: 8px;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION 6 — THE SYSTEM (dark, rising)
+══════════════════════════════════════════════ */
+.s6-system {
+  padding: 100px 0;
+}
+.s6-system .m-headline { color: var(--paper); }
+
+.s6-sub {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: rgba(250, 250, 250, 0.5);
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+.s6-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.s6-block {
+  padding: 24px 24px 24px 20px;
+  border-left: 2px solid var(--saffron);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.s6-block-indent { margin-left: 20px; }
+
+.s6-block-title {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--paper);
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.s6-block-body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: rgba(250, 250, 250, 0.6);
+  line-height: 1.85;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION 7 — THE RESEARCH
+══════════════════════════════════════════════ */
+.s7-research {
+  background: rgba(242, 240, 234, 0.97);
+  padding: 80px 0;
+}
+
+.s7-blocks {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.s7-block {
+  padding: 0 0 40px 20px;
+  position: relative;
+}
+.s7-block:last-child { padding-bottom: 0; }
+
+.s7-block::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  width: 2px;
+  height: 1em;
+  background: var(--saffron);
+  opacity: 0.55;
+}
+
+.s7-block-title {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink);
+  margin-bottom: 10px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.s7-block-body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.9;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION 8 — THE CLOSE (dark, rising)
+══════════════════════════════════════════════ */
+.s8-close {
+  padding: 120px 0;
+  text-align: center;
+}
+
+/* Grid overlay */
+.s8-close::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 59px,
+    rgba(255, 255, 255, 0.012) 59px,
+    rgba(255, 255, 255, 0.012) 60px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.s8-headline {
+  font-family: 'Sora', sans-serif;
+  font-weight: 200;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--paper);
+  margin-bottom: 16px;
+}
+
+/* Termination dot — thread endpoint. BASELINE position: sits like a period */
+.s8-term-dot {
+  display: inline-block;
+  width: 0.22em;
+  height: 0.22em;
+  border-radius: 50%;
+  background: var(--saffron);
+  margin-left: 0.04em;
+  vertical-align: baseline;
+  position: relative;
+  top: 0.04em;
+}
+.s8-term-dot.pulsed {
+  animation: termPulse 600ms ease-out forwards;
+}
+@keyframes termPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.s8-sub {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: rgba(250, 250, 250, 0.45);
+  margin-bottom: 40px;
+}
+
+/* Dark CTA — saffron bg, ink text, glow */
+.s8-close .btn-main {
+  background: var(--saffron);
+  color: var(--ink);
+  box-shadow: 0 4px 20px rgba(232, 175, 56, 0.3), 6px 6px 0 rgba(232, 175, 56, 0.2);
+}
+.s8-close .btn-main:hover {
+  box-shadow: 0 8px 32px rgba(232, 175, 56, 0.5), 8px 8px 0 rgba(232, 175, 56, 0.3);
+  transform: translate(-2px, -2px);
+}
+
+.s8-micro {
+  display: block;
+  margin-top: 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.45rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 250, 0.3);
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE — below 768px
+══════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .m-col {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  .m-narrow {
+    max-width: 100%;
+    padding: 0 28px;
+  }
+
+  .s1-hero { min-height: 100vh; min-height: 100svh; }
+  .s1-inner { padding: 60px 20px 48px; }
+  .s1-title { font-size: clamp(2rem, 9vw, 3rem); }
+
+  .s2-problem { padding: 48px 0; }
+  .s2-rhythm-line { font-size: 1.05rem; line-height: 2.0; }
+
+  .s3-unlock { padding: 64px 0; }
+  .s4-definition { padding: 64px 0; }
+  .s5-why { padding: 64px 0; }
+  .s6-system { padding: 64px 0; }
+  .s7-research { padding: 64px 0; }
+  .s8-close { padding: 64px 0; }
+
+  /* Subject grid — single column on mobile */
+  .s4-grid { grid-template-columns: 1fr; }
+
+  /* Product indent reduced on mobile */
+  .s6-block-indent { margin-left: 12px; }
+
+  .m-headline { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .s8-headline { font-size: clamp(1.8rem, 8vw, 3rem); }
+
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+/* ══════════════════════════════════════════════
+   FOOTER NAV — add The Science
+══════════════════════════════════════════════ */
+.footer-nav a { display: block; }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<!-- Skip navigation -->
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<!-- Saffron thread — the visual spine of the page -->
+<div class="saffron-thread" id="saffron-thread" aria-hidden="true"></div>
+
+<!-- ═══ NAV ═══ -->
+<div class="site-nav show" id="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-bar">
+    <a href="index.html" class="nav-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a>
+    <div class="nav-center">
+      <a href="/plan">The Plan</a>
+      <a href="games.html">The Games</a>
+      <a href="methodology.html" class="active">The Science</a>
+    </div>
+    <a href="/plan" class="nav-cta-sm">Launch</a>
+  </div>
+</div>
+
+<main id="main-content">
+
+<!-- ═══════════════════════════════════
+     SECTION 1 — THE OPENING
+     Full viewport, linen, title page
+═══════════════════════════════════ -->
+<section class="m-section s1-hero" aria-labelledby="s1-heading">
+  <div class="s1-inner">
+    <span class="s1-eyebrow">The Science</span>
+    <h1 class="s1-title" id="s1-heading">
+      <span class="s1-title-text" aria-label="Orbital Learning">Orbital Learning</span><span class="s1-origin-dot" aria-hidden="true"></span>
+    </h1>
+    <span class="s1-subtitle">Every subject orbits one theme.</span>
+    <p class="s1-body-para m-reveal" id="s1-body">
+      Orbital Learning is a methodology where math, science, history, geography, and art all connect through a single idea. The way planets orbit a sun, every subject orbits one theme. The result: children who think across domains, not inside silos.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SECTION 2 — THE PROBLEM
+     warm-bg, narrow 520px column
+═══════════════════════════════════ -->
+<section class="m-section s2-problem" aria-labelledby="s2-heading">
+  <div class="m-narrow">
+    <h2 class="m-headline m-reveal" id="s2-heading">How did we get here</h2>
+    <div class="s2-rhythm m-reveal" data-delay="1" aria-label="Math in one room. Science in another. History down the hall.">
+      <span class="s2-rhythm-line" aria-hidden="true">Math in one room.</span>
+      <span class="s2-rhythm-line" aria-hidden="true">Science in another.</span>
+      <span class="s2-rhythm-line" aria-hidden="true">History down the hall<span class="sp" aria-hidden="true"></span></span>
+    </div>
+    <p class="m-body m-reveal" data-delay="2">
+      This model exists because it was easier to organize teachers and textbooks by subject. Not because it was better for children. The research has said otherwise for decades. In 1993, Susan Kovalik, a veteran classroom teacher and California's Gifted and Talented Teacher of the Year, formalized Integrated Thematic Instruction, demonstrating that children learn more deeply when subjects are connected through meaningful themes. The learning science calls the outcome "far transfer": the ability to take knowledge from one domain and apply it in another. It is the most valuable and most difficult cognitive skill to develop.
+    </p>
+    <p class="m-body m-reveal" data-delay="3">
+      The problem was never the research. It was the execution. Designing a week where volcanoes connect to chemistry, geography, history, and math required a team of curriculum specialists. No single parent or teacher could do it alone.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SECTION 3 — THE UNLOCK
+     ink, rising dark, narrow 520px
+═══════════════════════════════════ -->
+<section class="m-section s3-unlock section-dark" id="s3" aria-labelledby="s3-heading">
+  <div class="m-narrow dark-inner">
+    <h2 class="m-headline" id="s3-heading">What changed</h2>
+    <p class="m-body-light">
+      <span class="m-saffron">AI</span> changed. For the first time, the cross-domain mapping that required a curriculum team can happen in seconds. A parent types one theme. The system connects it across every subject, matched to each child's age and reading level. What was locked inside institutions for 30 years is now accessible to any family with a browser.
+    </p>
+    <p class="s3-closing">
+      Orbital Learning is not a new pedagogy. It is a validated pedagogy made accessible for the first time.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SECTION 4 — THE DEFINITION
+     linen, 680px, subject grid
+═══════════════════════════════════ -->
+<section class="m-section s4-definition" aria-labelledby="s4-heading">
+  <div class="m-col">
+    <div class="s4-saffron-rule m-reveal" aria-hidden="true"></div>
+    <h2 class="m-headline m-reveal" data-delay="1" id="s4-heading">What Orbital Learning is</h2>
+    <p class="m-body m-reveal" data-delay="2">A learning methodology where every subject orbits one unifying theme.</p>
+    <p class="m-body m-reveal" data-delay="2">
+      One theme sits at the center of the week. Math orbits it. Science orbits it. History, geography, art, and language all orbit it. Each subject approaches the same idea from a different angle. The child experiences every subject as connected, not as isolated chapters in separate textbooks.
+    </p>
+    <p class="m-body m-reveal" data-delay="3">When the theme is volcanoes:</p>
+
+    <!-- Subject grid — visual centerpiece -->
+    <div class="s4-grid" id="s4-grid" role="list" aria-label="Six subjects, all connected to one theme">
+      <div class="s4-cell" role="listitem">
+        <span class="s4-cell-label">Science</span>
+        <span class="s4-cell-desc">explains how they form</span>
+      </div>
+      <div class="s4-cell" role="listitem">
+        <span class="s4-cell-label">Geography</span>
+        <span class="s4-cell-desc">finds them on the map</span>
+      </div>
+      <div class="s4-cell" role="listitem">
+        <span class="s4-cell-label">History</span>
+        <span class="s4-cell-desc">remembers Pompeii</span>
+      </div>
+      <div class="s4-cell" role="listitem">
+        <span class="s4-cell-label">Chemistry</span>
+        <span class="s4-cell-desc">identifies sulfur</span>
+      </div>
+      <div class="s4-cell" role="listitem">
+        <span class="s4-cell-label">Math</span>
+        <span class="s4-cell-desc">measures the eruption</span>
+      </div>
+      <div class="s4-cell" role="listitem">
+        <span class="s4-cell-label">Art</span>
+        <span class="s4-cell-desc">builds the cross-section</span>
+      </div>
+    </div>
+
+    <p class="s4-closing m-reveal">
+      One theme<span class="sp" aria-hidden="true"></span> &nbsp;Six subjects<span class="sp" aria-hidden="true"></span> &nbsp;Every one connected<span class="sp" aria-hidden="true"></span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SECTION 5 — WHY IT MATTERS NOW
+     warm-bg, 680px column
+═══════════════════════════════════ -->
+<section class="m-section s5-why" aria-labelledby="s5-heading">
+  <div class="m-col">
+    <h2 class="m-headline m-reveal" id="s5-heading">The skill that matters next</h2>
+    <p class="m-body m-reveal" data-delay="1">
+      Jensen Huang, CEO of Nvidia, says the future definition of smart is the ability to see around corners, to infer what others miss.
+    </p>
+    <p class="m-body m-reveal" data-delay="2">
+      In an AI world, information is abundant. Any child can look up the capital of Iceland. The advantage is no longer knowing facts. It is knowing that facts connect. That sulfur explains volcanoes. That volcanoes explain Pompeii. That Pompeii explains why we study history at all.
+    </p>
+    <p class="m-body m-reveal" data-delay="3">
+      Children who learn to think across domains early, who build the muscle of connection before they are taught to think in silos, carry a cognitive advantage that compounds for life.
+    </p>
+    <p class="m-body s5-closing-line m-reveal" data-delay="4">
+      Orbital Learning builds that muscle from the ground up.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SECTION 6 — THE SYSTEM
+     ink, rising dark, indent system
+═══════════════════════════════════ -->
+<section class="m-section s6-system section-dark" id="s6" aria-labelledby="s6-heading">
+  <div class="m-col dark-inner">
+    <h2 class="m-headline" id="s6-heading">The system</h2>
+    <p class="s6-sub">Wizkoo is the first consumer product built entirely on Orbital Learning.</p>
+    <div class="s6-blocks">
+      <div class="s6-block">
+        <div class="s6-block-title">The Plan Generator<span class="sp" aria-hidden="true"></span></div>
+        <p class="s6-block-body">A parent enters their children and chooses a theme. The system generates a full week where every subject orbits that theme, differentiated by each child's age and reading level. What took a curriculum team now takes two minutes.</p>
+      </div>
+      <div class="s6-block s6-block-indent">
+        <div class="s6-block-title">Atlas<span class="sp" aria-hidden="true"></span></div>
+        <p class="s6-block-body">The world layer. 227 countries. Heritage, politics, history, geography. Any theme passes through Atlas and becomes a window into the world.</p>
+      </div>
+      <div class="s6-block s6-block-indent">
+        <div class="s6-block-title">Elementum<span class="sp" aria-hidden="true"></span></div>
+        <p class="s6-block-body">The matter layer. 118 elements with personalities, Wonder Paths, and a Constellation Map where completed journeys draw glowing threads across the periodic table. Any theme passes through Elementum and becomes a window into what everything is made of.</p>
+      </div>
+      <div class="s6-block">
+        <div class="s6-block-title">Spiral Learning<span class="sp" aria-hidden="true"></span></div>
+        <p class="s6-block-body">The return. Week 8 references Week 3. What a child learned in January shows up in March. The orbit comes back around.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SECTION 7 — THE RESEARCH
+     linen, 680px, four blocks
+═══════════════════════════════════ -->
+<section class="m-section s7-research" aria-labelledby="s7-heading">
+  <div class="m-col">
+    <h2 class="m-headline m-reveal" id="s7-heading">The research</h2>
+    <div class="s7-blocks">
+      <div class="s7-block m-reveal" data-delay="1">
+        <div class="s7-block-title">Integrated Thematic Instruction (1993)</div>
+        <p class="s7-block-body">
+          Susan Kovalik, a veteran classroom teacher and California's 1984 Gifted and Talented Teacher of the Year, developed the ITI model based on 25 years of teaching experience and emerging brain research. Her framework, adopted in hundreds of schools across the US, Europe, and Asia, demonstrated that children learn more deeply when subjects are connected through meaningful themes. The ITI model was selected as one of 56 programs in the national Comprehensive School Reform Catalog.
+        </p>
+      </div>
+      <div class="s7-block m-reveal" data-delay="2">
+        <div class="s7-block-title">Far Transfer (1999)</div>
+        <p class="s7-block-body">
+          Dr. John Bransford at Vanderbilt University and Dr. Daniel Schwartz at Stanford University published the landmark paper "Rethinking Transfer" in the Review of Research in Education, redefining how researchers measure the ability to apply knowledge across domains. Their work established that learning experiences designed around meaningful connections produce both effective performance and positive transfer, while siloed instruction often produces strong recall but poor transfer.
+        </p>
+      </div>
+      <div class="s7-block m-reveal" data-delay="3">
+        <div class="s7-block-title">Interdisciplinary Learning (1926&#8211;present)</div>
+        <p class="s7-block-body">
+          A century of research on cross-subject integration, from Professor Woodworth's coining of "interdisciplinary" at Columbia University in 1926 to the IB Primary Years Programme's transdisciplinary framework used in thousands of schools worldwide, confirms that children learn more durably when subjects connect through shared themes and real-world contexts.
+        </p>
+      </div>
+      <div class="s7-block m-reveal" data-delay="4">
+        <div class="s7-block-title">Brain-Compatible Learning (1991)</div>
+        <p class="s7-block-body">
+          Dr. Renate Caine and Dr. Geoffrey Caine, in their foundational work "Making Connections: Teaching and the Human Brain," established that the brain processes information through patterns and connections, not isolated facts. Their research showed that context-based, connected information is retained longer and retrieved more easily than knowledge learned in isolation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SECTION 8 — THE CLOSE
+     ink, rising dark, thread terminus
+═══════════════════════════════════ -->
+<section class="m-section s8-close section-dark" id="s8" aria-labelledby="s8-heading">
+  <div class="dark-inner">
+    <h2 class="s8-headline" id="s8-heading">See it in action<span class="s8-term-dot" id="s8-dot" aria-hidden="true"></span></h2>
+    <p class="s8-sub">One theme. Every subject. All connected.</p>
+    <a href="/plan" class="btn-main">Build My Family's Week</a>
+    <span class="s8-micro">Founding families are in. You're next.</span>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="wm footer-wm">w<span class="i-fix">i</span>z<span class="k">k</span>oo</a>
+      <div class="footer-tagline">Weekly learning plans for ages 2 to 12.</div>
+      <div class="ft-location">Cumming, Georgia</div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="games.html">The Games</a>
+      <a href="/plan">The Plan</a>
+      <a href="methodology.html">The Science</a>
+    </nav>
+    <div class="footer-social">
+      <div class="footer-social-label">Follow</div>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+    <div class="footer-privacy">
+      <a href="#privacy" style="font-family:'Space Mono',monospace;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(250,250,250,0.35);text-decoration:none;border-bottom:1px solid rgba(250,250,250,0.15);padding-bottom:2px;" onmouseover="this.style.color='rgba(250,250,250,0.7)'" onmouseout="this.style.color='rgba(250,250,250,0.35)'">Privacy</a>
+    </div>
+    <div class="ft-r">&copy; 2026 Wizkoo</div>
+  </div>
+  <div class="ft-educator">Educator or co-op leader? <a href="mailto:hello@wizkoo.com">Get in touch.</a></div>
+</footer>
+
+<script>
+/* ─── Dark nav: always visible on non-homepage pages ─── */
+(function () {
+  var nav = document.getElementById('site-nav');
+  if (nav) nav.classList.add('show');
+})();
+</script>
+<script src="js/nav.js"></script>
+<script>
+(function () {
+'use strict';
+
+/* ─── Custom cursor ─── */
+(function () {
+  var c = document.getElementById('cursor'), cx = 0, cy = 0;
+  if (!c) return;
+  window.mx = 0; window.my = 0;
+  document.addEventListener('mousemove', function (e) {
+    window.mx = e.clientX; window.my = e.clientY;
+    c.classList.add('visible');
+  });
+  document.addEventListener('mouseleave', function () { c.classList.remove('visible'); });
+  var hoverEls = 'a,button,.btn-main,.wm';
+  document.addEventListener('mouseover', function (e) { if (e.target.closest(hoverEls)) c.classList.add('hover'); });
+  document.addEventListener('mouseout',  function (e) { if (e.target.closest(hoverEls)) c.classList.remove('hover'); });
+  (function tick() {
+    cx += (window.mx - cx) * 0.15;
+    cy += (window.my - cy) * 0.15;
+    c.style.left = cx + 'px';
+    c.style.top  = cy + 'px';
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ─── Character-by-character reveal for "Orbital Learning" ─── */
+(function () {
+  var titleSpan = document.querySelector('.s1-title-text');
+  var dot = document.querySelector('.s1-origin-dot');
+  if (!titleSpan) return;
+
+  var text = titleSpan.textContent;
+  titleSpan.innerHTML = '';
+  titleSpan.setAttribute('aria-hidden', 'true');
+
+  var baseDelay = 800; // ms before first char
+  var stagger   = 55;  // ms between chars (30% slower than homepage ~40ms)
+
+  Array.from(text).forEach(function (ch, i) {
+    var s = document.createElement('span');
+    s.className = 'meth-char';
+    s.textContent = ch === ' ' ? '\u00A0' : ch;
+    s.style.animationDelay    = (baseDelay + i * stagger) + 'ms';
+    s.style.animationDuration = '600ms';
+    titleSpan.appendChild(s);
+  });
+
+  // Origin dot bursts after all chars finish
+  var totalMs = baseDelay + text.length * stagger + 200;
+  setTimeout(function () {
+    if (dot) dot.classList.add('pop');
+  }, totalMs);
+})();
+
+/* ─── Section 1: body paragraph reveals on first scroll ─── */
+(function () {
+  var para = document.getElementById('s1-body');
+  if (!para) return;
+  var revealed = false;
+  function check() {
+    if (!revealed && window.scrollY > 80) {
+      revealed = true;
+      para.classList.add('visible');
+      window.removeEventListener('scroll', check);
+    }
+  }
+  window.addEventListener('scroll', check, { passive: true });
+})();
+
+/* ─── Saffron thread: scroll → scaleY ─── */
+(function () {
+  var thread = document.getElementById('saffron-thread');
+  if (!thread) return;
+  var pref = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (pref && pref.matches) return;
+
+  function update() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if (max <= 0) return;
+    var progress = Math.min(window.scrollY / max, 1);
+    thread.style.transform = 'scaleY(' + progress + ')';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ─── Generic scroll reveal (IntersectionObserver) ─── */
+(function () {
+  if (!window.IntersectionObserver) return;
+
+  var reveals = document.querySelectorAll('.m-reveal');
+  var revealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(function (el) { revealObs.observe(el); });
+})();
+
+/* ─── Dark rising sections ─── */
+(function () {
+  if (!window.IntersectionObserver) return;
+
+  var darkSections = document.querySelectorAll('.section-dark');
+  var darkObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && !entry.target.classList.contains('rising')) {
+        entry.target.classList.add('rising');
+        darkObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  darkSections.forEach(function (s) { darkObs.observe(s); });
+})();
+
+/* ─── Subject grid: staggered cell reveal ─── */
+(function () {
+  if (!window.IntersectionObserver) return;
+
+  var grid = document.getElementById('s4-grid');
+  if (!grid) return;
+  var cells = grid.querySelectorAll('.s4-cell');
+  var triggered = false;
+
+  var gridObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && !triggered) {
+        triggered = true;
+        cells.forEach(function (cell, i) {
+          setTimeout(function () {
+            cell.classList.add('visible');
+          }, i * 120);
+        });
+        gridObs.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+
+  gridObs.observe(grid);
+})();
+
+/* ─── Thread termination dot: pulse when Section 8 arrives ─── */
+(function () {
+  if (!window.IntersectionObserver) return;
+
+  var dot = document.getElementById('s8-dot');
+  if (!dot) return;
+
+  var dotObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && !dot.classList.contains('pulsed')) {
+        // small delay to let the dark section rise and content fade in first
+        setTimeout(function () {
+          dot.classList.add('pulsed');
+        }, 900);
+        dotObs.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  dotObs.observe(document.getElementById('s8'));
+})();
+
+/* ─── CTA Firefly — s8 close section ─── */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cta = document.getElementById('s8');
+  if (!cta) return;
+  var btn = cta.querySelector('.btn-main');
+  if (!btn) return;
+
+  var ff = document.createElement('div');
+  ff.style.cssText = 'position:absolute;width:5px;height:5px;border-radius:50%;background:#E8AF38;pointer-events:none;z-index:10;opacity:0;transition:opacity 0.4s ease;box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15);';
+  cta.appendChild(ff);
+
+  var triggered = false;
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting && !triggered) {
+      triggered = true;
+      obs.disconnect();
+      setTimeout(launch, 650); /* wait for dark section rise */
+    }
+  }, { threshold: 0.4 });
+  obs.observe(cta);
+
+  function launch() {
+    var cr = cta.getBoundingClientRect();
+    var br = btn.getBoundingClientRect();
+    var x0 = (br.left - cr.left) + br.width * 0.15;
+    var y0 = (br.top  - cr.top)  + br.height * 0.5;
+    ff.style.left = x0 + 'px';
+    ff.style.top  = y0 + 'px';
+    requestAnimationFrame(function () { ff.style.opacity = '1'; });
+    var t = 0, start = Date.now(), dur = 2600;
+    (function drift() {
+      t += 0.018;
+      if (Date.now() - start >= dur) {
+        ff.style.transition = 'opacity 0.5s ease';
+        ff.style.opacity = '0';
+        return;
+      }
+      ff.style.left = (x0 + Math.sin(t * 2.1) * 14 + Math.sin(t * 4.7) * 6) + 'px';
+      ff.style.top  = (y0 + Math.cos(t * 1.6) * 10 + Math.cos(t * 3.3) * 4) + 'px';
+      requestAnimationFrame(drift);
+    })();
+  }
+})();
+
+})();
+</script>
+</body>
+</html>
