@@ -13,7 +13,22 @@ footer {
   align-items: start;
 }
 
-.footer-wm { font-size: 24px; color: var(--paper); margin-bottom: 12px; }
+/* Footer wordmark: match nav bar size and add wm-dot + i-fix support */
+.footer-brand .wm { font-size: 18px; }
+.footer-brand .wm .i-fix::before { background: var(--ink); }
+.footer-brand .wm .wm-dot {
+  display: inline-block;
+  position: relative;
+  margin-left: -0.08em;
+}
+.footer-brand .wm .wm-dot::after {
+  content: '';
+  position: absolute;
+  top: 0.1em; right: -0.2em;
+  width: 0.22em; height: 0.22em;
+  border-radius: 50%;
+  background: var(--saffron);
+}
 
 .footer-tagline {
   font-family: 'DM Sans', sans-serif;
