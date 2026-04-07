@@ -17,7 +17,72 @@ nav.scrolled {
   box-shadow: 0 1px 16px rgba(0,0,0,0.25);
 }
 
-/* ─── Wordmark ─── */
+/* ─── Wordmark — canonical .nav-wm (matches index.html nav) ─── */
+.nav-wm {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: #F0F2F8;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.nav-wm .k {
+  display: inline-block;
+  transform: rotate(8deg);
+  transform-origin: bottom center;
+  color: var(--saffron);
+}
+.nav-wm:hover .k { animation: kGiggle 0.8s ease-in-out; }
+.nav-wm .i-fix { position: relative; display: inline-block; }
+.nav-wm .wm-dot {
+  display: inline-block;
+  position: relative;
+  margin-left: -0.08em;
+}
+.nav-wm .wm-dot::after {
+  content: '';
+  position: absolute;
+  top: 0.1em; right: -0.2em;
+  width: 0.22em; height: 0.22em;
+  border-radius: 50%;
+  background: var(--saffron);
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-wm:hover .wm-dot::after { animation: dotReact 0.4s cubic-bezier(0.16,1,0.3,1); }
+
+/* ─── kGiggle — 14-frame wiggle matching index.html exactly ─── */
+@keyframes kGiggle {
+  0%   { transform: rotate(8deg) }
+  6%   { transform: rotate(12deg) translateY(-1px) }
+  12%  { transform: rotate(5deg) }
+  18%  { transform: rotate(13deg) translateY(-1.5px) }
+  24%  { transform: rotate(6deg) translateY(0.5px) }
+  30%  { transform: rotate(11deg) translateY(-1px) }
+  36%  { transform: rotate(7deg) }
+  42%  { transform: rotate(10deg) translateY(-0.5px) }
+  50%  { transform: rotate(8deg) }
+  58%  { transform: rotate(10deg) translateY(-1px) }
+  66%  { transform: rotate(7deg) }
+  75%  { transform: rotate(9deg) translateY(-0.5px) }
+  85%  { transform: rotate(8deg) }
+  100% { transform: rotate(8deg) }
+}
+@keyframes dotReact {
+  0%   { transform: scale(1) }
+  40%  { transform: scale(1.4) }
+  100% { transform: scale(1) }
+}
+
+/* ─── Legacy nav .wm (kept for any residual uses) ─── */
 nav .wm {
   font-family: 'Sora', sans-serif;
   font-weight: 800;
@@ -37,16 +102,7 @@ nav .wm .k {
   transform-origin: bottom center;
   color: var(--saffron);
 }
-nav .wm:hover .k { animation: wm-kGiggle 0.8s ease-in-out; }
-@keyframes wm-kGiggle {
-  0%  { transform: rotate(8deg) }
-  6%  { transform: rotate(12deg) translateY(-1px) }
-  18% { transform: rotate(13deg) translateY(-1.5px) }
-  30% { transform: rotate(11deg) translateY(-1px) }
-  50% { transform: rotate(8deg) }
-  75% { transform: rotate(9deg) translateY(-0.5px) }
-  100%{ transform: rotate(8deg) }
-}
+nav .wm:hover .k { animation: kGiggle 0.8s ease-in-out; }
 nav .wm .i-fix { position: relative; display: inline-block; }
 nav .wm .wm-dot {
   display: inline-block;
@@ -60,14 +116,9 @@ nav .wm .wm-dot::after {
   width: 0.22em; height: 0.22em;
   border-radius: 50%;
   background: var(--saffron);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
 }
-nav .wm:hover .wm-dot::after { animation: wm-dotReact 0.4s ease; }
-@keyframes wm-dotReact {
-  0%   { transform: scale(1) }
-  40%  { transform: scale(1.4) }
-  100% { transform: scale(1) }
-}
+nav .wm:hover .wm-dot::after { animation: dotReact 0.4s cubic-bezier(0.16,1,0.3,1); }
 
 /* Ghost-text fix: footer nav must not inherit nav position:fixed */
 footer nav {

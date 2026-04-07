@@ -54,3 +54,38 @@
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 })();
+
+// ═══ WORDMARK SOUND + GIGGLE ═══
+(function () {
+  var audioCtx;
+  document.addEventListener('click', function () {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  });
+
+  function playGiggle() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    var now = audioCtx.currentTime;
+    var o1 = audioCtx.createOscillator(), g1 = audioCtx.createGain();
+    o1.type = 'sine'; o1.connect(g1); g1.connect(audioCtx.destination);
+    o1.frequency.setValueAtTime(880, now);
+    o1.frequency.exponentialRampToValueAtTime(1100, now + 0.04);
+    o1.frequency.exponentialRampToValueAtTime(660, now + 0.08);
+    g1.gain.setValueAtTime(0.04, now);
+    g1.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+    o1.start(now); o1.stop(now + 0.1);
+    var o2 = audioCtx.createOscillator(), g2 = audioCtx.createGain();
+    o2.type = 'sine'; o2.connect(g2); g2.connect(audioCtx.destination);
+    o2.frequency.setValueAtTime(990, now + 0.1);
+    o2.frequency.exponentialRampToValueAtTime(1200, now + 0.14);
+    o2.frequency.exponentialRampToValueAtTime(750, now + 0.18);
+    g2.gain.setValueAtTime(0.03, now + 0.1);
+    g2.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+    o2.start(now + 0.1); o2.stop(now + 0.2);
+  }
+
+  document.querySelectorAll('.nav-wm, .wm').forEach(function (w) {
+    w.addEventListener('mouseenter', function () { setTimeout(playGiggle, 350); });
+  });
+})();
