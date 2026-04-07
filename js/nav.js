@@ -89,3 +89,18 @@
     w.addEventListener('mouseenter', function () { setTimeout(playGiggle, 350); });
   });
 })();
+
+// ═══ CUSTOM CURSOR ═══
+(function () {
+  var c = document.getElementById('cursor');
+  if (!c) return;
+  var cx = 0, cy = 0;
+  window.mx = window.mx || 0;
+  window.my = window.my || 0;
+  document.addEventListener('mousemove', function (e) { window.mx = e.clientX; window.my = e.clientY; c.classList.add('visible'); });
+  document.addEventListener('mouseleave', function () { c.classList.remove('visible'); });
+  var hoverEls = 'a,button,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.week-card,.plan-card,.sr-track,.planned-dot,.wm,.nav-wm';
+  document.addEventListener('mouseover', function (e) { if (e.target.closest(hoverEls)) c.classList.add('hover'); });
+  document.addEventListener('mouseout',  function (e) { if (e.target.closest(hoverEls)) c.classList.remove('hover'); });
+  (function tick() { cx += (window.mx - cx) * 0.15; cy += (window.my - cy) * 0.15; c.style.left = cx + 'px'; c.style.top = cy + 'px'; requestAnimationFrame(tick); })();
+})();
