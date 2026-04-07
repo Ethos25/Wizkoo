@@ -333,29 +333,29 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .cta-reveal{opacity:0;transition:opacity 1.4s var(--expo)}.cta-reveal.visible{opacity:1}
 
 /* ═══ FOOTER — Blueprint-correct colors ═══ */
-footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,0.04)}
-.footer-inner{max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.footer-wm{font-size:24px;color:#F0F2F8}
-.footer-tagline{color:#C8CDDA;font-size:0.82rem;line-height:1.7;letter-spacing:0.005em;margin-top:12px}
+
+
+
+
 .footer-rae{margin-top:16px;font-size:0.72rem;color:#8C91A5;line-height:1.7;letter-spacing:0.005em}
 .footer-rae-link{color:#C8CDDA;text-decoration:none;border-bottom:1px solid rgba(232,175,56,0.3);transition:color .25s,border-color .25s}
 .footer-rae-link:hover{color:#F0F2F8;border-bottom-color:var(--saffron)}
-.footer-email{margin-top:8px}
-.footer-email-link{font-size:0.72rem;color:#8C91A5;text-decoration:none;transition:color .25s}
-.footer-email-link:hover{color:#F0F2F8}
-.footer-right{display:flex;flex-direction:column;justify-content:space-between;height:100%;text-align:right}
-.footer-nav{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
-.footer-nav button{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;background:transparent;border:none;transition:color .25s;padding:0}
-.footer-nav button:hover{color:#F0F2F8}
-.footer-nav button:focus-visible{outline:2px solid var(--saffron);outline-offset:2px}
-.footer-nav a{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;text-decoration:none;transition:color .25s;padding:0;text-align:right}
-.footer-nav a:hover{color:#F0F2F8}
-.ft-educator-idx{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(140,145,165,0.6);margin-top:16px;text-align:right}
-.ft-educator-idx a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(140,145,165,0.25);padding-bottom:1px;transition:color .15s}
-.ft-educator-idx a:hover{color:#F0F2F8}
-.ft-r{color:#8C91A5;font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;margin-top:24px;line-height:1.7;text-align:right}
-.footer-privacy{color:#8C91A5;text-decoration:none;transition:color .25s}
-.footer-privacy:hover{color:var(--saffron)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--expo),transform .7s var(--expo)}.reveal.visible{opacity:1;transform:translateY(0)}
 
@@ -376,7 +376,7 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   .sr-card{flex:1 1 45%}
   .cta-dark h2{font-size:2.6rem}
   .ec-headline{font-size:2rem}
-  .footer-inner{grid-template-columns:1fr 1fr;gap:32px;padding:0}
+  
 }
 
 @media(max-width:768px){
@@ -453,11 +453,11 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
   .pc-break{padding:6px 16px}
 
   /* ── Footer ── */
-  footer{padding:32px 20px}
-  .footer-inner{grid-template-columns:1fr;gap:32px;padding:0}
-  .footer-right{text-align:left}
-  .footer-nav{align-items:flex-start}
-  .ft-r{text-align:left}
+  
+  
+  
+  
+  
 
   /* ── Circle CTA ── */
   .btn-circle{width:88px;height:88px;font-size:0.76rem}
@@ -1288,24 +1288,8 @@ footer{padding:48px 48px 32px;background:rgba(12,16,32,0.95);-webkit-backdrop-fi
 <section class="cta-dark cta-reveal" id="early-access"><h2>One moment<span class="sp"></span><br>Every subject connected<span class="sp"></span></h2><p class="cta-status">Founding families are in. You're next.</p><p class="cta-sub">Early access opens soon. Leave your email and we'll reach out when it's your turn.</p><form name="early-access" method="POST" data-netlify="true" class="cta-form" id="cta-form"><div class="cta-form-row"><input type="email" name="email" placeholder="Your email" required class="cta-input" aria-label="Email address"><button type="submit" class="cta-submit">Build My Family's Week</button></div></form><div class="cta-success" id="cta-success" hidden><p class="cta-confirmed">You're on the list. We'll be in touch soon.</p></div></section>
 </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a>
-      <div class="footer-tagline">The connected learning system for families with children ages 2 to 12.</div>
-      <div class="footer-email"><a href="mailto:hello@wizkoo.com" class="footer-email-link">hello@wizkoo.com</a></div>
-    </div>
-    <div class="footer-right">
-      <nav class="footer-nav">
-        <a href="games.html">The Games</a>
-        <a href="/plan">The Plan</a>
-        <a href="methodology.html">The Science</a>
-      </nav>
-      <div class="ft-r">&copy; 2026 Wizkoo<br><a href="/privacy.html" class="footer-privacy">Privacy</a></div>
-      <div class="ft-educator-idx">Educator or co-op leader? <a href="mailto:hello@wizkoo.com">Get in touch.</a></div>
-    </div>
-  </div>
-</footer>
+<div id="site-footer"></div>
+<script src="/components/footer.js"></script>
 
 <script>
 // ═══ CUSTOM CURSOR ═══
