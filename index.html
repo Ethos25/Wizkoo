@@ -568,23 +568,12 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 /* ═══ PANEL SOON ═══ */
 .panel-soon{font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-top:6px}
 
-/* ═══ FOUNDING FAMILIES CTA ═══ */
+/* ═══ PRICING CTA ═══ */
 .cta-status{font-family:'Sora',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--saffron);margin-bottom:12px}
 .cta-sub{font-size:0.82rem;color:rgba(250,250,250,0.35);margin-bottom:32px}
-.cta-form{max-width:380px;margin:0 auto}
-.cta-form-row{display:flex;gap:0;border:1.5px solid rgba(232,175,56,0.3);transition:border-color .3s}
-.cta-form-row:focus-within{border-color:var(--saffron)}
-.cta-input{flex:1;background:transparent;border:none;padding:14px 16px;font-family:'Inter',system-ui,sans-serif;font-size:0.82rem;color:var(--paper);outline:none}
-.cta-input::placeholder{color:rgba(250,250,250,0.2)}
-.cta-submit{font-family:'Sora',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.06em;padding:14px 24px;background:var(--saffron);color:var(--ink);border:none;white-space:nowrap;transition:background .2s,transform .2s}
-.cta-submit:hover{background:#D4A030;transform:translateY(-1px)}
-.cta-success{max-width:380px;margin:0 auto}
-.cta-confirmed{font-family:'Sora',sans-serif;font-weight:600;font-size:0.92rem;color:var(--saffron)}
 
 @media(max-width:768px){
   .sr-progress{height:3px}
-  .cta-form-row{flex-direction:column}
-  .cta-submit{width:100%}
 }
 
 /* ═══ THE THREAD ═══ */
@@ -781,7 +770,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="/plan" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div><a href="#early-access" class="nav-launch">Launch</a></div>
+  <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="/plan" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div><a href="/plan" class="nav-launch">Start Free</a></div>
 </div>
 
 <!-- ═══ LINEN HERO ═══ -->
@@ -806,9 +795,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
   <div class="hero-circle-zone">
     <div class="hero-sphere-stack">
       <div class="hero-cta-circle" id="hero-cta-circle" role="button" tabindex="0"
-           onclick="location.href='#early-access'"
-           onkeydown="if(event.key==='Enter')location.href='#early-access'">
-        <span class="hero-cta-circle-text">Join</span>
+           onclick="location.href='/plan'"
+           onkeydown="if(event.key==='Enter')location.href='/plan'">
+        <span class="hero-cta-circle-text">Start</span>
       </div>
       <p class="hero-sphere-micro"><span class="hsm-phrase">No credit card</span><span class="hsm-sep">&nbsp;·&nbsp;</span><span class="hsm-phrase">No per-child pricing</span><span class="hsm-sep">&nbsp;·&nbsp;</span><span class="hsm-phrase">Cancel anytime</span></p>
     </div>
@@ -970,7 +959,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 <div class="hz3" id="hz3">
   <div class="hz3-inner">
     <a href="/plan" class="hz3-cta" id="hz3-cta">Build My Family's Week</a>
-    <div class="hz3-micro" id="hz3-micro">Founding families are in. You're next.</div>
+    <div class="hz3-micro" id="hz3-micro">No credit card for your first plan.</div>
   </div>
 </div>
 
@@ -1225,7 +1214,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
     <div class="plan-founder">
       <div class="founder-line">Built by <strong>a mother of four</strong> who tested every plan on her own children.</div>
       <p class="founder-detail">Four children. Different ages. Different reading levels. Same table every morning.</p>
-      <div class="founder-cta"><a href="#early-access" class="btn-main">Build My Family's Week</a><span class="micro-copy">Early access opens soon.</span></div>
+      <div class="founder-cta"><a href="/plan" class="btn-main">Build My Family's Week</a><span class="micro-copy">No credit card for your first plan.</span></div>
     </div>
   </div>
 </section>
@@ -1282,10 +1271,10 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 <section class="philo"><div class="philo-left reveal"><h2>The hard part was never teaching<span class="sp"></span><br>It was knowing <strong>what to teach next</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>He can't read yet. But he's learning from her.</h3><p>When every child studies the same theme at their own level, the 7-year-old becomes the teacher. The 4-year-old becomes the student. The 2-year-old just wants to be in the room. That's not a side effect. That's the whole point.</p></div><div class="phi"><h3>Sunday night is yours again.</h3><p>Type one theme. See the week. Walk into Monday knowing exactly what to do.</p></div><div class="phi"><h3>Your kid was never the one in the textbook.</h3><p>Every curriculum you've tried was built for a child who sits still, finishes worksheets, and fits neatly into a grade. Yours doesn't. This builds a week around the children you actually have. Their ages, their reading levels, the way they actually learn.</p></div><div class="phi"><h3>She's five. She reads like she's seven. We noticed.</h3><p>We don't sort children by birthday. A 5-year-old who reads at a second-grade level gets second-grade reading. A 7-year-old who needs more time with addition gets more time with addition. Age is a line on a form. Readiness is what we build for.</p></div></div></section>
 
 <!-- FAQ -->
-<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library of isolated subjects. Outschool is a marketplace of individual classes. Wizkoo connects everything through a single theme and builds the whole week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>Free during launch. Accounts with saved plans coming soon.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library of isolated subjects. Outschool is a marketplace of individual classes. Wizkoo connects everything through a single theme and builds the whole week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>$50/month or $499/year. Your first plan is free — no account required.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
 
 <!-- CTA -->
-<section class="cta-dark cta-reveal" id="early-access"><h2>One moment<span class="sp"></span><br>Every subject connected<span class="sp"></span></h2><p class="cta-status">Founding families are in. You're next.</p><p class="cta-sub">Early access opens soon. Leave your email and we'll reach out when it's your turn.</p><form name="early-access" method="POST" data-netlify="true" class="cta-form" id="cta-form"><div class="cta-form-row"><input type="email" name="email" placeholder="Your email" required class="cta-input" aria-label="Email address"><button type="submit" class="cta-submit">Build My Family's Week</button></div></form><div class="cta-success" id="cta-success" hidden><p class="cta-confirmed">You're on the list. We'll be in touch soon.</p></div></section>
+<section class="cta-dark cta-reveal" id="pricing"><h2>One moment<span class="sp"></span><br>Every subject connected<span class="sp"></span></h2><p class="cta-status">Your first plan is free</p><p class="cta-sub">No credit card. No account required. Just pick a theme and build your week.</p><div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:0 auto 40px;max-width:520px"><div style="border:1px solid rgba(232,175,56,0.25);padding:24px 40px;text-align:center;min-width:160px"><div style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:#8C91A5;margin-bottom:8px">Monthly</div><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:2.2rem;letter-spacing:-0.03em;color:#F2F0EA">$50<span style="font-size:0.9rem;font-weight:400;color:#8C91A5">&thinsp;/&nbsp;mo</span></div></div><div style="border:1px solid rgba(232,175,56,0.55);padding:24px 40px;text-align:center;min-width:160px;position:relative"><div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--saffron);color:var(--ink);font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 12px;white-space:nowrap">Best value</div><div style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:#8C91A5;margin-bottom:8px">Annual</div><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:2.2rem;letter-spacing:-0.03em;color:#F2F0EA">$499<span style="font-size:0.9rem;font-weight:400;color:#8C91A5">&thinsp;/&nbsp;yr</span></div></div></div><a href="/plan" class="btn-main">Build My Family's Week</a></section>
 </div>
 
 <div id="site-footer"></div>
@@ -1595,19 +1584,6 @@ function toggleWave(row){
   if(!isOpen){row.classList.add('open');detail.classList.add('open')}
 }
 
-// ═══ EARLY ACCESS FORM ═══
-(function(){
-  var form=document.getElementById('cta-form');
-  var success=document.getElementById('cta-success');
-  if(!form)return;
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var data=new FormData(form);
-    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data).toString()})
-    .then(function(){form.hidden=true;success.hidden=false})
-    .catch(function(){form.hidden=true;success.hidden=false});
-  });
-})();
 
 function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.hidden=true;b.parentElement.classList.remove('open')});if(!o){btn.setAttribute('aria-expanded','true');a.hidden=false;btn.parentElement.classList.add('open')}}
 
@@ -2053,12 +2029,12 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
 </script>
 
 <script>
-/* ─── CTA Firefly — #early-access section ─── */
+/* ─── CTA Firefly — #pricing section ─── */
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var cta = document.getElementById('early-access');
+  var cta = document.getElementById('pricing');
   if (!cta) return;
-  var btn = cta.querySelector('.cta-submit');
+  var btn = cta.querySelector('.btn-main');
   if (!btn) return;
 
   var ff = document.createElement('div');
