@@ -65,7 +65,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .tag-light{font-family:'Space Mono',monospace;font-size:var(--tag-size);letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:12px}
 .saffron-rule{height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.35}
 .btn-main{font-family:'Sora',sans-serif;font-weight:600;font-size:var(--button-size);letter-spacing:0.06em;padding:14px 40px;background:var(--ink);color:var(--paper);border:none;box-shadow:6px 6px 0 var(--saffron);transition:transform .25s var(--expo),box-shadow .25s var(--expo);white-space:nowrap;display:inline-block;text-decoration:none}
-.btn-main:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--saffron)}
+.btn-main:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--saffron)}
 
 
 .hero-circle-wrap{margin-top:40px;display:flex;flex-direction:column;align-items:center;opacity:0;animation:fastReveal .6s var(--expo) forwards 3.6s}
@@ -106,20 +106,20 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 
 /* ═══ NAV ═══ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(0);pointer-events:auto}
-.nav-wordmark-wrap{display:flex;flex-direction:column;margin-right:auto;flex-shrink:0}
-.nav-tagline{font-family:'Space Mono',monospace;font-size:5px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,250,250,0.2);white-space:nowrap;margin-top:2px}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(0);pointer-events:auto}
+.nav-tagline-strip{position:fixed;top:72px;left:0;right:0;z-index:999;height:24px;background:rgba(12,16,32,0.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,175,56,0.55)}
+.nav-tagline-strip::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.12),transparent)}
 .site-nav a:not(.nav-cta-sm):not(.nav-launch),.nav-bar a:not(.nav-cta-sm):not(.nav-launch){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
-.site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
+.site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;filter:none;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.4}
 .nav-bar{width:100%;max-width:var(--max-width);height:100%;padding:0 48px;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:40px}
-.nav-wm{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
+.nav-wm{font-family:'Sora',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;margin-right:auto;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .nav-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}
 .nav-wm:hover .k{animation:kGiggle 0.8s ease-in-out}
 .nav-wm .i-fix{position:relative;display:inline-block}
 
 
-.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
-.nav-center button{font-family:'Space Mono',monospace;font-weight:400;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px;background:transparent;border:none}
+.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:36px;flex:1;justify-content:center}
+.nav-center button{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px;background:transparent;border:none}
 .nav-center button::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
 .nav-center button:hover{color:rgba(250,250,250,0.8)}
 .nav-center button:hover::after{width:100%}
@@ -128,7 +128,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nav-cta-sm:hover{background:#D4A030;transform:translateY(-1px)}
 .nav-launch{font-family:'Space Mono',monospace;font-weight:700;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:var(--saffron);color:var(--ink);text-decoration:none;white-space:nowrap;flex-shrink:0;border-radius:2px;border:none;outline:none;transition:background .2s,transform .2s;display:inline-block}
 .nav-launch:hover{background:#D4A030;transform:translateY(-1px)}
-@media(max-width:768px){.nav-launch{font-size:8px;padding:6px 12px}}
+@media(max-width:768px){.nav-launch{font-size:8px;padding:6px 12px}.nav-tagline-strip{display:none}}
 
 /* ═══ HERO ═══ */
 .hero-wrapper{position:relative;height:200vh}
@@ -645,9 +645,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .hz1-inner{max-width:1200px;margin:0 auto;padding:0 48px 0 clamp(48px,10vw,14vw)}
 .hz1-eyebrow{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8C91A5;display:flex;align-items:center;gap:9px;margin-bottom:10px;opacity:0;transform:translateY(12px)}
 .hz-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#E8AF38;flex-shrink:0;display:inline-block}
-.hz1-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.2rem,3.6vw,3.5rem);line-height:1.1;letter-spacing:-0.03em;color:#0C1020;margin:0 0 4px;opacity:0;transform:translateY(12px)}
-.hz-hl-dot{display:inline-block;width:clamp(8px,1.0vw,13px);height:clamp(8px,1.0vw,13px);border-radius:50%;background:#E8AF38;margin-left:2px;vertical-align:baseline;position:relative;top:0;opacity:0}
-.hz1-sub{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1rem,2vw,1.4rem);line-height:1.12;letter-spacing:-0.02em;color:#4A4850;margin:0;opacity:0;transform:translateY(12px)}
+.hz1-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.2rem,3.4vw,3.2rem);line-height:1.1;letter-spacing:-0.03em;color:#0C1020;margin:0 0 4px;opacity:0;transform:translateY(12px)}
+.hz-hl-dot{display:inline-block;width:clamp(7px,0.8vw,10px);height:clamp(7px,0.8vw,10px);border-radius:50%;background:#E8AF38;margin-left:2px;vertical-align:baseline;position:relative;top:0;opacity:0}
+.hz1-sub{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1rem,2vw,1.4rem);line-height:1.12;letter-spacing:-0.02em;color:#4A4850;margin:0 0 32px 0;opacity:0;transform:translateY(12px)}
 .hz-q-wrap{position:relative;display:inline-block;line-height:1}
 .hz-q-dot{position:absolute;bottom:0.22em;left:50%;transform:translateX(-50%);width:clamp(5px,0.6vw,8px);height:clamp(5px,0.6vw,8px);border-radius:50%;background:#E8AF38;box-shadow:0 0 8px rgba(232,175,56,0.3);opacity:0}
 
@@ -693,18 +693,18 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 /* height breakpoint removed — hero is always full viewport */
 
 /* ═══ LINEN HERO — new structure ═══ */
-.linen-hero{position:relative;height:100vh;height:100dvh;background:#F2F0EA;display:flex;flex-direction:row;align-items:stretch;overflow:hidden}
+.linen-hero{position:relative;height:100vh;height:100dvh;background:#F2F0EA;display:flex;flex-direction:row;align-items:stretch;overflow:hidden;padding-top:96px;box-sizing:border-box}
 .linen-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,transparent,rgba(16,24,48,0.12));pointer-events:none;z-index:2}
 
 /* Left text zone */
-.linen-hero-text{position:relative;z-index:1;flex:0 0 55%;max-width:55%;display:flex;flex-direction:column;padding-top:0;overflow:hidden}
+.linen-hero-text{position:relative;z-index:1;flex:0 0 60%;max-width:60%;display:flex;flex-direction:column;justify-content:center;padding-top:0;padding-bottom:20px;overflow:hidden}
 
 /* Override arrival-inner padding in new hero context */
 .linen-hero .arrival{background:transparent;padding:0;position:static}
 .linen-hero .arrival-inner{padding:36px 48px 28px clamp(48px,10vw,14vw);max-width:none;margin:0;width:auto}
 
 /* Override hz1-inner padding in new hero context */
-.linen-hero .hz1-inner{padding:20px clamp(24px,4vw,48px) 0 clamp(48px,10vw,14vw);max-width:none;margin:0}
+.linen-hero .hz1-inner{padding:0 clamp(24px,4vw,48px) 0 48px;max-width:none;margin:0}
 
 /* Right circle zone */
 .hero-circle-zone{position:relative;z-index:100;flex:0 0 45%;max-width:45%;display:flex;align-items:flex-start;justify-content:center}
@@ -736,7 +736,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 /* Mobile: stack text above circle */
 @media(max-width:768px){
   .linen-hero{flex-direction:column;height:auto;min-height:100vh;min-height:100dvh;overflow-y:auto}
-  .linen-hero-text{flex:none;width:100%;max-width:100%;padding-top:72px;overflow:visible}
+  .linen-hero-text{flex:none;width:100%;max-width:100%;padding-top:80px;padding-bottom:0;justify-content:flex-start;overflow:visible}
   .hero-circle-zone{flex:none;width:100%;max-width:100%;padding:24px 0 40px}
   .hero-cta-circle{width:clamp(100px,28vw,150px);height:clamp(100px,28vw,150px)}
   .linen-hero .arrival-inner{padding:0 20px 12px 20px}
@@ -748,6 +748,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nav-home-dot{width:12px;height:12px;border-radius:50%;background:#E8AF38;display:inline-block;transition:transform .3s cubic-bezier(0.16,1,0.3,1),box-shadow .3s}
 .nav-home:hover .nav-home-dot{transform:scale(1.5);box-shadow:0 0 8px rgba(232,175,56,0.6)}
 
+.hero-tagline{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--saffron);margin:0 0 16px 0;line-height:1}
+.linen-hero-text::after{content:'';position:absolute;top:0;bottom:0;right:-40px;width:280px;pointer-events:none;z-index:0;background:linear-gradient(to left,rgba(232,175,56,0.12) 0%,rgba(232,175,56,0.05) 40%,transparent 85%),radial-gradient(ellipse at 100% 50%,rgba(232,175,56,0.08) 0%,transparent 60%)}
 /* ═══ HERO LEFT COLUMN REVEAL ═══ */
 .linen-hero-text{opacity:0;animation:heroColReveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards 0.3s}
 @keyframes heroColReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
@@ -756,11 +758,14 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .hero-micro{font-family:'Space Mono',monospace;font-size:0.57rem;letter-spacing:0.13em;text-transform:uppercase;color:#8A8688;margin-bottom:14px;margin-top:24px}
 
 /* ═══ HERO CTA WRAP ═══ */
-.hero-cta-wrap{padding:0 0 0 clamp(48px,10vw,14vw);display:flex;flex-direction:column;align-items:flex-start}
+.hero-cta-wrap{padding:0 0 0 48px;display:flex;flex-direction:column;align-items:flex-start}
+.hero-cta-wrap .btn-main{font-size:0.82rem;padding:14px 38px;box-shadow:4px 4px 0 var(--saffron)}
 @media(max-width:768px){.hero-cta-wrap{padding:0 20px}}
 
 /* ═══ OPEN SEAT ZONE — saffron panel ═══ */
-.open-seat-zone{position:relative;z-index:1;flex:0 0 45%;max-width:45%}
+.open-seat-zone{position:relative;z-index:1;flex:0 0 40%;max-width:40%;background:linear-gradient(to right,rgba(232,175,56,0.12) 0%,rgba(232,175,56,0.05) 25%,rgba(232,175,56,0) 55%) ,#F2F0EA}
+.open-seat-zone::before{display:none}
+.open-seat-zone::after{display:none}
 .open-seat-clip{
   position:absolute;top:8%;bottom:8%;left:0;right:0;
   overflow:hidden;
@@ -800,10 +805,10 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .os-text{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 clamp(12px,3vw,32px)}
 .os-the{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(8px,1.2vw,17px);color:rgba(12,16,32,0.4);letter-spacing:0.01em;line-height:1;margin-bottom:4px}
 .os-name{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(14px,2.5vw,36px);color:#0C1020;letter-spacing:-0.035em;line-height:1.08;white-space:nowrap}
-.os-dot{display:inline-block;width:0.28em;height:0.28em;border-radius:50%;background:#E8AF38;vertical-align:baseline;position:relative;top:-0.05em;margin-left:0.04em;flex-shrink:0}
-.os-mechanism{font-family:'Sora',sans-serif;font-weight:400;font-size:clamp(7px,1vw,14px);color:rgba(12,16,32,0.55);letter-spacing:0.015em;line-height:1.55;margin-top:clamp(8px,1.2vw,16px);opacity:0;animation:osFadeIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards 2.6s}
+.os-dot{display:inline-block;width:0.28em;height:0.28em;border-radius:50%;background:#E8AF38;vertical-align:baseline;position:relative;top:0.04em;margin-left:0.04em;flex-shrink:0}
+.os-mechanism{font-family:'Sora',sans-serif;font-weight:400;font-size:clamp(7px,1vw,14px);color:rgba(12,16,32,0.78);letter-spacing:0.015em;line-height:1.55;margin-top:clamp(8px,1.2vw,16px);opacity:0;animation:osFadeIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards 2.6s}
 .os-link-wrap{margin-top:clamp(6px,1vw,12px);opacity:0;animation:osFadeIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards 3.2s}
-.os-link{font-family:'Inter',sans-serif;font-style:italic;font-weight:400;font-size:clamp(5px,0.6vw,9px);color:rgba(12,16,32,0.32);text-decoration:none;position:relative}
+.os-link{font-family:'Inter',sans-serif;font-style:italic;font-weight:400;font-size:clamp(5px,0.6vw,9px);color:rgba(12,16,32,0.5);text-decoration:none;position:relative}
 .os-link::after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;background:rgba(12,16,32,0.32);transition:width 300ms}
 .os-link:hover::after{width:100%}
 @keyframes osFadeIn{from{opacity:0}to{opacity:1}}
@@ -818,18 +823,17 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .open-seat-clip:hover .os-inset-shadow{box-shadow:inset 3px 0 6px rgba(160,112,32,0.15)}
 
 /* Saffron bleed onto linen */
-.os-bleed-main{position:absolute;top:0;bottom:0;right:0;width:160px;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse at 100% 50%,rgba(232,175,56,0.09) 0%,rgba(232,175,56,0.04) 40%,transparent 70%)}
-.os-bleed-top{position:absolute;top:0;right:0;width:120px;height:50%;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse at 100% 0%,rgba(232,175,56,0.05) 0%,transparent 60%)}
-.os-bleed-bot{position:absolute;bottom:0;right:0;width:120px;height:50%;pointer-events:none;z-index:0;
-  background:radial-gradient(ellipse at 100% 100%,rgba(232,175,56,0.05) 0%,transparent 60%)}
+.os-bleed-main{display:none}
+.os-bleed-top{display:none}
+.os-bleed-bot{display:none}
 
 /* Mobile: hide panel on small screens, show sphere fallback */
 @media(max-width:768px){
   .open-seat-zone{flex:none;width:100%;max-width:100%;min-height:240px;position:relative}
   .open-seat-clip{top:16px;bottom:16px;left:16px;right:0;border-radius:clamp(10px,3vw,20px) 0 0 clamp(10px,3vw,20px)}
-  .os-bleed-main,.os-bleed-top,.os-bleed-bot{display:none}
+  .os-bleed-main{display:none}
+  .open-seat-zone::before,.open-seat-zone::after{display:none!important}
+  .linen-hero-text::after{display:none}
 }
 
 /* prefers-reduced-motion: kill all panel animations */
@@ -843,21 +847,45 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 }
 
 /* ═══ A PLAN IS NOT A PROMPT ═══ */
-.not-a-prompt{background:var(--linen);padding:4rem 1.5rem;display:flex;justify-content:center}
-.nap-inner{max-width:640px;width:100%}
-.nap-heading{font-family:'Sora',sans-serif;font-weight:600;font-size:32px;color:#0C1020;letter-spacing:-0.02em;margin-bottom:1.5rem}
-.nap-lead{font-family:'Sora',sans-serif;font-weight:400;font-size:20px;color:#0C1020;line-height:1.6;margin-bottom:0}
-.nap-lead+.nap-lead{margin-bottom:1.5rem}
-.nap-detail{font-family:'Inter',sans-serif;font-weight:400;font-size:16px;color:rgba(12,16,32,0.8);line-height:1.8;display:block;opacity:0;transform:translateY(8px);transition:opacity 400ms ease-out,transform 400ms ease-out}
-.nap-detail.vis{opacity:1;transform:translateY(0)}
-.nap-close{font-family:'Sora',sans-serif;font-weight:500;font-size:18px;color:#0C1020;margin-top:1.5rem;opacity:0;transform:translateY(8px);transition:opacity 400ms ease-out,transform 400ms ease-out}
-.nap-close.vis{opacity:1;transform:translateY(0)}
+.nap-section{background:var(--warm-bg);padding:clamp(24px,4vh,44px) 48px clamp(20px,3vh,36px);position:relative;overflow:hidden}
+.nap-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(12,16,32,0.012) 59px,rgba(12,16,32,0.012) 60px);pointer-events:none}
+.nap-section>*{position:relative;z-index:1}
+.nap-center{max-width:640px;margin:0 auto}
+.nap-heading{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(22px,2.4vw,30px);color:#0C1020;letter-spacing:-0.03em;line-height:1.05;margin-bottom:clamp(12px,2vh,22px);text-align:center}
+.nap-lead{font-family:'Sora',sans-serif;font-weight:400;font-size:clamp(13px,1.1vw,15px);line-height:1.65;margin-bottom:4px}
+/* PRODUCTION TEST: If dim line reads as broken/error text on low-contrast screens in bright light, bump 0.45 to 0.50 */
+.nap-lead-dim{color:rgba(12,16,32,0.45)}
+.nap-lead-bright{color:#0C1020;margin-bottom:clamp(14px,2.2vh,26px)}
+.nap-cards{display:flex;gap:16px;align-items:stretch}
+.nap-closer-card{flex:0 0 152px;background:var(--ink);padding:clamp(16px,2.5vh,26px) 22px;display:flex;flex-direction:column;justify-content:center;box-shadow:6px 6px 0 var(--saffron)}
+.nap-closer-l1{font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#F0F2F8;line-height:1.5;letter-spacing:-0.01em}
+.nap-closer-l2{font-family:'Sora',sans-serif;font-weight:600;font-size:20px;color:var(--saffron);line-height:1.4;letter-spacing:-0.01em}
+.nap-closer-l3{font-family:'Sora',sans-serif;font-weight:400;font-size:13px;color:rgba(240,242,248,0.45);line-height:1.45;margin-top:6px;letter-spacing:-0.005em}
+.nap-evidence{flex:1;background:#FFFCF5;border:1.5px solid #0C1020;border-left:3px solid var(--saffron);transition:transform .35s var(--expo),box-shadow .35s var(--expo)}
+.nap-evidence:hover{transform:translate(-2px,-3px);box-shadow:4px 4px 12px rgba(12,16,32,0.08)}
+.nap-ev-row{padding:clamp(8px,1.4vh,13px) 22px;border-bottom:1px solid var(--rule)}
+.nap-ev-row:last-child{border-bottom:none}
+.nap-ev-text{font-family:'Inter',sans-serif;font-size:0.86rem;color:#0C1020;line-height:1.75;opacity:0.78}
+.nap-ev-text strong{font-weight:600;color:#0C1020;opacity:1}
+/* PRODUCTION TEST: If counterpoint is invisible on a low-contrast laptop in sunlight, bump 0.28 to 0.32 */
+.nap-counterpoint{text-align:right;margin-top:clamp(10px,1.8vh,20px);font-family:'Sora',sans-serif;font-weight:400;font-size:13px;color:rgba(12,16,32,0.28);font-style:italic}
 @media(max-width:768px){
-  .not-a-prompt{padding:3rem 1.25rem}
-  .nap-heading{font-size:24px}
-  .nap-lead{font-size:18px}
-  .nap-detail{font-size:15px}
-  .nap-close{font-size:16px}
+  .nap-section{padding:48px 24px 52px}
+  .nap-heading{font-size:28px;margin-bottom:20px}
+  .nap-lead{font-size:15px}
+  .nap-lead-bright{margin-bottom:28px}
+  .nap-cards{flex-direction:column;gap:12px}
+  .nap-closer-card{flex:none;padding:14px 18px;flex-direction:row;align-items:center;gap:6px;flex-wrap:wrap;box-shadow:5px 5px 0 var(--saffron)}
+  .nap-closer-l1{font-size:14px}
+  .nap-closer-l2{font-size:14px}
+  .nap-closer-l3{font-size:13px;margin-top:0}
+  .nap-closer-l3 br{display:none}
+  .nap-ev-row{padding:14px 16px}
+  .nap-ev-text{font-size:0.82rem}
+  .nap-counterpoint{font-size:12px}
+}
+@media(hover:none)and(pointer:coarse){
+  .nap-evidence:hover{transform:none;box-shadow:none}
 }
 </style>
 <!-- Open Graph -->
@@ -882,8 +910,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><div class="nav-wordmark-wrap"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-tagline">Weekly learning plans. Built around your people.</div></div><div class="nav-center"><a href="/plan" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a><a href="/the-open-seat" class="nav-science">The Open Seat</a></div><a href="/plan" class="nav-launch">Build a Plan</a></div>
+  <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="/plan" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="library.html" class="nav-science">The Library</a><a href="methodology.html" class="nav-science">The Science</a><a href="/the-open-seat" class="nav-science">The Open Seat</a></div><a href="/plan" class="nav-launch">Build Your Plan</a></div>
 </div>
+<div class="nav-tagline-strip">Weekly learning plans. Built around your people.</div>
 
 <!-- ═══ LINEN HERO ═══ -->
 <section class="linen-hero" id="linen-hero">
@@ -891,13 +920,13 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
   <div class="linen-hero-text">
     <!-- Headline + subheadline -->
     <div class="hz1-inner" id="hz1">
-      <h1 class="hz1-h1" id="hz1-h1" aria-label="Granddad broke his foot">Granddad broke his foot<span class="hz-hl-dot" id="hz-hl-dot" aria-hidden="true"></span></h1>
+      <h1 class="hz1-h1" id="hz1-h1" aria-label="Granddad broke his foot">Granddad broke his <span style="white-space:nowrap">foot<span class="hz-hl-dot" id="hz-hl-dot" aria-hidden="true"></span></span></h1>
       <p class="hz1-sub" id="hz1-sub">Guess what everyone learned that week<span style="color:#4A4850">?</span></p>
     </div>
     <!-- Micro text + CTA -->
     <div class="hero-cta-wrap">
-      <p class="hero-micro">No credit card · No per-child pricing · Cancel anytime<span class="esa-badge" style="display:none"> · ESA funds accepted.</span></p>
-      <a href="/plan" class="btn-main">Build a Plan</a>
+      <p class="hero-micro">No credit card · No per-child pricing · Cancel anytime</p>
+      <a href="/plan" class="btn-main">Build Your Plan</a>
     </div>
   </div>
 
@@ -992,10 +1021,6 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
         <g id="dot-reading" opacity="0" transform="translate(333,114)">
           <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
         </g>
-        <!-- WRITING: exactly on Orbit C at -60° (12:30 position), calculated: (499.76, 37.13) -->
-        <g id="dot-writing" opacity="0" transform="translate(499.76,37.13)">
-          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
-        </g>
         <!-- MATH: ~3 o'clock, right -->
         <g id="dot-math" opacity="0" transform="translate(728,225)">
           <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
@@ -1016,6 +1041,10 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
         <g id="dot-art" opacity="0" transform="translate(173,289)">
           <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
         </g>
+        <!-- WRITING: exactly on Orbit C at -60° (12:30 position), calculated: (499.76, 37.13) -->
+        <g id="dot-writing" opacity="0" transform="translate(499.76,37.13)">
+          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
+        </g>
 
         <!-- ─── Callout text groups ─── -->
         <!-- READING: upper-left — text centered BELOW dot at (333,114) -->
@@ -1023,24 +1052,6 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
           <text x="333" y="133" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">READING</text>
           <text x="333" y="149" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">The man who accidentally</text>
           <text x="333" y="163" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">saw through his wife's hand.</text>
-        </g>
-        <!-- ART: left-center zone — text-anchor end, right edge 10 units left of dot at (173,289) -->
-        <g id="callout-art" opacity="0">
-          <text x="163" y="258" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="end">ART</text>
-          <text x="163" y="274" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Sketch the human skeleton.</text>
-          <text x="163" y="289" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Label every bone you can name.</text>
-        </g>
-        <!-- GEOGRAPHY: lower-left zone — text anchored adjacent to dot at (289,396) -->
-        <g id="callout-geo" opacity="0">
-          <text x="148" y="363" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em">GEOGRAPHY</text>
-          <text x="148" y="379" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Visit Würzburg, Germany.</text>
-          <text x="148" y="394" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Where X-rays were born.</text>
-        </g>
-        <!-- WRITING: text below-right of dot at (499.76, 37.13) — dot_x+12, dot_y+16/30/43 -->
-        <g id="callout-writing" opacity="0">
-          <text x="512" y="53" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">WRITING</text>
-          <text x="512" y="69" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">A get-well letter to Granddad.</text>
-          <text x="512" y="83" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">What would you say?</text>
         </g>
         <!-- MATH: right zone — text to the RIGHT of dot at (728,225) -->
         <g id="callout-math" opacity="0">
@@ -1059,6 +1070,24 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
           <text x="424" y="439" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">HISTORY</text>
           <text x="424" y="456" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">1895. One accident changed</text>
           <text x="424" y="471" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">medicine forever.</text>
+        </g>
+        <!-- GEOGRAPHY: lower-left zone — text anchored adjacent to dot at (289,396) -->
+        <g id="callout-geo" opacity="0">
+          <text x="148" y="363" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em">GEOGRAPHY</text>
+          <text x="148" y="379" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Visit Würzburg, Germany.</text>
+          <text x="148" y="394" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Where X-rays were born.</text>
+        </g>
+        <!-- ART: left-center zone — text-anchor end, right edge 10 units left of dot at (173,289) -->
+        <g id="callout-art" opacity="0">
+          <text x="163" y="258" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="end">ART</text>
+          <text x="163" y="274" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Sketch the human skeleton.</text>
+          <text x="163" y="289" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Label every bone you can name.</text>
+        </g>
+        <!-- WRITING: text below-right of dot at (499.76, 37.13) — dot_x+12, dot_y+16/30/43 -->
+        <g id="callout-writing" opacity="0">
+          <text x="512" y="53" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">WRITING</text>
+          <text x="512" y="69" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">A get-well letter to Granddad.</text>
+          <text x="512" y="83" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">What would you say?</text>
         </g>
       </svg>
 
@@ -1245,20 +1274,6 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
       </svg>
 </div>
 
-<!-- ═══ A PLAN IS NOT A PROMPT ═══ -->
-<section class="not-a-prompt" id="not-a-prompt">
-  <div class="nap-inner">
-    <h2 class="nap-heading">A plan is not a prompt.</h2>
-    <p class="nap-lead">A prompt gives you a lesson. Once.</p>
-    <p class="nap-lead">Wizkoo builds a system that compounds.</p>
-    <span class="nap-detail">Multi-age differentiation across your kids.</span>
-    <span class="nap-detail">Spiral learning that connects last month to next week.</span>
-    <span class="nap-detail">Atlas and Elementum woven into every plan.</span>
-    <span class="nap-detail">And it remembers what you've already covered.</span>
-    <p class="nap-close">Type one theme. Two minutes. Done.</p>
-  </div>
-</section>
-
 <div class="content-layer">
 
 <!-- EVERYTHING CONNECTS -->
@@ -1293,6 +1308,43 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
         <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Helium: the element that lifts balloons and powers the sun</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══ A PLAN IS NOT A PROMPT ═══ -->
+<div class="saffron-rule"></div>
+<section class="nap-section reveal" id="not-a-prompt">
+  <div class="nap-center">
+
+    <h2 class="nap-heading">A plan is not a prompt.</h2>
+
+    <p class="nap-lead nap-lead-dim">A prompt gives you a lesson. Once.</p>
+    <p class="nap-lead nap-lead-bright">We built something that doesn't forget.</p>
+
+    <div class="nap-cards">
+
+      <div class="nap-closer-card">
+        <div class="nap-closer-l1">One topic.</div>
+        <div class="nap-closer-l2">Two minutes.</div>
+        <div class="nap-closer-l3">A whole week<br>planned.</div>
+      </div>
+
+      <div class="nap-evidence">
+        <div class="nap-ev-row">
+          <div class="nap-ev-text">We know <strong>your kids aren't in the same place.</strong></div>
+        </div>
+        <div class="nap-ev-row">
+          <div class="nap-ev-text">We remember <strong>what you covered three weeks ago.</strong></div>
+        </div>
+        <div class="nap-ev-row">
+          <div class="nap-ev-text">Real-world science, world literacy, and a printable library. <strong>All built in.</strong></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="nap-counterpoint">A prompt starts over every single time.</div>
+
   </div>
 </section>
 
@@ -1408,7 +1460,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 <section class="philo"><div class="philo-left reveal"><h2>The hard part was never teaching<span class="sp"></span><br>It was knowing <strong>what to teach next</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>He can't read yet. But he's learning from her.</h3><p>When every child studies the same theme at their own level, the 7-year-old becomes the teacher. The 4-year-old becomes the student. The 2-year-old just wants to be in the room. That's not a side effect. That's the whole point.</p></div><div class="phi"><h3>Sunday night is yours again.</h3><p>Type one theme. See the week. Walk into Monday knowing exactly what to do.</p></div><div class="phi"><h3>Your kid was never the one in the textbook.</h3><p>Every curriculum you've tried was built for a child who sits still, finishes worksheets, and fits neatly into a grade. Yours doesn't. This builds a week around the children you actually have. Their ages, their reading levels, the way they actually learn.</p></div><div class="phi"><h3>She's five. She reads like she's seven. We noticed.</h3><p>We don't sort children by birthday. A 5-year-old who reads at a second-grade level gets second-grade reading. A 7-year-old who needs more time with addition gets more time with addition. Age is a line on a form. Readiness is what we build for.</p></div></div></section>
 
 <!-- FAQ -->
-<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Frequently asked<span class="sp"></span> questions<span class="sp"></span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library of isolated subjects. Outschool is a marketplace of individual classes. Wizkoo connects everything through a single theme and builds the whole week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>$50/month or $499/year. Your first plan is free — no account required.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
+<section class="faq-section reveal"><div class="faq-inner"><div class="tag-light">Questions parents ask</div><h2>Questions parents ask<span style="color:var(--saffron)">.</span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>ChatGPT gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is this different from Khan Academy?</button><div class="faq-a" hidden>Khan is a library of isolated subjects. Outschool is a marketplace of individual classes. Wizkoo connects everything through a single theme and builds the whole week.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>$50/month or $499/year. Your first plan is free — no account required.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
 
 <!-- CTA -->
 <section class="cta-dark cta-reveal" id="pricing"><h2>One moment<span class="sp"></span><br><span style="white-space:nowrap">Every subject connected<span class="sp"></span></span></h2><p class="cta-status">Your first plan is free</p><p class="cta-sub">No account. No commitment. Just pick a theme and build your week.</p><a href="/plan" class="btn-main">Build My Family&#8217;s Week</a><div style="margin:56px auto 0;padding-top:48px;border-top:1px solid rgba(255,255,255,0.07);max-width:520px"><p style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;margin:0 0 16px">When you&rsquo;re ready</p><p style="font-family:'Sora',sans-serif;font-weight:300;font-size:1.1rem;letter-spacing:-0.02em;color:rgba(250,250,250,0.5);margin:0 0 36px">One price. Every child in your house.</p><div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:0 auto 40px"><div style="border:1px solid rgba(232,175,56,0.25);padding:24px 40px;text-align:center;min-width:160px"><div style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:#8C91A5;margin-bottom:8px">Monthly</div><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:2.2rem;letter-spacing:-0.03em;color:#F2F0EA">$50<span style="font-size:0.9rem;font-weight:400;color:#8C91A5">&thinsp;/&nbsp;mo</span></div></div><div style="border:1px solid rgba(232,175,56,0.55);padding:24px 40px;text-align:center;min-width:160px;position:relative"><div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--saffron);color:var(--ink);font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 12px;white-space:nowrap">Best value</div><div style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:#8C91A5;margin-bottom:8px">Annual</div><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:2.2rem;letter-spacing:-0.03em;color:#F2F0EA">$499<span style="font-size:0.9rem;font-weight:400;color:#8C91A5">&thinsp;/&nbsp;yr</span></div></div></div><a href="/plan/sign-up" class="btn-main">Start My Subscription</a></div></section>
@@ -1481,7 +1533,7 @@ function spawnConfetti(x,y){
 // ═══ HERO THREE-ZONE ANIMATION ═══
 (function(){
   var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var SUBJECTS=['reading','writing','math','science','history','geo','art'];
+  var SUBJECTS=['reading','math','science','history','geo','art','writing'];
   var EDI='cubic-bezier(0.16,1,0.3,1)';
 
   function showAll(){
@@ -1671,8 +1723,6 @@ function spawnConfetti(x,y){
 (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});document.querySelectorAll('.reveal,.plan-card-entrance,.phi,.cta-reveal').forEach(function(el){obs.observe(el)});
 // Id-tags: staggered reveal via JS so hover doesn't inherit entrance delay
 var tagObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var tags=document.querySelectorAll('.id-tag');tags.forEach(function(tag,i){setTimeout(function(){tag.classList.add('visible')},i*120)});tagObs.disconnect()}})},{threshold:0.1});var tagWrap=document.querySelector('.id-tags-wrap');if(tagWrap)tagObs.observe(tagWrap);
-// A Plan Is Not a Prompt: staggered detail lines
-var napObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var details=document.querySelectorAll('.nap-detail');details.forEach(function(d,i){setTimeout(function(){d.classList.add('vis')},i*100)});var close=document.querySelector('.nap-close');if(close)setTimeout(function(){close.classList.add('vis')},(details.length-1)*100+100);napObs.disconnect()}})},{threshold:0.15});var napSec=document.getElementById('not-a-prompt');if(napSec)napObs.observe(napSec);
 })();
 
 function toggleWave(row){
@@ -1696,14 +1746,15 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   if(!ff)return;
   // positions
   function getFootDotPos(){var d=document.getElementById('hz-hl-dot');if(!d)return{x:window.innerWidth*0.3,y:window.innerHeight*0.4};var r=d.getBoundingClientRect();return{x:r.left+r.width/2-4,y:r.top+r.height/2-4};}
-  function getOSDotPos(){var d=document.querySelector('.os-dot');if(!d)return{x:window.innerWidth*0.72,y:window.innerHeight*0.38};var r=d.getBoundingClientRect();return{x:r.left+r.width/2-4,y:r.top+r.height/2-4};}
+  function getOSDotPos(){var d=document.querySelector('.open-seat-panel');if(!d)return{x:window.innerWidth*0.82,y:window.innerHeight*0.72};var r=d.getBoundingClientRect();return{x:r.left+r.width*0.72-4,y:r.top+r.height*0.72-4};}
   function expoOut(t){return t>=1?1:1-Math.pow(2,-10*t);}
 
-  var ffx=0,ffy=0,catches=0,looping=false,loopAngle=0;
+  var ffx=0,ffy=0;
   var phase='waiting';
   var phaseStart=0;
   var travelFrom={x:0,y:0},travelTo={x:0,y:0};
   var resideBase={x:0,y:0};
+  var fleeFrom={x:0,y:0},fleeTo={x:0,y:0};
 
   // ── Birth at 3.8s ──
   setTimeout(function(){
@@ -1759,24 +1810,36 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
     }
     else if(phase==='reside'){
       var cyc=(now-phaseStart)/16000;
-      ffx=resideBase.x+Math.sin(cyc*Math.PI*2)*3.5+Math.sin(cyc*Math.PI*5.3)*1.5;
-      ffy=resideBase.y+Math.cos(cyc*Math.PI*2.1)*2.8+Math.cos(cyc*Math.PI*3.7)*1.2;
+      ffx=resideBase.x+Math.sin(cyc*Math.PI*2)*28+Math.sin(cyc*Math.PI*5.3)*12;
+      ffy=resideBase.y+Math.cos(cyc*Math.PI*2.1)*20+Math.cos(cyc*Math.PI*3.7)*9;
       ff.style.left=ffx+'px';ff.style.top=ffy+'px';
       ff.style.background='#F0C050';
       ff.style.boxShadow='0 0 14px 5px rgba(240,192,80,0.6),0 0 28px 8px rgba(240,192,80,0.25)';
-      // Cursor collision
+      // Cursor proximity — flee
       var dx=window.mx-ffx,dy=window.my-ffy,dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<30&&!ff.classList.contains('caught')){
-        catches++;ff.classList.add('caught');
-        var cur=document.getElementById('cursor');
-        if(cur){cur.style.background='#6BBF6B';cur.style.boxShadow='0 0 12px rgba(107,191,107,0.5)';setTimeout(function(){cur.style.background='';cur.style.boxShadow=''},400);}
-        var ring=document.createElement('div');ring.className='collision-ring';ring.style.left=ffx+'px';ring.style.top=ffy+'px';document.body.appendChild(ring);setTimeout(function(){ring.remove()},500);
-        var sc=['#E8AF38','#6BBF6B','#D4A030','#8ED08E','#F0C45A'];
-        for(var i=0;i<5;i++){var sp=document.createElement('div');sp.className='collision-spark';sp.style.left=ffx+'px';sp.style.top=ffy+'px';sp.style.background=sc[i%sc.length];sp.style.setProperty('--sx',(Math.random()-0.5)*60+'px');sp.style.setProperty('--sy',(Math.random()-0.5)*60+'px');sp.style.animation='sparkOut 0.4s var(--expo) forwards';document.body.appendChild(sp);setTimeout(function(el){el.remove()}.bind(null,sp),500);}
-        if(catches===3){looping=true;loopAngle=0;}
-        setTimeout(function(){ff.classList.remove('caught')},350);
+      if(dist<38){
+        var angle=Math.atan2(ffy-window.my,ffx-window.mx);
+        fleeFrom={x:ffx,y:ffy};
+        fleeTo={x:ffx+Math.cos(angle)*140,y:ffy+Math.sin(angle)*140};
+        phase='flee';phaseStart=now;
       }
-      if(looping){loopAngle+=0.12;resideBase.x+=Math.cos(loopAngle)*0.4;resideBase.y+=Math.sin(loopAngle)*0.4;if(loopAngle>Math.PI*2){looping=false;loopAngle=0;}}
+    }
+    else if(phase==='flee'){
+      var p=Math.min((now-phaseStart)/350,1);
+      var e=expoOut(p);
+      ff.style.left=(fleeFrom.x+(fleeTo.x-fleeFrom.x)*e)+'px';
+      ff.style.top=(fleeFrom.y+(fleeTo.y-fleeFrom.y)*e)+'px';
+      ff.style.opacity=String(1-e);
+      if(p>=1){
+        ff.style.opacity='0';
+        setTimeout(function(){
+          ff.style.transition='opacity 0.6s ease';
+          ff.style.left=resideBase.x+'px';ff.style.top=resideBase.y+'px';
+          ff.style.opacity='1';
+          setTimeout(function(){ff.style.transition=''},700);
+          phase='reside';phaseStart=Date.now();
+        },1000);
+      }
     }
 
     requestAnimationFrame(tick);
@@ -1883,7 +1946,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   var particles=[];
   function init(){
     particles=[];
-    for(var i=0;i<80;i++){
+    for(var i=0;i<240;i++){
       var rv=Math.random(),plane=rv<0.30?0:rv<0.70?1:2;
       var size=plane===0?0.5+Math.random()*0.5:plane===1?1.5+Math.random()*1.5:3.5+Math.random()*1.5;
       var ba=plane===0?0.10+Math.random()*0.07:plane===1?0.15+Math.random()*0.10:0.22+Math.random()*0.14;
