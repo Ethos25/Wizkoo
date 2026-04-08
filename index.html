@@ -106,8 +106,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 
 /* ═══ NAV ═══ */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(-100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);pointer-events:none}
-.site-nav.show{transform:translateY(0);pointer-events:auto}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:48px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(0);pointer-events:auto}
+.nav-wordmark-wrap{display:flex;flex-direction:column;margin-right:auto;flex-shrink:0}
+.nav-tagline{font-family:'Space Mono',monospace;font-size:5px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,250,250,0.2);white-space:nowrap;margin-top:2px}
 .site-nav a:not(.nav-cta-sm):not(.nav-launch),.nav-bar a:not(.nav-cta-sm):not(.nav-launch){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.25}
 .nav-bar{width:100%;max-width:var(--max-width);height:100%;padding:0 48px;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:40px}
@@ -192,7 +193,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .hero-sub{margin-top:36px;max-width:680px;}
 .hero-sub-text{font-size:1rem;color:#777;line-height:1.6}
 .hero-cta-group{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
-.hero-micro{font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid)}
+.hero-micro{font-family:'Space Mono',monospace;font-size:0.57rem;letter-spacing:0.13em;text-transform:uppercase;color:#8A8688;margin-bottom:14px}
 
 
 
@@ -645,7 +646,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .hz1-eyebrow{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#8C91A5;display:flex;align-items:center;gap:9px;margin-bottom:10px;opacity:0;transform:translateY(12px)}
 .hz-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#E8AF38;flex-shrink:0;display:inline-block}
 .hz1-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.2rem,3.6vw,3.5rem);line-height:1.1;letter-spacing:-0.03em;color:#0C1020;margin:0 0 4px;opacity:0;transform:translateY(12px)}
-.hz-hl-dot{display:inline-block;width:clamp(10px,1.2vw,15px);height:clamp(10px,1.2vw,15px);border-radius:50%;background:#E8AF38;margin-left:4px;vertical-align:baseline;transform:translateY(2px);opacity:0}
+.hz-hl-dot{display:inline-block;width:clamp(8px,1.0vw,13px);height:clamp(8px,1.0vw,13px);border-radius:50%;background:#E8AF38;margin-left:2px;vertical-align:baseline;position:relative;top:0;opacity:0}
 .hz1-sub{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1rem,2vw,1.4rem);line-height:1.12;letter-spacing:-0.02em;color:#4A4850;margin:0;opacity:0;transform:translateY(12px)}
 .hz-q-wrap{position:relative;display:inline-block;line-height:1}
 .hz-q-dot{position:absolute;bottom:0.22em;left:50%;transform:translateX(-50%);width:clamp(5px,0.6vw,8px);height:clamp(5px,0.6vw,8px);border-radius:50%;background:#E8AF38;box-shadow:0 0 8px rgba(232,175,56,0.3);opacity:0}
@@ -746,7 +747,118 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nav-home{display:inline-flex;align-items:center;justify-content:center;padding:16px;flex-shrink:0;text-decoration:none;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .nav-home-dot{width:12px;height:12px;border-radius:50%;background:#E8AF38;display:inline-block;transition:transform .3s cubic-bezier(0.16,1,0.3,1),box-shadow .3s}
 .nav-home:hover .nav-home-dot{transform:scale(1.5);box-shadow:0 0 8px rgba(232,175,56,0.6)}
-@media(hover:hover){.hero-cta-circle{cursor:none!important}}
+
+/* ═══ HERO LEFT COLUMN REVEAL ═══ */
+.linen-hero-text{opacity:0;animation:heroColReveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards 0.3s}
+@keyframes heroColReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ HERO MICRO TEXT ═══ */
+.hero-micro{font-family:'Space Mono',monospace;font-size:0.57rem;letter-spacing:0.13em;text-transform:uppercase;color:#8A8688;margin-bottom:14px;margin-top:24px}
+
+/* ═══ HERO CTA WRAP ═══ */
+.hero-cta-wrap{padding:0 0 0 clamp(48px,10vw,14vw);display:flex;flex-direction:column;align-items:flex-start}
+@media(max-width:768px){.hero-cta-wrap{padding:0 20px}}
+
+/* ═══ OPEN SEAT ZONE — saffron panel ═══ */
+.open-seat-zone{position:relative;z-index:1;flex:0 0 45%;max-width:45%}
+.open-seat-clip{
+  position:absolute;top:8%;bottom:8%;left:0;right:0;
+  overflow:hidden;
+  border-radius:clamp(14px,2.2vw,28px) 0 0 clamp(14px,2.2vw,28px);
+  clip-path:inset(0 0 0 100%);
+  animation:clipReveal 0.9s cubic-bezier(0.16,1,0.3,1) forwards 1.5s;
+}
+@keyframes clipReveal{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0%)}}
+
+.open-seat-panel{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 45%,#EEC050 0%,#E8AF38 45%,#E2A530 100%);
+  animation:panelBreathe 8s ease-in-out infinite alternate;
+  overflow:hidden;
+}
+@keyframes panelBreathe{0%{filter:brightness(1)}50%{filter:brightness(1.02)}100%{filter:brightness(1)}}
+
+/* Panel grain layer */
+.os-grain{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:0.022}
+/* Panel top-to-bottom light */
+.os-toplight{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(255,250,230,0.04) 0%,transparent 40%,rgba(160,112,32,0.035) 100%)}
+/* Panel drifting radial light */
+.os-driftlight{position:absolute;width:140%;height:140%;top:-20%;left:-20%;z-index:3;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,248,220,0.2) 0%,transparent 50%);
+  animation:lightDrift 14s ease-in-out infinite alternate}
+@keyframes lightDrift{0%{transform:translate(0%,0%)}100%{transform:translate(12%,8%)}}
+/* Panel text glow */
+.os-textglow{position:absolute;width:80%;height:60%;top:20%;left:10%;z-index:4;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(255,250,230,0.06) 0%,transparent 70%)}
+
+/* Panel canvas */
+#particle-canvas{position:absolute;inset:0;z-index:5;pointer-events:none}
+
+/* Panel text layer */
+.os-text{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 clamp(12px,3vw,32px)}
+.os-the{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(8px,1.2vw,17px);color:rgba(12,16,32,0.4);letter-spacing:0.01em;line-height:1;margin-bottom:4px}
+.os-name{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(14px,2.5vw,36px);color:#0C1020;letter-spacing:-0.035em;line-height:1.08;white-space:nowrap}
+.os-dot{display:inline-block;width:0.28em;height:0.28em;border-radius:50%;background:#E8AF38;vertical-align:baseline;position:relative;top:-0.05em;margin-left:0.04em;flex-shrink:0}
+.os-mechanism{font-family:'Sora',sans-serif;font-weight:400;font-size:clamp(7px,1vw,14px);color:rgba(12,16,32,0.55);letter-spacing:0.015em;line-height:1.55;margin-top:clamp(8px,1.2vw,16px);opacity:0;animation:osFadeIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards 2.6s}
+.os-link-wrap{margin-top:clamp(6px,1vw,12px);opacity:0;animation:osFadeIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards 3.2s}
+.os-link{font-family:'Inter',sans-serif;font-style:italic;font-weight:400;font-size:clamp(5px,0.6vw,9px);color:rgba(12,16,32,0.32);text-decoration:none;position:relative}
+.os-link::after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;background:rgba(12,16,32,0.32);transition:width 300ms}
+.os-link:hover::after{width:100%}
+@keyframes osFadeIn{from{opacity:0}to{opacity:1}}
+
+/* Panel edge treatments */
+.os-edge-highlight{position:absolute;top:0;bottom:0;left:0;width:2px;z-index:20;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(255,252,240,0.2),rgba(255,250,230,0.06),rgba(200,144,48,0.05))}
+.os-edge-shadow{position:absolute;top:0;bottom:0;left:-6px;width:6px;z-index:20;pointer-events:none;
+  background:linear-gradient(to right,rgba(160,112,32,0.06),transparent)}
+.os-inset-shadow{position:absolute;inset:0;z-index:19;pointer-events:none;
+  box-shadow:inset 3px 0 6px rgba(160,112,32,0.1);border-radius:clamp(14px,2.2vw,28px) 0 0 clamp(14px,2.2vw,28px)}
+.open-seat-clip:hover .os-inset-shadow{box-shadow:inset 3px 0 6px rgba(160,112,32,0.15)}
+
+/* Saffron bleed onto linen */
+.os-bleed-main{position:absolute;top:0;bottom:0;right:0;width:160px;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 100% 50%,rgba(232,175,56,0.09) 0%,rgba(232,175,56,0.04) 40%,transparent 70%)}
+.os-bleed-top{position:absolute;top:0;right:0;width:120px;height:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 100% 0%,rgba(232,175,56,0.05) 0%,transparent 60%)}
+.os-bleed-bot{position:absolute;bottom:0;right:0;width:120px;height:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 100% 100%,rgba(232,175,56,0.05) 0%,transparent 60%)}
+
+/* Mobile: hide panel on small screens, show sphere fallback */
+@media(max-width:768px){
+  .open-seat-zone{flex:none;width:100%;max-width:100%;min-height:240px;position:relative}
+  .open-seat-clip{top:16px;bottom:16px;left:16px;right:0;border-radius:clamp(10px,3vw,20px) 0 0 clamp(10px,3vw,20px)}
+  .os-bleed-main,.os-bleed-top,.os-bleed-bot{display:none}
+}
+
+/* prefers-reduced-motion: kill all panel animations */
+@media(prefers-reduced-motion:reduce){
+  .linen-hero-text{animation:none!important;opacity:1!important;transform:none!important}
+  .open-seat-clip{animation:none!important;clip-path:inset(0 0 0 0%)!important}
+  .open-seat-panel{animation:none!important}
+  .os-driftlight{animation:none!important}
+  .os-mechanism,.os-link-wrap{animation:none!important;opacity:1!important}
+  #particle-canvas{display:none!important}
+}
+
+/* ═══ A PLAN IS NOT A PROMPT ═══ */
+.not-a-prompt{background:var(--linen);padding:4rem 1.5rem;display:flex;justify-content:center}
+.nap-inner{max-width:640px;width:100%}
+.nap-heading{font-family:'Sora',sans-serif;font-weight:600;font-size:32px;color:#0C1020;letter-spacing:-0.02em;margin-bottom:1.5rem}
+.nap-lead{font-family:'Sora',sans-serif;font-weight:400;font-size:20px;color:#0C1020;line-height:1.6;margin-bottom:0}
+.nap-lead+.nap-lead{margin-bottom:1.5rem}
+.nap-detail{font-family:'Inter',sans-serif;font-weight:400;font-size:16px;color:rgba(12,16,32,0.8);line-height:1.8;display:block;opacity:0;transform:translateY(8px);transition:opacity 400ms ease-out,transform 400ms ease-out}
+.nap-detail.vis{opacity:1;transform:translateY(0)}
+.nap-close{font-family:'Sora',sans-serif;font-weight:500;font-size:18px;color:#0C1020;margin-top:1.5rem;opacity:0;transform:translateY(8px);transition:opacity 400ms ease-out,transform 400ms ease-out}
+.nap-close.vis{opacity:1;transform:translateY(0)}
+@media(max-width:768px){
+  .not-a-prompt{padding:3rem 1.25rem}
+  .nap-heading{font-size:24px}
+  .nap-lead{font-size:18px}
+  .nap-detail{font-size:15px}
+  .nap-close{font-size:16px}
+}
 </style>
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -770,36 +882,47 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="/plan" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a></div><a href="/plan" class="nav-launch">Start Free</a></div>
+  <div class="nav-bar"><div class="nav-wordmark-wrap"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-tagline">Weekly learning plans. Built around your people.</div></div><div class="nav-center"><a href="/plan" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="methodology.html" class="nav-science">The Science</a><a href="/the-open-seat" class="nav-science">The Open Seat</a></div><a href="/plan" class="nav-launch">Build a Plan</a></div>
 </div>
 
 <!-- ═══ LINEN HERO ═══ -->
 <section class="linen-hero" id="linen-hero">
   <!-- Left text zone -->
   <div class="linen-hero-text">
-    <!-- Wordmark + descriptor -->
-    <div class="arrival" id="arrival">
-      <div class="arrival-inner">
-        <span class="arrival-wm" id="hero-wm">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></span>
-        <div class="arrival-tagline hero-eyebrow">WEEKLY LEARNING PLANS.<br>BUILT AROUND YOUR PEOPLE.</div>
-      </div>
-    </div>
     <!-- Headline + subheadline -->
     <div class="hz1-inner" id="hz1">
       <h1 class="hz1-h1" id="hz1-h1" aria-label="Granddad broke his foot">Granddad broke his foot<span class="hz-hl-dot" id="hz-hl-dot" aria-hidden="true"></span></h1>
       <p class="hz1-sub" id="hz1-sub">Guess what everyone learned that week<span style="color:#4A4850">?</span></p>
     </div>
+    <!-- Micro text + CTA -->
+    <div class="hero-cta-wrap">
+      <p class="hero-micro">No credit card · No per-child pricing · Cancel anytime<span class="esa-badge" style="display:none"> · ESA funds accepted.</span></p>
+      <a href="/plan" class="btn-main">Build a Plan</a>
+    </div>
   </div>
 
-  <!-- Right CTA circle -->
-  <div class="hero-circle-zone">
-    <div class="hero-sphere-stack">
-      <div class="hero-cta-circle" id="hero-cta-circle" role="button" tabindex="0"
-           onclick="location.href='/plan'"
-           onkeydown="if(event.key==='Enter')location.href='/plan'">
-        <span class="hero-cta-circle-text">Start</span>
+  <!-- Right: Saffron Panel — The Open Seat -->
+  <div class="open-seat-zone">
+    <div class="os-bleed-main"></div>
+    <div class="os-bleed-top"></div>
+    <div class="os-bleed-bot"></div>
+    <div class="open-seat-clip">
+      <div class="open-seat-panel">
+        <svg class="os-grain" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="os-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#os-noise)"/></svg>
+        <div class="os-toplight"></div>
+        <div class="os-driftlight"></div>
+        <div class="os-textglow"></div>
+        <canvas id="particle-canvas"></canvas>
+        <div class="os-text">
+          <div class="os-the">The</div>
+          <div class="os-name">Open Seat<span class="os-dot"></span></div>
+          <div class="os-mechanism">Your subscription.<br>Another's scholarship.</div>
+          <div class="os-link-wrap"><a href="/the-open-seat" class="os-link">Learn more</a></div>
+        </div>
       </div>
-      <p class="hero-sphere-micro"><span class="hsm-phrase">No credit card</span><span class="hsm-sep">&nbsp;·&nbsp;</span><span class="hsm-phrase">No per-child pricing</span><span class="hsm-sep">&nbsp;·&nbsp;</span><span class="hsm-phrase">Cancel anytime</span></p>
+      <div class="os-edge-shadow"></div>
+      <div class="os-edge-highlight"></div>
+      <div class="os-inset-shadow"></div>
     </div>
   </div>
 </section>
@@ -944,12 +1067,12 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
         <div class="hz2-mob-nucleus"></div>
         <div class="hz2-mob-list">
           <div class="hz2-mob-item"><span class="hz2-mob-label">Reading</span><span class="hz2-mob-text">The man who accidentally saw through his wife's hand.</span></div>
-          <div class="hz2-mob-item"><span class="hz2-mob-label">Writing</span><span class="hz2-mob-text">A get-well letter to Granddad. What would you say?</span></div>
           <div class="hz2-mob-item"><span class="hz2-mob-label">Math</span><span class="hz2-mob-text">Measuring bone lengths. Which is longest?</span></div>
           <div class="hz2-mob-item"><span class="hz2-mob-label">Science</span><span class="hz2-mob-text">How fractures heal. Why does a cast work?</span></div>
           <div class="hz2-mob-item"><span class="hz2-mob-label">History</span><span class="hz2-mob-text">1895: one accident changed medicine forever.</span></div>
           <div class="hz2-mob-item"><span class="hz2-mob-label">Geography</span><span class="hz2-mob-text">Visit Würzburg, Germany. Where X-rays were born.</span></div>
           <div class="hz2-mob-item"><span class="hz2-mob-label">Art</span><span class="hz2-mob-text">Sketch the human skeleton. Label every bone you can name.</span></div>
+          <div class="hz2-mob-item"><span class="hz2-mob-label">Writing</span><span class="hz2-mob-text">A get-well letter to Granddad. What would you say?</span></div>
         </div>
       </div>
     </div>
@@ -1121,6 +1244,20 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
         </g>
       </svg>
 </div>
+
+<!-- ═══ A PLAN IS NOT A PROMPT ═══ -->
+<section class="not-a-prompt" id="not-a-prompt">
+  <div class="nap-inner">
+    <h2 class="nap-heading">A plan is not a prompt.</h2>
+    <p class="nap-lead">A prompt gives you a lesson. Once.</p>
+    <p class="nap-lead">Wizkoo builds a system that compounds.</p>
+    <span class="nap-detail">Multi-age differentiation across your kids.</span>
+    <span class="nap-detail">Spiral learning that connects last month to next week.</span>
+    <span class="nap-detail">Atlas and Elementum woven into every plan.</span>
+    <span class="nap-detail">And it remembers what you've already covered.</span>
+    <p class="nap-close">Type one theme. Two minutes. Done.</p>
+  </div>
+</section>
 
 <div class="content-layer">
 
@@ -1390,9 +1527,9 @@ function spawnConfetti(x,y){
   }
 
   // Zone 1 reveals
-  rev('hz1-h1',        2000, 700);
-  revO('hz-hl-dot',    2200, 400);
-  rev('hz1-sub',       2700, 700);
+  rev('hz1-h1',         300, 700);
+  revO('hz-hl-dot',    500, 400);
+  rev('hz1-sub',        700, 700);
 
   // Zone 2: dark strip fades in
   setTimeout(function(){
@@ -1481,49 +1618,7 @@ function spawnConfetti(x,y){
   setTimeout(function(){window.removeEventListener('scroll',onEs);},7500);
 })();
 
-// ═══ SPHERE — align center to #hz1 vertical center ═══
-(function(){
-  function alignSphere(){
-    var hz1=document.getElementById('hz1');
-    var sphere=document.getElementById('hero-cta-circle');
-    if(!hz1||!sphere)return;
-    var zone=sphere.parentElement;
-    var zoner=zone.getBoundingClientRect();
-    var hz1r=hz1.getBoundingClientRect();
-    var hz1Center=hz1r.top+hz1r.height/2;
-    var targetTop=hz1Center-zoner.top-sphere.offsetHeight/2;
-    sphere.style.marginTop=Math.round(targetTop)+'px';
-  }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',alignSphere);
-  } else {
-    alignSphere();
-  }
-  window.addEventListener('load',alignSphere);
-  window.addEventListener('resize',alignSphere,{passive:true});
-})();
-
-// ═══ NAV — slides in past 70% hero, one-way door ═══
-(function(){
-  var nav=document.getElementById('site-nav');
-  var arrival=document.getElementById('arrival');
-  var navRevealed=false;
-  window.addEventListener('scroll',function(){
-    if(!navRevealed){
-      var fadeProgress=Math.min(window.scrollY/(window.innerHeight*0.5),1);
-      if(arrival)arrival.style.opacity=1-fadeProgress;
-      if(window.scrollY>window.innerHeight*0.7){
-        navRevealed=true;
-        nav.classList.add('show');
-        if(arrival){
-          arrival.style.transition='opacity 0.3s cubic-bezier(0.16,1,0.3,1)';
-          arrival.style.opacity='0';
-          arrival.style.visibility='hidden';
-        }
-      }
-    }
-  },{passive:true});
-})();
+// nav is permanently visible — no scroll reveal needed
 
 
 
@@ -1575,7 +1670,10 @@ function spawnConfetti(x,y){
 // ═══ SCROLL REVEALS ═══
 (function(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});document.querySelectorAll('.reveal,.plan-card-entrance,.phi,.cta-reveal').forEach(function(el){obs.observe(el)});
 // Id-tags: staggered reveal via JS so hover doesn't inherit entrance delay
-var tagObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var tags=document.querySelectorAll('.id-tag');tags.forEach(function(tag,i){setTimeout(function(){tag.classList.add('visible')},i*120)});tagObs.disconnect()}})},{threshold:0.1});var tagWrap=document.querySelector('.id-tags-wrap');if(tagWrap)tagObs.observe(tagWrap)})();
+var tagObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var tags=document.querySelectorAll('.id-tag');tags.forEach(function(tag,i){setTimeout(function(){tag.classList.add('visible')},i*120)});tagObs.disconnect()}})},{threshold:0.1});var tagWrap=document.querySelector('.id-tags-wrap');if(tagWrap)tagObs.observe(tagWrap);
+// A Plan Is Not a Prompt: staggered detail lines
+var napObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var details=document.querySelectorAll('.nap-detail');details.forEach(function(d,i){setTimeout(function(){d.classList.add('vis')},i*100)});var close=document.querySelector('.nap-close');if(close)setTimeout(function(){close.classList.add('vis')},(details.length-1)*100+100);napObs.disconnect()}})},{threshold:0.15});var napSec=document.getElementById('not-a-prompt');if(napSec)napObs.observe(napSec);
+})();
 
 function toggleWave(row){
   var detail=row.nextElementSibling;
@@ -1591,367 +1689,102 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
 if(typeof window.mx==='undefined'){window.mx=0;window.my=0;}
 document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;});
 
-// ═══ FIREFLY ═══
+// ═══ FIREFLY — born from "foot." dot, travels to Open Seat ═══
 (function(){
-  console.log('Firefly init');
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   var ff=document.getElementById('firefly');
-  console.log('firefly el:', ff);
-  if(!ff){console.warn('Firefly: #firefly element not found');return;}
-  var heroWm=document.getElementById('hero-wm');
-  console.log('hero-wm el:', heroWm);
-  var wmDot=heroWm?heroWm.querySelector('.wm-dot'):null;
-  console.log('wm-dot el:', wmDot);
-  var eyebrowCheck=document.querySelector('.hero-eyebrow');
-  console.log('hero-eyebrow el:', eyebrowCheck);
-  console.log('window.mx/my:', window.mx, window.my);
+  if(!ff)return;
+  // positions
+  function getFootDotPos(){var d=document.getElementById('hz-hl-dot');if(!d)return{x:window.innerWidth*0.3,y:window.innerHeight*0.4};var r=d.getBoundingClientRect();return{x:r.left+r.width/2-4,y:r.top+r.height/2-4};}
+  function getOSDotPos(){var d=document.querySelector('.os-dot');if(!d)return{x:window.innerWidth*0.72,y:window.innerHeight*0.38};var r=d.getBoundingClientRect();return{x:r.left+r.width/2-4,y:r.top+r.height/2-4};}
+  function expoOut(t){return t>=1?1:1-Math.pow(2,-10*t);}
 
-  // Helper: get the exact center of the saffron ::after dot
-  function getDotCenter(){
-    if(!wmDot)return{x:window.innerWidth*0.6-4,y:window.innerHeight*0.3-4};
-    var r=wmDot.getBoundingClientRect();
-    var fs=parseFloat(getComputedStyle(wmDot).fontSize)||64;
-    // Subtract half of firefly size (8px→4px) so firefly CENTER lands on dot CENTER
-    // X: dot::after right:-0.2em, width:0.22em → center at r.right + fs*(0.2-0.11) = r.right+fs*0.09
-    // Y: dot::after top:0.1em, height:0.22em → center at r.top + fs*(0.1+0.11) = r.top+fs*0.21
-    return{x:Math.round(r.right+fs*0.09-4),y:Math.round(r.top+fs*0.21-4)};
-  }
+  var ffx=0,ffy=0,catches=0,looping=false,loopAngle=0;
+  var phase='waiting';
+  var phaseStart=0;
+  var travelFrom={x:0,y:0},travelTo={x:0,y:0};
+  var resideBase={x:0,y:0};
 
-  var dotPos=getDotCenter();
-  var ffx=dotPos.x, ffy=dotPos.y;
-  var ffTargetX=ffx, ffTargetY=ffy;
-  var ffVx=0, ffVy=0;
-  var catches=0;
-  var lastMoveTime=Date.now();
-  var idle=false;
-  var looping=false;
-  var loopAngle=0;
-  var dwelling=false;
-  var dwellStart=0;
-  var dwellDuration=1500;
-  var orbitAngle=0;
+  // ── Birth at 3.8s ──
+  setTimeout(function(){
+    var fp=getFootDotPos();
+    ffx=fp.x;ffy=fp.y;
+    ff.style.left=ffx+'px';ff.style.top=ffy+'px';
+    ff.classList.add('alive');
+    phase='birth';phaseStart=Date.now();
+    var s=document.createElement('style');
+    s.textContent='#hz-hl-dot{animation:dotBurst 0.6s var(--expo) forwards!important;opacity:1!important}';
+    document.head.appendChild(s);setTimeout(function(){s.remove()},700);
+  },3800);
 
-  // Birth sequence state
-  var birthPhase='waiting'; // waiting, descending, tracing, flitting, returning, homeDwell, free
-  var birthStart=0;
-  var birthHomeX=dotPos.x;
-  var birthHomeY=dotPos.y;
-  var eyebrowEl=document.querySelector('.hero-eyebrow');
-  var eyebrowStartX=0, eyebrowEndX=0, eyebrowY=0;
-
-  // Points of interest: cycle through these
-  var pois=[];
-  function updatePois(){
-    pois=[];
-    // Hero CTA circle — primary POI, firefly orbits this after birth
-    var hcc=document.getElementById('hero-cta-circle');
-    if(hcc){var r=hcc.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2,r:r.width/2,orbit:true})}
-    // Plan circle CTA
-    var pc=document.querySelector('.btn-circle');
-    if(pc){var r=pc.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
-    // Plan card
-    var pk=document.querySelector('.plan-card');
-    if(pk){var r=pk.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+40})}
-    // Same room header
-    var sr=document.querySelector('.sr-track');
-    if(sr){var r=sr.getBoundingClientRect();pois.push({x:r.left+r.width/3,y:r.top+r.height/2})}
-    // Everything Connects headline
-    var ec=document.querySelector('.ec-headline');
-    if(ec){var r=ec.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
-    // Games elementum chips
-    var el=document.querySelector('.elem-chips');
-    if(el){var r=el.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
-    // Closing CTA
-    var ct=document.querySelector('.btn-circle-dark');
-    if(ct){var r=ct.getBoundingClientRect();pois.push({x:r.left+r.width/2,y:r.top+r.height/2})}
-  }
-
-  var currentPoi=0;
-  var poiTimer=0;
-  var t=0;
-
-  // Perlin-like noise approximation
-  function noise(x){return Math.sin(x*1.2)*0.5+Math.sin(x*2.7)*0.3+Math.sin(x*4.1)*0.2}
-
-  // ═══ BIRTH SEQUENCE: firefly born from terminal dot, traces tagline, returns ═══
-  document.fonts.ready.then(function(){
-    setTimeout(function(){
-      // Pulse the terminal dot
-      var wmDotEl=document.querySelector('#hero-wm .wm-dot');
-      if(wmDotEl){
-        var afterStyle=document.createElement('style');
-        afterStyle.textContent='#hero-wm .wm-dot::after{animation:dotReact 0.6s var(--expo)!important}';
-        document.head.appendChild(afterStyle);
-        setTimeout(function(){afterStyle.remove()},700);
-      }
-      // Calculate eyebrow positions
-      if(eyebrowEl){
-        var ebRect=eyebrowEl.getBoundingClientRect();
-        eyebrowStartX=ebRect.left;
-        eyebrowEndX=ebRect.right;
-        eyebrowY=ebRect.top+ebRect.height/2;
-      }
-      // Recalculate home position fresh
-      var dc=getDotCenter();
-      birthHomeX=dc.x;birthHomeY=dc.y;
-      ffx=birthHomeX;ffy=birthHomeY;
-      ff.classList.add('alive');
-      birthPhase='descending';
-      birthStart=Date.now();
-      updatePois();
-    },5500);
-  });
-
-  // Track mouse movement for idle detection
-  document.addEventListener('mousemove',function(){lastMoveTime=Date.now()});
-
-  // Scroll updates POIs
-  window.addEventListener('scroll',function(){updatePois();lastMoveTime=Date.now()},{passive:true});
+  // ── Travel begins at 4.6s ──
+  setTimeout(function(){
+    var fp=getFootDotPos();var op=getOSDotPos();
+    travelFrom={x:fp.x,y:fp.y};
+    travelTo={x:op.x-12,y:op.y-8};
+    ffx=travelFrom.x;ffy=travelFrom.y;
+    phase='travel';phaseStart=Date.now();
+  },4600);
 
   function tick(){
-    t+=0.008;
     var now=Date.now();
 
-    // ─── BIRTH SEQUENCE ───
-    if(birthPhase!=='free'&&birthPhase!=='waiting'){
-      var elapsed=now-birthStart;
-
-      if(birthPhase==='descending'){
-        // Recalculate positions fresh each frame
-        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
-        if(eyebrowEl){var ebr=eyebrowEl.getBoundingClientRect();eyebrowStartX=ebr.left;eyebrowEndX=ebr.right;eyebrowY=ebr.top+ebr.height/2}
-        // Slow meander from dot toward eyebrow start, 800ms
-        var descDuration=800;
-        var progress=Math.min(elapsed/descDuration,1);
-        var eased=Math.pow(progress,2.5);
-        var baseX=birthHomeX+(eyebrowStartX-birthHomeX)*eased;
-        var baseY=birthHomeY+(eyebrowY-birthHomeY)*eased;
-        var wander=(1-progress);
-        var noiseX=Math.sin(progress*Math.PI*4.3)*18*wander+Math.sin(progress*Math.PI*7.1)*8*wander;
-        var noiseY=Math.cos(progress*Math.PI*3.7)*14*wander+Math.cos(progress*Math.PI*5.9)*6*wander;
-        ffx=baseX+noiseX;
-        ffy=baseY+noiseY;
-        var glow=0.2+progress*0.3;
-        ff.style.boxShadow='0 0 '+(4+progress*6)+'px '+(1+progress*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(10+progress*8)+'px '+(3+progress*3)+'px rgba(232,175,56,'+(glow*0.3)+')';
-        if(progress>=1){birthPhase='tracing';birthStart=now}
-      }
-      else if(birthPhase==='tracing'){
-        // Slow deliberate trace along tagline text, 2200ms
-        var traceDuration=2200;
-        var progress=Math.min(elapsed/traceDuration,1);
-        var eased=progress<0.5?2*progress*progress:1-Math.pow(-2*progress+2,2)/2;
-        eased=Math.min(eased,1);
-        ffx=eyebrowStartX+(eyebrowEndX-eyebrowStartX)*eased;
-        ffy=eyebrowY+Math.sin(progress*Math.PI*6)*3+Math.sin(progress*Math.PI*2.3)*2;
-        var glow=Math.min(progress*2,1)*0.5+0.3;
-        ff.style.boxShadow='0 0 '+(8+glow*6)+'px '+(3+glow*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(16+glow*8)+'px '+(5+glow*4)+'px rgba(232,175,56,'+(glow*0.3)+')';
-        if(progress>=1){birthPhase='flitting';birthStart=now}
-      }
-      else if(birthPhase==='flitting'){
-        // Hover at end of tagline for 500ms, flitting in small circles
-        var flitProgress=elapsed/500;
-        ffx=eyebrowEndX-8+Math.sin(flitProgress*Math.PI*5)*6;
-        ffy=eyebrowY+Math.cos(flitProgress*Math.PI*3.5)*5;
-        var pulse=0.6+0.2*Math.sin(elapsed*0.008);
-        ff.style.boxShadow='0 0 12px 5px rgba(232,175,56,'+pulse+'),0 0 24px 8px rgba(232,175,56,'+(pulse*0.35)+')';
-        if(elapsed>500){
-          var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
-          birthPhase='returning';birthStart=now;
-        }
-      }
-      else if(birthPhase==='returning'){
-        // Recalculate dot position each frame for accuracy
-        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
-        // Arc back to wordmark dot in 600ms with upward curve
-        var retDuration=600;
-        var progress=Math.min(elapsed/retDuration,1);
-        var eased=1-Math.pow(1-progress,3);
-        ffx=eyebrowEndX+(birthHomeX-eyebrowEndX)*eased;
-        var arcHeight=-50;
-        var arcY=arcHeight*Math.sin(progress*Math.PI);
-        ffy=eyebrowY+(birthHomeY-eyebrowY)*eased+arcY;
-        var glow=0.8*(1-progress)+0.3;
-        ff.style.boxShadow='0 0 '+(12-progress*6)+'px '+(5-progress*3)+'px rgba(232,175,56,'+glow+'),0 0 '+(24-progress*10)+'px '+(8-progress*4)+'px rgba(232,175,56,'+(glow*0.3)+')';
-        if(progress>=1){birthPhase='homeDwell';birthStart=now;ff.style.boxShadow=''}
-      }
-      else if(birthPhase==='homeDwell'){
-        // Track dot position live
-        var dc=getDotCenter();birthHomeX=dc.x;birthHomeY=dc.y;
-        // Settle at dot for 400ms — static (no oscillation) and no glow so firefly is fully hidden
-        ffx=birthHomeX;
-        ffy=birthHomeY;
-        ff.style.boxShadow='none';
-        if(elapsed>400){birthPhase='free';ff.style.boxShadow='';ffVx=0;currentPoi=0;updatePois();}
-      }
-
+    if(phase==='birth'){
+      var p=Math.min((now-phaseStart)/600,1);
+      var scale=p<0.4?(p/0.4)*1.8:p<0.7?1.8-((p-0.4)/0.3)*0.95:0.85+((p-0.7)/0.3)*0.15;
+      ff.style.transform='scale('+scale+')';
+      ff.style.boxShadow='0 0 '+(6*scale)+'px '+(2*scale)+'px rgba(232,175,56,'+(0.5*scale)+'),0 0 '+(14*scale)+'px '+(5*scale)+'px rgba(232,175,56,'+(0.2*scale)+')';
+    }
+    else if(phase==='travel'){
+      var p=Math.min((now-phaseStart)/2200,1);
+      var e=expoOut(p);
+      ffx=travelFrom.x+(travelTo.x-travelFrom.x)*e;
+      ffy=travelFrom.y+(travelTo.y-travelFrom.y)*e;
       ff.style.left=ffx+'px';ff.style.top=ffy+'px';
-      requestAnimationFrame(tick);
-      return; // Skip normal movement during birth
+      ff.style.transform='scale(1)';
+      var glow=0.3+e*0.3;
+      ff.style.boxShadow='0 0 '+(6+e*8)+'px '+(2+e*5)+'px rgba(232,175,56,'+glow+'),0 0 '+(14+e*6)+'px '+(5+e*3)+'px rgba(232,175,56,'+(glow*0.4)+')';
+      if(p>=1){phase='bloom';phaseStart=now;window._fireflyBloomed=true;}
     }
-
-    // ─── NORMAL FREE-ROAMING BEHAVIOR ───
-
-    // Idle detection: hide after 3s no movement
-    if(now-lastMoveTime>3000){
-      if(!idle){idle=true;ff.classList.remove('alive')}
-    } else {
-      if(idle){idle=true;ff.classList.add('alive');idle=false}
-    }
-
-    // Pick target: drift toward current POI with noise, dwell on arrival
-    if(pois.length>0){
-      var poi=pois[currentPoi%pois.length];
-      if(poi){
-        var dxPoi=poi.x-ffx,dyPoi=poi.y-ffy;
-        var distPoi=Math.sqrt(dxPoi*dxPoi+dyPoi*dyPoi);
-
-        if(dwelling){
-          var dwellElapsed=now-dwellStart;
-          var thisDwell=poi.orbit?8000:dwellDuration;
-          if(poi.orbit){
-            // Orbit the CTA circle: elliptical path with slight wobble
-            orbitAngle+=0.012+Math.sin(orbitAngle*1.3)*0.002;
-            var orbitRx=(poi.r||100)+35;
-            var orbitRy=orbitRx*0.65;
-            ffTargetX=poi.x+orbitRx*Math.cos(orbitAngle)+Math.sin(t*0.7)*8;
-            ffTargetY=poi.y+orbitRy*Math.sin(orbitAngle)+Math.cos(t*0.5)*5;
-            var pulse=1+0.2*Math.sin(dwellElapsed*0.005);
-            var orbitGlow='0 0 '+(6*pulse)+'px '+(2*pulse)+'px rgba(232,175,56,'+(0.35*pulse)+'),0 0 '+(16*pulse)+'px '+(4*pulse)+'px rgba(232,175,56,'+(0.12*pulse)+')';
-            // 3D depth: back half of orbit (ffy < poi.y) → behind sphere (z:99, no glow)
-            if(ffy<poi.y){
-              ff.style.zIndex='99';
-              ff.style.boxShadow='none';
-            } else {
-              ff.style.zIndex='9998';
-              ff.style.boxShadow=orbitGlow;
-            }
-          } else {
-            // Normal dwell: subtle float near POI
-            ffTargetX=poi.x+Math.sin(t*2)*3;
-            ffTargetY=poi.y+Math.cos(t*1.7)*3;
-            var pulse=1+0.4*Math.sin(dwellElapsed*0.004);
-            ff.style.boxShadow='0 0 '+(8*pulse)+'px '+(3*pulse)+'px rgba(232,175,56,'+(0.4*pulse)+'),0 0 '+(20*pulse)+'px '+(6*pulse)+'px rgba(232,175,56,'+(0.15*pulse)+')';
-          }
-          if(dwellElapsed>thisDwell){
-            dwelling=false;
-            ff.style.boxShadow='';
-            ff.style.zIndex='9998'; // restore front z-index when leaving orbit
-            // Orbit POI: briefly visit next, then return; non-orbit: always return to sphere
-            currentPoi=poi.orbit?(currentPoi+1)%pois.length:0;
-            updatePois();
-            poiTimer=0;
-          }
-        } else {
-          var attractDist=poi.orbit?(poi.r||100)+60:25;
-          ffTargetX=poi.x+noise(t*0.3)*70;
-          ffTargetY=poi.y;
-          // Enter dwell/orbit when close enough
-          if(distPoi<attractDist&&(!poi.orbit||Math.abs(ffVx)<3)){
-            dwelling=true;
-            dwellStart=now;
-            if(poi.orbit){orbitAngle=Math.atan2(ffy-poi.y,ffx-poi.x);}
-            ffVx=0;
-          }
-          poiTimer++;
-          if(poiTimer>600){poiTimer=0;currentPoi=(currentPoi+1)%pois.length;updatePois()}
-        }
+    else if(phase==='bloom'){
+      var p=Math.min((now-phaseStart)/1200,1);
+      var inner=8+p*24,isp=3+p*13,outer=14+p*18,osp=5+p*11;
+      var r=Math.round(232+p*16),g=Math.round(175+p*17),bv=Math.round(56+p*24);
+      ff.style.background='rgb('+r+','+g+','+bv+')';
+      ff.style.boxShadow='0 0 '+inner+'px '+isp+'px rgba('+r+','+g+','+bv+',0.7),0 0 '+outer+'px '+osp+'px rgba('+r+','+g+','+bv+',0.3)';
+      if(now-phaseStart>=1400){
+        phase='reside';phaseStart=now;
+        resideBase={x:travelTo.x,y:travelTo.y};
       }
     }
-
-    // Loop-de-loop on third catch
-    if(looping){
-      loopAngle+=0.12;
-      ffx+=Math.cos(loopAngle)*8;
-      ffy+=Math.sin(loopAngle)*8;
-      if(loopAngle>Math.PI*2){looping=false;loopAngle=0}
-    } else if(dwelling){
-      // Gentle float toward dwell target
-      ffx+=(ffTargetX-ffx)*0.08;
-      ffy+=(ffTargetY-ffy)*0.08;
-      ffVx=0;
-    } else {
-      // Firefly: slow lateral sweep, Y follows a sine wave not the target
-      var targetDx=ffTargetX-ffx;
-      ffVx+=targetDx*0.003+noise(t*0.4)*0.2;
-      ffVx*=0.98;
-      ffx+=ffVx;
-      var yBase=ffTargetY;
-      var yWant=yBase+Math.sin(t*0.35)*15;
-      ffy+=(yWant-ffy)*0.015;
-    }
-
-    ff.style.left=ffx+'px';ff.style.top=ffy+'px';
-
-    // ─── COLLISION WITH CURSOR ───
-    var dx=window.mx-ffx,dy=window.my-ffy;
-    var dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<30&&ff.classList.contains('alive')&&!ff.classList.contains('caught')){
-      catches++;
-      ff.classList.add('caught');
-
-      // Green flash on cursor
-      var cur=document.getElementById('cursor');
-      if(cur){cur.style.background='#6BBF6B';cur.style.boxShadow='0 0 12px rgba(107,191,107,0.5)';
-      setTimeout(function(){cur.style.background='';cur.style.boxShadow=''},400);}
-
-      // Collision ring
-      var ring=document.createElement('div');ring.className='collision-ring';
-      ring.style.left=ffx+'px';ring.style.top=ffy+'px';
-      document.body.appendChild(ring);
-      setTimeout(function(){ring.remove()},500);
-
-      // Sparks
-      var sparkColors=['#E8AF38','#6BBF6B','#D4A030','#8ED08E','#F0C45A'];
-      for(var i=0;i<5;i++){
-        var sp=document.createElement('div');sp.className='collision-spark';
-        sp.style.left=ffx+'px';sp.style.top=ffy+'px';
-        sp.style.background=sparkColors[i%sparkColors.length];
-        sp.style.setProperty('--sx',(Math.random()-0.5)*60+'px');
-        sp.style.setProperty('--sy',(Math.random()-0.5)*60+'px');
-        sp.style.animation='sparkOut 0.4s var(--expo) forwards';
-        document.body.appendChild(sp);
-        setTimeout(function(el){el.remove()}.bind(null,sp),500);
+    else if(phase==='reside'){
+      var cyc=(now-phaseStart)/16000;
+      ffx=resideBase.x+Math.sin(cyc*Math.PI*2)*3.5+Math.sin(cyc*Math.PI*5.3)*1.5;
+      ffy=resideBase.y+Math.cos(cyc*Math.PI*2.1)*2.8+Math.cos(cyc*Math.PI*3.7)*1.2;
+      ff.style.left=ffx+'px';ff.style.top=ffy+'px';
+      ff.style.background='#F0C050';
+      ff.style.boxShadow='0 0 14px 5px rgba(240,192,80,0.6),0 0 28px 8px rgba(240,192,80,0.25)';
+      // Cursor collision
+      var dx=window.mx-ffx,dy=window.my-ffy,dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<30&&!ff.classList.contains('caught')){
+        catches++;ff.classList.add('caught');
+        var cur=document.getElementById('cursor');
+        if(cur){cur.style.background='#6BBF6B';cur.style.boxShadow='0 0 12px rgba(107,191,107,0.5)';setTimeout(function(){cur.style.background='';cur.style.boxShadow=''},400);}
+        var ring=document.createElement('div');ring.className='collision-ring';ring.style.left=ffx+'px';ring.style.top=ffy+'px';document.body.appendChild(ring);setTimeout(function(){ring.remove()},500);
+        var sc=['#E8AF38','#6BBF6B','#D4A030','#8ED08E','#F0C45A'];
+        for(var i=0;i<5;i++){var sp=document.createElement('div');sp.className='collision-spark';sp.style.left=ffx+'px';sp.style.top=ffy+'px';sp.style.background=sc[i%sc.length];sp.style.setProperty('--sx',(Math.random()-0.5)*60+'px');sp.style.setProperty('--sy',(Math.random()-0.5)*60+'px');sp.style.animation='sparkOut 0.4s var(--expo) forwards';document.body.appendChild(sp);setTimeout(function(el){el.remove()}.bind(null,sp),500);}
+        if(catches===3){looping=true;loopAngle=0;}
+        setTimeout(function(){ff.classList.remove('caught')},350);
       }
-
-      // Dart away
-      ffVx=(Math.random()>0.5?1:-1)*7;
-      currentPoi=(currentPoi+1)%Math.max(pois.length,1);
-
-      // Third catch: loop-de-loop
-      if(catches===3){looping=true;loopAngle=0}
-
-      setTimeout(function(){ff.classList.remove('caught')},350);
+      if(looping){loopAngle+=0.12;resideBase.x+=Math.cos(loopAngle)*0.4;resideBase.y+=Math.sin(loopAngle)*0.4;if(loopAngle>Math.PI*2){looping=false;loopAngle=0;}}
     }
 
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
-
-  // ═══ REPLAY BIRTH SEQUENCE (click wordmark dot to replay) ═══
-  window.replayFirefly=function(){
-    if(birthPhase!=='free')return;
-    var dc=getDotCenter();
-    birthHomeX=dc.x;birthHomeY=dc.y;
-    if(eyebrowEl){
-      var ebRect=eyebrowEl.getBoundingClientRect();
-      eyebrowStartX=ebRect.left;
-      eyebrowEndX=ebRect.right;
-      eyebrowY=ebRect.top+ebRect.height/2;
-    }
-    ffx=birthHomeX;ffy=birthHomeY;
-    ffVx=0;dwelling=false;looping=false;
-    ff.classList.add('alive');
-    ff.style.boxShadow='';
-    birthPhase='descending';
-    birthStart=Date.now();
-    var afterStyle=document.createElement('style');
-    afterStyle.textContent='#hero-wm .wm-dot::after{animation:dotReact 0.6s var(--expo)!important}';
-    document.head.appendChild(afterStyle);
-    setTimeout(function(){afterStyle.remove()},700);
-  };
-  // Click the arrival wordmark dot to replay
-  var arrivalWmDot=document.querySelector('#hero-wm .wm-dot');
-  if(arrivalWmDot)arrivalWmDot.addEventListener('click',function(){window.replayFirefly()});
 })();
+
+
 
 // Patch cursor code to expose mx/my globally
 
@@ -2029,6 +1862,77 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
 </script>
 
 <script>
+/* ─── PARTICLE CANVAS — Open Seat panel ─── */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var canvas=document.getElementById('particle-canvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var dpr=window.devicePixelRatio||1;
+  var W=0,H=0,gcx=0,gcy=0;
+  function resize(){
+    var parent=canvas.parentElement;if(!parent)return;
+    var rect=parent.getBoundingClientRect();
+    W=rect.width;H=rect.height;
+    canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);
+    canvas.style.width=W+'px';canvas.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    gcx=W*0.5;gcy=H*0.45;
+  }
+  var COLORS=[[255,255,255],[255,254,248],[255,252,240],[255,250,235],[255,248,225],[255,245,215],[255,242,205],[255,240,200],[252,238,195]];
+  var particles=[];
+  function init(){
+    particles=[];
+    for(var i=0;i<80;i++){
+      var rv=Math.random(),plane=rv<0.30?0:rv<0.70?1:2;
+      var size=plane===0?0.5+Math.random()*0.5:plane===1?1.5+Math.random()*1.5:3.5+Math.random()*1.5;
+      var ba=plane===0?0.10+Math.random()*0.07:plane===1?0.15+Math.random()*0.10:0.22+Math.random()*0.14;
+      var spd=0.008+size*0.006+Math.random()*0.012;
+      var ang=Math.random()*Math.PI*2;
+      particles.push({x:Math.random()*(W||400),y:Math.random()*(H||600),size:size,plane:plane,col:COLORS[Math.floor(Math.random()*COLORS.length)],ba:ba,vx:Math.cos(ang)*spd,vy:Math.sin(ang)*spd,ph:Math.random()*Math.PI*2,boost:0});
+    }
+  }
+  var t=0,running=true;
+  function draw(){
+    if(!running||!W){requestAnimationFrame(draw);return;}
+    t++;
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<particles.length;i++){
+      var p=particles[i];
+      var dx=gcx-p.x,dy=gcy-p.y,dist=Math.sqrt(dx*dx+dy*dy)+1;
+      p.vx+=dx/dist*0.00025;p.vy+=dy/dist*0.00025;
+      p.vx*=0.9999;p.vy*=0.9999;
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;
+      if(p.y<-10)p.y=H+10;if(p.y>H+10)p.y=-10;
+      var alpha=p.ba*(0.7+0.3*Math.sin(t*0.012+p.ph));
+      if(p.boost>0){alpha=Math.min(1,alpha*(1+p.boost*0.4));p.boost-=0.003;if(p.boost<0)p.boost=0;}
+      if(p.plane===2)ctx.filter='blur(0.5px)';else ctx.filter='none';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle='rgba('+p.col[0]+','+p.col[1]+','+p.col[2]+','+alpha+')';
+      ctx.fill();
+    }
+    ctx.filter='none';
+    if(window._fireflyBloomed){
+      window._fireflyBloomed=false;
+      var threshold=W*0.2;
+      for(var j=0;j<particles.length;j++){var pp=particles[j];if(Math.sqrt((pp.x-gcx)*(pp.x-gcx)+(pp.y-gcy)*(pp.y-gcy))<threshold)pp.boost=1;}
+      setTimeout(function(){for(var k=0;k<particles.length;k++)particles[k].boost=0;},3000);
+    }
+    requestAnimationFrame(draw);
+  }
+  if('IntersectionObserver'in window){
+    var obs=new IntersectionObserver(function(entries){
+      running=entries[0].isIntersecting;
+    },{threshold:0.1});
+    obs.observe(canvas);
+  }
+  function start(){resize();init();draw();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);
+  else setTimeout(start,0);
+  window.addEventListener('resize',function(){resize();},{passive:true});
+})();
+
 /* ─── CTA Firefly — #pricing section ─── */
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
