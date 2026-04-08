@@ -15,14 +15,14 @@
     style.textContent = [
       /* Base */
       '#wizkoo-footer{',
-      '  background-color:#0C1428;',
-      '  padding:56px 48px 0;',
+      '  background-color:#0C1020;',
       '  color:#F0F2F8;',
       '  border-top:1px solid rgba(255,255,255,0.04);',
       '}',
 
-      /* Top grid — 4 columns */
-      '#wizkoo-footer .wf-inner{',
+      /* ── Top grid — 4 columns (brand, nav, social, legal) ── */
+      '#wizkoo-footer .wf-top{',
+      '  padding:56px 48px 48px;',
       '  max-width:1200px;',
       '  margin:0 auto;',
       '  display:grid;',
@@ -88,7 +88,7 @@
       '}',
       '#wizkoo-footer .wf-social a:hover{color:#C8CDDA;}',
 
-      /* Col 4 — Legal */
+      /* Col 4 — Legal (top section) */
       '#wizkoo-footer .wf-legal{',
       '  display:flex;',
       '  flex-direction:column;',
@@ -106,11 +106,51 @@
       '}',
       '#wizkoo-footer .wf-privacy:hover{color:#F0F2F8;}',
 
-      /* Bottom bar */
+      /* ── 3-column links section ── */
+      '#wizkoo-footer .wf-links-section{',
+      '  position:relative;',
+      '  padding:60px 48px 40px;',
+      '  border-top:1px solid transparent;',
+      '  background-image:linear-gradient(90deg,transparent,rgba(232,175,56,0.15),transparent);',
+      '  background-size:100% 1px;',
+      '  background-repeat:no-repeat;',
+      '  background-position:top;',
+      '}',
+      '#wizkoo-footer .wf-links-inner{',
+      '  max-width:1200px;',
+      '  margin:0 auto;',
+      '  display:flex;',
+      '  gap:80px;',
+      '  align-items:start;',
+      '}',
+      '#wizkoo-footer .wf-col{',
+      '  display:flex;',
+      '  flex-direction:column;',
+      '  gap:14px;',
+      '}',
+      '#wizkoo-footer .wf-col-label{',
+      '  font-family:"Space Mono",monospace;',
+      '  font-size:0.58rem;',
+      '  letter-spacing:0.2em;',
+      '  text-transform:uppercase;',
+      '  color:rgba(250,250,250,0.25);',
+      '  margin-bottom:6px;',
+      '}',
+      '#wizkoo-footer .wf-col a{',
+      '  font-family:Inter,sans-serif;',
+      '  font-size:0.8rem;',
+      '  color:rgba(250,250,250,0.45);',
+      '  text-decoration:none;',
+      '  transition:color 250ms ease;',
+      '  line-height:1.4;',
+      '}',
+      '#wizkoo-footer .wf-col a:hover{color:rgba(250,250,250,0.8);}',
+
+      /* ── Bottom bar ── */
       '#wizkoo-footer .wf-bottom{',
       '  max-width:1200px;',
-      '  margin:32px auto 0;',
-      '  padding:24px 0 32px;',
+      '  margin:0 auto;',
+      '  padding:32px 48px 40px;',
       '  border-top:1px solid rgba(255,255,255,0.06);',
       '  display:flex;',
       '  justify-content:space-between;',
@@ -120,10 +160,10 @@
       '}',
       '#wizkoo-footer .wf-copy{',
       '  font-family:"Space Mono",monospace;',
-      '  font-size:0.45rem;',
+      '  font-size:0.58rem;',
       '  text-transform:uppercase;',
       '  letter-spacing:0.1em;',
-      '  color:#50556E;',
+      '  color:rgba(250,250,250,0.15);',
       '}',
       '#wizkoo-footer .wf-edu{',
       '  font-family:"Space Mono",monospace;',
@@ -140,27 +180,32 @@
       '}',
       '#wizkoo-footer .wf-edu a:hover{color:#F0F2F8;}',
 
-      /* Responsive — 768px: 2-col */
+      /* ── Responsive — 768px ── */
       '@media(max-width:768px){',
-      '  #wizkoo-footer{padding:48px 20px 0;}',
-      '  #wizkoo-footer .wf-inner{',
+      '  #wizkoo-footer .wf-top{',
+      '    padding:48px 20px 40px;',
       '    grid-template-columns:1fr 1fr;',
       '    gap:32px;',
       '  }',
       '  #wizkoo-footer .wf-legal{align-items:flex-start;}',
-      '  #wizkoo-footer .wf-bottom{padding:20px 0 28px;}',
-      '}',
-
-      /* Responsive — 480px: 1-col */
-      '@media(max-width:480px){',
-      '  #wizkoo-footer .wf-inner{',
-      '    grid-template-columns:1fr;',
-      '    gap:28px;',
+      '  #wizkoo-footer .wf-links-section{padding:48px 20px 36px;}',
+      '  #wizkoo-footer .wf-links-inner{',
+      '    flex-direction:column;',
+      '    gap:32px;',
       '  }',
       '  #wizkoo-footer .wf-bottom{',
+      '    padding:24px 20px 32px;',
       '    flex-direction:column;',
       '    align-items:flex-start;',
       '    gap:6px;',
+      '  }',
+      '}',
+
+      /* ── Responsive — 480px ── */
+      '@media(max-width:480px){',
+      '  #wizkoo-footer .wf-top{',
+      '    grid-template-columns:1fr;',
+      '    gap:28px;',
       '  }',
       '}'
     ].join('\n');
@@ -170,40 +215,72 @@
   /* ── Footer HTML ────────────────────────────────────────────────────── */
   el.innerHTML = [
     '<footer id="wizkoo-footer">',
-    '  <div class="wf-inner">',
 
-    '    <!-- Brand -->',
+    '  <!-- Top: brand, quick nav, social, legal -->',
+    '  <div class="wf-top">',
+
     '    <div class="wf-brand">',
     '      <a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a>',
     '      <div class="wf-tagline">Weekly learning plans for families, ages 2&ndash;12.</div>',
     '      <div class="wf-email"><a href="mailto:hello@wizkoo.com">hello@wizkoo.com</a></div>',
     '    </div>',
 
-    '    <!-- Nav -->',
     '    <nav class="wf-nav" aria-label="Site">',
     '      <a href="/plan">The Plan</a>',
     '      <a href="/games">The Games</a>',
     '      <a href="/methodology">The Science</a>',
     '    </nav>',
 
-    '    <!-- Social -->',
     '    <div class="wf-social">',
     '      <a href="https://instagram.com/heywizkoo" target="_blank" rel="noopener noreferrer">Instagram</a>',
     '      <a href="https://tiktok.com/@heywizkoo" target="_blank" rel="noopener noreferrer">TikTok</a>',
     '    </div>',
 
-    '    <!-- Legal -->',
     '    <div class="wf-legal">',
     '      <a href="/privacy" class="wf-privacy">Privacy</a>',
     '    </div>',
 
     '  </div>',
 
+    '  <!-- 3-column structured nav -->',
+    '  <div class="wf-links-section">',
+    '    <div class="wf-links-inner">',
+
+    '      <div class="wf-col">',
+    '        <div class="wf-col-label">Product</div>',
+    '        <a href="/plan">The Plan</a>',
+    '        <a href="/games">The Games</a>',
+    '        <a href="/library">The Library</a>',
+    '        <a href="/science">The Science</a>',
+    '        <a href="/ages">The Ages</a>',
+    '        <a href="/the-open-seat">The Open Seat</a>',
+    '        <a href="/pricing">The Price</a>',
+    '      </div>',
+
+    '      <div class="wf-col">',
+    '        <div class="wf-col-label">Learn More</div>',
+    '        <a href="/about">About</a>',
+    '        <a href="/esa">ESA &amp; Funding</a>',
+    '        <a href="/scope">Scope &amp; Sequence</a>',
+    '        <a href="/#faq">FAQ</a>',
+    '      </div>',
+
+    '      <div class="wf-col">',
+    '        <div class="wf-col-label">Legal</div>',
+    '        <a href="/privacy">Privacy Policy</a>',
+    '        <a href="/terms">Terms of Service</a>',
+    '        <a href="/contact">Contact</a>',
+    '      </div>',
+
+    '    </div>',
+    '  </div>',
+
     '  <!-- Bottom bar -->',
     '  <div class="wf-bottom">',
-    '    <span class="wf-copy">&copy; 2026 Wizkoo</span>',
+    '    <span class="wf-copy">&copy; 2026 Wizkoo LLC</span>',
     '    <span class="wf-edu">Educator or co-op leader? <a href="mailto:hello@wizkoo.com">Get in touch.</a></span>',
     '  </div>',
+
     '</footer>'
   ].join('\n');
 })();
