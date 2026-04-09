@@ -21,7 +21,6 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/nav.css">
 <link rel="stylesheet" href="css/footer.css">
 <style>
 /* ══════════════════════════════════════════════
@@ -714,6 +713,9 @@ body {
 <!-- Custom cursor -->
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 
+<div id="wizkoo-nav"></div>
+<script src="/components/nav.js"></script>
+
 <!-- Skip navigation -->
 <a href="#main-content" class="skip-nav">Skip to main content</a>
 
@@ -951,7 +953,6 @@ body {
   if (nav) nav.classList.add('show');
 })();
 </script>
-<script src="js/nav.js"></script>
 <script>
 (function () {
 'use strict';
