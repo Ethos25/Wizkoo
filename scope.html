@@ -5,55 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scope &amp; Sequence — wizkoo</title>
 <meta name="description" content="Downloadable scope and sequence documents showing what your child will learn, week by week.">
+<meta property="og:title" content="Scope &amp; Sequence — wizkoo">
+<meta property="og:description" content="Downloadable scope and sequence documents showing what your child will learn, week by week.">
+<meta property="og:image" content="assets/wizkoo-og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scope &amp; Sequence — wizkoo">
+<meta name="twitter:description" content="Downloadable scope and sequence documents showing what your child will learn, week by week.">
+<meta name="twitter:image" content="assets/wizkoo-og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/footer.css">
 <style>
-:root{
-  --saffron:#E8AF38;--ink:#0C1020;--linen:#F2F0EA;--warm-bg:#ECEAE3;
-  --rule:#E0DED6;--mid:#666;
-  --expo:cubic-bezier(0.16,1,0.3,1);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-@media(hover:hover){html,body,a,button{cursor:none}}
-.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
-.cursor.visible{opacity:1}
-.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
-
-/* ── NAV ── */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.4),transparent);opacity:0.4}
-.nav-bar{display:flex;align-items:center;height:100%;padding:0 32px;gap:24px}
-.nav-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.04em;color:#F2F0EA;text-decoration:none;margin-right:auto;flex-shrink:0}
-.nav-wm .i-fix{font-style:italic}
-.nav-wm .k{letter-spacing:-0.06em}
-.nav-wm .wm-dot{color:var(--saffron)}
-.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
-.nav-science{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px}
-.nav-science::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
-.nav-science:hover{color:rgba(250,250,250,0.8)}
-.nav-science:hover::after{width:100%}
-.nav-launch{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:transparent;color:var(--saffron);border:1px solid rgba(232,175,56,0.4);text-decoration:none;transition:border-color .25s,color .25s;white-space:nowrap;flex-shrink:0}
-.nav-launch:hover{border-color:var(--saffron);color:var(--saffron)}
-.nav-tagline-strip{position:fixed;top:72px;left:0;right:0;z-index:999;height:24px;display:flex;align-items:center;justify-content:center;background:rgba(12,16,32,0.88);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,175,56,0.55)}
-.nav-tagline-strip::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.12),transparent)}
-
-/* ── PAGE ── */
 main{padding-top:96px;min-height:100vh;display:flex;align-items:center;justify-content:center}
 .page-hero{max-width:640px;margin:0 auto;padding:80px 48px 120px;text-align:center}
-.tag{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:20px}
 .page-hero h1{font-family:'Sora',sans-serif;font-weight:200;font-size:1.8rem;letter-spacing:-0.02em;color:var(--ink);line-height:1.2;margin:0 0 20px}
 .page-hero p{font-family:'Inter',sans-serif;font-size:0.9rem;color:#777;line-height:1.75;max-width:520px;margin:0 auto}
-@media(max-width:768px){
-  .nav-center{display:none}
-  .page-hero{padding:60px 24px 80px}
-}
+@media(max-width:768px){.page-hero{padding:60px 24px 80px}}
 </style>
 </head>
 <body>
@@ -61,11 +36,9 @@ main{padding-top:96px;min-height:100vh;display:flex;align-items:center;justify-c
 
 <div id="wizkoo-nav"></div>
 <script src="/components/nav.js"></script>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
 
-<a href="/plan" class="nav-launch">Build Your Plan</a></div>
-</div>
-
-<main>
+<main id="main-content">
   <section class="page-hero">
     <div class="tag">Scope &amp; Sequence</div>
     <h1>What your child will learn, week by week.</h1>
@@ -75,14 +48,17 @@ main{padding-top:96px;min-height:100vh;display:flex;align-items:center;justify-c
 
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
+
 <script>
+// ═══ CUSTOM CURSOR ═══
 (function(){
-  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
-  var c=document.getElementById('cursor');if(!c)return;
-  var raf;
-  document.addEventListener('mousemove',function(e){cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';c.classList.add('visible');});});
-  document.addEventListener('mouseover',function(e){c.classList.toggle('hover',!!e.target.closest('a,button,[role="button"]'));});
-  document.documentElement.addEventListener('mouseleave',function(){c.classList.remove('visible');});
+  var c=document.getElementById('cursor'),cx=0,cy=0;window.mx=0;window.my=0;
+  document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
+  document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
+  var hoverEls='a,button,.btn-main,.wm,.nav-wm';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(hoverEls))c.classList.add('hover')});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(hoverEls))c.classList.remove('hover')});
+  (function tick(){cx+=(window.mx-cx)*0.15;cy+=(window.my-cy)*0.15;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(tick)})();
 })();
 </script>
 </body>

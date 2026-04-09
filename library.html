@@ -35,6 +35,12 @@
 .btn-main{font-family:'Sora',sans-serif;font-weight:600;font-size:0.95rem;letter-spacing:0.06em;padding:14px 40px;background:#0C1020;color:#FAF6F1;border:none;box-shadow:6px 6px 0 #E8AF38;transition:transform .25s,box-shadow .25s;white-space:nowrap;display:inline-block;text-decoration:none}
 .btn-main:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #E8AF38}
 @media(max-width:768px){.page-hero{padding:100px 24px 60px}.library-cta{padding:0 24px 80px}}
+/* ═══ CUSTOM CURSOR ═══ */
+@media(hover:hover){html,body,a,button,.btn-main{cursor:none}}
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:#E8AF38;pointer-events:none;z-index:9999;transition:width .25s cubic-bezier(0.19,1,0.22,1),height .25s cubic-bezier(0.19,1,0.22,1),margin .25s cubic-bezier(0.19,1,0.22,1),opacity .2s;opacity:0;mix-blend-mode:exclusion}
+.cursor.visible{opacity:1}
+.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid #E8AF38}
+@media(hover:none){.cursor{display:none!important}}
 </style>
 </head>
 <body>
@@ -72,5 +78,18 @@
 <!-- ═══ FOOTER ═══ -->
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
+
+<script>
+// ═══ CUSTOM CURSOR ═══
+(function(){
+  var c=document.getElementById('cursor'),cx=0,cy=0;window.mx=0;window.my=0;
+  document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
+  document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
+  var hoverEls='a,button,.btn-main,.wm,.nav-wm';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(hoverEls))c.classList.add('hover')});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(hoverEls))c.classList.remove('hover')});
+  (function tick(){cx+=(window.mx-cx)*0.15;cy+=(window.my-cy)*0.15;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(tick)})();
+})();
+</script>
 </body>
 </html>
