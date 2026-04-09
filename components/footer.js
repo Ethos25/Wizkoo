@@ -13,6 +13,21 @@
     var style = document.createElement('style');
     style.id = 'wf-styles';
     style.textContent = [
+      /* Founder bar */
+      '#wizkoo-footer .wf-founder-bar{',
+      '  padding:28px 48px 24px;',
+      '  border-bottom:1px solid rgba(255,255,255,0.06);',
+      '  text-align:center;',
+      '}',
+      '#wizkoo-footer .wf-founder-line{',
+      '  font-family:\'Sora\',sans-serif;',
+      '  font-weight:300;',
+      '  font-size:clamp(0.88rem,1.6vw,1.05rem);',
+      '  letter-spacing:-0.01em;',
+      '  color:rgba(240,242,248,0.5);',
+      '  margin:0;',
+      '}',
+
       /* Base */
       '#wizkoo-footer{',
       '  background-color:#0C1020;',
@@ -215,6 +230,11 @@
   /* ── Footer HTML ────────────────────────────────────────────────────── */
   el.innerHTML = [
     '<footer id="wizkoo-footer">',
+
+    '  <!-- Founder bar -->',
+    '  <div class="wf-founder-bar">',
+    '    <p class="wf-founder-line">Founding families are in. You\u2019re next.</p>',
+    '  </div>',
 
     '  <!-- Top: brand, quick nav, social, legal -->',
     '  <div class="wf-top">',

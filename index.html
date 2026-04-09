@@ -182,6 +182,21 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nav-launch:hover{background:#D4A030;transform:translateY(-1px)}
 @media(max-width:768px){.nav-launch{font-size:8px;padding:6px 12px}.nav-tagline-strip{display:none}}
 
+/* ── Hamburger button (mobile only) ── */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;padding:0;background:transparent;border:none;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+.nav-hamburger-line{display:block;width:20px;height:2px;background:#0C1020;border-radius:1px}
+@media(max-width:768px){.nav-hamburger{display:flex}}
+
+/* ── Mobile menu panel ── */
+.nav-mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;z-index:998;overflow:hidden;pointer-events:none}
+.nav-mobile-menu-inner{background:#F2F0EA;border-bottom:1px solid #E0DED6;transform:translateY(-100%);transition:transform 150ms ease-in;padding:8px 0}
+.nav-mobile-menu.open{pointer-events:auto}
+.nav-mobile-menu.open .nav-mobile-menu-inner{transform:translateY(0);transition:transform 200ms cubic-bezier(0.16,1,0.3,1)}
+.nav-mobile-menu a{display:block;font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#0C1020;text-decoration:none;padding:16px 24px;background:transparent;border:none;-webkit-tap-highlight-color:transparent;outline:none}
+.nav-mobile-menu a:hover{color:rgba(12,16,32,0.55)}
+.nav-mobile-menu a:focus-visible{outline:2px solid var(--saffron);outline-offset:-2px}
+@media(max-width:768px){.nav-mobile-menu{display:block}}
+
 /* ═══ HERO ═══ */
 .hero-wrapper{position:relative;height:200vh}
 .hero-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--linen)}
@@ -556,6 +571,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 @keyframes sparkOut{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--sx),var(--sy))}}
 @media(hover:none)and(pointer:coarse){.firefly{width:7px;height:7px;box-shadow:0 0 10px 4px rgba(232,175,56,0.45),0 0 24px 8px rgba(232,175,56,0.18)}}
 @media(prefers-reduced-motion:reduce){.firefly{display:none!important}}
+@media(max-width:768px){.firefly{display:none!important}}
 
 /* ═══ IDENTITY TAGS ═══ */
 .id-tags-wrap{background:var(--warm-bg);padding:36px 48px;position:relative;overflow:hidden}
@@ -977,9 +993,20 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 <div class="firefly" id="firefly"></div>
 
 <div class="site-nav" id="site-nav" role="navigation">
-  <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="/plan" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="library.html" class="nav-science">The Library</a><a href="methodology.html" class="nav-science">The Science</a><a href="ages.html" class="nav-science">The Ages</a><a href="/the-open-seat" class="nav-science">The Open Seat</a><a href="pricing.html" class="nav-science">The Price</a></div><a href="/plan" class="nav-launch">Build Your Plan</a></div>
+  <div class="nav-bar"><a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a><div class="nav-center"><a href="/plan" class="nav-science">The Plan</a><a href="games.html" class="nav-science">The Games</a><a href="library.html" class="nav-science">The Library</a><a href="methodology.html" class="nav-science">The Science</a><a href="ages.html" class="nav-science">The Ages</a><a href="/the-open-seat" class="nav-science">The Open Seat</a><a href="pricing.html" class="nav-science">The Price</a></div><button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false"><span class="nav-hamburger-line"></span><span class="nav-hamburger-line"></span><span class="nav-hamburger-line"></span></button><a href="/plan" class="nav-launch">Build Your Plan</a></div>
 </div>
 <div class="nav-tagline-strip">Weekly learning plans. Built around your people.</div>
+<nav class="nav-mobile-menu" id="nav-mobile-menu" aria-label="Main menu" aria-hidden="true">
+  <div class="nav-mobile-menu-inner">
+    <a href="/plan">The Plan</a>
+    <a href="games.html">The Games</a>
+    <a href="library.html">The Library</a>
+    <a href="methodology.html">The Science</a>
+    <a href="ages.html">The Ages</a>
+    <a href="/the-open-seat">The Open Seat</a>
+    <a href="pricing.html">The Price</a>
+  </div>
+</nav>
 
 <!-- ═══ LINEN HERO ═══ -->
 <section class="linen-hero" id="linen-hero">
@@ -1806,11 +1833,13 @@ function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-ex
 if(typeof window.mx==='undefined'){window.mx=0;window.my=0;}
 document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;});
 
-// ═══ FIREFLY — born from "foot." dot, travels to Open Seat ═══
+// ═══ FIREFLY — born from "foot." dot, travels to Open Seat (desktop only) ═══
 (function(){
+  if(window.innerWidth<=768)return;
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   var ff=document.getElementById('firefly');
   if(!ff)return;
+  var killed=false;
   // positions
   function getFootDotPos(){var d=document.getElementById('hz-hl-dot');if(!d)return{x:window.innerWidth*0.3,y:window.innerHeight*0.4};var r=d.getBoundingClientRect();return{x:r.left+r.width/2-4,y:r.top+r.height/2-4};}
   function getOSDotPos(){var d=document.querySelector('.open-seat-panel');if(!d)return{x:window.innerWidth*0.82,y:window.innerHeight*0.72};var r=d.getBoundingClientRect();return{x:r.left+r.width*0.72-4,y:r.top+r.height*0.72-4};}
@@ -1845,6 +1874,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   },4600);
 
   function tick(){
+    if(killed)return;
     var now=Date.now();
 
     if(phase==='birth'){
@@ -1912,6 +1942,15 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
+
+  // Kill on resize to mobile
+  window.addEventListener('resize',function(){
+    if(window.innerWidth<=768&&!killed){
+      killed=true;
+      ff.classList.remove('alive');
+      ff.style.opacity='0';
+    }
+  },{passive:true});
 })();
 
 
@@ -2061,6 +2100,74 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);
   else setTimeout(start,0);
   window.addEventListener('resize',function(){resize();},{passive:true});
+})();
+
+// ═══ HAMBURGER MENU ═══
+(function(){
+  var btn=document.getElementById('nav-hamburger');
+  var menu=document.getElementById('nav-mobile-menu');
+  if(!btn||!menu)return;
+  var links=menu.querySelectorAll('a');
+
+  function isOpen(){return menu.classList.contains('open');}
+
+  function openMenu(){
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden','false');
+    btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    if(links[0])links[0].focus();
+  }
+
+  function closeMenu(){
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden','true');
+    btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    btn.focus();
+  }
+
+  // Toggle on hamburger click
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    isOpen()?closeMenu():openMenu();
+  });
+
+  // Close on link tap
+  links.forEach(function(a){
+    a.addEventListener('click',function(){closeMenu();});
+  });
+
+  // Close on outside tap/click
+  document.addEventListener('click',function(e){
+    if(!isOpen())return;
+    if(!menu.contains(e.target)&&e.target!==btn&&!btn.contains(e.target)){
+      closeMenu();
+    }
+  });
+
+  // Escape key closes
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&isOpen()){closeMenu();}
+  });
+
+  // Focus trap inside menu
+  document.addEventListener('keydown',function(e){
+    if(!isOpen()||e.key!=='Tab')return;
+    var focusable=Array.from(menu.querySelectorAll('a'));
+    if(!focusable.length)return;
+    var first=focusable[0],last=focusable[focusable.length-1];
+    if(e.shiftKey){
+      if(document.activeElement===first){e.preventDefault();last.focus();}
+    } else {
+      if(document.activeElement===last){e.preventDefault();first.focus();}
+    }
+  });
+
+  // Close menu on resize to desktop
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>768&&isOpen())closeMenu();
+  },{passive:true});
 })();
 
 /* ─── CTA Firefly — #pricing section ─── */
