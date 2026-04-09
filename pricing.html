@@ -3,81 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Price — wizkoo</title>
+<title>The Price | Wizkoo</title>
 <meta name="description" content="$50/month or $499/year. All your kids. Cancel anytime.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@200;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
-:root{
-  --saffron:#E8AF38;--ink:#0C1020;--linen:#F2F0EA;--warm-bg:#ECEAE3;
-  --rule:#E0DED6;--mid:#666;
-  --expo:cubic-bezier(0.16,1,0.3,1);
-}
-*{margin:0;padding:0;box-sizing:border-box}
+:root{--saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm:#ECEAE3;--rule:#E0DED6;--mid:#4A4850;--expo:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.22,1,0.36,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
-a{text-decoration:none;color:inherit}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+@media(hover:hover){html,body,a,button{cursor:none}}
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}.cursor.visible{opacity:1}.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,.25);border:1.5px solid var(--saffron)}
+.sr{opacity:0;transform:translateY(32px);transition:opacity 800ms var(--expo),transform 800ms var(--expo)}.sr.v{opacity:1;transform:translateY(0)}
+.sr-fade{opacity:0;transition:opacity 600ms var(--expo)}.sr-fade.v{opacity:1}
+.sr-btn{opacity:0;transition:opacity 600ms ease}.sr-btn.v{opacity:1}
 
-/* ── NAV ── */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.4),transparent);opacity:0.4}
-.nav-bar{display:flex;align-items:center;height:100%;padding:0 32px;gap:24px}
-.nav-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.04em;color:#F2F0EA;text-decoration:none;margin-right:auto;flex-shrink:0}
-.nav-wm .i-fix{font-style:italic}
-.nav-wm .k{letter-spacing:-0.06em}
-.nav-wm .wm-dot{color:var(--saffron)}
-.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
-.nav-science{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px}
-.nav-science::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
-.nav-science:hover{color:rgba(250,250,250,0.8)}
-.nav-science:hover::after{width:100%}
-.nav-science.active{color:rgba(250,250,250,0.85)}
-.nav-science.active::after{width:100%}
-.nav-launch{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:transparent;color:var(--saffron);border:1px solid rgba(232,175,56,0.4);text-decoration:none;transition:border-color .25s,color .25s;white-space:nowrap;flex-shrink:0}
-.nav-launch:hover{border-color:var(--saffron);color:var(--saffron)}
-.nav-tagline-strip{position:fixed;top:72px;left:0;right:0;z-index:999;height:24px;display:flex;align-items:center;justify-content:center;background:rgba(12,16,32,0.88);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,175,56,0.55)}
-.nav-tagline-strip::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.12),transparent)}
+/* ═══ HERO — dark, centered, pricing up front ═══ */
+.hero{background:var(--ink);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(72px + clamp(40px,8vh,80px)) 48px clamp(60px,10vh,120px);position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.012) 59px,rgba(255,255,255,.012) 60px);pointer-events:none}
+.hero::after{content:'';position:absolute;width:60%;height:60%;top:20%;left:20%;background:radial-gradient(ellipse at 50% 45%,rgba(24,40,72,.45) 0%,transparent 65%);pointer-events:none}
+.hero-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(20px,3vh,32px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .25s}
+.hero-h{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.1;letter-spacing:-.03em;color:rgba(240,242,248,.95);max-width:700px;margin-bottom:clamp(8px,1.5vh,16px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .45s}
+.hero-sub{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(.95rem,1.3vw,1.2rem);line-height:1.5;color:rgba(240,242,248,.4);max-width:500px;margin-bottom:clamp(40px,7vh,72px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .6s}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── PAGE ── */
-main{padding-top:120px;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.page-hero{max-width:600px;margin:0 auto;padding:80px 48px 120px;text-align:center}
-.tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:24px}
-.page-hero h1{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:-0.03em;color:var(--ink);line-height:1.08;margin:0 0 32px}
-.page-hero h1 span{color:var(--saffron)}
-.pricing-line{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1rem,1.6vw,1.2rem);color:var(--mid);line-height:1.7;margin:0 0 48px}
-.pricing-line strong{color:var(--ink);font-weight:600}
-.btn-main{font-family:'Sora',sans-serif;font-weight:600;font-size:0.95rem;letter-spacing:0.06em;padding:14px 40px;background:var(--ink);color:var(--linen);border:none;box-shadow:6px 6px 0 var(--saffron);transition:transform .25s,box-shadow .25s;white-space:nowrap;display:inline-block;text-decoration:none}
-.btn-main:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--saffron)}
+/* Pricing cards */
+.pricing-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .75s}
+.pricing-card{border:1px solid rgba(232,175,56,.25);padding:clamp(28px,4vh,44px) clamp(32px,4vw,52px);text-align:center;min-width:200px;position:relative;transition:transform .3s var(--expo),border-color .3s}
+@media(hover:hover){.pricing-card:hover{transform:translateY(-2px);border-color:rgba(232,175,56,.45)}}
+.pricing-card.featured{border-color:rgba(232,175,56,.55)}
+.pricing-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--saffron);color:var(--ink);font-family:'Space Mono',monospace;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 14px;white-space:nowrap;font-weight:700}
+.pricing-label{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(140,145,165,.9);margin-bottom:clamp(8px,1.5vh,14px)}
+.pricing-amount{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.4rem,4vw,3.2rem);letter-spacing:-.03em;color:#F2F0EA}
+.pricing-unit{font-size:clamp(.8rem,.9vw,.95rem);font-weight:400;color:rgba(140,145,165,.8)}
+.pricing-detail{font-family:'Inter',sans-serif;font-size:clamp(.75rem,.85vw,.82rem);color:rgba(240,242,248,.3);margin-top:clamp(12px,2vh,20px);line-height:1.6}
 
-@media(max-width:768px){
-  .nav-center{display:none}
-  .page-hero{padding:60px 24px 80px}
-}
+/* Hero CTA */
+.hero-cta{margin-top:clamp(36px,6vh,56px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .9s}
+.hero-btn{display:inline-block;background:var(--saffron);color:var(--ink);font-family:'Sora',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.06em;padding:14px 44px;border:none;text-decoration:none;box-shadow:6px 6px 0 rgba(232,175,56,.3);transition:transform .3s var(--expo),box-shadow .3s var(--expo)}.hero-btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 rgba(232,175,56,.4)}
+.hero-trust{font-family:'Inter',sans-serif;font-size:clamp(.72rem,.85vw,.8rem);color:rgba(240,242,248,.22);margin-top:clamp(14px,2vh,24px);letter-spacing:.02em}
+
+/* ═══ WHAT YOU GET — linen ═══ */
+.features{background:var(--linen);padding:clamp(80px,14vh,180px) 48px;position:relative}
+.features::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(242,240,234,0) 0%,rgba(224,222,214,.3) 100%);pointer-events:none}
+.features-inner{max-width:800px;margin:0 auto;position:relative;z-index:1}
+.features-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:clamp(20px,3vh,32px)}
+.features-h{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;letter-spacing:-.03em;color:var(--ink);margin-bottom:clamp(36px,6vh,56px)}
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vh,40px) clamp(32px,5vw,64px)}
+.feature{padding-left:16px;border-left:1px solid rgba(232,175,56,.2)}
+.feature-title{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.85rem,1vw,.95rem);color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+.feature-desc{font-family:'Inter',sans-serif;font-size:clamp(.8rem,.92vw,.87rem);line-height:1.75;color:rgba(12,16,32,.5)}
+
+/* ═══ OPEN SEAT MENTION — warm ═══ */
+.os{background:var(--warm);padding:clamp(56px,8vh,100px) 48px;position:relative}
+.os::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(12,16,32,.006) 59px,rgba(12,16,32,.006) 60px);pointer-events:none}
+.os-inner{max-width:600px;margin:0 auto;position:relative;z-index:1;text-align:center}
+.os-h{font-family:'Sora',sans-serif;font-weight:400;font-size:clamp(1.1rem,1.5vw,1.25rem);line-height:1.55;color:var(--ink);margin-bottom:clamp(8px,1.5vh,14px);letter-spacing:-.01em}
+.os-sub{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.95vw,.88rem);line-height:1.8;color:rgba(12,16,32,.45)}
+.os-link{color:var(--saffron);text-decoration:none;border-bottom:1px solid rgba(232,175,56,.3);transition:border-color .25s}.os-link:hover{border-color:var(--saffron)}
+
+/* ═══ FAQ — linen ═══ */
+.faq{background:var(--linen);padding:clamp(80px,14vh,180px) 48px;position:relative}
+.faq::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(242,240,234,0) 0%,rgba(224,222,214,.25) 100%);pointer-events:none}
+.faq-inner{max-width:640px;margin:0 auto;position:relative;z-index:1}
+.faq-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:clamp(32px,5vh,48px)}
+.faq-item{border-bottom:1px solid var(--rule);padding:clamp(16px,2.5vh,24px) 0}
+.faq-item:first-child{border-top:1px solid var(--rule)}
+.faq-q{font-family:'Sora',sans-serif;font-weight:500;font-size:clamp(.88rem,1.05vw,.95rem);color:var(--ink);background:none;border:none;width:100%;text-align:left;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;letter-spacing:-.01em;line-height:1.5}
+.faq-q::after{content:'+';font-family:'Sora',sans-serif;font-weight:200;font-size:1.2rem;color:var(--saffron);flex-shrink:0;transition:transform .3s var(--expo)}
+.faq-q[aria-expanded="true"]::after{transform:rotate(45deg)}
+.faq-a{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.95vw,.88rem);line-height:1.8;color:rgba(12,16,32,.55);padding-top:clamp(10px,1.5vh,16px);max-width:90%}
+
+/* ═══ CTA — dark ═══ */
+.cta{background:var(--ink);padding:clamp(80px,14vh,160px) 48px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.012) 59px,rgba(255,255,255,.012) 60px);pointer-events:none}
+.cta-glow{position:absolute;width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-45%);background:radial-gradient(circle,rgba(232,175,56,.04) 0%,transparent 55%);pointer-events:none}
+.cta-h{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.15;letter-spacing:-.03em;color:rgba(240,242,248,.9);margin-bottom:clamp(8px,1.5vh,16px);position:relative;z-index:1}
+.cta-sub{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(.9rem,1.1vw,1rem);color:rgba(240,242,248,.35);margin-bottom:clamp(28px,4vh,40px);position:relative;z-index:1}
+.cta-btn{display:inline-block;background:var(--saffron);color:var(--ink);font-family:'Sora',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.06em;padding:14px 44px;border:none;text-decoration:none;box-shadow:6px 6px 0 rgba(232,175,56,.3);transition:transform .3s var(--expo),box-shadow .3s var(--expo);position:relative;z-index:1}.cta-btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 rgba(232,175,56,.4)}
+
+@media(max-width:768px){.hero{padding:calc(72px + 32px) 20px 48px}.pricing-grid{flex-direction:column;align-items:center}.pricing-card{min-width:260px;width:100%;max-width:320px}.features{padding:56px 20px}.features-grid{grid-template-columns:1fr}.os{padding:40px 20px}.faq{padding:56px 20px}.cta{padding:56px 20px}}
+@media(hover:none)and(pointer:coarse){.cursor{display:none!important}}
+@media(prefers-reduced-motion:reduce){.hero-ey,.hero-h,.hero-sub,.pricing-grid,.hero-cta{opacity:1!important;animation:none!important;transform:none!important}.sr,.sr-fade,.sr-btn{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
+<div class="cursor" id="cursor"></div>
+
 <div id="wizkoo-nav"></div>
 <script src="/components/nav.js"></script>
 
-<a href="/plan" class="nav-launch">Build Your Plan</a></div>
-</div>
-
 <main>
-  <section class="page-hero">
-    <div class="tag">The Price</div>
-    <h1>Coming <span>soon.</span></h1>
-    <p class="pricing-line"><strong>$50/month or $499/year.</strong><br>All your kids. Cancel anytime.</p>
-    <a href="/plan" class="btn-main">Try Free First</a>
-  </section>
+
+<section class="hero">
+  <div class="hero-ey">The Price</div>
+  <h1 class="hero-h">One price. Every child in your family.</h1>
+  <p class="hero-sub">No per-child pricing. No hidden tiers. One subscription covers your whole house.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-label">Monthly</div>
+      <div class="pricing-amount">$50<span class="pricing-unit">&thinsp;/&nbsp;mo</span></div>
+      <div class="pricing-detail">Cancel anytime.<br>No commitment.</div>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Best value</div>
+      <div class="pricing-label">Annual</div>
+      <div class="pricing-amount">$499<span class="pricing-unit">&thinsp;/&nbsp;yr</span></div>
+      <div class="pricing-detail">Two months free.<br>$41.58/mo effective.</div>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="/plan" class="hero-btn">Build Your Plan</a>
+    <p class="hero-trust">Your first plan is free &middot; No account required</p>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-inner">
+    <div class="features-ey sr">What your subscription includes</div>
+    <h2 class="features-h sr" style="transition-delay:150ms">Everything. For everyone.</h2>
+    <div class="features-grid">
+      <div class="feature sr" style="transition-delay:200ms">
+        <div class="feature-title">Unlimited plans</div>
+        <div class="feature-desc">Generate as many weekly learning plans as you need. New themes, new weeks, no limits.</div>
+      </div>
+      <div class="feature sr" style="transition-delay:300ms">
+        <div class="feature-title">Every child covered</div>
+        <div class="feature-desc">Ages 2–12. Activities differentiated by age, reading level, and developmental stage.</div>
+      </div>
+      <div class="feature sr" style="transition-delay:400ms">
+        <div class="feature-title">The Games</div>
+        <div class="feature-desc">Interactive learning games that reinforce each week's theme. Built for the whole family.</div>
+      </div>
+      <div class="feature sr" style="transition-delay:500ms">
+        <div class="feature-title">The Library</div>
+        <div class="feature-desc">A growing collection of curated resources, references, and supplemental materials.</div>
+      </div>
+      <div class="feature sr" style="transition-delay:600ms">
+        <div class="feature-title">The Open Seat</div>
+        <div class="feature-desc">Your subscription funds a full year of Wizkoo for another family. Built into the price.</div>
+      </div>
+      <div class="feature sr" style="transition-delay:700ms">
+        <div class="feature-title">Orbit Reports</div>
+        <div class="feature-desc">Weekly summaries of what your children actually learned. Facts, vocabulary, discoveries.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="os">
+  <div class="os-inner sr">
+    <p class="os-h">Your subscription. Another&rsquo;s scholarship.</p>
+    <p class="os-sub">Every Wizkoo subscription includes The Open Seat &mdash; a full year of access for a family that needs it. It&rsquo;s not on top of the price. It&rsquo;s built into it. <a href="/the-open-seat" class="os-link">Learn how it works</a></p>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="faq-inner">
+    <div class="faq-ey sr">Common questions</div>
+    <div class="faq-item sr" style="transition-delay:100ms">
+      <button class="faq-q" aria-expanded="false">What ages does Wizkoo work for?</button>
+      <div class="faq-a" hidden>Families with children ages 2 to 12. Activities are matched to each child&rsquo;s age, reading level, and developmental stage.</div>
+    </div>
+    <div class="faq-item sr" style="transition-delay:150ms">
+      <button class="faq-q" aria-expanded="false">Do I pay per child?</button>
+      <div class="faq-a" hidden>No. One subscription covers every child in your family. No per-child pricing, no add-ons, no tiers.</div>
+    </div>
+    <div class="faq-item sr" style="transition-delay:200ms">
+      <button class="faq-q" aria-expanded="false">Can I try it first?</button>
+      <div class="faq-a" hidden>Yes. Your first plan is completely free &mdash; no account, no credit card. Pick a theme and build your week.</div>
+    </div>
+    <div class="faq-item sr" style="transition-delay:250ms">
+      <button class="faq-q" aria-expanded="false">How do I cancel?</button>
+      <div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked.</div>
+    </div>
+    <div class="faq-item sr" style="transition-delay:300ms">
+      <button class="faq-q" aria-expanded="false">What is The Open Seat?</button>
+      <div class="faq-a" hidden>Every subscription includes a full year of Wizkoo for another family. You can nominate someone or we&rsquo;ll match a family from our waitlist. It&rsquo;s built into the price &mdash; not added on top.</div>
+    </div>
+    <div class="faq-item sr" style="transition-delay:350ms">
+      <button class="faq-q" aria-expanded="false">Is my children&rsquo;s data safe?</button>
+      <div class="faq-a" hidden>Plans generate in your browser. We never collect children&rsquo;s data. COPPA compliant from day one.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-glow"></div>
+  <h2 class="cta-h sr">Ready to build your first week?</h2>
+  <p class="cta-sub sr" style="transition-delay:100ms">No account. No commitment. Just pick a theme.</p>
+  <a href="/plan" class="cta-btn sr-btn" style="transition-delay:200ms">Build Your Plan</a>
+</section>
+
 </main>
 
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
 
+<script>
+/* REVEALS */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var els=document.querySelectorAll('.sr,.sr-fade,.sr-btn');
+  if(!els.length||!window.IntersectionObserver)return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}
+    });
+  },{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+  els.forEach(function(el){io.observe(el)});
+})();
+
+/* FAQ ACCORDION */
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var answer=btn.nextElementSibling;
+    var isOpen=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded',String(!isOpen));
+    answer.hidden=isOpen;
+  });
+});
+
+/* CUSTOM CURSOR */
+(function(){
+  if(window.matchMedia('(hover:none)').matches)return;
+  var c=document.getElementById('cursor');
+  if(!c)return;
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',function(e){
+    mx=e.clientX;my=e.clientY;
+    if(!c.classList.contains('visible'))c.classList.add('visible');
+  },{passive:true});
+  (function loop(){
+    cx+=(mx-cx)*.12;cy+=(my-cy)*.12;
+    c.style.transform='translate('+cx+'px,'+cy+'px)';
+    requestAnimationFrame(loop);
+  })();
+  document.addEventListener('mouseover',function(e){
+    if(e.target.closest('a,button'))c.classList.add('hover');
+  },{passive:true});
+  document.addEventListener('mouseout',function(e){
+    if(e.target.closest('a,button'))c.classList.remove('hover');
+  },{passive:true});
+})();
+</script>
 </body>
 </html>
