@@ -3,98 +3,262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy — wizkoo</title>
+<title>Privacy Policy — wizkoo</title>
+<meta name="description" content="Wizkoo Privacy Policy. How we collect, use, and protect information for families with children ages 2–12. COPPA compliant.">
+<link rel="canonical" href="https://wizkoo.com/privacy">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;600;700;800&family=DM+Sans:wght@400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 :root{
-  --saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm-bg:#ECEAE3;
-  --rule:#E0DED6;--mid:#888;--max-width:1200px;
+  --saffron:#E8AF38;--ink:#0C1020;--linen:#F2F0EA;
+  --rule:#E0DED6;--mid:#666;--expo:cubic-bezier(0.16,1,0.3,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--linen);color:var(--ink);font-size:0.9rem;line-height:1.7}
-a{color:inherit;text-decoration:none}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+::selection{background:rgba(232,175,56,0.2);color:inherit}
+
+/* Cursor */
+@media(hover:hover) and (pointer:fine){html,body,a,button{cursor:none}}
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);opacity:0;transition:width .25s var(--expo),height .25s var(--expo),opacity .2s;mix-blend-mode:exclusion}
+.cursor.visible{opacity:1}
+.cursor.hover{width:28px;height:28px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
+@media(hover:none),(pointer:coarse){.cursor{display:none!important}}
 
 /* Nav */
-.site-nav{background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:0 48px;height:48px;display:flex;align-items:center;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,0.04)}
-/* Canonical wordmark — matches index.html nav */
-.nav-wm{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.4),transparent);opacity:0.4}
+.nav-bar{display:flex;align-items:center;height:100%;padding:0 48px;gap:24px;max-width:1200px;margin:0 auto}
+.nav-wm{font-family:'Sora',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;margin-right:auto;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
 .nav-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}
 .nav-wm:hover .k{animation:kGiggle 0.8s ease-in-out}
 .nav-wm .i-fix{position:relative;display:inline-block}
 .nav-wm .wm-dot{display:inline-block;position:relative;margin-left:-0.08em}
-.nav-wm .wm-dot::after{content:'';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron);transition:transform .3s cubic-bezier(0.16,1,0.3,1)}
-.nav-wm:hover .wm-dot::after{animation:dotReact .4s cubic-bezier(0.16,1,0.3,1)}
+.nav-wm .wm-dot::after{content:'';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron)}
 @keyframes kGiggle{0%{transform:rotate(8deg)}6%{transform:rotate(12deg) translateY(-1px)}12%{transform:rotate(5deg)}18%{transform:rotate(13deg) translateY(-1.5px)}24%{transform:rotate(6deg) translateY(0.5px)}30%{transform:rotate(11deg) translateY(-1px)}36%{transform:rotate(7deg)}42%{transform:rotate(10deg) translateY(-0.5px)}50%{transform:rotate(8deg)}58%{transform:rotate(10deg) translateY(-1px)}66%{transform:rotate(7deg)}75%{transform:rotate(9deg) translateY(-0.5px)}85%{transform:rotate(8deg)}100%{transform:rotate(8deg)}}
-@keyframes dotReact{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}
-.nav-back{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,250,250,0.3);margin-left:auto;transition:color .2s}
-.nav-back:hover{color:rgba(250,250,250,0.8)}
+.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
+.nav-science{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px}
+.nav-science::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
+.nav-science:hover{color:rgba(250,250,250,0.8)}
+.nav-science:hover::after{width:100%}
+.nav-launch{font-family:'Space Mono',monospace;font-weight:700;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:var(--saffron);color:var(--ink);text-decoration:none;white-space:nowrap;flex-shrink:0;border-radius:2px;transition:background .2s,transform .2s}
+.nav-launch:hover{background:#D4A030;transform:translateY(-1px)}
+.nav-tagline-strip{position:fixed;top:72px;left:0;right:0;z-index:999;height:24px;display:flex;align-items:center;justify-content:center;background:rgba(12,16,32,0.88);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,175,56,0.55)}
+.nav-tagline-strip::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.12),transparent)}
 
-/* Main */
-.page-wrap{max-width:680px;margin:0 auto;padding:80px 48px 120px}
-.page-tag{font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:20px}
-.page-title{font-family:'Sora',sans-serif;font-weight:200;font-size:2.8rem;letter-spacing:-0.04em;line-height:1.1;margin-bottom:48px}
+/* Page */
+main{padding-top:96px;min-height:100vh}
+.legal-wrap{max-width:720px;margin:0 auto;padding:64px 48px 120px}
+.page-tag{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:16px}
+.page-title{font-family:'Sora',sans-serif;font-weight:200;font-size:2.8rem;letter-spacing:-0.04em;line-height:1.1;margin-bottom:12px}
 .page-title strong{font-weight:700}
-.privacy-list{list-style:none;border-top:1px solid var(--rule)}
-.privacy-item{padding:24px 0;border-bottom:1px solid var(--rule);font-size:0.88rem;color:#444;line-height:1.75}
-.privacy-item strong{font-family:'Sora',sans-serif;font-weight:700;font-size:0.78rem;color:var(--ink);display:block;margin-bottom:4px}
-.privacy-item a{border-bottom:1px solid rgba(232,175,56,0.4);color:var(--ink);transition:border-color .2s}
-.privacy-item a:hover{border-color:var(--saffron)}
+.page-updated{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin-bottom:56px}
 
-/* Footer */
+/* Legal content */
+.legal-intro{font-size:0.93rem;color:#555;line-height:1.8}
+.legal-section{padding:40px 0;border-top:1px solid var(--rule)}
+.legal-h2{font-family:'Sora',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);margin:0 0 20px}
+.legal-h3{font-family:'Inter',sans-serif;font-weight:700;font-size:0.93rem;color:var(--ink);margin:28px 0 10px;display:block}
+.legal-section p,.legal-intro{font-size:0.93rem;color:#555;line-height:1.8;margin-bottom:14px}
+.legal-section p:last-child{margin-bottom:0}
+.legal-section ul{font-size:0.93rem;color:#555;line-height:1.8;padding-left:24px;margin:10px 0 14px;list-style:disc}
+.legal-section li{margin-bottom:6px}
+.legal-provider{padding:20px 0;border-top:1px solid var(--rule)}
+.legal-providers>.legal-provider:first-child{border-top:none;padding-top:0}
+.legal-provider strong{display:block;font-weight:700;font-size:0.93rem;color:var(--ink);margin-bottom:6px}
+.legal-section a{color:var(--ink);border-bottom:1px solid rgba(232,175,56,0.5);transition:border-color .2s}
+.legal-section a:hover{border-color:var(--saffron)}
+.legal-intro a{color:var(--ink);border-bottom:1px solid rgba(232,175,56,0.5);transition:border-color .2s}
+.legal-intro a:hover{border-color:var(--saffron)}
 
-
-
-
-
+/* Responsive */
 @media(max-width:768px){
-  .site-nav{padding:0 20px}
-  .page-wrap{padding:48px 20px 80px}
+  .nav-center{display:none}
+  .nav-tagline-strip{display:none}
+  main{padding-top:72px}
+  .legal-wrap{padding:48px 24px 80px}
   .page-title{font-size:2rem}
-  
-  
-  
+}
+@media(max-width:480px){
+  .nav-bar{padding:0 20px}
 }
 </style>
 </head>
 <body>
+<div class="cursor" id="cursor"></div>
 
 <div id="wizkoo-nav"></div>
 <script src="/components/nav.js"></script>
 
 
-<main class="page-wrap">
-  <div class="page-tag">Legal</div>
-  <h1 class="page-title"><strong>Privacy</strong></h1>
+<main>
+  <div class="legal-wrap">
 
-  <ol class="privacy-list">
-    <li class="privacy-item">
-      <strong>No children's data collected.</strong>
-      Wizkoo does not collect personal information from children.
-    </li>
-    <li class="privacy-item">
-      <strong>Plans stay in your browser.</strong>
-      Learning plans generate entirely in your browser. No plan data is sent to or stored on our servers.
-    </li>
-    <li class="privacy-item">
-      <strong>No accounts required.</strong>
-      During early access, no account creation is required. We do not collect names, emails, or any identifying information from children.
-    </li>
-    <li class="privacy-item">
-      <strong>No tracking cookies.</strong>
-      We use no tracking cookies. Essential cookies only, if any.
-    </li>
-    <li class="privacy-item">
-      <strong>Email sign-up.</strong>
-      We collect your email address solely to notify you when early access opens. We do not share, sell, or use it for any other purpose.
-    </li>
-    <li class="privacy-item">
-      <strong>Questions?</strong>
-      Contact us at <a href="mailto:privacy@wizkoo.com">privacy@wizkoo.com</a>.
-    </li>
-  </ol>
+    <div class="page-tag">Legal</div>
+    <h1 class="page-title"><strong>Privacy</strong> Policy</h1>
+    <p class="page-updated">Last Updated: April 9, 2026</p>
+
+    <p class="legal-intro">Wizkoo is operated by Wizkoo LLC (formerly ReApproach Education LLC) (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), a Georgia limited liability company. This Privacy Policy describes how we collect, use, and protect information when you use wizkoo.com and our family learning products (collectively, the &ldquo;Service&rdquo;).</p>
+    <p class="legal-intro">We take children&rsquo;s privacy seriously. Our Service is designed for families with children ages 2&ndash;12, and we have built our platform to minimize data collection and protect your family&rsquo;s privacy. We comply with the Children&rsquo;s Online Privacy Protection Act (COPPA) and the FTC&rsquo;s amended COPPA Rule (16 CFR 312, effective June 23, 2025).</p>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">1. Information We Collect</h2>
+
+      <span class="legal-h3">Free Learning Games</span>
+      <p>Our free geography and science learning games do not collect any personal information. These products run entirely in your web browser. All game progress and settings are stored locally on your device using your browser&rsquo;s built-in storage. We do not have access to this data, and it is never transmitted to our servers.</p>
+
+      <span class="legal-h3">Plan Generator (Subscription Service)</span>
+      <p>When you subscribe to our weekly learning plan generator, we collect the following information from the parent or guardian who creates the account:</p>
+      <ul>
+        <li>Your name</li>
+        <li>Your email address</li>
+        <li>Payment information (processed securely by Stripe, Inc.; we do not store credit card numbers)</li>
+      </ul>
+      <p>To personalize learning plans for your family, we also ask you to provide:</p>
+      <ul>
+        <li>Your child&rsquo;s first name</li>
+        <li>Your child&rsquo;s age or grade level</li>
+        <li>The number of children in your household participating in the program</li>
+      </ul>
+      <p>We do not collect your child&rsquo;s last name, date of birth, email address, phone number, physical address, photograph, biometric identifiers (including facial geometry, fingerprints, or voiceprints), or any other identifying information beyond what is listed above.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">2. Information We Do Not Collect</h2>
+      <p>We do not collect: device identifiers, IP addresses for tracking purposes, geolocation data, browsing history, biometric identifiers, cookies for advertising, or any information from third-party services about you or your children. We do not use analytics services that track individual users. We do not serve advertisements. We do not use push notifications or engagement techniques directed at children. We do not use your child&rsquo;s information to build profiles for any purpose other than delivering the learning plans you requested.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">3. How We Use Information</h2>
+      <p>Parent information is used to: manage your account, process your subscription payment, send you your weekly learning plans, and communicate with you about your subscription (such as renewal notices or service updates).</p>
+      <p>Child information (first name and age/grade) is used exclusively to: personalize your family&rsquo;s weekly learning plans so that activities are age-appropriate and plans can be addressed to each child by name.</p>
+
+      <span class="legal-h3">AI-Generated Learning Plans</span>
+      <p>Your family&rsquo;s learning plans are generated using artificial intelligence. When generating a plan, your child&rsquo;s first name and age/grade are transmitted to our AI provider (Anthropic, Inc.) for processing. This transmission occurs under a zero data retention agreement, meaning your child&rsquo;s information is processed transiently to generate the plan and is not stored, logged, or retained by the AI provider. The AI provider does not use your family&rsquo;s information to train models or for any other purpose.</p>
+      <p>We do not use any information for advertising, marketing to children, behavioral profiling, or any purpose other than delivering the educational service you purchased.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">4. How We Store and Protect Information</h2>
+      <p>Parent account information and child first names/ages are stored on secure, encrypted servers in the United States provided by Supabase, Inc. Payment processing is handled entirely by Stripe, Inc., a PCI-DSS compliant payment processor. We do not store credit card numbers or bank account information on our servers.</p>
+      <p>Game progress, learning plan history, and user preferences are stored locally on your device and are not transmitted to our servers.</p>
+
+      <span class="legal-h3">Written Information Security Program</span>
+      <p>Pursuant to 16 CFR 312.8, we maintain a written information security program that includes:</p>
+      <ul>
+        <li>Encryption of personal information in transit (TLS 1.2+) and at rest</li>
+        <li>Access controls limiting employee and contractor access to personal information to those with a legitimate business need</li>
+        <li>Authentication via Clerk, Inc., with industry-standard password hashing and session management</li>
+        <li>Regular security reviews of our infrastructure and third-party service providers</li>
+        <li>Incident response procedures for potential data breaches</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">5. Data Retention Policy</h2>
+      <p>Pursuant to 16 CFR 312.10, we maintain the following data retention policy:</p>
+      <ul>
+        <li><strong>Active subscription data</strong> (parent account, child profiles): Retained for the duration of your subscription plus 90 days post-cancellation (to allow reactivation).</li>
+        <li><strong>Payment records</strong>: Retained by Stripe per their data retention policy and applicable financial regulations.</li>
+        <li><strong>AI-generated learning plans</strong>: Stored locally on your device. Not retained on our servers.</li>
+        <li><strong>Free game data</strong>: Stored locally on your device only. Never transmitted to or retained on our servers.</li>
+      </ul>
+      <p>After the 90-day post-cancellation period, all personal information is permanently deleted from our servers. We do not retain personal information indefinitely.</p>
+      <p>You may request deletion of your account and all associated data at any time by emailing <a href="mailto:privacy@wizkoo.com">privacy@wizkoo.com</a>. We will process deletion requests within 30 days.</p>
+      <p>Child profile information (first name and age/grade) can be individually deleted at any time through your parent account settings without canceling your subscription.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">6. Your Parental Rights</h2>
+      <p>As the parent or guardian of a child using our Service, you have the right to:</p>
+      <ul>
+        <li>Review the personal information we have collected about your child by logging into your account or by contacting us at <a href="mailto:privacy@wizkoo.com">privacy@wizkoo.com</a></li>
+        <li>Request deletion of your child&rsquo;s personal information at any time</li>
+        <li>Refuse further collection of your child&rsquo;s information (note: this may require canceling your subscription, as child age/grade is necessary for the Service to function)</li>
+        <li>Receive a copy of this Privacy Policy at any time by visiting wizkoo.com/privacy or by contacting us</li>
+      </ul>
+      <p>We will not require your child to disclose more information than is reasonably necessary to participate in the educational activities provided by our Service.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">7. Third-Party Service Providers</h2>
+      <p>We share personal information only with the following service providers, solely as necessary to operate the Service. We do not sell, rent, trade, or otherwise share your personal information or your child&rsquo;s personal information with any third party for advertising, marketing, or any non-integral purpose.</p>
+
+      <div class="legal-providers">
+        <div class="legal-provider">
+          <strong>Stripe, Inc. (payment processing)</strong>
+          <p>Processes subscription payments. Receives parent name, email, and payment information. Does not receive child information. Privacy policy: <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">stripe.com/privacy</a>.</p>
+        </div>
+        <div class="legal-provider">
+          <strong>Clerk, Inc. (authentication)</strong>
+          <p>Manages account login and session security. Receives parent email and password (hashed). Does not receive child information. Privacy policy: <a href="https://clerk.com/legal/privacy" target="_blank" rel="noopener noreferrer">clerk.com/legal/privacy</a>.</p>
+        </div>
+        <div class="legal-provider">
+          <strong>Anthropic, Inc. (AI plan generation)</strong>
+          <p>Generates personalized learning plans. Receives child first name and age/grade transiently under a zero data retention agreement. Does not store, log, or retain any personal information. Privacy policy: <a href="https://anthropic.com/privacy" target="_blank" rel="noopener noreferrer">anthropic.com/privacy</a>.</p>
+        </div>
+        <div class="legal-provider">
+          <strong>Supabase, Inc. (database hosting)</strong>
+          <p>Hosts encrypted parent and child profile data. Acts as a data processor under our direction. Privacy policy: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">supabase.com/privacy</a>.</p>
+        </div>
+        <div class="legal-provider">
+          <strong>Vercel, Inc. (application hosting)</strong>
+          <p>Hosts the Plan Generator application. May process IP addresses in server logs per standard web hosting. Does not receive child information. Privacy policy: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">vercel.com/legal/privacy-policy</a>.</p>
+        </div>
+        <div class="legal-provider">
+          <strong>Netlify, Inc. (static site hosting)</strong>
+          <p>Hosts the marketing website and free games. No personal information is transmitted. Privacy policy: <a href="https://netlify.com/privacy" target="_blank" rel="noopener noreferrer">netlify.com/privacy</a>.</p>
+        </div>
+      </div>
+
+      <p style="margin-top:20px">All third-party disclosures listed above are integral to the operation of the Service. No separate parental consent is required for these disclosures under 16 CFR 312.5(a)(2). We do not share data with advertising networks, data brokers, analytics companies, or any other third-party service providers.</p>
+      <p>We may disclose information if required by law, such as in response to a valid subpoena, court order, or government investigation.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">8. COPPA Compliance</h2>
+      <p>Our Service is directed to children under 13 and we comply with the Children&rsquo;s Online Privacy Protection Act (COPPA) and the FTC&rsquo;s amended COPPA Rule (16 CFR 312, as amended effective June 23, 2025).</p>
+
+      <span class="legal-h3">Verifiable Parental Consent</span>
+      <p>We obtain verifiable parental consent before collecting any information about children through the parent account creation and subscription payment process. Pursuant to 16 CFR 312.5(b)(2), the credit card transaction required to create a subscription account serves as the method of verifiable parental consent. Only parents or guardians may create accounts. Children do not create accounts, do not have login credentials, and do not directly provide us with any information.</p>
+
+      <span class="legal-h3">No Non-Integral Disclosures</span>
+      <p>We do not disclose children&rsquo;s personal information to third parties for purposes that are not integral to the Service. Therefore, no separate opt-in consent for third-party disclosures is required under 16 CFR 312.5(a)(2).</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">9. Cookies and Local Storage</h2>
+      <p>Our Service uses the following browser technologies:</p>
+      <ul>
+        <li><strong>Authentication cookies (Clerk)</strong>: Functional cookies necessary to maintain your login session. These are not used for tracking or advertising.</li>
+        <li><strong>Local storage (free games)</strong>: Game progress and settings stored locally on your device. This data never leaves your browser.</li>
+      </ul>
+      <p>We do not use tracking cookies, advertising cookies, or any third-party cookies.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">10. State Privacy Laws</h2>
+      <p>If you are a California resident, you may have additional rights under the California Consumer Privacy Act (CCPA/CPRA), including the right to know what personal information we collect, the right to delete your information, and the right to opt out of the sale of personal information. We do not sell personal information. To exercise any rights under applicable state privacy laws, contact us at <a href="mailto:privacy@wizkoo.com">privacy@wizkoo.com</a>.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">11. Changes to This Policy</h2>
+      <p>We will notify you of material changes to this Privacy Policy by email at least 30 days before the changes take effect. Continued use of the Service after the effective date of changes constitutes acceptance.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">12. Contact Us</h2>
+      <p>Wizkoo LLC<br>
+      Email: <a href="mailto:privacy@wizkoo.com">privacy@wizkoo.com</a><br>
+      Website: wizkoo.com</p>
+    </section>
+
+  </div>
 </main>
 
 <div id="site-footer"></div>
@@ -102,24 +266,20 @@ a{color:inherit;text-decoration:none}
 
 <script>
 (function(){
-  var audioCtx;
-  document.addEventListener('click',function(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();});
-  function playGiggle(){
-    if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    if(audioCtx.state==='suspended')audioCtx.resume();
-    var now=audioCtx.currentTime;
-    var o1=audioCtx.createOscillator(),g1=audioCtx.createGain();
-    o1.type='sine';o1.connect(g1);g1.connect(audioCtx.destination);
-    o1.frequency.setValueAtTime(880,now);o1.frequency.exponentialRampToValueAtTime(1100,now+0.04);o1.frequency.exponentialRampToValueAtTime(660,now+0.08);
-    g1.gain.setValueAtTime(0.04,now);g1.gain.exponentialRampToValueAtTime(0.001,now+0.1);
-    o1.start(now);o1.stop(now+0.1);
-    var o2=audioCtx.createOscillator(),g2=audioCtx.createGain();
-    o2.type='sine';o2.connect(g2);g2.connect(audioCtx.destination);
-    o2.frequency.setValueAtTime(990,now+0.1);o2.frequency.exponentialRampToValueAtTime(1200,now+0.14);o2.frequency.exponentialRampToValueAtTime(750,now+0.18);
-    g2.gain.setValueAtTime(0.03,now+0.1);g2.gain.exponentialRampToValueAtTime(0.001,now+0.2);
-    o2.start(now+0.1);o2.stop(now+0.2);
-  }
-  document.querySelectorAll('.nav-wm').forEach(function(w){w.addEventListener('mouseenter',function(){setTimeout(playGiggle,350)});});
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  var c=document.getElementById('cursor');if(!c)return;
+  var raf;
+  document.addEventListener('mousemove',function(e){
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(function(){
+      c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';
+      c.classList.add('visible');
+    });
+  });
+  document.addEventListener('mouseover',function(e){
+    c.classList.toggle('hover',!!e.target.closest('a,button,[role="button"]'));
+  });
+  document.documentElement.addEventListener('mouseleave',function(){c.classList.remove('visible');});
 })();
 </script>
 </body>

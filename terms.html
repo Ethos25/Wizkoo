@@ -4,55 +4,83 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terms of Service — wizkoo</title>
-<meta name="description" content="Wizkoo Terms of Service.">
+<meta name="description" content="Wizkoo Terms of Service. Subscription terms, cancellation policy, and acceptable use for wizkoo.com.">
+<link rel="canonical" href="https://wizkoo.com/terms">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 :root{
-  --saffron:#E8AF38;--ink:#0C1020;--linen:#F2F0EA;--warm-bg:#ECEAE3;
-  --rule:#E0DED6;--mid:#666;
-  --expo:cubic-bezier(0.16,1,0.3,1);
+  --saffron:#E8AF38;--ink:#0C1020;--linen:#F2F0EA;
+  --rule:#E0DED6;--mid:#666;--expo:cubic-bezier(0.16,1,0.3,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-@media(hover:hover){html,body,a,button{cursor:none}}
-.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
-.cursor.visible{opacity:1}
-.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
+::selection{background:rgba(232,175,56,0.2);color:inherit}
 
-/* ── NAV ── */
+/* Cursor */
+@media(hover:hover) and (pointer:fine){html,body,a,button{cursor:none}}
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);opacity:0;transition:width .25s var(--expo),height .25s var(--expo),opacity .2s;mix-blend-mode:exclusion}
+.cursor.visible{opacity:1}
+.cursor.hover{width:28px;height:28px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
+@media(hover:none),(pointer:coarse){.cursor{display:none!important}}
+
+/* Nav */
 .site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.4),transparent);opacity:0.4}
-.nav-bar{display:flex;align-items:center;height:100%;padding:0 32px;gap:24px}
-.nav-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.04em;color:#F2F0EA;text-decoration:none;margin-right:auto;flex-shrink:0}
-.nav-wm .i-fix{font-style:italic}
-.nav-wm .k{letter-spacing:-0.06em}
-.nav-wm .wm-dot{color:var(--saffron)}
+.nav-bar{display:flex;align-items:center;height:100%;padding:0 48px;gap:24px;max-width:1200px;margin:0 auto}
+.nav-wm{font-family:'Sora',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;margin-right:auto;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}
+.nav-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}
+.nav-wm:hover .k{animation:kGiggle 0.8s ease-in-out}
+.nav-wm .i-fix{position:relative;display:inline-block}
+.nav-wm .wm-dot{display:inline-block;position:relative;margin-left:-0.08em}
+.nav-wm .wm-dot::after{content:'';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron)}
+@keyframes kGiggle{0%{transform:rotate(8deg)}6%{transform:rotate(12deg) translateY(-1px)}12%{transform:rotate(5deg)}18%{transform:rotate(13deg) translateY(-1.5px)}24%{transform:rotate(6deg) translateY(0.5px)}30%{transform:rotate(11deg) translateY(-1px)}36%{transform:rotate(7deg)}42%{transform:rotate(10deg) translateY(-0.5px)}50%{transform:rotate(8deg)}58%{transform:rotate(10deg) translateY(-1px)}66%{transform:rotate(7deg)}75%{transform:rotate(9deg) translateY(-0.5px)}85%{transform:rotate(8deg)}100%{transform:rotate(8deg)}}
 .nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
 .nav-science{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px}
 .nav-science::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
 .nav-science:hover{color:rgba(250,250,250,0.8)}
 .nav-science:hover::after{width:100%}
-.nav-launch{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:transparent;color:var(--saffron);border:1px solid rgba(232,175,56,0.4);text-decoration:none;transition:border-color .25s,color .25s;white-space:nowrap;flex-shrink:0}
-.nav-launch:hover{border-color:var(--saffron);color:var(--saffron)}
+.nav-launch{font-family:'Space Mono',monospace;font-weight:700;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:var(--saffron);color:var(--ink);text-decoration:none;white-space:nowrap;flex-shrink:0;border-radius:2px;transition:background .2s,transform .2s}
+.nav-launch:hover{background:#D4A030;transform:translateY(-1px)}
 .nav-tagline-strip{position:fixed;top:72px;left:0;right:0;z-index:999;height:24px;display:flex;align-items:center;justify-content:center;background:rgba(12,16,32,0.88);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,175,56,0.55)}
 .nav-tagline-strip::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.12),transparent)}
 
-/* ── PAGE ── */
-main{padding-top:96px;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.page-hero{max-width:640px;margin:0 auto;padding:80px 48px 120px;text-align:center}
-.tag{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:20px}
-.page-hero h1{font-family:'Sora',sans-serif;font-weight:200;font-size:1.8rem;letter-spacing:-0.02em;color:var(--ink);line-height:1.2;margin:0 0 20px}
-.page-hero p{font-family:'Inter',sans-serif;font-size:0.9rem;color:#777;line-height:1.75;max-width:520px;margin:0 auto}
+/* Page */
+main{padding-top:96px;min-height:100vh}
+.legal-wrap{max-width:720px;margin:0 auto;padding:64px 48px 120px}
+.page-tag{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:16px}
+.page-title{font-family:'Sora',sans-serif;font-weight:200;font-size:2.8rem;letter-spacing:-0.04em;line-height:1.1;margin-bottom:12px}
+.page-title strong{font-weight:700}
+.page-updated{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin-bottom:56px}
+
+/* Legal content */
+.legal-intro{font-size:0.93rem;color:#555;line-height:1.8;margin-bottom:14px}
+.legal-section{padding:40px 0;border-top:1px solid var(--rule)}
+.legal-h2{font-family:'Sora',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);margin:0 0 20px}
+.legal-section p{font-size:0.93rem;color:#555;line-height:1.8;margin-bottom:14px}
+.legal-section p:last-child{margin-bottom:0}
+.legal-section ul{font-size:0.93rem;color:#555;line-height:1.8;padding-left:24px;margin:10px 0 14px;list-style:disc}
+.legal-section li{margin-bottom:6px}
+.legal-caps{font-size:0.93rem;color:#555;line-height:1.8;margin-bottom:14px}
+.legal-section a{color:var(--ink);border-bottom:1px solid rgba(232,175,56,0.5);transition:border-color .2s}
+.legal-section a:hover{border-color:var(--saffron)}
+
+/* Responsive */
 @media(max-width:768px){
   .nav-center{display:none}
-  .page-hero{padding:60px 24px 80px}
+  .nav-tagline-strip{display:none}
+  main{padding-top:72px}
+  .legal-wrap{padding:48px 24px 80px}
+  .page-title{font-size:2rem}
+}
+@media(max-width:480px){
+  .nav-bar{padding:0 20px}
 }
 </style>
 </head>
@@ -62,26 +90,149 @@ main{padding-top:96px;min-height:100vh;display:flex;align-items:center;justify-c
 <div id="wizkoo-nav"></div>
 <script src="/components/nav.js"></script>
 
-<a href="/plan" class="nav-launch">Build Your Plan</a></div>
-</div>
 
 <main>
-  <section class="page-hero">
-    <div class="tag">Terms of Service</div>
-    <h1>The fine print.</h1>
-    <p>Coming soon.</p>
-  </section>
+  <div class="legal-wrap">
+
+    <div class="page-tag">Legal</div>
+    <h1 class="page-title"><strong>Terms</strong> of Service</h1>
+    <p class="page-updated">Last Updated: April 9, 2026</p>
+
+    <section class="legal-section" style="border-top:none;padding-top:0">
+      <h2 class="legal-h2">1. Acceptance of Terms</h2>
+      <p>By accessing or using wizkoo.com and any associated products or services (collectively, the &ldquo;Service&rdquo;), you agree to be bound by these Terms of Service (&ldquo;Terms&rdquo;). If you do not agree to these Terms, do not use the Service. The Service is operated by Wizkoo LLC (formerly ReApproach Education LLC), a Georgia limited liability company.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">2. Description of Service</h2>
+      <p>Wizkoo provides AI-powered family learning products for children ages 2&ndash;12, including:</p>
+      <ul>
+        <li>Free browser-based learning games (no account required)</li>
+        <li>A subscription-based weekly learning plan generator that creates personalized educational plans for your family</li>
+      </ul>
+      <p>All educational content is generated by artificial intelligence and is intended to supplement, not replace, a parent&rsquo;s or educator&rsquo;s judgment regarding their child&rsquo;s education.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">3. Account Creation and Eligibility</h2>
+      <p>To use the Plan Generator, you must create an account. By creating an account, you represent and warrant that:</p>
+      <ul>
+        <li>You are at least 18 years of age</li>
+        <li>You are the parent or legal guardian of any children whose information you provide</li>
+        <li>All information you provide is accurate and complete</li>
+        <li>You will maintain the security of your account credentials</li>
+      </ul>
+      <p>Children may not create accounts. Only parents or legal guardians may create and manage accounts on behalf of their children.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">4. Subscription Terms and Billing</h2>
+      <p>The Plan Generator is available through the following subscription options:</p>
+      <ul>
+        <li>Monthly subscription: $50.00 per month</li>
+        <li>Annual subscription: $499.00 per year</li>
+      </ul>
+      <p>Subscriptions are billed in advance on a recurring basis (monthly or annually, depending on the plan selected). Payment is processed by Stripe, Inc. You authorize us to charge your selected payment method for all subscription fees.</p>
+      <p>Prices are subject to change. We will provide at least 30 days&rsquo; written notice of any price increase. The new price will apply at the start of your next billing cycle following the notice period.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">5. Free Trial and Promotional Offers</h2>
+      <p>From time to time, we may offer free trials or promotional pricing. Unless otherwise stated, promotional offers are available to new subscribers only and are subject to these Terms. At the end of any trial or promotional period, your subscription will automatically convert to the standard rate unless you cancel before the trial or promotional period ends.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">6. Cancellation and Refund Policy</h2>
+      <p>You may cancel your subscription at any time through your account settings or by contacting us at <a href="mailto:support@wizkoo.com">support@wizkoo.com</a>.</p>
+      <ul>
+        <li><strong>Monthly subscriptions</strong>: Cancellation takes effect at the end of the current billing period. No refunds for partial months.</li>
+        <li><strong>Annual subscriptions</strong>: Cancellation takes effect at the end of the current annual period. No prorated refunds for unused months, except where required by applicable law.</li>
+      </ul>
+      <p>After cancellation, your account data is retained for 90 days to allow reactivation. After 90 days, all data is permanently deleted per our <a href="/privacy">Privacy Policy</a>.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">7. Acceptable Use Policy</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use the Service for any unlawful purpose</li>
+        <li>Share your account credentials with others or allow unauthorized access</li>
+        <li>Attempt to reverse-engineer, decompile, or extract the source code of any part of the Service</li>
+        <li>Use automated tools to scrape, crawl, or extract content from the Service</li>
+        <li>Interfere with or disrupt the Service or its infrastructure</li>
+        <li>Resell, redistribute, or commercially exploit generated learning plans without our written permission</li>
+        <li>Use the Service to generate content for purposes other than family education</li>
+      </ul>
+      <p>We reserve the right to suspend or terminate your account for violations of this policy.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">8. Intellectual Property</h2>
+      <p>The Wizkoo name, logo, and all original content on wizkoo.com (including game designs, website copy, and visual assets) are the property of Wizkoo LLC and are protected by applicable intellectual property laws.</p>
+      <p>Learning plans generated for your family through the Plan Generator are licensed to you for personal, non-commercial family educational use. You may print, share within your household, and use these plans with your children&rsquo;s educators. You may not resell or commercially distribute generated plans.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">9. Limitation of Liability</h2>
+      <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, WIZKOO LLC SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, ARISING OUT OF YOUR USE OF OR INABILITY TO USE THE SERVICE.</p>
+      <p>OUR TOTAL LIABILITY FOR ANY CLAIM ARISING OUT OF OR RELATING TO THESE TERMS OR THE SERVICE SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE 12 MONTHS PRECEDING THE CLAIM.</p>
+      <p>Wizkoo provides educational content and tools to support family learning. We do not guarantee specific educational outcomes. Parents and guardians retain full responsibility for their children&rsquo;s education and should exercise their own judgment in using our materials.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">10. Disclaimer of Warranties</h2>
+      <p>THE SERVICE IS PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+      <p>We do not warrant that the Service will be uninterrupted, error-free, or secure, or that any defects will be corrected. AI-generated learning plans may contain inaccuracies and should be reviewed by a parent or educator before use.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">11. Indemnification</h2>
+      <p>You agree to indemnify and hold harmless Wizkoo LLC, its officers, directors, employees, and agents from any claims, damages, losses, or expenses (including reasonable attorney&rsquo;s fees) arising from your use of the Service or violation of these Terms.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">12. Governing Law and Dispute Resolution</h2>
+      <p>These Terms are governed by the laws of the State of Georgia, without regard to conflict of law principles. Any dispute arising under these Terms shall be resolved in the state or federal courts located in Forsyth County, Georgia, and you consent to the personal jurisdiction of such courts.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">13. Changes to These Terms</h2>
+      <p>We may update these Terms from time to time. We will notify you of material changes by email at least 30 days before the changes take effect. Continued use of the Service after the effective date of changes constitutes acceptance of the revised Terms.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">14. Severability</h2>
+      <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2 class="legal-h2">15. Contact Us</h2>
+      <p>Wizkoo LLC<br>
+      Email: <a href="mailto:support@wizkoo.com">support@wizkoo.com</a><br>
+      Website: wizkoo.com</p>
+    </section>
+
+  </div>
 </main>
 
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
+
 <script>
 (function(){
   if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
   var c=document.getElementById('cursor');if(!c)return;
   var raf;
-  document.addEventListener('mousemove',function(e){cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';c.classList.add('visible');});});
-  document.addEventListener('mouseover',function(e){c.classList.toggle('hover',!!e.target.closest('a,button,[role="button"]'));});
+  document.addEventListener('mousemove',function(e){
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(function(){
+      c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';
+      c.classList.add('visible');
+    });
+  });
+  document.addEventListener('mouseover',function(e){
+    c.classList.toggle('hover',!!e.target.closest('a,button,[role="button"]'));
+  });
   document.documentElement.addEventListener('mouseleave',function(){c.classList.remove('visible');});
 })();
 </script>
