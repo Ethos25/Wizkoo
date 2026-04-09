@@ -271,7 +271,7 @@
     '        <a href="/plan">The Plan</a>',
     '        <a href="/games">The Games</a>',
     '        <a href="/library">The Library</a>',
-    '        <a href="/science">The Science</a>',
+    '        <a href="/methodology">The Science</a>',
     '        <a href="/ages">The Ages</a>',
     '        <a href="/the-open-seat">The Open Seat</a>',
     '        <a href="/pricing">The Price</a>',
