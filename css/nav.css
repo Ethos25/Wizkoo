@@ -227,7 +227,7 @@ nav .nb:hover { background: #D4A030; transform: translateY(-1px); }
   color: var(--paper);
   font-size: 1.5rem;
   cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   opacity: 0.6;
   transition: opacity 0.15s;
 }

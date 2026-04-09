@@ -2,12 +2,12 @@
   /* ── Colors ── */
   --saffron: #E8AF38;
   --saffron-pale: #FFF9EE;
-  --ink: #0A0A0A;
+  --ink: #0C1020;
   --paper: #FAFAFA;
-  --warm-bg: #F5F4F0;
-  --mid: #888;
-  --faint: #CCC;
-  --rule: #E8E8E8;
+  --warm-bg: #ECEAE3;
+  --mid: #4A4850;
+  --faint: #A8A6B0;
+  --rule: #E0DED6;
 
   /* ── Spacing ── */
   --section-pad: 80px;
@@ -27,13 +27,11 @@
   --button-size: 0.78rem;
 
   /* ── Warm background stops ── */
-  --warm-cream: #FBF8F3;
-  --warm-linen: #F5F0E8;
-  --warm-sand: #EDE6D8;
+  --linen: #F2F0EA;
 
   /* ── Section background alternation ── */
-  --section-light: var(--warm-cream);
-  --section-warm: var(--warm-linen);
+  --section-light: var(--linen);
+  --section-warm: var(--warm-bg);
 
   /* ── Depth & shadow ── */
   --shadow-soft: 0 4px 24px rgba(10, 10, 10, 0.06);
