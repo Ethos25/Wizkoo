@@ -3,111 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Ages — wizkoo</title>
-<meta name="description" content="Wizkoo learning plans by age group — ages 2–4, 5–7, 8–10, and 10–12.">
+<title>The Ages | Wizkoo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@200;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
-:root{
-  --saffron:#E8AF38;--ink:#0C1020;--linen:#F2F0EA;--warm-bg:#ECEAE3;
-  --rule:#E0DED6;--mid:#666;
-  --expo:cubic-bezier(0.16,1,0.3,1);
-}
-*{margin:0;padding:0;box-sizing:border-box}
+:root{--saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm:#ECEAE3;--rule:#E0DED6;--mid:#4A4850;--expo:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.22,1,0.36,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
-a{text-decoration:none;color:inherit}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+@media(hover:hover){html,body,a,button{cursor:none}}
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}.cursor.visible{opacity:1}.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,.25);border:1.5px solid var(--saffron)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center}.nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:.4}
+.nb{width:100%;max-width:1200px;height:100%;padding:0 48px;display:flex;align-items:center;gap:40px}
+.nw{font-family:'Sora',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;margin-right:auto}.nw .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}.nw:hover .k{animation:kg .8s ease-in-out}
+@keyframes kg{0%{transform:rotate(8deg)}18%{transform:rotate(13deg) translateY(-1.5px)}50%{transform:rotate(8deg)}100%{transform:rotate(8deg)}}
+.wd{display:inline-block;position:relative;margin-left:-.08em}.wd::after{content:'';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron)}
+.nc{display:flex;align-items:center;gap:28px;flex:1;justify-content:center}
+.nl{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,242,248,.7);text-decoration:none;white-space:nowrap;position:relative;padding-bottom:2px;transition:color .25s}.nl::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}.nl:hover{color:rgba(240,242,248,1)}.nl:hover::after{width:100%}.nl.ac{color:#F0F2F8}.nl.ac::after{width:100%}
+.ncta{font-family:'Space Mono',monospace;font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:7px 16px;background:var(--saffron);color:var(--ink);text-decoration:none;white-space:nowrap;flex-shrink:0;border-radius:2px;border:none;transition:background .2s,transform .2s}.ncta:hover{background:#D4A030;transform:translateY(-1px)}
+.ham{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;padding:0;background:transparent;border:none;flex-shrink:0}.ham span{display:block;width:20px;height:2px;background:rgba(240,242,248,.8);border-radius:1px}
+.mm{display:none;position:fixed;top:72px;left:0;right:0;z-index:998;overflow:hidden;pointer-events:none}.mm-in{background:var(--linen);border-bottom:1px solid var(--rule);transform:translateY(-100%);transition:transform 150ms ease-in;padding:8px 0}.mm.open{pointer-events:auto}.mm.open .mm-in{transform:translateY(0);transition:transform 200ms var(--expo)}.mm a{display:block;font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:16px 24px;background:transparent;border:none}
+.sr{opacity:0;transform:translateY(32px);transition:opacity 800ms var(--expo),transform 800ms var(--expo)}.sr.v{opacity:1;transform:translateY(0)}
+.sr-btn{opacity:0;transition:opacity 600ms ease}.sr-btn.v{opacity:1}
 
-/* ── NAV ── */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.4),transparent);opacity:0.4}
-.nav-bar{display:flex;align-items:center;height:100%;padding:0 32px;gap:24px}
-.nav-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.04em;color:#F2F0EA;text-decoration:none;margin-right:auto;flex-shrink:0}
-.nav-wm .i-fix{font-style:italic}
-.nav-wm .k{letter-spacing:-0.06em}
-.nav-wm .wm-dot{color:var(--saffron)}
-.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
-.nav-science{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px}
-.nav-science::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
-.nav-science:hover{color:rgba(250,250,250,0.8)}
-.nav-science:hover::after{width:100%}
-.nav-science.active{color:rgba(250,250,250,0.85)}
-.nav-science.active::after{width:100%}
-.nav-launch{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:transparent;color:var(--saffron);border:1px solid rgba(232,175,56,0.4);text-decoration:none;transition:border-color .25s,color .25s;white-space:nowrap;flex-shrink:0}
-.nav-launch:hover{border-color:var(--saffron);color:var(--saffron)}
-.nav-tagline-strip{position:fixed;top:72px;left:0;right:0;z-index:999;height:24px;display:flex;align-items:center;justify-content:center;background:rgba(12,16,32,0.88);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,175,56,0.55)}
-.nav-tagline-strip::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.12),transparent)}
+/* ═══ HERO — linen, centered ═══ */
+.hero{background:var(--linen);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:72px 48px clamp(60px,10vh,120px);position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(242,240,234,0) 0%,rgba(224,222,214,.35) 100%);pointer-events:none}
+.hero-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(20px,3vh,32px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .25s}
+.hero-h{font-family:'Sora',sans-serif;font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.12;letter-spacing:-.03em;color:var(--ink);max-width:720px;margin-bottom:clamp(16px,2.5vh,28px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .45s}
+.hero-h-light{font-weight:200}
+.hero-h-bold{font-weight:700;display:block}
+.hero-sub{font-family:'Inter',sans-serif;font-weight:400;font-size:clamp(.9rem,1.1vw,1.05rem);line-height:1.75;color:rgba(12,16,32,.5);max-width:600px;position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .65s}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── PAGE ── */
-main{padding-top:120px;min-height:100vh}
-.page-hero{max-width:860px;margin:0 auto;padding:80px 48px 60px;text-align:center}
-.tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:24px}
-.page-hero h1{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:-0.03em;color:var(--ink);line-height:1.08;margin:0 0 48px}
-.page-hero h1 span{color:var(--saffron)}
+/* ═══ TIER CARDS — linen bg, 2x2 grid ═══ */
+.tiers{background:var(--linen);padding:0 48px clamp(80px,14vh,180px);position:relative}
+.tiers::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(242,240,234,0) 0%,rgba(224,222,214,.2) 100%);pointer-events:none}
+.tiers-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px);max-width:900px;margin:0 auto;position:relative;z-index:1}
+.tier-card{background:var(--paper);border:1.5px solid var(--ink);padding:clamp(28px,4vh,44px) clamp(24px,3vw,36px);position:relative;transition:transform .3s var(--expo)}
+.tier-card::after{content:'';position:absolute;top:6px;left:6px;right:-6px;bottom:-6px;background:rgba(12,16,32,.04);z-index:-1;pointer-events:none;transition:top .3s var(--expo),bottom .3s var(--expo)}
+@media(hover:hover){.tier-card:hover{transform:translateY(-2px)}.tier-card:hover::after{top:8px;bottom:-8px}}
+.tier-label{font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(8px,1.5vh,14px)}
+.tier-name{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.1rem,1.4vw,1.25rem);color:var(--ink);margin-bottom:clamp(14px,2.5vh,24px);letter-spacing:-.02em}
+.tier-moment{font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.8;color:rgba(12,16,32,.72);margin-bottom:clamp(14px,2vh,20px)}
+.tier-context{font-family:'Inter',sans-serif;font-size:clamp(.8rem,.92vw,.87rem);line-height:1.75;color:rgba(12,16,32,.4)}
 
-/* ── AGE SECTIONS ── */
-.ages-grid{max-width:860px;margin:0 auto;padding:0 48px 120px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.age-card{background:var(--warm-bg);border:1px solid var(--rule);padding:40px 32px}
-.age-card-range{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:16px}
-.age-card h2{font-family:'Sora',sans-serif;font-weight:600;font-size:1.6rem;letter-spacing:-0.03em;color:var(--ink);margin-bottom:12px}
-.age-card p{font-family:'Sora',sans-serif;font-weight:300;font-size:0.9rem;color:var(--mid);line-height:1.7}
-.coming-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--saffron);border:1px solid rgba(232,175,56,0.3);padding:4px 10px;margin-top:20px}
+/* ═══ CLOSE — warm, emotional anchor ═══ */
+.closing{background:var(--warm);padding:clamp(80px,14vh,180px) 48px;text-align:center;position:relative}
+.closing::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(12,16,32,.006) 59px,rgba(12,16,32,.006) 60px);pointer-events:none}
+.closing-h{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.2;letter-spacing:-.025em;color:var(--ink);max-width:600px;margin:0 auto clamp(36px,6vh,56px);position:relative;z-index:1}
+.closing-h .td{display:inline-block;width:clamp(5px,.6vw,8px);height:clamp(5px,.6vw,8px);border-radius:50%;background:var(--saffron);margin-left:2px;vertical-align:baseline}
 
-@media(max-width:768px){
-  .nav-center{display:none}
-  .page-hero{padding:60px 24px 40px}
-  .ages-grid{grid-template-columns:1fr;padding:0 24px 80px}
-}
+/* ═══ CTA — dark ═══ */
+.cta{background:var(--ink);padding:clamp(80px,14vh,160px) 48px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.012) 59px,rgba(255,255,255,.012) 60px);pointer-events:none}
+.cta-glow{position:absolute;width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-45%);background:radial-gradient(circle,rgba(232,175,56,.04) 0%,transparent 55%);pointer-events:none}
+.cta-btn{display:inline-block;background:var(--saffron);color:var(--ink);font-family:'Sora',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.06em;padding:14px 44px;border:none;text-decoration:none;box-shadow:6px 6px 0 rgba(232,175,56,.3);transition:transform .3s var(--expo),box-shadow .3s var(--expo);position:relative;z-index:1}.cta-btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 rgba(232,175,56,.4)}.cta-btn:focus-visible{outline:2px solid var(--saffron);outline-offset:4px}
+.cta-sub{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,242,248,.25);margin-top:clamp(14px,2vh,24px);position:relative;z-index:1}
+
+@media(max-width:1024px){}
+@media(max-width:768px){.ham{display:flex}.nc{display:none}.nb{padding:0 16px;gap:16px;justify-content:space-between}.ncta{font-size:8px;padding:6px 12px}.mm{display:block}.hero{padding:72px 20px 48px}.tiers{padding:0 20px 56px}.tiers-grid{grid-template-columns:1fr}.closing{padding:56px 20px}.cta{padding:56px 20px}}
+@media(hover:none)and(pointer:coarse){.cursor{display:none!important}}
+@media(prefers-reduced-motion:reduce){.hero-ey,.hero-h,.hero-sub{opacity:1!important;animation:none!important;transform:none!important}.sr,.sr-btn{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-
-<div id="wizkoo-nav"></div>
-<script src="/components/nav.js"></script>
-
-<a href="/plan" class="nav-launch">Build Your Plan</a></div>
-</div>
-
+<div class="cursor" id="cursor"></div>
+<div class="nav" role="navigation"><div class="nb"><a href="/" class="nw" aria-label="Wizkoo Home">w<span style="position:relative;display:inline-block">i</span>z<span class="k">k</span>o<span class="wd">o</span></a><div class="nc"><a href="/plan" class="nl">The Plan</a><a href="/games" class="nl">The Games</a><a href="/library" class="nl">The Library</a><a href="/methodology" class="nl">The Science</a><a href="/ages" class="nl ac">The Ages</a><a href="/the-open-seat" class="nl">The Open Seat</a><a href="/pricing" class="nl">The Price</a></div><button class="ham" id="ham" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a href="/plan" class="ncta">Build Your Plan</a></div></div>
+<nav class="mm" id="mm" aria-hidden="true"><div class="mm-in"><a href="/plan">The Plan</a><a href="/games">The Games</a><a href="/library">The Library</a><a href="/methodology">The Science</a><a href="/ages">The Ages</a><a href="/the-open-seat">The Open Seat</a><a href="/pricing">The Price</a></div></nav>
 <main>
-  <section class="page-hero">
-    <div class="tag">The Ages</div>
-    <h1>Coming <span>soon.</span></h1>
-  </section>
 
-  <div class="ages-grid">
-    <div class="age-card" id="ages-2-4">
-      <div class="age-card-range">Ages 2–4</div>
-      <h2>The Explorers</h2>
-      <p>Sensory play, early language, and big-world wonder. Activities built for little hands and limitless curiosity.</p>
-      <div class="coming-badge">Coming soon</div>
+<section class="hero">
+  <div class="hero-ey">The Ages</div>
+  <h1 class="hero-h"><span class="hero-h-light">She's two. He's ten.</span><span class="hero-h-bold">Same volcano. Different week.</span></h1>
+  <p class="hero-sub">She's squeezing red food coloring into warm water. He's comparing eyewitness accounts of Pompeii. They're sitting at the same table, studying the same theme, and neither one is waiting for the other.</p>
+</section>
+
+<section class="tiers">
+  <div class="tiers-grid">
+    <div class="tier-card sr">
+      <div class="tier-label">Ages 2 to 4</div>
+      <div class="tier-name">The Explorers</div>
+      <div class="tier-moment">Warm water in a bin. Baking soda piled like snow. She squeezes red food coloring and watches the whole thing fizz. She doesn't know the word eruption yet. She just made one.</div>
+      <div class="tier-context">Learning is physical. Activities are built for small hands, short windows, and the kind of curiosity that puts things in its mouth. No reading required. No screens. Just material.</div>
     </div>
-    <div class="age-card" id="ages-5-7">
-      <div class="age-card-range">Ages 5–7</div>
-      <h2>The Readers</h2>
-      <p>Early reading, foundational math, and the joy of asking why. The years when everything is still magic.</p>
-      <div class="coming-badge">Coming soon</div>
+    <div class="tier-card sr" style="transition-delay:150ms">
+      <div class="tier-label">Ages 4 to 7</div>
+      <div class="tier-name">The Readers</div>
+      <div class="tier-moment">He's sounding out the word on the card. M-A-G-M-A. He matches it to the picture. He holds it up: "I got magma." He's been doing this for twenty minutes and hasn't noticed.</div>
+      <div class="tier-context">This is where letters become words and words become power. Vocabulary cards, tracing, counting with real objects. They want to do everything the older kids are doing. The plan lets them.</div>
     </div>
-    <div class="age-card" id="ages-8-10">
-      <div class="age-card-range">Ages 8–10</div>
-      <h2>The Connectors</h2>
-      <p>Cross-subject thinking, deeper research, and real-world projects. Where curious kids become independent learners.</p>
-      <div class="coming-badge">Coming soon</div>
+    <div class="tier-card sr" style="transition-delay:300ms">
+      <div class="tier-label">Ages 8 to 10</div>
+      <div class="tier-name">The Connectors</div>
+      <div class="tier-moment">She mapped the Ring of Fire before lunch. After snack, she measured Mount Fuji in doorways — 233 of them. Now she's writing three sentences using her vocabulary words and arguing that "tectonic" should count as two.</div>
+      <div class="tier-context">They're starting to see how things relate. Math connects to geography. Science explains what history recorded. The plan doesn't just teach subjects — it gives them the thread between subjects to pull.</div>
     </div>
-    <div class="age-card" id="ages-10-12">
-      <div class="age-card-range">Ages 10–12</div>
-      <h2>The Thinkers</h2>
-      <p>Complex topics, multi-source analysis, and the beginning of original thought. Learning that looks like the real world.</p>
-      <div class="coming-badge">Coming soon</div>
+    <div class="tier-card sr" style="transition-delay:450ms">
+      <div class="tier-label">Ages 10 to 12</div>
+      <div class="tier-name">The Thinkers</div>
+      <div class="tier-moment">Three accounts of Pompeii. One says the eruption lasted hours. Another says days. He's circled the contradictions and written in the margin: "They can't both be right." He hasn't been asked to do this.</div>
+      <div class="tier-context">They don't just learn facts — they interrogate them. Complex sources, original analysis, structured argument. This is where learning starts to look like thinking. The plan meets them there.</div>
     </div>
   </div>
+</section>
+
+<section class="closing">
+  <h2 class="closing-h sr">Four kids. One table. Nobody's waiting<span class="td"></span></h2>
+</section>
+
+<section class="cta">
+  <div class="cta-glow"></div>
+  <a href="/plan" class="cta-btn sr-btn" aria-label="Build My Family's Week">Build My Family's Week</a>
+  <p class="cta-sub sr-btn" style="transition-delay:150ms">No credit card for first plan</p>
+</section>
+
 </main>
 
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
 
+<script>
+(function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var e=document.querySelectorAll('.sr,.sr-btn');if(!e.length||!window.IntersectionObserver)return;var o=new IntersectionObserver(function(n){n.forEach(function(i){if(i.isIntersecting){i.target.classList.add('v');o.unobserve(i.target)}})},{threshold:.08,rootMargin:'0px 0px -20px 0px'});e.forEach(function(el){o.observe(el)})})();
+(function(){if(window.matchMedia('(hover:none)').matches)return;var c=document.getElementById('cursor');if(!c)return;var mx=0,my=0,cx=0,cy=0;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(!c.classList.contains('visible'))c.classList.add('visible')},{passive:true});(function l(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;c.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(l)})();document.addEventListener('mouseover',function(e){if(e.target.closest('a,button'))c.classList.add('hover')},{passive:true});document.addEventListener('mouseout',function(e){if(e.target.closest('a,button'))c.classList.remove('hover')},{passive:true})})();
+(function(){var b=document.getElementById('ham'),m=document.getElementById('mm');if(!b||!m)return;function io(){return m.classList.contains('open')}function op(){m.classList.add('open');m.setAttribute('aria-hidden','false');b.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}function cl(){m.classList.remove('open');m.setAttribute('aria-hidden','true');b.setAttribute('aria-expanded','false');document.body.style.overflow=''}b.addEventListener('click',function(e){e.stopPropagation();io()?cl():op()});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl)});document.addEventListener('click',function(e){if(io()&&!m.contains(e.target)&&e.target!==b&&!b.contains(e.target))cl()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&io())cl()});window.addEventListener('resize',function(){if(window.innerWidth>768&&io())cl()},{passive:true})})();
+</script>
 </body>
 </html>
