@@ -233,7 +233,7 @@
 
     '  <!-- Founder bar -->',
     '  <div class="wf-founder-bar">',
-    '    <p class="wf-founder-line">Founding families are in. You\u2019re next.</p>',
+    '    <p class="wf-founder-line">Now accepting founding families.</p>',
     '  </div>',
 
     '  <!-- Top: brand, quick nav, social, legal -->',
@@ -241,19 +241,24 @@
 
     '    <div class="wf-brand">',
     '      <a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a>',
-    '      <div class="wf-tagline">Weekly learning plans for families, ages 2&ndash;12.</div>',
+    '      <div class="wf-tagline">Weekly learning plans for families, ages 2 to 12.</div>',
     '      <div class="wf-email"><a href="mailto:hello@wizkoo.com">hello@wizkoo.com</a></div>',
     '    </div>',
 
     '    <nav class="wf-nav" aria-label="Site">',
     '      <a href="/plan">The Plan</a>',
     '      <a href="/games">The Games</a>',
+    '      <a href="/library">The Library</a>',
     '      <a href="/methodology">The Science</a>',
+    '      <a href="/ages">The Ages</a>',
+    '      <a href="/the-open-seat">The Open Seat</a>',
+    '      <a href="/pricing">The Price</a>',
     '    </nav>',
 
     '    <div class="wf-social">',
     '      <a href="https://instagram.com/heywizkoo" target="_blank" rel="noopener noreferrer">Instagram</a>',
     '      <a href="https://tiktok.com/@heywizkoo" target="_blank" rel="noopener noreferrer">TikTok</a>',
+    '      <a href="https://pinterest.com/heywizkoo" target="_blank" rel="noopener noreferrer">Pinterest</a>',
     '    </div>',
 
     '    <div class="wf-legal">',
@@ -279,9 +284,6 @@
 
     '      <div class="wf-col">',
     '        <div class="wf-col-label">Learn More</div>',
-    '        <a href="/about">About</a>',
-    '        <a href="/esa">ESA &amp; Funding</a>',
-    '        <a href="/scope">Scope &amp; Sequence</a>',
     '        <a href="/#faq">FAQ</a>',
     '      </div>',
 
