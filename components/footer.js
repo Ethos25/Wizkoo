@@ -20,18 +20,18 @@
       '  border-top:1px solid rgba(255,255,255,0.04);',
       '}',
 
-      /* ── Top grid: brand | nav | social | legal ── */
+      /* ── Top grid: brand | product | learn more | connect+legal ── */
       '#wizkoo-footer .wf-top{',
       '  padding:56px 48px 48px;',
       '  max-width:1200px;',
       '  margin:0 auto;',
       '  display:grid;',
-      '  grid-template-columns:1.6fr 1fr 0.7fr 0.7fr;',
+      '  grid-template-columns:1.4fr 1fr 1fr 0.8fr;',
       '  gap:48px;',
       '  align-items:start;',
       '}',
 
-      /* Col 1 — Brand */
+      /* ── Col 1: Brand ── */
       '#wizkoo-footer .wf-brand .footer-wm{',
       '  font-family:\'Sora\',sans-serif;',
       '  font-weight:700;',
@@ -52,12 +52,13 @@
       '#wizkoo-footer .wf-brand .footer-wm:hover .k{',
       '  animation:kGiggle 0.8s ease-in-out;',
       '}',
-      '#wizkoo-footer .wf-brand .footer-wm .wm-dot{',
+      /* Footer-specific dot class — isolated from nav.js global .wm-dot styles */
+      '#wizkoo-footer .wf-brand .footer-wm .wf-o-dot{',
       '  display:inline-block;',
       '  position:relative;',
       '  margin-left:-0.08em;',
       '}',
-      '#wizkoo-footer .wf-brand .footer-wm .wm-dot::after{',
+      '#wizkoo-footer .wf-brand .footer-wm .wf-o-dot::after{',
       '  content:\'\';',
       '  position:absolute;',
       '  top:.1em;right:-.2em;',
@@ -82,7 +83,7 @@
       '}',
       '#wizkoo-footer .wf-email a:hover{color:rgba(240,242,248,0.65);}',
 
-      /* Column headers (PRODUCT / CONNECT / LEGAL) */
+      /* ── Column headers ── */
       '#wizkoo-footer .wf-col-header{',
       '  font-family:"Space Mono",monospace;',
       '  font-weight:400;',
@@ -93,14 +94,13 @@
       '  margin-bottom:18px;',
       '}',
 
-      /* Cols 2, 3, 4 — shared column wrapper */
+      /* ── Cols 2, 3, 4 — shared column wrapper ── */
       '#wizkoo-footer .wf-nav,',
       '#wizkoo-footer .wf-social,',
-      '#wizkoo-footer .wf-legal{',
+      '#wizkoo-footer .wf-learn{',
       '  display:flex;',
       '  flex-direction:column;',
       '  gap:13px;',
-      /* Reset any site-nav bleeding from base/nav styles */
       '  position:static!important;',
       '  height:auto!important;',
       '  background:transparent!important;',
@@ -111,10 +111,10 @@
       '  border:none!important;',
       '}',
 
-      /* Shared link style — Inter 400 */
+      /* ── Shared link style: Inter 400 ── */
       '#wizkoo-footer .wf-nav a,',
-      '#wizkoo-footer .wf-social a,',
-      '#wizkoo-footer .wf-legal a{',
+      '#wizkoo-footer .wf-learn a,',
+      '#wizkoo-footer .wf-social a{',
       '  font-family:\'Inter\',system-ui,sans-serif;',
       '  font-weight:400;',
       '  font-size:0.875rem;',
@@ -124,21 +124,38 @@
       '  line-height:1;',
       '}',
       '#wizkoo-footer .wf-nav a:hover,',
-      '#wizkoo-footer .wf-social a:hover,',
-      '#wizkoo-footer .wf-legal a:hover{',
+      '#wizkoo-footer .wf-learn a:hover,',
+      '#wizkoo-footer .wf-social a:hover{',
       '  color:rgba(240,242,248,0.85);',
       '}',
 
-      /* Social links: icon + text inline */
-      '#wizkoo-footer .wf-social a{',
+      /* ── Social links: icon + text inline ── */
+      '#wizkoo-footer .wf-social a.wf-social-link{',
       '  display:inline-flex;',
       '  align-items:center;',
       '  gap:9px;',
       '}',
-      '#wizkoo-footer .wf-social a svg{',
+      '#wizkoo-footer .wf-social a.wf-social-link svg{',
       '  flex-shrink:0;',
-      '  vertical-align:middle;',
       '}',
+
+      /* ── Legal links sit below social in col 4 ── */
+      '#wizkoo-footer .wf-legal-links{',
+      '  display:flex;',
+      '  flex-direction:column;',
+      '  gap:13px;',
+      '  margin-top:20px;',
+      '}',
+      '#wizkoo-footer .wf-legal-links a{',
+      '  font-family:\'Inter\',system-ui,sans-serif;',
+      '  font-weight:400;',
+      '  font-size:0.81rem;',
+      '  color:rgba(240,242,248,0.38);',
+      '  text-decoration:none;',
+      '  transition:color 0.25s ease;',
+      '  line-height:1;',
+      '}',
+      '#wizkoo-footer .wf-legal-links a:hover{color:rgba(240,242,248,0.7);}',
 
       /* ── Divider ── */
       '#wizkoo-footer .wf-divider{',
@@ -217,38 +234,42 @@
     '    <!-- Col 1: Brand (no header) -->',
     '    <div class="wf-brand">',
     '      <a href="/" class="footer-wm" aria-label="Wizkoo home">',
-    '        w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span>',
+    '        w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wf-o-dot">o</span>',
     '      </a>',
     '      <p class="wf-tagline">Weekly learning plans<br>for families, ages 2 to 12.</p>',
     '      <div class="wf-email"><a href="mailto:hello@wizkoo.com">hello@wizkoo.com</a></div>',
     '    </div>',
 
-    '    <!-- Col 2: Nav -->',
-    '    <nav class="wf-nav" aria-label="Site navigation">',
+    '    <!-- Col 2: Product -->',
+    '    <nav class="wf-nav" aria-label="Product">',
     '      <div class="wf-col-header" aria-hidden="true">Product</div>',
     '      <a href="/plan">The Plan</a>',
     '      <a href="/games">The Games</a>',
     '      <a href="/library">The Library</a>',
     '      <a href="/methodology">The Science</a>',
     '      <a href="/ages">The Ages</a>',
-    '      <a href="/the-open-seat">The Open Seat</a>',
     '      <a href="/pricing">The Price</a>',
+    '    </nav>',
+
+    '    <!-- Col 3: Learn More -->',
+    '    <nav class="wf-learn" aria-label="Learn more">',
+    '      <div class="wf-col-header" aria-hidden="true">Learn More</div>',
+    '      <a href="/the-open-seat">The Open Seat</a>',
+    '      <a href="/esa">ESA</a>',
+    '      <a href="/about">About</a>',
     '      <a href="/#faq">FAQ</a>',
     '    </nav>',
 
-    '    <!-- Col 3: Social -->',
+    '    <!-- Col 4: Connect + Legal -->',
     '    <div class="wf-social">',
     '      <div class="wf-col-header" aria-hidden="true">Connect</div>',
-    '      <a href="https://instagram.com/heywizkoo" target="_blank" rel="noopener noreferrer">' + icons.instagram + 'Instagram</a>',
-    '      <a href="https://tiktok.com/@heywizkoo" target="_blank" rel="noopener noreferrer">' + icons.tiktok + 'TikTok</a>',
-    '      <a href="https://pinterest.com/heywizkoo" target="_blank" rel="noopener noreferrer">' + icons.pinterest + 'Pinterest</a>',
-    '    </div>',
-
-    '    <!-- Col 4: Legal -->',
-    '    <div class="wf-legal">',
-    '      <div class="wf-col-header" aria-hidden="true">Legal</div>',
-    '      <a href="/privacy">Privacy Policy</a>',
-    '      <a href="/terms">Terms of Service</a>',
+    '      <a href="https://instagram.com/heywizkoo" class="wf-social-link" target="_blank" rel="noopener noreferrer">' + icons.instagram + 'Instagram</a>',
+    '      <a href="https://tiktok.com/@heywizkoo" class="wf-social-link" target="_blank" rel="noopener noreferrer">' + icons.tiktok + 'TikTok</a>',
+    '      <a href="https://pinterest.com/heywizkoo" class="wf-social-link" target="_blank" rel="noopener noreferrer">' + icons.pinterest + 'Pinterest</a>',
+    '      <div class="wf-legal-links">',
+    '        <a href="/privacy">Privacy Policy</a>',
+    '        <a href="/terms">Terms of Service</a>',
+    '      </div>',
     '    </div>',
 
     '  </div>',
