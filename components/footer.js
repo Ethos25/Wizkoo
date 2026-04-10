@@ -20,7 +20,7 @@
       '  border-top:1px solid rgba(255,255,255,0.04);',
       '}',
 
-      /* ── Top grid: brand | product | learn more | connect+legal ── */
+      /* ── Top grid: brand | product | learn more | connect ── */
       '#wizkoo-footer .wf-top{',
       '  padding:56px 48px 48px;',
       '  max-width:1200px;',
@@ -139,23 +139,22 @@
       '  flex-shrink:0;',
       '}',
 
-      /* ── Legal links sit below social in col 4 ── */
-      '#wizkoo-footer .wf-legal-links{',
-      '  display:flex;',
-      '  flex-direction:column;',
-      '  gap:13px;',
-      '  margin-top:20px;',
+      /* ── Bottom bar legal links ── */
+      '#wizkoo-footer .wf-copy-legal{',
+      '  display:inline-flex;',
+      '  align-items:center;',
+      '  gap:0;',
       '}',
-      '#wizkoo-footer .wf-legal-links a{',
-      '  font-family:\'Inter\',system-ui,sans-serif;',
-      '  font-weight:400;',
-      '  font-size:0.81rem;',
-      '  color:rgba(240,242,248,0.38);',
+      '#wizkoo-footer .wf-copy-legal a{',
+      '  font-family:"Space Mono",monospace;',
+      '  font-size:0.6rem;',
+      '  text-transform:uppercase;',
+      '  letter-spacing:0.1em;',
+      '  color:rgba(240,242,248,0.28);',
       '  text-decoration:none;',
       '  transition:color 0.25s ease;',
-      '  line-height:1;',
       '}',
-      '#wizkoo-footer .wf-legal-links a:hover{color:rgba(240,242,248,0.7);}',
+      '#wizkoo-footer .wf-copy-legal a:hover{color:rgba(240,242,248,0.5);}',
 
       /* ── Divider ── */
       '#wizkoo-footer .wf-divider{',
@@ -260,16 +259,12 @@
     '      <a href="/#faq">FAQ</a>',
     '    </nav>',
 
-    '    <!-- Col 4: Connect + Legal -->',
+    '    <!-- Col 4: Connect -->',
     '    <div class="wf-social">',
     '      <div class="wf-col-header" aria-hidden="true">Connect</div>',
     '      <a href="https://instagram.com/heywizkoo" class="wf-social-link" target="_blank" rel="noopener noreferrer">' + icons.instagram + 'Instagram</a>',
     '      <a href="https://tiktok.com/@heywizkoo" class="wf-social-link" target="_blank" rel="noopener noreferrer">' + icons.tiktok + 'TikTok</a>',
     '      <a href="https://pinterest.com/heywizkoo" class="wf-social-link" target="_blank" rel="noopener noreferrer">' + icons.pinterest + 'Pinterest</a>',
-    '      <div class="wf-legal-links">',
-    '        <a href="/privacy">Privacy Policy</a>',
-    '        <a href="/terms">Terms of Service</a>',
-    '      </div>',
     '    </div>',
 
     '  </div>',
@@ -277,7 +272,7 @@
     '  <div class="wf-divider" aria-hidden="true"></div>',
 
     '  <div class="wf-bottom">',
-    '    <span class="wf-copy">&copy; 2026 Wizkoo LLC</span>',
+    '    <span class="wf-copy wf-copy-legal">&copy; 2026 Wizkoo LLC&nbsp;&middot;&nbsp;<a href="/privacy">Privacy</a>&nbsp;&middot;&nbsp;<a href="/terms">Terms</a></span>',
     '    <span class="wf-edu">Educator or co-op leader? <a href="mailto:hello@wizkoo.com">Get in touch.</a></span>',
     '  </div>',
 
