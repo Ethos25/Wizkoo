@@ -284,6 +284,7 @@
 
     '      <div class="wf-col">',
     '        <div class="wf-col-label">Learn More</div>',
+    '        <a href="/about">About</a>',
     '        <a href="/#faq">FAQ</a>',
     '      </div>',
 
