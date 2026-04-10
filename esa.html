@@ -3,58 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ESA &amp; Funding — wizkoo</title>
-<meta name="description" content="Wizkoo is designed to qualify for Education Savings Account funding in participating states.">
+<title>Your Guide to Education Savings Accounts | Wizkoo</title>
+<meta name="description" content="Your parent-friendly guide to Education Savings Accounts. Learn what ESAs are, what you can spend funds on, and how to use them for homeschool curriculum.">
+<link rel="canonical" href="https://wizkoo.com/esa">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@200;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
-:root{
-  --saffron:#E8AF38;--ink:#0C1020;--linen:#F2F0EA;--warm-bg:#ECEAE3;
-  --rule:#E0DED6;--mid:#666;
-  --expo:cubic-bezier(0.16,1,0.3,1);
-}
-*{margin:0;padding:0;box-sizing:border-box}
+:root{--saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm:#ECEAE3;--rule:#E0DED6;--mid:#4A4850;--expo:cubic-bezier(0.16,1,0.3,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
-a{text-decoration:none;color:inherit}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 @media(hover:hover){html,body,a,button{cursor:none}}
-.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
-.cursor.visible{opacity:1}
-.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}.cursor.visible{opacity:1}.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,.25);border:1.5px solid var(--saffron)}
+.sr{opacity:0;transform:translateY(24px);transition:opacity 700ms var(--expo),transform 700ms var(--expo)}.sr.v{opacity:1;transform:translateY(0)}
+.sr-fade{opacity:0;transition:opacity 600ms var(--expo)}.sr-fade.v{opacity:1}
+.sr-rule{opacity:0;transform:scaleX(0);transform-origin:left;transition:opacity 500ms var(--expo),transform 700ms var(--expo)}.sr-rule.v{opacity:.5;transform:scaleX(1)}
+.sr-btn{opacity:0;transition:opacity 600ms ease}.sr-btn.v{opacity:1}
 
-/* ── NAV ── */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.site-nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.4),transparent);opacity:0.4}
-.nav-bar{display:flex;align-items:center;height:100%;padding:0 32px;gap:24px}
-.nav-wm{font-family:'Sora',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.04em;color:#F2F0EA;text-decoration:none;margin-right:auto;flex-shrink:0}
-.nav-wm .i-fix{font-style:italic}
-.nav-wm .k{letter-spacing:-0.06em}
-.nav-wm .wm-dot{color:var(--saffron)}
-.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}
-.nav-science{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-decoration:none;transition:color .25s;white-space:nowrap;position:relative;padding-bottom:2px}
-.nav-science::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}
-.nav-science:hover{color:rgba(250,250,250,0.8)}
-.nav-science:hover::after{width:100%}
-.nav-launch{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:transparent;color:var(--saffron);border:1px solid rgba(232,175,56,0.4);text-decoration:none;transition:border-color .25s,color .25s;white-space:nowrap;flex-shrink:0}
-.nav-launch:hover{border-color:var(--saffron);color:var(--saffron)}
-.nav-tagline-strip{position:fixed;top:72px;left:0;right:0;z-index:999;height:24px;display:flex;align-items:center;justify-content:center;background:rgba(12,16,32,0.88);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,175,56,0.55)}
-.nav-tagline-strip::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.12),transparent)}
+/* ═══ SHARED PROSE ═══ */
+.prose{font-family:'Inter',sans-serif;font-size:clamp(.88rem,1.05vw,.95rem);line-height:1.85;color:rgba(12,16,32,.6)}
+.prose p{margin-bottom:1.15rem}.prose p:last-child{margin-bottom:0}
+.prose strong{font-weight:600;color:rgba(12,16,32,.78)}
 
-/* ── PAGE ── */
-main{padding-top:96px;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.page-hero{max-width:640px;margin:0 auto;padding:80px 48px 120px;text-align:center}
-.tag{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:20px}
-.page-hero h1{font-family:'Sora',sans-serif;font-weight:200;font-size:1.8rem;letter-spacing:-0.02em;color:var(--ink);line-height:1.2;margin:0 0 20px}
-.page-hero p{font-family:'Inter',sans-serif;font-size:0.9rem;color:#777;line-height:1.75;max-width:520px;margin:0 auto}
-@media(max-width:768px){
-  .nav-center{display:none}
-  .page-hero{padding:60px 24px 80px}
-}
+/* ═══ HERO — linen, centered, guide framing ═══ */
+.hero{background:var(--linen);padding:clamp(120px,16vh,200px) 48px clamp(48px,8vh,80px);position:relative;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 35%,rgba(242,240,234,0) 0%,rgba(224,222,214,.35) 100%);pointer-events:none}
+.hero-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(16px,2.5vh,24px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .2s}
+.hero-h{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.15;letter-spacing:-.03em;color:var(--ink);max-width:640px;margin:0 auto clamp(16px,2.5vh,24px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .4s}
+.hero-sub{font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.7;color:rgba(12,16,32,.45);max-width:520px;margin:0 auto;position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .6s}
+/* Jump links */
+.hero-nav{display:flex;flex-wrap:wrap;gap:8px 12px;justify-content:center;margin-top:clamp(28px,4vh,44px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .75s}
+.hero-nav a{font-family:'Space Mono',monospace;font-size:clamp(.42rem,.52vw,.48rem);letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:5px 12px;border:1px solid var(--rule);transition:border-color .25s,color .25s}
+@media(hover:hover){.hero-nav a:hover{border-color:rgba(232,175,56,.4);color:var(--ink)}}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ ARTICLE SECTIONS — alternating linen/warm ═══ */
+.sec{padding:clamp(56px,9vh,100px) 48px;position:relative}
+.sec-linen{background:var(--linen)}
+.sec-warm{background:var(--warm)}
+.sec-warm::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(12,16,32,.005) 59px,rgba(12,16,32,.005) 60px);pointer-events:none}
+.sec-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.sec-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(12px,2vh,20px)}
+.sec-h{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.3;letter-spacing:-.02em;color:var(--ink);margin-bottom:clamp(20px,3vh,32px)}
+
+/* ═══ SPENDING CATEGORIES — saffron-bordered list ═══ */
+.cat-list{display:flex;flex-direction:column;gap:clamp(16px,2.5vh,24px)}
+.cat{padding-left:clamp(16px,2vw,24px);border-left:2px solid rgba(232,175,56,.2)}
+.cat-name{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.88rem,1.02vw,.95rem);color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.cat-desc{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.94vw,.88rem);line-height:1.75;color:rgba(12,16,32,.5)}
+.cat-excluded{margin-top:clamp(20px,3vh,32px);padding:clamp(16px,2.5vh,24px);background:rgba(12,16,32,.03);border-radius:0}
+.cat-excluded-label{font-family:'Space Mono',monospace;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,16,32,.35);margin-bottom:8px}
+.cat-excluded-text{font-family:'Inter',sans-serif;font-size:clamp(.8rem,.9vw,.85rem);line-height:1.75;color:rgba(12,16,32,.42)}
+
+/* ═══ PROCESS STEPS — vertical thread ═══ */
+.step-list{display:flex;flex-direction:column;gap:0}
+.step{position:relative;padding-left:clamp(36px,5vw,52px);padding-bottom:clamp(28px,4vh,40px)}
+.step:last-child{padding-bottom:0}
+.step::before{content:'';position:absolute;left:10px;top:8px;bottom:0;width:1px;background:rgba(232,175,56,.15)}
+.step:last-child::before{display:none}
+.step::after{content:'';position:absolute;left:6px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--saffron);opacity:.35}
+.step-label{font-family:'Space Mono',monospace;font-weight:700;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(4px,.8vh,8px)}
+.step-title{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.9rem,1.05vw,.98rem);color:var(--ink);margin-bottom:clamp(4px,.8vh,8px);letter-spacing:-.01em}
+.step-desc{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.94vw,.88rem);line-height:1.75;color:rgba(12,16,32,.5)}
+
+/* ═══ PLATFORM ASIDE — two compact cards ═══ */
+.platforms{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px);margin-top:clamp(28px,4vh,40px)}
+.platform{background:var(--paper);border:1px solid var(--rule);padding:clamp(16px,2.5vh,24px);transition:border-color .25s}
+@media(hover:hover){.platform:hover{border-color:rgba(232,175,56,.35)}}
+.platform-name{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.88rem,1vw,.95rem);color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+.platform-desc{font-family:'Inter',sans-serif;font-size:clamp(.78rem,.88vw,.84rem);line-height:1.7;color:rgba(12,16,32,.45)}
+
+/* ═══ HOMESCHOOL TIPS — clean list with saffron markers ═══ */
+.tips{display:flex;flex-direction:column;gap:clamp(20px,3vh,28px)}
+.tip{padding-left:clamp(16px,2vw,24px);border-left:2px solid rgba(232,175,56,.15)}
+.tip-title{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.85rem,.98vw,.92rem);color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.tip-desc{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.94vw,.88rem);line-height:1.75;color:rgba(12,16,32,.48)}
+
+/* ═══ WIZKOO POSITIONING — contained card ═══ */
+.wiz-card{background:var(--paper);border:1.5px solid var(--ink);padding:clamp(28px,4vh,44px) clamp(24px,3vw,36px);position:relative}
+.wiz-card::after{content:'';position:absolute;top:6px;left:6px;right:-6px;bottom:-6px;background:rgba(232,175,56,.1);z-index:-1;pointer-events:none}
+.wiz-price{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.1rem,1.4vw,1.3rem);color:var(--ink);margin-bottom:clamp(12px,2vh,20px);letter-spacing:-.02em}
+.wiz-context{font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.85;color:rgba(12,16,32,.55);margin-bottom:clamp(16px,2.5vh,24px)}
+.wiz-status{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.94vw,.88rem);line-height:1.75;color:rgba(12,16,32,.55);padding:clamp(16px,2.5vh,24px);background:rgba(232,175,56,.04);border-left:2px solid rgba(232,175,56,.3)}
+.wiz-status strong{color:var(--ink)}
+.wiz-check{font-family:'Inter',sans-serif;font-size:clamp(.78rem,.88vw,.84rem);line-height:1.75;color:rgba(12,16,32,.42);margin-top:clamp(16px,2.5vh,24px);font-style:italic}
+
+/* ═══ STATE GRID — 50 states, scannable ═══ */
+.states-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:2px}
+.state-link{display:block;font-family:'Space Mono',monospace;font-size:clamp(.5rem,.6vw,.55rem);letter-spacing:.08em;text-transform:uppercase;color:rgba(12,16,32,.5);padding:clamp(10px,1.5vh,14px) clamp(10px,1.5vw,14px);background:var(--paper);border:1px solid var(--rule);text-decoration:none;transition:border-color .2s,color .2s,background .2s,transform .2s var(--expo)}
+@media(hover:hover){.state-link:hover{border-color:rgba(232,175,56,.6);color:var(--ink);background:#FFFDF8;transform:translateY(-1px)}}
+.states-fallback{font-family:'Inter',sans-serif;font-size:clamp(.8rem,.92vw,.86rem);line-height:1.7;color:rgba(12,16,32,.4);margin-top:clamp(20px,3vh,28px)}
+.states-fallback a{color:var(--saffron);text-decoration:none;border-bottom:1px solid rgba(232,175,56,.3);transition:border-color .25s}
+.states-fallback a:hover{border-color:var(--saffron)}
+
+/* ═══ FAQ ═══ */
+.faq{background:var(--linen);padding:clamp(64px,10vh,120px) 48px;position:relative}
+.faq-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.faq-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:clamp(28px,4vh,40px)}
+.faq-item{border-bottom:1px solid var(--rule);padding:clamp(14px,2vh,20px) 0}
+.faq-item:first-child{border-top:1px solid var(--rule)}
+.faq-q{font-family:'Sora',sans-serif;font-weight:500;font-size:clamp(.86rem,1vw,.93rem);color:var(--ink);background:none;border:none;width:100%;text-align:left;padding:0;display:flex;align-items:center;justify-content:space-between;gap:16px;letter-spacing:-.01em;line-height:1.5}
+@media(hover:hover){.faq-q{cursor:none}}
+.faq-q::after{content:'+';font-family:'Sora',sans-serif;font-weight:200;font-size:1.2rem;color:var(--saffron);flex-shrink:0;transition:transform .3s var(--expo)}
+.faq-q[aria-expanded="true"]::after{transform:rotate(45deg)}
+.faq-a{font-family:'Inter',sans-serif;font-size:clamp(.8rem,.92vw,.86rem);line-height:1.8;color:rgba(12,16,32,.52);padding-top:clamp(8px,1.2vh,14px);max-width:92%}
+
+/* ═══ CTA — dark ═══ */
+.cta{background:var(--ink);padding:clamp(80px,14vh,160px) 48px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.012) 59px,rgba(255,255,255,.012) 60px);pointer-events:none}
+.cta-glow{position:absolute;width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-45%);background:radial-gradient(circle,rgba(232,175,56,.04) 0%,transparent 55%);pointer-events:none}
+.cta-h{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.15;letter-spacing:-.03em;color:rgba(240,242,248,.92);margin-bottom:clamp(20px,3vh,32px);position:relative;z-index:1}
+.cta-btn{display:inline-block;background:var(--saffron);color:var(--ink);font-family:'Sora',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.06em;padding:14px 44px;border:none;text-decoration:none;box-shadow:6px 6px 0 rgba(232,175,56,.3);transition:transform .3s var(--expo),box-shadow .3s var(--expo);position:relative;z-index:1}.cta-btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 rgba(232,175,56,.4)}
+.cta-sub{font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,242,248,.25);margin-top:clamp(14px,2vh,20px);position:relative;z-index:1}
+
+/* ═══ FOOTER NOTE ═══ */
+.fnote{background:var(--ink);padding:0 48px 24px;text-align:center}
+.fnote p{font-family:'Inter',sans-serif;font-size:clamp(.65rem,.75vw,.72rem);line-height:1.7;color:rgba(240,242,248,.12);max-width:640px;margin:0 auto;font-style:italic}
+
+@media(max-width:768px){.hero{padding:100px 20px 36px}.sec{padding:40px 20px}.platforms{grid-template-columns:1fr}.states-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}.faq{padding:40px 20px}.cta{padding:56px 20px}.fnote{padding:0 20px 20px}.hero-nav{gap:6px 8px}.hero-nav a{font-size:.4rem;padding:4px 8px}}
+@media(hover:none)and(pointer:coarse){.cursor{display:none!important}}
+@media(prefers-reduced-motion:reduce){.hero-ey,.hero-h,.hero-sub,.hero-nav{opacity:1!important;animation:none!important;transform:none!important}.sr,.sr-fade,.sr-rule,.sr-btn{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an Education Savings Account (ESA)?","acceptedAnswer":{"@type":"Answer","text":"It's a state-funded account that lets you use public education dollars for approved private educational expenses — curriculum, tutoring, educational software, and in many states, private school tuition. Despite the name, you don't fund it. Your state does."}},{"@type":"Question","name":"How much money can I get from an ESA?","acceptedAnswer":{"@type":"Answer","text":"It depends on your state and whether your child attends private school or is homeschooled. Amounts range from about $2,000 to $11,000 per year per child. Students with disabilities may receive significantly more."}},{"@type":"Question","name":"Does my state have an ESA program?","acceptedAnswer":{"@type":"Answer","text":"As of 2026, 18 states have active programs and several more have legislation pending."}},{"@type":"Question","name":"Can I use ESA funds for homeschool curriculum?","acceptedAnswer":{"@type":"Answer","text":"Yes, in most states. Curriculum materials, educational software, and learning platforms are generally approved expenses. Some states require the vendor to be listed on their approved marketplace."}},{"@type":"Question","name":"Do ESA funds roll over from year to year?","acceptedAnswer":{"@type":"Answer","text":"In most states, yes. Unused funds roll over as long as your child stays enrolled in the program."}},{"@type":"Question","name":"Can I use ESA funds for more than one child?","acceptedAnswer":{"@type":"Answer","text":"Each child who's accepted gets their own ESA account with their own funding. Three kids accepted means three separate accounts."}},{"@type":"Question","name":"Is Wizkoo an approved ESA vendor?","acceptedAnswer":{"@type":"Answer","text":"Not yet. We're in the approval process. Check your state's page for the latest status."}},{"@type":"Question","name":"Do I need to be low-income to qualify for an ESA?","acceptedAnswer":{"@type":"Answer","text":"Many states have opened their programs to all families regardless of income. Others have income requirements."}}]}
+</script>
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
@@ -62,28 +138,149 @@ main{padding-top:96px;min-height:100vh;display:flex;align-items:center;justify-c
 <div id="wizkoo-nav"></div>
 <script src="/components/nav.js"></script>
 
-<a href="/plan" class="nav-launch">Build Your Plan</a></div>
-</div>
-
 <main>
-  <section class="page-hero">
-    <div class="tag">ESA &amp; Funding</div>
-    <h1>Use your education savings here.</h1>
-    <p>Wizkoo is designed to qualify for Education Savings Account funding in participating states. Details coming soon.</p>
-  </section>
+
+<section class="hero">
+  <div class="hero-ey">ESA for Families</div>
+  <h1 class="hero-h">Your Guide to Education Savings Accounts</h1>
+  <p class="hero-sub">What they are, what you can spend them on, and how to use them for your family.</p>
+  <div class="hero-nav">
+    <a href="#what">What is an ESA</a>
+    <a href="#spending">What you can buy</a>
+    <a href="#process">How it works</a>
+    <a href="#homeschool">For homeschoolers</a>
+    <a href="#wizkoo">Wizkoo + ESA</a>
+    <a href="#states">Find your state</a>
+    <a href="#faq-section">FAQ</a>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS AN ESA ═══ -->
+<section class="sec sec-linen" id="what">
+  <div class="sec-inner sr">
+    <div class="sec-h">What is an ESA?</div>
+    <div class="prose">
+      <p>Despite the name, an Education Savings Account isn't a savings account you fund yourself. Your state funds it. You spend it.</p>
+      <p>Here's how it works: instead of your state's education dollars going to a school district, they go into an account with your name on it. You use that account to pay for your child's learning — curriculum, tutoring, educational software, textbooks, and in many states, private school tuition.</p>
+      <p>Think of it like a debit card for education. Your state deposits funds — typically between $6,000 and $10,000 per child, per year — and you decide where that money goes.</p>
+      <p>ESAs aren't loans. They're not taxed. And in most states, unused funds roll over year to year as long as your child stays enrolled in the program. You're not borrowing anything. You're redirecting the education funding your state already sets aside for your child.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT CAN YOU SPEND ON ═══ -->
+<section class="sec sec-warm" id="spending">
+  <div class="sec-inner sr">
+    <div class="sec-h">What can you spend ESA funds on?</div>
+    <div class="cat-list">
+      <div class="cat"><div class="cat-name">Curriculum and learning materials</div><div class="cat-desc">Textbooks, workbooks, educational software, online learning platforms, and subscription-based curriculum tools. If you homeschool, this is probably the category you'll use most.</div></div>
+      <div class="cat"><div class="cat-name">Private school tuition and fees</div><div class="cat-desc">Full or partial tuition at approved private schools, including registration fees and required materials.</div></div>
+      <div class="cat"><div class="cat-name">Tutoring</div><div class="cat-desc">One-on-one or small group tutoring from approved providers.</div></div>
+      <div class="cat"><div class="cat-name">Educational technology</div><div class="cat-desc">Computers, tablets, and software. Most states cap tech purchases at 10% of your annual ESA amount.</div></div>
+      <div class="cat"><div class="cat-name">Educational therapies</div><div class="cat-desc">Speech therapy, occupational therapy, and other services for students with learning differences.</div></div>
+      <div class="cat"><div class="cat-name">Standardized testing and college prep</div><div class="cat-desc">SAT/ACT fees, AP exam fees, and college admission testing.</div></div>
+      <div class="cat"><div class="cat-name">Transportation</div><div class="cat-desc">Some states allow a portion of ESA funds for transportation to approved educational services.</div></div>
+    </div>
+    <div class="cat-excluded">
+      <div class="cat-excluded-label">What you can't use ESA funds for</div>
+      <div class="cat-excluded-text">General household expenses, non-educational entertainment, paying family members for instruction (in most states), or public school tuition — since the funds represent dollars redirected from the public system in the first place.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SPENDING PROCESS ═══ -->
+<section class="sec sec-linen" id="process">
+  <div class="sec-inner sr">
+    <div class="sec-h">How does the spending process work?</div>
+    <p class="prose" style="margin-bottom:clamp(28px,4vh,40px)">You don't receive cash. Most ESA programs use a managed marketplace platform — basically an online store where you can only buy from vendors your state has approved.</p>
+    <div class="step-list">
+      <div class="step"><div class="step-label">Step 1</div><div class="step-title">Apply and get accepted</div><div class="step-desc">Each state has its own application window and eligibility requirements. Applications are usually submitted online through the state's ESA portal or administrator.</div></div>
+      <div class="step"><div class="step-label">Step 2</div><div class="step-title">Funds land in your account</div><div class="step-desc">Once accepted, your state deposits funds into a managed account — usually in quarterly installments, not a lump sum.</div></div>
+      <div class="step"><div class="step-label">Step 3</div><div class="step-title">Shop from approved vendors</div><div class="step-desc">Your state uses a platform where you search for approved vendors and purchase directly. It works like an online store, except your ESA funds are the payment method.</div></div>
+      <div class="step"><div class="step-label">Step 4</div><div class="step-title">Save your receipts</div><div class="step-desc">Even though purchases go through an approved platform, keep all documentation. Some states run random audits.</div></div>
+      <div class="step"><div class="step-label">Step 5</div><div class="step-title">Submit any required assessments</div><div class="step-desc">Many states require annual standardized testing to confirm your child is making academic progress.</div></div>
+    </div>
+    <div class="platforms">
+      <div class="platform"><div class="platform-name">ClassWallet</div><div class="platform-desc">A marketplace where approved vendors list their products. You browse, add to cart, and check out using your ESA funds. Multiple states use ClassWallet.</div></div>
+      <div class="platform"><div class="platform-name">Odyssey</div><div class="platform-desc">Works the same way — a managed marketplace with approved vendors, direct purchasing, and fund tracking. Your state page will tell you which platform your program uses.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOMESCHOOL ═══ -->
+<section class="sec sec-warm" id="homeschool">
+  <div class="sec-inner sr">
+    <div class="sec-ey">For homeschool families</div>
+    <div class="sec-h">ESA funds can cover a significant chunk of your curriculum costs.</div>
+    <div class="tips">
+      <div class="tip"><div class="tip-title">Amounts may vary</div><div class="tip-desc">Some states provide different funding levels depending on whether your child attends private school or is homeschooled. Your state page has the specific numbers.</div></div>
+      <div class="tip"><div class="tip-title">You can mix and match</div><div class="tip-desc">Most states let you combine expenses from a single ESA account — an online math curriculum, a writing tutor, science equipment, and an educational software subscription can all come from the same account.</div></div>
+      <div class="tip"><div class="tip-title">Subscriptions qualify</div><div class="tip-desc">Monthly or annual subscriptions to educational platforms typically count as approved curriculum expenses, as long as the platform is listed on your state's marketplace.</div></div>
+      <div class="tip"><div class="tip-title">Notice of intent</div><div class="tip-desc">Most states require homeschool families to file a notice of intent to homeschool with their local school district or state education department before ESA funds are released.</div></div>
+      <div class="tip"><div class="tip-title">Annual testing</div><div class="tip-desc">Most ESA programs require homeschool students to take a standardized assessment each year. This is separate from any testing your co-op or curriculum includes.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WIZKOO + ESA ═══ -->
+<section class="sec sec-linen" id="wizkoo">
+  <div class="sec-inner sr">
+    <div class="sec-ey">Wizkoo and ESA funding</div>
+    <div class="wiz-card">
+      <div class="wiz-price">$50/month or $499/year. One line item in your ESA budget.</div>
+      <div class="wiz-context">To put it in perspective: a family with a typical ESA could fund Wizkoo for the year, plus a math tutor, testing fees, a tablet, and science supplies, and still have money left over. Wizkoo runs about $500 to $600 a year depending on your plan. That's less than 10% of most state ESA allocations.</div>
+      <div class="wiz-status"><strong>Wizkoo is not yet listed on ESA marketplace platforms.</strong> We're in the approval process and will update each state's page as approvals land. In the meantime, families in states that allow direct reimbursement for educational software may be able to use ESA funds by submitting a receipt.</div>
+      <div class="wiz-check">Before purchasing with ESA funds, check with your state's ESA program administrator to confirm that educational software subscriptions are an approved expense category.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FIND YOUR STATE ═══ -->
+<section class="sec sec-warm" id="states">
+  <div class="sec-inner" style="max-width:780px">
+    <div class="sec-ey sr">Find your state</div>
+    <div class="sec-h sr" style="transition-delay:100ms">Every state handles education funding differently. Tap yours to see what's available.</div>
+    <div class="states-grid sr" style="transition-delay:200ms">
+      <a href="/esa/alabama" class="state-link">Alabama</a><a href="/esa/alaska" class="state-link">Alaska</a><a href="/esa/arizona" class="state-link">Arizona</a><a href="/esa/arkansas" class="state-link">Arkansas</a><a href="/esa/california" class="state-link">California</a><a href="/esa/colorado" class="state-link">Colorado</a><a href="/esa/connecticut" class="state-link">Connecticut</a><a href="/esa/delaware" class="state-link">Delaware</a><a href="/esa/florida" class="state-link">Florida</a><a href="/esa/georgia" class="state-link">Georgia</a><a href="/esa/hawaii" class="state-link">Hawaii</a><a href="/esa/idaho" class="state-link">Idaho</a><a href="/esa/illinois" class="state-link">Illinois</a><a href="/esa/indiana" class="state-link">Indiana</a><a href="/esa/iowa" class="state-link">Iowa</a><a href="/esa/kansas" class="state-link">Kansas</a><a href="/esa/kentucky" class="state-link">Kentucky</a><a href="/esa/louisiana" class="state-link">Louisiana</a><a href="/esa/maine" class="state-link">Maine</a><a href="/esa/maryland" class="state-link">Maryland</a><a href="/esa/massachusetts" class="state-link">Massachusetts</a><a href="/esa/michigan" class="state-link">Michigan</a><a href="/esa/minnesota" class="state-link">Minnesota</a><a href="/esa/mississippi" class="state-link">Mississippi</a><a href="/esa/missouri" class="state-link">Missouri</a><a href="/esa/montana" class="state-link">Montana</a><a href="/esa/nebraska" class="state-link">Nebraska</a><a href="/esa/nevada" class="state-link">Nevada</a><a href="/esa/new-hampshire" class="state-link">New Hampshire</a><a href="/esa/new-jersey" class="state-link">New Jersey</a><a href="/esa/new-mexico" class="state-link">New Mexico</a><a href="/esa/new-york" class="state-link">New York</a><a href="/esa/north-carolina" class="state-link">North Carolina</a><a href="/esa/north-dakota" class="state-link">North Dakota</a><a href="/esa/ohio" class="state-link">Ohio</a><a href="/esa/oklahoma" class="state-link">Oklahoma</a><a href="/esa/oregon" class="state-link">Oregon</a><a href="/esa/pennsylvania" class="state-link">Pennsylvania</a><a href="/esa/rhode-island" class="state-link">Rhode Island</a><a href="/esa/south-carolina" class="state-link">South Carolina</a><a href="/esa/south-dakota" class="state-link">South Dakota</a><a href="/esa/tennessee" class="state-link">Tennessee</a><a href="/esa/texas" class="state-link">Texas</a><a href="/esa/utah" class="state-link">Utah</a><a href="/esa/vermont" class="state-link">Vermont</a><a href="/esa/virginia" class="state-link">Virginia</a><a href="/esa/washington" class="state-link">Washington</a><a href="/esa/west-virginia" class="state-link">West Virginia</a><a href="/esa/wisconsin" class="state-link">Wisconsin</a><a href="/esa/wyoming" class="state-link">Wyoming</a>
+    </div>
+    <p class="states-fallback sr" style="transition-delay:300ms">Don't see what you need? Email us at <a href="mailto:hello@wizkoo.com">hello@wizkoo.com</a> — we're happy to help you figure out your state's options.</p>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq" id="faq-section">
+  <div class="faq-inner">
+    <div class="faq-ey sr">FAQ</div>
+    <div class="faq-item sr" style="transition-delay:50ms"><button class="faq-q" aria-expanded="false">What is an Education Savings Account (ESA)?</button><div class="faq-a" hidden>It's a state-funded account that lets you use public education dollars for approved private educational expenses — curriculum, tutoring, educational software, and in many states, private school tuition. Despite the name, you don't fund it. Your state does.</div></div>
+    <div class="faq-item sr" style="transition-delay:100ms"><button class="faq-q" aria-expanded="false">How much money can I get from an ESA?</button><div class="faq-a" hidden>It depends on your state and whether your child attends private school or is homeschooled. Amounts range from about $2,000 to $11,000 per year per child. Students with disabilities may receive significantly more. Find your state's page above for exact numbers.</div></div>
+    <div class="faq-item sr" style="transition-delay:150ms"><button class="faq-q" aria-expanded="false">Does my state have an ESA program?</button><div class="faq-a" hidden>As of 2026, 18 states have active programs and several more have legislation pending. Tap your state in the grid above to see what's available.</div></div>
+    <div class="faq-item sr" style="transition-delay:200ms"><button class="faq-q" aria-expanded="false">Can I use ESA funds for homeschool curriculum?</button><div class="faq-a" hidden>Yes, in most states. Curriculum materials, educational software, and learning platforms are generally approved expenses. Some states require the vendor to be listed on their approved marketplace.</div></div>
+    <div class="faq-item sr" style="transition-delay:250ms"><button class="faq-q" aria-expanded="false">Do ESA funds roll over from year to year?</button><div class="faq-a" hidden>In most states, yes. Unused funds roll over as long as your child stays enrolled in the program. Rules vary by state for what happens to remaining funds after your child graduates or leaves.</div></div>
+    <div class="faq-item sr" style="transition-delay:300ms"><button class="faq-q" aria-expanded="false">Can I use ESA funds for more than one child?</button><div class="faq-a" hidden>Each child who's accepted gets their own ESA account with their own funding. Three kids accepted means three separate accounts.</div></div>
+    <div class="faq-item sr" style="transition-delay:350ms"><button class="faq-q" aria-expanded="false">Is Wizkoo an approved ESA vendor?</button><div class="faq-a" hidden>Not yet. We're in the approval process. Check your state's page for the latest status.</div></div>
+    <div class="faq-item sr" style="transition-delay:400ms"><button class="faq-q" aria-expanded="false">Do I need to be low-income to qualify for an ESA?</button><div class="faq-a" hidden>Many states have opened their programs to all families regardless of income. Others have income requirements. Your state's page has the specific eligibility criteria.</div></div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta">
+  <div class="cta-glow"></div>
+  <h2 class="cta-h sr">Your ESA funds. Your family's week.</h2>
+  <a href="/plan" class="cta-btn sr-btn" style="transition-delay:100ms" aria-label="Build My Family's Week">Build My Family's Week</a>
+  <p class="cta-sub sr-btn" style="transition-delay:200ms">No credit card for first plan</p>
+</section>
+
+<div class="fnote"><p>This page is for informational purposes only and is not legal or financial advice. ESA program details, funding amounts, and eligibility requirements change frequently. Always verify current information directly with your state's ESA program administrator. Last updated April 2026.</p></div>
+
 </main>
 
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
+
 <script>
-(function(){
-  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
-  var c=document.getElementById('cursor');if(!c)return;
-  var raf;
-  document.addEventListener('mousemove',function(e){cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';c.classList.add('visible');});});
-  document.addEventListener('mouseover',function(e){c.classList.toggle('hover',!!e.target.closest('a,button,[role="button"]'));});
-  document.documentElement.addEventListener('mouseleave',function(){c.classList.remove('visible');});
-})();
+(function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var e=document.querySelectorAll('.sr,.sr-fade,.sr-rule,.sr-btn');if(!e.length||!window.IntersectionObserver)return;var o=new IntersectionObserver(function(n){n.forEach(function(i){if(i.isIntersecting){i.target.classList.add('v');o.unobserve(i.target)}})},{threshold:.06,rootMargin:'0px 0px -15px 0px'});e.forEach(function(el){o.observe(el)})})();
+document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){var a=btn.nextElementSibling;var open=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',!open);a.hidden=open})});
+(function(){if(window.matchMedia('(hover:none)').matches)return;var c=document.getElementById('cursor');if(!c)return;var mx=0,my=0,cx=0,cy=0;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(!c.classList.contains('visible'))c.classList.add('visible')},{passive:true});(function l(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;c.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(l)})();document.addEventListener('mouseover',function(e){if(e.target.closest('a,button'))c.classList.add('hover')},{passive:true});document.addEventListener('mouseout',function(e){if(e.target.closest('a,button'))c.classList.remove('hover')},{passive:true})})();
 </script>
 </body>
 </html>

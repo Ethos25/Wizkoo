@@ -17,16 +17,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 @media(hover:hover){html,body,a,button{cursor:none}}
 .cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}.cursor.visible{opacity:1}.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,.25);border:1.5px solid var(--saffron)}
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center}.nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:.4}
-.nb{width:100%;max-width:1200px;height:100%;padding:0 48px;display:flex;align-items:center;gap:40px}
-.nw{font-family:'Sora',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;margin-right:auto}.nw .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}.nw:hover .k{animation:kg .8s ease-in-out}
-@keyframes kg{0%{transform:rotate(8deg)}18%{transform:rotate(13deg) translateY(-1.5px)}50%{transform:rotate(8deg)}100%{transform:rotate(8deg)}}
-.wd{display:inline-block;position:relative;margin-left:-.08em}.wd::after{content:'';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron)}
-.nc{display:flex;align-items:center;gap:28px;flex:1;justify-content:center}
-.nl{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,242,248,.7);text-decoration:none;white-space:nowrap;position:relative;padding-bottom:2px;transition:color .25s}.nl::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}.nl:hover{color:rgba(240,242,248,1)}.nl:hover::after{width:100%}.nl.ac{color:#F0F2F8}.nl.ac::after{width:100%}
-.ncta{font-family:'Space Mono',monospace;font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:7px 16px;background:var(--saffron);color:var(--ink);text-decoration:none;white-space:nowrap;flex-shrink:0;border-radius:2px;border:none;transition:background .2s,transform .2s}.ncta:hover{background:#D4A030;transform:translateY(-1px)}
-.ham{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;padding:0;background:transparent;border:none;flex-shrink:0}.ham span{display:block;width:20px;height:2px;background:rgba(240,242,248,.8);border-radius:1px}
-.mm{display:none;position:fixed;top:72px;left:0;right:0;z-index:998;overflow:hidden;pointer-events:none}.mm-in{background:var(--linen);border-bottom:1px solid var(--rule);transform:translateY(-100%);transition:transform 150ms ease-in;padding:8px 0}.mm.open{pointer-events:auto}.mm.open .mm-in{transform:translateY(0);transition:transform 200ms var(--expo)}.mm a{display:block;font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:16px 24px;background:transparent;border:none}
+
 .sr{opacity:0;transform:translateY(32px);transition:opacity 800ms var(--expo),transform 800ms var(--expo)}.sr.v{opacity:1;transform:translateY(0)}
 .sr-btn{opacity:0;transition:opacity 600ms ease}.sr-btn.v{opacity:1}
 
@@ -66,15 +57,15 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink
 .cta-sub{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,242,248,.25);margin-top:clamp(14px,2vh,24px);position:relative;z-index:1}
 
 @media(max-width:1024px){}
-@media(max-width:768px){.ham{display:flex}.nc{display:none}.nb{padding:0 16px;gap:16px;justify-content:space-between}.ncta{font-size:8px;padding:6px 12px}.mm{display:block}.hero{padding:72px 20px 48px}.tiers{padding:0 20px 56px}.tiers-grid{grid-template-columns:1fr}.closing{padding:56px 20px}.cta{padding:56px 20px}}
+@media(max-width:768px){.hero{padding:72px 20px 48px}.tiers{padding:0 20px 56px}.tiers-grid{grid-template-columns:1fr}.closing{padding:56px 20px}.cta{padding:56px 20px}}
 @media(hover:none)and(pointer:coarse){.cursor{display:none!important}}
 @media(prefers-reduced-motion:reduce){.hero-ey,.hero-h,.hero-sub{opacity:1!important;animation:none!important;transform:none!important}.sr,.sr-btn{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
-<div class="nav" role="navigation"><div class="nb"><a href="/" class="nw" aria-label="Wizkoo Home">w<span style="position:relative;display:inline-block">i</span>z<span class="k">k</span>o<span class="wd">o</span></a><div class="nc"><a href="/plan" class="nl">The Plan</a><a href="/games" class="nl">The Games</a><a href="/library" class="nl">The Library</a><a href="/methodology" class="nl">The Science</a><a href="/ages" class="nl ac">The Ages</a><a href="/the-open-seat" class="nl">The Open Seat</a><a href="/pricing" class="nl">The Price</a></div><button class="ham" id="ham" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button><a href="/plan" class="ncta">Build Your Plan</a></div></div>
-<nav class="mm" id="mm" aria-hidden="true"><div class="mm-in"><a href="/plan">The Plan</a><a href="/games">The Games</a><a href="/library">The Library</a><a href="/methodology">The Science</a><a href="/ages">The Ages</a><a href="/the-open-seat">The Open Seat</a><a href="/pricing">The Price</a></div></nav>
+<div id="wizkoo-nav"></div>
+<script src="/components/nav.js"></script>
 <main>
 
 <section class="hero">
@@ -130,7 +121,6 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink
 <script>
 (function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var e=document.querySelectorAll('.sr,.sr-btn');if(!e.length||!window.IntersectionObserver)return;var o=new IntersectionObserver(function(n){n.forEach(function(i){if(i.isIntersecting){i.target.classList.add('v');o.unobserve(i.target)}})},{threshold:.08,rootMargin:'0px 0px -20px 0px'});e.forEach(function(el){o.observe(el)})})();
 (function(){if(window.matchMedia('(hover:none)').matches)return;var c=document.getElementById('cursor');if(!c)return;var mx=0,my=0,cx=0,cy=0;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(!c.classList.contains('visible'))c.classList.add('visible')},{passive:true});(function l(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;c.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(l)})();document.addEventListener('mouseover',function(e){if(e.target.closest('a,button'))c.classList.add('hover')},{passive:true});document.addEventListener('mouseout',function(e){if(e.target.closest('a,button'))c.classList.remove('hover')},{passive:true})})();
-(function(){var b=document.getElementById('ham'),m=document.getElementById('mm');if(!b||!m)return;function io(){return m.classList.contains('open')}function op(){m.classList.add('open');m.setAttribute('aria-hidden','false');b.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}function cl(){m.classList.remove('open');m.setAttribute('aria-hidden','true');b.setAttribute('aria-expanded','false');document.body.style.overflow=''}b.addEventListener('click',function(e){e.stopPropagation();io()?cl():op()});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl)});document.addEventListener('click',function(e){if(io()&&!m.contains(e.target)&&e.target!==b&&!b.contains(e.target))cl()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&io())cl()});window.addEventListener('resize',function(){if(window.innerWidth>768&&io())cl()},{passive:true})})();
 </script>
 </body>
 </html>
