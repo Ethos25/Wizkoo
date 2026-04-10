@@ -95,7 +95,7 @@
 
       /* Responsive */
       '@media(max-width:768px){',
-      '  .nav-hamburger{display:flex}',
+      '  .nav-hamburger{display:flex;order:-1}',
       '  .nav-mobile-menu{display:block}',
       '  .nav-center{display:none}',
       '  .nav-science{display:none}',
