@@ -3,194 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About wizkoo — Built at the Kitchen Table</title>
-<meta name="description" content="Created by a mother of four boys who brought operational thinking to homeschool. Wizkoo is the product version of what her family uses every day.">
-<meta property="og:title" content="About wizkoo — Built at the Kitchen Table">
-<meta property="og:description" content="Created by a mother of four boys who brought operational thinking to homeschool. Wizkoo is the product version of what her family uses every day.">
+<title>About | Wizkoo</title>
+<meta name="description" content="Wizkoo is a weekly learning platform for families with children ages 2 to 12. One theme connects every subject. Every subscription carries a second seat.">
+<link rel="canonical" href="https://wizkoo.com/about">
+<meta property="og:title" content="About | Wizkoo">
+<meta property="og:description" content="Wizkoo is a weekly learning platform for families with children ages 2 to 12. One theme connects every subject. Every subscription carries a second seat.">
 <meta property="og:image" content="assets/wizkoo-og.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="About wizkoo — Built at the Kitchen Table">
-<meta name="twitter:description" content="Created by a mother of four boys who brought operational thinking to homeschool. Wizkoo is the product version of what her family uses every day.">
+<meta name="twitter:title" content="About | Wizkoo">
+<meta name="twitter:description" content="Wizkoo is a weekly learning platform for families with children ages 2 to 12. One theme connects every subject. Every subscription carries a second seat.">
 <meta name="twitter:image" content="assets/wizkoo-og.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Wizkoo","url":"https://wizkoo.com","foundingDate":"2025","address":{"@type":"PostalAddress","addressRegion":"Georgia","addressCountry":"US"}}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@200;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="icon" href="favicon.ico" sizes="32x32">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Wizkoo Founder",
-  "jobTitle": "Founder",
-  "description": "Mother of four boys, former COO in financial services, creator of Wizkoo and the ReApproach Education curriculum.",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Wizkoo",
-    "url": "https://wizkoo.com"
-  },
-
-}
-</script>
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/footer.css">
 <style>
-  /* ── About page styles ── */
-  .about-hero {
-    margin-top: 60px;
-    padding: var(--section-pad) var(--content-pad);
-    max-width: var(--max-width);
-    border-bottom: 1px solid var(--rule);
-  }
-  .about-hero .tag { margin-bottom: 16px; }
-  .about-hero h1 {
-    font-family: 'Sora', sans-serif;
-    font-weight: 200;
-    font-size: 3.4rem;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    max-width: 720px;
-  }
-  .about-hero h1 strong { font-weight: 700; }
-  .about-hero .hero-sub {
-    margin-top: 24px;
-    font-size: var(--body-size);
-    font-weight: 400;
-    color: #555;
-    line-height: 1.7;
-    max-width: 580px;
-  }
+:root{--saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm:#ECEAE3;--rule:#E0DED6;--mid:#4A4850;--faint:#A8A6B0;--expo:cubic-bezier(0.16,1,0.3,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+@media(hover:hover){html,body,a,button{cursor:none}}
 
-  .about-body {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 0;
-    max-width: var(--max-width);
-  }
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}.cursor.visible{opacity:1}.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,.25);border:1.5px solid var(--saffron)}
 
-  .about-main {
-    padding: var(--section-pad) var(--content-pad);
-    border-right: 1px solid var(--rule);
-  }
+/* ═══ REVEALS ═══ */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--expo),transform .6s var(--expo)}.rv.vis{opacity:1;transform:translateY(0)}
+.rv-fade{opacity:0;transition:opacity 1.2s var(--expo)}.rv-fade.vis{opacity:1}
+.rv-slow{opacity:0;transform:translateY(12px);transition:opacity 1s var(--expo),transform 1s var(--expo)}.rv-slow.vis{opacity:1;transform:translateY(0)}
+.rv-std{opacity:0;transform:translateY(24px);transition:opacity .7s var(--expo),transform .7s var(--expo)}.rv-std.vis{opacity:1;transform:translateY(0)}
+.sp{display:inline-block;width:clamp(5px,.5vw,7px);height:clamp(5px,.5vw,7px);border-radius:50%;background:var(--saffron);margin-left:3px;vertical-align:baseline;position:relative;top:2px}
+.sp-lg{width:clamp(7px,.7vw,10px);height:clamp(7px,.7vw,10px)}
 
-  .about-section { margin-bottom: 56px; }
-  .about-section:last-child { margin-bottom: 0; }
-  .about-section .tag { margin-bottom: 16px; }
-  .about-section h2 {
-    font-family: 'Sora', sans-serif;
-    font-weight: 700;
-    font-size: 1.4rem;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-    line-height: 1.25;
-  }
-  .about-section p {
-    font-size: var(--small-size);
-    font-weight: 400;
-    color: #444;
-    line-height: 1.8;
-    margin-bottom: 16px;
-  }
-  .about-section p:last-child { margin-bottom: 0; }
-  .about-section p strong { font-weight: 500; color: var(--ink); }
+/* ═══ S1: THE OPEN SEAT — linen ═══ */
+.s1{background:var(--linen);padding:clamp(130px,18vh,200px) 48px clamp(56px,8vh,96px);position:relative;overflow:hidden}
+.s1::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 40% 35%,rgba(232,175,56,.04) 0%,transparent 55%);pointer-events:none}
+.s1-in{max-width:600px;margin:0 auto;position:relative;z-index:1}
+.s1-ey{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(24px,4vh,36px);opacity:0;animation:fi .5s var(--expo) forwards .2s}
+.s1-ground{font-family:'Inter',sans-serif;font-size:clamp(.84rem,.98vw,.9rem);line-height:1.8;color:rgba(12,16,32,.45);margin-bottom:clamp(28px,4vh,44px);opacity:0;animation:fi .5s var(--expo) forwards .4s}
+.s1 h1{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(2.2rem,4.5vw,3.6rem);line-height:1.08;letter-spacing:-.035em;margin-bottom:clamp(12px,2vh,20px);opacity:0;animation:fi .6s var(--expo) forwards .55s}
+.s1-sub{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(.92rem,1.15vw,1.05rem);color:rgba(12,16,32,.38);margin-bottom:clamp(28px,4vh,44px);opacity:0;animation:fi .5s var(--expo) forwards .7s}
+.s1-body{font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.85;color:rgba(12,16,32,.5);opacity:0;animation:fi .5s var(--expo) forwards .85s}
+.s1-body strong{font-weight:600;color:rgba(12,16,32,.72)}
+.s1-link{display:inline-block;margin-top:clamp(20px,3vh,28px);font-family:'Inter',sans-serif;font-style:italic;font-size:clamp(.82rem,.95vw,.88rem);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--faint);padding-bottom:2px;transition:border-color .25s,color .25s}.s1-link:hover{border-color:var(--saffron);color:var(--saffron)}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-  .phi-list { margin-top: 8px; }
-  .phi-item {
-    padding: 20px 0;
-    border-top: 1px solid var(--rule);
-  }
-  .phi-item:last-child { border-bottom: 1px solid var(--rule); }
-  .phi-item h3 {
-    font-family: 'Sora', sans-serif;
-    font-weight: 600;
-    font-size: 0.88rem;
-    color: var(--ink); /* saffron failed WCAG contrast on white */
-    margin-bottom: 6px;
-  }
-  .phi-item p {
-    font-size: 0.82rem;
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 0;
-  }
+/* ═══ S2: WHY THIS EXISTS — dark, two-column ═══ */
+.s2{background:var(--ink);color:var(--paper);padding:clamp(80px,14vh,160px) 48px clamp(80px,12vh,140px);position:relative;overflow:hidden}
+.s2::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}
+.s2::after{content:'';position:absolute;width:900px;height:700px;top:20%;left:50%;transform:translate(-50%,-25%);background:radial-gradient(ellipse 70% 55%,rgba(232,175,56,.04) 0%,rgba(232,175,56,.015) 35%,transparent 65%);pointer-events:none}
+.s2>*{position:relative;z-index:1}
+.s2-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start}
+.s2-left{position:sticky;top:100px}
+.s2-ey{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:16px}
+.s2 h2{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.1;letter-spacing:-.03em;color:rgba(240,242,248,.95)}
+.s2-setup{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(.92rem,1.15vw,1.05rem);line-height:1.6;color:rgba(240,242,248,.28);margin-top:clamp(20px,3vh,28px)}
+.s2-blk{padding:clamp(24px,3.5vh,36px) 0;border-top:1px solid rgba(255,255,255,0.06);opacity:0;transform:translateY(16px);transition:opacity .6s var(--expo),transform .6s var(--expo)}.s2-blk.vis{opacity:1;transform:translateY(0)}.s2-blk:last-of-type{border-bottom:1px solid rgba(255,255,255,0.06)}
+.s2-blk h3{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.82rem,.96vw,.9rem);color:var(--saffron);margin-bottom:10px;letter-spacing:-.01em}
+.s2-blk p{font-family:'Inter',sans-serif;font-size:clamp(.78rem,.9vw,.84rem);color:rgba(250,250,250,0.35);line-height:1.75}
+/* Resolving line */
+.s2-resolve{max-width:660px;margin:clamp(56px,9vh,96px) auto;padding:clamp(32px,5vh,52px) 0 clamp(32px,5vh,52px) clamp(28px,3.5vw,40px);position:relative}
+.s2-resolve-border{position:absolute;left:0;top:0;bottom:0;width:3px;background:rgba(232,175,56,.3);animation:breathe 6s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.25}50%{opacity:.5}}
+.s2-resolve p{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(1.25rem,2.4vw,1.7rem);line-height:1.42;color:rgba(240,242,248,.72);letter-spacing:-.02em;position:relative;z-index:1}
+.s2-resolve::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(400px,60vw,700px);height:clamp(160px,22vh,280px);background:radial-gradient(ellipse,rgba(232,175,56,.08) 0%,rgba(232,175,56,.03) 35%,transparent 65%);pointer-events:none;border-radius:50%}
+/* Founder coda */
+.fq{max-width:560px;margin:clamp(40px,6vh,64px) auto 0;padding-top:clamp(32px,5vh,44px);border-top:1px solid rgba(255,255,255,0.06);text-align:center}
+.fq blockquote{font-family:'Inter',sans-serif;font-size:clamp(.84rem,.98vw,.9rem);line-height:1.85;color:rgba(240,242,248,.40);font-style:italic}
+.fq cite{display:block;margin-top:clamp(14px,2vh,20px);font-family:'Space Mono',monospace;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,242,248,.14);font-style:normal}
 
-  .reapproach-block {
-    margin-top: 20px;
-    padding: 20px 24px;
-    background: var(--warm-bg);
-    border-left: 3px solid var(--saffron);
-  }
-  .reapproach-block p {
-    font-size: 0.82rem;
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 0;
-  }
-  .reapproach-block strong { color: var(--ink); font-weight: 500; }
+/* ═══ S3: CTA AT PEAK INTENT — linen ═══ */
+.s3{background:var(--linen);padding:clamp(64px,10vh,120px) 48px;text-align:center;position:relative}
+.s3-btn{display:inline-block;background:var(--saffron);color:var(--ink);font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.72rem,.85vw,.78rem);letter-spacing:.06em;padding:16px 52px;border:none;text-decoration:none;box-shadow:6px 6px 0 var(--ink);transition:transform .3s var(--expo),box-shadow .3s var(--expo)}.s3-btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.s3-micro{font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:clamp(14px,2vh,20px)}
 
-  .about-sidebar {
-    padding: var(--section-pad) 40px;
-    background: var(--warm-bg);
-    position: sticky;
-    top: 60px;
-    align-self: start;
-  }
-  .sidebar-quote {
-    font-family: 'Sora', sans-serif;
-    font-weight: 200;
-    font-size: 1.4rem;
-    line-height: 1.45;
-    letter-spacing: -0.02em;
-    margin-bottom: 32px;
-  }
-  .sidebar-quote strong { font-weight: 700; }
-  .sidebar-fact {
-    padding: 20px 0;
-    border-top: 1px solid var(--rule);
-  }
-  .sidebar-fact .sf-num {
-    font-family: 'Sora', sans-serif;
-    font-weight: 700;
-    font-size: 2rem;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    color: var(--ink);
-    margin-bottom: 4px;
-  }
-  .sidebar-fact .sf-label {
-    font-family: 'Space Mono', monospace;
-    font-weight: 400;
-    font-size: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--mid);
-  }
-  .sidebar-cta-wrap {
-    margin-top: 40px;
-    padding-top: 32px;
-    border-top: 1px solid var(--rule);
-  }
-  .sidebar-cta-wrap p {
-    font-size: 0.82rem;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
+/* ═══ S4: ORBITAL LEARNING — warm ═══ */
+.s4{background:var(--warm);padding:clamp(72px,12vh,140px) 48px;position:relative;overflow:hidden}
+.s4::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(12,16,32,0.006) 59px,rgba(12,16,32,0.006) 60px);pointer-events:none}
+.s4>*{position:relative;z-index:1}
+.s4-in{max-width:680px;margin:0 auto}
+.s4-ey{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(20px,3vh,28px)}
+.s4 h2{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.4rem,2.2vw,1.8rem);line-height:1.2;letter-spacing:-.025em;margin-bottom:clamp(24px,4vh,36px)}
+.s4-prose{font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.85;color:rgba(12,16,32,.55)}
+.s4-prose p{margin-bottom:1.2rem}.s4-prose p:last-child{margin-bottom:0}
+/* Contrast line */
+.s4-contrast{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.95vw,.88rem);line-height:1.8;color:rgba(12,16,32,.38);margin:clamp(24px,4vh,36px) 0;padding-left:clamp(16px,2vw,24px);border-left:2px solid rgba(12,16,32,.08)}
+/* Differentiator */
+.s4-diff{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.95rem,1.2vw,1.08rem);color:var(--ink);letter-spacing:-.015em;margin:clamp(28px,4vh,40px) 0 clamp(24px,3.5vh,32px)}
+/* Age tier cards */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.2vw,14px);margin-bottom:clamp(32px,5vh,44px)}
+.tier{background:var(--paper);border:1.5px solid var(--ink);padding:clamp(16px,2.5vh,24px) clamp(10px,1.2vw,16px);text-align:center;position:relative;transition:transform .25s var(--expo),box-shadow .25s var(--expo)}
+.tier::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--saffron)}
+@media(hover:hover){.tier:hover{transform:translateY(-2px);box-shadow:4px 4px 0 rgba(232,175,56,.12)}}
+.tier-age{font-family:'Space Mono',monospace;font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:var(--saffron);margin-bottom:4px}
+.tier-role{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.78rem,.9vw,.84rem);color:var(--ink);margin-bottom:3px}
+.tier-d{font-family:'Inter',sans-serif;font-size:clamp(.7rem,.8vw,.74rem);line-height:1.55;color:rgba(12,16,32,.4)}
+/* Spiral memory */
+.s4-spiral{font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.85;color:rgba(12,16,32,.55);margin-bottom:clamp(8px,1.5vh,14px)}
+/* Research anchor */
+.s4-research{font-family:'Inter',sans-serif;font-size:clamp(.78rem,.9vw,.84rem);line-height:1.75;color:rgba(12,16,32,.35);font-style:italic}
+/* Second CTA link */
+.s4-cta{display:inline-block;margin-top:clamp(28px,4vh,40px);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--faint);padding-bottom:2px;transition:border-color .25s,color .25s}.s4-cta:hover{border-color:var(--saffron);color:var(--saffron)}
 
-  @media (max-width: 1024px) {
-    .about-body { grid-template-columns: 1fr; }
-    .about-main { border-right: none; border-bottom: 1px solid var(--rule); }
-    .about-sidebar { position: relative; top: 0; }
-  }
-  @media (max-width: 768px) {
-    .about-hero { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
-    .about-hero h1 { font-size: 2.4rem; }
-    .about-main { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
-    .about-sidebar { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
-  }
+/* ═══ S5: THE RECORD — dark ═══ */
+.s5{background:var(--ink);padding:clamp(64px,10vh,100px) 48px clamp(64px,10vh,100px);position:relative;overflow:hidden}
+.s5::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}
+.s5-in{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.s5-ey{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,242,248,.18);margin-bottom:clamp(28px,4vh,44px)}
+.s5-row{display:grid;grid-template-columns:130px 1fr;gap:clamp(16px,3vw,32px);padding:clamp(16px,2.5vh,24px) 0;border-bottom:1px solid rgba(255,255,255,0.05);transition:background .25s}
+.s5-row:first-child{border-top:1px solid rgba(255,255,255,0.05)}
+@media(hover:hover){.s5-row:hover{background:rgba(255,255,255,.02)}}
+.s5-label{font-family:'Space Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,242,248,.2);padding-top:4px}
+.s5-val{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.94vw,.88rem);line-height:1.75;color:rgba(240,242,248,.42)}
+.s5-val strong{font-weight:600;color:rgba(240,242,248,.62)}
+.s5-val a{color:var(--saffron);text-decoration:none;border-bottom:1px solid rgba(232,175,56,.3);transition:border-color .25s}.s5-val a:hover{border-color:var(--saffron)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){.s2-layout{grid-template-columns:1fr;gap:40px}.s2-left{position:relative;top:0}}
+@media(max-width:768px){.s1{padding:100px 20px 40px}.s1 h1{font-size:2rem}.s2{padding:56px 20px}.s2 h2{font-size:1.6rem}.s2-resolve p{font-size:1.1rem}.s3{padding:40px 20px}.s4{padding:48px 20px}.tiers{grid-template-columns:1fr 1fr}.s5{padding:40px 20px}.s5-row{grid-template-columns:90px 1fr;gap:10px}}
+@media(hover:none)and(pointer:coarse){.cursor{display:none!important}.tier:hover{transform:none;box-shadow:none}.s5-row:hover{background:transparent}}
+@media(prefers-reduced-motion:reduce){.s1-ey,.s1-ground,.s1 h1,.s1-sub,.s1-body{opacity:1!important;animation:none!important;transform:none!important}.rv,.rv-fade,.rv-slow,.rv-std,.s2-blk{opacity:1!important;transform:none!important;transition:none!important}.s2-resolve-border{animation:none!important;opacity:.3!important}}
 </style>
 </head>
 <body>
@@ -200,118 +140,120 @@
 <script src="/components/nav.js"></script>
 <a href="#main-content" class="skip-nav">Skip to main content</a>
 
-<!-- ═══ NAV ═══ -->
-
 <main id="main-content">
-<!-- ═══ HERO ═══ -->
-<section class="about-hero" aria-label="About Wizkoo">
-  <div class="tag">About Wizkoo</div>
-  <h1>Built at the kitchen table<span class="sp"></span><br>Tested on <strong>four boys</strong><span class="sp"></span><br>Now yours<span class="sp"></span></h1>
-  <p class="hero-sub">Wizkoo started as a private weekly curriculum. Friends started asking for copies. What you're looking at is the product version of what one family uses every single morning.</p>
+
+<!-- ═══ S1: THE OPEN SEAT ═══ -->
+<section class="s1">
+  <div class="s1-in">
+    <div class="s1-ey">About Wizkoo</div>
+    <p class="s1-ground">Wizkoo is a weekly learning platform for families with children ages 2 to 12. One theme connects every subject. Every child at the table gets a plan matched to their age.</p>
+    <h1>Price doesn't get to decide who learns<span class="sp sp-lg"></span></h1>
+    <p class="s1-sub">That's the line we drew before we wrote a single plan.</p>
+    <div class="s1-body">
+      <p>Every subscription carries a second seat. Not as a promotion. Not as an add-on. As architecture. The way the company is built from the inside.</p>
+    </div>
+    <a href="/the-open-seat" class="s1-link">The Open Seat &rarr;</a>
+  </div>
 </section>
 
-<!-- ═══ BODY ═══ -->
-<div class="about-body" id="about-detail">
-  <div class="about-main">
-
-    <div class="about-section">
-      <div class="tag">The Founder</div>
-      <h2>A mother of four. A former COO. One very busy kitchen table.</h2>
-      <p>She has four boys — ages 2, 3, 4, and 6. Different reading levels. Different attention spans. Different everything. Same table, every morning.</p>
-      <p>Before homeschooling, she spent a decade in financial services as a Chief Operating Officer. She brought operational thinking to the classroom: <strong>systems, sequencing, feedback loops</strong>. She stopped asking "what should we cover this week?" and started asking "how do we build knowledge that lasts?"</p>
-      <p>The answer was thematic threading — one idea pulled through every subject, every day, for an entire week. Week 8 references Week 3. The children don't just learn facts. They build a web.</p>
-      <p>Her friends noticed. They started asking for copies of the plans. Then strangers found her through a homeschool group. Then it became clear: this needed to be a product. <strong>Wizkoo is that product.</strong></p>
+<!-- ═══ S2: WHY THIS EXISTS ═══ -->
+<section class="s2">
+  <div class="s2-layout">
+    <div class="s2-left rv-fade">
+      <div class="s2-ey">Why this exists</div>
+      <h2>You already <span style="white-space:nowrap">knew<span class="sp sp-lg"></span></span></h2>
+      <p class="s2-setup">You knew before you had the language for it. Before the research confirmed it. Before anyone in your life agreed with you.</p>
     </div>
-
-    <div class="about-section">
-      <div class="tag">Educational Philosophy</div>
-      <h2>Capability over calendar. Architecture over checklists.</h2>
-      <div class="phi-list">
-        <div class="phi-item">
-          <h3>Thematic Threading</h3>
-          <p>Every subject in a given week connects to one central theme. Volcanoes don't just appear in science — they appear in geography (Atlas), chemistry (Elementum), writing, and math. The child's brain doesn't file subjects separately. It builds a single, coherent picture.</p>
-        </div>
-        <div class="phi-item">
-          <h3>Spiral Learning</h3>
-          <p>Week 8 deliberately references Week 3. This isn't accidental — it's designed. Each plan includes a "spiral connection" callout showing exactly what prior knowledge today's lesson builds on. Knowledge compounds instead of evaporating.</p>
-        </div>
-        <div class="phi-item">
-          <h3>Multi-Child Differentiation</h3>
-          <p>Four children can learn about the same volcano at the same time in the same room — but each child's experience is calibrated to their reading level, age, and developmental stage. Same theme. Different entry points. No child is waiting and no child is lost.</p>
-        </div>
-        <div class="phi-item">
-          <h3>Capability Over Calendar</h3>
-          <p>Wizkoo doesn't ask what grade your child is in. It asks what your child can do and what they're ready for next. Singapore Math foundations. Structured literacy sequencing. NGSS science alignment. But none of it is labeled that way — it's just what works.</p>
-        </div>
+    <div>
+      <div class="s2-blk">
+        <h3>They don't see him.</h3>
+        <p>Maybe it was the morning your daughter finished the worksheet in three minutes and spent the rest of the hour with her head on the desk, waiting. Maybe it was the call from the teacher who said your son needed to stop moving so much, as if moving was the problem. Maybe she came home one day and something behind her eyes was different, and you never got the full story, and you didn't need it. Maybe the school called him "too much" and "not enough" in the same sentence, and you sat in the parking lot afterward and thought: they don't see him.</p>
+      </div>
+      <div class="s2-blk">
+        <h3>Good isn't the same thing as alive.</h3>
+        <p>Or maybe none of that happened. Maybe the school was fine. The teachers were kind. The grades were good. And you looked at your child and thought: good isn't the same thing as alive.</p>
+      </div>
+      <div class="s2-blk">
+        <h3>You built it yourself.</h3>
+        <p>Or maybe you never put them in at all. Maybe you looked at the system before your oldest was born and thought: I can do this differently. Not because something was broken. Because you believed something better was possible and you were willing to build it yourself.</p>
+      </div>
+      <div class="s2-blk">
+        <h3>We don't ask why.</h3>
+        <p>Every family that homeschools has a reason. Some left. Some never entered. Some are still figuring out what to call it. We don't ask why. We don't need to.</p>
       </div>
     </div>
-
-    <div class="about-section">
-      <div class="tag">ReApproach Education</div>
-      <h2>Where Wizkoo comes from.</h2>
-      <p>Wizkoo is built by <strong>ReApproach Education</strong>, a home-based instructional program in Cumming, Georgia. ReApproach is the private curriculum practice that Wizkoo's founder has run for her own family since 2022.</p>
-      <div class="reapproach-block">
-        <p><strong>Every plan on Wizkoo was tested in a real home, with real children, before it was made available to yours.</strong> The Atlas countries, the Elementum character voices, the spiral learning connections — all of it ran at the kitchen table first.</p>
-      </div>
-    </div>
-
   </div>
 
-  <aside class="about-sidebar">
-    <div class="sidebar-quote">
-      "Four children. Different ages. Different reading levels. <strong>Same table every morning.</strong> That's who this was built for first."
+  <!-- Resolving line -->
+  <div class="s2-resolve rv-fade">
+    <div class="s2-resolve-border"></div>
+    <p>Some of us left something. Some of us chose something. All of us sat down on a Sunday night and tried to figure out what Monday was supposed to look like. And then we built it from scratch.</p>
+  </div>
+
+  <!-- Founder coda -->
+  <div class="fq rv-slow" style="transition-delay:200ms">
+    <blockquote>"I have four boys. They're 6, 4, 3, and 2. I needed Monday morning to work for all of them at the same table. No curriculum I found could do that. So I stopped looking and started building."</blockquote>
+    <cite>Founder, Wizkoo</cite>
+  </div>
+</section>
+
+<!-- ═══ S3: CTA AT PEAK INTENT ═══ -->
+<section class="s3">
+  <a href="/plan" class="s3-btn rv-std">Build Your Plan</a>
+  <p class="s3-micro rv-std" style="transition-delay:100ms">No credit card for first plan.</p>
+</section>
+
+<!-- ═══ S4: ORBITAL LEARNING ═══ -->
+<section class="s4">
+  <div class="s4-in">
+    <div class="s4-ey rv-std">The methodology</div>
+    <h2 class="rv-std" style="transition-delay:100ms">One theme<span class="sp" style="margin-right:5px"></span>Every subject<span class="sp"></span></h2>
+
+    <div class="s4-prose rv-std" style="transition-delay:200ms">
+      <p>We call it Orbital Learning. One idea at the center, and every school subject orbits it, the way planets orbit a single sun. A broken bone becomes a week of anatomy, history, geography, writing, and math. A backyard turtle becomes biology, art, cartography, and a letter to a wildlife center. The starting point is not a scope and sequence. The starting point is your life.</p>
     </div>
-    <div class="sidebar-fact">
-      <div class="sf-num">4</div>
-      <div class="sf-label">Children. Ages 2–6.</div>
+
+    <div class="s4-contrast rv-std" style="transition-delay:250ms">Most curricula teach subjects in parallel lines that never cross. Reading at 9:00. Math at 10:00. Science at 11:00. The child learns facts in isolation and is expected to build the connections alone.</div>
+
+    <div class="s4-diff rv-std" style="transition-delay:300ms">Four children studying the same volcano get four different plans. Same table. Same morning. Nobody is waiting for anyone<span class="sp"></span></div>
+
+    <div class="tiers">
+      <div class="tier rv" style="transition-delay:350ms"><div class="tier-age">Age 2</div><div class="tier-role">Explorer</div><div class="tier-d">Sensory play. Texture, color, sound.</div></div>
+      <div class="tier rv" style="transition-delay:500ms"><div class="tier-age">Age 4</div><div class="tier-role">Observer</div><div class="tier-d">Guided exploration. Names, shapes, stories.</div></div>
+      <div class="tier rv" style="transition-delay:650ms"><div class="tier-age">Age 6</div><div class="tier-role">Builder</div><div class="tier-d">Reading, writing, early research.</div></div>
+      <div class="tier rv" style="transition-delay:800ms"><div class="tier-age">Age 10</div><div class="tier-role">Architect</div><div class="tier-d">Research, structured argument, synthesis.</div></div>
     </div>
-    <div class="sidebar-fact">
-      <div class="sf-num">2022</div>
-      <div class="sf-label">When the plans started.</div>
-    </div>
-    <div class="sidebar-fact">
-      <div class="sf-num">52+</div>
-      <div class="sf-label">Weekly themes developed.</div>
-    </div>
-    <div class="sidebar-fact">
-      <div class="sf-num">0</div>
-      <div class="sf-label">Grades. We don't use them.</div>
-    </div>
-    <div class="sidebar-cta-wrap">
-      <p>Ready to see what a week looks like for your family?</p>
-      <a href="/plan" class="btn-main">See what a week looks like →</a>
-    </div>
-  </aside>
-</div>
+
+    <p class="s4-spiral rv-std" style="transition-delay:400ms">Week 8 references Week 3. What your child learned in January shows up in March. The system does not start over. It remembers.</p>
+
+    <p class="s4-research rv-std" style="transition-delay:450ms">Orbital Learning is built on 30 years of integrated thematic instruction research from Stanford and Columbia, designed by educators, and made accessible through AI.</p>
+
+    <a href="/plan" class="s4-cta rv-std" style="transition-delay:500ms">See what a week looks like &rarr;</a>
+  </div>
+</section>
+
+<!-- ═══ S5: THE RECORD ═══ -->
+<section class="s5">
+  <div class="s5-in">
+    <div class="s5-ey rv-std">The record</div>
+    <div class="s5-row rv-std" style="transition-delay:50ms"><div class="s5-label">Entity</div><div class="s5-val"><strong>Wizkoo LLC</strong> &middot; Georgia, USA &middot; Founded 2025</div></div>
+    <div class="s5-row rv-std" style="transition-delay:100ms"><div class="s5-label">Product</div><div class="s5-val">Personalized weekly learning plans for families with children ages 2 to 12. One theme connects every subject. Every child at the table gets a plan matched to their age and reading level. The system remembers what you covered last month and builds on it next week. Secular. Research-backed. AI-personalized, educator-designed.</div></div>
+    <div class="s5-row rv-std" style="transition-delay:150ms"><div class="s5-label">Companion Apps</div><div class="s5-val"><strong>Atlas</strong> &mdash; 227 countries. World geography, heritage, history, and culture.<br><strong>Elementum</strong> &mdash; 118 elements. Guided by Elementus, a dragon who knows every element by name.</div></div>
+    <div class="s5-row rv-std" style="transition-delay:175ms"><div class="s5-label">The Library</div><div class="s5-val">Printable resources that live inside every plan. Worksheets, experiments, coloring pages, and more &mdash; designed to be used at the table, not on a screen.</div></div>
+    <div class="s5-row rv-std" style="transition-delay:200ms"><div class="s5-label">Privacy</div><div class="s5-val">Plans generate in the browser. Wizkoo does not collect children's data. COPPA compliant by architecture.</div></div>
+    <div class="s5-row rv-std" style="transition-delay:250ms"><div class="s5-label">The Open Seat</div><div class="s5-val">Every subscription funds a full year of access for a nominated family. No difference in product. No label on the account. <a href="/the-open-seat">Learn more</a>.</div></div>
+    <div class="s5-row rv-std" style="transition-delay:300ms"><div class="s5-label">Contact</div><div class="s5-val"><a href="mailto:hello@wizkoo.com" style="font-family:'Space Mono',monospace;font-size:clamp(.72rem,.85vw,.8rem);letter-spacing:.02em">hello@wizkoo.com</a></div></div>
+  </div>
+</section>
 
 </main>
 
-<!-- ═══ FOOTER ═══ -->
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
 
 <script>
-/* ── Custom cursor ── */
-(function(){
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  var c = document.getElementById('cursor'); if (!c) return;
-  var raf;
-  document.addEventListener('mousemove', function(e){
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(function(){
-      c.style.left = e.clientX + 'px';
-      c.style.top  = e.clientY + 'px';
-      c.classList.add('visible');
-    });
-  });
-  document.addEventListener('mouseover', function(e){
-    var isHover = e.target.closest('a,button,[role="button"],input,select,textarea,label,[onclick],[tabindex],.btn-main,.btn-secondary,.nb');
-    c.classList.toggle('hover', !!isHover);
-  });
-  document.documentElement.addEventListener('mouseleave', function(){
-    c.classList.remove('visible');
-  });
-})();
+(function(){if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;var e=document.querySelectorAll('.rv,.rv-fade,.rv-slow,.rv-std,.s2-blk');if(!e.length||!window.IntersectionObserver)return;var o=new IntersectionObserver(function(n){n.forEach(function(i){if(i.isIntersecting){i.target.classList.add('vis');o.unobserve(i.target)}})},{threshold:.08,rootMargin:'0px 0px -20px 0px'});e.forEach(function(el){o.observe(el)})})();
+(function(){if(window.matchMedia('(hover:none)').matches)return;var c=document.getElementById('cursor');if(!c)return;var mx=0,my=0,cx=0,cy=0;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(!c.classList.contains('visible'))c.classList.add('visible')},{passive:true});(function l(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;c.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(l)})();document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,.tier,.s5-row'))c.classList.add('hover')},{passive:true});document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,.tier,.s5-row'))c.classList.remove('hover')},{passive:true})})();
 </script>
 </body>
 </html>
