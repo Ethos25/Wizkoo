@@ -9,24 +9,27 @@ const DB_URL = process.env.DATABASE_URL;
 if (!DB_URL) { console.error('Set DATABASE_URL first.'); process.exit(1); }
 
 const SKIP_TITLES = new Set([
-  // religion
-  'sparrow',
-  'a vaisakhi to remember',
-  'every scoop of light: a story about repairing the world',
+  // religion (user confirmed)
+  'aru shah and the end of time',
+  "the inquisitor's tale: or, the three magical children and their holy dog",
+  'number the stars',
+  'wishtree',
   // dupes already in DB
-  'the bear out there',
-  'the poisoned king',
-  'please pay attention',
-  // policy
-  'trans history: a graphic novel',
+  'greenglass house','chasing vermeer','stamped: racism, antiracism, and you',
+  'the boy who harnessed the wind (young readers edition)','my side of the mountain',
+  'the phantom tollbooth','hatchet','the cricket in times square',
 ]);
 
 const AUTHOR_OVERRIDES = {};
 
 // Religion check — skip any book whose themes/description mention religion
-const RELIG_RE = /islam|quran|muslim|christian|bible|church|mosque|synagogue|hindu|buddhis|religion\b|faith\b|prayer\b|jesus|saint\b|western.?wall|sacred\b|torah|jewish\b|sikh/i;
+// "church" excluded from regex to avoid false positive on "Churchill"
+const RELIG_RE = /islam|quran|muslim|christian|bible|(?<!churc)h(?:urch)|mosque|synagogue|hindu|buddhis|religion\b|faith\b|prayer\b|jesus|saint\b|western.?wall|sacred\b|torah|jewish\b|sikh/i;
 function hasReligion(cols) {
-  return RELIG_RE.test([cols[13]||'', cols[18]||'', cols[17]||'', cols[24]||''].join(' '));
+  const text = [cols[13]||'', cols[18]||'', cols[17]||'', cols[24]||''].join(' ');
+  // exclude Churchill false positive
+  const cleaned = text.replace(/Churchill/gi, '');
+  return RELIG_RE.test(cleaned);
 }
 
 /* ── CSV parser ─────────────────────────────────────────────────────────────── */
@@ -180,12 +183,12 @@ async function enrich(title, author) {
 
 /* ── Main ───────────────────────────────────────────────────────────────────── */
 async function main() {
-  console.log('\n📚 Wizkoo Library — 2025 Batch 80 Import\n');
+  console.log('\n📚 Wizkoo Library — 10-12 Fiction/Nonfiction 80 Import\n');
   const pool = new Pool({ connectionString: DB_URL, ssl: { rejectUnauthorized: false }, max: 3 });
   await pool.query('SELECT 1');
   console.log('✓ Database connected\n');
 
-  const raw = fs.readFileSync('C:/Users/amyog/Downloads/wizkoo_2025_80_books.csv', 'utf8');
+  const raw = fs.readFileSync('C:/Users/amyog/Downloads/wizkoo_1012_fiction_nonfiction_80.csv', 'utf8');
   const rows = parseCSV(raw).slice(1);
 
   let imported = 0, skipped = 0, dupes = 0;
