@@ -8,27 +8,23 @@ const { Pool } = require('pg');
 const DB_URL = process.env.DATABASE_URL;
 if (!DB_URL) { console.error('Set DATABASE_URL first.'); process.exit(1); }
 
-const SKIP_TITLES = new Set([
-  // religion (user confirmed)
-  'aru shah and the end of time',
-  "the inquisitor's tale: or, the three magical children and their holy dog",
-  'number the stars',
-  'wishtree',
-  // dupes already in DB
-  'greenglass house','chasing vermeer','stamped: racism, antiracism, and you',
-  'the boy who harnessed the wind (young readers edition)','my side of the mountain',
-  'the phantom tollbooth','hatchet','the cricket in times square',
-]);
+// ── Permanent blocklist: titles ever removed from this library ────────────────
+const _blocklist = JSON.parse(fs.readFileSync(
+  require('path').join(__dirname, 'deleted-titles-blocklist.json'), 'utf8'
+));
+const BLOCKLIST = new Set(_blocklist.map(t => t.toLowerCase().trim()));
+
+// Per-batch skip list (dupes found at precheck time)
+const SKIP_TITLES = new Set([]);
 
 const AUTHOR_OVERRIDES = {};
 
 // Religion check — skip any book whose themes/description mention religion
-// "church" excluded from regex to avoid false positive on "Churchill"
-const RELIG_RE = /islam|quran|muslim|christian|bible|(?<!churc)h(?:urch)|mosque|synagogue|hindu|buddhis|religion\b|faith\b|prayer\b|jesus|saint\b|western.?wall|sacred\b|torah|jewish\b|sikh/i;
+// Expanded to include indigenous spiritual practices; excludes Churchill false positive
+const RELIG_RE = /islam|quran|muslim|christian|bible|church(?!ill)|mosque|synagogue|hindu|buddhis|religion\b|faith\b|prayer\b|jesus|saint\b|western.?wall|sacred\b|torah|jewish\b|sikh|shaman|spirit.?world|dreamcatcher|ancestors.*spirit|spirit.*ancestors/i;
 function hasReligion(cols) {
-  const text = [cols[13]||'', cols[18]||'', cols[17]||'', cols[24]||''].join(' ');
-  // exclude Churchill false positive
-  const cleaned = text.replace(/Churchill/gi, '');
+  const cleaned = [cols[13]||'', cols[18]||'', cols[17]||'', cols[24]||''].join(' ')
+    .replace(/Churchill/gi, '');
   return RELIG_RE.test(cleaned);
 }
 
@@ -200,6 +196,13 @@ async function main() {
     if (!title) continue;
 
     const titleKey = title.toLowerCase().trim();
+
+    // Permanent blocklist check (catches previously deleted titles re-entering)
+    if (BLOCKLIST.has(titleKey)) {
+      console.log('  [BLOCKLIST] ' + title);
+      dupes++;
+      continue;
+    }
 
     if (SKIP_TITLES.has(titleKey)) {
       console.log('  [SKIP] ' + title);
