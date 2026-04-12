@@ -2,3 +2,12 @@
 /plan/*  https://wizkoo-plan-generator.vercel.app/plan/:splat  200
 /planner  /plan  301
 /planner.html  /plan  301
+
+# Clean URL redirects — .html → clean path
+/what-we-believe.html  /what-we-believe  301
+/games.html  /games  301
+/methodology.html  /methodology  301
+
+# Library book detail pages — serves /library/book.html for any /library/:slug
+# Netlify file-based routing serves library.html for /library before this rule runs
+/library/:slug  /library/book.html  200

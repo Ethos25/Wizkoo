@@ -1,0 +1,50 @@
+[build]
+  publish = "."
+
+# ── Plan generator proxy ────────────────────────────────────────────────────
+[[redirects]]
+  from    = "/plan"
+  to      = "https://wizkoo-plan-generator.vercel.app/plan"
+  status  = 200
+  force   = true
+
+[[redirects]]
+  from    = "/plan/*"
+  to      = "https://wizkoo-plan-generator.vercel.app/plan/:splat"
+  status  = 200
+  force   = true
+
+# ── Legacy clean-URL redirects ───────────────────────────────────────────────
+[[redirects]]
+  from   = "/planner"
+  to     = "/plan"
+  status = 301
+
+[[redirects]]
+  from   = "/planner.html"
+  to     = "/plan"
+  status = 301
+
+[[redirects]]
+  from   = "/what-we-believe.html"
+  to     = "/what-we-believe"
+  status = 301
+
+[[redirects]]
+  from   = "/games.html"
+  to     = "/games"
+  status = 301
+
+[[redirects]]
+  from   = "/methodology.html"
+  to     = "/methodology"
+  status = 301
+
+# ── Library book detail pages ────────────────────────────────────────────────
+# Must come AFTER the /library exact-file match (library.html handles /library).
+# force = true so the rewrite fires even though /library/ is also a directory.
+[[redirects]]
+  from   = "/library/:slug"
+  to     = "/library/book.html"
+  status = 200
+  force  = true

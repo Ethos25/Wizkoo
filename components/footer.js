@@ -254,6 +254,7 @@
     '    <nav class="wf-learn" aria-label="Learn more">',
     '      <div class="wf-col-header" aria-hidden="true">Learn More</div>',
     '      <a href="/the-open-seat">The Open Seat</a>',
+    '      <a href="/what-we-believe">What We Believe</a>',
     '      <a href="/esa">ESA</a>',
     '      <a href="/about">About</a>',
     '      <a href="/#faq">FAQ</a>',

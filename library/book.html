@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Title and meta injected dynamically by library-book.js -->
+<title>Loading… | Wizkoo Library</title>
+<meta name="description" content="A curated book in the Wizkoo Library — chosen because it opens more than one door.">
+<link rel="canonical" id="bk-canonical" href="https://wizkoo.com/library">
+<meta property="og:title" id="bk-og-title" content="Wizkoo Library">
+<meta property="og:description" id="bk-og-desc" content="A curated book in the Wizkoo Library.">
+<meta property="og:image" id="bk-og-image" content="https://wizkoo.com/assets/wizkoo-og.png">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="bk-tw-title" content="Wizkoo Library">
+<meta name="twitter:description" id="bk-tw-desc" content="A curated book in the Wizkoo Library.">
+<meta name="twitter:image" id="bk-tw-image" content="https://wizkoo.com/assets/wizkoo-og.png">
+<!-- Schema.org Book markup injected by library-book.js after data fetch -->
+<script type="application/ld+json" id="bk-schema"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@200;300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/library.css">
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<div id="wizkoo-nav"></div>
+<script src="/components/nav.js"></script>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<main id="main-content" class="bk-page">
+
+  <!-- ═══ BREADCRUMB ═══ -->
+  <div class="bk-breadcrumb" aria-label="Breadcrumb">
+    <div class="bk-breadcrumb-inner">
+      <a href="/library">The Library</a>
+      <span class="bk-breadcrumb-sep" aria-hidden="true">→</span>
+      <span id="bk-breadcrumb-title">…</span>
+    </div>
+  </div>
+
+  <!-- ═══ HERO CONTENT (injected by JS) ═══ -->
+  <div id="bk-content">
+
+    <!-- Loading state -->
+    <div class="bk-hero" id="bk-loading" aria-live="polite">
+      <div class="bk-hero-grid">
+        <div class="bk-cover-col">
+          <div class="bk-cover" style="background:#1a1f30; box-shadow: 8px 8px 0 var(--saffron);">
+            <div style="width:100%; height:100%; background: linear-gradient(90deg, #1e2438 25%, #252c42 50%, #1e2438 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite;"></div>
+          </div>
+        </div>
+        <div class="bk-content-col">
+          <div style="display:flex; flex-direction:column; gap:12px; padding-top:8px;">
+            <div style="height:12px; width:40%; background: linear-gradient(90deg, #e8e6e0 25%, #f0ede7 50%, #e8e6e0 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite;"></div>
+            <div style="height:48px; width:80%; background: linear-gradient(90deg, #e8e6e0 25%, #f0ede7 50%, #e8e6e0 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite;"></div>
+            <div style="height:14px; width:55%; background: linear-gradient(90deg, #e8e6e0 25%, #f0ede7 50%, #e8e6e0 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite;"></div>
+            <div style="height:80px; width:90%; background: linear-gradient(90deg, #e8e6e0 25%, #f0ede7 50%, #e8e6e0 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite; margin-top:16px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ MORE IN THIS THEME (injected by JS) ═══ -->
+  <div id="bk-more-container"></div>
+
+  <!-- ═══ SUBSCRIBER CTA ═══ -->
+  <section class="lib-subscriber-cta" aria-label="Get personalized recommendations">
+    <div class="lib-subscriber-cta-inner">
+      <p class="lib-cta-tag">Personalized to Your Children</p>
+      <h2 class="lib-cta-title">See this book in your child's weekly plan.</h2>
+      <p class="lib-cta-body">Wizkoo matches books from The Library to each child's age, reading level, and the theme your family is exploring — automatically, every week.</p>
+      <a href="/plan" class="lib-cta-btn">Build Your Plan Free</a>
+    </div>
+  </section>
+
+  <!-- ═══ ESA LINE ═══ -->
+  <div class="lib-esa-line">
+    <p>Homeschooling with ESA funds? Wizkoo is ESA-eligible. <a href="/esa">Learn more →</a></p>
+  </div>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<div id="site-footer"></div>
+<script src="/components/footer.js"></script>
+
+<!-- Supabase client (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/js/supabase-config.js"></script>
+<script src="/js/library-book.js"></script>
+
+<script>
+/* ── Custom Cursor ── */
+(function(){
+  var c=document.getElementById('cursor'),cx=0,cy=0;window.mx=0;window.my=0;
+  document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
+  document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
+  var sel='a,button,.bk-more-card,.bk-cover-link,.bk-badge';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(sel))c.classList.add('hover')});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(sel))c.classList.remove('hover')});
+  (function tick(){cx+=(window.mx-cx)*0.15;cy+=(window.my-cy)*0.15;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(tick)})();
+})();
+</script>
+</body>
+</html>

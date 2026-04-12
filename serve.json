@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/library", "destination": "/library.html" },
+    { "source": "/library/**", "destination": "/library/book.html" }
+  ]
+}
