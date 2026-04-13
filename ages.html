@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-surface="linen">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink
 .sr-btn{opacity:0;transition:opacity 600ms ease}.sr-btn.v{opacity:1}
 
 /* ═══ HERO — linen, centered ═══ */
-.hero{background:var(--linen);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:72px 48px clamp(60px,10vh,120px);position:relative;overflow:hidden;text-align:center}
+.hero{background:var(--linen);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:52px 48px clamp(60px,10vh,120px);position:relative;overflow:hidden;text-align:center}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(242,240,234,0) 0%,rgba(224,222,214,.35) 100%);pointer-events:none}
 .hero-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(20px,3vh,32px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .25s}
 .hero-h{font-family:'Sora',sans-serif;font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.12;letter-spacing:-.03em;color:var(--ink);max-width:720px;margin-bottom:clamp(16px,2.5vh,28px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .45s}
@@ -57,10 +57,11 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink
 .cta-sub{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,242,248,.25);margin-top:clamp(14px,2vh,24px);position:relative;z-index:1}
 
 @media(max-width:1024px){}
-@media(max-width:768px){.hero{padding:72px 20px 48px}.tiers{padding:0 20px 56px}.tiers-grid{grid-template-columns:1fr}.closing{padding:56px 20px}.cta{padding:56px 20px}}
+@media(max-width:768px){.hero{padding:52px 20px 48px}.tiers{padding:0 20px 56px}.tiers-grid{grid-template-columns:1fr}.closing{padding:56px 20px}.cta{padding:56px 20px}}
 @media(hover:none)and(pointer:coarse){.cursor{display:none!important}}
 @media(prefers-reduced-motion:reduce){.hero-ey,.hero-h,.hero-sub{opacity:1!important;animation:none!important;transform:none!important}.sr,.sr-btn{opacity:1!important;transform:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
@@ -115,6 +116,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink
 
 </main>
 
+<div class="footer-fade"></div>
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
 

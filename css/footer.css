@@ -1,10 +1,9 @@
 /* ═══ FOOTER — Wizkoo Marketing Site ═══
-   Background: #0C1428 (Blueprint sidebar/overlay depth)
-   All pages use components/footer.js which injects #wizkoo-footer.
-   This file provides the nav-reset rule required by pages that load
-   nav.css (games.html, games/atlas.html, games/elementum.html, etc.)
-   and serves as a style reference. The authoritative footer styles
-   live inline in components/footer.js as #wizkoo-footer { … } blocks.
+   The dark planetarium footer is rendered sitewide via components/footer.js.
+   Authoritative footer styles live inline in footer.js as #wizkoo-footer { … } blocks.
+   This file provides:
+     1. The nav-reset rule required by pages that load nav.css
+     2. The linen-page transition zone class (.footer-fade)
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ─── Critical: reset nav.css position:fixed for <nav> inside footer ─── */
@@ -19,21 +18,21 @@ footer nav,
   box-shadow: none !important;
 }
 
-/* ─── Educator footer line (used by legacy .ft-educator class) ─── */
-.ft-educator {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.45rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #50556E;
-  margin-top: 24px;
-  padding: 0 var(--content-pad, 48px);
-  text-align: right;
+/* ─── Linen-page transition zone ──────────────────────────────────────────
+   Add <div class="footer-fade"></div> immediately before #site-footer on
+   pages whose last content surface is linen/warm (index, pricing, about,
+   ages, what-we-believe). Creates a 100px fade from the linen surface into
+   the dark footer rather than a hard cut.
+   ─────────────────────────────────────────────────────────────────────── */
+.footer-fade {
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(7, 12, 26, 0.8) 100%
+  );
+  pointer-events: none;
+  position: relative;
+  z-index: 10;
+  margin-top: -100px;
 }
-.ft-educator a {
-  color: #8C91A5;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 200ms ease;
-}
-.ft-educator a:hover { color: #F0F2F8; }

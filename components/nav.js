@@ -1,33 +1,36 @@
 /**
  * Wizkoo Site Nav — single source of truth
  * Injects the canonical nav into #wizkoo-nav on every marketing page.
- * Runs synchronously (no DOMContentLoaded wrapper) so the nav is in the
- * DOM immediately, matching footer.js behaviour.
+ * Runs synchronously so nav + announcement bar are in the DOM immediately.
+ *
+ * Structure (top to bottom inside #wizkoo-nav):
+ *   1. .announce  — position:sticky top:0   z-index:21  (scrolls away on mobile)
+ *   2. .nav        — position:sticky top:30px z-index:20  (always present, sticks below bar)
+ *   3. #nav-mobile-menu — position:fixed, opens below nav
  *
  * Active link is detected automatically from window.location.pathname.
- * Hamburger / mobile-menu behaviour is attached after HTML injection.
  */
 (function () {
   var el = document.getElementById('wizkoo-nav');
   if (!el) return;
+
+  /* ── Noise SVG data URL (shared by both bars) ─────────────────────── */
+  var NOISE = 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3CfeColorMatrix type=\'saturate\' values=\'0\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")';
 
   /* ── Scoped styles ──────────────────────────────────────────────────── */
   if (!document.getElementById('wn-styles')) {
     var style = document.createElement('style');
     style.id = 'wn-styles';
     style.textContent = [
-      /* Ensure --expo and --saffron are available if not set by the page */
+
+      /* Ensure tokens are available if not set by the page */
       ':root{',
       '  --expo:cubic-bezier(0.16,1,0.3,1);',
       '  --saffron:#E8AF38;',
       '  --ink:#0C1020;',
       '}',
 
-      /* Wordmark dot + animations (shared with .nav-wm) */
-      '.wm-dot{display:inline-block;position:relative;margin-left:-0.08em}',
-      '.wm-dot::after{content:\'\';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron);transition:transform .3s var(--expo)}',
-      '.nav-wm:hover .wm-dot::after{animation:dotReact .4s var(--expo)}',
-      '@keyframes dotReact{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}',
+      /* ── kGiggle + dot animations ── */
       '@keyframes kGiggle{',
       '  0%{transform:rotate(8deg)}',
       '  6%{transform:rotate(12deg) translateY(-1px)}',
@@ -44,91 +47,256 @@
       '  85%{transform:rotate(8deg)}',
       '  100%{transform:rotate(8deg)}',
       '}',
+      '@keyframes dotReact{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}',
 
-      /* Site nav bar */
-      '.site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(12,16,32,0.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;transform:translateY(0);pointer-events:auto}',
-      '.site-nav::after{content:\'\';position:absolute;bottom:0;left:0;right:0;height:1px;filter:none;background:linear-gradient(90deg,transparent,var(--saffron),transparent);opacity:0.4}',
-      '.site-nav a:not(.nav-cta-sm):not(.nav-launch),.nav-bar a:not(.nav-cta-sm):not(.nav-launch){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}',
+      /* ── Wordmark dot ── */
+      '.wm-dot{display:inline-block;position:relative;margin-left:-0.08em}',
+      '.wm-dot::after{content:\'\';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron);transition:transform .3s var(--expo)}',
+      '.nav-wm:hover .wm-dot::after{animation:dotReact .4s var(--expo)}',
 
-      /* Nav bar inner */
-      '.nav-bar{width:100%;max-width:1200px;height:100%;padding:0 48px;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:40px}',
+      /* ═══ ANNOUNCEMENT BAR ═══ */
+      '.announce{',
+      '  height:30px;',
+      '  margin:0;',
+      '  background:rgba(12,16,32,0.44);',
+      '  backdrop-filter:blur(14px);',
+      '  -webkit-backdrop-filter:blur(14px);',
+      '  border-bottom:1px solid rgba(232,175,56,0.14);',
+      '  display:flex;',
+      '  align-items:center;',
+      '  justify-content:center;',
+      '  position:relative;',
+      '  overflow:hidden;',
+      '}',
+      '.announce::before{',
+      '  content:\'\';',
+      '  position:absolute;',
+      '  inset:0;',
+      '  background-image:' + NOISE + ';',
+      '  background-size:256px 256px;',
+      '  opacity:0.028;',
+      '  pointer-events:none;',
+      '}',
+      '.announce-text{',
+      '  font-family:\'Space Mono\',monospace;',
+      '  font-size:7px;',
+      '  letter-spacing:0.28em;',
+      '  text-transform:uppercase;',
+      '  color:rgba(232,175,56,0.60);',
+      '  position:relative;',
+      '  z-index:1;',
+      '}',
 
-      /* Wordmark */
-      '.nav-wm{font-family:\'Sora\',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.02em;color:#F0F2F8;text-decoration:none;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:baseline;line-height:1;margin-right:auto;background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}',
+      /* ═══ NAV BAR ═══ */
+      '.nav{',
+      '  height:52px;',
+      '  margin:0;',
+      '  padding:0 40px;',
+      '  position:relative;',
+      '  display:flex;',
+      '  align-items:center;',
+      '  justify-content:space-between;',
+      '  background:linear-gradient(90deg,rgba(12,16,32,0.44) 0%,rgba(12,16,32,0.22) 28%,rgba(12,16,32,0.06) 100%);',
+      '  backdrop-filter:blur(32px) saturate(1.4);',
+      '  -webkit-backdrop-filter:blur(32px) saturate(1.4);',
+      '  border-bottom:1px solid rgba(255,255,255,0.05);',
+      '  isolation:isolate;',
+      '  pointer-events:auto;',
+      '}',
+
+      /* Noise texture — physical depth layer */
+      '.nav::before{',
+      '  content:\'\';',
+      '  position:absolute;',
+      '  inset:0;',
+      '  background-image:' + NOISE + ';',
+      '  background-size:256px 256px;',
+      '  opacity:0.030;',
+      '  pointer-events:none;',
+      '  z-index:-1;',
+      '}',
+
+
+      /* Prevent links inside nav from picking up page-level overrides */
+      '.nav a:not(.nav-cta){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}',
+
+      /* ── Left: Wordmark ── */
+      '.nav-wm{',
+      '  font-family:\'Sora\',sans-serif;',
+      '  font-weight:800;',
+      '  font-size:17px;',
+      '  letter-spacing:-0.04em;',
+      '  color:#FAFAFA;',
+      '  text-decoration:none;',
+      '  white-space:nowrap;',
+      '  flex-shrink:0;',
+      '  display:inline-flex;',
+      '  align-items:baseline;',
+      '  line-height:1;',
+      '  background:transparent!important;',
+      '  border:none!important;',
+      '  box-shadow:none!important;',
+      '  outline:none!important;',
+      '}',
       '.nav-wm .k{display:inline-block;transform:rotate(8deg);transform-origin:bottom center;color:var(--saffron)}',
       '.nav-wm:hover .k{animation:kGiggle 0.8s ease-in-out}',
       '.nav-wm .i-fix{position:relative;display:inline-block}',
 
-      /* Center links */
-      '.nav-center{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:28px;flex:1;justify-content:center}',
+      /* ── Center: Nav links — absolute-centered ── */
+      '.nav-center{',
+      '  position:absolute;',
+      '  left:50%;',
+      '  top:0;',
+      '  height:100%;',
+      '  transform:translateX(-50%);',
+      '  display:flex;',
+      '  align-items:center;',
+      '  flex-direction:row;',
+      '  flex-wrap:nowrap;',
+      '  gap:26px;',
+      '}',
 
-      /* Nav links */
-      '.nav-science{font-family:\'Space Mono\',monospace;font-weight:400;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,242,248,0.7);text-decoration:none;white-space:nowrap;position:relative;padding-bottom:2px;transition:color .25s}',
-      '.nav-science::after{content:\'\';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--saffron);transition:width .3s var(--expo)}',
-      '.nav-science:hover{color:rgba(240,242,248,1)}',
-      '.nav-science:hover::after{width:100%}',
-      '.nav-science.active{color:rgba(240,242,248,1)}',
-      '.nav-science.active::after{width:100%}',
+      /* ── Nav links ── */
+      '.nav-link{',
+      '  font-family:\'Space Mono\',monospace;',
+      '  font-weight:400;',
+      '  font-size:7.5px;',
+      '  letter-spacing:0.15em;',
+      '  text-transform:uppercase;',
+      '  color:rgba(255,255,255,0.65);',
+      '  text-decoration:none;',
+      '  white-space:nowrap;',
+      '  position:relative;',
+      '  transition:color 0.2s;',
+      '  background:transparent!important;',
+      '  border:none!important;',
+      '  box-shadow:none!important;',
+      '  outline:none!important;',
+      '}',
+      '.nav-link::after{',
+      '  content:\'\';',
+      '  position:absolute;',
+      '  bottom:-2px;',
+      '  left:0;',
+      '  width:0;',
+      '  height:1px;',
+      '  background:#E8AF38;',
+      '  transition:width 0.25s cubic-bezier(0.16,1,0.3,1);',
+      '}',
+      '.nav-link:hover{color:rgba(255,255,255,0.90)}',
+      '.nav-link:hover::after{width:100%}',
+      '.nav-link.active{color:#FAFAFA}',
+      '.nav-link.active::after{width:100%}',
 
-      /* CTA variants */
-      '.nav-cta-sm{font-family:\'Space Mono\',monospace;font-weight:400;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:8px 18px;background:var(--saffron)!important;color:var(--ink)!important;text-decoration:none!important;transition:background .3s,transform .2s;white-space:nowrap;flex-shrink:0;border-radius:2px;border:none!important;box-shadow:none!important;outline:none!important}',
-      '.nav-cta-sm:hover{background:#D4A030!important;transform:translateY(-1px)}',
-      '.nav-launch{font-family:\'Space Mono\',monospace;font-weight:700;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;padding:7px 16px;background:var(--saffron);color:var(--ink);text-decoration:none;white-space:nowrap;flex-shrink:0;border-radius:2px;border:none;outline:none;transition:background .2s,transform .2s;display:inline-block}',
-      '.nav-launch:hover{background:#D4A030;transform:translateY(-1px)}',
+      /* ═══ NAV CTA ═══ */
+      '.nav-cta{',
+      '  font-family:\'Sora\',sans-serif;',
+      '  font-weight:700;',
+      '  font-size:9px;',
+      '  letter-spacing:0.07em;',
+      '  text-transform:uppercase;',
+      '  padding:8px 18px;',
+      '  background:transparent;',
+      '  color:#E8AF38;',
+      '  border:1px solid rgba(232,175,56,0.65);',
+      '  box-shadow:none;',
+      '  text-decoration:none;',
+      '  display:inline-block;',
+      '  white-space:nowrap;',
+      '  flex-shrink:0;',
+      '  transition:border-color 0.22s cubic-bezier(0.16,1,0.3,1),box-shadow 0.22s cubic-bezier(0.16,1,0.3,1);',
+      '}',
+      '.nav-cta:hover{',
+      '  border-color:rgba(232,175,56,1.0);',
+      '  box-shadow:0 0 0 1px rgba(232,175,56,0.20),0 2px 12px rgba(232,175,56,0.18);',
+      '}',
 
-      /* Hamburger (mobile only) */
+      /* ── Hamburger (mobile only) ── */
       '.nav-hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;padding:0;background:transparent;border:none;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent}',
-      '.nav-hamburger-line{display:block;width:20px;height:2px;background:rgba(240,242,248,0.8);border-radius:1px}',
+      '.nav-hamburger-line{display:block;width:20px;height:2px;background:rgba(250,250,250,0.7);border-radius:1px}',
 
-      /* Mobile menu panel */
-      '.nav-mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;z-index:998;overflow:hidden;pointer-events:none}',
-      '.nav-mobile-menu-inner{background:#F2F0EA;border-bottom:1px solid #E0DED6;transform:translateY(-100%);transition:transform 150ms ease-in;padding:8px 0;box-shadow:0 4px 12px rgba(12,16,32,0.06)}',
+      /* ── Mobile menu panel (position:fixed, below sticky nav) ── */
+      '.nav-mobile-menu{display:none;position:fixed;top:52px;left:0;right:0;z-index:19;overflow:hidden;pointer-events:none}',
+      '.nav-mobile-menu-inner{',
+      '  background:rgba(12,16,32,0.96);',
+      '  -webkit-backdrop-filter:blur(20px);',
+      '  backdrop-filter:blur(20px);',
+      '  border-bottom:1px solid rgba(255,255,255,0.08);',
+      '  transform:translateY(-100%);',
+      '  transition:transform 150ms ease-in;',
+      '  padding:8px 0;',
+      '}',
       '.nav-mobile-menu.open{pointer-events:auto}',
-      '.nav-mobile-menu.open .nav-mobile-menu-inner{transform:translateY(0);transition:transform 200ms cubic-bezier(0.16,1,0.3,1)}',
-      '.nav-mobile-menu a{display:block;font-family:\'Space Mono\',monospace;font-weight:400;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#0C1020;text-decoration:none;padding:16px 24px;background:transparent;border:none;-webkit-tap-highlight-color:transparent;outline:none}',
-      '.nav-mobile-menu a:hover{color:rgba(12,16,32,0.55)}',
+      '.nav-mobile-menu.open .nav-mobile-menu-inner{transform:translateY(0);transition:transform 300ms cubic-bezier(0.16,1,0.3,1)}',
+      '.nav-mobile-menu a{',
+      '  display:block;',
+      '  font-family:\'Space Mono\',monospace;',
+      '  font-weight:400;',
+      '  font-size:9px;',
+      '  letter-spacing:0.15em;',
+      '  text-transform:uppercase;',
+      '  line-height:32px;',
+      '  color:rgba(255,255,255,0.6);',
+      '  text-decoration:none;',
+      '  padding:10px 40px;',
+      '  background:transparent;',
+      '  border:none;',
+      '  -webkit-tap-highlight-color:transparent;',
+      '  outline:none;',
+      '  transition:color 0.2s;',
+      '}',
+      '.nav-mobile-menu a:hover{color:rgba(255,255,255,0.9)}',
       '.nav-mobile-menu a:focus-visible{outline:2px solid var(--saffron);outline-offset:-2px}',
 
-      /* Tagline strip (HTML stays per-page; CSS lives here) */
-      '.nav-tagline-strip{position:fixed;top:72px;left:0;right:0;z-index:999;height:24px;background:rgba(12,16,32,0.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-family:\'Space Mono\',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,175,56,0.55)}',
-      '.nav-tagline-strip::after{content:\'\';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(232,175,56,0.12),transparent)}',
-
-      /* Responsive */
+      /* ═══ MOBILE ═══ */
       '@media(max-width:768px){',
-      '  .nav-hamburger{display:flex;order:-1}',
+      '  .nav{padding:0 20px}',
+      '  .nav-hamburger{display:flex}',
       '  .nav-mobile-menu{display:block}',
       '  .nav-center{display:none}',
-      '  .nav-science{display:none}',
-      '  .nav-launch{font-size:8px;padding:6px 12px}',
-      '  .nav-tagline-strip{display:none}',
-      '  .nav-bar{padding:0 16px;gap:16px;justify-content:space-between}',
+      '  .nav-cta{font-size:8px;padding:6px 12px}',
       '}'
+
     ].join('\n');
     document.head.appendChild(style);
   }
 
+  /* ── Container is the sticky element ──────────────────────────────── */
+  /* top:-30px = negative of announce bar height.                         */
+  /* As page scrolls 30px, bar clips above viewport, nav locks at top.   */
+  el.style.position = 'sticky';
+  el.style.top      = '-30px';
+  el.style.zIndex   = '20';
+
   /* ── Nav HTML ───────────────────────────────────────────────────────── */
   el.innerHTML = [
-    '<div class="site-nav" id="site-nav" role="navigation" aria-label="Main navigation">',
-    '  <div class="nav-bar">',
-    '    <a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a>',
-    '    <div class="nav-center">',
-    '      <a href="/plan" class="nav-science">The Plan</a>',
-    '      <a href="/games" class="nav-science">The Games</a>',
-    '      <a href="/library" class="nav-science">The Library</a>',
-    '      <a href="/methodology" class="nav-science">The Science</a>',
-    '      <a href="/ages" class="nav-science">The Ages</a>',
-    '      <a href="/the-open-seat" class="nav-science">The Open Seat</a>',
-    '      <a href="/pricing" class="nav-science">The Price</a>',
-    '    </div>',
-    '    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">',
-    '      <span class="nav-hamburger-line"></span>',
-    '      <span class="nav-hamburger-line"></span>',
-    '      <span class="nav-hamburger-line"></span>',
-    '    </button>',
-    '    <a href="/plan" class="nav-launch">Build Your Plan</a>',
-    '  </div>',
+
+    /* 1. Announcement bar — sticky top:0, scrolls away on mobile */
+    '<div class="announce" role="banner" aria-label="Site announcement">',
+    '  <span class="announce-text">Personalized homeschool learning plans. Books. Games. Connected by one theme.</span>',
     '</div>',
+
+    /* 2. Frosted glass nav — sticky top:30px, always present on desktop */
+    '<div class="nav" id="site-nav" role="navigation" aria-label="Main navigation">',
+    '  <a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a>',
+    '  <div class="nav-center">',
+    '    <a href="/plan"          class="nav-link">The Plan</a>',
+    '    <a href="/games"         class="nav-link">The Games</a>',
+    '    <a href="/library"       class="nav-link">The Library</a>',
+    '    <a href="/methodology"   class="nav-link">The Science</a>',
+    '    <a href="/ages"          class="nav-link">The Ages</a>',
+    '    <a href="/the-open-seat" class="nav-link">The Open Seat</a>',
+    '    <a href="/pricing"       class="nav-link">The Price</a>',
+    '  </div>',
+    '  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">',
+    '    <span class="nav-hamburger-line"></span>',
+    '    <span class="nav-hamburger-line"></span>',
+    '    <span class="nav-hamburger-line"></span>',
+    '  </button>',
+    '  <a href="/plan" class="nav-cta">Build Your Plan</a>',
+    '</div>',
+
+    /* 3. Mobile menu — position:fixed, opens below sticky nav */
     '<nav class="nav-mobile-menu" id="nav-mobile-menu" aria-label="Main menu" aria-hidden="true">',
     '  <div class="nav-mobile-menu-inner">',
     '    <a href="/plan">The Plan</a>',
@@ -140,11 +308,12 @@
     '    <a href="/pricing">The Price</a>',
     '  </div>',
     '</nav>'
+
   ].join('\n');
 
   /* ── Active link ────────────────────────────────────────────────────── */
   var path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
-  el.querySelectorAll('.nav-science').forEach(function (link) {
+  el.querySelectorAll('.nav-link').forEach(function (link) {
     var href = link.getAttribute('href').replace(/\.html$/, '').replace(/\/$/, '') || '/';
     if (href === path || (href !== '/' && path.startsWith(href))) {
       link.classList.add('active');

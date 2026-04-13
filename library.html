@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-surface="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +49,12 @@
 <script src="/components/nav.js"></script>
 <a href="#main-content" class="skip-nav">Skip to main content</a>
 
-<main id="main-content" style="padding-top:72px">
+<main id="main-content">
+
+  <div class="lib-star-field" id="lib-stars" aria-hidden="true"></div>
+  <div class="lib-nebula lib-nb1" aria-hidden="true"></div>
+  <div class="lib-nebula lib-nb2" aria-hidden="true"></div>
+  <div class="lib-nebula lib-nb3" aria-hidden="true"></div>
 
   <!-- ═══ HERO ═══ -->
   <section class="lib-hero" aria-label="The Library">
@@ -84,7 +89,7 @@
           <span class="abc-tagline">They read. You talk about it at dinner.</span>
         </button>
         <button class="age-band-card" data-band="10-12" aria-pressed="false">
-          <span class="abc-ages">Ages 10–12</span>
+          <span class="abc-ages">Ages 11–12</span>
           <span class="abc-role">Read and Explore</span>
           <span class="abc-tagline">They go deep. You go there with them.</span>
         </button>
@@ -200,6 +205,34 @@
 
 <script src="/js/supabase-config.js"></script>
 <script src="/js/library.js"></script>
+
+<script>
+/* ── Star Field Generator ── */
+(function(){
+  var s = document.getElementById('lib-stars');
+  if (!s) return;
+  var html = '';
+  for (var i = 0; i < 160; i++) {
+    var x  = Math.random() * 100;
+    var y  = Math.random() * 100;
+    var sz = Math.random() < 0.7 ? 1
+             : Math.random() < 0.6 ? 1.5 : 2;
+    var lo  = (0.05 + Math.random() * 0.12).toFixed(2);
+    var hi  = (0.28 + Math.random() * 0.45).toFixed(2);
+    var dur = (2 + Math.random() * 4).toFixed(1);
+    var del = (Math.random() * 5).toFixed(1);
+    html += '<div style="position:absolute;border-radius:50%;'
+          + 'background:#F0F2F8;'
+          + 'left:'+x+'%;top:'+y+'%;'
+          + 'width:'+sz+'px;height:'+sz+'px;'
+          + 'animation:libTwinkle '+dur+'s ease-in-out '
+          + 'infinite '+del+'s;'
+          + '--lo:'+lo+';--hi:'+hi+';">'
+          + '</div>';
+  }
+  s.innerHTML = html;
+})();
+</script>
 
 <script>
 /* ── Custom Cursor ── */
