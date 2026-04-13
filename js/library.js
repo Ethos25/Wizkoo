@@ -19,7 +19,7 @@
     { id: '2-4',   label: 'Ages 2–4',   role: 'Read Together' },
     { id: '5-7',   label: 'Ages 5–7',   role: 'Read Side by Side' },
     { id: '8-10',  label: 'Ages 8–10',  role: 'Read and Discuss' },
-    { id: '10-12', label: 'Ages 10–12', role: 'Read and Explore' },
+    { id: '10-12', label: 'Ages 11–12', role: 'Read and Explore' },
   ];
 
   var THEMES_PER_BAND  = 6;   // max theme clusters shown per band
@@ -228,16 +228,24 @@
       'Print this list for your library visit.</button>';
     html += '</div>'; // .lib-band-view-header
 
+    var orbDiv = '<div class="lib-orbital-div" aria-hidden="true">' +
+      '<div class="lib-orb-line"></div>' +
+      '<div class="lib-orb-dot"></div>' +
+      '<div class="lib-orb-line"></div>' +
+      '</div>';
+
     if (topThemes.length === 0) {
       // No meta-theme overlap for this band — fallback: show books ungrouped
-      html += renderThemeCluster('Books', null, bandBooks, bandId, null);
+      html += renderThemeCluster('Books', null, bandBooks, bandId, null, bandConfig.label);
     } else {
-      topThemes.forEach(function (te) {
-        html += renderThemeCluster(te.label, te.slug, te.books, bandId, te.books.length);
+      topThemes.forEach(function (te, i) {
+        if (i > 0) html += orbDiv;
+        html += renderThemeCluster(te.label, te.slug, te.books, bandId, te.books.length, bandConfig.label);
       });
 
       if (otherBooks.length > 0 && topThemes.length < THEMES_PER_BAND) {
-        html += renderThemeCluster('More Books', null, otherBooks, bandId, null);
+        html += orbDiv;
+        html += renderThemeCluster('More Books', null, otherBooks, bandId, null, bandConfig.label);
       }
     }
 
@@ -254,22 +262,28 @@
   }
 
   /* Renders a single theme cluster with up to BOOKS_PER_THEME cards */
-  function renderThemeCluster(label, slug, books, bandId, totalCount) {
+  function renderThemeCluster(label, slug, books, bandId, totalCount, bandLabel) {
     var toShow  = books.slice(0, BOOKS_PER_THEME);
     var hasMore = totalCount !== null && totalCount > BOOKS_PER_THEME;
 
     var html = '<div class="lib-theme-cluster">';
     html += '<div class="lib-theme-header">';
-    html += '<span class="lib-theme-label">' + esc(label) + '</span>';
+    if (bandLabel) {
+      html += '<span class="lib-theme-eyebrow">' + esc(bandLabel) + '</span>';
+    }
+    html += '<div class="lib-theme-header-row">';
+    html += '<h3 class="lib-theme-title">' + esc(label) + '</h3>';
     if (hasMore && slug) {
       html += '<a href="/library?band=' + esc(bandId) + '&theme=' + esc(slug) +
         '" class="lib-theme-see-all">See all ' + totalCount + ' →</a>';
     }
     html += '</div>';
+    html += '<div class="lib-theme-rule"></div>';
+    html += '</div>'; // .lib-theme-header
     html += '<div class="book-grid">';
     toShow.forEach(function (book) { html += renderBookCard(book); });
     html += '</div>';
-    html += '</div>';
+    html += '</div>'; // .lib-theme-cluster
     return html;
   }
 
@@ -300,13 +314,10 @@
       'aria-label="' + esc(book.title) + ' by ' + esc(book.author) + '">' +
       '<div class="book-card-cover">' + coverHtml + '</div>' +
       '<div class="book-card-body">' +
-        '<div class="book-card-orbital" aria-label="Orbital score: ' + book.orbital_score + ' out of 5">' +
-          orbitalDots +
-        '</div>' +
+        '<div class="book-card-badges">' + bandBadges + formatBadge + '</div>' +
         '<p class="book-card-title">' + esc(book.title) + '</p>' +
         '<p class="book-card-author">by ' + esc(book.author) + '</p>' +
-        '<p class="book-card-hook">' + esc(book.hook) + '</p>' +
-        '<div class="book-card-badges">' + bandBadges + formatBadge + '</div>' +
+        (book.orbital_score ? '<div class="book-card-orbital" aria-label="Orbital score: ' + book.orbital_score + ' out of 5">' + orbitalDots + '</div>' : '') +
       '</div>' +
     '</a>';
   }
