@@ -4,6 +4,10 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── Page shell ──────────────────────────────────────────────────────────── */
+#main-content {
+  position: relative;
+}
+
 body {
   background-image:
     radial-gradient(ellipse at 50% 45%, #182848 0%, #101830 70%),
@@ -103,7 +107,7 @@ body {
   50%       { opacity: var(--hi, 0.55); }
 }
 .lib-nebula {
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   filter: blur(80px);
   pointer-events: none;
