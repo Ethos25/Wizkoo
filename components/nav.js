@@ -280,7 +280,7 @@
 
     /* 1. Announcement bar — sticky top:0, scrolls away on mobile */
     '<div class="announce" role="banner" aria-label="Site announcement">',
-    '  <span class="announce-text">Personalized homeschool learning plans. Books. Games. Connected by one theme.</span>',
+    '  <span class="announce-text">Personalized homeschool learning plans, ages 2 to 12. Books. Games. Connected by one theme.</span>',
     '</div>',
 
     /* 2. Frosted glass nav — sticky top:30px, always present on desktop */

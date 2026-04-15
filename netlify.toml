@@ -4,13 +4,13 @@
 # ── Plan generator proxy ────────────────────────────────────────────────────
 [[redirects]]
   from    = "/plan"
-  to      = "https://wizkoo-plan-generator.vercel.app/plan"
+  to      = "https://wizkoo-plan-generator.vercel.app"
   status  = 200
   force   = true
 
 [[redirects]]
   from    = "/plan/*"
-  to      = "https://wizkoo-plan-generator.vercel.app/plan/:splat"
+  to      = "https://wizkoo-plan-generator.vercel.app/:splat"
   status  = 200
   force   = true
 

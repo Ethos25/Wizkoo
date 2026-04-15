@@ -176,6 +176,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 /* ═══ WORDMARK TERMINAL DOT ═══ */
 .wm-dot{display:inline-block;position:relative;margin-left:-0.08em}
 .wm-dot::after{content:'';position:absolute;top:.1em;right:-.2em;width:.22em;height:.22em;border-radius:50%;background:var(--saffron);transition:transform .3s var(--expo)}
+.wm-dot--super::after{top:-0.55em!important;right:-0.15em!important;width:0.18em!important;height:0.18em!important}
 .wm:hover .wm-dot::after{animation:dotReact .4s var(--expo)}
 .nav-wm:hover .wm-dot::after{animation:dotReact .4s var(--expo)}
 @keyframes dotReact{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}
@@ -1024,15 +1025,23 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nh-inner{width:100%;max-width:1200px;margin:0 auto}
 .nh-grid{display:grid;grid-template-columns:52% 1fr;gap:80px;align-items:center}
 .nh-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.44);margin-bottom:12px;display:block}
-.nh-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,48px);color:#0C1020;line-height:1.08;letter-spacing:-0.025em;margin-bottom:20px}
-.nh-pillars{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(12,16,32,0.10)}
-.nh-pillar{padding-top:14px;padding-right:24px;padding-left:24px;border-right:1px solid rgba(12,16,32,0.10)}
+.nh-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(52px,6.8vw,84px);color:#0C1020;line-height:1.06;letter-spacing:-0.03em;margin-bottom:20px}
+.nh-proof{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(12px,1.1vw,15px);color:rgba(12,16,32,0.50);line-height:1.5;letter-spacing:-0.01em;margin-bottom:24px}
+.nh-dot{display:inline-block;width:0.22em;height:0.22em;border-radius:50%;background:#E8AF38;margin-left:0.04em;vertical-align:baseline;position:relative;top:0.06em}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.nh-pillars{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(12,16,32,0.10)}
+.nh-pillar{padding-top:28px;padding-right:28px;padding-left:28px;border-right:1px solid rgba(12,16,32,0.10)}
 .nh-pillar:first-child{padding-left:0}
-.nh-pillar:last-child{border-right:none}
+.nh-pillar:last-child{border-right:none;padding-right:0}
 .nh-pillar-accent{display:block;width:24px;height:1.5px;background:#E8AF38;margin-bottom:14px}
-.nh-pillar-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#0C1020;margin-bottom:14px;display:block}
-.nh-pillar-body{font-family:'Sora',sans-serif;font-weight:300;font-size:14px;line-height:1.65;color:rgba(12,16,32,0.65);margin:0}
-.nh-right{display:flex;align-items:center;justify-content:flex-start}
+.nh-pillar-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#0C1020;margin-bottom:16px;display:block}
+.nh-pillar-body{font-family:'Sora',sans-serif;font-weight:300;font-size:15px;line-height:1.7;color:rgba(12,16,32,0.65);margin:0}
+.nh-theme-hint{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.10em;color:rgba(12,16,32,0.38);margin-top:8px;display:block;line-height:1.6}
+.nh-theme-hint a{color:#E8AF38;text-decoration:none;border-bottom:1px solid rgba(232,175,56,0.35);padding-bottom:1px}
+.nh-theme-hint a:hover{border-bottom-color:#E8AF38}
+.nh-trust-strip{background:#F2F0EA;border-top:1px solid rgba(12,16,32,0.10);padding:14px 80px;text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.50)}
+.nh-trust-auto{color:#E8AF38}
+.nh-right{display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .nh-form-wrap{width:100%;max-width:380px}
 .nh-form-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.40);margin-bottom:16px;display:block}
 .nh-form{display:flex;flex-direction:column;gap:16px}
@@ -1045,19 +1054,23 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nh-select{cursor:pointer;padding-right:20px}
 .nh-select:invalid{color:rgba(12,16,32,0.34)}
 .nh-select option{color:#0C1020}
-.nh-submit-group{display:flex;flex-direction:column;align-items:flex-start;margin-top:16px;gap:12px}
-.nh-submit{font-family:'Sora',sans-serif;font-weight:700;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:12px 28px;background:#E8AF38;color:#0C1020;border:none;border-radius:0;cursor:pointer;white-space:nowrap;display:inline-block;transition:background 0.2s}
-.nh-submit:hover{background:#EDBA45}
+.nh-submit-group{display:flex;flex-direction:column;align-items:flex-end;margin-top:16px;gap:12px}
+.nh-submit{font-family:'Sora',sans-serif;font-weight:700;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 40px;background:transparent;color:#0C1020;border:none;border-radius:0;cursor:pointer;white-space:nowrap;display:inline-block;box-shadow:6px 6px 0 #E8AF38;transition:transform 0.15s cubic-bezier(0.16,1,0.3,1),box-shadow 0.15s cubic-bezier(0.16,1,0.3,1)}
+.nh-submit:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #E8AF38}
 .nh-microcopy{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.09em;color:rgba(12,16,32,0.40);line-height:1.7;margin:0}
 @media(max-width:768px){
   .nh-section{padding:60px 24px;min-height:auto;align-items:flex-start}
   .nh-grid{grid-template-columns:1fr;gap:48px}
-  .nh-pillars{grid-template-columns:1fr}
-  .nh-pillar{border-right:none;border-bottom:1px solid rgba(12,16,32,0.10);padding:16px 0}
-  .nh-pillar:last-child{border-bottom:none}
+  .nh-pillars{grid-template-columns:1fr 1fr}
+  .nh-pillar{border-right:none;border-bottom:1px solid rgba(12,16,32,0.10);padding:14px 8px}
+  .nh-pillar:nth-child(odd){border-right:1px solid rgba(12,16,32,0.10)}
+  .nh-pillar:nth-last-child(-n+2){border-bottom:none}
+  .nh-pillar:first-child{padding-left:0}
+  .nh-pillar:last-child{padding-right:0;border-bottom:none}
   .nh-right{width:100%}
   .nh-form-wrap{max-width:100%}
   .nh-submit{width:100%;text-align:center}
+  .nh-trust-strip{padding:12px 24px;font-size:8px;letter-spacing:0.16em}
 }
 @media(prefers-reduced-motion:reduce){.nh-input,.nh-submit{transition:none}}
 
@@ -1065,16 +1078,18 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 @media(max-height:780px){
   .nh-section{padding:20px 80px}
   .nh-eyebrow{margin-bottom:8px}
-  .nh-h1{font-size:clamp(22px,2.8vw,38px);margin-bottom:12px}
+  .nh-h1{font-size:clamp(22px,2.8vw,38px);margin-bottom:8px}
+  .nh-proof{font-size:11px;margin-bottom:12px}
   .nh-pillar{padding-top:8px}
   .nh-pillar-accent{margin-bottom:8px}
-  .nh-pillar-label{margin-bottom:8px}
-  .nh-pillar-body{font-size:12px;line-height:1.5}
+  .nh-pillar-label{margin-bottom:6px}
+  .nh-pillar-body{font-size:11px;line-height:1.45}
   .nh-form-label{margin-bottom:10px}
   .nh-form{gap:10px}
   .nh-input{padding:8px 0;font-size:14px}
   .nh-submit-group{margin-top:10px;gap:8px}
   .nh-microcopy{display:none}
+  .nh-theme-hint{display:none}
 }
 
 /* ═══ HERO INTAKE FORM ═══ */
@@ -1125,25 +1140,10 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
     <div class="nh-grid">
       <!-- Left column: product copy -->
       <div class="nh-left">
-        <p class="nh-eyebrow">Personalized learning. Every week.</p>
-        <h1 class="nh-h1" id="nh-headline">One theme runs your family's entire learning week<span style="color:#E8AF38">.</span></h1>
-        <div class="nh-pillars">
-          <div class="nh-pillar">
-            <span class="nh-pillar-accent"></span>
-            <span class="nh-pillar-label">THE PLAN</span>
-            <p class="nh-pillar-body">One theme. Every child gets a week built for their level, not the family's average.</p>
-          </div>
-          <div class="nh-pillar">
-            <span class="nh-pillar-accent"></span>
-            <span class="nh-pillar-label">THE LIBRARY</span>
-            <p class="nh-pillar-body">Over five hundred books already matched to the theme. The right one for each child is waiting.</p>
-          </div>
-          <div class="nh-pillar">
-            <span class="nh-pillar-accent"></span>
-            <span class="nh-pillar-label">THE GAMES</span>
-            <p class="nh-pillar-body">Geography and science that run the same theme. Play and learning are the same hour.</p>
-          </div>
-        </div>
+        <p class="nh-eyebrow">One price. Every child.</p>
+        <h1 class="visually-hidden">Personalized homeschool learning plans for families with children ages 2 to 12</h1>
+        <h2 class="nh-h1" id="nh-headline" style="color:#0C1020">Personalized weekly homeschool plans for every child in your home<span class="nh-dot"></span></h2>
+        <p class="nh-proof">Every week is tracked — so you always know where you stand.</p>
       </div>
       <!-- Right column: intake form -->
       <div class="nh-right">
@@ -1173,7 +1173,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
               </div>
             </div>
             <div class="nh-field">
-              <input type="text" id="nh-theme" name="theme" class="nh-input" placeholder="What are you curious about? (e.g. dinosaurs, space, oceans)" maxlength="200" autocomplete="off">
+              <input type="text" id="nh-theme" name="theme" class="nh-input" placeholder="What are they curious about?" maxlength="200" autocomplete="off">
+              <span class="nh-theme-hint">Or start from one of our <a href="#">pre-built themes</a></span>
             </div>
             <div class="nh-submit-group">
               <button type="submit" class="nh-submit">Build My Family's Week →</button>
@@ -1185,6 +1186,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
     </div>
   </div>
 </section>
+<div class="nh-trust-strip" role="note">Covers every domain of every US educational standard. <span class="nh-trust-auto">Automatically.</span></div>
 
 <!-- ═══ LINEN HERO (GRANDDAD SECTION) ═══ -->
 <section class="linen-hero" id="linen-hero">
