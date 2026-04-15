@@ -1,5 +1,5 @@
-/plan  https://wizkoo-plan-generator.vercel.app  200
-/plan/*  https://wizkoo-plan-generator.vercel.app/:splat  200
+/plan  https://wizkoo-plan-generator.vercel.app/plan  200
+/plan/*  https://wizkoo-plan-generator.vercel.app/plan/:splat  200
 /planner  /plan  301
 /planner.html  /plan  301
 
