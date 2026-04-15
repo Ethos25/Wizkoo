@@ -1021,11 +1021,12 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 }
 
 /* ═══ NEW HERO SECTION ═══ */
-.nh-section{background:#F2F0EA;padding:32px 80px;min-height:calc(100vh - 82px);min-height:calc(100dvh - 82px);display:flex;align-items:center;box-sizing:border-box}
+.nh-section{background:repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(12,16,32,0.008) 79px,rgba(12,16,32,0.008) 80px),repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(12,16,32,0.008) 79px,rgba(12,16,32,0.008) 80px),radial-gradient(ellipse 70% 60% at 48% 40%,rgba(255,252,240,0.65) 0%,rgba(242,240,234,0) 70%),#F2F0EA;padding:88px 80px 56px;min-height:calc(100vh - 82px);min-height:calc(100dvh - 82px);display:flex;align-items:center;box-sizing:border-box}
 .nh-inner{width:100%;max-width:1200px;margin:0 auto}
-.nh-grid{display:grid;grid-template-columns:52% 1fr;gap:80px;align-items:center}
-.nh-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.44);margin-bottom:12px;display:block}
-.nh-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(52px,6.8vw,84px);color:#0C1020;line-height:1.06;letter-spacing:-0.03em;margin-bottom:20px}
+.nh-grid{display:grid;grid-template-columns:62fr 38fr;gap:0;align-items:stretch}
+.nh-left{padding-top:48px}
+.nh-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.44);margin-bottom:20px;display:block}
+.nh-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(52px,6.2vw,82px);color:#0C1020;line-height:1.06;letter-spacing:-0.03em;margin-bottom:20px}
 .nh-proof{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(12px,1.1vw,15px);color:rgba(12,16,32,0.50);line-height:1.5;letter-spacing:-0.01em;margin-bottom:24px}
 .nh-dot{display:inline-block;width:0.22em;height:0.22em;border-radius:50%;background:#E8AF38;margin-left:0.04em;vertical-align:baseline;position:relative;top:0.06em}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -1041,23 +1042,41 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .nh-theme-hint a:hover{border-bottom-color:#E8AF38}
 .nh-trust-strip{background:#F2F0EA;border-top:1px solid rgba(12,16,32,0.10);padding:14px 80px;text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.50)}
 .nh-trust-auto{color:#E8AF38}
-.nh-right{display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
-.nh-form-wrap{width:100%;max-width:380px}
+.nh-right{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;background:#ECEAE3;border-left:2px solid #E8AF38;padding:28px 44px;box-sizing:border-box;min-height:100%;position:relative;overflow:hidden}
+.nh-right::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:200px 200px;opacity:0.025;pointer-events:none;z-index:0}
+.nh-form-wrap{width:100%;max-width:380px;position:relative;z-index:1}
+.nh-invitation{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(12,16,32,0.38);display:block;margin-bottom:16px}
 .nh-form-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.40);margin-bottom:16px;display:block}
 .nh-form{display:flex;flex-direction:column;gap:16px}
 .nh-field{position:relative;width:100%}
-.nh-input{display:block;width:100%;background:transparent;border:none;border-bottom:1px solid rgba(12,16,32,0.18);border-radius:0;font-family:'Sora',sans-serif;font-weight:300;font-size:16px;color:#0C1020;padding:12px 0;outline:none;box-shadow:none;-webkit-appearance:none;appearance:none;transition:border-bottom-color 200ms cubic-bezier(0.16,1,0.3,1)}
-.nh-input::placeholder{color:rgba(12,16,32,0.34)}
-.nh-input:focus{border-bottom-color:#E8AF38}
+.nh-input{display:block;width:100%;background:rgba(232,175,56,0.04);border:none;border-bottom:1px solid rgba(12,16,32,0.18);border-radius:0;font-family:'Sora',sans-serif;font-weight:300;font-size:17px;color:#0C1020;padding:14px 0;min-height:52px;outline:none;box-shadow:none;-webkit-appearance:none;appearance:none;transition:border-bottom-color 200ms cubic-bezier(0.16,1,0.3,1),background 240ms cubic-bezier(0.16,1,0.3,1)}
+.nh-input::placeholder{color:rgba(12,16,32,0.34);font-size:17px}
+.nh-input:focus{border-bottom-color:#E8AF38;background:rgba(232,175,56,0.08)}
+.nh-select.age-selected{font-weight:700;font-size:20px;color:#0C1020}
 .nh-select-wrap{position:relative;width:100%}
 .nh-select-wrap::after{content:'▾';position:absolute;right:0;top:50%;transform:translateY(-50%);color:#E8AF38;font-size:12px;pointer-events:none;line-height:1}
-.nh-select{cursor:pointer;padding-right:20px}
+.nh-select{cursor:default;padding-right:20px}
 .nh-select:invalid{color:rgba(12,16,32,0.34)}
 .nh-select option{color:#0C1020}
-.nh-submit-group{display:flex;flex-direction:column;align-items:flex-end;margin-top:16px;gap:12px}
+.nh-submit-group{display:flex;flex-direction:column;align-items:flex-end;margin-top:8px;gap:12px}
 .nh-submit{font-family:'Sora',sans-serif;font-weight:700;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 40px;background:transparent;color:#0C1020;border:none;border-radius:0;cursor:pointer;white-space:nowrap;display:inline-block;box-shadow:6px 6px 0 #E8AF38;transition:transform 0.15s cubic-bezier(0.16,1,0.3,1),box-shadow 0.15s cubic-bezier(0.16,1,0.3,1)}
 .nh-submit:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #E8AF38}
 .nh-microcopy{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.09em;color:rgba(12,16,32,0.40);line-height:1.7;margin:0}
+.nh-proof-claim{font-family:'Sora',sans-serif;font-weight:300;font-size:15px;color:rgba(12,16,32,0.72);line-height:1.5;letter-spacing:-0.01em;margin-bottom:12px;display:block}
+.nh-proof-detail{font-family:'Sora',sans-serif;font-weight:300;font-size:14px;font-style:italic;letter-spacing:0;color:rgba(12,16,32,0.52);line-height:1.5;margin-bottom:24px;display:block}
+.nh-suggestion-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.nh-suggestion-btn{display:inline-flex;align-items:center;padding:7px 14px;background:transparent;border:1px solid rgba(12,16,32,0.16);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.52);cursor:pointer;border-radius:0;transition:all 180ms cubic-bezier(0.16,1,0.3,1)}
+.nh-suggestion-btn:hover{border-color:#E8AF38;color:#0C1020}
+.nh-suggestion-btn.active{border-color:#E8AF38;color:#E8AF38;background:rgba(232,175,56,0.06)}
+@media(prefers-reduced-motion:no-preference){
+  @keyframes wizkoo-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .nh-saffron-period{animation:wizkoo-breathe 3s ease-in-out infinite;transform-origin:center;display:inline-block}
+  @keyframes hero-firefly-drift{0%{transform:translateY(0px);opacity:0}15%{opacity:1}85%{opacity:0.8}100%{transform:translateY(-40px);opacity:0}}
+  .hero-firefly{animation:hero-firefly-drift 8s ease-in-out infinite;animation-delay:2s;opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-firefly{display:none}
+}
 @media(max-width:768px){
   .nh-section{padding:60px 24px;min-height:auto;align-items:flex-start}
   .nh-grid{grid-template-columns:1fr;gap:48px}
@@ -1076,18 +1095,18 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 
 /* ── Short viewport (200% display scale, laptops) ── */
 @media(max-height:780px){
-  .nh-section{padding:20px 80px}
-  .nh-eyebrow{margin-bottom:8px}
-  .nh-h1{font-size:clamp(22px,2.8vw,38px);margin-bottom:8px}
-  .nh-proof{font-size:11px;margin-bottom:12px}
-  .nh-pillar{padding-top:8px}
-  .nh-pillar-accent{margin-bottom:8px}
-  .nh-pillar-label{margin-bottom:6px}
-  .nh-pillar-body{font-size:11px;line-height:1.45}
-  .nh-form-label{margin-bottom:10px}
+  .nh-section{padding:16px 80px;align-items:flex-start;min-height:0}
+  .nh-grid{align-items:flex-start}
+  .nh-right{padding:16px 24px;min-height:0}
+  .nh-eyebrow{margin-bottom:6px}
+  .nh-h1{font-size:clamp(22px,2.8vw,38px);margin-bottom:6px}
+  .nh-proof-claim{font-size:12px;margin-bottom:6px}
+  .nh-proof-detail{font-size:11px;margin-bottom:12px}
+  .nh-invitation{margin-bottom:10px}
   .nh-form{gap:10px}
-  .nh-input{padding:8px 0;font-size:14px}
-  .nh-submit-group{margin-top:10px;gap:8px}
+  .nh-input{padding:8px 0;font-size:14px;min-height:36px}
+  .nh-suggestion-chips{margin-top:8px}
+  .nh-submit-group{margin-top:4px;gap:6px}
   .nh-microcopy{display:none}
   .nh-theme-hint{display:none}
 }
@@ -1127,28 +1146,71 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 <meta name="twitter:image" content="https://wizkoo.com/wizkoo-og.png">
 <link rel="stylesheet" href="css/footer.css">
 </head>
-<body>
+<body class="page-home">
 <!-- Custom cursor -->
 <div class="cursor" id="cursor"></div>
 <div class="firefly" id="firefly"></div>
 
 <div id="wizkoo-nav"></div>
-<script src="/components/nav.js"></script>
+<script src="/components/nav.js?v=5"></script>
+<!-- ═══ HOMEPAGE-ONLY NAV OVERRIDES ═══ -->
+<!-- JS direct-set: runs after nav.js, wins every cascade battle -->
+<script>
+(function(){
+  var ann = document.querySelector('.announce');
+  if(!ann) return;
+  ann.style.setProperty('background','#0C1020','important');
+  ann.style.setProperty('backdrop-filter','none','important');
+  ann.style.setProperty('-webkit-backdrop-filter','none','important');
+})();
+</script>
+<style id="hp-nav-overrides">
+/* Announcement bar — solid dark, no blur */
+.page-home .announce{
+  background:rgba(12,16,32,0.82)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+/* Announcement text — light against solid dark surface */
+.page-home .announce-text{
+  color:rgba(232,175,56,0.75)!important;
+}
+/* Nav — solid dark surface, no blur */
+.page-home .nav.nav--on-linen{
+  background:rgba(12,16,32,0.96)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+/* CTA — filled saffron on homepage */
+.page-home .nav-cta{
+  background:#E8AF38!important;
+  color:#0C1020!important;
+  border-color:#E8AF38!important;
+}
+.page-home .nav-cta:hover{
+  background:#F0BD50!important;
+  border-color:#F0BD50!important;
+  box-shadow:none!important;
+}
+</style>
 <!-- ═══ NEW HERO SECTION ═══ -->
 <section class="nh-section" id="new-hero" aria-labelledby="nh-headline">
   <div class="nh-inner">
     <div class="nh-grid">
       <!-- Left column: product copy -->
       <div class="nh-left">
+        <div style="width:32px;height:1.5px;background:#E8AF38;margin-bottom:10px;"></div>
         <p class="nh-eyebrow">One price. Every child.</p>
         <h1 class="visually-hidden">Personalized homeschool learning plans for families with children ages 2 to 12</h1>
-        <h2 class="nh-h1" id="nh-headline" style="color:#0C1020">Personalized weekly homeschool plans for every child in your home<span class="nh-dot"></span></h2>
-        <p class="nh-proof">Every week is tracked — so you always know where you stand.</p>
+        <h2 class="nh-h1" id="nh-headline" style="color:#0C1020"><span style="font-weight:200;opacity:0.72;display:block">Personalized weekly</span><span style="font-weight:800;color:#0C1020;display:block">homeschool plans.</span><span style="font-weight:800;color:#E8AF38;display:block;font-size:0.65em">And tracking.</span></h2>
+        <p class="nh-proof-detail" style="margin-top:16px;margin-bottom:14px">So you always know where you stand.</p>
+        <p class="nh-proof-claim">Covers every domain of every US educational standard. Automatically.</p>
       </div>
       <!-- Right column: intake form -->
       <div class="nh-right">
+        <div class="hero-firefly" style="position:absolute;width:3px;height:3px;border-radius:50%;background:#E8AF38;box-shadow:0 0 6px 2px rgba(232,175,56,0.20);bottom:20%;left:24px;pointer-events:none;"></div>
         <div class="nh-form-wrap">
-          <p class="nh-form-label">Start building your week</p>
+          <span class="nh-invitation">Tell us about your family.</span>
           <form id="nh-form" class="nh-form" novalidate>
             <div class="nh-field">
               <input type="text" id="nh-name" name="childName" class="nh-input" placeholder="Your child's name" maxlength="50" autocomplete="off">
@@ -1157,24 +1219,29 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
               <div class="nh-select-wrap">
                 <select id="nh-age" name="childAge" class="nh-input nh-select">
                   <option value="" disabled selected>Their age</option>
-                  <option value="1">1 year old</option>
-                  <option value="2">2 years old</option>
-                  <option value="3">3 years old</option>
-                  <option value="4">4 years old</option>
-                  <option value="5">5 years old</option>
-                  <option value="6">6 years old</option>
-                  <option value="7">7 years old</option>
-                  <option value="8">8 years old</option>
-                  <option value="9">9 years old</option>
-                  <option value="10">10 years old</option>
-                  <option value="11">11 years old</option>
-                  <option value="12">12 years old</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
                 </select>
               </div>
             </div>
             <div class="nh-field">
               <input type="text" id="nh-theme" name="theme" class="nh-input" placeholder="What are they curious about?" maxlength="200" autocomplete="off">
-              <span class="nh-theme-hint">Or start from one of our <a href="#">pre-built themes</a></span>
+              <div class="nh-suggestion-chips">
+                <button type="button" class="nh-suggestion-btn" data-theme="Dinosaurs">Dinosaurs</button>
+                <button type="button" class="nh-suggestion-btn" data-theme="Space">Space</button>
+                <button type="button" class="nh-suggestion-btn" data-theme="Oceans">Oceans</button>
+                <button type="button" class="nh-suggestion-btn" data-theme="Ancient Egypt">Ancient Egypt</button>
+              </div>
             </div>
             <div class="nh-submit-group">
               <button type="submit" class="nh-submit">Build My Family's Week →</button>
@@ -1186,8 +1253,6 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
     </div>
   </div>
 </section>
-<div class="nh-trust-strip" role="note">Covers every domain of every US educational standard. <span class="nh-trust-auto">Automatically.</span></div>
-
 <!-- ═══ LINEN HERO (GRANDDAD SECTION) ═══ -->
 <section class="linen-hero" id="linen-hero">
   <div class="orb-stars" aria-hidden="true"></div>
@@ -2205,6 +2270,34 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
       + '?childName=' + encodeURIComponent(name)
       + '&childAge=' + age
       + '&theme='    + encodeURIComponent(theme);
+  });
+})();
+
+/* ─── Age dropdown: bold number on selection ─── */
+(function(){
+  var sel = document.getElementById('nh-age');
+  if(!sel) return;
+  sel.addEventListener('change', function(){
+    if(this.value) this.classList.add('age-selected');
+    else this.classList.remove('age-selected');
+  });
+})();
+
+/* ─── Theme suggestion chips ─── */
+(function(){
+  var themeInput = document.getElementById('nh-theme');
+  var btns = document.querySelectorAll('.nh-suggestion-btn');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var isActive = btn.classList.contains('active');
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      if(!isActive){
+        btn.classList.add('active');
+        themeInput.value = btn.getAttribute('data-theme');
+      } else {
+        themeInput.value = '';
+      }
+    });
   });
 })();
 

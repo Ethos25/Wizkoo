@@ -119,9 +119,9 @@
 
       /* ── Linen-page nav modifier ── */
       '.nav--on-linen{',
-      '  background:linear-gradient(90deg,rgba(15,30,100,0.92) 0%,rgba(15,30,100,0.82) 28%,rgba(15,30,100,0.75) 100%);',
-      '  backdrop-filter:blur(8px) saturate(1.6);',
-      '  -webkit-backdrop-filter:blur(8px) saturate(1.6);',
+      '  background:rgba(12,16,32,0.96);',
+      '  backdrop-filter:none;',
+      '  -webkit-backdrop-filter:none;',
       '}',
 
       /* Prevent links inside nav from picking up page-level overrides */
@@ -275,12 +275,18 @@
   el.style.top      = '-30px';
   el.style.zIndex   = '20';
 
+  /* ── Path (needed for both HTML and active-link logic below) ─────── */
+  var path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+  var _hp  = (path === '/');
+
   /* ── Nav HTML ───────────────────────────────────────────────────────── */
   el.innerHTML = [
 
     /* 1. Announcement bar — sticky top:0, scrolls away on mobile */
-    '<div class="announce" role="banner" aria-label="Site announcement">',
-    '  <span class="announce-text">Personalized homeschool learning plans, ages 2 to 12. Books. Games. Connected by one theme.</span>',
+    '<div class="announce" role="banner" aria-label="Site announcement"' +
+      (_hp ? ' style="background:#0C1020;backdrop-filter:none;-webkit-backdrop-filter:none"' : '') + '>',
+    '  <span class="announce-text"' +
+      (_hp ? ' style="color:rgba(232,175,56,0.75)"' : '') + '>Personalized homeschool learning plans, ages 2 to 12. Books. Games. Connected by one theme.</span>',
     '</div>',
 
     /* 2. Frosted glass nav — sticky top:30px, always present on desktop */
@@ -319,7 +325,7 @@
   ].join('\n');
 
   /* ── Active link ────────────────────────────────────────────────────── */
-  var path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+  /* path already computed above */
   el.querySelectorAll('.nav-link').forEach(function (link) {
     var href = link.getAttribute('href').replace(/\.html$/, '').replace(/\/$/, '') || '/';
     if (href === path || (href !== '/' && path.startsWith(href))) {
