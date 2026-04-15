@@ -1061,6 +1061,22 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 }
 @media(prefers-reduced-motion:reduce){.nh-input,.nh-submit{transition:none}}
 
+/* ── Short viewport (200% display scale, laptops) ── */
+@media(max-height:780px){
+  .nh-section{padding:20px 80px}
+  .nh-eyebrow{margin-bottom:8px}
+  .nh-h1{font-size:clamp(22px,2.8vw,38px);margin-bottom:12px}
+  .nh-pillar{padding-top:8px}
+  .nh-pillar-accent{margin-bottom:8px}
+  .nh-pillar-label{margin-bottom:8px}
+  .nh-pillar-body{font-size:12px;line-height:1.5}
+  .nh-form-label{margin-bottom:10px}
+  .nh-form{gap:10px}
+  .nh-input{padding:8px 0;font-size:14px}
+  .nh-submit-group{margin-top:10px;gap:8px}
+  .nh-microcopy{display:none}
+}
+
 /* ═══ HERO INTAKE FORM ═══ */
 .hero-intake-form{display:flex;flex-direction:column;gap:24px;max-width:420px;width:100%}
 .hif-field{position:relative;width:100%}
