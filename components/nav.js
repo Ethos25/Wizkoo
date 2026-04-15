@@ -61,12 +61,11 @@
       '  background:rgba(12,16,32,0.44);',
       '  backdrop-filter:blur(14px);',
       '  -webkit-backdrop-filter:blur(14px);',
-      '  border-bottom:1px solid rgba(232,175,56,0.14);',
+      '  border-bottom:1px solid rgba(255,255,255,0.06);',
       '  display:flex;',
       '  align-items:center;',
       '  justify-content:center;',
       '  position:relative;',
-      '  overflow:hidden;',
       '}',
       '.announce::before{',
       '  content:\'\';',
@@ -82,7 +81,7 @@
       '  font-size:7px;',
       '  letter-spacing:0.28em;',
       '  text-transform:uppercase;',
-      '  color:rgba(232,175,56,0.60);',
+      '  color:rgba(12,16,32,0.75);',
       '  position:relative;',
       '  z-index:1;',
       '}',
@@ -96,10 +95,11 @@
       '  display:flex;',
       '  align-items:center;',
       '  justify-content:space-between;',
-      '  background:linear-gradient(90deg,rgba(12,16,32,0.44) 0%,rgba(12,16,32,0.22) 28%,rgba(12,16,32,0.06) 100%);',
+      '  background:linear-gradient(90deg,rgba(12,16,32,0.56) 0%,rgba(12,16,32,0.22) 28%,rgba(12,16,32,0.06) 100%);',
       '  backdrop-filter:blur(32px) saturate(1.4);',
       '  -webkit-backdrop-filter:blur(32px) saturate(1.4);',
       '  border-bottom:1px solid rgba(255,255,255,0.05);',
+      '  box-shadow:0 1px 0 rgba(255,255,255,0.08),0 4px 24px rgba(12,16,32,0.08);',
       '  isolation:isolate;',
       '  pointer-events:auto;',
       '}',
@@ -116,6 +116,13 @@
       '  z-index:-1;',
       '}',
 
+
+      /* ── Linen-page nav modifier ── */
+      '.nav--on-linen{',
+      '  background:linear-gradient(90deg,rgba(15,30,100,0.92) 0%,rgba(15,30,100,0.82) 28%,rgba(15,30,100,0.75) 100%);',
+      '  backdrop-filter:blur(8px) saturate(1.6);',
+      '  -webkit-backdrop-filter:blur(8px) saturate(1.6);',
+      '}',
 
       /* Prevent links inside nav from picking up page-level overrides */
       '.nav a:not(.nav-cta){background:transparent!important;border:none!important;box-shadow:none!important;outline:none!important}',
@@ -319,6 +326,12 @@
       link.classList.add('active');
     }
   });
+
+  /* ── Linen-page modifier — homepage only ───────────────────────────── */
+  if (path === '/') {
+    var siteNav = document.getElementById('site-nav');
+    if (siteNav) siteNav.classList.add('nav--on-linen');
+  }
 
   /* ── Hamburger behaviour ────────────────────────────────────────────── */
   var btn  = document.getElementById('nav-hamburger');
