@@ -339,3 +339,13 @@
   .element-cards-grid { grid-template-columns: 1fr; }
   .ghc-title { font-size: 2.2rem; }
 }
+
+/* ── Short viewport (200% display scale, laptops) ── */
+@media (max-height: 780px) {
+  .page-hero { margin-top: 20px; padding: 32px var(--content-pad) 24px; }
+  .page-hero h1 { font-size: 2.4rem; }
+  .page-hero .hero-sub { margin-top: 12px; font-size: 0.88rem; }
+  .game-showcase-hero { margin-top: 20px; padding: 32px var(--content-pad) 24px; }
+  .game-showcase-hero h1 { font-size: 2.2rem; }
+  .game-showcase-hero .hero-sub { margin-top: 12px; font-size: 0.88rem; }
+}
