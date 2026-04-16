@@ -24,8 +24,8 @@
 <link rel="stylesheet" href="css/footer.css">
 <style>
   .account-hero {
-    margin-top: 60px;
-    padding: var(--section-pad) var(--content-pad);
+    margin-top: clamp(12px, 4vh, 60px);
+    padding: clamp(16px, 5vh, 80px) var(--content-pad) clamp(12px, 4vh, 60px);
     max-width: var(--max-width);
     border-bottom: 1px solid var(--rule);
   }
@@ -33,13 +33,13 @@
   .account-hero h1 {
     font-family: 'Sora', sans-serif;
     font-weight: 200;
-    font-size: 3.2rem;
+    font-size: clamp(1.8rem, min(4vw, 5.5vh), 3.2rem);
     line-height: 1.1;
     letter-spacing: -0.03em;
   }
   .account-hero h1 strong { font-weight: 700; }
   .account-hero .hero-sub {
-    margin-top: 20px;
+    margin-top: clamp(8px, 2.5vh, 20px);
     font-size: var(--body-size);
     font-weight: 400;
     color: #555;
@@ -241,12 +241,6 @@
     .account-main { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
     .account-sidebar { padding: var(--section-pad-mobile) var(--content-pad-mobile); }
     .coming-soon-card { padding: 28px; }
-  }
-  /* ── Short viewport (200% display scale, laptops) ── */
-  @media (max-height: 780px) {
-    .account-hero { margin-top: 0; padding: 20px var(--content-pad) 16px; }
-    .account-hero h1 { font-size: 2rem; }
-    .account-hero .hero-sub { margin-top: 8px; font-size: 0.85rem; }
   }
 </style>
 </head>
