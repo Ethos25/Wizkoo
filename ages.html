@@ -6,7 +6,7 @@
 <title>The Ages | Wizkoo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@200;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,7 +14,7 @@
 :root{--saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm:#ECEAE3;--rule:#E0DED6;--mid:#4A4850;--expo:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.22,1,0.36,1)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:'Sora',sans-serif;background:var(--ink);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 @media(hover:hover){html,body,a,button{cursor:none}}
 .cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}.cursor.visible{opacity:1}.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,.25);border:1.5px solid var(--saffron)}
 
@@ -24,11 +24,12 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink
 /* ═══ HERO — linen, centered ═══ */
 .hero{background:var(--linen);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:52px 48px clamp(60px,10vh,120px);position:relative;overflow:hidden;text-align:center}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(242,240,234,0) 0%,rgba(224,222,214,.35) 100%);pointer-events:none}
-.hero-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(20px,3vh,32px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .25s}
+.hero-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.45);margin-bottom:clamp(20px,3vh,32px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .25s}
+.hero-ey::before{content:'';display:block;width:32px;height:1.5px;background:#E8AF38;margin-bottom:12px}
 .hero-h{font-family:'Sora',sans-serif;font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.12;letter-spacing:-.03em;color:var(--ink);max-width:720px;margin-bottom:clamp(16px,2.5vh,28px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .45s}
 .hero-h-light{font-weight:200}
 .hero-h-bold{font-weight:700;display:block}
-.hero-sub{font-family:'Inter',sans-serif;font-weight:400;font-size:clamp(.9rem,1.1vw,1.05rem);line-height:1.75;color:rgba(12,16,32,.5);max-width:600px;position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .65s}
+.hero-sub{font-family:'Sora',sans-serif;font-weight:400;font-size:clamp(.9rem,1.1vw,1.05rem);line-height:1.75;color:rgba(12,16,32,.5);max-width:600px;position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .65s}
 @keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
 /* ═══ TIER CARDS — linen bg, 2x2 grid ═══ */
@@ -38,10 +39,10 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--ink
 .tier-card{background:var(--paper);border:1.5px solid var(--ink);padding:clamp(28px,4vh,44px) clamp(24px,3vw,36px);position:relative;transition:transform .3s var(--expo)}
 .tier-card::after{content:'';position:absolute;top:6px;left:6px;right:-6px;bottom:-6px;background:rgba(12,16,32,.04);z-index:-1;pointer-events:none;transition:top .3s var(--expo),bottom .3s var(--expo)}
 @media(hover:hover){.tier-card:hover{transform:translateY(-2px)}.tier-card:hover::after{top:8px;bottom:-8px}}
-.tier-label{font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(8px,1.5vh,14px)}
+.tier-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.45);margin-bottom:clamp(8px,1.5vh,14px)}
 .tier-name{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.1rem,1.4vw,1.25rem);color:var(--ink);margin-bottom:clamp(14px,2.5vh,24px);letter-spacing:-.02em}
-.tier-moment{font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.8;color:rgba(12,16,32,.72);margin-bottom:clamp(14px,2vh,20px)}
-.tier-context{font-family:'Inter',sans-serif;font-size:clamp(.8rem,.92vw,.87rem);line-height:1.75;color:rgba(12,16,32,.4)}
+.tier-moment{font-family:'Sora',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.8;color:rgba(12,16,32,.72);margin-bottom:clamp(14px,2vh,20px)}
+.tier-context{font-family:'Sora',sans-serif;font-size:clamp(.8rem,.92vw,.87rem);line-height:1.75;color:rgba(12,16,32,.4)}
 
 /* ═══ CLOSE — warm, emotional anchor ═══ */
 .closing{background:var(--warm);padding:clamp(48px,6vh,80px) 48px;text-align:center;position:relative}

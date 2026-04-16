@@ -15,7 +15,7 @@
 <meta name="twitter:image" content="assets/wizkoo-og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Inter:wght@400;500&family=Sora:wght@200;300;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -42,7 +42,7 @@
    BODY — Inter font + warming gradient
 ══════════════════════════════════════════════ */
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.85rem;
   background: linear-gradient(to bottom, #F3F1EB, #F0EDE6);
   background-attachment: fixed;
@@ -121,10 +121,10 @@ body {
 ══════════════════════════════════════════════ */
 .m-tag {
   font-family: 'Space Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--saffron);
+  color: rgba(12,16,32,0.45);
   margin-bottom: 20px;
   display: block;
 }
@@ -140,7 +140,7 @@ body {
 }
 
 .m-body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.85rem;
   line-height: 1.85;
   color: #555;
@@ -149,7 +149,7 @@ body {
 .m-body:last-child { margin-bottom: 0; }
 
 .m-body-light {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.85rem;
   line-height: 1.85;
   color: rgba(250, 250, 250, 0.7);
@@ -234,14 +234,22 @@ body {
 
 .s1-eyebrow {
   font-family: 'Space Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--saffron);
+  color: rgba(12,16,32,0.45);
   margin-bottom: 24px;
   display: block;
   opacity: 0;
   animation: s1FadeUp 0.5s var(--expo) forwards 0.3s;
+}
+.s1-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: #E8AF38;
+  margin-bottom: 12px;
 }
 
 @keyframes s1FadeUp {
@@ -311,7 +319,7 @@ body {
 }
 
 .s1-body-para {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.85rem;
   line-height: 1.85;
   color: #555;
@@ -349,7 +357,7 @@ body {
 
 .s3-closing {
   margin-top: 40px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.85rem;
   line-height: 1.85;
   color: rgba(250, 250, 250, 0.88);
@@ -396,16 +404,16 @@ body {
 
 .s4-cell-label {
   font-family: 'Space Mono', monospace;
-  font-size: 0.5rem;
-  letter-spacing: 0.2em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--saffron);
+  color: rgba(12,16,32,0.45);
   margin-bottom: 6px;
   display: block;
 }
 
 .s4-cell-desc {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.78rem;
   color: #444;
   line-height: 1.55;
@@ -449,7 +457,7 @@ body {
 .s6-system .m-headline { color: var(--paper); }
 
 .s6-sub {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.85rem;
   color: rgba(250, 250, 250, 0.5);
   line-height: 1.7;
@@ -480,7 +488,7 @@ body {
 }
 
 .s6-block-body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.82rem;
   color: rgba(250, 250, 250, 0.6);
   line-height: 1.85;
@@ -528,7 +536,7 @@ body {
 }
 
 .s7-block-body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.82rem;
   color: #555;
   line-height: 1.9;
@@ -590,7 +598,7 @@ body {
 }
 
 .s8-sub {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Sora', sans-serif;
   font-size: 0.88rem;
   color: rgba(250, 250, 250, 0.45);
   margin-bottom: 40px;

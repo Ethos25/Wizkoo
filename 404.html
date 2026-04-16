@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -29,11 +29,19 @@
   .nf-code {
     font-family: 'Space Mono', monospace;
     font-weight: 400;
-    font-size: var(--tag-size);
-    letter-spacing: 0.2em;
+    font-size: 10px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #767676;
+    color: rgba(12,16,32,0.45);
     margin-bottom: 24px;
+  }
+  .nf-code::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1.5px;
+    background: #E8AF38;
+    margin-bottom: 12px;
   }
   .nf-title {
     font-family: 'Sora', sans-serif;
@@ -46,7 +54,7 @@
   }
   .nf-title strong { font-weight: 700; }
   .nf-sub {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Sora', sans-serif;
     font-weight: 400;
     font-size: var(--body-size);
     color: #555;

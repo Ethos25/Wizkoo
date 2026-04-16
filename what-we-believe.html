@@ -17,7 +17,7 @@
 <meta name="twitter:image" content="assets/wizkoo-og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@200;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -43,7 +43,7 @@
 :root{--saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm:#ECEAE3;--rule:#E0DED6;--mid:#4A4850;--faint:#A8A6B0;--expo:cubic-bezier(0.16,1,0.3,1)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 @media(hover:hover){html,body,a,button{cursor:none}}
 .cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}.cursor.visible{opacity:1}.cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,.25);border:1.5px solid var(--saffron)}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--expo),transform .6s var(--expo)}.rv.vis{opacity:1;transform:translateY(0)}
@@ -54,7 +54,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .hero{background:var(--linen);padding:clamp(16px,6vh,140px) 48px clamp(12px,4vh,80px);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 35%,rgba(232,175,56,.04) 0%,transparent 55%);pointer-events:none}
 .hero-in{max-width:880px;margin:0 auto;padding-left:calc(80px + clamp(20px,3vw,40px));position:relative;z-index:1}
-.hero-ey{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(8px,2vh,28px);opacity:0;animation:fi .5s var(--expo) forwards .2s}
+.hero-ey{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.45);margin-bottom:clamp(8px,2vh,28px);opacity:0;animation:fi .5s var(--expo) forwards .2s}
+.hero-ey::before{content:'';display:block;width:32px;height:1.5px;background:#E8AF38;margin-bottom:12px}
 .hero h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.6rem,min(3.4vw,4.5vh),3.2rem);line-height:1.1;letter-spacing:-.03em;margin-bottom:clamp(8px,2vh,32px);opacity:0;animation:fi .6s var(--expo) forwards .4s}
 .hero-sub{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.55;color:rgba(12,16,32,.4);max-width:520px;letter-spacing:-.01em;opacity:0;animation:fi .5s var(--expo) forwards .6s}
 @keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -67,7 +68,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--lin
 .b-num{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(2.8rem,4.5vw,4rem);line-height:1;color:rgba(12,16,32,.10);letter-spacing:-.04em;padding-top:2px}
 .belief.vis .b-num{color:rgba(12,16,32,.10)}
 .b-lead{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.92rem,1.1vw,1.02rem);color:var(--saffron);line-height:1.4;letter-spacing:-.015em;margin-bottom:clamp(10px,1.5vh,16px)}
-.b-body{font-family:'Inter',sans-serif;font-size:clamp(.82rem,.95vw,.88rem);line-height:1.8;color:rgba(12,16,32,.45)}
+.b-body{font-family:'Sora',sans-serif;font-size:clamp(.82rem,.95vw,.88rem);line-height:1.8;color:rgba(12,16,32,.45)}
 .b-stack{display:flex;flex-direction:column;gap:2px;margin:clamp(12px,2vh,18px) 0;padding-left:clamp(16px,2vw,24px);border-left:2px solid rgba(232,175,56,.28)}
 .b-stack span{font-family:'Sora',sans-serif;font-weight:500;font-size:clamp(.85rem,1vw,.92rem);color:rgba(12,16,32,.55)}
 .cta{background:var(--ink);padding:clamp(48px,6vh,80px) 48px;text-align:center;position:relative;overflow:hidden}

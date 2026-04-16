@@ -6,7 +6,8 @@
   padding: clamp(16px, 5vh, 80px) var(--content-pad) clamp(12px, 4vh, 60px);
   max-width: var(--max-width);
 }
-.page-hero .tag { margin-bottom: 16px; color: #767676; }
+.page-hero .tag { margin-bottom: 16px; color: rgba(12,16,32,0.45); }
+.page-hero .tag::before { content: ''; display: block; width: 32px; height: 1.5px; background: #E8AF38; margin-bottom: 12px; }
 .page-hero h1 {
   font-family: 'Sora', sans-serif;
   font-weight: 200;
@@ -50,10 +51,10 @@
 .ghc-tag {
   font-family: 'Space Mono', monospace;
   font-weight: 400;
-  font-size: var(--tag-size);
-  letter-spacing: 0.2em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #767676;
+  color: rgba(12,16,32,0.45);
   margin-bottom: 12px;
 }
 .ghc-title {
@@ -133,6 +134,7 @@
   color: var(--paper);
 }
 .game-showcase-hero .tag { color: var(--saffron); margin-bottom: 16px; }
+.game-showcase-hero .tag::before { content: ''; display: block; width: 32px; height: 1.5px; background: #E8AF38; margin-bottom: 12px; }
 .game-showcase-hero h1 {
   font-family: 'Sora', sans-serif;
   font-weight: 200;
@@ -168,10 +170,10 @@
 .fb-label {
   font-family: 'Space Mono', monospace;
   font-weight: 400;
-  font-size: var(--tag-size);
-  letter-spacing: 0.2em;
+  font-size: 10px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #767676;
+  color: rgba(12,16,32,0.45);
   margin-bottom: 12px;
 }
 .fb-title {

@@ -7,7 +7,7 @@
 <meta name="description" content="Get in touch with the Wizkoo team.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -19,7 +19,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
+body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 @media(hover:hover){html,body,a,button{cursor:none}}
 .cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
@@ -29,7 +29,8 @@ a{text-decoration:none;color:inherit}
 /* ── PAGE ── */
 main{padding-top:72px;min-height:100vh}
 .contact-wrap{max-width:600px;margin:0 auto;padding:80px 48px 120px;text-align:center}
-.tag{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:24px}
+.tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.45);margin-bottom:24px}
+.tag::before{content:'';display:block;width:32px;height:1.5px;background:#E8AF38;margin-bottom:12px}
 .contact-h1{font-family:'Sora',sans-serif;font-weight:200;font-size:2.2rem;letter-spacing:-0.03em;color:var(--ink);line-height:1.15;margin:0 0 36px}
 .contact-email-link{display:inline-block;font-family:'Space Mono',monospace;font-size:1rem;letter-spacing:0.04em;color:var(--ink);border-bottom:2px solid var(--saffron);padding-bottom:3px;transition:color .2s,border-color .2s;margin-bottom:64px}
 .contact-email-link:hover{color:var(--saffron)}
@@ -37,8 +38,8 @@ main{padding-top:72px;min-height:100vh}
 /* Audience blocks */
 .contact-routes{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule);text-align:left}
 .contact-route{padding:28px 0;border-bottom:1px solid var(--rule)}
-.contact-route-label{font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
-.contact-route-text{font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--mid);line-height:1.6;margin-bottom:10px}
+.contact-route-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.45);margin-bottom:8px}
+.contact-route-text{font-family:'Sora',sans-serif;font-size:0.88rem;color:var(--mid);line-height:1.6;margin-bottom:10px}
 .contact-route-email{font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.04em;color:var(--ink);border-bottom:1px solid rgba(232,175,56,0.45);padding-bottom:1px;transition:color .2s,border-color .2s}
 .contact-route-email:hover{color:var(--saffron);border-color:var(--saffron)}
 
