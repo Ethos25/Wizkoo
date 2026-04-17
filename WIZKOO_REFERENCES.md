@@ -246,14 +246,15 @@ Database ID: b132ce969d3041348b4b7b6a6082cb99
 Data source: 4a4a8f2e-3c19-4e23-9b9d-5d4084fee57e
 
 First: search the database for a page where
-date:Date:start matches today's date (2026-04-17).
+date:Date:start matches today's actual date in YYYY-MM-DD format.
 
 If today's page EXISTS:
   Fetch it. Append a BUILD SESSION block to its content.
 
 If today's page DOES NOT EXIST:
   Create a new page with these properties:
-    Day: "Friday, April 17, 2026" (full day name + date)
+    Day: "[full day name + date — compute from today's actual date.
+      Example format: Friday, April 17, 2026]"
     date:Date:start: "2026-04-17"
     date:Date:is_datetime: 0
     Status: "Open"
@@ -277,6 +278,8 @@ produced. Keep it scannable. Ten lines maximum.
 STEP 10 — VERSION LOG
 Add one line to VERSION HISTORY in the Technical Runbook:
   v[next] — [date] — [one sentence: what this session did]
+  Also update the MAINTENANCE RULE "Last updated" date
+  in Layer 0 to today's date.
 
 MINIMUM VIABLE CLOSE:
 Steps 3, 6, 7, 8, 9, and 10. Never less than that.
@@ -382,7 +385,7 @@ what is frozen, and what decisions are locked.
 
   Homepage          | Active work    | Nav, warm right column, spacing
   Plan (/plan)      | Elite          | Touch nothing
-  Games             | Below standard | Nav, saffron deployment, weight system
+  Games             | Below standard | Saffron deployment, weight system
   Library           | Elite          | Touch nothing
   Methodology       | Needs rethink  | Full content and layout redesign
   Ages              | Strong         | Verify nav color landing
@@ -664,8 +667,13 @@ Root-level pages (every HTML file is a self-contained page):
   privacy.html        Privacy policy.
   terms.html          Terms of service.
   404.html            Error page.
+  README.md           Points to this Technical Runbook. First file
+                      any AI or developer reads when opening the repo.
 
 Config and tooling:
+  CLAUDE.md           Claude Code project instructions. Dev server setup
+                      (npm run serve → localhost:3000) and Playwright
+                      visual verification workflow for this codebase.
   package.json        Node dependencies: serve, @playwright/test, pg.
   netlify.toml        Netlify config: /plan proxy redirect to Vercel.
   _redirects          Netlify redirect rules (clean URL rewrites, .html removal).
@@ -716,7 +724,9 @@ JavaScript (C:\Users\amyog\Desktop\wizkoo\js\):
   supabase-config.js  Supabase client initialization. (510 bytes)
 
 Scripts (C:\Users\amyog\Desktop\wizkoo\scripts\):
-  screenshot.js       Playwright screenshot automation (see CLAUDE.md).
+  screenshot.js       Playwright screenshot automation. Captures full-page
+                      screenshots of every marketing page for visual QA.
+                      Run with: node scripts/screenshot.js
   build-esa-pages.py  Generates ESA content pages.
   import-library.js   Bulk library data import.
   (29 total scripts — data pipeline and build tooling)
@@ -738,6 +748,8 @@ Root config:
   tsconfig.json       Path alias @/* → ./src/*. Target ES2017. Strict mode.
   drizzle.config.ts   ORM migrations from /drizzle directory.
   vercel.json         Vercel deployment config.
+  README.md           Points to this Technical Runbook. First file
+                      any AI or developer reads when opening the repo.
   sentry.*.config.ts  Sentry error tracking (client and server configs).
 
 Global design tokens:
@@ -2179,3 +2191,9 @@ v1.7 — April 17, 2026
   ATC Flight Log (b132ce969d3041348b4b7b6a6082cb99),
   version log. Minimum viable close updated to
   Steps 3, 6, 7, 8, 9, 10.
+
+v1.8 — April 17, 2026 — Six corrections applied:
+  hardcoded flight log date made dynamic, README.md added
+  to both file maps, Games status corrected (nav loads
+  correctly), CLAUDE.md reference resolved, close protocol
+  Step 10 updated to include Maintenance Rule date update.
