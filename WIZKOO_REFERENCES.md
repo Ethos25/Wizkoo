@@ -1,15 +1,17 @@
 # TECHNICAL RUNBOOK — WIZKOO
 # Filename: WIZKOO_REFERENCES.md
-# Version 1.6 — April 17, 2026
+# Version 1.7 — April 17, 2026
 #
-# TO START EVERY BUILD SESSION, SAY:
-# "Run the Technical Runbook"
-#
+# ══════════════════════════════════════
+# TO START EVERY BUILD SESSION:
+# Say: "Run the Technical Runbook"
 # That single instruction triggers everything below.
+# ══════════════════════════════════════
+#
 # Read this file end to end.
 # Confirm you have read it by stating the three items
 # in the SESSION STARTUP INSTRUCTION in Layer 1.
-# Then check the Notion Transfer Queue before any work begins.
+# Then execute the startup sequence before any work begins.
 
 ---
 
@@ -86,51 +88,65 @@ These are the mandatory procedures that govern how all work is done.
 Every build session starts with one line from Amy:
 "Run the Technical Runbook"
 
-That instruction triggers this sequence. Execute all
-three steps before touching any file.
+Execute all four steps before touching any file.
 
 STEP 1 — CONFIRM YOU READ THIS FILE
 State out loud:
   1. Both local codebase paths
-  2. Canonical saffron hex value (#E8AF38)
+  2. Canonical saffron hex value
   3. Environment assigned to the page you will work on today
 Do not begin work until all three are confirmed.
 
 STEP 2 — CHECK THE TRANSFER QUEUE
-Open Notion page: 345335a8d33281ea9f86e19c5018624a
+Use the Notion tool to fetch page:
+345335a8d33281ea9f86e19c5018624a
 (Technical Runbook Transfer Queue)
-This page holds decisions from chat sessions that need
-to be applied to this document before build work begins.
+
+Read the Pending Transfers section completely.
 
 If any items show STATUS: PENDING:
-  Read each item completely.
+  Read each item fully.
   Apply it to the correct section of this document.
-  Change its STATUS to APPLIED and note today's date.
-  Log what was applied in VERSION HISTORY as v[next].
+  Update that item in Notion: change STATUS to APPLIED,
+  add today's date and which section it was applied to.
+  Log what was applied in VERSION HISTORY.
+  State: "Applied [X] items from Transfer Queue."
 
-If the queue is empty: state "Transfer Queue clear."
-Then proceed to Step 3.
+If queue is empty:
+  State: "Transfer Queue clear. Proceeding."
 
-Do not skip Step 2. A decision that exists only in Notion
-and not in this document will be lost to the next session.
+Do not skip this step. A decision deposited by a chat
+session that is not applied before work begins will be
+overwritten or ignored by this session's changes.
 
 STEP 3 — GIT STATUS CHECK
 Run: git status
 Run: git log --oneline -3
-Report findings.
+Report findings before touching any file.
 If uncommitted changes exist from a prior session:
   "WARNING: [X] uncommitted files from prior session.
-  Commit, review, or discard before proceeding?"
+  Files: [list]. Commit, review, or discard?"
 Do not begin new work until Amy responds.
+
+STEP 4 — BEGIN WORK
+State what the session will accomplish.
+Then proceed.
 
 ---
 
 ## BUILD SESSION CLOSE PROTOCOL
 
 Mandatory. Every session. Non-negotiable.
-Triggered by: task completion, context getting heavy,
-or Amy signaling end of session.
-Claude Code initiates without being asked.
+
+TRIGGER LANGUAGE — Claude Code initiates without being asked
+when Amy says any of the following:
+  "wrap it up" / "close it out" / "let's close"
+  "I'm done" / "that's it" / "stepping away"
+  "write the baton" / "pass it off"
+  OR when primary deliverable is complete and context
+  is getting heavy.
+Do not wait to be asked. When the signal fires, run
+the protocol immediately.
 
 STEP 1 — DELIVERABLE CHECK
 Is the primary task complete per the Completion Standard?
@@ -143,16 +159,32 @@ STEP 2 — OPEN ITEMS SWEEP
 What was started but not finished this session?
 What was discovered that needs a follow-up session?
 What was deferred and why?
-Each item goes into KNOWN BUGS or OPEN ITEMS
-in the runbook. Not noted in chat. Written to the file.
+Each item goes into KNOWN BUGS or OPEN ITEMS in the
+Technical Runbook. Not noted in chat. Written to file.
 
-STEP 3 — DECISION WRITE-BACK
-Every decision made this session gets written to
-LOCKED DECISIONS in WIZKOO_REFERENCES.md before closing.
-If a decision reverses a prior locked decision,
-remove the old entry and note why it was superseded.
+STEP 3 — DECISION WRITE-BACK (two directions)
+
+Direction 1 — Codebase decisions to Technical Runbook:
+Every decision made this session that affects the codebase
+gets written to LOCKED DECISIONS before closing.
+If it reverses a prior locked decision, remove the old
+entry and note why it was superseded.
 A decision that exists only in the chat transcript
 does not exist. It will be relitigated next session.
+
+Direction 2 — Product/brand decisions to Transfer Queue:
+If this session surfaced any decision that affects the
+chat-side system (new surface assignment, product direction,
+GTM implication, brand decision, design principle):
+Use the Notion tool to add it to the Transfer Queue:
+  Page: 345335a8d33281ea9f86e19c5018624a
+  Format:
+    DATE: [today]
+    SECTION: [which Technical Runbook section this belongs in]
+    DECISION: [exactly what needs to be added or changed]
+    STATUS: PENDING
+If nothing to deposit: state "Nothing to deposit to
+Transfer Queue this session."
 
 STEP 4 — CODEBASE IMPACT TRACE
 What else in the codebase is affected by what changed?
@@ -160,44 +192,97 @@ What components consume a token that was modified?
 What files import from a file that was renamed or moved?
 What adjacent code shares a failure pattern that was fixed?
 Verify those surfaces before closing.
-If a surface is broken, fix it or document it as a known bug.
+If broken: fix it or document it as a known bug.
 Do not leave a downstream breakage undocumented.
 
-STEP 5 — RUNBOOK UPDATE
+STEP 5 — FAILURE PATTERN SWEEP
+Did this session reveal a new Claude Code failure pattern?
+A new way the executor gets things wrong in this codebase?
+If yes: add it to KNOWN CLAUDE CODE FAILURE PATTERNS
+in Layer 6. Name it. Describe it. State the prevention rule.
+If nothing new: state "No new failure patterns this session."
+This is the build session equivalent of Twin Calibration.
+The system learns from its failures only if they are
+documented before the session closes.
+
+STEP 6 — RUNBOOK UPDATE
 Update WIZKOO_REFERENCES.md with everything that changed:
 New files: add to CRITICAL FILE MAP with path and purpose.
 Changed tokens: update CSS CUSTOM PROPERTIES section.
-Resolved bugs: mark resolved with fix summary and line reference.
-New bugs found: add with file, line, root cause theory, fix spec.
-New failure patterns: add to KNOWN CLAUDE CODE FAILURE PATTERNS.
+Resolved bugs: mark resolved with fix summary and location.
+New bugs: add with file, line, root cause, fix spec.
+New failure patterns: add to Layer 6.
 Copy updated file to both codebase folders.
 
-STEP 6 — VERIFICATION GATE
+STEP 7 — VERIFICATION GATE
 Produce this ledger before closing:
 
 BUILD SESSION WRITE-BACK VERIFICATION
 ✓ UPDATED: [what] → WIZKOO_REFERENCES.md ([X] lines)
 ✓ COPIED: C:\Users\amyog\Desktop\wizkoo ([X] lines)
 ✓ COPIED: C:\Users\amyog\Desktop\wizkoo-plan-generator ([X] lines)
+✓ TRANSFER QUEUE: [items deposited OR "nothing to deposit"]
+✓ FAILURE PATTERNS: [captured OR "none this session"]
 ✗ NOT DONE: [item] → [Amy deferred / technical blocker only]
 
-Line count must match across both copies.
-If counts differ, the copy failed. Redo it.
-"Recommend updating the runbook" is not a valid close.
-If it needs updating, update it now.
+Line counts must match across both copies.
+If they differ, the copy failed. Redo it.
 Identifying the work IS the instruction to do the work.
+"Recommend updating" is not a valid close.
 
-STEP 7 — GIT CLOSE
-Execute the GIT PROTOCOL session close sequence above.
-Commit all changes including runbook updates.
-Push to remote.
-Confirm remote is current.
+STEP 8 — GIT CLOSE
+Run: git status
+Stage all changes including runbook updates.
+Commit with descriptive message:
+  "YYYY-MM-DD — [what was built/fixed/changed]"
+  Specific enough that reading git log tomorrow tells
+  you exactly what this session did.
+Run: git push
+Confirm: "Committed and pushed. Remote is current."
+
+STEP 9 — FLIGHT LOG ENTRY
+Use the Notion tool to write to the ATC Flight Log.
+Database ID: b132ce969d3041348b4b7b6a6082cb99
+Data source: 4a4a8f2e-3c19-4e23-9b9d-5d4084fee57e
+
+First: search the database for a page where
+date:Date:start matches today's date (2026-04-17).
+
+If today's page EXISTS:
+  Fetch it. Append a BUILD SESSION block to its content.
+
+If today's page DOES NOT EXIST:
+  Create a new page with these properties:
+    Day: "Friday, April 17, 2026" (full day name + date)
+    date:Date:start: "2026-04-17"
+    date:Date:is_datetime: 0
+    Status: "Open"
+    Session Count: 1
+  Then write the build session entry as page content.
+
+BUILD SESSION ENTRY FORMAT:
+---
+BUILD SESSION — [time if known, otherwise omit]
+Intended: [what Amy opened this session to accomplish]
+Shipped: [what actually got committed and pushed]
+Commit: [hash]
+Still open: [what carries to next session, or "Nothing"]
+Drift: [did session expand beyond intent? brief note]
+---
+
+This is Amy's productivity record. Not a technical log.
+Morning Amy reads this to know what the build system
+produced. Keep it scannable. Ten lines maximum.
+
+STEP 10 — VERSION LOG
+Add one line to VERSION HISTORY in the Technical Runbook:
+  v[next] — [date] — [one sentence: what this session did]
 
 MINIMUM VIABLE CLOSE:
-Steps 3, 5, 6, and 7. Never less than that.
+Steps 3, 6, 7, 8, 9, and 10. Never less than that.
 If Amy says "just close it" push back once:
-"Minimum close is Steps 3, 5, 6, and 7.
-Takes under five minutes. Proceeding now."
+"Minimum close is Steps 3, 6, 7, 8, 9, and 10.
+Under five minutes. Proceeding now."
 
 ---
 
@@ -2082,3 +2167,15 @@ v1.6 — April 17, 2026
   Session Startup Instruction updated with Transfer Queue
   check (Notion page 345335a8d33281ea9f86e19c5018624a).
   System now fully wired: one line starts every session.
+
+v1.7 — April 17, 2026
+  Document renamed to Technical Runbook — WIZKOO.
+  Single-line session trigger added to header.
+  Session Startup Instruction: autonomous Transfer Queue
+  check via Notion tool (Step 2), git status check (Step 3).
+  Build Session Close Protocol expanded to 10 steps:
+  trigger language, two-direction decision write-back,
+  failure pattern sweep, autonomous flight log write to
+  ATC Flight Log (b132ce969d3041348b4b7b6a6082cb99),
+  version log. Minimum viable close updated to
+  Steps 3, 6, 7, 8, 9, 10.
