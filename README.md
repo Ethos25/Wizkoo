@@ -2,7 +2,7 @@
 
 This project is governed by the Technical Runbook.
 Before touching any file in this codebase, read:
-  WIZKOO_REFERENCES.md
+  TECHNICAL_RUNBOOK.md
 
 Every session starts with one line:
   "Run the Technical Runbook"
@@ -17,7 +17,7 @@ The Technical Runbook contains:
   - Quality standards ($200 Standard, Completion Standard)
 
 If you are an AI: do not begin work until you have read
-WIZKOO_REFERENCES.md completely and confirmed the three
+TECHNICAL_RUNBOOK.md completely and confirmed the three
 startup items in its Session Startup Instruction.
 
 If you are a developer: same instruction.

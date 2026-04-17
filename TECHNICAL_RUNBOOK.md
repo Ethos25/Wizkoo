@@ -1,6 +1,6 @@
 # TECHNICAL RUNBOOK — WIZKOO
-# Filename: WIZKOO_REFERENCES.md
-# Version 1.9 — April 17, 2026
+# Filename: TECHNICAL_RUNBOOK.md
+# Version 2.0 — April 17, 2026
 #
 # ══════════════════════════════════════
 # TO START EVERY BUILD SESSION:
@@ -206,7 +206,7 @@ The system learns from its failures only if they are
 documented before the session closes.
 
 STEP 6 — RUNBOOK UPDATE
-Update WIZKOO_REFERENCES.md with everything that changed:
+Update TECHNICAL_RUNBOOK.md with everything that changed:
 New files: add to CRITICAL FILE MAP with path and purpose.
 Changed tokens: update CSS CUSTOM PROPERTIES section.
 Resolved bugs: mark resolved with fix summary and location.
@@ -218,7 +218,7 @@ STEP 7 — VERIFICATION GATE
 Produce this ledger before closing:
 
 BUILD SESSION WRITE-BACK VERIFICATION
-✓ UPDATED: [what] → WIZKOO_REFERENCES.md ([X] lines)
+✓ UPDATED: [what] → TECHNICAL_RUNBOOK.md ([X] lines)
 ✓ COPIED: C:\Users\amyog\Desktop\wizkoo ([X] lines)
 ✓ COPIED: C:\Users\amyog\Desktop\wizkoo-plan-generator ([X] lines)
 ✓ TRANSFER QUEUE: [items deposited OR "nothing to deposit"]
@@ -922,7 +922,7 @@ MARKETING SITE → Netlify (wizkoo.com)
     /library/:slug → /library/book.html
 
   Deploy checklist:
-    1. Ensure WIZKOO_REFERENCES.md changes are committed
+    1. Ensure TECHNICAL_RUNBOOK.md changes are committed
     2. Push to main: git push
     3. Netlify auto-deploys within ~60s
     4. Verify at wizkoo.com — no build logs to check
@@ -2216,3 +2216,7 @@ v1.8 — April 17, 2026 — Six corrections applied:
 v1.9 — April 17, 2026 — Session close. Pattern 7 added to
   Layer 6 (hardcoded temporal values in procedural
   instructions). No code files touched this session.
+
+v2.0 — April 17, 2026 — File renamed from WIZKOO_REFERENCES.md
+  to TECHNICAL_RUNBOOK.md. All internal references and
+  README pointers updated.
