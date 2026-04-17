@@ -1,11 +1,17 @@
 # WIZKOO_REFERENCES.md
-# Version 1.1 — April 17, 2026
+# Version 1.5 — April 17, 2026
 # THE single source of truth for every Claude Code session on either codebase.
 # Read this file completely before touching any file.
 # Confirm you have read it by stating: both local paths + canonical saffron hex
 # + environment assigned to the page you are about to work on.
 
 ---
+
+═══════════════════════════════════════
+LAYER 0 — IDENTITY
+Read this layer first, every session. It defines what this document is,
+who it answers to, and what the quality bar is.
+═══════════════════════════════════════
 
 ## GOVERNING DOCUMENTS
 
@@ -18,6 +24,489 @@ If this file and the code disagree, THE LIGHT STANDARD WINS.
 This file is a fast-lookup extract. The Notion document is the authority.
 
 ---
+
+## THE ONE-SENTENCE SUMMARY
+
+"Warm surface. Warm energy. Cool architecture.
+The proportions shift. The system never changes."
+
+---
+
+## THE QUALITY FILTER (read before every session)
+
+"Someone who loves children made this."
+Every surface, every interaction, every sound passes through one filter:
+does this feel crafted, or does it feel assembled?
+If the answer is "it's fine" — it is not ready.
+
+---
+
+## MAINTENANCE RULE
+
+This file is only as good as its accuracy.
+When a value is locked: add it here before closing the session.
+When a file path changes: update it here immediately.
+When a decision is made: add it to Locked Decisions before closing.
+When the Light Standard updates: reconcile this file against it.
+The Light Standard is always the authority. This file is the fast lookup.
+
+Last updated: April 17, 2026
+Maintained by: Amy Oguntala
+
+---
+
+## TABLE OF CONTENTS
+
+LAYER 0 — IDENTITY: Governing documents, quality filter, hierarchy rule, maintenance rule
+LAYER 1 — OPERATIONAL PROTOCOLS: Session startup, close protocol, git protocol, completion standard
+LAYER 2 — LIVE STATE: Pages status, known bugs, nav deliberate hold, locked decisions
+LAYER 3 — SYSTEM MAP: Codebase locations, file maps, environment variables, dependencies, deployment
+LAYER 4 — DESIGN SYSTEM: Surfaces, color system, typography, motion, nav system, $200 standard
+LAYER 5 — COMPONENT SPECS: Generation spectacle, firefly, homepage hero, atlas continent palette
+LAYER 6 — FAILURE PREVENTION: Known Claude Code failure patterns, accessibility, performance
+LAYER 7 — DEEP REFERENCE: CSS custom properties (both codebases), API surface, prompt templates
+LAYER 8 — HISTORY: Version history
+
+---
+
+═══════════════════════════════════════
+LAYER 1 — OPERATIONAL PROTOCOLS
+Read this layer at the start and end of every session.
+These are the mandatory procedures that govern how all work is done.
+═══════════════════════════════════════
+
+## SESSION STARTUP INSTRUCTION
+
+Paste this at the start of every Claude Code session:
+
+"Read WIZKOO_REFERENCES.md before doing anything.
+Marketing site: C:\Users\amyog\Desktop\wizkoo\WIZKOO_REFERENCES.md
+Plan generator: C:\Users\amyog\Desktop\wizkoo-plan-generator\WIZKOO_REFERENCES.md
+Read it completely. Then confirm:
+  1. Both local codebase paths
+  2. Canonical saffron hex value
+  3. Environment assigned to the page you are about to work on
+Do not begin work until all three are confirmed."
+
+---
+
+## BUILD SESSION CLOSE PROTOCOL
+
+Mandatory. Every session. Non-negotiable.
+Triggered by: task completion, context getting heavy,
+or Amy signaling end of session.
+Claude Code initiates without being asked.
+
+STEP 1 — DELIVERABLE CHECK
+Is the primary task complete per the Completion Standard?
+Built. Migrated. Verified. Old version removed.
+System in clean unambiguous state.
+If any step is incomplete, name it explicitly.
+Never present partial completion as done.
+
+STEP 2 — OPEN ITEMS SWEEP
+What was started but not finished this session?
+What was discovered that needs a follow-up session?
+What was deferred and why?
+Each item goes into KNOWN BUGS or OPEN ITEMS
+in the runbook. Not noted in chat. Written to the file.
+
+STEP 3 — DECISION WRITE-BACK
+Every decision made this session gets written to
+LOCKED DECISIONS in WIZKOO_REFERENCES.md before closing.
+If a decision reverses a prior locked decision,
+remove the old entry and note why it was superseded.
+A decision that exists only in the chat transcript
+does not exist. It will be relitigated next session.
+
+STEP 4 — CODEBASE IMPACT TRACE
+What else in the codebase is affected by what changed?
+What components consume a token that was modified?
+What files import from a file that was renamed or moved?
+What adjacent code shares a failure pattern that was fixed?
+Verify those surfaces before closing.
+If a surface is broken, fix it or document it as a known bug.
+Do not leave a downstream breakage undocumented.
+
+STEP 5 — RUNBOOK UPDATE
+Update WIZKOO_REFERENCES.md with everything that changed:
+New files: add to CRITICAL FILE MAP with path and purpose.
+Changed tokens: update CSS CUSTOM PROPERTIES section.
+Resolved bugs: mark resolved with fix summary and line reference.
+New bugs found: add with file, line, root cause theory, fix spec.
+New failure patterns: add to KNOWN CLAUDE CODE FAILURE PATTERNS.
+Copy updated file to both codebase folders.
+
+STEP 6 — VERIFICATION GATE
+Produce this ledger before closing:
+
+BUILD SESSION WRITE-BACK VERIFICATION
+✓ UPDATED: [what] → WIZKOO_REFERENCES.md ([X] lines)
+✓ COPIED: C:\Users\amyog\Desktop\wizkoo ([X] lines)
+✓ COPIED: C:\Users\amyog\Desktop\wizkoo-plan-generator ([X] lines)
+✗ NOT DONE: [item] → [Amy deferred / technical blocker only]
+
+Line count must match across both copies.
+If counts differ, the copy failed. Redo it.
+"Recommend updating the runbook" is not a valid close.
+If it needs updating, update it now.
+Identifying the work IS the instruction to do the work.
+
+STEP 7 — GIT CLOSE
+Execute the GIT PROTOCOL session close sequence above.
+Commit all changes including runbook updates.
+Push to remote.
+Confirm remote is current.
+
+MINIMUM VIABLE CLOSE:
+Steps 3, 5, 6, and 7. Never less than that.
+If Amy says "just close it" push back once:
+"Minimum close is Steps 3, 5, 6, and 7.
+Takes under five minutes. Proceeding now."
+
+---
+
+## GIT PROTOCOL — EVERY SESSION
+
+SESSION OPEN (before any work begins):
+Run: git status
+Run: git log --oneline -5
+Report findings before touching any file.
+If uncommitted changes exist from a prior session:
+  State: "WARNING: Uncommitted changes exist from a
+  prior session. Affected files: [list]. Commit,
+  review, or discard before proceeding?"
+Do not begin new work until Amy responds.
+
+SESSION CLOSE (final step, after all other close steps):
+Run: git status
+Commit all changes with a descriptive message.
+Commit message format:
+  "YYYY-MM-DD — [what was built/fixed/changed]"
+  Example: "2026-04-17 — firefly velocity rebuilt,
+  nav rgba source hunt, runbook updated"
+Run: git push
+Confirm: "Committed and pushed. Remote is current."
+If push is deferred by Amy, state explicitly:
+  "[X] commits staged locally. Remote is behind.
+  Push required before next deploy."
+
+COMMIT MESSAGE STANDARD:
+Specific enough that reading git log tomorrow tells
+you exactly what each session changed.
+Never: "fix" "updates" "changes" "wip"
+Always: what changed, where, and why in one sentence.
+
+RULES:
+Never close a session with uncommitted work without
+explicitly flagging it to Amy first.
+Never build on top of uncommitted work from a prior
+session without surfacing it to Amy first.
+
+---
+
+## THE COMPLETION STANDARD (from Operating Philosophy)
+
+Source document (Notion): 334335a8d33281e894a0f75017d48957
+
+"Done" does not mean "the new thing exists."
+Done means the full chain is complete:
+
+1. BUILD the new thing.
+2. MIGRATE the data from the old thing.
+3. VERIFY the migration is correct.
+4. REMOVE the old thing.
+5. CONFIRM the system is in a clean, unambiguous state.
+
+Stopping at step 2 creates two sources of truth.
+Two sources of truth is worse than one bad source.
+Nobody knows which one is current.
+
+THE TEST: If someone opens this codebase tomorrow with no verbal briefing
+from Amy, will they find one clean consistent state? Or artifacts, duplicates,
+and half-finished work that requires Amy to explain?
+If it requires explanation, it is not done.
+
+CLAUDE CODE APPLICATION:
+Before presenting any task as complete, walk the chain:
+Did I build it, migrate it, verify it, remove the old version,
+and confirm the system is consistent?
+
+If any step is incomplete, name it explicitly:
+"I have completed steps 1-3. Steps 4-5 remain: the old CSS rule
+needs to be removed and the specificity conflict needs to be verified
+in DevTools. Want me to do that now?"
+
+Never present 60% of a task as 100% of a task.
+Never leave an old rule in place when a new one has been added.
+Never add a new CSS rule when the winning rule should be changed at source.
+
+---
+
+## THE $200 STANDARD — SUMMARY
+
+Quality floor: every surface feels crafted, not assembled.
+One plastic cup collapses the entire $200 illusion.
+The answer to "will a parent screenshot this?" must be yes.
+→ Full content: LAYER 4 — THE $200 STANDARD (Quality Floor Directive)
+
+---
+
+═══════════════════════════════════════
+LAYER 2 — LIVE STATE
+Read this layer before any build session to understand what is broken,
+what is frozen, and what decisions are locked.
+═══════════════════════════════════════
+
+## PAGES STATUS
+
+  Homepage          | Active work    | Nav, warm right column, spacing
+  Plan (/plan)      | Elite          | Touch nothing
+  Games             | Below standard | Nav, saffron deployment, weight system
+  Library           | Elite          | Touch nothing
+  Methodology       | Needs rethink  | Full content and layout redesign
+  Ages              | Strong         | Verify nav color landing
+  Open Seat         | LOCKED FINAL   | Day sky exactly as built. NEVER CHANGE.
+  Pricing           | Strong         | Firefly fix pending
+
+---
+
+## KNOWN BUGS
+
+1. ANNOUNCEMENT BAR TEXT COLOR — NON-HOMEPAGE PAGES
+   What is broken: The announcement bar text on every page except the homepage is
+     dark ink (rgba(12,16,32,0.75)) on a semi-transparent dark bar. On linen pages
+     this text is barely visible. On night-sky pages it is nearly invisible. The Light
+     Standard spec and the homepage both use saffron rgba(232,175,56,0.60).
+   Origin: C:\Users\amyog\Desktop\wizkoo\components\nav.js line 84
+     Current value: color:rgba(12,16,32,0.75);
+     Correct value: color:rgba(232,175,56,0.60);
+   Root cause: The default .announce-text rule was written with dark ink. The homepage
+     is a special case that applies saffron via an inline override at nav.js lines
+     288–289 (the _hp branch). All other pages fall through to the default dark value.
+     Nobody updated the default to match the spec.
+   What has been attempted: Nothing documented. The homepage override exists as evidence
+     that saffron was the intended color — someone fixed it for the homepage and
+     forgot the default.
+   The fix (exact):
+     In C:\Users\amyog\Desktop\wizkoo\components\nav.js, change line 84 from:
+       '  color:rgba(12,16,32,0.75);',
+     to:
+       '  color:rgba(232,175,56,0.60);',
+     That is the only change required. The homepage inline override at lines 288–289
+     can remain — it uses rgba(232,175,56,0.75) (slightly brighter) which is fine on
+     the solid #0C1020 bar. The default change brings all other pages into spec.
+   Verify in browser: Open ages.html (a linen page with the standard bar, not the
+     homepage). Inspect the announcement bar text. It should be legible saffron
+     against the dark bar, not nearly invisible dark ink. Check the same on
+     library.html (night-sky surface) to confirm it reads on dark backgrounds too.
+
+2. NAV CTA STYLE — GHOST VS FILLED (REQUIRES AMY CONFIRMATION BEFORE FIXING)
+   What is broken: The Light Standard spec says Nav CTA must be saffron fill:
+     background: #E8AF38, color: #0C1020 (dark text on saffron button).
+     The current implementation at nav.js lines 199–219 is ghost style:
+     background: transparent, color: #E8AF38, border: 1px solid rgba(232,175,56,0.65).
+   Origin: C:\Users\amyog\Desktop\wizkoo\components\nav.js lines 199–219 (.nav-cta rule)
+   Root cause theory: The nav background was changed from frosted glass to solid dark
+     (rgba(12,16,32,0.96)) as a locked decision. A filled saffron CTA against an opaque
+     dark bar creates a visually heavy look — someone may have switched to ghost to
+     reduce visual weight and never documented the change as intentional. Alternatively
+     it may simply be an unrecorded decision.
+   What has been attempted: Nothing documented. This state has been in the codebase
+     since at least April 12, 2026. The Locked Decisions section records the nav
+     background change but says nothing about the CTA style.
+   DO NOT FIX without Amy confirming this is a bug and not an intentional design choice.
+     Ask: "The nav CTA is currently ghost style (transparent, saffron border). The Light
+     Standard says it should be saffron fill. Should I change it back to filled?"
+   If Amy confirms it is a bug, the fix (exact):
+     In C:\Users\amyog\Desktop\wizkoo\components\nav.js, change lines 206–214:
+       Current:
+         '  background:transparent;',
+         '  color:#E8AF38;',
+         '  border:1px solid rgba(232,175,56,0.65);',
+         '  box-shadow:none;',
+       Change to:
+         '  background:#E8AF38;',
+         '  color:#0C1020;',
+         '  border:1px solid rgba(232,175,56,0.90);',
+         '  box-shadow:inset 0 1px 0 rgba(255,255,255,0.20);',
+       And lines 216–219 (hover state):
+       Current:
+         '  border-color:rgba(232,175,56,1.0);',
+         '  box-shadow:0 0 0 1px rgba(232,175,56,0.20),0 2px 12px rgba(232,175,56,0.18);',
+       Change to:
+         '  background:#EDBA45;',
+         '  filter:brightness(1.04);',
+         (remove the border-color and box-shadow lines from hover)
+   Verify in browser: Nav CTA should render as a solid saffron rectangle (#E8AF38)
+     with dark ink text (#0C1020). Hover should lighten to #EDBA45. No translation
+     (translateY) on hover — spec says NO translation.
+
+3. PRICING PAGE — CTA FIREFLY MISSING
+   What is broken: pricing.html has no firefly implementation at all. The "Firefly fix
+     pending" note in Pages Status refers to this page, not to the #pricing section of
+     index.html. The pricing.html CTA section (.cta / .cta-btn) has no animation.
+   Origin: C:\Users\amyog\Desktop\wizkoo\pricing.html — no firefly code exists anywhere
+     in the file (confirmed by search of all 258 lines). The page has a .cta section
+     (lines 82–88, 197–201) with class .cta-btn on the primary button (line 201).
+   Root cause: The CTA firefly in index.html (lines 2356–2401) targets
+     document.getElementById('pricing') and cta.querySelector('.btn-main'). Neither
+     selector matches anything in pricing.html. That code only runs on index.html. The
+     pricing page was never given its own firefly implementation.
+   What has been attempted: Nothing. The "fix pending" note records the intent to add
+     a firefly but it was never built.
+   The fix (exact): Add the following script to pricing.html, immediately before
+     </body> (after the existing scroll-reveal script block). Adapt element selectors
+     from index.html's implementation to match pricing.html's class names:
+
+     <script>
+     /* ─── CTA Firefly — pricing page ─── */
+     (function () {
+       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+       if (window.innerWidth < 768) return;
+       var cta = document.querySelector('.cta');
+       if (!cta) return;
+       var btn = cta.querySelector('.cta-btn');
+       if (!btn) return;
+
+       var ff = document.createElement('div');
+       ff.style.cssText = 'position:absolute;width:5px;height:5px;border-radius:50%;' +
+         'background:#E8AF38;pointer-events:none;z-index:10;opacity:0;' +
+         'transition:opacity 0.4s ease;' +
+         'box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15);';
+       cta.appendChild(ff);
+
+       var triggered = false;
+       if (!window.IntersectionObserver) return;
+       var obs = new IntersectionObserver(function (entries) {
+         if (entries[0].isIntersecting && !triggered) {
+           triggered = true;
+           obs.disconnect();
+           setTimeout(launch, 300);
+         }
+       }, { threshold: 0.4 });
+       obs.observe(cta);
+
+       function launch() {
+         var cr = cta.getBoundingClientRect();
+         var br = btn.getBoundingClientRect();
+         var x0 = (br.left - cr.left) + br.width * 0.15;
+         var y0 = (br.top  - cr.top)  + br.height * 0.5;
+         ff.style.left = x0 + 'px';
+         ff.style.top  = y0 + 'px';
+         requestAnimationFrame(function () { ff.style.opacity = '1'; });
+         var t = 0, start = Date.now(), dur = 2600;
+         (function drift() {
+           t += 0.018;
+           if (Date.now() - start >= dur) {
+             ff.style.transition = 'opacity 0.5s ease';
+             ff.style.opacity = '0';
+             return;
+           }
+           ff.style.left = (x0 + Math.sin(t * 2.1) * 14 + Math.sin(t * 4.7) * 6) + 'px';
+           ff.style.top  = (y0 + Math.cos(t * 1.6) * 10 + Math.cos(t * 3.3) * 4) + 'px';
+           requestAnimationFrame(drift);
+         })();
+       }
+     })();
+     </script>
+
+   BEFORE adding this: verify the .cta element has position:relative (it does —
+     pricing.html line 82: .cta{...position:relative;overflow:hidden}). The overflow:hidden
+     will clip the firefly if it drifts outside .cta bounds. The drift range is ±14px
+     horizontally and ±10px vertically from the button center — ensure the .cta section
+     is tall enough that the firefly won't be clipped at its extremes.
+   Verify in browser: Scroll the pricing.html CTA section ("Ready to build your first
+     week?") into view. Within 300ms of intersection, a 5px saffron dot should appear
+     at the left edge of the "Build Your Plan" button and drift for 2.6s then fade out.
+     Confirm it is clipped by .cta bounds (not visible outside the section).
+     Confirm it does not appear on mobile (<768px) or with prefers-reduced-motion.
+
+4. GAMES PAGES — INVALID SORA WEIGHT VALUES
+   What is broken: Multiple elements across the games pages use Sora font-weight 600,
+     which is not in the approved Sora weight set (200, 300, 700, 800 only).
+     Weight 600 is a prohibited weight that does not exist in the licensed Sora subset
+     and falls back to the nearest available weight — producing inconsistent rendering.
+   NOTE on "Nav": All three games pages correctly load components/nav.js via
+     <div id="wizkoo-nav"> + <script src="/components/nav.js">. No nav bugs confirmed
+     by code inspection. If a visual nav issue exists it requires a browser audit session.
+   NOTE on "Saffron deployment": No wrong saffron colors found (all usages are either
+     #E8AF38 or var(--saffron) or correctly using saffron). Hardcoded hex strings in
+     JS inline styles (games.html line 101) are functionally correct even if they could
+     use CSS vars. Not a saffron deployment error in the color-correctness sense.
+
+   SUB-BUG 4a — atlas.html, Sora weight 600 on postcard body text:
+     File: C:\Users\amyog\Desktop\wizkoo\games\atlas.html, line 94
+     Current: font-family:'Sora',sans-serif;font-weight:600;font-size:0.95rem;
+     Wrong because: 600 is not a loaded Sora weight.
+     Fix: Change font-weight:600 to font-weight:700 on that inline style.
+
+   SUB-BUG 4b — elementum.html, Sora weight 600 on element name label:
+     File: C:\Users\amyog\Desktop\wizkoo\games\elementum.html, line 62
+     Current: style="font-family:'Sora',sans-serif;font-weight:600;font-size:1rem;..."
+     Wrong because: 600 is not a loaded Sora weight.
+     Fix: Change font-weight:600 to font-weight:700 on that inline style.
+
+   Additional weight-system audit needed: pricing.html also has invalid Sora weights:
+     pricing.html line 58: .feature-title font-weight:600 → change to 700
+     pricing.html line 76: .faq-q font-weight:500 → change to 700
+     pricing.html line 47: .hero-btn font-weight:600 → change to 700
+     pricing.html line 87: .cta-btn font-weight:600 → change to 700
+     (pricing.html is NOT listed in the games bug but has the same class of error)
+
+   Verify in browser: Inspect any element using font-family Sora in the games or pricing
+     pages. In DevTools > Computed, the resolved font-weight must be 200, 300, 700, or
+     800. Any other value (400 fallback from 500/600 mismatch) is a bug. The most
+     visible symptom: a headline that looks thinner than expected (600 falling back to
+     400 because 600 isn't loaded).
+
+5. METHODOLOGY PAGE — NEEDS RETHINK
+   What is broken: Full content and layout redesign required. Page does not
+     meet the $200 Standard or current design language.
+   Location: C:\Users\amyog\Desktop\wizkoo\methodology.html
+   Status: Unresolved. Requires a design session before any code work.
+
+6. HOMEPAGE ENVIRONMENT — UNRESOLVED
+   What is broken: The environment assignment for the homepage is TBD.
+     The decision between "linen only" or "multi-surface" has not been made.
+   Location: ENVIRONMENT MAP section of this document.
+   Status: Unresolved. No code work should proceed on homepage surface until
+     this is decided and locked into the Environment Map.
+
+---
+
+## NAV DELIBERATE HOLD
+
+NAV STATUS: DELIBERATE HOLD — April 17, 2026
+Four unresolved questions. Nav frozen exactly as deployed.
+Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
+
+---
+
+## LOCKED DECISIONS — DO NOT REOPEN
+
+- Open Seat: day sky surface exactly as built. Permanent. Final. Never change.
+- Hamburger nav on desktop: permanently off the table.
+- Entrance animation on homepage: removed. Done.
+- "And tracking." — period. Never exclamation mark.
+- Theme suggestion buttons: Space Mono, NO EMOJI. Ever.
+- Two Claude Code sessions on same codebase simultaneously: never.
+- Firefly in wordmark: parked. Do not reintroduce.
+- Homepage fully dark: parked. Do not reopen.
+- Saffron announcement bar as full-width surface: Light Standard violation. Never.
+- Column ratio: 62/38. Locked.
+- Age dropdown: numbers only 1-12. No "years old."
+- Deprecated day sky color #1848B8: never use.
+- Three equal saffron lines in headline: never. One saffron moment per headline.
+- Frosted glass nav on linen: solved with dark nav. Do not suggest reverting.
+
+---
+
+═══════════════════════════════════════
+LAYER 3 — SYSTEM MAP
+Read this layer when you need to find a file, understand the codebase
+structure, or check environment setup and deployment configuration.
+═══════════════════════════════════════
 
 ## CODEBASE LOCATIONS
 
@@ -164,94 +653,188 @@ Other key source dirs:
 
 ---
 
-## THE ONE-SENTENCE SUMMARY
+## ENVIRONMENT VARIABLES
 
-"Warm surface. Warm energy. Cool architecture.
-The proportions shift. The system never changes."
+MARKETING SITE (C:\Users\amyog\Desktop\wizkoo)
+  No .env files. No build step. No server-side secrets.
+  Supabase credentials are exposed as window globals in:
+    C:\Users\amyog\Desktop\wizkoo\js\supabase-config.js
+    WIZKOO_SUPABASE_URL      — Supabase project URL
+    WIZKOO_SUPABASE_ANON_KEY — Supabase anon/public key
+  These are intentionally public-facing. Row Level Security
+  policies (sql/library-schema.sql) control data access.
+  No other environment variables required for the marketing site.
+
+PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator)
+  Source: .env.example (22 variables)
+  All secrets go in .env.local (never committed).
+
+  Database:
+    DATABASE_URL          — Postgres connection string (pooler via Supabase)
+    DIRECT_URL            — Direct DB URL for drizzle-kit migrations.
+                            Must use db.{ref}.supabase.co:5432, NOT pooler host.
+
+  Clerk Authentication (5 vars):
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY — Client-side Clerk key
+    CLERK_SECRET_KEY                  — Server-side Clerk key
+    CLERK_WEBHOOK_SECRET              — Verifies Clerk webhook signatures
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL     — Set to /sign-in
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL     — Set to /sign-up
+    (NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL and AFTER_SIGN_UP_URL
+     also in .env.example: /dashboard and /onboarding)
+
+  Stripe Payments (4 + 2 price IDs):
+    STRIPE_SECRET_KEY              — Server-side Stripe key
+    STRIPE_WEBHOOK_SECRET          — Verifies Stripe webhook events
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY — Client-side Stripe key
+    STRIPE_MONTHLY_PRICE_ID        — Monthly plan price ID from Stripe Dashboard
+    STRIPE_ANNUAL_PRICE_ID         — Annual plan price ID from Stripe Dashboard
+
+  AI:
+    ANTHROPIC_API_KEY    — Claude API key (main plan generation + orbit reports + safety)
+
+  Email:
+    RESEND_API_KEY       — Resend transactional email service
+
+  Error tracking:
+    SENTRY_DSN           — Sentry project DSN (client + server configs)
+
+  Analytics:
+    POSTHOG_API_KEY      — PostHog product analytics
+
+  Rate limiting:
+    UPSTASH_REDIS_REST_URL   — Upstash Redis REST endpoint
+    UPSTASH_REDIS_REST_TOKEN — Upstash Redis auth token
+
+  Cron job auth:
+    CRON_SECRET          — Bearer token checked by all four /api/cron/* routes
+
+---
+
+## DEPENDENCY INVENTORY
+
+MARKETING SITE (C:\Users\amyog\Desktop\wizkoo\package.json)
+  devDependencies (3):
+    @playwright/test  ^1.58.2   — Playwright test runner (screenshot automation)
+    pg                ^8.20.0   — PostgreSQL client (library data import scripts)
+    serve             ^14.2.6   — Local static dev server (npm run serve)
+  No runtime dependencies. Static site. No build step.
+  Package manager: npm (no lockfile constraint).
+
+PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator\package.json)
+  Package manager: pnpm ONLY. (preinstall script enforces this.)
+  Node required: >=20.0.0
+
+  dependencies (23):
+    @anthropic-ai/sdk   ^0.82.0    — Anthropic Claude API client
+    @clerk/nextjs       ^7.0.8     — Clerk auth (Next.js integration)
+    @sentry/nextjs      ^10.47.0   — Sentry error tracking
+    @supabase/supabase-js ^2.101.1 — Supabase JS client
+    @tanstack/react-query ^5.96.1  — Server state management
+    @upstash/ratelimit  ^2.0.8     — Rate limiting (uses Upstash Redis)
+    @upstash/redis      ^1.37.0    — Upstash Redis client
+    clsx                ^2.1.1     — Class name utility
+    drizzle-orm         ^0.45.2    — ORM for Postgres/Supabase
+    framer-motion       ^12.38.0   — Animation library
+    nanoid              ^5.1.7     — Unique ID generation
+    next                16.2.2     — Next.js framework (PINNED — do not auto-upgrade)
+    postgres            ^3.4.8     — Postgres driver (used by Drizzle)
+    posthog-js          ^1.364.7   — PostHog analytics (client-side)
+    posthog-node        ^5.28.11   — PostHog analytics (server-side)
+    qrcode.react        ^4.2.0     — QR code generation (plan sharing)
+    react               19.2.4     — React (PINNED — matches Next.js 16 requirement)
+    react-dom           19.2.4     — React DOM (PINNED)
+    resend              ^6.10.0    — Transactional email
+    stripe              ^22.0.0    — Stripe payments SDK
+    svix                ^1.90.0    — Webhook signature verification (Clerk webhooks)
+    tailwind-merge      ^3.5.0     — Tailwind class merging utility
+    zod                 ^4.3.6     — Schema validation
+    zustand             ^5.0.12    — Client state management
+
+  devDependencies (8):
+    @tailwindcss/postcss  ^4       — Tailwind v4 PostCSS integration
+    @types/node           ^20      — Node.js TypeScript types
+    @types/react          ^19      — React TypeScript types
+    @types/react-dom      ^19      — React DOM TypeScript types
+    drizzle-kit           ^0.31.10 — Drizzle ORM migration CLI
+    eslint                ^9       — Linter
+    eslint-config-next    16.2.2   — Next.js ESLint config (PINNED to match Next)
+    tailwindcss           ^4       — Tailwind CSS v4
+    typescript            ^5       — TypeScript compiler
+
+  PIN NOTE: next@16.2.2, react@19.2.4, react-dom@19.2.4, and
+  eslint-config-next@16.2.2 are intentionally pinned. React 19
+  and Next 16 are paired versions. Do not upgrade without a
+  dedicated upgrade session.
 
 ---
 
-## THE QUALITY FILTER (read before every session)
+## DEPLOYMENT PROTOCOL
 
-"Someone who loves children made this."
-Every surface, every interaction, every sound passes through one filter:
-does this feel crafted, or does it feel assembled?
-If the answer is "it's fine" — it is not ready.
+MARKETING SITE → Netlify (wizkoo.com)
+  Config file: C:\Users\amyog\Desktop\wizkoo\netlify.toml
+  Publish directory: . (repo root — serves static files directly)
+  Build command: none (no build step)
+  Deploy trigger: push to main branch on GitHub (Ethos25/Wizkoo)
 
----
+  Proxy rules (netlify.toml):
+    /plan      → https://wizkoo-plan-generator.vercel.app/plan   (200 proxy)
+    /plan/*    → https://wizkoo-plan-generator.vercel.app/plan/:splat (200 proxy)
+  Legacy redirects (301):
+    /planner     → /plan
+    /planner.html → /plan
+    /what-we-believe.html → /what-we-believe
+    /games.html  → /games
+    /methodology.html → /methodology
+  Library book detail rewrite (200):
+    /library/:slug → /library/book.html
 
-## COLOR SYSTEM — THE TRIAD
+  Deploy checklist:
+    1. Ensure WIZKOO_REFERENCES.md changes are committed
+    2. Push to main: git push
+    3. Netlify auto-deploys within ~60s
+    4. Verify at wizkoo.com — no build logs to check
 
-SAFFRON (canonical brand accent)
-  #E8AF38
-  The ONE accent color. Appears wherever the Wizkoo brand is present.
-  Never adjusted for any surface. Never lightened for dark. Never darkened for light.
-  If saffron does not read, the surface is wrong — not the saffron.
-  PRECIOUS. Small doses. Never as a background surface. Never geographic.
-  Product variants (apps only — not brand):
-    Elementum gold: #FFD54F
-    Atlas amber: #D4884A
+PLAN GENERATOR → Vercel (wizkoo.com/plan)
+  Config file: C:\Users\amyog\Desktop\wizkoo-plan-generator\vercel.json
+  Framework: Next.js (auto-detected by Vercel)
+  Build command: pnpm build (next build)
+  Output: .next directory
+  basePath: /plan (set in next.config.ts)
+  Deploy trigger: push to master branch
 
-LINEN (the warm surface you trust)
-  #F2F0EA — Primary background
-  #FAFAFA — Paper (card surfaces)
-  #ECEAE3 — Warm BG (section backgrounds)
-  #E0DED6 — Rule (borders)
-  Emotional register: trust, warmth, the parent's domestic world.
+  Environment variables: all 22 vars from ENVIRONMENT VARIABLES
+  section above must be set in Vercel Dashboard > Settings > Environment Variables
+  for both Production and Preview environments.
 
-ULTRAMARINE (the cool architecture that holds everything)
-  Replaces generic black (#0A0A0A) across the entire ecosystem.
-  #0C1020 — Ink (96% dark). All text, borders, card outlines on Wizkoo.
-  #0C1428 — Sidebar/overlay. Deepest UI layer. Modal backgrounds.
-  #101830 — App background base (Atlas, Elementum, night sky pages).
-  #182848 — App background center glow. Creates planetarium effect.
-  rgba(12,16,32,0.95) + backdrop-filter blur — Nav/footer.
-  #1A2A5A — Link hover, focus rings, subtle UI accents in apps.
-  #0A41B2 — Cursor phenomenon (exclusion-blend of saffron on linen).
-             ONLY at point-scale: cursor, task dots, focus rings.
-             NEVER a surface color.
-  #7898D0 — Atlas ocean. Bright, watery. Lightest ultramarine member.
+  Cron jobs (vercel.json — runs on Vercel's cron infrastructure):
+    orbit-report      — 0 6 * * 0   (Sundays 6am UTC)
+                        Path: /plan/api/cron/orbit-report
+                        Generates weekly learning narrative emails.
+    plan-lifecycle    — 0 3 * * *   (Daily 3am UTC)
+                        Path: /plan/api/cron/plan-lifecycle
+                        Handles plan expiry, archiving, subscription checks.
+    auth-reconciliation — 0 7 * * 1 (Mondays 7am UTC)
+                        Path: /plan/api/cron/auth-reconciliation
+                        Syncs Clerk auth state with database user records.
+    re-engagement     — 0 14 * * *  (Daily 2pm UTC)
+                        Path: /plan/api/cron/re-engagement
+                        Sends re-engagement emails to inactive users.
+  All cron routes validate CRON_SECRET bearer token before executing.
 
-DAY SKY (the threshold — the open world between parent and child)
-  Locked April 12, 2026. The sky at high noon.
-  Emotional register: aspiration, access, openness. A deep breath.
-
-  Sky background gradient:
-  linear-gradient(180deg,
-    #1A4EC2 0%, #1E54C6 8%, #2260CC 18%,
-    #2868CC 30%, #2E6ECE 42%, #306CCC 54%,
-    #2C68C6 64%, #2860B8 74%, #2054A8 84%,
-    #174496 92%, #123485 100%)
-
-  Sky midpoint reference: #2868CC
-
-  DEPRECATED — NEVER USE: #1848B8
-  This appeared in early briefing documents. It is wrong.
-  Any session referencing #1848B8 must be corrected before work proceeds.
-
-  Sun corona (above sky, radial at top center):
-  radial-gradient(ellipse 90% 60% at 50% -5%,
-    rgba(200,130,0,0.90) 0%,
-    rgba(232,175,56,0.72) 8%,
-    rgba(232,175,56,0.48) 20%,
-    rgba(232,175,56,0.24) 36%,
-    rgba(220,162,38,0.08) 54%,
-    transparent 70%)
-
-  Sun disc (above corona, tight bright core):
-  radial-gradient(ellipse 22% 18% at 50% -2%,
-    rgba(255,255,220,0.85) 0%,
-    rgba(255,240,140,0.65) 18%,
-    rgba(232,175,56,0.45) 38%,
-    transparent 65%)
-
-  Text on day sky:
-    Primary: #FAFAFA
-    Secondary: rgba(255,255,255,0.42)
-    Eyebrow/label: rgba(255,255,255,0.30)
-    Saffron accent: #E8AF38 (unchanged on all surfaces)
+  Deploy checklist:
+    1. Ensure pnpm build passes locally: pnpm build
+    2. Push to master: git push
+    3. Monitor Vercel dashboard for build logs (~2-3 min build time)
+    4. Verify at wizkoo.com/plan after deploy completes
 
 ---
+
+═══════════════════════════════════════
+LAYER 4 — DESIGN SYSTEM
+Read this layer before touching any visual element, color, type,
+motion, or surface. All design values live here.
+═══════════════════════════════════════
 
 ## SURFACE ARCHITECTURE — THREE WORLDS, ONE DOOR
 
@@ -331,6 +914,133 @@ Universal Footer: Every page. No exceptions.
   Footer              | Universal    | Locked — every page, no exceptions
 
 Rule: New pages do not get built until their environment is assigned above first.
+
+---
+
+## COLOR SYSTEM — THE TRIAD
+
+SAFFRON (canonical brand accent)
+  #E8AF38
+  The ONE accent color. Appears wherever the Wizkoo brand is present.
+  Never adjusted for any surface. Never lightened for dark. Never darkened for light.
+  If saffron does not read, the surface is wrong — not the saffron.
+  PRECIOUS. Small doses. Never as a background surface. Never geographic.
+  Product variants (apps only — not brand):
+    Elementum gold: #FFD54F
+    Atlas amber: #D4884A
+
+LINEN (the warm surface you trust)
+  #F2F0EA — Primary background
+  #FAFAFA — Paper (card surfaces)
+  #ECEAE3 — Warm BG (section backgrounds)
+  #E0DED6 — Rule (borders)
+  Emotional register: trust, warmth, the parent's domestic world.
+
+ULTRAMARINE (the cool architecture that holds everything)
+  Replaces generic black (#0A0A0A) across the entire ecosystem.
+  #0C1020 — Ink (96% dark). All text, borders, card outlines on Wizkoo.
+  #0C1428 — Sidebar/overlay. Deepest UI layer. Modal backgrounds.
+  #101830 — App background base (Atlas, Elementum, night sky pages).
+  #182848 — App background center glow. Creates planetarium effect.
+  rgba(12,16,32,0.95) + backdrop-filter blur — Nav/footer.
+  #1A2A5A — Link hover, focus rings, subtle UI accents in apps.
+  #0A41B2 — Cursor phenomenon (exclusion-blend of saffron on linen).
+             ONLY at point-scale: cursor, task dots, focus rings.
+             NEVER a surface color.
+  #7898D0 — Atlas ocean. Bright, watery. Lightest ultramarine member.
+
+DAY SKY (the threshold — the open world between parent and child)
+  Locked April 12, 2026. The sky at high noon.
+  Emotional register: aspiration, access, openness. A deep breath.
+
+  Sky background gradient:
+  linear-gradient(180deg,
+    #1A4EC2 0%, #1E54C6 8%, #2260CC 18%,
+    #2868CC 30%, #2E6ECE 42%, #306CCC 54%,
+    #2C68C6 64%, #2860B8 74%, #2054A8 84%,
+    #174496 92%, #123485 100%)
+
+  Sky midpoint reference: #2868CC
+
+  DEPRECATED — NEVER USE: #1848B8
+  This appeared in early briefing documents. It is wrong.
+  Any session referencing #1848B8 must be corrected before work proceeds.
+
+  Sun corona (above sky, radial at top center):
+  radial-gradient(ellipse 90% 60% at 50% -5%,
+    rgba(200,130,0,0.90) 0%,
+    rgba(232,175,56,0.72) 8%,
+    rgba(232,175,56,0.48) 20%,
+    rgba(232,175,56,0.24) 36%,
+    rgba(220,162,38,0.08) 54%,
+    transparent 70%)
+
+  Sun disc (above corona, tight bright core):
+  radial-gradient(ellipse 22% 18% at 50% -2%,
+    rgba(255,255,220,0.85) 0%,
+    rgba(255,240,140,0.65) 18%,
+    rgba(232,175,56,0.45) 38%,
+    transparent 65%)
+
+  Text on day sky:
+    Primary: #FAFAFA
+    Secondary: rgba(255,255,255,0.42)
+    Eyebrow/label: rgba(255,255,255,0.30)
+    Saffron accent: #E8AF38 (unchanged on all surfaces)
+
+---
+
+## TYPOGRAPHY SYSTEM
+
+Marketing Site (Wizkoo):
+  Sora — Display headlines, hero text, CTA buttons
+    Weights: 200, 300, 700, 800 ONLY
+    Weights 400, 500, 600 never appear in headlines
+  Inter — Body, UI, descriptions, form fields, prose
+  Space Mono — Labels, eyebrows, nav, buttons, micro-copy (uppercase, letterspaced)
+
+Apps:
+  Atlas: DM Serif Display + Inter + Space Mono
+  Elementum: Outfit (900/700) + Quicksand (500) + Inter + Space Mono
+
+NO OTHER TYPEFACE ENTERS ANY CODEBASE. If found, remove it.
+
+Sora Weight System:
+  200 — light display lines
+  300 — body and subtext
+  700 — saffron accent lines
+  800 — bold headline lines
+
+Eyebrow Treatment (universal — every page, every section header):
+  Font: Space Mono, 10px, weight 400, letter-spacing 0.14em, uppercase
+  On linen: rgba(12,16,32,0.45)
+  On day sky: rgba(255,255,255,0.30)
+  On night sky: #E8AF38
+
+Saffron Rule (above every eyebrow on every hero section):
+  Width: 32px. Height: 1.5px. Background: #E8AF38.
+  Margin-bottom: 12px. Same on every surface. No exceptions.
+
+---
+
+## MOTION IDENTITY
+
+Wizkoo:     cubic-bezier(0.16, 1, 0.3, 1) — Editorial. A page turning.
+Elementum:  cubic-bezier(.34, 1.56, .64, 1) — Cosmic play. Spring bounce.
+Atlas:      cubic-bezier(.22, .68, 0, 1.04) — Compass precision.
+Snap (Plan Generator UI): cubic-bezier(0.22, 1, 0.36, 1) — 280ms state changes.
+
+---
+
+## CROSS-SYSTEM CONSISTENCY — FIVE IMMUTABLE ELEMENTS
+
+These are pixel-identical across linen, night sky, and day sky. No exceptions.
+
+1. Typefaces: Sora + Space Mono + Inter on marketing. No others.
+2. Saffron: #E8AF38 exactly. Never adjusted per surface.
+3. Eyebrow treatment: Space Mono, 10px, 0.14em, uppercase. Surface-appropriate color.
+4. Saffron rule: 32px, 1.5px, #E8AF38. Above every hero eyebrow.
+5. Nav: one treatment, all pages. Never transparent. Never surface-matched.
 
 ---
 
@@ -469,39 +1179,6 @@ Plan Generator Nav (authenticated — separate from marketing nav):
 
 ---
 
-## TYPOGRAPHY SYSTEM
-
-Marketing Site (Wizkoo):
-  Sora — Display headlines, hero text, CTA buttons
-    Weights: 200, 300, 700, 800 ONLY
-    Weights 400, 500, 600 never appear in headlines
-  Inter — Body, UI, descriptions, form fields, prose
-  Space Mono — Labels, eyebrows, nav, buttons, micro-copy (uppercase, letterspaced)
-
-Apps:
-  Atlas: DM Serif Display + Inter + Space Mono
-  Elementum: Outfit (900/700) + Quicksand (500) + Inter + Space Mono
-
-NO OTHER TYPEFACE ENTERS ANY CODEBASE. If found, remove it.
-
-Sora Weight System:
-  200 — light display lines
-  300 — body and subtext
-  700 — saffron accent lines
-  800 — bold headline lines
-
-Eyebrow Treatment (universal — every page, every section header):
-  Font: Space Mono, 10px, weight 400, letter-spacing 0.14em, uppercase
-  On linen: rgba(12,16,32,0.45)
-  On day sky: rgba(255,255,255,0.30)
-  On night sky: #E8AF38
-
-Saffron Rule (above every eyebrow on every hero section):
-  Width: 32px. Height: 1.5px. Background: #E8AF38.
-  Margin-bottom: 12px. Same on every surface. No exceptions.
-
----
-
 ## TEXT COLOR HIERARCHY — DARK SURFACES
 
 Three planes at rest (Lotte van der Berg + Jiu Yoon):
@@ -523,29 +1200,127 @@ Cool-tinted white sits — it shares the blue DNA of the surface.
 
 ---
 
-## MOTION IDENTITY
+## THE $200 STANDARD (Quality Floor Directive)
 
-Wizkoo:     cubic-bezier(0.16, 1, 0.3, 1) — Editorial. A page turning.
-Elementum:  cubic-bezier(.34, 1.56, .64, 1) — Cosmic play. Spring bounce.
-Atlas:      cubic-bezier(.22, .68, 0, 1.04) — Compass precision.
-Snap (Plan Generator UI): cubic-bezier(0.22, 1, 0.36, 1) — 280ms state changes.
+Source document (Notion): 338335a8d33281f699d4d705f973d430
+Read the full document before any build session on the plan generator.
+Everything below is binding. Do not weaken it.
+
+### What $200 Feels Like
+
+You know the feeling when you walk into a hotel and within 3 seconds
+you know it costs $400 a night? Nobody told you the price.
+The lighting is warmer than it needs to be. The spacing is more generous
+than it needs to be. Every surface communicates: someone spent more time
+on this than they had to.
+
+That is what Wizkoo must feel like.
+
+A parent opens the app. Within 3 seconds, before they read a word:
+the linen warmth. The weight of the typography. The saffron that appears
+in exactly two places and nowhere else. The silence where other apps
+would have confetti. The space between elements that says "we chose not
+to cram more in."
+
+They don't think "$200 product." They feel "this is unusually good."
+Then they see $50 and the gap between what they feel and what they pay
+becomes the story they tell their friend.
+
+THAT GAP IS THE PRODUCT.
+
+### What Kills the $200 Feeling (instantly, not gradually)
+
+A rounded corner where everything else is sharp. Dead.
+A system font where Sora should be. Dead.
+A green checkmark in a product that uses saffron. Dead.
+A "Loading..." where a breathing saffron dot should be. Dead.
+A bounce animation where editorial easing should be. Dead.
+An error message that says "Oops! Something went wrong!" Dead.
+A default Tailwind gray where the warm paper-crease border should be. Dead.
+
+One plastic cup and the entire illusion collapses.
+The parent doesn't think "everything else was great but the cup was cheap."
+The parent thinks "this place is pretending."
+
+Your job: zero plastic cups.
+"Style the card nicely" is how plastic cups get in.
+"Paper background (#FAFAFA), 1.5px border in #0C1020, 8px saffron offset
+pseudo-element shadow, sharp corners (2px), hover lifts translateY(-2px)
+with cubic-bezier(0.16,1,0.3,1) while shadow stays planted" is how
+you prevent them.
+
+### The Parent's Internal Monologue (the sequence that must not break)
+
+SECOND 1:  "Oh. This is warm. This doesn't look like an app. Stationery."
+SECOND 3:  "That font. Light but confident. Like a magazine, not a website."
+SECOND 5:  "Gold. Not yellow. Just a touch of it. Expensive feeling."
+SECOND 10: "The cursor changed. The card lifted. Someone built every detail."
+MINUTE 1:  "It's using my child's name. In a sentence a person wrote. While I watch."
+MINUTE 2:  "This plan looks like it came from a design studio. I want to print this."
+MINUTE 3:  "This is $50? How is this $50?"
+
+If any step breaks, the parent never reaches the last thought.
+Miss one and the cascade fails.
+
+### $50 vs $200 — Concrete Examples
+
+THE DASHBOARD
+  $50: Rounded corners, gray shadow, "1 Plan Generated" stat, green badge, system font.
+  $200: Sharp corners, saffron offset pseudo-element shadow, no stat cards (the plan
+        IS the dashboard), saffron dot for subscription status, Space Mono uppercase
+        nav with saffron underline on hover, parent's family initial floating quietly
+        on the right.
+
+THE ONBOARDING
+  $50: Multi-field form, "Submit" button, progress dots, "Enter your child's name."
+  $200: Full-viewport single question per screen. "Who's learning this week?" in
+        Sora 200. Cursor already blinking in the name field. Input borders invisible
+        at rest, bloom saffron on focus. "Generate Our Plan" as the singular saffron
+        moment. A 2px saffron progress line that slides forward silently.
+
+THE ERROR
+  $50: Red box, exclamation icon. "Oops! Something went wrong. Please try again later."
+  $200: No box. No red. No icon. Calm text in existing layout. "Taking longer than
+        usual. Try again?" One button. Same typography as everything else. The error
+        doesn't scream. It speaks.
+
+THE GENERATION WAIT
+  $50: Spinning circle. "Loading your plan..."
+  $200: A 12px saffron dot that breathes (scale 0.85 to 1.15). No text. The parent
+        watches. Then their child's name appears, woven into a sentence about what
+        the plan is building. The parent's breath catches. The dot is still breathing.
+        The plan materializes.
+
+### The Final Test
+
+Open the product on your phone at 10 PM in a dark room.
+Hold it at arm's length.
+Does it glow like a luxury object?
+Does the linen feel warm?
+Does the saffron feel precious?
+Does the typography feel editorial?
+Does the silence between elements feel intentional?
+
+Yes = $200 product.
+"Sort of" = $100 product.
+"It looks fine" = $50 product that will be replaced by the next app that looks fine.
+
+### The Prompt Standard
+
+Before writing any Claude Code prompt, ask:
+"Will this produce a surface a parent would screenshot and send to a friend?"
+
+If the answer is "probably" or "most of it" — the prompt is not specific enough.
+The answer must be "yes, because every color traces to a token, every font has
+a specific weight, every animation has a named curve, and every pixel has a reason."
 
 ---
 
-## ATLAS CONTINENT PALETTE (Montessori-verified, locked)
-
-  Asia:          #E0C84A (yellow — NOT saffron, clearly distinct)
-  North America: #D4884A (orange-amber)
-  South America: #D06878 (deep rose)
-  Europe:        #C05050 (terracotta-red)
-  Africa:        #4A8A4A (forest green)
-  Oceania:       #A07850 (earth brown, NOT green)
-  Antarctica:    as-is (white/light)
-  Ocean:         #7898D0 (bright watery blue — ultramarine family)
-
-Saffron (#E8AF38) NEVER appears as a geographic color.
-
----
+═══════════════════════════════════════
+LAYER 5 — COMPONENT SPECS
+Read this layer when working on animated or interactive components.
+Every spec here is locked — do not approximate from memory.
+═══════════════════════════════════════
 
 ## GENERATION SPECTACLE — PLAN GENERATOR
 
@@ -701,47 +1476,78 @@ Section 2 (Granddad):
 
 ---
 
-## PAGES STATUS
+## ATLAS CONTINENT PALETTE (Montessori-verified, locked)
 
-  Homepage          | Active work    | Nav, warm right column, spacing
-  Plan (/plan)      | Elite          | Touch nothing
-  Games             | Below standard | Nav, saffron deployment, weight system
-  Library           | Elite          | Touch nothing
-  Methodology       | Needs rethink  | Full content and layout redesign
-  Ages              | Strong         | Verify nav color landing
-  Open Seat         | LOCKED FINAL   | Day sky exactly as built. NEVER CHANGE.
-  Pricing           | Strong         | Firefly fix pending
+  Asia:          #E0C84A (yellow — NOT saffron, clearly distinct)
+  North America: #D4884A (orange-amber)
+  South America: #D06878 (deep rose)
+  Europe:        #C05050 (terracotta-red)
+  Africa:        #4A8A4A (forest green)
+  Oceania:       #A07850 (earth brown, NOT green)
+  Antarctica:    as-is (white/light)
+  Ocean:         #7898D0 (bright watery blue — ultramarine family)
 
----
-
-## LOCKED DECISIONS — DO NOT REOPEN
-
-- Open Seat: day sky surface exactly as built. Permanent. Final. Never change.
-- Hamburger nav on desktop: permanently off the table.
-- Entrance animation on homepage: removed. Done.
-- "And tracking." — period. Never exclamation mark.
-- Theme suggestion buttons: Space Mono, NO EMOJI. Ever.
-- Two Claude Code sessions on same codebase simultaneously: never.
-- Firefly in wordmark: parked. Do not reintroduce.
-- Homepage fully dark: parked. Do not reopen.
-- Saffron announcement bar as full-width surface: Light Standard violation. Never.
-- Column ratio: 62/38. Locked.
-- Age dropdown: numbers only 1-12. No "years old."
-- Deprecated day sky color #1848B8: never use.
-- Three equal saffron lines in headline: never. One saffron moment per headline.
-- Frosted glass nav on linen: solved with dark nav. Do not suggest reverting.
+Saffron (#E8AF38) NEVER appears as a geographic color.
 
 ---
 
-## CROSS-SYSTEM CONSISTENCY — FIVE IMMUTABLE ELEMENTS
+═══════════════════════════════════════
+LAYER 6 — FAILURE PREVENTION
+Read this layer before every session. These are the documented ways
+this project has gone wrong — do not repeat them.
+═══════════════════════════════════════
 
-These are pixel-identical across linen, night sky, and day sky. No exceptions.
+## KNOWN CLAUDE CODE FAILURE PATTERNS
 
-1. Typefaces: Sora + Space Mono + Inter on marketing. No others.
-2. Saffron: #E8AF38 exactly. Never adjusted per surface.
-3. Eyebrow treatment: Space Mono, 10px, 0.14em, uppercase. Surface-appropriate color.
-4. Saffron rule: 32px, 1.5px, #E8AF38. Above every hero eyebrow.
-5. Nav: one treatment, all pages. Never transparent. Never surface-matched.
+These are documented failure modes Claude Code has
+exhibited in this codebase. Read before every session.
+Do not repeat them.
+
+PATTERN 1 — CACHE BLAME
+When a visual fix does not land, Claude Code defaults
+to blaming browser cache. If the problem persists in
+incognito, it is not cache. It is the wrong file or
+the wrong rule. Require a source hunt before accepting
+any cache explanation.
+
+PATTERN 2 — DESTINATION-BASED ANIMATION
+Claude Code defaults to bezier-from-A-to-B animation
+for any movement task. This produces mechanical,
+predictable motion. For organic movement (firefly,
+particles, ambient elements) the architecture must be
+velocity-based with steering, not destination-based.
+If you find yourself writing a bezier to a point,
+the architecture is wrong.
+
+PATTERN 3 — WRONG FILE EDITED
+When a specificity conflict exists, Claude Code will
+sometimes edit a secondary file instead of finding
+and changing the winning rule at source. Always run
+a full specificity audit before making any CSS change.
+Find the winning rule. Change it there. Do not add
+new rules on top of conflicting ones.
+
+PATTERN 4 — PARTIAL COMPLETION PRESENTED AS DONE
+Claude Code will sometimes complete steps 1-2 of a
+5-step task and present the result as finished.
+Apply the Completion Standard to every task:
+built, migrated, verified, old version removed,
+system clean. If any step is missing, name it.
+
+PATTERN 5 — RAW HEX INSTEAD OF TOKEN
+Claude Code will hardcode color values directly in
+components instead of consuming the CSS custom property.
+Every color in this codebase has a token definition.
+Use the variable. Never the raw hex in a component.
+If you see a raw hex in a component file, that is a bug.
+
+PATTERN 6 — APPROXIMATED VALUES
+When Claude Code cannot immediately find a source value,
+it will sometimes use a close approximation instead of
+reading the source file. This is never acceptable.
+If a value is in the runbook, use that exact value.
+If a value is not in the runbook, navigate to the source
+file and read it. Never approximate.
 
 ---
 
@@ -765,149 +1571,11 @@ All animation loops pause via IntersectionObserver when offscreen.
 
 ---
 
-## SESSION STARTUP INSTRUCTION
-
-Paste this at the start of every Claude Code session:
-
-"Read WIZKOO_REFERENCES.md before doing anything.
-Marketing site: C:\Users\amyog\Desktop\wizkoo\WIZKOO_REFERENCES.md
-Plan generator: C:\Users\amyog\Desktop\wizkoo-plan-generator\WIZKOO_REFERENCES.md
-Read it completely. Then confirm:
-  1. Both local codebase paths
-  2. Canonical saffron hex value
-  3. Environment assigned to the page you are about to work on
-Do not begin work until all three are confirmed."
-
----
-
-## BUILD SESSION CLOSE PROTOCOL
-
-Mandatory. Every session. Non-negotiable.
-Triggered by: task completion, context getting heavy,
-or Amy signaling end of session.
-Claude Code initiates without being asked.
-
-STEP 1 — DELIVERABLE CHECK
-Is the primary task complete per the Completion Standard?
-Built. Migrated. Verified. Old version removed.
-System in clean unambiguous state.
-If any step is incomplete, name it explicitly.
-Never present partial completion as done.
-
-STEP 2 — OPEN ITEMS SWEEP
-What was started but not finished this session?
-What was discovered that needs a follow-up session?
-What was deferred and why?
-Each item goes into KNOWN BUGS or OPEN ITEMS
-in the runbook. Not noted in chat. Written to the file.
-
-STEP 3 — DECISION WRITE-BACK
-Every decision made this session gets written to
-LOCKED DECISIONS in WIZKOO_REFERENCES.md before closing.
-If a decision reverses a prior locked decision,
-remove the old entry and note why it was superseded.
-A decision that exists only in the chat transcript
-does not exist. It will be relitigated next session.
-
-STEP 4 — CODEBASE IMPACT TRACE
-What else in the codebase is affected by what changed?
-What components consume a token that was modified?
-What files import from a file that was renamed or moved?
-What adjacent code shares a failure pattern that was fixed?
-Verify those surfaces before closing.
-If a surface is broken, fix it or document it as a known bug.
-Do not leave a downstream breakage undocumented.
-
-STEP 5 — RUNBOOK UPDATE
-Update WIZKOO_REFERENCES.md with everything that changed:
-New files: add to CRITICAL FILE MAP with path and purpose.
-Changed tokens: update CSS CUSTOM PROPERTIES section.
-Resolved bugs: mark resolved with fix summary and line reference.
-New bugs found: add with file, line, root cause theory, fix spec.
-New failure patterns: add to KNOWN CLAUDE CODE FAILURE PATTERNS.
-Copy updated file to both codebase folders.
-
-STEP 6 — VERIFICATION GATE
-Produce this ledger before closing:
-
-BUILD SESSION WRITE-BACK VERIFICATION
-✓ UPDATED: [what] → WIZKOO_REFERENCES.md ([X] lines)
-✓ COPIED: C:\Users\amyog\Desktop\wizkoo ([X] lines)
-✓ COPIED: C:\Users\amyog\Desktop\wizkoo-plan-generator ([X] lines)
-✗ NOT DONE: [item] → [Amy deferred / technical blocker only]
-
-Line count must match across both copies.
-If counts differ, the copy failed. Redo it.
-"Recommend updating the runbook" is not a valid close.
-If it needs updating, update it now.
-Identifying the work IS the instruction to do the work.
-
-STEP 7 — GIT CLOSE
-Execute the GIT PROTOCOL session close sequence above.
-Commit all changes including runbook updates.
-Push to remote.
-Confirm remote is current.
-
-MINIMUM VIABLE CLOSE:
-Steps 3, 5, 6, and 7. Never less than that.
-If Amy says "just close it" push back once:
-"Minimum close is Steps 3, 5, 6, and 7.
-Takes under five minutes. Proceeding now."
-
----
-
-## GIT PROTOCOL — EVERY SESSION
-
-SESSION OPEN (before any work begins):
-Run: git status
-Run: git log --oneline -5
-Report findings before touching any file.
-If uncommitted changes exist from a prior session:
-  State: "WARNING: Uncommitted changes exist from a
-  prior session. Affected files: [list]. Commit,
-  review, or discard before proceeding?"
-Do not begin new work until Amy responds.
-
-SESSION CLOSE (final step, after all other close steps):
-Run: git status
-Commit all changes with a descriptive message.
-Commit message format:
-  "YYYY-MM-DD — [what was built/fixed/changed]"
-  Example: "2026-04-17 — firefly velocity rebuilt,
-  nav rgba source hunt, runbook updated"
-Run: git push
-Confirm: "Committed and pushed. Remote is current."
-If push is deferred by Amy, state explicitly:
-  "[X] commits staged locally. Remote is behind.
-  Push required before next deploy."
-
-COMMIT MESSAGE STANDARD:
-Specific enough that reading git log tomorrow tells
-you exactly what each session changed.
-Never: "fix" "updates" "changes" "wip"
-Always: what changed, where, and why in one sentence.
-
-RULES:
-Never close a session with uncommitted work without
-explicitly flagging it to Amy first.
-Never build on top of uncommitted work from a prior
-session without surfacing it to Amy first.
-
----
-
-## MAINTENANCE RULE
-
-This file is only as good as its accuracy.
-When a value is locked: add it here before closing the session.
-When a file path changes: update it here immediately.
-When a decision is made: add it to Locked Decisions before closing.
-When the Light Standard updates: reconcile this file against it.
-The Light Standard is always the authority. This file is the fast lookup.
-
-Last updated: April 17, 2026
-Maintained by: Amy Oguntala
-
----
+═══════════════════════════════════════
+LAYER 7 — DEEP REFERENCE
+Read this layer only when you need exact token values, API details,
+or prompt system internals. Do not read on every session.
+═══════════════════════════════════════
 
 ## CSS CUSTOM PROPERTIES — MARKETING SITE
 
@@ -1217,557 +1885,6 @@ Tailwind 4 integration (lines 257–262):
 
 ---
 
-## KNOWN BUGS
-
-1. ANNOUNCEMENT BAR TEXT COLOR — NON-HOMEPAGE PAGES
-   What is broken: The announcement bar text on every page except the homepage is
-     dark ink (rgba(12,16,32,0.75)) on a semi-transparent dark bar. On linen pages
-     this text is barely visible. On night-sky pages it is nearly invisible. The Light
-     Standard spec and the homepage both use saffron rgba(232,175,56,0.60).
-   Origin: C:\Users\amyog\Desktop\wizkoo\components\nav.js line 84
-     Current value: color:rgba(12,16,32,0.75);
-     Correct value: color:rgba(232,175,56,0.60);
-   Root cause: The default .announce-text rule was written with dark ink. The homepage
-     is a special case that applies saffron via an inline override at nav.js lines
-     288–289 (the _hp branch). All other pages fall through to the default dark value.
-     Nobody updated the default to match the spec.
-   What has been attempted: Nothing documented. The homepage override exists as evidence
-     that saffron was the intended color — someone fixed it for the homepage and
-     forgot the default.
-   The fix (exact):
-     In C:\Users\amyog\Desktop\wizkoo\components\nav.js, change line 84 from:
-       '  color:rgba(12,16,32,0.75);',
-     to:
-       '  color:rgba(232,175,56,0.60);',
-     That is the only change required. The homepage inline override at lines 288–289
-     can remain — it uses rgba(232,175,56,0.75) (slightly brighter) which is fine on
-     the solid #0C1020 bar. The default change brings all other pages into spec.
-   Verify in browser: Open ages.html (a linen page with the standard bar, not the
-     homepage). Inspect the announcement bar text. It should be legible saffron
-     against the dark bar, not nearly invisible dark ink. Check the same on
-     library.html (night-sky surface) to confirm it reads on dark backgrounds too.
-
-2. NAV CTA STYLE — GHOST VS FILLED (REQUIRES AMY CONFIRMATION BEFORE FIXING)
-   What is broken: The Light Standard spec says Nav CTA must be saffron fill:
-     background: #E8AF38, color: #0C1020 (dark text on saffron button).
-     The current implementation at nav.js lines 199–219 is ghost style:
-     background: transparent, color: #E8AF38, border: 1px solid rgba(232,175,56,0.65).
-   Origin: C:\Users\amyog\Desktop\wizkoo\components\nav.js lines 199–219 (.nav-cta rule)
-   Root cause theory: The nav background was changed from frosted glass to solid dark
-     (rgba(12,16,32,0.96)) as a locked decision. A filled saffron CTA against an opaque
-     dark bar creates a visually heavy look — someone may have switched to ghost to
-     reduce visual weight and never documented the change as intentional. Alternatively
-     it may simply be an unrecorded decision.
-   What has been attempted: Nothing documented. This state has been in the codebase
-     since at least April 12, 2026. The Locked Decisions section records the nav
-     background change but says nothing about the CTA style.
-   DO NOT FIX without Amy confirming this is a bug and not an intentional design choice.
-     Ask: "The nav CTA is currently ghost style (transparent, saffron border). The Light
-     Standard says it should be saffron fill. Should I change it back to filled?"
-   If Amy confirms it is a bug, the fix (exact):
-     In C:\Users\amyog\Desktop\wizkoo\components\nav.js, change lines 206–214:
-       Current:
-         '  background:transparent;',
-         '  color:#E8AF38;',
-         '  border:1px solid rgba(232,175,56,0.65);',
-         '  box-shadow:none;',
-       Change to:
-         '  background:#E8AF38;',
-         '  color:#0C1020;',
-         '  border:1px solid rgba(232,175,56,0.90);',
-         '  box-shadow:inset 0 1px 0 rgba(255,255,255,0.20);',
-       And lines 216–219 (hover state):
-       Current:
-         '  border-color:rgba(232,175,56,1.0);',
-         '  box-shadow:0 0 0 1px rgba(232,175,56,0.20),0 2px 12px rgba(232,175,56,0.18);',
-       Change to:
-         '  background:#EDBA45;',
-         '  filter:brightness(1.04);',
-         (remove the border-color and box-shadow lines from hover)
-   Verify in browser: Nav CTA should render as a solid saffron rectangle (#E8AF38)
-     with dark ink text (#0C1020). Hover should lighten to #EDBA45. No translation
-     (translateY) on hover — spec says NO translation.
-
-3. PRICING PAGE — CTA FIREFLY MISSING
-   What is broken: pricing.html has no firefly implementation at all. The "Firefly fix
-     pending" note in Pages Status refers to this page, not to the #pricing section of
-     index.html. The pricing.html CTA section (.cta / .cta-btn) has no animation.
-   Origin: C:\Users\amyog\Desktop\wizkoo\pricing.html — no firefly code exists anywhere
-     in the file (confirmed by search of all 258 lines). The page has a .cta section
-     (lines 82–88, 197–201) with class .cta-btn on the primary button (line 201).
-   Root cause: The CTA firefly in index.html (lines 2356–2401) targets
-     document.getElementById('pricing') and cta.querySelector('.btn-main'). Neither
-     selector matches anything in pricing.html. That code only runs on index.html. The
-     pricing page was never given its own firefly implementation.
-   What has been attempted: Nothing. The "fix pending" note records the intent to add
-     a firefly but it was never built.
-   The fix (exact): Add the following script to pricing.html, immediately before
-     </body> (after the existing scroll-reveal script block). Adapt element selectors
-     from index.html's implementation to match pricing.html's class names:
-
-     <script>
-     /* ─── CTA Firefly — pricing page ─── */
-     (function () {
-       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-       if (window.innerWidth < 768) return;
-       var cta = document.querySelector('.cta');
-       if (!cta) return;
-       var btn = cta.querySelector('.cta-btn');
-       if (!btn) return;
-
-       var ff = document.createElement('div');
-       ff.style.cssText = 'position:absolute;width:5px;height:5px;border-radius:50%;' +
-         'background:#E8AF38;pointer-events:none;z-index:10;opacity:0;' +
-         'transition:opacity 0.4s ease;' +
-         'box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15);';
-       cta.appendChild(ff);
-
-       var triggered = false;
-       if (!window.IntersectionObserver) return;
-       var obs = new IntersectionObserver(function (entries) {
-         if (entries[0].isIntersecting && !triggered) {
-           triggered = true;
-           obs.disconnect();
-           setTimeout(launch, 300);
-         }
-       }, { threshold: 0.4 });
-       obs.observe(cta);
-
-       function launch() {
-         var cr = cta.getBoundingClientRect();
-         var br = btn.getBoundingClientRect();
-         var x0 = (br.left - cr.left) + br.width * 0.15;
-         var y0 = (br.top  - cr.top)  + br.height * 0.5;
-         ff.style.left = x0 + 'px';
-         ff.style.top  = y0 + 'px';
-         requestAnimationFrame(function () { ff.style.opacity = '1'; });
-         var t = 0, start = Date.now(), dur = 2600;
-         (function drift() {
-           t += 0.018;
-           if (Date.now() - start >= dur) {
-             ff.style.transition = 'opacity 0.5s ease';
-             ff.style.opacity = '0';
-             return;
-           }
-           ff.style.left = (x0 + Math.sin(t * 2.1) * 14 + Math.sin(t * 4.7) * 6) + 'px';
-           ff.style.top  = (y0 + Math.cos(t * 1.6) * 10 + Math.cos(t * 3.3) * 4) + 'px';
-           requestAnimationFrame(drift);
-         })();
-       }
-     })();
-     </script>
-
-   BEFORE adding this: verify the .cta element has position:relative (it does —
-     pricing.html line 82: .cta{...position:relative;overflow:hidden}). The overflow:hidden
-     will clip the firefly if it drifts outside .cta bounds. The drift range is ±14px
-     horizontally and ±10px vertically from the button center — ensure the .cta section
-     is tall enough that the firefly won't be clipped at its extremes.
-   Verify in browser: Scroll the pricing.html CTA section ("Ready to build your first
-     week?") into view. Within 300ms of intersection, a 5px saffron dot should appear
-     at the left edge of the "Build Your Plan" button and drift for 2.6s then fade out.
-     Confirm it is clipped by .cta bounds (not visible outside the section).
-     Confirm it does not appear on mobile (<768px) or with prefers-reduced-motion.
-
-4. GAMES PAGES — INVALID SORA WEIGHT VALUES
-   What is broken: Multiple elements across the games pages use Sora font-weight 600,
-     which is not in the approved Sora weight set (200, 300, 700, 800 only).
-     Weight 600 is a prohibited weight that does not exist in the licensed Sora subset
-     and falls back to the nearest available weight — producing inconsistent rendering.
-   NOTE on "Nav": All three games pages correctly load components/nav.js via
-     <div id="wizkoo-nav"> + <script src="/components/nav.js">. No nav bugs confirmed
-     by code inspection. If a visual nav issue exists it requires a browser audit session.
-   NOTE on "Saffron deployment": No wrong saffron colors found (all usages are either
-     #E8AF38 or var(--saffron) or correctly using saffron). Hardcoded hex strings in
-     JS inline styles (games.html line 101) are functionally correct even if they could
-     use CSS vars. Not a saffron deployment error in the color-correctness sense.
-
-   SUB-BUG 4a — atlas.html, Sora weight 600 on postcard body text:
-     File: C:\Users\amyog\Desktop\wizkoo\games\atlas.html, line 94
-     Current: font-family:'Sora',sans-serif;font-weight:600;font-size:0.95rem;
-     Wrong because: 600 is not a loaded Sora weight.
-     Fix: Change font-weight:600 to font-weight:700 on that inline style.
-
-   SUB-BUG 4b — elementum.html, Sora weight 600 on element name label:
-     File: C:\Users\amyog\Desktop\wizkoo\games\elementum.html, line 62
-     Current: style="font-family:'Sora',sans-serif;font-weight:600;font-size:1rem;..."
-     Wrong because: 600 is not a loaded Sora weight.
-     Fix: Change font-weight:600 to font-weight:700 on that inline style.
-
-   Additional weight-system audit needed: pricing.html also has invalid Sora weights:
-     pricing.html line 58: .feature-title font-weight:600 → change to 700
-     pricing.html line 76: .faq-q font-weight:500 → change to 700
-     pricing.html line 47: .hero-btn font-weight:600 → change to 700
-     pricing.html line 87: .cta-btn font-weight:600 → change to 700
-     (pricing.html is NOT listed in the games bug but has the same class of error)
-
-   Verify in browser: Inspect any element using font-family Sora in the games or pricing
-     pages. In DevTools > Computed, the resolved font-weight must be 200, 300, 700, or
-     800. Any other value (400 fallback from 500/600 mismatch) is a bug. The most
-     visible symptom: a headline that looks thinner than expected (600 falling back to
-     400 because 600 isn't loaded).
-
-5. METHODOLOGY PAGE — NEEDS RETHINK
-   What is broken: Full content and layout redesign required. Page does not
-     meet the $200 Standard or current design language.
-   Location: C:\Users\amyog\Desktop\wizkoo\methodology.html
-   Status: Unresolved. Requires a design session before any code work.
-
-6. HOMEPAGE ENVIRONMENT — UNRESOLVED
-   What is broken: The environment assignment for the homepage is TBD.
-     The decision between "linen only" or "multi-surface" has not been made.
-   Location: ENVIRONMENT MAP section of this document.
-   Status: Unresolved. No code work should proceed on homepage surface until
-     this is decided and locked into the Environment Map.
-
----
-
-## KNOWN CLAUDE CODE FAILURE PATTERNS
-
-These are documented failure modes Claude Code has
-exhibited in this codebase. Read before every session.
-Do not repeat them.
-
-PATTERN 1 — CACHE BLAME
-When a visual fix does not land, Claude Code defaults
-to blaming browser cache. If the problem persists in
-incognito, it is not cache. It is the wrong file or
-the wrong rule. Require a source hunt before accepting
-any cache explanation.
-
-PATTERN 2 — DESTINATION-BASED ANIMATION
-Claude Code defaults to bezier-from-A-to-B animation
-for any movement task. This produces mechanical,
-predictable motion. For organic movement (firefly,
-particles, ambient elements) the architecture must be
-velocity-based with steering, not destination-based.
-If you find yourself writing a bezier to a point,
-the architecture is wrong.
-
-PATTERN 3 — WRONG FILE EDITED
-When a specificity conflict exists, Claude Code will
-sometimes edit a secondary file instead of finding
-and changing the winning rule at source. Always run
-a full specificity audit before making any CSS change.
-Find the winning rule. Change it there. Do not add
-new rules on top of conflicting ones.
-
-PATTERN 4 — PARTIAL COMPLETION PRESENTED AS DONE
-Claude Code will sometimes complete steps 1-2 of a
-5-step task and present the result as finished.
-Apply the Completion Standard to every task:
-built, migrated, verified, old version removed,
-system clean. If any step is missing, name it.
-
-PATTERN 5 — RAW HEX INSTEAD OF TOKEN
-Claude Code will hardcode color values directly in
-components instead of consuming the CSS custom property.
-Every color in this codebase has a token definition.
-Use the variable. Never the raw hex in a component.
-If you see a raw hex in a component file, that is a bug.
-
-PATTERN 6 — APPROXIMATED VALUES
-When Claude Code cannot immediately find a source value,
-it will sometimes use a close approximation instead of
-reading the source file. This is never acceptable.
-If a value is in the runbook, use that exact value.
-If a value is not in the runbook, navigate to the source
-file and read it. Never approximate.
-
----
-
-## THE $200 STANDARD (Quality Floor Directive)
-
-Source document (Notion): 338335a8d33281f699d4d705f973d430
-Read the full document before any build session on the plan generator.
-Everything below is binding. Do not weaken it.
-
-### What $200 Feels Like
-
-You know the feeling when you walk into a hotel and within 3 seconds
-you know it costs $400 a night? Nobody told you the price.
-The lighting is warmer than it needs to be. The spacing is more generous
-than it needs to be. Every surface communicates: someone spent more time
-on this than they had to.
-
-That is what Wizkoo must feel like.
-
-A parent opens the app. Within 3 seconds, before they read a word:
-the linen warmth. The weight of the typography. The saffron that appears
-in exactly two places and nowhere else. The silence where other apps
-would have confetti. The space between elements that says "we chose not
-to cram more in."
-
-They don't think "$200 product." They feel "this is unusually good."
-Then they see $50 and the gap between what they feel and what they pay
-becomes the story they tell their friend.
-
-THAT GAP IS THE PRODUCT.
-
-### What Kills the $200 Feeling (instantly, not gradually)
-
-A rounded corner where everything else is sharp. Dead.
-A system font where Sora should be. Dead.
-A green checkmark in a product that uses saffron. Dead.
-A "Loading..." where a breathing saffron dot should be. Dead.
-A bounce animation where editorial easing should be. Dead.
-An error message that says "Oops! Something went wrong!" Dead.
-A default Tailwind gray where the warm paper-crease border should be. Dead.
-
-One plastic cup and the entire illusion collapses.
-The parent doesn't think "everything else was great but the cup was cheap."
-The parent thinks "this place is pretending."
-
-Your job: zero plastic cups.
-"Style the card nicely" is how plastic cups get in.
-"Paper background (#FAFAFA), 1.5px border in #0C1020, 8px saffron offset
-pseudo-element shadow, sharp corners (2px), hover lifts translateY(-2px)
-with cubic-bezier(0.16,1,0.3,1) while shadow stays planted" is how
-you prevent them.
-
-### The Parent's Internal Monologue (the sequence that must not break)
-
-SECOND 1:  "Oh. This is warm. This doesn't look like an app. Stationery."
-SECOND 3:  "That font. Light but confident. Like a magazine, not a website."
-SECOND 5:  "Gold. Not yellow. Just a touch of it. Expensive feeling."
-SECOND 10: "The cursor changed. The card lifted. Someone built every detail."
-MINUTE 1:  "It's using my child's name. In a sentence a person wrote. While I watch."
-MINUTE 2:  "This plan looks like it came from a design studio. I want to print this."
-MINUTE 3:  "This is $50? How is this $50?"
-
-If any step breaks, the parent never reaches the last thought.
-Miss one and the cascade fails.
-
-### $50 vs $200 — Concrete Examples
-
-THE DASHBOARD
-  $50: Rounded corners, gray shadow, "1 Plan Generated" stat, green badge, system font.
-  $200: Sharp corners, saffron offset pseudo-element shadow, no stat cards (the plan
-        IS the dashboard), saffron dot for subscription status, Space Mono uppercase
-        nav with saffron underline on hover, parent's family initial floating quietly
-        on the right.
-
-THE ONBOARDING
-  $50: Multi-field form, "Submit" button, progress dots, "Enter your child's name."
-  $200: Full-viewport single question per screen. "Who's learning this week?" in
-        Sora 200. Cursor already blinking in the name field. Input borders invisible
-        at rest, bloom saffron on focus. "Generate Our Plan" as the singular saffron
-        moment. A 2px saffron progress line that slides forward silently.
-
-THE ERROR
-  $50: Red box, exclamation icon. "Oops! Something went wrong. Please try again later."
-  $200: No box. No red. No icon. Calm text in existing layout. "Taking longer than
-        usual. Try again?" One button. Same typography as everything else. The error
-        doesn't scream. It speaks.
-
-THE GENERATION WAIT
-  $50: Spinning circle. "Loading your plan..."
-  $200: A 12px saffron dot that breathes (scale 0.85 to 1.15). No text. The parent
-        watches. Then their child's name appears, woven into a sentence about what
-        the plan is building. The parent's breath catches. The dot is still breathing.
-        The plan materializes.
-
-### The Final Test
-
-Open the product on your phone at 10 PM in a dark room.
-Hold it at arm's length.
-Does it glow like a luxury object?
-Does the linen feel warm?
-Does the saffron feel precious?
-Does the typography feel editorial?
-Does the silence between elements feel intentional?
-
-Yes = $200 product.
-"Sort of" = $100 product.
-"It looks fine" = $50 product that will be replaced by the next app that looks fine.
-
-### The Prompt Standard
-
-Before writing any Claude Code prompt, ask:
-"Will this produce a surface a parent would screenshot and send to a friend?"
-
-If the answer is "probably" or "most of it" — the prompt is not specific enough.
-The answer must be "yes, because every color traces to a token, every font has
-a specific weight, every animation has a named curve, and every pixel has a reason."
-
----
-
-## ENVIRONMENT VARIABLES
-
-MARKETING SITE (C:\Users\amyog\Desktop\wizkoo)
-  No .env files. No build step. No server-side secrets.
-  Supabase credentials are exposed as window globals in:
-    C:\Users\amyog\Desktop\wizkoo\js\supabase-config.js
-    WIZKOO_SUPABASE_URL      — Supabase project URL
-    WIZKOO_SUPABASE_ANON_KEY — Supabase anon/public key
-  These are intentionally public-facing. Row Level Security
-  policies (sql/library-schema.sql) control data access.
-  No other environment variables required for the marketing site.
-
-PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator)
-  Source: .env.example (22 variables)
-  All secrets go in .env.local (never committed).
-
-  Database:
-    DATABASE_URL          — Postgres connection string (pooler via Supabase)
-    DIRECT_URL            — Direct DB URL for drizzle-kit migrations.
-                            Must use db.{ref}.supabase.co:5432, NOT pooler host.
-
-  Clerk Authentication (5 vars):
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY — Client-side Clerk key
-    CLERK_SECRET_KEY                  — Server-side Clerk key
-    CLERK_WEBHOOK_SECRET              — Verifies Clerk webhook signatures
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL     — Set to /sign-in
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL     — Set to /sign-up
-    (NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL and AFTER_SIGN_UP_URL
-     also in .env.example: /dashboard and /onboarding)
-
-  Stripe Payments (4 + 2 price IDs):
-    STRIPE_SECRET_KEY              — Server-side Stripe key
-    STRIPE_WEBHOOK_SECRET          — Verifies Stripe webhook events
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY — Client-side Stripe key
-    STRIPE_MONTHLY_PRICE_ID        — Monthly plan price ID from Stripe Dashboard
-    STRIPE_ANNUAL_PRICE_ID         — Annual plan price ID from Stripe Dashboard
-
-  AI:
-    ANTHROPIC_API_KEY    — Claude API key (main plan generation + orbit reports + safety)
-
-  Email:
-    RESEND_API_KEY       — Resend transactional email service
-
-  Error tracking:
-    SENTRY_DSN           — Sentry project DSN (client + server configs)
-
-  Analytics:
-    POSTHOG_API_KEY      — PostHog product analytics
-
-  Rate limiting:
-    UPSTASH_REDIS_REST_URL   — Upstash Redis REST endpoint
-    UPSTASH_REDIS_REST_TOKEN — Upstash Redis auth token
-
-  Cron job auth:
-    CRON_SECRET          — Bearer token checked by all four /api/cron/* routes
-
----
-
-## DEPENDENCY INVENTORY
-
-MARKETING SITE (C:\Users\amyog\Desktop\wizkoo\package.json)
-  devDependencies (3):
-    @playwright/test  ^1.58.2   — Playwright test runner (screenshot automation)
-    pg                ^8.20.0   — PostgreSQL client (library data import scripts)
-    serve             ^14.2.6   — Local static dev server (npm run serve)
-  No runtime dependencies. Static site. No build step.
-  Package manager: npm (no lockfile constraint).
-
-PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator\package.json)
-  Package manager: pnpm ONLY. (preinstall script enforces this.)
-  Node required: >=20.0.0
-
-  dependencies (23):
-    @anthropic-ai/sdk   ^0.82.0    — Anthropic Claude API client
-    @clerk/nextjs       ^7.0.8     — Clerk auth (Next.js integration)
-    @sentry/nextjs      ^10.47.0   — Sentry error tracking
-    @supabase/supabase-js ^2.101.1 — Supabase JS client
-    @tanstack/react-query ^5.96.1  — Server state management
-    @upstash/ratelimit  ^2.0.8     — Rate limiting (uses Upstash Redis)
-    @upstash/redis      ^1.37.0    — Upstash Redis client
-    clsx                ^2.1.1     — Class name utility
-    drizzle-orm         ^0.45.2    — ORM for Postgres/Supabase
-    framer-motion       ^12.38.0   — Animation library
-    nanoid              ^5.1.7     — Unique ID generation
-    next                16.2.2     — Next.js framework (PINNED — do not auto-upgrade)
-    postgres            ^3.4.8     — Postgres driver (used by Drizzle)
-    posthog-js          ^1.364.7   — PostHog analytics (client-side)
-    posthog-node        ^5.28.11   — PostHog analytics (server-side)
-    qrcode.react        ^4.2.0     — QR code generation (plan sharing)
-    react               19.2.4     — React (PINNED — matches Next.js 16 requirement)
-    react-dom           19.2.4     — React DOM (PINNED)
-    resend              ^6.10.0    — Transactional email
-    stripe              ^22.0.0    — Stripe payments SDK
-    svix                ^1.90.0    — Webhook signature verification (Clerk webhooks)
-    tailwind-merge      ^3.5.0     — Tailwind class merging utility
-    zod                 ^4.3.6     — Schema validation
-    zustand             ^5.0.12    — Client state management
-
-  devDependencies (8):
-    @tailwindcss/postcss  ^4       — Tailwind v4 PostCSS integration
-    @types/node           ^20      — Node.js TypeScript types
-    @types/react          ^19      — React TypeScript types
-    @types/react-dom      ^19      — React DOM TypeScript types
-    drizzle-kit           ^0.31.10 — Drizzle ORM migration CLI
-    eslint                ^9       — Linter
-    eslint-config-next    16.2.2   — Next.js ESLint config (PINNED to match Next)
-    tailwindcss           ^4       — Tailwind CSS v4
-    typescript            ^5       — TypeScript compiler
-
-  PIN NOTE: next@16.2.2, react@19.2.4, react-dom@19.2.4, and
-  eslint-config-next@16.2.2 are intentionally pinned. React 19
-  and Next 16 are paired versions. Do not upgrade without a
-  dedicated upgrade session.
-
----
-
-## DEPLOYMENT PROTOCOL
-
-MARKETING SITE → Netlify (wizkoo.com)
-  Config file: C:\Users\amyog\Desktop\wizkoo\netlify.toml
-  Publish directory: . (repo root — serves static files directly)
-  Build command: none (no build step)
-  Deploy trigger: push to main branch on GitHub (Ethos25/Wizkoo)
-
-  Proxy rules (netlify.toml):
-    /plan      → https://wizkoo-plan-generator.vercel.app/plan   (200 proxy)
-    /plan/*    → https://wizkoo-plan-generator.vercel.app/plan/:splat (200 proxy)
-  Legacy redirects (301):
-    /planner     → /plan
-    /planner.html → /plan
-    /what-we-believe.html → /what-we-believe
-    /games.html  → /games
-    /methodology.html → /methodology
-  Library book detail rewrite (200):
-    /library/:slug → /library/book.html
-
-  Deploy checklist:
-    1. Ensure WIZKOO_REFERENCES.md changes are committed
-    2. Push to main: git push
-    3. Netlify auto-deploys within ~60s
-    4. Verify at wizkoo.com — no build logs to check
-
-PLAN GENERATOR → Vercel (wizkoo.com/plan)
-  Config file: C:\Users\amyog\Desktop\wizkoo-plan-generator\vercel.json
-  Framework: Next.js (auto-detected by Vercel)
-  Build command: pnpm build (next build)
-  Output: .next directory
-  basePath: /plan (set in next.config.ts)
-  Deploy trigger: push to master branch
-
-  Environment variables: all 22 vars from ENVIRONMENT VARIABLES
-  section above must be set in Vercel Dashboard > Settings > Environment Variables
-  for both Production and Preview environments.
-
-  Cron jobs (vercel.json — runs on Vercel's cron infrastructure):
-    orbit-report      — 0 6 * * 0   (Sundays 6am UTC)
-                        Path: /plan/api/cron/orbit-report
-                        Generates weekly learning narrative emails.
-    plan-lifecycle    — 0 3 * * *   (Daily 3am UTC)
-                        Path: /plan/api/cron/plan-lifecycle
-                        Handles plan expiry, archiving, subscription checks.
-    auth-reconciliation — 0 7 * * 1 (Mondays 7am UTC)
-                        Path: /plan/api/cron/auth-reconciliation
-                        Syncs Clerk auth state with database user records.
-    re-engagement     — 0 14 * * *  (Daily 2pm UTC)
-                        Path: /plan/api/cron/re-engagement
-                        Sends re-engagement emails to inactive users.
-  All cron routes validate CRON_SECRET bearer token before executing.
-
-  Deploy checklist:
-    1. Ensure pnpm build passes locally: pnpm build
-    2. Push to master: git push
-    3. Monitor Vercel dashboard for build logs (~2-3 min build time)
-    4. Verify at wizkoo.com/plan after deploy completes
-
----
-
 ## EXTERNAL API SURFACE
 
 ANTHROPIC / CLAUDE
@@ -1890,6 +2007,12 @@ UPGRADE PROTOCOL — UPGRADE_PROTOCOL.md (in src\lib\ai\)
 
 ---
 
+═══════════════════════════════════════
+LAYER 8 — HISTORY
+A record of what changed and when. Read when you need to understand
+what version of the document you are working with.
+═══════════════════════════════════════
+
 ## VERSION HISTORY
 
 v1.0 — April 17, 2026
@@ -1912,41 +2035,8 @@ v1.3 — April 17, 2026
   dependency inventory, deployment protocol, external API surface,
   prompt template system, nav deliberate hold added.
 
----
+v1.4 — April 17, 2026 — v24 snapshot file removed from repo root.
 
-## THE COMPLETION STANDARD (from Operating Philosophy)
-
-Source document (Notion): 334335a8d33281e894a0f75017d48957
-
-"Done" does not mean "the new thing exists."
-Done means the full chain is complete:
-
-1. BUILD the new thing.
-2. MIGRATE the data from the old thing.
-3. VERIFY the migration is correct.
-4. REMOVE the old thing.
-5. CONFIRM the system is in a clean, unambiguous state.
-
-Stopping at step 2 creates two sources of truth.
-Two sources of truth is worse than one bad source.
-Nobody knows which one is current.
-
-THE TEST: If someone opens this codebase tomorrow with no verbal briefing
-from Amy, will they find one clean consistent state? Or artifacts, duplicates,
-and half-finished work that requires Amy to explain?
-If it requires explanation, it is not done.
-
-CLAUDE CODE APPLICATION:
-Before presenting any task as complete, walk the chain:
-Did I build it, migrate it, verify it, remove the old version,
-and confirm the system is consistent?
-
-If any step is incomplete, name it explicitly:
-"I have completed steps 1-3. Steps 4-5 remain: the old CSS rule
-needs to be removed and the specificity conflict needs to be verified
-in DevTools. Want me to do that now?"
-
-Never present 60% of a task as 100% of a task.
-Never leave an old rule in place when a new one has been added.
-Never add a new CSS rule when the winning rule should be changed at source.
-
+v1.5 — April 17, 2026 — Full document restructure. Content unchanged.
+  Reorganized into 8 labeled layers with table of contents for AI
+  and developer readability.
