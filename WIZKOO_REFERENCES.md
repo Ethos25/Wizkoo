@@ -1,9 +1,15 @@
-# WIZKOO_REFERENCES.md
-# Version 1.5 — April 17, 2026
-# THE single source of truth for every Claude Code session on either codebase.
-# Read this file completely before touching any file.
-# Confirm you have read it by stating: both local paths + canonical saffron hex
-# + environment assigned to the page you are about to work on.
+# TECHNICAL RUNBOOK — WIZKOO
+# Filename: WIZKOO_REFERENCES.md
+# Version 1.6 — April 17, 2026
+#
+# TO START EVERY BUILD SESSION, SAY:
+# "Run the Technical Runbook"
+#
+# That single instruction triggers everything below.
+# Read this file end to end.
+# Confirm you have read it by stating the three items
+# in the SESSION STARTUP INSTRUCTION in Layer 1.
+# Then check the Notion Transfer Queue before any work begins.
 
 ---
 
@@ -77,16 +83,45 @@ These are the mandatory procedures that govern how all work is done.
 
 ## SESSION STARTUP INSTRUCTION
 
-Paste this at the start of every Claude Code session:
+Every build session starts with one line from Amy:
+"Run the Technical Runbook"
 
-"Read WIZKOO_REFERENCES.md before doing anything.
-Marketing site: C:\Users\amyog\Desktop\wizkoo\WIZKOO_REFERENCES.md
-Plan generator: C:\Users\amyog\Desktop\wizkoo-plan-generator\WIZKOO_REFERENCES.md
-Read it completely. Then confirm:
+That instruction triggers this sequence. Execute all
+three steps before touching any file.
+
+STEP 1 — CONFIRM YOU READ THIS FILE
+State out loud:
   1. Both local codebase paths
-  2. Canonical saffron hex value
-  3. Environment assigned to the page you are about to work on
-Do not begin work until all three are confirmed."
+  2. Canonical saffron hex value (#E8AF38)
+  3. Environment assigned to the page you will work on today
+Do not begin work until all three are confirmed.
+
+STEP 2 — CHECK THE TRANSFER QUEUE
+Open Notion page: 345335a8d33281ea9f86e19c5018624a
+(Technical Runbook Transfer Queue)
+This page holds decisions from chat sessions that need
+to be applied to this document before build work begins.
+
+If any items show STATUS: PENDING:
+  Read each item completely.
+  Apply it to the correct section of this document.
+  Change its STATUS to APPLIED and note today's date.
+  Log what was applied in VERSION HISTORY as v[next].
+
+If the queue is empty: state "Transfer Queue clear."
+Then proceed to Step 3.
+
+Do not skip Step 2. A decision that exists only in Notion
+and not in this document will be lost to the next session.
+
+STEP 3 — GIT STATUS CHECK
+Run: git status
+Run: git log --oneline -3
+Report findings.
+If uncommitted changes exist from a prior session:
+  "WARNING: [X] uncommitted files from prior session.
+  Commit, review, or discard before proceeding?"
+Do not begin new work until Amy responds.
 
 ---
 
@@ -2040,3 +2075,10 @@ v1.4 — April 17, 2026 — v24 snapshot file removed from repo root.
 v1.5 — April 17, 2026 — Full document restructure. Content unchanged.
   Reorganized into 8 labeled layers with table of contents for AI
   and developer readability.
+
+v1.6 — April 17, 2026
+  Document renamed to Technical Runbook.
+  Header updated with single-line session trigger.
+  Session Startup Instruction updated with Transfer Queue
+  check (Notion page 345335a8d33281ea9f86e19c5018624a).
+  System now fully wired: one line starts every session.
