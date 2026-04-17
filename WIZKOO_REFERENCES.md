@@ -1,6 +1,6 @@
 # TECHNICAL RUNBOOK — WIZKOO
 # Filename: WIZKOO_REFERENCES.md
-# Version 1.7 — April 17, 2026
+# Version 1.9 — April 17, 2026
 #
 # ══════════════════════════════════════
 # TO START EVERY BUILD SESSION:
@@ -1681,6 +1681,21 @@ If a value is in the runbook, use that exact value.
 If a value is not in the runbook, navigate to the source
 file and read it. Never approximate.
 
+PATTERN 7 — HARDCODED TEMPORAL VALUES IN PROCEDURAL INSTRUCTIONS
+When writing procedural instructions (close protocol, startup
+sequence, flight log steps), Claude Code will sometimes embed
+the current session's date or context-specific values directly
+into the instruction text — values that must stay dynamic.
+Example: writing "2026-04-17" into a step that will be
+executed on future dates with different values.
+Prevention rule: Any date, hash, or session-specific value
+inside a procedural instruction must use a placeholder or
+formula, never a literal from the current session.
+Correct: "today's actual date in YYYY-MM-DD format"
+Wrong: "2026-04-17"
+If you wrote a literal where a formula belongs, it is a bug.
+Correct it before closing the session.
+
 ---
 
 ## ACCESSIBILITY (non-negotiable)
@@ -2197,3 +2212,7 @@ v1.8 — April 17, 2026 — Six corrections applied:
   to both file maps, Games status corrected (nav loads
   correctly), CLAUDE.md reference resolved, close protocol
   Step 10 updated to include Maintenance Rule date update.
+
+v1.9 — April 17, 2026 — Session close. Pattern 7 added to
+  Layer 6 (hardcoded temporal values in procedural
+  instructions). No code files touched this session.
