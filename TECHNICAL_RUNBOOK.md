@@ -733,6 +733,12 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Deprecated day sky color #1848B8: never use.
 - Three equal saffron lines in headline: never. One saffron moment per headline.
 - Frosted glass nav on linen: solved with dark nav. Do not suggest reverting.
+- Time masthead ("08:17 · THURSDAY · WK 4 · SPRING TERM"): removed April 19, 2026. Do not reintroduce.
+- Kicker and kicker rule in hero left column: removed with the time masthead. First visible element above headline is empty space. Do not reintroduce either element.
+- Hero left column alignment rule: `.nh-left{padding-top:305px}` governs baseline alignment at 1440px. Alignment is container-driven, not element-driven. Do not change without re-verifying diff measurement.
+- Desk note width: 50% of `.nh-right` content area. Single tape piece (`::after` only), centered at `left:calc(50% - 28px)`. Do not add a second tape piece.
+- Blocklist architecture: `suicide`, `murder`, `weed` are BLOCKLIST_EXACT (exact-match only). Phrased uses ("murder mystery", "suicide prevention", "garden weeds") pass to Layer 3 AI moderation. Both client (index.html) and server (validate-theme.js) lists must stay in sync.
+- Email provider for moderation digest: Resend. Do not swap provider without updating both sendEmail() and env var names in moderation-digest.js.
 
 ---
 
@@ -1792,6 +1798,17 @@ If a value is in the runbook, use that exact value.
 If a value is not in the runbook, navigate to the source
 file and read it. Never approximate.
 
+PATTERN 8 — CLIENT/SERVER LIST DIVERGENCE
+When a moderation rule exists in both a server function
+(validate-theme.js) and a client-side IIFE (index.html),
+Claude Code will update one and not the other. The two
+lists are independent copies — they do not share a module.
+Prevention rule: Any change to BLOCKLIST or BLOCKLIST_EXACT
+must be applied to BOTH files in the same commit. After
+editing either file, grep the other for the changed term
+before committing. A commit that updates one list and not
+the other is incomplete by definition.
+
 PATTERN 7 — HARDCODED TEMPORAL VALUES IN PROCEDURAL INSTRUCTIONS
 When writing procedural instructions (close protocol, startup
 sequence, flight log steps), Claude Code will sometimes embed
@@ -2331,6 +2348,17 @@ v1.9 — April 17, 2026 — Session close. Pattern 7 added to
 v2.0 — April 17, 2026 — File renamed from WIZKOO_REFERENCES.md
   to TECHNICAL_RUNBOOK.md. All internal references and
   README pointers updated.
+
+v2.1 — April 19, 2026
+  Hero editorial pass + moderation hardening session.
+  Fix A: left column padding-top 305px for zero-diff baseline
+  alignment. Fix B: desk note 50% width, single centered tape
+  piece. Time masthead, kicker, kicker rule removed from hero
+  left column. suicide/murder/weed moved to BLOCKLIST_EXACT in
+  both client (index.html) and server (validate-theme.js).
+  Pattern 8 added (client/server list divergence). Locked
+  decisions updated with masthead removal, desk spec, blocklist
+  architecture, and Resend as digest email provider.
 
 v2.1 — April 19, 2026 — Claude Code Operating Principles added to
   Layer 1 (six principles, session-start instruction, governance rules).
