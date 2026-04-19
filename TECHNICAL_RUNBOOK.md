@@ -9,7 +9,7 @@
 # ══════════════════════════════════════
 #
 # Read this file end to end.
-# Confirm you have read it by stating the three items
+# Confirm you have read it by stating the four items
 # in the SESSION STARTUP INSTRUCTION in Layer 1.
 # Then execute the startup sequence before any work begins.
 
@@ -58,7 +58,7 @@ When a decision is made: add it to Locked Decisions before closing.
 When the Light Standard updates: reconcile this file against it.
 The Light Standard is always the authority. This file is the fast lookup.
 
-Last updated: April 17, 2026
+Last updated: April 19, 2026
 Maintained by: Amy Oguntala
 
 ---
@@ -95,7 +95,13 @@ State out loud:
   1. Both local codebase paths
   2. Canonical saffron hex value
   3. Environment assigned to the page you will work on today
-Do not begin work until all three are confirmed.
+  4. Confirm Operating Principles active by naming all six by number:
+     (1) Pre-flight audit, (2) Clean state requirement,
+     (3) Report superseded rules, (4) Three-strike reset rule,
+     (5) Specificity hygiene, (6) One source of truth per component.
+Do not begin work until all four are confirmed. Stating the principles
+is not optional — it confirms they are active for the session, not
+just present in the document.
 
 STEP 2 — CHECK THE TRANSFER QUEUE
 Use the Notion tool to fetch page:
@@ -372,6 +378,111 @@ Quality floor: every surface feels crafted, not assembled.
 One plastic cup collapses the entire $200 illusion.
 The answer to "will a parent screenshot this?" must be yes.
 → Full content: LAYER 4 — THE $200 STANDARD (Quality Floor Directive)
+
+---
+
+## CLAUDE CODE OPERATING PRINCIPLES
+
+Source: Amy Oguntala, April 19, 2026, after the Wizkoo homepage hero reset session.
+Notion: Technical Runbook — Wizkoo (347335a8d332818bbd18d10b2a2170de), Section 2.
+
+Non-negotiable rules that govern every Claude Code session on Wizkoo.
+Same tier as the Wizkoo Operating Philosophy and the Completion Standard.
+These principles exist because accumulated technical debt from
+additive-without-reconciliation changes has been observed to compound into
+unrecoverable states that require full resets. These principles prevent
+that class of failure.
+
+CONTEXT:
+Born from a homepage hero build session where five consecutive tweak prompts
+layered conflicting CSS rules without reconciling them, producing a broken state
+that required a full reset. The correction revealed the principle underneath:
+Claude Code's default is additive, not reconciliative. Reconciliation must be
+made explicit.
+
+THE STANDARD:
+Every Claude Code session operates under the six principles below. They are
+non-negotiable. They apply equally at the start of a session, mid-session,
+and in the final deploy. "Fast but accumulates debt" is not permitted. The
+Completion Standard applies to code the same way it applies to every other
+Wizkoo output.
+
+PRINCIPLE 1 — PRE-FLIGHT AUDIT
+Before executing any visual or structural change, report the current state of
+the affected element: its CSS rules, HTML structure, JavaScript bindings.
+Confirm understanding before touching code.
+This is not optional commentary. It is a verification checkpoint. If the
+pre-flight audit reveals conflicts or ambiguities that the prompt did not
+address, stop and report. Do not proceed on assumptions.
+
+PRINCIPLE 2 — CLEAN STATE REQUIREMENT
+Every change leaves the affected system in a known-clean state. New rules
+replace old rules. Old rules are removed. No orphaned CSS, no dead variables,
+no commented-out code left as "just in case." If the change supersedes prior
+work, the prior work is deleted, not left dormant.
+The test: if someone else opens this codebase tomorrow with no verbal briefing
+from Amy, will they find one clean, consistent state? Or will they find
+artifacts, duplicates, and half-finished work?
+
+PRINCIPLE 3 — REPORT SUPERSEDED RULES
+As part of any change, list the specific CSS rules, HTML elements, or
+JavaScript that will be removed or modified. This list is part of the
+pre-flight audit and part of the execution report. It is not optional.
+The purpose: Amy can catch a supersession that was not intended before the
+change is executed. If Principle 3 is skipped, unintended deletions are
+discovered only after deployment — which is too late.
+
+PRINCIPLE 4 — THREE-STRIKE RESET RULE
+If three consecutive tweak prompts on the same element do not produce the
+intended result, stop tweaking. The problem is no longer the tweak — it is
+the foundation.
+Request a reset of that element. Reset means: identify and strip all CSS
+rules, HTML structure, and JavaScript related to the element that are not
+being preserved in the final intent, then rebuild from the preserved intent
+as if starting fresh.
+Iterative tweaking of a broken foundation is always slower than a reset.
+The reset rule prevents compounding failure.
+
+PRINCIPLE 5 — SPECIFICITY HYGIENE
+When multiple CSS rules could apply to an element, the winning rule is stated
+explicitly and competing rules are removed. Do not use !important to win
+specificity fights. If specificity is unclear, consolidate the rules.
+!important is permitted only for third-party override scenarios where the
+underlying rule cannot be modified. It is never used to resolve an internal
+specificity conflict within Wizkoo code.
+
+PRINCIPLE 6 — ONE SOURCE OF TRUTH PER COMPONENT
+Each visual element has one governing CSS rule set. Each HTML component has
+one governing template. Each JavaScript behavior has one governing function.
+When rules, templates, or behaviors are distributed across multiple files or
+scopes, consolidate during the change. If consolidation is out of scope for
+the current change, flag it and propose a separate cleanup pass. Do not add
+to a distributed mess.
+
+SESSION-START INSTRUCTION (verbatim, every session):
+  "This session operates under Claude Code Operating Principles
+   (see Wizkoo technical runbook). Apply all six principles to every
+   change in this session. Pre-flight audit before every non-trivial
+   change. Report superseded rules as part of every change. If three
+   consecutive tweaks fail, request a reset."
+
+WHY THESE PRINCIPLES EXIST:
+Claude Code's default behavior, given a change request, is to find the
+smallest delta that produces the requested visual or functional change.
+"Smallest delta" often means: add a new rule with higher specificity,
+leave the old rule in place, move on.
+This default is not wrong in isolation. It is catastrophically wrong at
+scale. Across a multi-prompt session, the accumulated orphaned rules produce
+a codebase where every change fights invisible competing rules from earlier
+changes. Eventually the fight is unwinnable and a full reset is required.
+The six principles make reconciliation explicit. They do not slow the work.
+They prevent the compounding failure that is slower than the work itself.
+
+GOVERNANCE:
+  Additions require Amy's explicit decision.
+  Removals are not permitted.
+  Applies to every Claude Code session on Wizkoo — wizkoo.com and
+  the plan generator.
 
 ---
 
@@ -2220,3 +2331,9 @@ v1.9 — April 17, 2026 — Session close. Pattern 7 added to
 v2.0 — April 17, 2026 — File renamed from WIZKOO_REFERENCES.md
   to TECHNICAL_RUNBOOK.md. All internal references and
   README pointers updated.
+
+v2.1 — April 19, 2026 — Claude Code Operating Principles added to
+  Layer 1 (six principles, session-start instruction, governance rules).
+  Session Startup Step 1 updated from three-item to four-item confirmation
+  (item 4: name all six Operating Principles before work begins).
+  Notion mirror updated in same session. Transfer Queue cleared.
