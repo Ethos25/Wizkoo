@@ -11,7 +11,7 @@
 <link rel="canonical" href="https://wizkoo.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script type="application/ld+json">
 {
@@ -1025,17 +1025,20 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .nh-inner{width:100%;max-width:1200px;margin:0 auto}
 .nh-grid{display:grid;grid-template-columns:62fr 38fr;gap:0;align-items:stretch}
 .nh-left{position:relative;padding-top:180px}
-.nh-kicker-rule{position:absolute;top:0;left:0;width:48px;height:2px;background:#E8AF38}
-.nh-kicker{position:absolute;top:12px;left:0;font-family:'Space Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#0C1020;margin:0;display:block}
+.nh-time-masthead{position:absolute;top:0;left:0;font-family:'Space Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;line-height:1;color:#0C1020;margin:0}
+.nh-tm-saffron{color:#E8AF38}
+.nh-kicker-rule{position:absolute;top:51px;left:0;width:48px;height:2px;background:#E8AF38}
+.nh-kicker{position:absolute;top:63px;left:0;font-family:'Space Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#0C1020;margin:0;display:block}
 .nh-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.44);margin-bottom:20px;display:block}
-.nh-h1{font-family:'Fraunces',serif;font-weight:600;font-size:128px;line-height:0.98;letter-spacing:-0.02em;color:#0C1020;margin:0}
-.nh-h1-line1{display:block;color:#0C1020}
-.nh-h1-line2{display:block;color:#E8AF38}
-.nh-h1-line3{display:block;color:#0C1020}
-.nh-subline{font-family:'Fraunces',serif;font-weight:500;font-style:italic;font-size:28px;letter-spacing:0;line-height:1.4;color:#5A544A;margin:32px 0 0 0}
+.nh-h1{font-family:'Fraunces',serif;color:#0C1020;margin:0}
+.nh-h1-line1{display:block;font-weight:400;font-size:88px;line-height:1.0;letter-spacing:-0.02em;color:#0C1020}
+.nh-h1-line2{display:block;font-weight:700;font-size:144px;line-height:0.98;letter-spacing:-0.025em;color:#E8AF38}
+.nh-h1-line3{display:block;font-weight:700;font-size:80px;line-height:1.0;letter-spacing:-0.02em;color:#0C1020}
+.nh-subline{font-family:'Fraunces',serif;font-weight:500;font-style:italic;font-size:22px;letter-spacing:0;line-height:1.4;color:#5A544A;margin:28px 0 0 0}
 .nh-divider{width:200px;height:0;border:none;border-top:0.5px solid rgba(12,16,32,0.20);margin:56px 0 36px 0}
 .nh-footer-kicker{font-family:'Space Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;line-height:1.8;color:#0C1020}
 .nh-fk-saffron{color:#E8AF38}
+.nh-fk2{font-family:'Space Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;line-height:1.8;color:#0C1020;margin-top:24px}
 .nh-proof{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(12px,1.1vw,15px);color:rgba(12,16,32,0.50);line-height:1.5;letter-spacing:-0.01em;margin-bottom:24px}
 .nh-dot{display:inline-block;width:0.22em;height:0.22em;border-radius:50%;background:#E8AF38;margin-left:0.04em;vertical-align:baseline;position:relative;top:0.06em}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -1085,9 +1088,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @media(prefers-reduced-motion:reduce){
   .hero-firefly{display:none}
 }
-@media(max-width:1439px){.nh-h1{font-size:96px}}
-@media(max-width:1023px){.nh-h1{font-size:72px}}
-@media(max-width:767px){.nh-h1{font-size:52px}}
+@media(max-width:1439px){.nh-h1-line1{font-size:68px}.nh-h1-line2{font-size:112px}.nh-h1-line3{font-size:62px}}
+@media(max-width:1023px){.nh-h1-line1{font-size:52px}.nh-h1-line2{font-size:84px}.nh-h1-line3{font-size:48px}}
+@media(max-width:767px){.nh-h1-line1{font-size:38px}.nh-h1-line2{font-size:62px}.nh-h1-line3{font-size:36px}}
 @media(max-width:768px){
   .nh-section{padding:60px 24px;min-height:auto;align-items:flex-start}
   .nh-left{padding-top:60px}
@@ -1191,13 +1194,13 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .reply.sent-state{opacity:0.25;pointer-events:none;transition:opacity .4s var(--ease-out-expo)}
 
 /* ── Short viewport (laptops, 200% DPI) ── */
-@media(max-height:900px){
+@media(max-height:899px){
   .nh-section{padding:0 80px 20px;align-items:flex-start;min-height:100dvh}
   .nh-grid{align-items:flex-start}
   .nh-left{padding-top:180px}
   .nh-right{padding:0 24px 14px;min-height:0}
-  .nh-h1{font-size:64px}
-  .nh-subline{font-size:20px;margin-top:18px}
+  .nh-h1-line1{font-size:44px}.nh-h1-line2{font-size:72px}.nh-h1-line3{font-size:40px}
+  .nh-subline{font-size:16px;margin-top:14px}
   .nh-divider{margin:28px 0 20px 0}
   .nh-proof-claim{font-size:12px;margin-bottom:6px}
   .nh-proof-detail{font-size:11px;margin-bottom:12px}
@@ -1218,8 +1221,8 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .nh-section{padding:0 80px 14px;align-items:flex-start;min-height:100dvh}
   .nh-left{padding-top:120px}
   .nh-right{padding:0 24px 8px}
-  .nh-h1{font-size:48px}
-  .nh-subline{font-size:17px;margin-top:12px}
+  .nh-h1-line1{font-size:33px}.nh-h1-line2{font-size:54px}.nh-h1-line3{font-size:30px}
+  .nh-subline{font-size:13px;margin-top:10px}
   .nh-divider{margin:20px 0 14px 0}
   .nh-proof-detail{display:none}
   /* v3 form compact */
@@ -1240,8 +1243,8 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .nh-right{padding:0 24px 2px}
   .nh-kicker-rule{display:none}
   .nh-kicker{display:none}
-  .nh-h1{font-size:36px;line-height:1.0}
-  .nh-subline{font-size:14px;margin-top:8px}
+  .nh-h1-line1{font-size:25px}.nh-h1-line2{font-size:40px}.nh-h1-line3{font-size:22px}
+  .nh-subline{font-size:11px;margin-top:6px}
   .nh-divider{margin:12px 0 8px 0}
   .nh-footer-kicker{font-size:10px}
   .nh-proof-detail{display:none}
@@ -1585,6 +1588,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Left column: product copy -->
       <div class="nh-left">
         <h1 class="visually-hidden">Personalized homeschool learning plans for families with children ages 2 to 12</h1>
+        <p class="nh-time-masthead" aria-hidden="true"><span>08:17 · </span><span class="nh-tm-saffron">THURSDAY</span><span> · WK 4 · SPRING TERM</span></p>
         <div class="nh-kicker-rule" aria-hidden="true"></div>
         <p class="nh-kicker">ONE PRICE. EVERY CHILD.</p>
         <h2 class="nh-h1" id="nh-headline">
@@ -1598,6 +1602,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div><span>COVERS EVERY </span><span class="nh-fk-saffron">US STANDARD</span></div>
           <div>· AUTOMATICALLY</div>
         </div>
+        <div class="nh-fk2"><span>ONE PRICE · UP TO </span><span class="nh-fk-saffron">4</span><span> CHILDREN</span></div>
       </div>
       <!-- Right column: v3 intake form -->
       <div class="nh-right">
