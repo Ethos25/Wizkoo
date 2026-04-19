@@ -63,10 +63,10 @@ const BLOCKLIST = [
   'cocaine','heroin','meth','methamphetamine','crack',
   'lsd','mdma','ecstasy','fentanyl','opioid',
   'ketamine','psilocybin','shrooms',
-  'marijuana','cannabis','weed','stoner','bong','blunt','spliff',
+  'marijuana','cannabis','stoner','bong','blunt','spliff',
   'drugs','druggie','junkie',
   /* violence / self-harm */
-  'murder','suicide','self-harm','selfharm','self harm',
+  'self-harm','selfharm','self harm',
   'gore','decapitat','dismember','mutilat','massacre','genocide',
   'terrorist','terrorism','snuff',
   'kill yourself','hang yourself',
@@ -82,6 +82,7 @@ const BLOCKLIST = [
 const BLOCKLIST_EXACT = [
   'sex','gun','rifle','pistol','bomb','grenade','explosive',
   'cutting','hanging','overdose',
+  'murder','suicide','weed',
 ];
 
 function normalizeLeet(s) {
