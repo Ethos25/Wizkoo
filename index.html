@@ -1021,12 +1021,21 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* ═══ NEW HERO SECTION ═══ */
-.nh-section{background:radial-gradient(ellipse 70% 60% at 48% 40%,rgba(255,252,240,0.65) 0%,rgba(242,240,234,0) 70%),#F2F0EA;padding:88px 80px 56px;min-height:calc(100vh - 82px);min-height:calc(100dvh - 82px);display:flex;align-items:center;box-sizing:border-box}
+.nh-section{background:radial-gradient(ellipse 70% 60% at 48% 40%,rgba(255,252,240,0.65) 0%,rgba(242,240,234,0) 70%),#F2F0EA;padding:0 80px 56px;min-height:100vh;min-height:100dvh;display:flex;align-items:flex-start;box-sizing:border-box}
 .nh-inner{width:100%;max-width:1200px;margin:0 auto}
 .nh-grid{display:grid;grid-template-columns:62fr 38fr;gap:0;align-items:stretch}
-.nh-left{padding-top:100px}
+.nh-left{padding-top:38vh}
+.nh-kicker-rule{width:48px;height:2px;background:#E8AF38;margin-bottom:10px}
+.nh-kicker{font-family:'Space Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#0C1020;margin:0 0 40px 0;display:block}
 .nh-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.44);margin-bottom:20px;display:block}
-.nh-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(72px,9vw,136px);color:#0C1020;line-height:0.96;letter-spacing:-0.03em;margin-bottom:20px}
+.nh-h1{font-family:'Fraunces',serif;font-weight:600;font-size:128px;line-height:0.98;letter-spacing:-0.02em;color:#0C1020;margin:0}
+.nh-h1-line1{display:block;color:#0C1020}
+.nh-h1-line2{display:block;color:#E8AF38}
+.nh-h1-line3{display:block;color:#0C1020}
+.nh-subline{font-family:'Fraunces',serif;font-weight:500;font-style:italic;font-size:28px;letter-spacing:0;line-height:1.4;color:#5A544A;margin:32px 0 0 0}
+.nh-divider{width:200px;height:0;border:none;border-top:0.5px solid rgba(12,16,32,0.20);margin:56px 0 36px 0}
+.nh-footer-kicker{font-family:'Space Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;line-height:1.8;color:#0C1020}
+.nh-fk-saffron{color:#E8AF38}
 .nh-proof{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(12px,1.1vw,15px);color:rgba(12,16,32,0.50);line-height:1.5;letter-spacing:-0.01em;margin-bottom:24px}
 .nh-dot{display:inline-block;width:0.22em;height:0.22em;border-radius:50%;background:#E8AF38;margin-left:0.04em;vertical-align:baseline;position:relative;top:0.06em}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -1042,7 +1051,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .nh-theme-hint a:hover{border-bottom-color:#E8AF38}
 .nh-trust-strip{background:#F2F0EA;border-top:1px solid rgba(12,16,32,0.10);padding:14px 80px;text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.50)}
 .nh-trust-auto{color:#E8AF38}
-.nh-right{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;background:#F2F0EA;border-left:none;padding:28px 44px;box-sizing:border-box;min-height:100%;position:relative;overflow:visible}
+.nh-right{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;background:#F2F0EA;border-left:none;padding:20vh 44px 28px;box-sizing:border-box;min-height:100%;position:relative;overflow:visible}
 .nh-form-wrap{width:100%;max-width:380px;position:relative;z-index:1}
 .nh-invitation{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(12,16,32,0.38);display:block;margin-bottom:16px}
 .nh-form-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.40);margin-bottom:16px;display:block}
@@ -1076,8 +1085,12 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @media(prefers-reduced-motion:reduce){
   .hero-firefly{display:none}
 }
+@media(max-width:1439px){.nh-h1{font-size:96px}}
+@media(max-width:1023px){.nh-h1{font-size:72px}}
+@media(max-width:767px){.nh-h1{font-size:52px}}
 @media(max-width:768px){
   .nh-section{padding:60px 24px;min-height:auto;align-items:flex-start}
+  .nh-left{padding-top:60px}
   .nh-grid{grid-template-columns:1fr;gap:48px}
   .nh-pillars{grid-template-columns:1fr 1fr}
   .nh-pillar{border-right:none;border-bottom:1px solid rgba(12,16,32,0.10);padding:14px 8px}
@@ -1179,11 +1192,13 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 /* ── Short viewport (laptops, 200% DPI) ── */
 @media(max-height:900px){
-  .nh-section{padding:16px 80px 20px;align-items:center;min-height:100dvh}
+  .nh-section{padding:0 80px 20px;align-items:flex-start;min-height:100dvh}
   .nh-grid{align-items:flex-start}
-  .nh-right{padding:20px 24px 14px;min-height:0}
-  .nh-eyebrow{margin-bottom:6px}
-  .nh-h1{font-size:clamp(22px,2.8vw,38px);margin-bottom:6px}
+  .nh-left{padding-top:16vh}
+  .nh-right{padding:12vh 24px 14px;min-height:0}
+  .nh-h1{font-size:64px}
+  .nh-subline{font-size:20px;margin-top:18px}
+  .nh-divider{margin:28px 0 20px 0}
   .nh-proof-claim{font-size:12px;margin-bottom:6px}
   .nh-proof-detail{font-size:11px;margin-bottom:12px}
   .nh-microcopy{display:none}
@@ -1201,9 +1216,12 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 /* ── Very short viewport (200% DPI ~540px content area) ── */
 @media(max-height:700px){
-  .nh-section{padding:12px 80px 14px;align-items:flex-start;min-height:100dvh}
-  .nh-right{padding:18px 24px 8px}
-  .nh-h1{font-size:clamp(20px,2.6vw,34px)}
+  .nh-section{padding:0 80px 14px;align-items:flex-start;min-height:100dvh}
+  .nh-left{padding-top:10vh}
+  .nh-right{padding:8vh 24px 8px}
+  .nh-h1{font-size:48px}
+  .nh-subline{font-size:17px;margin-top:12px}
+  .nh-divider{margin:20px 0 14px 0}
   .nh-proof-detail{display:none}
   /* v3 form compact */
   .desk{padding:7px 12px 8px;margin-bottom:-12px}
@@ -1219,12 +1237,15 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 /* ── Extreme short (below 500px — user's real 396px viewport) ── */
 @media(max-height:500px){
-  .nh-section{padding:6px 80px 6px;align-items:flex-start;min-height:100dvh}
-  .nh-left{padding-top:0}
-  .nh-right{padding:16px 24px 2px}
-  .nh-eyebrow{display:none}
-  .nh-h1{font-size:clamp(16px,2.2vw,26px);margin-bottom:2px;line-height:1.04}
-  .nh-proof-claim{display:none}
+  .nh-section{padding:0 80px 6px;align-items:flex-start;min-height:100dvh}
+  .nh-left{padding-top:6px}
+  .nh-right{padding:4vh 24px 2px}
+  .nh-kicker-rule{display:none}
+  .nh-kicker{display:none}
+  .nh-h1{font-size:36px;line-height:1.0}
+  .nh-subline{font-size:14px;margin-top:8px}
+  .nh-divider{margin:12px 0 8px 0}
+  .nh-footer-kicker{font-size:10px}
   .nh-proof-detail{display:none}
   /* v3 form compact */
   .desk{padding:5px 10px 5px;margin-bottom:-8px}
@@ -1566,11 +1587,20 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="nh-grid">
       <!-- Left column: product copy -->
       <div class="nh-left">
-        <div style="width:32px;height:1.5px;background:#E8AF38;margin-bottom:10px;"></div>
-        <p class="nh-eyebrow">One price. Every child.</p>
         <h1 class="visually-hidden">Personalized homeschool learning plans for families with children ages 2 to 12</h1>
-        <h2 class="nh-h1" id="nh-headline" style="color:#0C1020"><span style="font-weight:200;opacity:0.72;display:block">Personalized weekly</span><span style="font-weight:800;color:#E8AF38;display:block">homeschool plans.</span><span style="font-weight:800;color:#0C1020;display:block;font-size:0.65em">And tracking.</span><span style="font-weight:800;color:#0C1020;display:block;font-size:0.65em">So you always know where you stand.</span></h2>
-        <p class="nh-proof-claim">Covers every domain of every US educational standard. Automatically.</p>
+        <div class="nh-kicker-rule" aria-hidden="true"></div>
+        <p class="nh-kicker">ONE PRICE. EVERY CHILD.</p>
+        <h2 class="nh-h1" id="nh-headline">
+          <span class="nh-h1-line1">Personalized weekly</span>
+          <span class="nh-h1-line2">homeschool plans.</span>
+          <span class="nh-h1-line3">And tracking.</span>
+        </h2>
+        <p class="nh-subline">...so you always know where you stand.</p>
+        <hr class="nh-divider" aria-hidden="true">
+        <div class="nh-footer-kicker">
+          <div><span>COVERS EVERY </span><span class="nh-fk-saffron">US STANDARD</span></div>
+          <div>· AUTOMATICALLY</div>
+        </div>
       </div>
       <!-- Right column: v3 intake form -->
       <div class="nh-right">
