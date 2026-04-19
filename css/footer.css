@@ -25,14 +25,14 @@ footer nav,
    the dark footer rather than a hard cut.
    ─────────────────────────────────────────────────────────────────────── */
 .footer-fade {
-  height: 100px;
+  height: 80px;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(7, 12, 26, 0.8) 100%
+    #F08838 100%
   );
   pointer-events: none;
   position: relative;
   z-index: 10;
-  margin-top: -100px;
+  margin-top: -80px;
 }

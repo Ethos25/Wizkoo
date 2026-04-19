@@ -255,6 +255,12 @@
       '.nav-mobile-menu a:hover{color:rgba(255,255,255,0.9)}',
       '.nav-mobile-menu a:focus-visible{outline:2px solid var(--saffron);outline-offset:-2px}',
 
+      /* ═══ COMPACT DESKTOP (200% DPI scale / ~960–1100px) ═══ */
+      '@media(max-width:1100px){',
+      '  .nav{padding:0 24px}',
+      '  .nav-center{gap:16px}',
+      '}',
+
       /* ═══ MOBILE ═══ */
       '@media(max-width:768px){',
       '  .nav{padding:0 20px}',

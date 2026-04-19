@@ -260,6 +260,13 @@ nav .nb:hover { background: #D4A030; transform: translateY(-1px); }
 }
 
 /* ─── Responsive ─── */
+@media (max-width: 1200px) {
+  .nav-links { gap: 20px; }
+}
+@media (max-width: 1050px) {
+  .nav-links { gap: 14px; }
+  nav { padding: 0 28px; }
+}
 @media (max-width: 900px) {
   .nav-links { display: none; }
 }

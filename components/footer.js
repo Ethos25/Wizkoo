@@ -1,11 +1,14 @@
 /**
  * Wizkoo Site Footer — single source of truth
- * Injects the canonical footer into #site-footer on every marketing page.
- * Runs synchronously so the footer is in the DOM immediately.
+ * Treatment A: Sunset-to-Night (homepage, plan, price, ages, methodology, library)
+ * Treatment B: Continuous-Night (games, science, open seat)
+ * Surface is determined by data-footer-treatment attribute on <body> (defaults to 'a').
  */
 (function () {
   var el = document.getElementById('site-footer');
   if (!el) return;
+
+  var treatment = (document.body.getAttribute('data-footer-treatment') || 'a').toLowerCase();
 
   /* ── Scoped styles ──────────────────────────────────────────────────── */
   if (!document.getElementById('wf-styles')) {
@@ -19,36 +22,107 @@
       '  50%{opacity:var(--hi,0.55);}',
       '}',
 
-      /* Base — dark planetarium background + pinstripe overlay */
-      '#wizkoo-footer{',
+      /* ── Treatment A: Sunset-to-Night ── */
+      '#wizkoo-footer[data-treatment="a"]{',
+      '  background:linear-gradient(180deg,',
+      '    #FFB060 0%,',
+      '    #F08838 7%,',
+      '    #D85838 15%,',
+      '    #B04848 25%,',
+      '    #8A4056 38%,',
+      '    #5A3858 52%,',
+      '    #352848 66%,',
+      '    #1A1838 80%,',
+      '    #0C1020 92%,',
+      '    #0C1020 100%);',
+      '  color:#F0F2F8;',
+      '  position:relative;',
+      '  overflow:hidden;',
+      '  min-height:520px;',
+      '}',
+
+      /* Sun disc — glowing circle in upper zone */
+      '#wizkoo-footer[data-treatment="a"] .wf-sky{',
+      '  position:absolute;',
+      '  top:-35px;',
+      '  right:8%;',
+      '  width:70px;',
+      '  height:70px;',
+      '  border-radius:50%;',
+      '  background:radial-gradient(circle,#FFFAE8 0%,#FFE899 22%,#FFBC50 52%,#FF8F30 78%,rgba(255,100,20,0) 100%);',
+      '  box-shadow:0 0 20px 10px rgba(255,210,80,0.55),0 0 48px 22px rgba(255,160,50,0.28),0 0 90px 40px rgba(255,120,30,0.12);',
+      '  pointer-events:none;',
+      '  z-index:2;',
+      '  will-change:transform;',
+      '}',
+
+      /* Star field: lower 45% only (gradient night phase begins at ~66%) */
+      '#wizkoo-footer[data-treatment="a"] .wf-stars{',
+      '  position:absolute;',
+      '  top:55%;',
+      '  left:0;right:0;bottom:0;',
+      '  pointer-events:none;',
+      '  z-index:0;',
+      '}',
+
+      /* "The day is made." — Fraunces italic, orange zone */
+      '#wizkoo-footer[data-treatment="a"] .wf-closing{',
+      '  position:absolute;',
+      '  top:18%;',
+      '  left:0;right:0;',
+      '  text-align:center;',
+      '  font-family:"Fraunces",serif;',
+      '  font-style:italic;',
+      '  font-weight:500;',
+      '  font-size:26px;',
+      '  letter-spacing:0.005em;',
+      '  color:rgba(248,236,215,0.92);',
+      '  line-height:1.3;',
+      '  pointer-events:none;',
+      '  z-index:1;',
+      '  user-select:none;',
+      '}',
+
+      /* ── Treatment B: Continuous-Night ── */
+      '#wizkoo-footer[data-treatment="b"]{',
       '  background:',
-      '    radial-gradient(ellipse 100% 20% at 50% 0%,',
-      '      rgba(232, 175, 56, 0.06) 0%,',
-      '      transparent 100%),',
-      '    radial-gradient(ellipse at 50% 45%,',
-      '      rgba(24, 40, 72, 0.60) 0%,',
-      '      rgba(16, 24, 48, 0.30) 70%),',
-      '    repeating-linear-gradient(',
-      '      90deg,',
-      '      transparent, transparent 59px,',
-      '      rgba(255,255,255,0.012) 59px,',
-      '      rgba(255,255,255,0.012) 60px',
-      '    ),',
+      '    radial-gradient(ellipse at 50% 45%,rgba(24,40,72,0.60) 0%,rgba(16,24,48,0.30) 70%),',
       '    #0C1020;',
       '  color:#F0F2F8;',
       '  position:relative;',
       '  overflow:hidden;',
       '}',
 
-      /* Star field layer — absolute, fills footer, behind all content */
-      '#wizkoo-footer .wf-stars{',
+      /* Treatment B: stars fill full footer at higher density */
+      '#wizkoo-footer[data-treatment="b"] .wf-stars{',
       '  position:absolute;',
       '  inset:0;',
       '  pointer-events:none;',
       '  z-index:0;',
       '}',
 
-      /* All content sections float above the star field */
+      /* Treatment B: closing line in upper star field */
+      '#wizkoo-footer[data-treatment="b"] .wf-closing{',
+      '  position:absolute;',
+      '  top:22%;',
+      '  left:0;right:0;',
+      '  text-align:center;',
+      '  font-family:"Fraunces",serif;',
+      '  font-style:italic;',
+      '  font-weight:500;',
+      '  font-size:26px;',
+      '  letter-spacing:0.005em;',
+      '  color:rgba(248,236,215,0.92);',
+      '  line-height:1.3;',
+      '  pointer-events:none;',
+      '  z-index:1;',
+      '  user-select:none;',
+      '}',
+
+      /* Sun disc hidden in treatment B */
+      '#wizkoo-footer[data-treatment="b"] .wf-sky{display:none}',
+
+      /* All content sections float above background layers */
       '#wizkoo-footer .wf-top,',
       '#wizkoo-footer .wf-divider,',
       '#wizkoo-footer .wf-bottom{',
@@ -56,9 +130,9 @@
       '  z-index:1;',
       '}',
 
-      /* ── Top grid: brand | product | learn more | connect ── */
+      /* ── Top grid: brand | learn | join | wizkoo ── */
       '#wizkoo-footer .wf-top{',
-      '  padding:56px 48px 48px;',
+      '  padding:260px 48px 36px;',
       '  max-width:1200px;',
       '  margin:0 auto;',
       '  display:grid;',
@@ -88,7 +162,6 @@
       '#wizkoo-footer .wf-brand .footer-wm:hover .k{',
       '  animation:kGiggle 0.8s ease-in-out;',
       '}',
-      /* Footer-specific dot class — isolated from nav.js global .wm-dot styles */
       '#wizkoo-footer .wf-brand .footer-wm .wf-o-dot{',
       '  display:inline-block;',
       '  position:relative;',
@@ -103,30 +176,32 @@
       '  background:#E8AF38;',
       '}',
       '#wizkoo-footer .wf-tagline{',
-      '  font-family:\'Inter\',sans-serif;',
-      '  font-size:0.81rem;',
-      '  color:rgba(240,242,248,0.4);',
-      '  line-height:1.6;',
+      '  font-family:\'Plus Jakarta Sans\',sans-serif;',
+      '  font-weight:400;',
+      '  font-size:13px;',
+      '  color:rgba(240,242,248,0.45);',
+      '  line-height:1.65;',
       '  margin-top:14px;',
       '}',
-      '#wizkoo-footer .wf-email{margin-top:8px;}',
+      '#wizkoo-footer .wf-email{margin-top:10px;}',
       '#wizkoo-footer .wf-email a{',
-      '  font-family:\'Inter\',sans-serif;',
-      '  font-size:0.81rem;',
-      '  color:rgba(240,242,248,0.3);',
+      '  font-family:\'Plus Jakarta Sans\',sans-serif;',
+      '  font-weight:400;',
+      '  font-size:13px;',
+      '  color:rgba(240,242,248,0.32);',
       '  text-decoration:none;',
       '  transition:color 0.25s ease;',
       '}',
-      '#wizkoo-footer .wf-email a:hover{color:rgba(240,242,248,0.65);}',
+      '#wizkoo-footer .wf-email a:hover{color:rgba(240,242,248,0.72);}',
 
-      /* ── Column headers ── */
+      /* ── Column headers: Space Mono uppercase ── */
       '#wizkoo-footer .wf-col-header{',
       '  font-family:"Space Mono",monospace;',
       '  font-weight:400;',
-      '  font-size:0.625rem;',
-      '  letter-spacing:0.14em;',
+      '  font-size:11px;',
+      '  letter-spacing:0.18em;',
       '  text-transform:uppercase;',
-      '  color:rgba(240,242,248,0.3);',
+      '  color:rgba(255,255,255,0.45);',
       '  margin-bottom:18px;',
       '}',
 
@@ -147,14 +222,14 @@
       '  border:none!important;',
       '}',
 
-      /* ── Shared link style: Inter 400 ── */
+      /* ── Shared link style: Plus Jakarta Sans 400 ── */
       '#wizkoo-footer .wf-nav a,',
       '#wizkoo-footer .wf-learn a,',
       '#wizkoo-footer .wf-social a{',
-      '  font-family:\'Inter\',system-ui,sans-serif;',
+      '  font-family:\'Plus Jakarta Sans\',sans-serif;',
       '  font-weight:400!important;',
-      '  font-size:0.875rem;',
-      '  color:rgba(240,242,248,0.55);',
+      '  font-size:14px;',
+      '  color:rgba(240,242,248,0.85);',
       '  text-decoration:none;',
       '  transition:color 0.25s ease;',
       '  line-height:1;',
@@ -162,7 +237,7 @@
       '#wizkoo-footer .wf-nav a:hover,',
       '#wizkoo-footer .wf-learn a:hover,',
       '#wizkoo-footer .wf-social a:hover{',
-      '  color:rgba(240,242,248,0.85);',
+      '  color:rgba(240,242,248,1);',
       '}',
 
       /* ── Social links: icon + text inline ── */
@@ -171,9 +246,7 @@
       '  align-items:center;',
       '  gap:9px;',
       '}',
-      '#wizkoo-footer .wf-social a.wf-social-link svg{',
-      '  flex-shrink:0;',
-      '}',
+      '#wizkoo-footer .wf-social a.wf-social-link svg{flex-shrink:0;}',
 
       /* ── Bottom bar legal links ── */
       '#wizkoo-footer .wf-copy-legal{',
@@ -186,7 +259,7 @@
       '  font-size:0.6rem;',
       '  text-transform:uppercase;',
       '  letter-spacing:0.1em;',
-      '  color:rgba(240,242,248,0.28);',
+      '  color:rgba(240,242,248,0.25);',
       '  text-decoration:none;',
       '  transition:color 0.25s ease;',
       '}',
@@ -204,7 +277,7 @@
       '#wizkoo-footer .wf-bottom{',
       '  max-width:1200px;',
       '  margin:0 auto;',
-      '  padding:24px 48px 40px;',
+      '  padding:20px 48px 32px;',
       '  display:flex;',
       '  justify-content:space-between;',
       '  align-items:center;',
@@ -235,10 +308,11 @@
       /* ── Responsive — 768px ── */
       '@media(max-width:768px){',
       '  #wizkoo-footer .wf-top{',
-      '    padding:44px 24px 40px;',
+      '    padding:220px 24px 32px;',
       '    grid-template-columns:1fr;',
       '    gap:32px;',
       '  }',
+      '  #wizkoo-footer[data-treatment="a"] .wf-closing{font-size:20px;top:16%}',
       '  #wizkoo-footer .wf-divider{margin:0 24px;}',
       '  #wizkoo-footer .wf-bottom{',
       '    padding:20px 24px 36px;',
@@ -262,14 +336,20 @@
 
   /* ── Footer HTML ────────────────────────────────────────────────────── */
   el.innerHTML = [
-    '<footer id="wizkoo-footer" role="contentinfo">',
+    '<footer id="wizkoo-footer" data-treatment="' + treatment + '" role="contentinfo">',
 
-    '  <!-- Star field — generated by JS below -->',
+    '  <!-- Sun disc layer (Treatment A only) -->',
+    '  <div class="wf-sky" aria-hidden="true"></div>',
+
+    '  <!-- Star field -->',
     '  <div class="wf-stars" aria-hidden="true"></div>',
+
+    '  <!-- Closing line -->',
+    '  <div class="wf-closing" aria-hidden="true">The day is made.</div>',
 
     '  <div class="wf-top">',
 
-    '    <!-- Col 1: Brand (no header) -->',
+    '    <!-- Col 1: Brand -->',
     '    <div class="wf-brand">',
     '      <a href="/" class="footer-wm" aria-label="Wizkoo home">',
     '        w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wf-o-dot">o</span>',
@@ -322,25 +402,81 @@
   /* ── Star field generator ───────────────────────────────────────────── */
   var starContainer = el.querySelector('.wf-stars');
   if (starContainer) {
+    var isTreatmentA = treatment === 'a';
+    /* Treatment A: stars in lower 45% of footer (container already starts at top:55%)
+       Treatment B: stars throughout, higher density */
+    var count = isTreatmentA ? 52 : 120;
     var starHtml = '';
-    for (var i = 0; i < 120; i++) {
-      var x   = (Math.random() * 100).toFixed(2);
-      var y   = (Math.random() * 100).toFixed(2);
-      var r   = Math.random();
-      var sz  = r < 0.7 ? 1 : r < 0.9 ? 1.5 : 2;
-      var lo  = (0.05 + Math.random() * 0.12).toFixed(2);
-      var hi  = (0.28 + Math.random() * 0.45).toFixed(2);
-      var dur = (2    + Math.random() * 4).toFixed(1);
-      var del = (Math.random() * 5).toFixed(1);
-      starHtml += '<div style="position:absolute;border-radius:50%;'
-               + 'background:#F0F2F8;'
+
+    /* Anchor stars (bright, 2-3px) */
+    for (var i = 0; i < (isTreatmentA ? 6 : 12); i++) {
+      var x = (Math.random() * 100).toFixed(2);
+      var y = (Math.random() * 100).toFixed(2);
+      var dur = (2 + Math.random() * 3).toFixed(1);
+      var del = (Math.random() * 4).toFixed(1);
+      starHtml += '<div style="position:absolute;border-radius:50%;background:rgba(245,245,220,0.95);'
                + 'left:' + x + '%;top:' + y + '%;'
-               + 'width:' + sz + 'px;height:' + sz + 'px;'
-               + 'animation:wfTwinkle ' + dur + 's ease-in-out '
-               + 'infinite ' + del + 's;'
-               + '--lo:' + lo + ';--hi:' + hi + ';"></div>';
+               + 'width:' + (2 + Math.random()).toFixed(1) + 'px;height:' + (2 + Math.random()).toFixed(1) + 'px;'
+               + 'animation:wfTwinkle ' + dur + 's ease-in-out infinite ' + del + 's;'
+               + '--lo:0.55;--hi:0.95;"></div>';
     }
+
+    /* Saffron signature star */
+    starHtml += '<div style="position:absolute;border-radius:50%;background:rgba(232,175,56,0.80);'
+             + 'left:38%;top:' + (isTreatmentA ? '30' : '20') + '%;'
+             + 'width:2.5px;height:2.5px;'
+             + 'animation:wfTwinkle 3.5s ease-in-out infinite 1.2s;'
+             + '--lo:0.45;--hi:0.85;"></div>';
+
+    /* Medium stars */
+    for (var j = 0; j < (isTreatmentA ? 15 : 30); j++) {
+      var x2 = (Math.random() * 100).toFixed(2);
+      var y2 = (Math.random() * 100).toFixed(2);
+      var dur2 = (2.5 + Math.random() * 3.5).toFixed(1);
+      var del2 = (Math.random() * 5).toFixed(1);
+      var lo2 = (0.25 + Math.random() * 0.15).toFixed(2);
+      var hi2 = (0.55 + Math.random() * 0.20).toFixed(2);
+      starHtml += '<div style="position:absolute;border-radius:50%;background:rgba(245,245,220,0.70);'
+               + 'left:' + x2 + '%;top:' + y2 + '%;'
+               + 'width:1.5px;height:1.5px;'
+               + 'animation:wfTwinkle ' + dur2 + 's ease-in-out infinite ' + del2 + 's;'
+               + '--lo:' + lo2 + ';--hi:' + hi2 + ';"></div>';
+    }
+
+    /* Soft stars */
+    for (var k = 0; k < (isTreatmentA ? 30 : 78); k++) {
+      var x3 = (Math.random() * 100).toFixed(2);
+      var y3 = (Math.random() * 100).toFixed(2);
+      var dur3 = (3 + Math.random() * 4).toFixed(1);
+      var del3 = (Math.random() * 5).toFixed(1);
+      var lo3 = (0.08 + Math.random() * 0.08).toFixed(2);
+      var hi3 = (0.25 + Math.random() * 0.15).toFixed(2);
+      starHtml += '<div style="position:absolute;border-radius:50%;background:rgba(245,245,220,0.35);'
+               + 'left:' + x3 + '%;top:' + y3 + '%;'
+               + 'width:1px;height:1px;'
+               + 'animation:wfTwinkle ' + dur3 + 's ease-in-out infinite ' + del3 + 's;'
+               + '--lo:' + lo3 + ';--hi:' + hi3 + ';"></div>';
+    }
+
     starContainer.innerHTML = starHtml;
+  }
+
+  /* ── Sun parallax (Treatment A only) ───────────────────────────────── */
+  if (treatment === 'a') {
+    var sunEl = el.querySelector('.wf-sky');
+    var footer = el.querySelector('#wizkoo-footer') || el.firstElementChild;
+    if (sunEl && footer) {
+      function updateSun() {
+        var rect = footer.getBoundingClientRect();
+        var vh = window.innerHeight;
+        /* progress: 0 = footer top at bottom of viewport, 1 = footer top at top of viewport */
+        var progress = Math.max(0, Math.min(1, (vh - rect.top) / vh));
+        /* Sun travels 120px downward as footer scrolls into view */
+        sunEl.style.transform = 'translateY(' + (progress * 120).toFixed(1) + 'px)';
+      }
+      window.addEventListener('scroll', updateSun, { passive: true });
+      updateSun();
+    }
   }
 
 })();
