@@ -11,7 +11,7 @@
 <link rel="canonical" href="https://wizkoo.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&display=swap&subset=latin,latin-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script type="application/ld+json">
 {
@@ -1021,12 +1021,12 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* ═══ NEW HERO SECTION ═══ */
-.nh-section{background:repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(12,16,32,0.008) 79px,rgba(12,16,32,0.008) 80px),repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(12,16,32,0.008) 79px,rgba(12,16,32,0.008) 80px),radial-gradient(ellipse 70% 60% at 48% 40%,rgba(255,252,240,0.65) 0%,rgba(242,240,234,0) 70%),#F2F0EA;padding:88px 80px 56px;min-height:calc(100vh - 82px);min-height:calc(100dvh - 82px);display:flex;align-items:center;box-sizing:border-box}
+.nh-section{background:radial-gradient(ellipse 70% 60% at 48% 40%,rgba(255,252,240,0.65) 0%,rgba(242,240,234,0) 70%),#F2F0EA;padding:88px 80px 56px;min-height:calc(100vh - 82px);min-height:calc(100dvh - 82px);display:flex;align-items:center;box-sizing:border-box}
 .nh-inner{width:100%;max-width:1200px;margin:0 auto}
 .nh-grid{display:grid;grid-template-columns:62fr 38fr;gap:0;align-items:stretch}
-.nh-left{padding-top:48px}
+.nh-left{padding-top:100px}
 .nh-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.44);margin-bottom:20px;display:block}
-.nh-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(52px,6.2vw,82px);color:#0C1020;line-height:1.06;letter-spacing:-0.03em;margin-bottom:20px}
+.nh-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(72px,9vw,136px);color:#0C1020;line-height:0.96;letter-spacing:-0.03em;margin-bottom:20px}
 .nh-proof{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(12px,1.1vw,15px);color:rgba(12,16,32,0.50);line-height:1.5;letter-spacing:-0.01em;margin-bottom:24px}
 .nh-dot{display:inline-block;width:0.22em;height:0.22em;border-radius:50%;background:#E8AF38;margin-left:0.04em;vertical-align:baseline;position:relative;top:0.06em}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -1042,8 +1042,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .nh-theme-hint a:hover{border-bottom-color:#E8AF38}
 .nh-trust-strip{background:#F2F0EA;border-top:1px solid rgba(12,16,32,0.10);padding:14px 80px;text-align:center;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.50)}
 .nh-trust-auto{color:#E8AF38}
-.nh-right{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;background:#ECEAE3;border-left:2px solid #E8AF38;padding:28px 44px;box-sizing:border-box;min-height:100%;position:relative;overflow:hidden}
-.nh-right::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:200px 200px;opacity:0.025;pointer-events:none;z-index:0}
+.nh-right{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;background:#F2F0EA;border-left:none;padding:28px 44px;box-sizing:border-box;min-height:100%;position:relative;overflow:visible}
 .nh-form-wrap{width:100%;max-width:380px;position:relative;z-index:1}
 .nh-invitation{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(12,16,32,0.38);display:block;margin-bottom:16px}
 .nh-form-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.40);margin-bottom:16px;display:block}
@@ -1093,22 +1092,156 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 @media(prefers-reduced-motion:reduce){.nh-input,.nh-submit{transition:none}}
 
-/* ── Short viewport (200% display scale, laptops) ── */
-@media(max-height:780px){
-  .nh-section{padding:16px 80px;align-items:flex-start;min-height:0}
+/* ══ v3 Right Form — desk note ══ */
+.desk{position:relative;background:#FFFDF5;padding:16px 24px 14px;box-shadow:0 1px 0 rgba(12,16,32,0.04),0 16px 40px -28px rgba(12,16,32,0.3);max-width:460px;z-index:2;margin-bottom:-20px;transform:rotate(-5deg);transform-origin:top center;margin-left:-10px;width:calc(100% + 14px)}
+.desk::before{content:'';position:absolute;top:-7px;left:0;right:0;height:9px;background:radial-gradient(circle at 6px 9px,#FFFDF5 4.5px,transparent 5px),radial-gradient(circle at 20px 7px,#FFFDF5 3.5px,transparent 4px),radial-gradient(circle at 34px 9px,#FFFDF5 4.5px,transparent 5px),radial-gradient(circle at 48px 7px,#FFFDF5 3.5px,transparent 4px),radial-gradient(circle at 62px 9px,#FFFDF5 4.5px,transparent 5px);background-size:56px 9px;background-repeat:repeat-x}
+.desk::after{content:'';position:absolute;top:-10px;left:38px;width:56px;height:16px;background:rgba(232,175,56,0.3);border-top:1px dashed rgba(232,175,56,0.55);border-bottom:1px dashed rgba(232,175,56,0.55);transform:rotate(-4deg);opacity:0.8}
+.desk-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.desk-seal{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:#E8AF38;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-style:italic;font-size:14px;color:#0C1020;box-shadow:0 2px 0 rgba(12,16,32,0.12),inset 0 1px 2px rgba(255,255,255,0.3);transform:rotate(-6deg);letter-spacing:-0.02em}
+.desk-meta{flex:1}
+.desk-from{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(12,16,32,0.42);margin-bottom:1px}
+.desk-from em{font-style:normal;color:#E8AF38}
+.desk-subject{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:13px;color:#0C1020;letter-spacing:-0.005em;line-height:1.2}
+.desk-body{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:14.5px;line-height:1.5;color:#2A2833}
+.desk-body strong{font-style:normal;font-weight:500;color:#0C1020}
+.desk-sign{margin-top:6px;padding-top:6px;border-top:1px dashed rgba(12,16,32,0.15);display:flex;justify-content:space-between;align-items:baseline;font-family:'Space Mono',monospace;font-size:7.5px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.4);gap:16px}
+.desk-sign em{font-style:normal;color:rgba(12,16,32,0.55)}
+/* ── Form card wrapper (sits below angled desk note) ── */
+.form-card{position:relative;z-index:1;width:100%;padding-top:60px}
+/* ── Reply card ── */
+.reply{position:relative;padding:28px 0 0 0;max-width:460px;z-index:1}
+.reply::before{content:'';position:absolute;top:0;left:0;right:40px;height:1px;background:repeating-linear-gradient(to right,rgba(12,16,32,0.2) 0 4px,transparent 4px 8px)}
+.reply-label{position:absolute;top:-8px;left:0;padding:0 12px 0 0;background:#F2F0EA;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#E8AF38;font-weight:700}
+.reply-label em{color:rgba(12,16,32,0.5);font-style:normal;font-weight:400;margin-left:10px}
+.sent{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.3;letter-spacing:-0.02em;color:#0C1020;margin-top:10px}
+.sent .line{display:block;margin-bottom:2px}
+.word{position:relative;display:inline-block;vertical-align:baseline}
+.word .tick,.age-word .tick{position:absolute;left:0;top:-16px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.45);white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .3s var(--ease-out-expo),transform .3s var(--ease-out-expo)}
+.word:has(input:focus) .tick,.word.filled .tick,.age-word.active .tick,.age-word.filled .tick,.age-word:hover .tick{opacity:1;transform:translateY(0)}
+.word.filled .tick,.age-word.filled .tick{color:#E8AF38}
+.word input{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:inherit;color:rgba(12,16,32,0.3);letter-spacing:-0.01em;background:transparent;border:0;outline:0;padding:0 4px 0 2px;margin:0;width:var(--w,10ch);line-height:inherit;border-bottom:2px solid rgba(12,16,32,0.18);transition:border-bottom-color .25s var(--ease-out-expo),background .25s var(--ease-out-expo),color .25s,width .2s ease}
+.word input::placeholder{color:rgba(12,16,32,0.26);font-style:italic}
+#nh-theme.ph-overlay::placeholder{color:transparent}
+.theme-ph{position:absolute;left:2px;top:0;height:100%;display:inline-flex;align-items:center;font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:inherit;line-height:inherit;color:rgba(12,16,32,0.26);letter-spacing:-0.01em;pointer-events:none;user-select:none;white-space:nowrap;opacity:1;transition:opacity .3s ease}
+.theme-error{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.52);margin-top:10px;display:none;line-height:1.7}
+.theme-error.visible{display:block}
+.theme-error a{color:#E8AF38;text-decoration:none;border-bottom:1px solid rgba(232,175,56,0.4);padding-bottom:1px;cursor:pointer}
+.theme-error a:hover{border-bottom-color:#E8AF38}
+.theme-network-error{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.52);margin-top:10px;display:none;line-height:1.7}
+.theme-network-error.visible{display:block}
+.word.filled input{color:#E8AF38;border-bottom-color:#E8AF38}
+.word input:focus{border-bottom-color:#E8AF38;background:linear-gradient(to top,rgba(232,175,56,0.12) 0%,rgba(232,175,56,0) 40%)}
+.punct{color:#E8AF38;font-family:'Fraunces',serif;font-style:italic;font-weight:400}
+.punct.period{font-size:1.3em;line-height:0;margin-left:-0.05em}
+.age-word{position:relative;display:inline-block}
+.age-scroll{display:inline-block;font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:rgba(12,16,32,0.3);width:var(--w,3ch);text-align:center;cursor:pointer;padding:0 4px;border-bottom:2px solid rgba(12,16,32,0.18);transition:color .2s,border-bottom-color .2s;user-select:none}
+.age-word.filled .age-scroll{color:#E8AF38;border-bottom-color:#E8AF38}
+.age-steppers{position:absolute;right:-26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;opacity:0;pointer-events:none;transition:opacity .2s}
+.age-word:hover .age-steppers,.age-word.active .age-steppers{opacity:1;pointer-events:auto}
+.age-steppers button{width:20px;height:20px;border:1px solid rgba(12,16,32,0.14);background:rgba(244,241,232,0.9);font-family:'Space Mono',monospace;font-size:9px;color:rgba(12,16,32,0.55);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.age-steppers button:hover{border-color:#E8AF38;color:#0C1020;background:#FFF}
+.cta-row{margin-top:40px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.lbracket{position:relative;font-family:'Sora',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:#0C1020;padding:14px 40px;line-height:1;background:transparent;border:none;box-shadow:6px 6px 0 #E8AF38;cursor:pointer;white-space:nowrap;display:inline-block;text-decoration:none;transition:transform 0.15s cubic-bezier(0.16,1,0.3,1),box-shadow 0.15s cubic-bezier(0.16,1,0.3,1)}
+.lbracket:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #E8AF38}
+.lbracket .arrow{display:inline-block;margin-left:0.5em}
+.lbracket:disabled{opacity:1;cursor:not-allowed;box-shadow:6px 6px 0 #E8AF38}
+.cta-note{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(12,16,32,0.45);line-height:1.7}
+.cta-note strong{color:#E8AF38;font-weight:700}
+.sibling-note{margin:14px 0 0 0;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.5);line-height:1.5}
+.sibling-note em{font-style:normal;color:#E8AF38;font-weight:700}
+/* ── Gate (post-submit) ── */
+.gate{max-width:460px;margin-top:14px;z-index:1;position:relative}
+.gate-stage{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#E8AF38;font-weight:700;margin-bottom:18px}
+.gate-stage em{color:rgba(12,16,32,0.5);font-style:normal;font-weight:400}
+.gate-steps{list-style:none;display:flex;flex-direction:column;gap:10px;padding:0;margin:0}
+.gate-steps li{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:500;color:rgba(12,16,32,0.35);padding-left:26px;position:relative;line-height:1.5;transition:color .35s var(--ease-out-expo)}
+.gate-steps li::before{content:'';position:absolute;left:0;top:6px;width:12px;height:12px;border-radius:50%;border:1.5px solid rgba(12,16,32,0.2);background:transparent;transition:all .35s var(--ease-out-expo)}
+.gate-steps li.active{color:#0C1020}
+.gate-steps li.active::before{border-color:#E8AF38;background:rgba(232,175,56,0.35);animation:nh-pulse 1.4s ease-in-out infinite}
+@keyframes nh-pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,175,56,0.5)}50%{box-shadow:0 0 0 6px rgba(232,175,56,0)}}
+.gate-steps li.done{color:rgba(12,16,32,0.55)}
+.gate-steps li.done::before{background:#E8AF38;border-color:#E8AF38;animation:none;box-shadow:none}
+.gate-steps li.done::after{content:'✓';position:absolute;left:3px;top:4px;font-size:9px;color:#0C1020;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;line-height:1}
+.gate-theme,.gate-age{color:#E8AF38;font-family:'Fraunces',serif;font-style:italic;font-weight:400}
+.gate-ready{animation:nh-fadeUp .5s var(--ease-out-expo)}
+@keyframes nh-fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.gate-head{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.25;letter-spacing:-0.02em;color:#0C1020;margin-bottom:10px}
+.gate-head span{color:#E8AF38;font-family:'Fraunces',serif;font-style:italic;font-weight:400}
+.gate-sub{font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:14px;color:rgba(12,16,32,0.6);line-height:1.5;margin-bottom:18px;max-width:42ch}
+.gate-sub span{color:#E8AF38;font-family:'Fraunces',serif;font-style:italic;font-weight:400}
+.email-row{margin:4px 0 14px;max-width:460px}
+.email-input{display:block;width:100%;font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:19px;color:#0C1020;letter-spacing:-0.005em;background:transparent;border:0;outline:0;padding:8px 0;border-bottom:1.5px solid rgba(12,16,32,0.22);transition:border-bottom-color .25s var(--ease-out-expo),background .25s var(--ease-out-expo)}
+.email-input::placeholder{color:rgba(12,16,32,0.3)}
+.email-input:focus{border-bottom-color:#E8AF38;background:linear-gradient(to top,rgba(232,175,56,0.12) 0%,rgba(232,175,56,0) 50%)}
+.email-row.filled .email-input{border-bottom-color:#E8AF38}
+.email-row.invalid .email-input{border-bottom-color:#C54B3C}
+.reply.sent-state{opacity:0.25;pointer-events:none;transition:opacity .4s var(--ease-out-expo)}
+
+/* ── Short viewport (laptops, 200% DPI) ── */
+@media(max-height:900px){
+  .nh-section{padding:16px 80px 20px;align-items:center;min-height:100dvh}
   .nh-grid{align-items:flex-start}
-  .nh-right{padding:16px 24px;min-height:0}
+  .nh-right{padding:20px 24px 14px;min-height:0}
   .nh-eyebrow{margin-bottom:6px}
   .nh-h1{font-size:clamp(22px,2.8vw,38px);margin-bottom:6px}
   .nh-proof-claim{font-size:12px;margin-bottom:6px}
   .nh-proof-detail{font-size:11px;margin-bottom:12px}
-  .nh-invitation{margin-bottom:10px}
-  .nh-form{gap:10px}
-  .nh-input{padding:8px 0;font-size:14px;min-height:36px}
-  .nh-suggestion-chips{margin-top:8px}
-  .nh-submit-group{margin-top:4px;gap:6px}
   .nh-microcopy{display:none}
   .nh-theme-hint{display:none}
+  /* v3 form compact */
+  .desk{padding:10px 16px 10px;margin-bottom:-16px}
+  .form-card{padding-top:44px}
+  .desk-body{font-size:13px;line-height:1.45}
+  .desk-sign{font-size:7px}
+  .reply{padding-top:18px}
+  .sent{font-size:clamp(1.05rem,1.55vw,1.35rem);margin-top:7px}
+  .cta-row{margin-top:16px}
+  .sibling-note{margin-top:8px}
+}
+
+/* ── Very short viewport (200% DPI ~540px content area) ── */
+@media(max-height:700px){
+  .nh-section{padding:12px 80px 14px;align-items:flex-start;min-height:100dvh}
+  .nh-right{padding:18px 24px 8px}
+  .nh-h1{font-size:clamp(20px,2.6vw,34px)}
+  .nh-proof-detail{display:none}
+  /* v3 form compact */
+  .desk{padding:7px 12px 8px;margin-bottom:-12px}
+  .form-card{padding-top:36px}
+  .desk-body{font-size:12px;line-height:1.4;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .desk-sign{display:none}
+  .reply{padding-top:12px}
+  .sent{font-size:clamp(0.95rem,1.4vw,1.2rem);margin-top:5px;line-height:1.25}
+  .cta-row{margin-top:12px;gap:16px}
+  .sibling-note{display:none}
+  .lbracket{padding:10px 16px}
+}
+
+/* ── Extreme short (below 500px — user's real 396px viewport) ── */
+@media(max-height:500px){
+  .nh-section{padding:6px 80px 6px;align-items:flex-start;min-height:100dvh}
+  .nh-left{padding-top:0}
+  .nh-right{padding:16px 24px 2px}
+  .nh-eyebrow{display:none}
+  .nh-h1{font-size:clamp(16px,2.2vw,26px);margin-bottom:2px;line-height:1.04}
+  .nh-proof-claim{display:none}
+  .nh-proof-detail{display:none}
+  /* v3 form compact */
+  .desk{padding:5px 10px 5px;margin-bottom:-8px}
+  .form-card{padding-top:22px}
+  .desk-seal{width:26px;height:26px;font-size:12px}
+  .desk-from{font-size:7px}
+  .desk-subject{font-size:12px}
+  .desk-body{font-size:10.5px;line-height:1.3;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .desk-head{gap:7px;margin-bottom:3px}
+  .desk-sign{display:none}
+  .reply{padding-top:8px}
+  .sent{font-size:clamp(0.82rem,1.2vw,1rem);margin-top:3px;line-height:1.18}
+  .cta-row{margin-top:6px;gap:10px;flex-wrap:nowrap}
+  .cta-note{display:none}
+  .sibling-note{display:none}
+  .lbracket{font-size:9px;padding:7px 14px;box-shadow:5px 5px 0 #E8AF38}
+  .lbracket:hover{box-shadow:7px 7px 0 #E8AF38}
 }
 
 /* ═══ HERO INTAKE FORM ═══ */
@@ -1129,6 +1262,129 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @media(max-width:768px){.hero-intake-form{max-width:100%}.hif-btn{width:100%;text-align:center}}
 @media(prefers-reduced-motion:reduce){.hif-input,.hif-btn{transition:none!important}}
 </style>
+<!-- ═══ SKY SYSTEM STYLES ═══ -->
+<style id="hp-sky-system">
+/* Body must be transparent so fixed creamWash provides the background */
+body.page-home{
+  background:transparent!important;
+}
+/* Fixed cream background — color interpolated by scroll JS */
+#creamWash{
+  position:fixed;inset:0;z-index:-3;
+  background:#F4F1E8;
+  transition:background-color 120ms linear;
+}
+/* Sun glow — 64vmax soft radial, moves along sun-arc path via CSS vars */
+#sunGlow{
+  position:fixed;
+  left:var(--sx,15%);top:var(--sy,12%);
+  width:64vmax;aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,
+    rgba(255,240,180,0.60) 0%,
+    rgba(248,200,80,0.36) 18%,
+    rgba(232,175,56,0.16) 40%,
+    rgba(232,175,56,0.00) 65%);
+  z-index:-1;
+  pointer-events:none;
+  filter:blur(6px);
+  opacity:var(--sun-o,1);
+  transition:opacity 180ms linear;
+}
+/* Linen sections: transparent so sky system shows through */
+.nh-section,
+.arrival,
+.hz1,
+.hz2,
+.hz3,
+.ec-section,
+.or-section,
+.nap-section,
+.faq-section,
+.thread-section,
+.philo-section{
+  background:transparent!important;
+}
+</style>
+<!-- ═══ v5 DESIGN SYSTEM OVERRIDES ═══ -->
+<style id="hp-v5-design">
+/* ── Display headlines: Fraunces 600 ── */
+.nh-h1,
+.hz1-h1,
+.moment-headline,
+.ec-headline,
+.cta-dark h2,
+.or-title,
+.same-room h2,
+.philo h2,
+.nap-heading,
+.faq-section h2,
+.thread-intro-text {
+  font-family:'Fraunces',serif;
+  font-weight:600;
+}
+/* ── Body text on cream: Plus Jakarta Sans 500 ── */
+.nh-proof,.nh-proof-claim,.nh-proof-detail,.nh-pillar-body,
+.sr-activity,.phi p,.moment-body,.or-sub,
+.founder-line,.founder-detail,
+.wc-detail,.wc-spiral,.gd,.moment,
+.nap-lead,.nap-ev-text,.nap-counterpoint,
+.hcard-content,.sr-why,.cta-sub,
+.layers-intro-text,.hero-setup-line,
+.nap-closer-l1,.nap-closer-l3,
+.faq-a {
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:500;
+}
+.faq-a{font-weight:400}
+
+/* ── CTA PATTERN 2: shared underline ── */
+/* Primary page CTA (on linen) */
+.btn-main{
+  font-family:'Space Mono',monospace!important;
+  font-weight:500!important;
+  font-size:13px!important;
+  letter-spacing:0.18em!important;
+  text-transform:uppercase!important;
+  padding:0 0 8px 0!important;
+  background:transparent!important;
+  color:#0C1020!important;
+  border:none!important;
+  box-shadow:none!important;
+  display:inline-block!important;
+  text-decoration:none!important;
+  position:relative!important;
+  border-bottom:3px solid #E8AF38!important;
+  transition:border-bottom-width .15s ease!important;
+}
+.btn-main:hover{
+  transform:none!important;
+  box-shadow:none!important;
+  color:#0C1020!important;
+  border-bottom-width:4px!important;
+}
+/* Dark-surface override (cta-dark section) */
+.cta-dark .btn-main{
+  color:rgba(248,236,215,0.92)!important;
+  background:transparent!important;
+  border-bottom-color:#E8AF38!important;
+}
+.cta-dark .btn-main:hover{
+  color:rgba(248,236,215,1)!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+
+
+/* ── Fraunces italic for emphasis within headlines ── */
+.ec-headline strong,.cta-dark h2 strong,.or-title strong,
+.same-room h2 strong,.philo h2 strong,.moment-headline strong{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-style:italic;
+}
+</style>
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://wizkoo.com">
@@ -1147,6 +1403,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 <link rel="stylesheet" href="css/footer.css">
 </head>
 <body class="page-home">
+<!-- ═══ SKY SYSTEM: cream wash + sun glow (fixed, behind all content) ═══ -->
+<div id="creamWash" aria-hidden="true"></div>
+<div id="sunGlow" aria-hidden="true"></div>
 <!-- Custom cursor -->
 <div class="cursor" id="cursor"></div>
 <div class="firefly" id="firefly"></div>
@@ -1165,23 +1424,38 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 })();
 </script>
 <style id="hp-nav-overrides">
-/* Announcement bar — solid dark, no blur */
+/* Announcement bar — solid dark */
 .page-home .announce{
-  background:rgba(12,16,32,0.82)!important;
+  background:#0C1020!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
-/* Announcement text — light against solid dark surface */
 .page-home .announce-text{
   color:rgba(232,175,56,0.75)!important;
 }
-/* Nav — solid dark surface, no blur */
+/* Nav — transparent per v5: no background, no blur */
+.page-home .nav,
 .page-home .nav.nav--on-linen{
-  background:rgba(12,16,32,0.96)!important;
+  background:transparent!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
+  border-bottom:none!important;
+  box-shadow:none!important;
 }
-/* CTA — filled saffron on homepage */
+.page-home .nav::before{display:none!important}
+/* Linen surface: ink type (default — hero is linen) */
+.page-home .nav-wm{color:#0C1020!important}
+.page-home .nav-link{color:rgba(12,16,32,0.55)!important}
+.page-home .nav-link:hover{color:rgba(12,16,32,0.90)!important}
+.page-home .nav-link.active{color:#0C1020!important}
+/* Dark surface: cream type (toggled by scroll JS below) */
+.page-home .nav.nav--surface-dark .nav-wm{color:#F0F2F8!important}
+.page-home .nav.nav--surface-dark .nav-link{color:rgba(240,242,248,0.65)!important}
+.page-home .nav.nav--surface-dark .nav-link:hover{color:rgba(240,242,248,0.92)!important}
+.page-home .nav.nav--surface-dark .nav-link.active{color:#F0F2F8!important}
+/* Hamburger lines: invert on linen */
+.page-home .nav-hamburger-line{background:rgba(12,16,32,0.7)!important}
+.page-home .nav.nav--surface-dark .nav-hamburger-line{background:rgba(240,242,248,0.7)!important}
 .page-home .nav-cta{
   background:#E8AF38!important;
   color:#0C1020!important;
@@ -1193,6 +1467,99 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   box-shadow:none!important;
 }
 </style>
+<!-- ═══ NAV SURFACE DETECTION ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var nav=document.getElementById('site-nav');
+  var linenHero=document.getElementById('linen-hero');
+  if(!nav||!linenHero)return;
+  function update(){
+    var r=linenHero.getBoundingClientRect();
+    if(r.top<=nav.offsetHeight+2){
+      nav.classList.add('nav--surface-dark');
+    } else {
+      nav.classList.remove('nav--surface-dark');
+    }
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+});
+</script>
+<!-- ═══ SUN ARC + CREAM WASH SCROLL SYSTEM ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var cream = document.getElementById('creamWash');
+  var sun   = document.getElementById('sunGlow');
+  if (!cream || !sun) return;
+
+  /* Sun arc: (x%, y%) of viewport at scroll progress p */
+  var SUN = [
+    {p:0.00, x:15, y:12},
+    {p:0.15, x:22, y:10},
+    {p:0.40, x:45, y: 2},
+    {p:0.55, x:55, y:-2},
+    {p:0.80, x:75, y:20},
+    {p:0.92, x:85, y:35}
+  ];
+
+  /* Cream background color at scroll progress p */
+  var CREAM = [
+    {p:0.00, c:[0xF4,0xF1,0xE8]},
+    {p:0.20, c:[0xF4,0xEF,0xE3]},
+    {p:0.45, c:[0xF2,0xF0,0xEA]},
+    {p:0.65, c:[0xF0,0xEC,0xDD]},
+    {p:0.85, c:[0xED,0xE5,0xCC]},
+    {p:0.92, c:[0xE8,0xDE,0xC0]}
+  ];
+
+  function lerp(a,b,t){ return a+(b-a)*t; }
+  function clamp(x,a,b){ return Math.max(a,Math.min(b,x)); }
+
+  function interpSun(p) {
+    for (var i = 0; i < SUN.length-1; i++) {
+      var a = SUN[i], b = SUN[i+1];
+      if (p >= a.p && p <= b.p) {
+        var t = (p-a.p)/(b.p-a.p);
+        return [lerp(a.x,b.x,t), lerp(a.y,b.y,t)];
+      }
+    }
+    return [SUN[SUN.length-1].x, SUN[SUN.length-1].y];
+  }
+
+  function interpCream(p) {
+    p = clamp(p, 0, 0.92);
+    for (var i = 0; i < CREAM.length-1; i++) {
+      var a = CREAM[i], b = CREAM[i+1];
+      if (p >= a.p && p <= b.p) {
+        var t = (p-a.p)/(b.p-a.p);
+        return [Math.round(lerp(a.c[0],b.c[0],t)), Math.round(lerp(a.c[1],b.c[1],t)), Math.round(lerp(a.c[2],b.c[2],t))];
+      }
+    }
+    return CREAM[CREAM.length-1].c;
+  }
+
+  function onScroll() {
+    var doc   = document.documentElement;
+    var total = doc.scrollHeight - window.innerHeight;
+    var p     = total > 0 ? clamp(window.scrollY / total, 0, 1) : 0;
+
+    var rgb = interpCream(p);
+    cream.style.backgroundColor = 'rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')';
+
+    var pos = interpSun(Math.min(p, 0.92));
+    sun.style.setProperty('--sx', pos[0].toFixed(2)+'%');
+    sun.style.setProperty('--sy', pos[1].toFixed(2)+'%');
+
+    /* Fade sun out past windowsill (scroll > 0.92) */
+    var fade = p < 0.92 ? 1 : Math.max(0, 1-(p-0.92)/0.04);
+    sun.style.setProperty('--sun-o', fade.toFixed(3));
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+});
+</script>
 <!-- ═══ NEW HERO SECTION ═══ -->
 <section class="nh-section" id="new-hero" aria-labelledby="nh-headline">
   <div class="nh-inner">
@@ -1202,53 +1569,101 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
         <div style="width:32px;height:1.5px;background:#E8AF38;margin-bottom:10px;"></div>
         <p class="nh-eyebrow">One price. Every child.</p>
         <h1 class="visually-hidden">Personalized homeschool learning plans for families with children ages 2 to 12</h1>
-        <h2 class="nh-h1" id="nh-headline" style="color:#0C1020"><span style="font-weight:200;opacity:0.72;display:block">Personalized weekly</span><span style="font-weight:800;color:#0C1020;display:block">homeschool plans.</span><span style="font-weight:800;color:#E8AF38;display:block;font-size:0.65em">And tracking.</span></h2>
-        <p class="nh-proof-detail" style="margin-top:16px;margin-bottom:14px;padding-left:20px">...so you always know where you stand.</p>
+        <h2 class="nh-h1" id="nh-headline" style="color:#0C1020"><span style="font-weight:200;opacity:0.72;display:block">Personalized weekly</span><span style="font-weight:800;color:#E8AF38;display:block">homeschool plans.</span><span style="font-weight:800;color:#0C1020;display:block;font-size:0.65em">And tracking.</span><span style="font-weight:800;color:#0C1020;display:block;font-size:0.65em">So you always know where you stand.</span></h2>
         <p class="nh-proof-claim">Covers every domain of every US educational standard. Automatically.</p>
       </div>
-      <!-- Right column: intake form -->
+      <!-- Right column: v3 intake form -->
       <div class="nh-right">
-        <div class="hero-firefly" style="position:absolute;width:3px;height:3px;border-radius:50%;background:#E8AF38;box-shadow:0 0 6px 2px rgba(232,175,56,0.20);bottom:20%;left:24px;pointer-events:none;"></div>
-        <div class="nh-form-wrap">
-          <span class="nh-invitation">Tell us about your family.</span>
-          <form id="nh-form" class="nh-form" novalidate>
-            <div class="nh-field">
-              <input type="text" id="nh-name" name="childName" class="nh-input" placeholder="Your child's name" maxlength="50" autocomplete="off">
+        <!-- Paper note from the desk -->
+        <article class="desk">
+          <header class="desk-head">
+            <div class="desk-seal">W</div>
+            <div class="desk-meta">
+              <div class="desk-from">From · <em>The Wizkoo desk</em></div>
+              <div class="desk-subject">A note, before you begin.</div>
             </div>
-            <div class="nh-field">
-              <div class="nh-select-wrap">
-                <select id="nh-age" name="childAge" class="nh-input nh-select">
-                  <option value="" disabled selected>Their age</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                </select>
+          </header>
+          <div class="desk-body">
+            3 fields. No account. You can see what a week looks like before you commit to a thing.
+          </div>
+          <div class="desk-sign">
+            <span>— The Wizkoo desk</span>
+            <em>Thursday, early</em>
+          </div>
+        </article>
+        <!-- Form card: sits below the angled desk note -->
+        <div class="form-card">
+        <!-- Reply card -->
+        <div class="reply" id="nh-reply">
+          <form id="nh-form" novalidate>
+            <h2 class="sent">
+              <span class="line">For
+                <span class="word" id="w-name">
+                  <span class="tick">the child</span>
+                  <input id="nh-name" name="childName" type="text" placeholder="their name" autocomplete="off" maxlength="30" style="--w:9ch"/>
+                </span><span class="punct">,</span> age
+                <span class="age-word" id="w-age">
+                  <span class="tick">years</span>
+                  <span class="age-scroll" id="f-age-display">—</span>
+                  <span class="age-steppers">
+                    <button type="button" id="age-up" aria-label="older">▲</button>
+                    <button type="button" id="age-dn" aria-label="younger">▼</button>
+                  </span>
+                </span><span class="punct period">.</span>
+              </span>
+              <span class="line">Build a week around
+                <span class="word" id="w-theme">
+                  <span class="tick">what they love</span>
+                  <span class="theme-ph" aria-hidden="true"></span>
+                  <span id="theme-sizer" aria-hidden="true" style="position:absolute;visibility:hidden;white-space:pre;pointer-events:none;user-select:none;top:0;left:0;padding:0 4px 0 2px"></span>
+                  <input id="nh-theme" name="theme" type="text" placeholder="dinosaurs" autocomplete="off" maxlength="60" style="--w:15ch"/>
+                </span><span class="punct period">.</span>
+              </span>
+            </h2>
+            <div class="theme-error" id="theme-error" aria-live="polite">Let's try a different theme. <a id="theme-suggest" href="#" tabindex="-1">See suggestions</a></div>
+            <div class="theme-network-error" id="theme-network-error" aria-live="polite">Something went wrong. Try again.</div>
+            <p class="sibling-note">More kids? <em>Add them after.</em></p>
+            <div class="cta-row">
+              <button type="submit" class="lbracket" id="nh-submit" disabled>
+                Show me this week<span class="arrow"> →</span>
+              </button>
+              <div class="cta-note">
+                <strong>Free sample</strong><br>No account, no card
               </div>
-            </div>
-            <div class="nh-field">
-              <input type="text" id="nh-theme" name="theme" class="nh-input" placeholder="What are they curious about?" maxlength="200" autocomplete="off">
-              <div class="nh-suggestion-chips">
-                <button type="button" class="nh-suggestion-btn" data-theme="Dinosaurs">Dinosaurs</button>
-                <button type="button" class="nh-suggestion-btn" data-theme="Space">Space</button>
-                <button type="button" class="nh-suggestion-btn" data-theme="Oceans">Oceans</button>
-                <button type="button" class="nh-suggestion-btn" data-theme="Ancient Egypt">Ancient Egypt</button>
-              </div>
-            </div>
-            <div class="nh-submit-group">
-              <button type="submit" class="nh-submit">Build My Family's Week →</button>
-              <p class="nh-microcopy">Have more kids? Add them on the next screen.<br>About three minutes later, your week is built.</p>
             </div>
           </form>
         </div>
+        <!-- Post-submit gate -->
+        <div class="gate" id="nh-gate" hidden>
+          <div id="gate-progress">
+            <div class="gate-stage">Stage 02 · <em>drafting the week</em></div>
+            <ul class="gate-steps" id="gate-steps">
+              <li data-s="1">Mapping standards for age <span class="gate-age">—</span></li>
+              <li data-s="2">Threading <span class="gate-theme">the theme</span> through 7 domains</li>
+              <li data-s="3">Picking books and games from the library</li>
+              <li data-s="4">Balancing across 5 mornings</li>
+            </ul>
+          </div>
+          <div class="gate-ready" id="gate-ready" hidden>
+            <div class="gate-stage">Stage 02 · <em>ready</em></div>
+            <h3 class="gate-head"><span id="gate-name">Their</span>'s week is drafted.</h3>
+            <p class="gate-sub">14 activities across 7 domains, woven around <span id="gate-theme2">the theme</span>. Where should we send it?</p>
+            <form id="email-form" novalidate>
+              <div class="email-row" id="email-row">
+                <input id="f-email" class="email-input" type="email" placeholder="your email" autocomplete="email" inputmode="email" aria-label="Your email" required/>
+              </div>
+              <div class="cta-row">
+                <button type="submit" class="lbracket" id="send-btn" disabled>
+                  Open the week<span class="arrow"> →</span>
+                </button>
+                <div class="cta-note">
+                  <strong>Unsubscribe</strong> any time<br>No sharing, ever
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        </div><!-- /form-card -->
       </div>
     </div>
   </div>
@@ -2273,66 +2688,424 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   });
 })();
 
-/* ─── Age dropdown: bold number on selection ─── */
+/* ─── v3 Right Form ─── */
 (function(){
-  var sel = document.getElementById('nh-age');
-  if(!sel) return;
-  sel.addEventListener('change', function(){
-    if(this.value) this.classList.add('age-selected');
-    else this.classList.remove('age-selected');
-  });
-})();
+  var ageVal = null;
+  var themes = ['dinosaurs','ocean life','volcanoes','outer space','robots','castles','insects','ancient Egypt','weather','the rainforest'];
+  var ti = 0;
 
-/* ─── Theme suggestion chips ─── */
-(function(){
-  var themeInput = document.getElementById('nh-theme');
-  var btns = document.querySelectorAll('.nh-suggestion-btn');
-  btns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var isActive = btn.classList.contains('active');
-      btns.forEach(function(b){ b.classList.remove('active'); });
-      if(!isActive){
-        btn.classList.add('active');
-        themeInput.value = btn.getAttribute('data-theme');
-      } else {
-        themeInput.value = '';
-      }
+  var ageDisplay = document.getElementById('f-age-display');
+  var ageUp      = document.getElementById('age-up');
+  var ageDn      = document.getElementById('age-dn');
+  var wAge       = document.getElementById('w-age');
+
+  function updateAge(){
+    if(ageDisplay) ageDisplay.textContent = ageVal !== null ? ageVal : '—';
+    if(wAge){ wAge.classList.toggle('filled', ageVal !== null); wAge.classList.add('active'); }
+    checkReady();
+  }
+
+  if(ageUp){ ageUp.addEventListener('click', function(){ ageVal = ageVal === null ? 5 : Math.min(12, ageVal + 1); updateAge(); }); }
+  if(ageDn){ ageDn.addEventListener('click', function(){ ageVal = ageVal === null ? 5 : Math.max(1, ageVal - 1); updateAge(); }); }
+
+  ['nh-name','nh-theme'].forEach(function(id){
+    var inp = document.getElementById(id);
+    if(!inp) return;
+    var word = inp.closest ? inp.closest('.word') : null;
+    inp.addEventListener('input', function(){
+      if(word) word.classList.toggle('filled', inp.value.trim() !== '');
+      checkReady();
     });
   });
-})();
 
-/* ─── New hero section form submit ─── */
-(function(){
+  var themeInp = document.getElementById('nh-theme');
+  if(themeInp){
+    setInterval(function(){
+      if(document.activeElement !== themeInp && themeInp.value === ''){
+        ti = (ti + 1) % themes.length;
+        themeInp.placeholder = themes[ti];
+      }
+    }, 2800);
+  }
+
+  function checkReady(){
+    var nameEl  = document.getElementById('nh-name');
+    var themeEl = document.getElementById('nh-theme');
+    var btn     = document.getElementById('nh-submit');
+    if(!btn) return;
+    btn.disabled = !(nameEl && nameEl.value.trim() && ageVal !== null && themeEl && themeEl.value.trim());
+  }
+
   var form = document.getElementById('nh-form');
   if(!form) return;
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    var nameEl  = document.getElementById('nh-name');
-    var ageEl   = document.getElementById('nh-age');
-    var themeEl = document.getElementById('nh-theme');
-    var name  = nameEl.value.trim();
-    var age   = ageEl.value;
-    var theme = themeEl.value.trim();
-    var fields = [
-      {el: nameEl,  empty: name  === ''},
-      {el: ageEl,   empty: age   === ''},
-      {el: themeEl, empty: theme === ''}
-    ];
-    var valid = true;
-    fields.forEach(function(f){
-      if(f.empty){
-        valid = false;
-        f.el.style.transition = 'border-bottom-color 300ms';
-        f.el.style.borderBottomColor = '#E8AF38';
-        setTimeout(function(){ f.el.style.borderBottomColor = ''; }, 300);
+    var name  = (document.getElementById('nh-name')  || {value:''}).value.trim();
+    var theme = (document.getElementById('nh-theme') || {value:''}).value.trim();
+    var age   = ageVal;
+    if(!name || age === null || !theme) return;
+
+    var reply = document.getElementById('nh-reply');
+    var gate  = document.getElementById('nh-gate');
+    if(reply) reply.classList.add('sent-state');
+    if(gate)  gate.hidden = false;
+
+    document.querySelectorAll('.gate-age').forEach(function(s){ s.textContent = age; });
+    document.querySelectorAll('.gate-theme').forEach(function(s){ s.textContent = theme; });
+
+    var steps = document.querySelectorAll('#gate-steps li');
+    var i = 0;
+    function nextStep(){
+      if(i < steps.length){
+        if(i > 0){ steps[i-1].classList.remove('active'); steps[i-1].classList.add('done'); }
+        steps[i].classList.add('active');
+        i++;
+        setTimeout(nextStep, 900);
+      } else {
+        if(steps[i-1]){ steps[i-1].classList.remove('active'); steps[i-1].classList.add('done'); }
+        var progress = document.getElementById('gate-progress');
+        var ready    = document.getElementById('gate-ready');
+        var gn       = document.getElementById('gate-name');
+        var gt       = document.getElementById('gate-theme2');
+        if(gn) gn.textContent = name;
+        if(gt) gt.textContent = theme;
+        if(progress) progress.hidden = true;
+        if(ready)    ready.hidden = false;
+
+        var emailInput = document.getElementById('f-email');
+        var emailRow   = document.getElementById('email-row');
+        var sendBtn    = document.getElementById('send-btn');
+        if(emailInput){
+          emailInput.addEventListener('input', function(){
+            var filled = emailInput.value.trim() !== '';
+            if(emailRow) emailRow.classList.toggle('filled', filled);
+            if(sendBtn)  sendBtn.disabled = !filled;
+          });
+        }
+        var emailForm = document.getElementById('email-form');
+        if(emailForm){
+          emailForm.addEventListener('submit', function(ev){
+            ev.preventDefault();
+            var email = emailInput ? emailInput.value.trim() : '';
+            if(!email) return;
+            window.location.href = '/plan/onboarding'
+              + '?childName=' + encodeURIComponent(name)
+              + '&childAge='  + age
+              + '&theme='     + encodeURIComponent(theme)
+              + '&email='     + encodeURIComponent(email);
+          });
+        }
       }
-    });
-    if(!valid) return;
-    window.location.href = '/plan/onboarding'
-      + '?childName=' + encodeURIComponent(name)
-      + '&childAge=' + age
-      + '&theme='    + encodeURIComponent(theme);
+    }
+    setTimeout(nextStep, 200);
   });
+})();
+</script>
+
+<script>
+/* ─── Theme field: rotating placeholder + auto-expand ─── */
+(function(){
+  var tier1=['Dinosaurs','LEGO','Horses','Space','Dragons','Minecraft','Superheroes','Unicorns','Pokemon','Cooking'];
+  var tier2=['Trucks','Trains','Sharks','Mermaids','Ocean','Volcanoes','Fairies','Butterflies','Knights','Pirates','Robots','Baking','Music','Drawing','Dance','Soccer','Sports','Coding','Writing','Mythology','Planets','Weather','Rainbows','Nature','Bugs','Farm','Dogs','Dolphins','Magic','Photography'];
+
+  function shuffle(a){
+    a=a.slice();
+    for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+    return a;
+  }
+
+  var words=shuffle(tier1).concat(shuffle(tier2));
+  var idx=0;
+  var timer=null;
+  var isFocused=false;
+
+  var input=document.getElementById('nh-theme');
+  var ph=document.querySelector('.theme-ph');
+  var sizer=document.getElementById('theme-sizer');
+  if(!input||!ph||!sizer)return;
+
+  function syncSizer(){
+    var cs=getComputedStyle(input);
+    sizer.style.fontFamily=cs.fontFamily;
+    sizer.style.fontSize=cs.fontSize;
+    sizer.style.fontStyle=cs.fontStyle;
+    sizer.style.fontWeight=cs.fontWeight;
+    sizer.style.letterSpacing=cs.letterSpacing;
+  }
+
+  function measurePx(text){
+    syncSizer();
+    sizer.textContent=text;
+    return sizer.getBoundingClientRect().width;
+  }
+
+  /* 1ch = width of '0' in this font */
+  function pxToCh(px){
+    var oneCh=measurePx('0');
+    return oneCh>0?px/oneCh:15;
+  }
+
+  function showOverlay(){
+    ph.style.opacity='1';
+    input.classList.add('ph-overlay');
+  }
+
+  function hideOverlay(){
+    ph.style.opacity='0';
+    input.classList.remove('ph-overlay');
+  }
+
+  function setWord(word, fade){
+    if(fade){
+      ph.style.opacity='0';
+      setTimeout(function(){
+        ph.textContent=word;
+        input.placeholder=word;
+        if(!isFocused&&!input.value) ph.style.opacity='1';
+      },300);
+    } else {
+      ph.textContent=word;
+      input.placeholder=word;
+    }
+  }
+
+  function startRotation(){
+    stopRotation();
+    timer=setInterval(function(){
+      if(isFocused||input.value)return;
+      idx=(idx+1)%words.length;
+      setWord(words[idx],true);
+    },2800);
+  }
+
+  function stopRotation(){
+    if(timer){clearInterval(timer);timer=null;}
+  }
+
+  /* Init */
+  setWord(words[idx],false);
+  showOverlay();
+  startRotation();
+
+  input.addEventListener('focus',function(){
+    isFocused=true;
+    hideOverlay();
+  });
+
+  input.addEventListener('blur',function(){
+    isFocused=false;
+    if(!input.value){
+      input.style.width='';
+      showOverlay();
+    }
+  });
+
+  input.addEventListener('input',function(){
+    if(input.value){
+      hideOverlay();
+      var w=pxToCh(measurePx(input.value)+8); /* +8px breathing room */
+      var clamped=Math.min(Math.max(w,15),30);
+      /* Set via custom property so CSS var(--w) picks it up */
+      input.style.setProperty('--w',clamped+'ch');
+    } else {
+      input.style.removeProperty('--w');
+    }
+  });
+
+  /* ── Two-word cap ── */
+  function hasSecondWordStarted(val){
+    /* Returns true if val contains a space followed by ≥1 non-space char.
+       Hyphens/apostrophes are NOT word separators — only ASCII space is. */
+    var i=val.indexOf(' ');
+    if(i===-1)return false;
+    return /\S/.test(val.slice(i+1));
+  }
+
+  input.addEventListener('keydown',function(e){
+    if(e.key!==' ')return;
+    var val=input.value;
+    /* Block: leading space or double space */
+    if(val===''||val[val.length-1]===' '){e.preventDefault();return;}
+    /* Block: third word (second space when second word already has chars) */
+    if(hasSecondWordStarted(val)){e.preventDefault();}
+  });
+
+  input.addEventListener('paste',function(e){
+    e.preventDefault();
+    var raw=(e.clipboardData||window.clipboardData).getData('text');
+    /* Trim, collapse runs of spaces, take first two tokens */
+    var tokens=raw.trim().replace(/\s+/g,' ').split(' ');
+    var sanitized=tokens.slice(0,2).join(' ');
+    /* Insert at cursor via execCommand (works in all desktop browsers) */
+    document.execCommand('insertText',false,sanitized);
+  });
+
+  /* ── Content moderation — Layer 1 client-side blocklist ── */
+  var BLOCKLIST=[
+    /* sexual */
+    'sexy','sexual','porn','pornographic','nude','naked',
+    'masturbat','orgasm','ejaculat','erection','boner','hardon',
+    'penis','vagina','vulva','clitoris','anus','anal','rectum',
+    'cock','dick','pussy','cunt','tit','boob','nipple',
+    'testicles','scrotum',
+    'butthole','asshole','arsehole','blowjob','handjob',
+    'rimjob','rimming','fellatio','cunnilingus',
+    'threesome','orgy','gangbang','incest','pedophil','pedo',
+    'bestiality','zoophilia','hentai','lolicon','shotacon',
+    'rape','molest','grope','fondle',
+    'stripper','escort','prostitut','whore','slut','skank','hooker',
+    'dildo','vibrator',
+    'cum','cumshot','jizz','jism','semen',
+    'fuck','fucker','fucking','fuk','phuck','fvck',
+    'shit','crap','piss',
+    'bitch','bastard','wank','wanker','twat','tosser',
+    'smut','pervert','fetish','lewd',
+    'nudes','sexting','onlyfans','camgirl','camboy',
+    'xxx','xrated','x-rated',
+    /* drugs */
+    'cocaine','heroin','meth','methamphetamine','crack',
+    'lsd','mdma','ecstasy','fentanyl','opioid',
+    'ketamine','psilocybin','shrooms',
+    'marijuana','cannabis','weed','stoner','bong','blunt','spliff',
+    'drugs','druggie','junkie',
+    /* violence / self-harm */
+    'murder','suicide','self-harm','selfharm','self harm',
+    'gore','decapitat','dismember','mutilat','massacre','genocide',
+    'terrorist','terrorism','snuff',
+    'kill yourself','hang yourself',
+    /* hate speech */
+    'nigger','nigga','faggot','kike','spic','chink',
+    'gook','wetback','tranny','retard',
+    /* hateful figures / ideologies */
+    'hitler','nazi','kkk','white power','white supremac',
+    'heil','antisemit',
+  ];
+
+  /* Terms that only block when the entire input exactly equals the term.
+     Allows legitimate phrases ("sex education", "gun safety") to pass. */
+  var BLOCKLIST_EXACT=[
+    'sex','gun','rifle','pistol','bomb','grenade','explosive',
+    'cutting','hanging','overdose',
+  ];
+
+  function normalizeLeet(s){
+    return s.toLowerCase()
+      .replace(/0/g,'o').replace(/3/g,'e').replace(/1/g,'i')
+      .replace(/4/g,'a').replace(/5/g,'s').replace(/@/g,'a')
+      .replace(/!/g,'i').replace(/\$/g,'s').replace(/7/g,'t');
+  }
+
+  function isThemeBlocked(val){
+    var n=normalizeLeet(val.trim());
+    for(var i=0;i<BLOCKLIST.length;i++){
+      var esc=BLOCKLIST[i].replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&');
+      /* \b left boundary — no right boundary to catch plurals/suffixes */
+      if(new RegExp('\\b'+esc,'i').test(n))return true;
+    }
+    return false;
+  }
+
+  function isExactBlocked(val){
+    var n=normalizeLeet(val.trim());
+    for(var i=0;i<BLOCKLIST_EXACT.length;i++){
+      if(n===BLOCKLIST_EXACT[i])return true;
+    }
+    return false;
+  }
+
+  var errEl=document.getElementById('theme-error');
+  var errNetEl=document.getElementById('theme-network-error');
+  var suggestEl=document.getElementById('theme-suggest');
+
+  function showThemeError(){if(errEl)errEl.classList.add('visible');}
+  function hideThemeError(){if(errEl)errEl.classList.remove('visible');}
+  function showNetworkError(){if(errNetEl)errNetEl.classList.add('visible');}
+  function hideNetworkError(){if(errNetEl)errNetEl.classList.remove('visible');}
+
+  /* Clear errors whenever user edits the field */
+  input.addEventListener('input',function(){hideThemeError();hideNetworkError();},true);
+
+  /* "See suggestions" — fills a random Tier 1 word */
+  if(suggestEl){
+    suggestEl.addEventListener('click',function(e){
+      e.preventDefault();
+      var pick=tier1[Math.floor(Math.random()*tier1.length)];
+      input.value=pick;
+      input.dispatchEvent(new Event('input',{bubbles:true}));
+      hideThemeError();
+    });
+  }
+
+  /* Capture-phase submit intercept — Layers 1 + 3 validation before
+     the bubble-phase gate listener runs */
+  var validationPassed=false;
+  var nhForm=document.getElementById('nh-form');
+  var submitBtn=document.getElementById('nh-submit');
+
+  if(nhForm){
+    nhForm.addEventListener('submit',function(e){
+
+      /* Second pass: validation already cleared — let bubble phase run */
+      if(validationPassed){validationPassed=false;return;}
+
+      /* Always intercept on first pass */
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      var val=(input.value||'').trim();
+
+      /* Layer 1 — client blocklist */
+      if(isThemeBlocked(val)||isExactBlocked(val)){
+        showThemeError();
+        if(typeof fetch==='function'){
+          fetch('/api/validate-theme',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({theme:val,clientBlocked:true}),
+          }).catch(function(){});
+        }
+        input.value='';
+        input.style.width='';
+        input.classList.add('ph-overlay');
+        showOverlay();
+        startRotation();
+        return;
+      }
+
+      /* Layer 3 — async server validation (200-400ms typical, 3s cap) */
+      hideThemeError();
+      hideNetworkError();
+      var origHTML=submitBtn.innerHTML;
+      submitBtn.textContent='Checking\u2026';
+      submitBtn.disabled=true;
+
+      var controller=typeof AbortController!=='undefined'?new AbortController():null;
+      var tid=setTimeout(function(){if(controller)controller.abort();},3000);
+
+      fetch('/api/validate-theme',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({theme:val,clientBlocked:false}),
+        signal:controller?controller.signal:undefined,
+      }).then(function(res){
+        clearTimeout(tid);
+        submitBtn.innerHTML=origHTML;
+        submitBtn.disabled=false;
+        if(res.ok){
+          validationPassed=true;
+          nhForm.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));
+        }else{
+          showThemeError();
+        }
+      }).catch(function(){
+        clearTimeout(tid);
+        submitBtn.innerHTML=origHTML;
+        submitBtn.disabled=false;
+        showNetworkError();
+      });
+
+    },true); /* capture phase */
+  }
 })();
 </script>
 </body>
