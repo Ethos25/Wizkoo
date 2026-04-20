@@ -1,0 +1,68 @@
+/* ═══════════════════════════════════════════════════════════
+   components.css — Shared component classes
+   Linked from: index.html, the-open-seat.html
+   Per Operating Principle 6: one source of truth per component.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── L-BRACKET CTA ──────────────────────────────────────────
+   Structural visual contract only.
+   Typography (font, size, color, letter-spacing) stays per-instance.
+   Mechanism: box-shadow offset creates saffron L on right + bottom.
+   Easing hardcoded (--expo not available in linked stylesheets;
+   see Open Item: move tokens to shared tokens.css).
+   ────────────────────────────────────────────────────────── */
+.l-bracket-cta {
+  box-shadow: 6px 6px 0 #E8AF38;
+  background: transparent;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1;
+  transition:
+    transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.l-bracket-cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #E8AF38;
+}
+
+/* Form-gated CTAs: use .cta-needs-ready to opt in to the dim→full color gate */
+.l-bracket-cta.cta-needs-ready {
+  color: rgba(12, 16, 32, 0.40);
+}
+
+/* Ready state: full color + pulse */
+.l-bracket-cta.cta-needs-ready.ready {
+  color: #0C1020;
+  animation: bracket-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation-delay: 0.4s;
+}
+
+@keyframes bracket-pulse {
+  0%, 100% {
+    box-shadow: 8px 8px 0 rgba(232, 175, 56, 1);
+  }
+  50% {
+    box-shadow: 8px 8px 0 rgba(232, 175, 56, 0.9);
+  }
+}
+
+/* When ready, hover lifts normally (suppress pulse during hover) */
+.l-bracket-cta.cta-needs-ready.ready:hover {
+  animation: none;
+  box-shadow: 10px 10px 0 #E8AF38;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l-bracket-cta.cta-needs-ready.ready {
+    animation: none;
+  }
+  .l-bracket-cta.cta-needs-ready {
+    transition: color 0.4s ease;
+  }
+}

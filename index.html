@@ -637,6 +637,13 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .week-orb{opacity:1!important}
   .firefly{display:none!important}
   .cursor{display:none!important}
+  /* Form: skip drawn-stroke animation, show underline immediately */
+  .word::before,.age-word::before{transition:none!important}
+  /* Brushcheck: no draw animation */
+  .brushcheck path animate{display:none}
+  /* Wiggly toggle: no slide animation */
+  .wiggly-track,.wiggly-thumb{transition:none}
+  /* l-bracket pulse handled in components.css prefers-reduced-motion block */
 }
 
 /* ═══ SAME ROOM PROGRESS BAR ═══ */
@@ -1028,9 +1035,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 .nh-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.44);margin-bottom:20px;display:block}
 .nh-h1{font-family:'Fraunces',serif;color:#0C1020;margin:0}
-.nh-h1-line1{display:block;font-weight:400;font-size:88px;line-height:1.0;letter-spacing:-0.02em;color:#0C1020}
-.nh-h1-line2{display:block;font-weight:700;font-size:144px;line-height:0.98;letter-spacing:-0.025em;color:#E8AF38}
-.nh-h1-line3{display:block;font-weight:700;font-size:80px;line-height:1.0;letter-spacing:-0.02em;color:#0C1020}
+.nh-h1-line1{display:block;font-weight:300;font-size:150px;line-height:1.0;letter-spacing:-0.02em;color:rgba(12,16,32,0.50)}
+.nh-h1-line2{display:block;font-weight:700;font-size:192px;line-height:0.98;letter-spacing:-0.025em;color:#E8AF38}
+.nh-h1-line3{display:block;font-weight:700;font-size:120px;line-height:1.0;letter-spacing:-0.02em;color:#0C1020}
 .nh-subline{font-family:'Fraunces',serif;font-weight:500;font-style:italic;font-size:22px;letter-spacing:0;line-height:1.4;color:#5A544A;margin:28px 0 0 0}
 .nh-divider{width:200px;height:0;border:none;border-top:0.5px solid rgba(12,16,32,0.20);margin:56px 0 36px 0}
 .nh-footer-kicker{font-family:'Space Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;line-height:1.8;color:#0C1020}
@@ -1058,9 +1065,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @media(prefers-reduced-motion:reduce){
   .hero-firefly{display:none}
 }
-@media(max-width:1439px){.nh-h1-line1{font-size:68px}.nh-h1-line2{font-size:112px}.nh-h1-line3{font-size:62px}}
-@media(max-width:1023px){.nh-h1-line1{font-size:52px}.nh-h1-line2{font-size:84px}.nh-h1-line3{font-size:48px}}
-@media(max-width:767px){.nh-h1-line1{font-size:38px}.nh-h1-line2{font-size:62px}.nh-h1-line3{font-size:36px}}
+@media(max-width:1439px){.nh-h1-line1{font-size:102px}.nh-h1-line2{font-size:150px}.nh-h1-line3{font-size:93px}}
+@media(max-width:1023px){.nh-h1-line1{font-size:78px}.nh-h1-line2{font-size:112px}.nh-h1-line3{font-size:72px}}
+@media(max-width:767px){.nh-h1-line1{font-size:57px}.nh-h1-line2{font-size:83px}.nh-h1-line3{font-size:54px}}
 @media(max-width:768px){
   .nh-section{padding:60px 24px;min-height:auto;align-items:flex-start}
   .nh-left{padding-top:60px}
@@ -1076,54 +1083,85 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* ══ v3 Right Form — desk note ══ */
-.desk{position:relative;background:#FFFDF5;padding:16px 24px 14px;box-shadow:0 1px 0 rgba(12,16,32,0.04),0 16px 40px -28px rgba(12,16,32,0.3);z-index:2;transform:rotate(-5deg);transform-origin:top left;width:50%;margin-bottom:96px}
-.desk::after{content:'';position:absolute;top:-10px;left:calc(50% - 28px);width:56px;height:16px;background:rgba(232,175,56,0.3);border-top:1px dashed rgba(232,175,56,0.55);border-bottom:1px dashed rgba(232,175,56,0.55);transform:rotate(-4deg);opacity:0.8}
-.desk-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.desk-seal{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:#E8AF38;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-style:italic;font-size:14px;color:#0C1020;box-shadow:0 2px 0 rgba(12,16,32,0.12),inset 0 1px 2px rgba(255,255,255,0.3);transform:rotate(-6deg);letter-spacing:-0.02em}
-.desk-meta{flex:1}
-.desk-from{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(12,16,32,0.42);margin-bottom:1px}
-.desk-from em{font-style:normal;color:#E8AF38}
-.desk-subject{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:13px;color:#0C1020;letter-spacing:-0.005em;line-height:1.2}
-.desk-body{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:14.5px;line-height:1.5;color:#2A2833}
-.desk-body strong{font-style:normal;font-weight:500;color:#0C1020}
-/* ── Form card wrapper (sits below angled desk note) ── */
+.desk{position:relative;background:#FFFDF5;padding:24px 28px 20px;box-shadow:0 1px 0 rgba(12,16,32,0.04),0 16px 40px -28px rgba(12,16,32,0.3);z-index:2;transform:rotate(-4deg);transform-origin:top left;width:78%;margin-bottom:80px;margin-left:-72px}
+/* One tape piece — centered at ~48% of note width, extending 8px above top edge */
+.desk::after{content:'';position:absolute;top:-8px;left:calc(48% - 28px);width:56px;height:18px;background:rgba(232,175,56,0.32);border-top:1.5px solid rgba(232,175,56,0.48);clip-path:polygon(1px 0%,55px 2px,56px 17px,0px 15px);transform:rotate(-3deg);pointer-events:none}
+/* Header row: W seal + heading */
+.desk-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.desk-seal{flex:0 0 auto;display:block}
+.desk-from{font-family:'Space Mono',monospace;font-weight:500;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(90,84,74,0.65)}
+.desk-h{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:22px;line-height:1.2;color:#0C1020;letter-spacing:0;margin:0}
+.desk-body{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:16px;line-height:1.55;color:rgba(42,38,35,0.92);letter-spacing:0}
+/* Magazine-dateline signature */
+.desk-dateline{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:8px;border-top:1px solid rgba(12,16,32,0.08)}
+.desk-dateline-left,.desk-dateline-right{font-family:'Space Mono',monospace;font-weight:500;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(90,84,74,0.65)}
 /* ── Reply card ── */
 .reply{position:relative;width:100%}
-.sent{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(1.35rem,2vw,1.7rem);line-height:1.3;letter-spacing:-0.02em;color:#0C1020;margin-top:0}
-.sent .line{display:block;margin-bottom:2px}
+/* Form prose lines: Fraunces italic, inline editable */
+.form-prose{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:22px;line-height:1.8;letter-spacing:0;color:#0C1020;display:block;margin-bottom:28px}
+.fpl-comma,.fpl-period{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:#E8AF38}
 .word{position:relative;display:inline-block;vertical-align:baseline}
-.word .tick,.age-word .tick{position:absolute;left:0;top:-16px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.45);white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .3s var(--ease-out-expo),transform .3s var(--ease-out-expo)}
+.word .tick,.age-word .tick{position:absolute;left:0;top:-16px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(12,16,32,0.45);white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .3s cubic-bezier(0.16,1,0.3,1),transform .3s cubic-bezier(0.16,1,0.3,1)}
 .word:has(input:focus) .tick,.word.filled .tick,.age-word.active .tick,.age-word.filled .tick,.age-word:hover .tick{opacity:1;transform:translateY(0)}
 .word.filled .tick,.age-word.filled .tick{color:#E8AF38}
-.word input{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:inherit;color:rgba(12,16,32,0.3);letter-spacing:-0.01em;background:transparent;border:0;outline:0;padding:0 4px 0 2px;margin:0;width:var(--w,10ch);line-height:inherit;border-bottom:2px solid rgba(12,16,32,0.18);transition:border-bottom-color .25s var(--ease-out-expo),background .25s var(--ease-out-expo),color .25s,width .2s ease}
-.word input::placeholder{color:rgba(12,16,32,0.26);font-style:italic}
+/* Rest-state underline on input */
+.word input{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:inherit;color:rgba(90,84,74,0.40);letter-spacing:0;background:transparent;border:0;outline:0;padding:0 4px 2px 2px;margin:0;width:var(--w,10ch);line-height:inherit;border-bottom:1.5px solid rgba(90,84,74,0.30);transition:background .2s ease,color .2s ease,width .2s ease}
+.word input::placeholder{color:rgba(90,84,74,0.40);font-style:italic}
+#nh-theme{min-width:200px;max-width:360px}
+#nh-name{min-width:180px;max-width:280px}
+/* Saffron drawn-stroke overlay — scaleX(0)→(1) on focus, drawn left to right */
+.word::before{content:'';position:absolute;bottom:0;left:2px;right:0;height:2px;background:#E8AF38;transform:scaleX(0);transform-origin:left;transition:transform 200ms cubic-bezier(0.16,1,0.3,1);pointer-events:none;z-index:1}
+.word:focus-within::before{transform:scaleX(1)}
+.word.filled::before{transform:scaleX(1);transition:none}
+/* Filled input: saffron */
+.word.filled input{color:#E8AF38}
+/* Theme animated placeholder */
 #nh-theme.ph-overlay::placeholder{color:transparent}
-.theme-ph{position:absolute;left:2px;top:0;height:100%;display:inline-flex;align-items:center;font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:inherit;line-height:inherit;color:rgba(12,16,32,0.26);letter-spacing:-0.01em;pointer-events:none;user-select:none;white-space:nowrap;opacity:1;transition:opacity .3s ease}
+.theme-ph{position:absolute;left:2px;top:0;height:100%;display:inline-flex;align-items:center;font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:inherit;line-height:inherit;color:rgba(12,16,32,0.38);letter-spacing:0;pointer-events:none;user-select:none;white-space:nowrap;opacity:1;transition:opacity .3s ease}
+/* Brushstroke checkmark SVG — right of input, appears on fill */
+.brushcheck{position:absolute;right:-22px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:0;pointer-events:none;overflow:visible;transition:opacity 100ms ease}
+.word.filled .brushcheck{opacity:1}
+.age-word.filled .brushcheck{opacity:1}
+/* Error states */
 .theme-error{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.52);margin-top:10px;display:none;line-height:1.7}
 .theme-error.visible{display:block}
 .theme-error a{color:#E8AF38;text-decoration:none;border-bottom:1px solid rgba(232,175,56,0.4);padding-bottom:1px;cursor:pointer}
 .theme-error a:hover{border-bottom-color:#E8AF38}
 .theme-network-error{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.52);margin-top:10px;display:none;line-height:1.7}
 .theme-network-error.visible{display:block}
-.word.filled input{color:#E8AF38;border-bottom-color:#E8AF38}
-.word input:focus{border-bottom-color:#E8AF38;background:linear-gradient(to top,rgba(232,175,56,0.12) 0%,rgba(232,175,56,0) 40%)}
-.punct{color:#E8AF38;font-family:'Fraunces',serif;font-style:italic;font-weight:400}
-.punct.period{font-size:1.3em;line-height:0;margin-left:-0.05em}
+/* Age stepper */
 .age-word{position:relative;display:inline-block}
-.age-scroll{display:inline-block;font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:rgba(12,16,32,0.3);width:var(--w,3ch);text-align:center;cursor:pointer;padding:0 4px;border-bottom:2px solid rgba(12,16,32,0.18);transition:color .2s,border-bottom-color .2s;user-select:none}
-.age-word.filled .age-scroll{color:#E8AF38;border-bottom-color:#E8AF38}
+/* Age underline: driven by pseudo-element like word inputs */
+.age-word::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:#E8AF38;transform:scaleX(0);transform-origin:left;transition:transform 200ms cubic-bezier(0.16,1,0.3,1);pointer-events:none;z-index:1}
+.age-word.filled::before{transform:scaleX(1);transition:none}
+.age-scroll{display:inline-block;font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:rgba(90,84,74,0.40);width:80px;min-width:80px;text-align:center;cursor:pointer;padding:0 4px 2px;border-bottom:1.5px solid rgba(90,84,74,0.30);transition:color .2s;user-select:none}
+.age-word.filled .age-scroll{color:#E8AF38}
 .age-steppers{position:absolute;right:-26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;opacity:0;pointer-events:none;transition:opacity .2s}
 .age-word:hover .age-steppers,.age-word.active .age-steppers{opacity:1;pointer-events:auto}
 .age-steppers button{width:20px;height:20px;border:1px solid rgba(12,16,32,0.14);background:rgba(244,241,232,0.9);font-family:'Space Mono',monospace;font-size:9px;color:rgba(12,16,32,0.55);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .age-steppers button:hover{border-color:#E8AF38;color:#0C1020;background:#FFF}
-.cta-row{margin-top:32px}
-.lbracket{position:relative;font-family:'Sora',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:#0C1020;padding:14px 40px;line-height:1;background:transparent;border:none;box-shadow:6px 6px 0 #E8AF38;cursor:pointer;white-space:nowrap;display:inline-block;text-decoration:none;transition:transform 0.15s cubic-bezier(0.16,1,0.3,1),box-shadow 0.15s cubic-bezier(0.16,1,0.3,1)}
-.lbracket:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #E8AF38}
-.lbracket .arrow{display:inline-block;margin-left:0.5em}
-.lbracket:disabled{opacity:1;cursor:not-allowed;box-shadow:6px 6px 0 #E8AF38}
-.plan-cta{font-family:'Space Mono',monospace;font-weight:500;font-size:14px;letter-spacing:0.18em;text-transform:uppercase;color:#0C1020;background:transparent;border:none;cursor:pointer;padding:0 0 6px;line-height:1;display:inline-block;text-decoration:underline;text-decoration-color:#E8AF38;text-decoration-thickness:3px;text-underline-offset:6px;transition:text-decoration-color .2s}
-.plan-cta:hover{text-decoration-color:#0C1020}
-.plan-cta:disabled{opacity:0.4;cursor:not-allowed}
+/* ── Wiggly Kid toggle ── */
+.wiggly-field{margin-top:32px}
+.wiggly-label-wrap{display:flex;flex-direction:column;gap:3px;cursor:pointer;user-select:none}
+.wiggly-input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.wiggly-row{display:flex;align-items:center;justify-content:flex-start;gap:8px}
+/* Rectangular track — half size */
+.wiggly-track{flex:0 0 22px;width:22px;height:12px;border-radius:0;border:1.5px solid #E8AF38;background:transparent;position:relative;display:block;transition:background 240ms cubic-bezier(0.16,1,0.3,1)}
+.wiggly-label-wrap:has(.wiggly-input:checked) .wiggly-track{background:#E8AF38}
+/* Thumb — rectangular, saffron off / cream on */
+.wiggly-thumb{position:absolute;top:2px;left:2px;width:7px;height:7px;border-radius:0;background:#E8AF38;display:block;transition:transform 240ms cubic-bezier(0.16,1,0.3,1),background 240ms cubic-bezier(0.16,1,0.3,1)}
+.wiggly-label-wrap:has(.wiggly-input:checked) .wiggly-thumb{transform:translateX(10px);background:#FFFDF5}
+.wiggly-label{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:9px;color:#0C1020;line-height:1.2}
+.wiggly-desc{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:10px;color:rgba(90,84,74,0.70);line-height:1.4}
+/* ── CTA row ── */
+.cta-row{margin-top:40px}
+/* Per-instance overrides for email gate send button */
+.send-btn-type{font-family:'Sora',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:#0C1020;padding:14px 40px}
+.send-btn-type .arrow{display:inline-block;margin-left:0.5em}
+/* Per-instance overrides for hero CTA */
+.hero-cta-btn{font-family:'Sora',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:#0C1020;padding:10px 24px}
+/* ── More kids note ── */
+.more-kids-note{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:13px;color:rgba(90,84,74,0.70);letter-spacing:0;margin-top:20px;line-height:1.4}
 /* ── Gate (post-submit) ── */
 .gate{max-width:460px;margin-top:14px;z-index:1;position:relative}
 .gate-stage{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#E8AF38;font-weight:700;margin-bottom:18px}
@@ -1158,12 +1196,17 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .nh-grid{align-items:flex-start}
   .nh-left{padding-top:180px}
   .nh-right{padding:48px 24px 14px;min-height:0}
-  .nh-h1-line1{font-size:44px}.nh-h1-line2{font-size:72px}.nh-h1-line3{font-size:40px}
+  .nh-h1-line1{font-size:66px}.nh-h1-line2{font-size:96px}.nh-h1-line3{font-size:60px}
   .nh-subline{font-size:16px;margin-top:14px}
   .nh-divider{margin:28px 0 20px 0}
   .desk{padding:10px 16px 10px}
+  .desk-seal{width:44px;height:44px}
+  .desk-from{font-size:9px}.desk-header{margin-bottom:10px}
+  .desk-h{font-size:18px}
   .desk-body{font-size:13px;line-height:1.45}
-  .sent{font-size:clamp(1.05rem,1.55vw,1.35rem)}
+  .desk-dateline{margin-top:12px}.desk-dateline-left,.desk-dateline-right{font-size:9px}
+  .form-prose{font-size:18px;line-height:1.6;margin-bottom:20px}
+  #nh-theme{min-width:150px}.wiggly-field{margin-top:24px}.cta-row{margin-top:28px}
   .cta-row{margin-top:16px}
 }
 
@@ -1172,12 +1215,17 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .nh-section{padding:0 80px 14px;align-items:flex-start;min-height:100dvh}
   .nh-left{padding-top:120px}
   .nh-right{padding:48px 24px 8px}
-  .nh-h1-line1{font-size:33px}.nh-h1-line2{font-size:54px}.nh-h1-line3{font-size:30px}
+  .nh-h1-line1{font-size:50px}.nh-h1-line2{font-size:72px}.nh-h1-line3{font-size:45px}
   .nh-subline{font-size:13px;margin-top:10px}
   .nh-divider{margin:20px 0 14px 0}
   .desk{padding:7px 12px 8px;margin-bottom:48px}
-  .desk-body{font-size:12px;line-height:1.4;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-  .sent{font-size:clamp(0.95rem,1.4vw,1.2rem);line-height:1.25}
+  .desk-seal{width:38px;height:38px}
+  .desk-from{font-size:8px}.desk-header{margin-bottom:8px}
+  .desk-h{font-size:16px}
+  .desk-body{font-size:12px;line-height:1.4;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+  .desk-dateline{margin-top:10px}.desk-dateline-left,.desk-dateline-right{font-size:8px}
+  .form-prose{font-size:16px;line-height:1.5;margin-bottom:16px}
+  #nh-theme{min-width:120px}.wiggly-field{margin-top:20px}.cta-row{margin-top:24px}
   .cta-row{margin-top:12px;gap:16px}
 }
 
@@ -1187,17 +1235,18 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .nh-left{padding-top:60px}
   .nh-right{padding:24px 24px 2px}
 
-  .nh-h1-line1{font-size:25px}.nh-h1-line2{font-size:40px}.nh-h1-line3{font-size:22px}
+  .nh-h1-line1{font-size:38px}.nh-h1-line2{font-size:54px}.nh-h1-line3{font-size:33px}
   .nh-subline{font-size:11px;margin-top:6px}
   .nh-divider{margin:12px 0 8px 0}
   .nh-footer-kicker{font-size:10px}
   .desk{padding:5px 10px 5px;margin-bottom:32px}
-  .desk-seal{width:26px;height:26px;font-size:12px}
-  .desk-from{font-size:7px}
-  .desk-subject{font-size:12px}
-  .desk-body{font-size:10.5px;line-height:1.3;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-  .desk-head{gap:7px;margin-bottom:3px}
-  .sent{font-size:clamp(0.82rem,1.2vw,1rem);line-height:1.18}
+  .desk-seal{width:32px;height:32px}
+  .desk-from{font-size:7px;letter-spacing:0.12em}.desk-header{margin-bottom:6px}
+  .desk-h{font-size:14px}
+  .desk-body{font-size:10.5px;line-height:1.3;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+  .desk-dateline{margin-top:8px}.desk-dateline-left,.desk-dateline-right{font-size:7px;letter-spacing:0.10em}
+  .form-prose{font-size:14px;line-height:1.4;margin-bottom:12px}
+  #nh-theme{min-width:90px}#nh-name{min-width:80px}.wiggly-field{margin-top:16px}.cta-row{margin-top:18px}
   .cta-row{margin-top:6px;gap:10px}
 }
 
@@ -1358,6 +1407,7 @@ body.page-home{
 <meta name="twitter:description" content="Personalized, secular homeschool learning platform for ages 2-12. AI-generated weekly plans for every child from one theme, curated reading lists, and interactive geography and science games. Orbital Learning methodology.">
 <meta name="twitter:image" content="https://wizkoo.com/wizkoo-og.png">
 <link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/components.css">
 </head>
 <body class="page-home">
 <!-- ═══ SKY SYSTEM: cream wash + sun glow (fixed, behind all content) ═══ -->
@@ -1541,48 +1591,136 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Right column: form -->
       <div class="nh-right">
         <!-- Paper note from the desk -->
-        <article class="desk">
-          <header class="desk-head">
-            <div class="desk-seal">W</div>
-            <div class="desk-meta">
-              <div class="desk-from">From · <em>The Wizkoo desk</em></div>
-              <div class="desk-subject">A note, before you begin.</div>
-            </div>
-          </header>
-          <div class="desk-body">3 fields. No account. See a week before you commit.</div>
+        <article class="desk" aria-label="A note from the Wizkoo Desk">
+          <div class="desk-header">
+            <svg class="desk-seal" viewBox="0 0 80 80" width="56" height="56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <radialGradient id="ds-wg" cx="43%" cy="38%" r="57%">
+                  <stop offset="0%" stop-color="#F6CB5A"/>
+                  <stop offset="30%" stop-color="#EDBA42"/>
+                  <stop offset="60%" stop-color="#D4A028"/>
+                  <stop offset="85%" stop-color="#B8840E"/>
+                  <stop offset="100%" stop-color="#9A6B04"/>
+                </radialGradient>
+                <radialGradient id="ds-gl" cx="34%" cy="28%" r="44%">
+                  <stop offset="0%" stop-color="rgba(255,248,210,0.62)"/>
+                  <stop offset="50%" stop-color="rgba(255,240,170,0.18)"/>
+                  <stop offset="100%" stop-color="rgba(255,235,150,0)"/>
+                </radialGradient>
+                <filter id="ds-sh" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(50,25,0,0.60)"/>
+                </filter>
+                <filter id="ds-tx" x="-5%" y="-5%" width="110%" height="110%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.80 0.72" numOctaves="4" seed="5" result="n"/>
+                  <feColorMatrix type="saturate" values="0" in="n" result="gn"/>
+                  <feBlend in="SourceGraphic" in2="gn" mode="overlay" result="tx"/>
+                  <feComposite in="tx" in2="SourceGraphic" operator="in"/>
+                </filter>
+              </defs>
+              <!-- Wax body — organic irregular edge -->
+              <path id="ds-bd" d="M40,5 C44,4 48.5,5.5 52,4.8 C56,4 59.5,7.2 62.2,10 C65,13 67.5,15.5 69,19.8 C70.5,24 71.2,28.2 71.8,32.5 C72.5,37 72.8,41.5 72,45.8 C71.2,50 69.5,54 67.2,57.2 C64.8,60.5 62,63.2 58.8,65.5 C55.2,68 51.5,69.8 47.5,71 C43.5,72 39.5,72.5 35.5,71.8 C31.5,71 27.8,69.5 24.5,67.2 C20.8,64.5 17.5,61.5 15.2,57.8 C12.8,54 11,49.8 10,45.5 C9,41.2 8.8,36.8 9.5,32.5 C10.2,28.2 11.8,24 14,20.2 C16.2,16.2 18.8,12.5 22,9.5 C25.2,6.5 28.8,4 32.8,3.5 C36.5,3 38.5,5.5 40,5 Z"
+                    fill="url(#ds-wg)" filter="url(#ds-sh)"/>
+              <!-- Grain texture overlay -->
+              <path d="M40,5 C44,4 48.5,5.5 52,4.8 C56,4 59.5,7.2 62.2,10 C65,13 67.5,15.5 69,19.8 C70.5,24 71.2,28.2 71.8,32.5 C72.5,37 72.8,41.5 72,45.8 C71.2,50 69.5,54 67.2,57.2 C64.8,60.5 62,63.2 58.8,65.5 C55.2,68 51.5,69.8 47.5,71 C43.5,72 39.5,72.5 35.5,71.8 C31.5,71 27.8,69.5 24.5,67.2 C20.8,64.5 17.5,61.5 15.2,57.8 C12.8,54 11,49.8 10,45.5 C9,41.2 8.8,36.8 9.5,32.5 C10.2,28.2 11.8,24 14,20.2 C16.2,16.2 18.8,12.5 22,9.5 C25.2,6.5 28.8,4 32.8,3.5 C36.5,3 38.5,5.5 40,5 Z"
+                    fill="url(#ds-wg)" filter="url(#ds-tx)" opacity="0.22"/>
+              <!-- Stamp ring outer — shadow line -->
+              <circle cx="40.5" cy="39.5" r="27" fill="none" stroke="rgba(80,45,0,0.50)" stroke-width="1.8"/>
+              <!-- Stamp ring outer — highlight line -->
+              <circle cx="39.5" cy="38.5" r="27" fill="none" stroke="rgba(255,220,110,0.32)" stroke-width="1"/>
+              <!-- Stamp ring inner — shadow -->
+              <circle cx="40.5" cy="39.5" r="23.5" fill="none" stroke="rgba(80,45,0,0.25)" stroke-width="1.2"/>
+              <!-- Stamp ring inner — highlight -->
+              <circle cx="39.5" cy="38.5" r="23.5" fill="none" stroke="rgba(255,220,110,0.20)" stroke-width="0.7"/>
+              <!-- W monogram — shadow layer -->
+              <text x="41.2" y="47" text-anchor="middle"
+                    font-family="'Fraunces',serif" font-style="italic" font-weight="700" font-size="21"
+                    fill="rgba(75,40,0,0.72)" letter-spacing="-0.5">W</text>
+              <!-- W monogram — recessed base -->
+              <text x="40" y="45.8" text-anchor="middle"
+                    font-family="'Fraunces',serif" font-style="italic" font-weight="700" font-size="21"
+                    fill="rgba(155,98,4,0.45)" letter-spacing="-0.5">W</text>
+              <!-- W monogram — light catching raised edge -->
+              <text x="39" y="44.8" text-anchor="middle"
+                    font-family="'Fraunces',serif" font-style="italic" font-weight="700" font-size="21"
+                    fill="rgba(255,228,115,0.60)" letter-spacing="-0.5">W</text>
+              <!-- Gloss highlight — top-left luster -->
+              <ellipse cx="31" cy="26" rx="14" ry="9" fill="url(#ds-gl)" transform="rotate(-30 31 26)"/>
+              <!-- Rim light -->
+              <path d="M40,5 C44,4 48.5,5.5 52,4.8 C56,4 59.5,7.2 62.2,10 C65,13 67.5,15.5 69,19.8 C70.5,24 71.2,28.2 71.8,32.5 C72.5,37 72.8,41.5 72,45.8 C71.2,50 69.5,54 67.2,57.2 C64.8,60.5 62,63.2 58.8,65.5 C55.2,68 51.5,69.8 47.5,71 C43.5,72 39.5,72.5 35.5,71.8 C31.5,71 27.8,69.5 24.5,67.2 C20.8,64.5 17.5,61.5 15.2,57.8 C12.8,54 11,49.8 10,45.5 C9,41.2 8.8,36.8 9.5,32.5 C10.2,28.2 11.8,24 14,20.2 C16.2,16.2 18.8,12.5 22,9.5 C25.2,6.5 28.8,4 32.8,3.5 C36.5,3 38.5,5.5 40,5 Z"
+                    fill="none" stroke="rgba(255,215,90,0.15)" stroke-width="1.5"/>
+            </svg>
+            <span class="desk-h">What We Ask First.</span>
+          </div>
+          <p class="desk-body">What your child can't stop talking about. Dragons. Tornadoes. Volcanoes. The week builds from there, and every standard still gets met. See the week as it would be built.</p>
+          <div class="desk-dateline">
+            <span class="desk-dateline-left">— THE WIZKOO DESK</span>
+            <span class="desk-dateline-right" id="desk-sig"></span>
+          </div>
         </article>
         <!-- Form -->
         <div class="reply" id="nh-reply">
           <form id="nh-form" novalidate>
-            <h2 class="sent">
-              <span class="line">For
-                <span class="word" id="w-name">
-                  <span class="tick">the child</span>
-                  <input id="nh-name" name="childName" type="text" placeholder="their name" autocomplete="off" maxlength="30" style="--w:9ch"/>
-                </span><span class="punct">,</span> age
-                <span class="age-word" id="w-age">
-                  <span class="tick">years</span>
-                  <span class="age-scroll" id="f-age-display">—</span>
-                  <span class="age-steppers">
-                    <button type="button" id="age-up" aria-label="older">▲</button>
-                    <button type="button" id="age-dn" aria-label="younger">▼</button>
-                  </span>
-                </span><span class="punct period">.</span>
-              </span>
-              <span class="line">Build a week around
-                <span class="word" id="w-theme">
-                  <span class="tick">what they love</span>
-                  <span class="theme-ph" aria-hidden="true"></span>
-                  <span id="theme-sizer" aria-hidden="true" style="position:absolute;visibility:hidden;white-space:pre;pointer-events:none;user-select:none;top:0;left:0;padding:0 4px 0 2px"></span>
-                  <input id="nh-theme" name="theme" type="text" placeholder="dinosaurs" autocomplete="off" maxlength="60" style="--w:15ch"/>
-                </span><span class="punct period">.</span>
-              </span>
-            </h2>
+
+            <!-- Field 1: Theme — "Build the week from [theme]." -->
+            <p class="form-prose">Build the week from
+              <span class="word" id="w-theme">
+                <span class="tick">what they love</span>
+                <span class="theme-ph" aria-hidden="true"></span>
+                <span id="theme-sizer" aria-hidden="true" style="position:absolute;visibility:hidden;white-space:pre;pointer-events:none;user-select:none;top:0;left:0;padding:0 4px 0 2px"></span>
+                <input id="nh-theme" name="theme" type="text" placeholder="dragons" autocomplete="off" maxlength="60" style="--w:9ch"/>
+                <svg class="brushcheck" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16">
+                  <path d="M2 8 Q5 11 6.5 12 Q8 11 14 3" stroke="#E8AF38" stroke-width="2.2" stroke-linecap="round" fill="none" stroke-dasharray="18" stroke-dashoffset="18">
+                    <animate attributeName="stroke-dashoffset" from="18" to="0" dur="280ms" fill="freeze" begin="indefinite"/>
+                  </path>
+                </svg>
+              </span><span class="fpl-period">.</span>
+            </p>
+
+            <!-- Field 2: Name + Age — "For [their name], age [___]." -->
+            <p class="form-prose">For
+              <span class="word" id="w-name">
+                <span class="tick">the child</span>
+                <input id="nh-name" name="childName" type="text" placeholder="their name" autocomplete="off" maxlength="30" style="--w:9ch"/>
+                <svg class="brushcheck" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16">
+                  <path d="M2 8 Q5 11 6.5 12 Q8 11 14 3" stroke="#E8AF38" stroke-width="2.2" stroke-linecap="round" fill="none" stroke-dasharray="18" stroke-dashoffset="18">
+                    <animate attributeName="stroke-dashoffset" from="18" to="0" dur="280ms" fill="freeze" begin="indefinite"/>
+                  </path>
+                </svg>
+              </span><span class="fpl-comma">,</span> age
+              <span class="age-word" id="w-age">
+                <span class="tick">years</span>
+                <span class="age-scroll" id="f-age-display">—</span>
+                <span class="age-steppers">
+                  <button type="button" id="age-up" aria-label="older">▲</button>
+                  <button type="button" id="age-dn" aria-label="younger">▼</button>
+                </span>
+                <svg class="brushcheck" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16">
+                  <path d="M2 8 Q5 11 6.5 12 Q8 11 14 3" stroke="#E8AF38" stroke-width="2.2" stroke-linecap="round" fill="none" stroke-dasharray="18" stroke-dashoffset="18">
+                    <animate attributeName="stroke-dashoffset" from="18" to="0" dur="280ms" fill="freeze" begin="indefinite"/>
+                  </path>
+                </svg>
+              </span><span class="fpl-period">.</span>
+            </p>
+
+            <!-- Field 3: Wiggly Kid toggle -->
+            <div class="wiggly-field">
+              <label class="wiggly-label-wrap">
+                <input type="checkbox" class="wiggly-input" id="wiggly-kid" name="wigglyKid" value="true">
+                <span class="wiggly-row">
+                  <span class="wiggly-label">Wiggly kid?</span>
+                  <span class="wiggly-track" aria-hidden="true"><span class="wiggly-thumb"></span></span>
+                </span>
+                <span class="wiggly-desc">We weave themed movement into the week.</span>
+              </label>
+            </div>
+
             <div class="theme-error" id="theme-error" aria-live="polite">Let's try a different theme. <a id="theme-suggest" href="#" tabindex="-1">See suggestions</a></div>
             <div class="theme-network-error" id="theme-network-error" aria-live="polite">Something went wrong. Try again.</div>
+
             <div class="cta-row">
-              <button type="submit" class="plan-cta" id="nh-submit" disabled>SHOW ME THIS WEEK →</button>
+              <button type="submit" class="l-bracket-cta cta-needs-ready hero-cta-btn" id="nh-submit">SHOW ME THIS WEEK →</button>
             </div>
+            <p class="more-kids-note">More kids? Add them after.</p>
           </form>
         </div>
         <!-- Post-submit gate (hidden; shown by JS on submit) -->
@@ -1605,7 +1743,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <input id="f-email" class="email-input" type="email" placeholder="your email" autocomplete="email" inputmode="email" aria-label="Your email" required/>
               </div>
               <div class="cta-row">
-                <button type="submit" class="lbracket" id="send-btn" disabled>
+                <button type="submit" class="l-bracket-cta send-btn-type" id="send-btn" disabled>
                   Open the week<span class="arrow"> →</span>
                 </button>
               </div>
@@ -2636,32 +2774,66 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   });
 })();
 
+/* ─── Desk signature: dynamic day + time-of-day ─── */
+(function(){
+  var sig = document.getElementById('desk-sig');
+  if(!sig) return;
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var day = days[new Date().getDay()];
+  var h = new Date().getHours();
+  var tod = (h >= 5 && h <= 8) ? 'early'
+          : (h >= 9 && h <= 11) ? 'mid-morning'
+          : (h >= 12 && h <= 13) ? 'midday'
+          : (h >= 14 && h <= 17) ? 'afternoon'
+          : (h >= 18 && h <= 20) ? 'evening'
+          : 'late';
+  sig.textContent = day.toUpperCase() + ', ' + tod.toUpperCase();
+})();
+
 /* ─── v3 Right Form ─── */
 (function(){
   var ageVal = null;
   var themes = ['dinosaurs','ocean life','volcanoes','outer space','robots','castles','insects','ancient Egypt','weather','the rainforest'];
   var ti = 0;
+  var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   var ageDisplay = document.getElementById('f-age-display');
   var ageUp      = document.getElementById('age-up');
   var ageDn      = document.getElementById('age-dn');
   var wAge       = document.getElementById('w-age');
+  var ageCheckFired = false;
+
+  function triggerBrushcheck(container){
+    if(reduced) return;
+    var anim = container && container.querySelector('.brushcheck path animate');
+    if(anim){ try{ anim.beginElement(); }catch(e){} }
+  }
 
   function updateAge(){
     if(ageDisplay) ageDisplay.textContent = ageVal !== null ? ageVal : '—';
-    if(wAge){ wAge.classList.toggle('filled', ageVal !== null); wAge.classList.add('active'); }
+    if(wAge){
+      var wasFilled = wAge.classList.contains('filled');
+      wAge.classList.toggle('filled', ageVal !== null);
+      wAge.classList.add('active');
+      if(ageVal !== null && !ageCheckFired){ ageCheckFired = true; triggerBrushcheck(wAge); }
+      if(ageVal === null){ ageCheckFired = false; }
+    }
     checkReady();
   }
 
   if(ageUp){ ageUp.addEventListener('click', function(){ ageVal = ageVal === null ? 5 : Math.min(12, ageVal + 1); updateAge(); }); }
   if(ageDn){ ageDn.addEventListener('click', function(){ ageVal = ageVal === null ? 5 : Math.max(1, ageVal - 1); updateAge(); }); }
 
+  var checkFired = {};
   ['nh-name','nh-theme'].forEach(function(id){
     var inp = document.getElementById(id);
     if(!inp) return;
     var word = inp.closest ? inp.closest('.word') : null;
     inp.addEventListener('input', function(){
-      if(word) word.classList.toggle('filled', inp.value.trim() !== '');
+      var filled = inp.value.trim() !== '';
+      if(word) word.classList.toggle('filled', filled);
+      if(filled && !checkFired[id]){ checkFired[id] = true; triggerBrushcheck(word); }
+      if(!filled){ checkFired[id] = false; }
       checkReady();
     });
   });
@@ -2676,21 +2848,39 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
     }, 2800);
   }
 
+  /* Wiggly-kid toggle: animate brushcheck on first check */
+  var wigglyKidEl = document.getElementById('wiggly-kid');
+  var wigglyFired = false;
+  if(wigglyKidEl){
+    wigglyKidEl.addEventListener('change', function(){
+      if(this.checked && !wigglyFired){
+        wigglyFired = true;
+        var lw = this.closest('.wiggly-label-wrap');
+        var anim = lw && lw.querySelector('.wiggly-check-svg path animate');
+        if(anim && !reduced){ try{ anim.beginElement(); }catch(e){} }
+      }
+      if(!this.checked){ wigglyFired = false; }
+    });
+  }
+
   function checkReady(){
     var nameEl  = document.getElementById('nh-name');
     var themeEl = document.getElementById('nh-theme');
     var btn     = document.getElementById('nh-submit');
     if(!btn) return;
-    btn.disabled = !(nameEl && nameEl.value.trim() && ageVal !== null && themeEl && themeEl.value.trim());
+    var ready = !!(nameEl && nameEl.value.trim() && ageVal !== null && themeEl && themeEl.value.trim());
+    btn.classList.toggle('ready', ready);
   }
+  checkReady();
 
   var form = document.getElementById('nh-form');
   if(!form) return;
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    var name  = (document.getElementById('nh-name')  || {value:''}).value.trim();
-    var theme = (document.getElementById('nh-theme') || {value:''}).value.trim();
-    var age   = ageVal;
+    var name     = (document.getElementById('nh-name')  || {value:''}).value.trim();
+    var theme    = (document.getElementById('nh-theme') || {value:''}).value.trim();
+    var age      = ageVal;
+    var wiggly   = wigglyKidEl ? wigglyKidEl.checked : false;
     if(!name || age === null || !theme) return;
 
     var reply = document.getElementById('nh-reply');
@@ -2727,7 +2917,10 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
           emailInput.addEventListener('input', function(){
             var filled = emailInput.value.trim() !== '';
             if(emailRow) emailRow.classList.toggle('filled', filled);
-            if(sendBtn)  sendBtn.disabled = !filled;
+            if(sendBtn){
+              sendBtn.disabled = !filled;
+              sendBtn.classList.toggle('ready', filled);
+            }
           });
         }
         var emailForm = document.getElementById('email-form');
@@ -2740,7 +2933,8 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
               + '?childName=' + encodeURIComponent(name)
               + '&childAge='  + age
               + '&theme='     + encodeURIComponent(theme)
-              + '&email='     + encodeURIComponent(email);
+              + '&email='     + encodeURIComponent(email)
+              + '&wigglyKid=' + wiggly;
           });
         }
       }

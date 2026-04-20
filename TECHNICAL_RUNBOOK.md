@@ -58,7 +58,7 @@ When a decision is made: add it to Locked Decisions before closing.
 When the Light Standard updates: reconcile this file against it.
 The Light Standard is always the authority. This file is the fast lookup.
 
-Last updated: April 19, 2026
+Last updated: April 20, 2026
 Maintained by: Amy Oguntala
 
 ---
@@ -707,6 +707,23 @@ what is frozen, and what decisions are locked.
    Status: Unresolved. No code work should proceed on homepage surface until
      this is decided and locked into the Environment Map.
 
+7. --ease-out-expo TOKEN NOT LINKED IN index.html
+   What is broken: `--ease-out-expo` is defined in css/tokens.css (same curve as
+     --expo: cubic-bezier(0.16, 1, 0.3, 1)) but css/tokens.css is NOT linked from
+     index.html. All var(--ease-out-expo) references in index.html inline CSS fall
+     back to browser default `ease` instead of the editorial expo curve.
+   Origin: css/tokens.css defines the token; index.html links its own inline :root
+     with --expo but not tokens.css.
+   Root cause: Two parallel token definitions were never unified. The inline :root
+     in index.html has --expo but not --ease-out-expo. Linked files (animations.css,
+     components.css) that reference --ease-out-expo resolve it from tokens.css — but
+     inline styles in index.html cannot reach tokens.css rules.
+   Fix: Either (a) add --ease-out-expo to index.html's inline :root, or (b) link
+     css/tokens.css from index.html and remove the inline --expo duplication.
+     Option (b) is the correct long-term fix per Operating Principle 6.
+   Status: Unresolved. Low visual impact (fallback `ease` is close). Fix in a
+     dedicated tokens cleanup session.
+
 ---
 
 ## NAV DELIBERATE HOLD
@@ -739,6 +756,10 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Desk note width: 50% of `.nh-right` content area. Single tape piece (`::after` only), centered at `left:calc(50% - 28px)`. Do not add a second tape piece.
 - Blocklist architecture: `suicide`, `murder`, `weed` are BLOCKLIST_EXACT (exact-match only). Phrased uses ("murder mystery", "suicide prevention", "garden weeds") pass to Layer 3 AI moderation. Both client (index.html) and server (validate-theme.js) lists must stay in sync.
 - Email provider for moderation digest: Resend. Do not swap provider without updating both sendEmail() and env var names in moderation-digest.js.
+- `.cta-needs-ready` gating: uses `color: rgba(12,16,32,0.40)` on unready state, NOT `opacity`. Box-shadow stays full saffron always. Transition is `color`, not `opacity`. Source of truth: css/components.css. Root cause of prior pale-yellow bug was element-level opacity dimming the box-shadow.
+- Wax seal (editorial note): inline SVG, 56×56px display, 80×80 viewBox. Organic blob path (not circle). 3-layer W monogram (shadow/base/highlight text offsets). Do not revert to div+span. Do not use the 6-lobe deboss-filter variant (reverted — user rejected it).
+- Hero headline line 2 ("homeschool plans."): locked at 192px. Was 216px. Reduced April 20, 2026 per user request.
+- CTA button typography ("SHOW ME THIS WEEK →"): Sora 600, 0.68rem, letter-spacing 0.06em. Matches Open Seat page `.btn-sky` treatment. Not Space Mono.
 
 ---
 
@@ -1824,6 +1845,67 @@ Wrong: "2026-04-17"
 If you wrote a literal where a formula belongs, it is a bug.
 Correct it before closing the session.
 
+PATTERN 9 — CLASS-NAME AUDIT MISSES VISUAL CONSTRUCTS
+When an audit searches for a visual by class name (e.g. "find
+the L-bracket") it will miss constructs whose visual effect is
+produced through a mechanism whose CSS class name does not match
+the visual's name — e.g. box-shadow tricks, pseudo-elements,
+or positioned siblings named for their semantic role, not their
+appearance.
+Example: the Open Seat hero button had `box-shadow: 6px 6px 0
+#E8AF38` producing the L-bracket effect, but the class was
+`.btn-sky`. Searching "bracket" found nothing and the audit
+reported the element as absent.
+Prevention rule: If an audit returns "element does not exist"
+but the visual is clearly present in the rendered page, the
+audit has failed. Re-scan using the visual's mechanism as the
+search target (the color value, the property name, the specific
+CSS rule), not the semantic label you expected the class to have.
+Never accept "not present" until a mechanism-based search
+confirms absence.
+
+---
+
+## OPEN ITEMS (post-launch follow-up)
+
+1. BRUSHSTROKE SVG ASSET — UPGRADE REQUIRED
+   Current state: The brushstroke checkmark in the homepage hero form (Field 1
+     fill, Field 2 fill, Wiggly kid toggle on-state) uses a close approximation
+     built from a single quadratic bezier path (SVG <path> Q command). It reads
+     as a checkmark but lacks genuine hand-drawn character.
+   Location: index.html — three identical inline SVG instances within .brushcheck
+     elements; wiggly toggle uses fourth instance in .wiggly-check-svg.
+   What to do: Commission a hand-drawn brushstroke checkmark illustration (Figma
+     with pen tool, Procreate, or Illustrator) and export as optimized SVG.
+     Replace placeholder <path> across all four instances. The SVG must have
+     stroke-dasharray/stroke-dashoffset set to path length so the SMIL draw
+     animation works. Measure the new path length and update both attributes.
+   Priority: Post-launch polish. Current state passes visual QA at normal reading
+     distance. Do not block launch on this.
+
+2. css/components.css — FUTURE PAGES MUST LINK
+   Current state: css/components.css was created April 19, 2026 as the single
+     source of truth for .l-bracket-cta per Operating Principle 6.
+     Currently linked from: index.html, the-open-seat.html.
+   What to do: Every page that uses the L-bracket CTA pattern must link
+     css/components.css in its <head>. Do not duplicate the rule inline.
+     Before adding any new L-bracket to a new page, confirm the link exists.
+   Prevention: Add to pre-flight audit checklist for any new page build:
+     "Does this page link css/components.css if it uses .l-bracket-cta?"
+
+3. --expo EASING TOKEN — CONSOLIDATION REQUIRED
+   Current state: --expo is defined in index.html's inline :root. --ease-out-expo
+     is defined in css/tokens.css. They are the same curve. css/tokens.css is not
+     linked from index.html. Components and linked stylesheets (animations.css,
+     components.css) use --ease-out-expo from tokens.css. Inline index.html styles
+     use --expo. This is fragmentation of the same token across two files.
+   What to do: Link css/tokens.css from index.html. Remove --expo from the inline
+     :root (or alias it to --ease-out-expo for backwards compatibility). Update all
+     inline index.html references from var(--expo) to var(--ease-out-expo).
+     This unifies the token under one name, one file, one definition.
+   Related: Known Bug #7 (--ease-out-expo not linked in index.html).
+   Priority: Dedicated tokens cleanup session. Do not mix into feature work.
+
 ---
 
 ## ACCESSIBILITY (non-negotiable)
@@ -2365,3 +2447,19 @@ v2.1 — April 19, 2026 — Claude Code Operating Principles added to
   Session Startup Step 1 updated from three-item to four-item confirmation
   (item 4: name all six Operating Principles before work begins).
   Notion mirror updated in same session. Transfer Queue cleared.
+
+v2.2 — April 20, 2026
+  Hero CTA + wax seal + headline session.
+  Fix A: L-bracket CTA pale-yellow resolved — `.cta-needs-ready` now uses
+    `color` gating (not opacity) in css/components.css; box-shadow stays
+    full saffron in all states.
+  Fix B: CTA typography set to Sora 600 0.68rem 0.06em (matching Open Seat
+    page). Padding 10px 24px.
+  Fix C: Wax seal rebuilt as inline SVG — organic blob path, 3-layer W
+    monogram (shadow/base/highlight), grain texture, gloss, double ring.
+    Replaces prior div+span implementation.
+  Fix D: "homeschool plans." font reduced 216px → 192px across all
+    breakpoints.
+  Locked decisions updated: cta-needs-ready color gate, wax seal spec,
+    headline line 2 size, CTA typography.
+  Form audit (read-only) completed. No code changes from audit.

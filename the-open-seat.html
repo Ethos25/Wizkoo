@@ -172,6 +172,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* Primary button — transparent on sky */
+/* .btn-sky: typography only — L-bracket visual comes from .l-bracket-cta */
 .btn-sky {
   font-family: 'Sora', sans-serif;
   font-weight: 600;
@@ -179,17 +180,8 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 14px 40px;
-  background: transparent;
   color: #FAFAFA;
-  border: none;
-  box-shadow: 6px 6px 0 #E8AF38;
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: transform 0.15s var(--expo), box-shadow 0.15s var(--expo);
 }
-.btn-sky:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 #E8AF38; }
 
 /* Secondary link */
 .plan-link-sky {
@@ -344,6 +336,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .sr,.sr-fade,.sr-ground,.sr-left,.sr-slow,.sr-card,.sr-rule,.sr-btn{opacity:1!important;transform:none!important;transition:none!important}
 }
 </style>
+<link rel="stylesheet" href="/css/components.css">
 </head>
 <body>
 
@@ -370,7 +363,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
       <p class="hero-setup">Some of us learned in rooms we weren't supposed to be in.</p>
       <h1 class="hero-h" id="hero-headline">This room is for<br><em>everyone<span class="hero-dot-circle"></span></em></h1>
       <div class="hero-cta">
-        <a href="/plan" class="btn-sky">Open a seat →</a>
+        <a href="/plan" class="btn-sky l-bracket-cta">Open a seat →</a>
         <a href="#how-it-works" class="plan-link-sky">How The Open Seat works</a>
       </div>
     </div>
