@@ -58,7 +58,7 @@ When a decision is made: add it to Locked Decisions before closing.
 When the Light Standard updates: reconcile this file against it.
 The Light Standard is always the authority. This file is the fast lookup.
 
-Last updated: April 20, 2026
+Last updated: April 21, 2026
 Maintained by: Amy Oguntala
 
 ---
@@ -483,6 +483,183 @@ GOVERNANCE:
   Removals are not permitted.
   Applies to every Claude Code session on Wizkoo — wizkoo.com and
   the plan generator.
+
+---
+
+## PROMPT CONSTRUCTION DISCIPLINE
+
+### WHY THIS SUBSECTION EXISTS
+
+Claude Code's default behavior is additive. Given a request to fix X,
+it produces the smallest delta that makes X work — usually by adding a
+new rule on top of existing rules, leaving superseded rules in place.
+Across a multi-prompt session, these leftover rules accumulate into
+competing logic that every future change has to navigate around. The
+compound effect is a codebase where prompts get harder to land because
+the noise drowns out the signal.
+
+The most common operator mistake that feeds this failure is the phrase
+"do not touch anything else." That instruction forbids reconciliation.
+It protects the operator from unwanted structural changes, but it also
+prevents the executor from cleaning up what its own change replaces.
+
+The fix is not to remove scope protection. The fix is to distinguish
+scope (what the executor may change) from reconciliation (what cleanup
+is authorized within scope). Every prompt to Claude Code must name both,
+explicitly and separately.
+
+This subsection defines the six-section standard that makes that
+distinction enforceable.
+
+### THE SIX-SECTION PROMPT STANDARD
+
+Every prompt sent to Claude Code must contain all six sections, in this
+order, with the section headers written as stated. If any section is
+missing, the prompt is not ready. Return it to the drafter before
+sending.
+
+  1. TASK
+  2. SCOPE
+  3. RECONCILIATION AUTHORIZED
+  4. PRESERVATION LOCKS
+  5. REPORTING
+  6. VERIFICATION
+
+Each section is defined below with its purpose and what goes in it.
+
+### SECTION 1 — TASK
+
+  Purpose: give Claude Code a verifiable goal.
+  Contents: what needs to happen, stated as a concrete outcome, not a
+    process.
+
+  Good: "Fix the announcement bar text color so it reads saffron on all
+    non-homepage pages."
+  Not good: "Help me figure out what is wrong with the announcement bar."
+
+  A task without a concrete outcome cannot be declared done.
+
+### SECTION 2 — SCOPE
+
+  Purpose: draw the boundary. Prevent Claude Code from wandering into
+    code it was not invited to touch.
+  Contents: which files, components, or surfaces the executor may change,
+    named explicitly. Out-of-scope items named explicitly as well.
+
+  Good: "In scope: components/nav.js lines 80 to 100. Out of scope: all
+    other files, all other components, the plan generator entirely."
+  Not good: "Just fix the nav."
+
+### SECTION 3 — RECONCILIATION AUTHORIZED
+
+  Purpose: separate narrow protection from additive-only execution.
+    Scope says what Claude Code MAY touch. This section says what
+    Claude Code SHOULD clean up when it touches.
+  Contents: what cleanup is explicitly permitted within scope. Removal
+    of superseded rules, deletion of dead code, consolidation of
+    duplicates. Also what cleanup is NOT authorized (restructuring,
+    renaming, refactoring).
+
+  Good: "You are authorized to remove the current .announce-text color
+    rule and any superseded overrides related to announcement bar text
+    color within the named scope. You are not authorized to restructure
+    the nav component or rename any selector."
+  Not good: silence. If this section is missing, Claude Code defaults
+    to additive-only, which is the failure mode this subsection exists
+    to prevent.
+
+### SECTION 4 — PRESERVATION LOCKS
+
+  Purpose: name fragile systems explicitly so Claude Code cannot
+    accidentally break them, even within authorized scope.
+  Contents: what must not change, even if the executor believes a change
+    would improve things. Pulls from the Preservation Locks Registry
+    (see Layer 6) for any prompt touching a system with registered locks.
+
+  Good: "Do not touch: any form-related code in index.html, any
+    BLOCKLIST or BLOCKLIST_EXACT array, netlify/functions/validate-
+    theme.js, any :root design token definition."
+  Not good: "Do not break anything." Vague preservation instructions
+    are not enforceable.
+
+### SECTION 5 — REPORTING
+
+  Purpose: prevent silent changes. Every modification Claude Code makes
+    must be nameable. If it cannot be named, it should not have happened.
+  Contents: what findings and changes Claude Code must state in its
+    response.
+
+  Two kinds of reporting:
+    Pre-execution: "Before making any change, list every file you will
+      modify and the specific change per file. Wait for approval."
+    Post-execution: "After completing, produce a ledger of files
+      changed, selectors removed, lines affected, and any finding from
+      the audit you chose not to execute."
+
+### SECTION 6 — VERIFICATION
+
+  Purpose: establish the gate between "change applied" and "change
+    shipped." Catch broken states before they hit the remote repository.
+  Contents: how correctness and integrity get confirmed.
+
+  Typical verification steps:
+    Run git status and git diff --stat before committing.
+    Confirm no file outside the named scope was modified.
+    Open the relevant pages in the dev server. Confirm no console
+      errors and no visual regressions.
+    Run the build if one exists.
+    Commit with a descriptive message.
+    Do not push without explicit approval from Amy.
+
+### DISTINGUISHING REPORTING FROM VERIFICATION
+
+The two sections are easy to confuse. Keep this distinction in mind:
+
+  REPORTING answers:    "What did you change?"
+  VERIFICATION answers: "Did it work and is the system still sound?"
+
+Reporting is a narrative Claude Code writes about its own work.
+Verification is a test Claude Code or Amy runs against the result.
+
+A prompt can have thorough reporting and fail verification — the change
+was named honestly and also broke the page. A prompt can pass
+verification with weak reporting — the page still renders, but nobody
+can tell what changed or why. Both sections must be present. They serve
+different functions.
+
+### THE RETURN RULE
+
+Any prompt missing one or more sections is not ready for execution.
+Return it to the drafter for completion before sending.
+
+This rule applies equally when:
+  Amy drafts the prompt herself.
+  A chat assistant drafts the prompt for Amy.
+  A prior session's baton includes a prompt to re-send.
+
+The executor (Claude Code) enforces this rule on the receiving side:
+when a prompt arrives missing one or more sections, Claude Code must
+request clarification and list the missing sections by name before
+executing. The drafter enforces this rule on the sending side.
+
+Two-sided enforcement prevents silent bypass.
+
+### MINIMUM VIABLE PROMPT
+
+For genuinely trivial changes (typo fixes, single-line comment
+corrections, one-word copy edits with no structural impact), a
+compressed prompt is acceptable:
+
+  TASK: [what]
+  SCOPE: [where — single file, single line]
+  RECONCILIATION: none needed
+  PRESERVATION: none at risk
+  REPORTING: show the diff
+  VERIFICATION: confirm no unintended matches in grep before committing
+
+All six sections are still named. The content is compressed because the
+change is small. Do not use this pattern for anything that touches a
+component, a system, or more than one file.
 
 ---
 
@@ -926,14 +1103,46 @@ Other key source dirs:
 ## ENVIRONMENT VARIABLES
 
 MARKETING SITE (C:\Users\amyog\Desktop\wizkoo)
-  No .env files. No build step. No server-side secrets.
+  No .env files. No build step. No server-side secrets in the
+  static site itself.
+
   Supabase credentials are exposed as window globals in:
     C:\Users\amyog\Desktop\wizkoo\js\supabase-config.js
     WIZKOO_SUPABASE_URL      — Supabase project URL
     WIZKOO_SUPABASE_ANON_KEY — Supabase anon/public key
   These are intentionally public-facing. Row Level Security
   policies (sql/library-schema.sql) control data access.
-  No other environment variables required for the marketing site.
+
+  Netlify Functions (set in Netlify Dashboard > Site Settings >
+  Environment Variables — NOT committed to repo):
+
+    OPENAI_API_KEY        — OpenAI Moderation API (Layer 3 of
+                            theme content moderation). Used by
+                            netlify/functions/validate-theme.js.
+
+    NOTION_API_KEY        — Notion API key for writing rejected
+                            theme logs to the moderation database.
+
+    NOTION_MODERATION_DB_ID — Notion database for moderation logs.
+                            Value: c8506fad-4656-4dac-b0a0-13aed19067be
+                            (Theme / Timestamp / Layer / IP Hash / Status)
+
+    IP_HASH_SALT          — One-time generated salt for IP address
+                            hashing. MUST NEVER ROTATE. Rotating breaks
+                            repeat-offender hash comparability across
+                            all historical log entries.
+
+    RESEND_API_KEY        — Resend API key for weekly moderation
+                            digest email (moderation-digest.js).
+
+    RESEND_FROM_EMAIL     — Sending address for moderation digest.
+                            Value: moderation@wizkoo.com
+
+    ADMIN_EMAIL           — Recipient for moderation digest.
+                            Value: amy@wizkoo.com
+
+  Source commits: 857b057 (Layer 1 implementation), b042e35
+  (BLOCKLIST_EXACT dual-tier, regex fix, test matrix).
 
 PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator)
   Source: .env.example (22 variables)
@@ -978,6 +1187,62 @@ PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator)
 
   Cron job auth:
     CRON_SECRET          — Bearer token checked by all four /api/cron/* routes
+
+---
+
+## CONTENT MODERATION ARCHITECTURE
+
+Applies to: netlify/functions/validate-theme.js,
+            index.html (client-side IIFE),
+            netlify/functions/moderation-digest.js
+
+Three-layer architecture. Every theme submission passes all three
+layers in sequence. A rejection at any layer stops submission.
+
+LAYER 1 — CLIENT-SIDE BLOCKLIST (index.html)
+  ~100 terms. Evaluated before any network request.
+  Matching: word-boundary regex (\bterm\b) — catches plurals and
+    suffixes without false positives on substrings.
+  Leetspeak normalization applied before matching:
+    0→o, 3→e, 1→i and l, 4→a, 5→s, @→a, !→i
+  Dual-tier structure (applied in same client-side pass):
+    BLOCKLIST       — word-boundary match. Catches plurals, suffixes,
+                      compounds. For terms that should never appear.
+    BLOCKLIST_EXACT — full-input match only. For terms (e.g. "weed",
+                      "murder") that must allow legitimate phrased use
+                      but should be rejected as standalone themes.
+
+LAYER 2 — SERVER-SIDE BLOCKLIST (netlify/functions/validate-theme.js)
+  Same blocklist as Layer 1, re-run server-side. Prevents client-side
+  bypass. Fail-closed: 3-second timeout blocks submission with a
+  generic error message. Never fails open.
+
+LAYER 3 — OPENAI MODERATION API (validate-theme.js)
+  Endpoint: https://api.openai.com/v1/moderations
+  Threshold: topScore > 0.5 OR flagged === true → reject.
+  Timeout: 3 seconds. On timeout, submission is blocked (fail-closed).
+
+REJECTION LOGGING
+  Rejected themes are written to Notion database:
+    NOTION_MODERATION_DB_ID: c8506fad-4656-4dac-b0a0-13aed19067be
+  Fields: Theme, Timestamp, Layer (which layer caught it), IP Hash,
+          Status.
+  IP address is hashed with IP_HASH_SALT before storage.
+  If Notion write fails: console.error fallback to Netlify function logs.
+
+REJECTION UI
+  Inline error below theme field: "Let's try a different theme."
+  "See suggestions" link surfaces a random Tier 1 safe word.
+  Submit button shows "Checking…" during validation.
+
+WEEKLY DIGEST
+  netlify/functions/moderation-digest.js sends a weekly summary via
+  Resend (RESEND_API_KEY) from RESEND_FROM_EMAIL to ADMIN_EMAIL.
+
+FILES AFFECTED
+  index.html                              — Layer 1 IIFE (client blocklist)
+  netlify/functions/validate-theme.js     — Layers 2 and 3
+  netlify/functions/moderation-digest.js  — Weekly Resend digest
 
 ---
 
@@ -2463,3 +2728,22 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v2.3 — April 21, 2026
+  Three Transfer Queue items applied:
+  (1) Environment Variables section updated: Marketing Site now
+    documents 7 Netlify Function env vars (OPENAI_API_KEY,
+    NOTION_API_KEY, NOTION_MODERATION_DB_ID, IP_HASH_SALT,
+    RESEND_API_KEY, RESEND_FROM_EMAIL, ADMIN_EMAIL) with source
+    commits 857b057 and b042e35.
+  (2) Content Moderation Architecture section added to Layer 3:
+    three-layer architecture documented (client blocklist /
+    server blocklist / OpenAI Moderation API), dual-tier
+    BLOCKLIST vs BLOCKLIST_EXACT structure, fail-closed posture,
+    rejection logging, weekly digest, affected files.
+  (3) Prompt Construction Discipline subsection added to Layer 1
+    (after Operating Principles, before Layer 2): six-section
+    prompt standard (TASK, SCOPE, RECONCILIATION AUTHORIZED,
+    PRESERVATION LOCKS, REPORTING, VERIFICATION), Return Rule,
+    and Minimum Viable Prompt pattern. Layer 0 Last updated
+    date updated to April 21, 2026.
