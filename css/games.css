@@ -7,7 +7,7 @@
   max-width: var(--max-width);
 }
 .page-hero .tag { margin-bottom: 16px; color: rgba(12,16,32,0.45); }
-.page-hero .tag::before { content: ''; display: block; width: 32px; height: 1.5px; background: #E8AF38; margin-bottom: 12px; }
+.page-hero .tag::before { content: ''; display: block; width: 32px; height: 1.5px; background: var(--saffron); margin-bottom: 12px; }
 .page-hero h1 {
   font-family: 'Sora', sans-serif;
   font-weight: 200;
@@ -134,7 +134,7 @@
   color: var(--paper);
 }
 .game-showcase-hero .tag { color: var(--saffron); margin-bottom: 16px; }
-.game-showcase-hero .tag::before { content: ''; display: block; width: 32px; height: 1.5px; background: #E8AF38; margin-bottom: 12px; }
+.game-showcase-hero .tag::before { content: ''; display: block; width: 32px; height: 1.5px; background: var(--saffron); margin-bottom: 12px; }
 .game-showcase-hero h1 {
   font-family: 'Sora', sans-serif;
   font-weight: 200;

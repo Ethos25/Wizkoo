@@ -12,7 +12,7 @@
    see Open Item: move tokens to shared tokens.css).
    ────────────────────────────────────────────────────────── */
 .l-bracket-cta {
-  box-shadow: 6px 6px 0 #E8AF38;
+  box-shadow: 6px 6px 0 var(--saffron);
   background: transparent;
   border: none;
   display: inline-block;
@@ -28,7 +28,7 @@
 
 .l-bracket-cta:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0 #E8AF38;
+  box-shadow: 8px 8px 0 var(--saffron);
 }
 
 /* Form-gated CTAs: use .cta-needs-ready to opt in to the dim→full color gate */
@@ -38,7 +38,7 @@
 
 /* Ready state: full color + pulse */
 .l-bracket-cta.cta-needs-ready.ready {
-  color: #0C1020;
+  color: var(--ink);
   animation: bracket-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   animation-delay: 0.4s;
 }
@@ -55,7 +55,7 @@
 /* When ready, hover lifts normally (suppress pulse during hover) */
 .l-bracket-cta.cta-needs-ready.ready:hover {
   animation: none;
-  box-shadow: 10px 10px 0 #E8AF38;
+  box-shadow: 10px 10px 0 var(--saffron);
 }
 
 @media (prefers-reduced-motion: reduce) {
