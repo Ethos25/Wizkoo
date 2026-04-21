@@ -255,6 +255,7 @@
       '.nav-mobile-menu a:hover{color:rgba(255,255,255,0.9)}',
       '.nav-mobile-menu a:focus-visible{outline:2px solid var(--saffron);outline-offset:-2px}',
 
+      /* nav-internal: intentionally not in CSS breakpoint system */
       /* ═══ COMPACT DESKTOP (200% DPI scale / ~960–1100px) ═══ */
       '@media(max-width:1100px){',
       '  .nav{padding:0 24px}',
