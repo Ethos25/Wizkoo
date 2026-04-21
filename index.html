@@ -540,7 +540,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* ═══ TOUCH DEVICES ═══ */
-@media(hover:none)and(pointer:coarse){
+@media(hover:none),(pointer:coarse){
   /* Disable custom cursor on touch */
   .cursor{display:none!important}
 
@@ -566,7 +566,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @keyframes ringExpand{0%{transform:scale(1);opacity:1}100%{transform:scale(12);opacity:0}}
 .collision-spark{position:fixed;width:3px;height:3px;border-radius:50%;pointer-events:none;z-index:9997}
 @keyframes sparkOut{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--sx),var(--sy))}}
-@media(hover:none)and(pointer:coarse){.firefly{width:7px;height:7px;box-shadow:0 0 6px 3px rgba(255,248,224,0.35)}}
+@media(hover:none),(pointer:coarse){.firefly{width:7px;height:7px;box-shadow:0 0 6px 3px rgba(255,248,224,0.35)}}
 @media(prefers-reduced-motion:reduce){.firefly{display:none!important}}
 @media(max-width:768px){.firefly{display:none!important}}
 
@@ -846,7 +846,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .nap-ev-text{font-size:0.82rem}
   .nap-counterpoint{font-size:12px}
 }
-@media(hover:none)and(pointer:coarse){
+@media(hover:none),(pointer:coarse){
   .nap-evidence:hover{transform:none;box-shadow:none}
 }
 
