@@ -2463,73 +2463,248 @@ executing. Enforcement by default, not by invocation.
 ### HOMEPAGE FORM PRESERVATION LOCKS
 
 Surface: the intake form on the homepage hero (index.html). Origin:
-three-layer content moderation architecture and Notion logging
-integration built April 2026. Breaking any item below produces silent
-form failures in production.
+line-by-line preservation registry produced by Amy's AI team
+(2026-04-21 evening session), reconciled against production index.html.
+Covers the full behavioral surface — SEO/accessibility structure, copy,
+mechanics, submit chain, and post-submit gate. Breaking any item below
+produces a silent regression: SEO loss, accessibility failure, copy-voice
+drift, validation bypass, or form deadlock in production.
 
-Item 1  — BLOCKLIST array (~100 terms). Client-side Layer 1 word-
-           boundary match list. Catches plurals and suffixes.
+ANCHORING CONVENTION. Every item lists three kinds of anchors where
+available:
+  - Semantic description (primary, stable across refactors)
+  - Element ID or selector (stable when element exists)
+  - Line number (current-state reference as of 2026-04-21, commit
+    2087f59; expected to drift)
+When prompts cite items from this registry, use semantic description +
+ID. Line numbers are for fast lookup only and must be re-verified by
+Claude Code on each session open.
 
-Item 2  — BLOCKLIST_EXACT array (~12 terms). Client-side Layer 1 full-
-           input match list. For terms that must allow legitimate phrased
-           use but block exact submission.
+CLUSTER A — STRUCTURAL LOCKS (SEO + ACCESSIBILITY)
 
-Item 3  — normalizeLeet() function. Leet-speak conversion (0→o, 3→e,
-           1→i/l, 4→a, 5→s, @→a, !→i). Prevents bypass via character
-           substitution.
+Item 1  — Visually-hidden H1 for SEO.
+           Semantic: the <h1 class="visually-hidden"> element containing
+           the full product description. The visible <h2 class="nh-h1">
+           is display-only — removing the hidden H1 tanks SEO.
+           Selector: h1.visually-hidden
+           Line (2026-04-21): 1565
 
-Item 4  — isThemeBlocked() and isExactBlocked() functions. Check
-           functions that consume the blocklists.
+Item 2  — novalidate on both forms.
+           Semantic: both the theme form and the email-gate form have
+           novalidate explicitly set. Native browser validation is
+           intentionally off because all validation is JS-driven (theme
+           blocklist, server validation, two-word cap). Restoring native
+           validation breaks the three-layer gate.
+           Selector: form[novalidate] (both forms)
+           Lines (2026-04-21): 1592, 1669
 
-Item 5  — Capture-phase submit listener. First interception. Runs
-           Layer 1 client blocklist check, then POSTs to
-           /api/validate-theme for Layer 2 and 3 checks.
+Item 3  — Wiggly kid fieldset semantics.
+           Semantic: <fieldset> + <legend class="visually-hidden"> + radio
+           inputs with default checked on the yes option. Screen readers
+           depend on the legend to announce the question. The default-yes
+           reflects the assumed-wiggly-kid copy bet.
+           Selector: fieldset containing name="wigglyKid" radios
+           Lines (2026-04-21): 1628-1642
 
-Item 6  — Bubble-phase submit listener. Runs after capture phase
-           clears. Handles progress gate display and email capture flow.
+Item 4  — Age combobox ARIA contract.
+           Semantic: role="combobox" aria-haspopup="listbox"
+           aria-expanded="false" tabindex="0" on the trigger;
+           role="listbox" on the panel; role="option" aria-selected on
+           each option. Assistive tech depends on this exact contract —
+           renaming or dropping any attribute breaks screen reader
+           announcement of the dropdown state.
+           Selector: #age-trigger (combobox), #age-panel (listbox)
+           Lines (2026-04-21): 1609-1622
 
-Item 7  — checkReady() function. Submit button gating logic. Enables
-           or disables submit based on form state.
+CLUSTER B — COPY LOCKS
 
-Item 8  — Theme field keydown handler. Prevents 3rd word and double
-           spaces. Enforces theme format constraint at input time.
+Item 5  — H1 three-line composition.
+           Semantic: "Personalized weekly / homeschool plans. / And
+           tracking." The standalone "And tracking." line is a
+           load-bearing strategic claim per the April 20 decision, not a
+           secondary feature. Three lines, not two, not merged.
+           Selector: .nh-h1-line1, .nh-h1-line2, .nh-h1-line3
+           Lines (2026-04-21): 1568-1572
 
-Item 9  — Paste sanitizer. Prevents multi-line pastes and mass-paste
-           attack vectors.
+Item 6  — Subline.
+           Semantic: "...so you never wonder what's missing." Locked April
+           20, superseded the earlier "...so you always know where you
+           stand." Do not revert.
+           Selector: .nh-subline (or equivalent)
+           Line (2026-04-21): 1573
 
-Item 10 — 60-char maxlength on theme input. Enforced in HTML attribute.
+Item 7  — Desk note kernel.
+           Semantic: "What your child can't stop talking about. Dragons.
+           Tornadoes. Volcanoes." The three-noun cadence is the distinctive
+           voice element. Replacing the examples or collapsing the cadence
+           flattens the voice.
+           Selector: .desk-body (or equivalent containing the kernel)
+           Line (2026-04-21): 1584
 
-Item 11 — 30-char maxlength on name input. Enforced in HTML attribute.
+Item 8  — Desk signature pair.
+           Semantic: "— THE WIZKOO DESK" plus dateline. Matched structure
+           — losing either half breaks the paper-note register.
+           Selector: .desk-signature + .desk-date (or equivalent)
+           Lines (2026-04-21): 1586-1587
 
-Item 12 — #theme-error element. DOM element consumed by validation
-           error display logic.
+Item 9  — Proof line.
+           Semantic: "ONE PRICE · UP TO 4 CHILDREN" — locked wording and
+           locked position at the bottom of the left column.
+           Selector: .nh-proof (or equivalent)
+           Line (2026-04-21): 1575
 
-Item 13 — #theme-network-error element. DOM element consumed by
-           network/API error display logic.
+CLUSTER C — THEME FIELD MECHANICS
 
-Item 14 — "See suggestions" Tier 1 word fallback link. Referenced by
-           error state logic.
+Item 10 — Theme-sizer auto-expand.
+           Semantic: hidden #theme-sizer span with CSS inheritance measures
+           rendered text width; input width is set via the --w custom
+           property, clamped between 15ch and 30ch. Replacing the input
+           element breaks the binding. Removal falls back to default HTML
+           input width and loses the variable-width visual.
+           Selector: #theme-sizer, #theme[style*="--w"]
+           Lines (2026-04-21): 1598, 2920-3016
 
-Item 15 — "Checking..." submit state. Transient submit button state
-           during /api/validate-theme call.
+Item 11 — Rotating placeholder system.
+           Semantic: two-tier placeholder pool — tier1 (10 words) and
+           tier2 (30 words) — shuffled together, rotating every 2800ms,
+           pausing on focus and when the input has a value. Tier1 is also
+           the "suggest" fallback pool used by Item 21. Removing either
+           tier breaks the "See suggestions" affordance.
+           Selector: .theme-ph overlay element, tier1[] and tier2[] arrays
+           in the IIFE
+           Lines (2026-04-21): 2911-2991
 
-Item 16 — Notion logging. Uses NOTION_API_KEY and
-           NOTION_MODERATION_DB_ID environment variables. Logs all
-           moderation rejections to Notion database
-           c8506fad-4656-4dac-b0a0-13aed19067be. Console.error fallback
-           on Notion failure.
+Item 12 — Two-word cap via keydown.
+           Semantic: keydown handler blocks leading space, double space,
+           and any third word. Hyphens and apostrophes are NOT word
+           separators — "super-hero" counts as one word. Naive re-
+           implementation using space-split breaks compound terms.
+           Selector: #theme input keydown listener
+           Lines (2026-04-21): 3027-3034
 
-Item 17 — Submit URL to wizkoo-plan-generator.vercel.app. Specific
-           param names (childName, childAge, theme, email, wigglyKid).
-           Changing param names breaks the handoff.
+Item 13 — Paste sanitizer.
+           Semantic: collapses whitespace on paste, takes first two
+           tokens, uses execCommand('insertText') for cursor-aware
+           insertion. Replacing with event.clipboardData.setData without
+           execCommand breaks cursor position after paste.
+           Selector: #theme input paste listener
+           Lines (2026-04-21): 3036-3044
 
-Item 18 — All existing :root design tokens in index.html. Token removal
-           is a Layer 2 hygiene task with its own scoped prompt, not a
-           side effect of form work.
+CLUSTER D — AGE COMBOBOX MECHANICS
 
-Item 19 — netlify/functions/validate-theme.js. Entire file is locked
-           from form-work prompts. Server-side Layer 2 and 3 moderation
-           logic lives here.
+Item 14 — Position:fixed anchoring.
+           Semantic: getBoundingClientRect() on trigger; manual flip
+           above-or-below based on window.innerHeight minus rect.bottom;
+           centered horizontally via (rect.width - panelW) / 2. Known
+           anchoring bug present in production; load-bearing despite the
+           bug — other logic assumes this positioning model.
+           Selector: #age-panel positioning logic in the combobox IIFE
+           Lines (2026-04-21): 2744-2764
+
+Item 15 — Scroll-close on capture phase.
+           Semantic: scroll listener with {capture: true} third argument,
+           fires on any scroll in any container. Without capture-phase,
+           the panel drifts off its anchor when the user scrolls inside a
+           nested container.
+           Selector: window scroll listener registered with capture:true
+           Line (2026-04-21): 2801
+
+Item 16 — Age range placeholder value (OPEN CORRECTION).
+           Semantic: age range placeholder currently reads "2-12". Per
+           April 20 decision, must update to "3-12". This is a known fix,
+           not a design question. One prompt touches three locations:
+           trigger placeholder at 1609, listbox option to remove at 1611,
+           fallback value at 2734.
+           Selector: #age-trigger placeholder attribute; #age-panel first
+           <li>; JS fallback constant
+           Lines (2026-04-21): 1609, 1611, 2734
+           Status: OPEN, fix pending.
+
+CLUSTER E — SUBMIT VALIDATION CHAIN (THE CONTENT GATE)
+
+Item 17 — Capture-phase submit intercept.
+           Semantic: first-wins submit listener that fires before the
+           bubble-phase listener. Uses a validationPassed flag and re-
+           dispatches a synthetic submit event to hand control to the gate
+           flow. Architecture is two listeners, two phases, one flag.
+           Understanding this is non-negotiable before touching submit —
+           naive "consolidate the listeners" refactor will break the gate.
+           Selector: form submit listener registered with {capture: true}
+           Lines (2026-04-21): 3143-3177
+
+Item 18 — Client blocklist with leet normalization.
+           Semantic: BLOCKLIST array checked against the theme input via
+           word-boundary regex (\b on left, no right boundary to catch
+           suffixed variants like "pornographic"), with leet-to-latin
+           normalization applied first (0→o, 3→e, 1→i, 4→a, 5→s, @→a,
+           !→i, $→s, 7→t).
+           Selector: BLOCKLIST const + normalizeLeet() + isThemeBlocked()
+           Lines (2026-04-21): 3047-3085, 3095-3100
+
+Item 19 — Exact-match blocklist.
+           Semantic: BLOCKLIST_EXACT array for context-sensitive terms
+           that pass in phrase form but block alone. Examples: "sex"
+           blocks, "sex education" passes; "gun" blocks, "gun safety"
+           passes. Do NOT collapse into BLOCKLIST — the semantic
+           distinction is deliberate.
+           Selector: BLOCKLIST_EXACT const + isExactBlocked()
+           Lines (2026-04-21): 3087-3093
+
+Item 20 — Server-side validation via Netlify function.
+           Semantic: POST to /api/validate-theme (Netlify function) with
+           3-second abort timeout. Separate logging request fires on
+           clientBlocked:true for analytics. The param contract and
+           timeout value are both locked.
+           Selector: /api/validate-theme fetch call in submit handler
+           Lines (2026-04-21): 3165, 3189
+
+Item 21 — Error UI states.
+           Semantic: three states — theme-error (blocked), theme-network-
+           error (timeout), see-suggestions link (auto-fills a random
+           tier1 word). aria-live="polite" on both error elements. "See
+           suggestions" is a trust-recovery mechanism, not optional.
+           Selector: #theme-error, #theme-network-error, .see-suggestions
+           link
+           Lines (2026-04-21): 1645-1646, 3120-3141
+
+Item 22 — Blocked-theme recovery flow.
+           Semantic: on block, clear input + reset width + show overlay +
+           restart rotation. The rotation restart is specific — it keeps
+           the form feeling alive after a rejection instead of defeated.
+           Removing the rotation restart is a subtle voice regression.
+           Selector: block handler in submit listener
+           Lines (2026-04-21): 3171-3175
+
+CLUSTER F — POST-SUBMIT GATE + EMAIL CAPTURE
+
+Item 23 — Two-stage gate (progress + ready).
+           Semantic: gate has two visual states — progress (4 animated
+           steps, 900ms each) transitioning to ready (personalized swap-
+           ins for gate-age, gate-theme, gate-name, gate-theme2). The
+           900ms timing is tested — shorter feels frantic, longer feels
+           broken. Do not tune the timing without user testing.
+           Selector: .gate-progress, .gate-ready, #gate-age/#gate-theme/
+           #gate-name/#gate-theme2
+           Lines (2026-04-21): 1655-1680, 2848-2903
+
+Item 24 — Onboarding URL construction.
+           Semantic: hands off name, age, theme, email, and wigglyKid to
+           /plan/onboarding as query parameters. The receiving route
+           depends on EXACTLY these param names. Renaming any param breaks
+           the handoff silently (the receiving route reads undefined).
+           Selector: submit handoff URL construction in gate ready-state
+           listener
+           Lines (2026-04-21): 2893-2898
+
+Item 25 — Progressive email-enable.
+           Semantic: the final submit button stays disabled until the
+           email field has a value. Not enforced by a native HTML
+           constraint — manual JS logic. If the manual logic is removed
+           while relying on native validation, the field bypasses the
+           gate.
+           Selector: email input listener + submit button disabled
+           property
+           Lines (2026-04-21): 2877-2886
 
 ### ADDING NEW REGISTRIES
 
@@ -3203,6 +3378,19 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v2.9 — April 21, 2026
+  Homepage Form Preservation Locks Registry upgraded from 19 items to 25
+  items, sourced from line-by-line read of production index.html by Amy's
+  AI team (2026-04-21 evening session). Adds Structural Locks cluster
+  (SEO + accessibility) and Copy Locks cluster, both missing from the
+  initial v2.5 registry. Adopts tiered anchoring convention (semantic +
+  selector + line number). Six clusters: Structural, Copy, Theme Field
+  Mechanics, Age Combobox, Submit Validation Chain, Post-Submit Gate.
+  One open correction logged: Item 16 (age range 2-12 to 3-12 per April
+  20 decision) is a known fix awaiting execution. Note: Transfer Queue
+  labeled this v2.6 but that number was already taken by the dead CSS
+  audit; assigned v2.9 instead.
 
 v2.8 — April 21, 2026
   Layer 3 Responsive Strategy Audit: RESPONSIVE_AUDIT_REPORT.md produced
