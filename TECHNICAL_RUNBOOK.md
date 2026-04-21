@@ -2632,6 +2632,25 @@ deliberate decision logged in LOCKED DECISIONS with a superseding entry.
      (--expo / --ease-out-expo consolidation) — both should be resolved
      in the same pass.
 
+7. HOVER QUERY CENTRALIZATION INTO base.css — DEFERRED
+   Current state: All pages now use consistent OR syntax
+     `(hover:none),(pointer:coarse)` (standardized April 21, 2026).
+     However, each page still declares its own hover media query inline
+     rather than inheriting from css/base.css, which already declares
+     the correct OR form at line 29.
+   What to do: For each page that declares `@media(hover:none),(pointer:coarse)`
+     inline, verify that css/base.css:29 already covers the same selectors,
+     then remove the per-page inline declaration. Pages to audit:
+     index.html (lines 543, 569, 849), about.html (134), pricing.html (91),
+     what-we-believe.html (81), ages.html (62), esa.html (129).
+   Note: Some per-page blocks contain page-specific hover resets
+     (e.g. about.html .tier:hover, what-we-believe.html .belief:hover)
+     that cannot move to base.css without creating specificity dependencies.
+     These must remain per-page; only the shared .cursor{display:none}
+     pattern is a candidate for centralization.
+   Priority: Dedicated hover centralization session. Do not mix into
+     feature work. Deferred from April 21, 2026 responsive audit (Conflict 4).
+
 ---
 
 ## ACCESSIBILITY (non-negotiable)
@@ -3184,6 +3203,17 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v2.8 — April 21, 2026
+  Layer 3 Responsive Strategy Audit: RESPONSIVE_AUDIT_REPORT.md produced
+  (5 conflicts, 4 coverage gaps). All 5 conflicts resolved mechanically:
+  Conflict 1: index.html 767px → 768px (.hz1 padding). Conflict 2:
+  index.html 1023px → 1024px (hero headline type tier). Conflict 3:
+  index.html JS comparator < 768 → <= 768 (CTA firefly guard). Conflict 4:
+  hover query AND → OR across 8 locations in 6 files. Conflict 5:
+  nav.js:258 comment documenting 1100px as nav-internal breakpoint.
+  Hover centralization into base.css deferred → OPEN ITEM 7.
+  3 commits pushed: 391090f (Pass 1), d23562d (Pass 2), 2087f59 (annotation).
 
 v2.6 — April 21, 2026
   Dead CSS audit execution (HIGH-confidence findings only):
