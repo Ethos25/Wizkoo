@@ -1225,6 +1225,7 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Wax seal (editorial note): inline SVG, 56×56px display, 80×80 viewBox. Organic blob path (not circle). 3-layer W monogram (shadow/base/highlight text offsets). Do not revert to div+span. Do not use the 6-lobe deboss-filter variant (reverted — user rejected it).
 - Hero headline line 2 ("homeschool plans."): locked at 192px. Was 216px. Reduced April 20, 2026 per user request.
 - CTA button typography ("SHOW ME THIS WEEK →"): Sora 600, 0.68rem, letter-spacing 0.06em. Matches Open Seat page `.btn-sky` treatment. Not Space Mono.
+- css/components.css easing (lines 24/25/26): cubic-bezier(0.16,1,0.3,1) left hardcoded intentionally. Consumers (index.html, the-open-seat.html) do not link tokens.css and have no --ease-out-expo in scope. Replacing with var(--ease-out-expo) would produce unresolved custom property. Option A per April 21, 2026 token consolidation pass. Revisit when OPEN ITEM 6 (link tokens.css to 8 pages) is resolved.
 
 ---
 
@@ -2596,6 +2597,41 @@ deliberate decision logged in LOCKED DECISIONS with a superseding entry.
      If both are live but producing the same output, consolidate.
    Priority: Dedicated library.css cleanup session.
 
+5. components.css line 48 — rgba(232,175,56,1) STILL HARDCODED
+   Current state: @keyframes bracket-pulse contains two keyframe stops using
+     rgba(232,175,56,1) at 0%/100% and rgba(232,175,56,0.9) at 50%.
+     The 0%/100% value was an approved Section B MEDIUM replacement in the
+     April 21, 2026 token consolidation pass, but was skipped at execution
+     time because it is inside a keyframe interpolation. Replacing with
+     var(--saffron) is technically safe (custom properties resolve before
+     animation interpolation) but was conservatively excluded per preflight
+     rules.
+   Location: css/components.css — @keyframes bracket-pulse, line 48.
+   What to do: Replace rgba(232,175,56,1) with var(--saffron) in the
+     0%/100% keyframe stop. Verify the bracket-pulse animation still
+     renders correctly in browser (saffron fully opaque → 0.9 opacity
+     pulse should be imperceptible but intact).
+   Note: rgba(232,175,56,0.9) at the 50% stop has no matching token
+     (no opacity tint tokens exist). Leave that value hardcoded.
+   Priority: Next token consolidation pass or standalone 1-line fix.
+
+6. 8 HTML PAGES — INLINE :root INSTEAD OF LINKING tokens.css
+   Current state: ages.html, contact.html, esa.html, pricing.html,
+     privacy.html, terms.html, what-we-believe.html, the-open-seat.html
+     each define their own inline :root block with token values
+     (--saffron, --ink, --linen, --paper, etc.) instead of linking
+     css/tokens.css. This creates 8 parallel sources of truth for the
+     same token values. Any future token change must be applied in 9
+     places (tokens.css + 8 inline blocks).
+   What to do: For each page: add <link rel="stylesheet" href="css/tokens.css">
+     to <head>, then remove or reduce the inline :root to only page-specific
+     overrides (e.g. --expo, --snap, --m-col if not in tokens.css).
+     Verify the page renders correctly after each change.
+   Note: index.html is excluded (Preservation Lock item 18).
+   Priority: Dedicated tokens cleanup session. Coordinate with OPEN ITEM 3
+     (--expo / --ease-out-expo consolidation) — both should be resolved
+     in the same pass.
+
 ---
 
 ## ACCESSIBILITY (non-negotiable)
@@ -3214,3 +3250,17 @@ v2.3 — April 21, 2026
     PRESERVATION LOCKS, REPORTING, VERIFICATION), Return Rule,
     and Minimum Viable Prompt pattern. Layer 0 Last updated
     date updated to April 21, 2026.
+
+v2.7 — April 21, 2026
+  Token consolidation pass (Layer 2 — PROMPT 3). 53 hardcoded
+  values replaced with var(--token) references across 16 files:
+  css/base.css (2), css/components.css (4), css/games.css (2),
+  css/library.css (17), 11 HTML pages (21), components/nav.js (7).
+  Tokens used: --saffron, --ink, --linen, --paper, --ease-out-expo,
+  --expo. 1 approved replacement skipped (components.css line 48
+  rgba keyframe interpolation — see OPEN ITEM 5). 3 replacements
+  deferred per Option A (components.css lines 24/25/26 easing —
+  see LOCKED DECISIONS). Structural finding: 8 pages with inline
+  :root instead of tokens.css link (see OPEN ITEM 6). Commit cce9476.
+  OPEN ITEMS 5 and 6 added. LOCKED DECISIONS updated with
+  components.css easing decision.
