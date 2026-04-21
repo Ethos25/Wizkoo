@@ -693,7 +693,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 /* ── Responsive ── */
 @media(max-width:1024px){.hz2-inner{padding:0 32px}}
-@media(max-width:767px){
+@media(max-width:768px){
   .hz1{padding:0}
   .hz1-inner{padding:0 20px 0 20px}
   .hz2{margin-top:16px;padding:28px 0 48px;height:auto}
@@ -889,8 +889,8 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .hero-firefly{display:none}
 }
 @media(max-width:1439px){.nh-h1-line1{font-size:34px}.nh-h1-line2{font-size:54px}.nh-h1-line3{font-size:34px}}
-@media(max-width:1023px){.nh-h1-line1{font-size:26px}.nh-h1-line2{font-size:40px}.nh-h1-line3{font-size:26px}}
-@media(max-width:767px){.nh-h1-line1{font-size:57px}.nh-h1-line2{font-size:83px}.nh-h1-line3{font-size:54px}}
+@media(max-width:1024px){.nh-h1-line1{font-size:26px}.nh-h1-line2{font-size:40px}.nh-h1-line3{font-size:26px}}
+@media(max-width:768px){.nh-h1-line1{font-size:57px}.nh-h1-line2{font-size:83px}.nh-h1-line3{font-size:54px}}
 @media(max-width:768px){
   .nh-section{padding:60px 24px;min-height:auto;align-items:flex-start}
   .nh-left{padding-top:60px}
@@ -2455,7 +2455,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
 /* ─── CTA Firefly — #pricing section ─── */
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.innerWidth < 768) return;
+  if (window.innerWidth <= 768) return;
   var cta = document.getElementById('pricing');
   if (!cta) return;
   var btn = cta.querySelector('.btn-main');
