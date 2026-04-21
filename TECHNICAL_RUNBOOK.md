@@ -27,9 +27,16 @@ Light Standard v4 (Notion): 32d335a8d332811ab922e806deeec3fb
 Build Spec Addendum (Notion): 32e335a8d33281ab802feee19d8ce22d
 $200 Standard (Notion): 338335a8d33281f699d4d705f973d430
 
-HIERARCHY RULE: If this file and the Light Standard disagree, THE LIGHT STANDARD WINS.
+HIERARCHY RULE: The Light Standard (Notion page 32d335a8d332811ab922e806deeec3fb) is
+the authority for design system values. This file extracts them for fast lookup.
+If this file and the Light Standard disagree, THE LIGHT STANDARD WINS.
 If this file and the code disagree, THE LIGHT STANDARD WINS.
-This file is a fast-lookup extract. The Notion document is the authority.
+
+TECHNICAL RUNBOOK AUTHORITY: This local file (TECHNICAL_RUNBOOK.md) is the source of
+truth for the Technical Runbook itself. The Notion mirror (page
+347335a8d332818bbd18d10b2a2170de) is a chat-session-facing copy kept in sync with this
+file through the Transfer Queue. If the local file and the Notion mirror disagree,
+THE LOCAL FILE WINS and the mirror is re-synced.
 
 ---
 
@@ -112,11 +119,30 @@ Read the Pending Transfers section completely.
 
 If any items show STATUS: PENDING:
   Read each item fully.
-  Apply it to the correct section of this document.
+  Apply it to the correct section of this document (both local copies).
+  Also update the Notion mirror: fetch the corresponding layer child
+  page under the Technical Runbook — Wizkoo parent
+  (347335a8d332818bbd18d10b2a2170de) and apply the same change to
+  that page. The Notion mirror must match the local file after every
+  Transfer Queue application. If a change spans multiple layers,
+  update all affected child pages.
   Update that item in Notion: change STATUS to APPLIED,
-  add today's date and which section it was applied to.
+  add today's date, which section(s) it was applied to,
+  and confirm the Notion mirror was also updated.
   Log what was applied in VERSION HISTORY.
-  State: "Applied [X] items from Transfer Queue."
+  State: "Applied [X] items from Transfer Queue.
+  Notion mirror synced: [list of child pages updated]."
+
+  Notion mirror child page IDs:
+    Layer 0 — Identity:             347335a8d33281d19118c3595b673eee
+    Layer 1 — Operational Protocols: 347335a8d332810ea482e135a30c0830
+    Layer 2 — Live State:            347335a8d3328166b24bd77f35e44d15
+    Layer 3 — System Map:            347335a8d33281039f71fad4c5dbdd3b
+    Layer 4 — Design System:         347335a8d3328182a7c7d69739dac96b
+    Layer 5 — Component Specs:       347335a8d33281dda1c4c3c75d0a6843
+    Layer 6 — Failure Prevention:    347335a8d3328176bf8fea86cffa41d2
+    Layer 7 — Deep Reference:        347335a8d33281148b84f97714ff1523
+    Layer 8 — History:               347335a8d33281698c4ccacaf86fbdbf
 
 If queue is empty:
   State: "Transfer Queue clear. Proceeding."
@@ -220,6 +246,16 @@ New bugs: add with file, line, root cause, fix spec.
 New failure patterns: add to Layer 6.
 Copy updated file to both codebase folders.
 
+MANDATORY MIRROR SYNC: Also update the Notion mirror to match.
+For every layer modified this session, fetch the corresponding
+layer child page under the Technical Runbook — Wizkoo parent
+(347335a8d332818bbd18d10b2a2170de) and apply the same change to
+that page. Child page IDs are listed in Step 2 of the Session
+Startup Instruction. The Notion mirror sync is same-tier as
+copying between the two local repo folders: not optional, not
+deferrable. The Verification Gate in Step 7 must include a line
+confirming every modified layer was synced to Notion.
+
 STEP 7 — VERIFICATION GATE
 Produce this ledger before closing:
 
@@ -227,6 +263,7 @@ BUILD SESSION WRITE-BACK VERIFICATION
 ✓ UPDATED: [what] → TECHNICAL_RUNBOOK.md ([X] lines)
 ✓ COPIED: C:\Users\amyog\Desktop\wizkoo ([X] lines)
 ✓ COPIED: C:\Users\amyog\Desktop\wizkoo-plan-generator ([X] lines)
+✓ NOTION MIRROR SYNCED: [list of layer child pages updated] OR "no layers modified this session"
 ✓ TRANSFER QUEUE: [items deposited OR "nothing to deposit"]
 ✓ FAILURE PATTERNS: [captured OR "none this session"]
 ✗ NOT DONE: [item] → [Amy deferred / technical blocker only]
@@ -660,6 +697,257 @@ compressed prompt is acceptable:
 All six sections are still named. The content is compressed because the
 change is small. Do not use this pattern for anything that touches a
 component, a system, or more than one file.
+
+---
+
+## PERIODIC CODE HYGIENE PROTOCOL
+
+### WHY THIS SUBSECTION EXISTS
+
+In-the-moment hygiene catches most accumulation. The Completion Standard
+enforces old-thing removal at write time. Principle 2 (Clean State
+Requirement) enforces clean state after every change. Pattern 5 (Raw Hex
+Instead of Token) catches hardcoded values as they are written. These
+rules cover the 80% case.
+
+The remaining 20% requires periodic passes. Orphaned rules slip in when
+a component is rewritten and the old rule is not caught. Token drift
+accumulates over dozens of files. Breakpoint systems get confused when
+multiple sessions touch responsive logic without the full picture. These
+failures are not caught by in-the-moment rules. They require a scheduled
+scan.
+
+This subsection defines when to run each periodic pass, what each pass
+does, and which prompt to use. The protocol moves the decision of when
+and how out of Amy's working memory and into a checklist that lives in
+the runbook.
+
+### THE FOUR LAYERS
+
+Code hygiene is an umbrella discipline with four distinct layers. Each
+layer addresses a different kind of accumulated mess. Each has its own
+risk profile and its own trigger.
+
+Layer 1 — Dead code removal. Delete CSS selectors, JS functions, and
+HTML elements that nothing references. Lowest risk because dead code
+cannot break what it does not touch. Highest immediate payoff because
+removal is mechanical and substantial debt accumulates here.
+
+Layer 2 — Token consolidation. Find hardcoded values in component files
+and replace with var(--token-name) references to the existing design
+token registry. Low risk, compounding payoff (one-line updates later
+when tokens evolve).
+
+Layer 3 — Responsive strategy audit. Examine breakpoints for coherence.
+Identify conflicts between width-based and height-based breakpoints.
+Decide whether to consolidate or formally document rules of engagement.
+Judgment-heavy. Not mechanical.
+
+Layer 4 — Full refactor. Reorganize how code is structured without
+changing what it does. Biggest lift. Highest risk. Only runs when a
+specific new feature is blocked by current architecture, never
+prophylactically.
+
+### THE OPTIMIZATION DISTINCTION
+
+Optimization is not hygiene. Hygiene is about correctness and
+maintainability. Optimization is about performance. They are different
+disciplines with different triggers, different risks, and different
+success criteria.
+
+Hygiene triggers on accumulation. Optimization triggers on measured slow
+performance. "Feels slow" is not an optimization trigger — instrumentation
+is. Before optimizing, measure. If the measurement does not show a problem,
+do not optimize.
+
+If Claude Code notices an optimization opportunity during a hygiene pass,
+flag it as a separate task. Do not bundle performance changes into a
+hygiene commit. The risks are different and mixing them makes regression
+diagnosis impossible.
+
+### TRIGGERS
+
+Layer 1 (Dead code removal) runs when:
+- Before any major redesign that will touch existing surfaces.
+- After locking a design direction (to clean up the abandoned iterations).
+- When prompts start taking longer to land than they used to (compounding
+  debt signal).
+- As a default cadence every 50 to 100 build prompts.
+
+Layer 2 (Token consolidation) runs when:
+- All Layer 1 triggers above, typically paired with a Layer 1 pass.
+- After any session that added or changed design tokens (to catch
+  hardcoded values that slipped in elsewhere).
+
+Layer 3 (Responsive strategy audit) runs when:
+- Before major layout changes that will touch breakpoints (run before
+  the redesign, not after).
+- When rendering bugs appear at odd screen sizes and it is unclear which
+  rule is winning.
+
+Layer 4 (Full refactor) runs when:
+- A specific new feature is blocked by current code architecture. The
+  trigger is mechanical: "I tried to add X and it broke Y because of
+  how the code is organized."
+- Never prophylactically. Never because the code "feels messy." The
+  trigger is a named blocked feature.
+
+### PRE-WRITTEN PROMPTS
+
+Five prompts below, all following the six-section Prompt Construction
+Discipline standard. Copy, adjust specifics as needed, paste into
+Claude Code.
+
+PROMPT 1 — LAYER 1 DEAD CODE AUDIT (REPORT-ONLY)
+
+TASK: Audit the marketing site codebase for dead CSS. Produce a findings
+  report in DEAD_CSS_AUDIT_REPORT.md. No modifications to any file.
+
+SCOPE: In scope: all CSS files under css/ at repo root, any <style>
+  blocks in index.html and all top-level HTML pages, any CSS inside
+  components/nav.js. Out of scope: /games/ subdirectory, plan generator
+  repo entirely, any JavaScript logic.
+
+RECONCILIATION AUTHORIZED: None. This is report-only. Do not modify
+  any file.
+
+PRESERVATION LOCKS: All files. No modifications of any kind permitted
+  in this pass.
+
+REPORTING: Produce DEAD_CSS_AUDIT_REPORT.md with findings in four
+  categories: orphaned selectors, unused custom properties, commented-
+  out rule blocks, duplicate selectors. Each finding includes file path,
+  line number, evidence (grep commands run and files searched),
+  confidence level (HIGH/MEDIUM/LOW), recommendation (SAFE_TO_REMOVE /
+  REVIEW_REQUIRED / KEEP_WITH_NOTE).
+
+VERIFICATION: Confirm DEAD_CSS_AUDIT_REPORT.md was created at repo root.
+  Confirm no other file was modified (git status shows only the new
+  report). Stop. Do not execute any deletions. Amy reviews the report
+  before any execution prompt runs.
+
+PROMPT 2 — LAYER 1 DEAD CODE EXECUTION (AFTER AUDIT REVIEW)
+
+TASK: Execute dead CSS cleanup based on DEAD_CSS_AUDIT_REPORT.md.
+  Remove all HIGH-confidence findings in Categories 1 (orphaned
+  selectors) and 2 (unused custom properties). Defer Category 4
+  (duplicates) unless explicitly approved per-finding.
+
+SCOPE: Marketing site repo only. In scope: files flagged for full
+  deletion in the audit report, inline <style> block selectors flagged
+  in the report, CSS file selector removals flagged in the report,
+  unused token removals in css/tokens.css, inert JavaScript null-guards
+  for removed elements (only if their sole purpose was handling now-
+  removed elements). Out of scope: /games/ subdirectory, plan generator
+  repo, components/nav.js runtime injection, any form-related code.
+
+RECONCILIATION AUTHORIZED: Remove all HIGH-confidence findings per the
+  audit report. Remove responsive override rules in media queries if
+  their main rule is being deleted in the same pass (dependency cleanup).
+  Do NOT restructure surviving code. Do NOT rename any selector. Do NOT
+  refactor file organization.
+
+PRESERVATION LOCKS: Do not touch any item in the Homepage Form
+  Preservation Locks Registry (see Layer 6). Do not touch
+  netlify/functions/ at all. Do not touch plan generator code. Do not
+  touch files in /games/.
+
+REPORTING: Before executing, list every file to modify or delete and
+  the specific changes per file. Wait for approval. After executing,
+  produce a ledger: files deleted with line counts, files modified with
+  selectors removed and line deltas, total lines removed net, any
+  finding not executed with reason.
+
+VERIFICATION: Run git status and git diff --stat. Confirm scope
+  integrity. Open representative pages in dev server, confirm no console
+  errors or visual regressions. Commit with descriptive message. Do NOT
+  push — Amy reviews before push.
+
+PROMPT 3 — LAYER 2 TOKEN CONSOLIDATION
+
+TASK: Find hardcoded color, spacing, and typography values in component
+  files that should be using existing CSS custom properties from
+  css/tokens.css. Produce a consolidation report, then execute approved
+  replacements.
+
+SCOPE: In scope: all CSS files under css/ except tokens.css (which is
+  the source), inline <style> blocks in HTML pages, CSS-in-JS inside
+  components/nav.js. Out of scope: /games/ subdirectory, plan generator
+  repo, images and SVGs, any value that is intentionally unique to one
+  component and not meant to be shared.
+
+RECONCILIATION AUTHORIZED: Replace hardcoded values with var(--token-name)
+  references where an exact match exists in tokens.css. Remove any token
+  in tokens.css that becomes unused as a result of consolidation. Do NOT
+  invent new tokens. Do NOT rename existing tokens. If a hardcoded value
+  has no matching token, report it but leave it.
+
+PRESERVATION LOCKS: Do not touch tokens.css itself except to remove tokens
+  that become unused. Do not touch any :root block in index.html
+  (Preservation Locks Registry item 18). Do not touch any form-related
+  code.
+
+REPORTING: Before executing, produce a report: every hardcoded value
+  found, which file and line, which token it would map to, confidence
+  the match is correct. Include any hardcoded values that have no token
+  match, separately. Wait for approval. After executing, produce a
+  ledger: replacements made per file, tokens removed, any values left
+  hardcoded with reason.
+
+VERIFICATION: Run git status. Confirm scope integrity. Open representative
+  pages in dev server, confirm no visual regressions. Commit with
+  descriptive message. Do NOT push — Amy reviews before push.
+
+PROMPT 4 — LAYER 3 RESPONSIVE STRATEGY AUDIT
+
+TASK: Audit the marketing site's breakpoint strategy. Document the
+  current system, identify conflicts between width-based and height-
+  based breakpoints, and recommend consolidation OR formalize rules of
+  engagement for the current split. Produce RESPONSIVE_AUDIT_REPORT.md.
+  Do not modify any file.
+
+SCOPE: In scope: all @media queries in all CSS files, all @media queries
+  in inline <style> blocks, any JS-driven viewport logic. Out of scope:
+  /games/, plan generator repo.
+
+RECONCILIATION AUTHORIZED: None. Report-only.
+
+PRESERVATION LOCKS: All files. Report-only.
+
+REPORTING: Produce RESPONSIVE_AUDIT_REPORT.md with complete inventory
+  of every breakpoint (width-based and height-based) and which file and
+  line; analysis of overlap; analysis of coverage gaps; recommendation
+  for each conflict (consolidate, document intentional split, or revise).
+
+VERIFICATION: Confirm RESPONSIVE_AUDIT_REPORT.md was created at repo
+  root. Confirm no other file was modified. Stop. Amy reviews and decides
+  next action.
+
+PROMPT 5 — LAYER 4 REFACTOR SCOPING (NOT EXECUTION)
+
+TASK: A specific new feature is blocked by current code architecture.
+  Assess whether a refactor is the right answer, what surface area it
+  would touch, and what the risk profile is. Produce a scoping document.
+  Do not execute any refactor.
+
+  [Amy: replace this line with the specific blocked feature context
+  before running this prompt.]
+
+SCOPE: In scope: analysis only, targeting the named blocked feature.
+  Out of scope: all other refactor candidates, any execution.
+
+RECONCILIATION AUTHORIZED: None. Scoping only.
+
+PRESERVATION LOCKS: All files. No modifications.
+
+REPORTING: Produce REFACTOR_SCOPING.md with the blocked feature named
+  explicitly; the current architecture blocking it; the minimum refactor
+  scope that would unblock (not the ideal, the minimum); files and
+  functions touched; risk profile; estimated effort; alternative
+  approaches that would avoid the refactor entirely.
+
+VERIFICATION: Confirm REFACTOR_SCOPING.md was created. Confirm no other
+  file was modified. Stop. Amy reviews and decides.
 
 ---
 
@@ -2131,6 +2419,128 @@ confirms absence.
 
 ---
 
+## PRESERVATION LOCKS REGISTRY
+
+### WHY THIS SECTION EXISTS
+
+Preservation locks are systems, files, or code sections that must not
+be modified even when Claude Code believes a modification would improve
+things. Without a registry, these locks live only in Amy's prompt
+context — listed manually every session that touches a surface with
+locked systems. Forgetting to include a lock in a prompt produces
+silent breaks: Claude Code sees the locked code, assesses it as
+cleanable, and modifies it. The break is not discovered until the
+broken system is exercised.
+
+This registry moves the locks from per-prompt recitation to session-
+start ambient protection. The Session Startup Instruction loads Layer 6
+at every session. Locks registered here are known to Claude Code from
+the first prompt forward. Amy's prompts reference the registry by name
+instead of re-listing items.
+
+### HOW TO USE THE REGISTRY
+
+Operator side (Amy drafting prompts): in the PRESERVATION LOCKS section
+of any prompt touching a registered surface, reference the registry by
+name. Example: "Do not touch any item in the Homepage Form Preservation
+Locks Registry." Do not re-list items inline. If the prompt targets a
+specific registered surface, name it. If the prompt is broader,
+reference all relevant registries.
+
+Executor side (Claude Code receiving prompts): Layer 6 is loaded at
+session start. Every registered lock is known from session open. If a
+prompt appears to touch a registered surface but does not explicitly
+reference the registry in its PRESERVATION LOCKS section, Claude Code
+must proactively apply the registry and confirm with Amy before
+executing. Enforcement by default, not by invocation.
+
+### HOMEPAGE FORM PRESERVATION LOCKS
+
+Surface: the intake form on the homepage hero (index.html). Origin:
+three-layer content moderation architecture and Notion logging
+integration built April 2026. Breaking any item below produces silent
+form failures in production.
+
+Item 1  — BLOCKLIST array (~100 terms). Client-side Layer 1 word-
+           boundary match list. Catches plurals and suffixes.
+
+Item 2  — BLOCKLIST_EXACT array (~12 terms). Client-side Layer 1 full-
+           input match list. For terms that must allow legitimate phrased
+           use but block exact submission.
+
+Item 3  — normalizeLeet() function. Leet-speak conversion (0→o, 3→e,
+           1→i/l, 4→a, 5→s, @→a, !→i). Prevents bypass via character
+           substitution.
+
+Item 4  — isThemeBlocked() and isExactBlocked() functions. Check
+           functions that consume the blocklists.
+
+Item 5  — Capture-phase submit listener. First interception. Runs
+           Layer 1 client blocklist check, then POSTs to
+           /api/validate-theme for Layer 2 and 3 checks.
+
+Item 6  — Bubble-phase submit listener. Runs after capture phase
+           clears. Handles progress gate display and email capture flow.
+
+Item 7  — checkReady() function. Submit button gating logic. Enables
+           or disables submit based on form state.
+
+Item 8  — Theme field keydown handler. Prevents 3rd word and double
+           spaces. Enforces theme format constraint at input time.
+
+Item 9  — Paste sanitizer. Prevents multi-line pastes and mass-paste
+           attack vectors.
+
+Item 10 — 60-char maxlength on theme input. Enforced in HTML attribute.
+
+Item 11 — 30-char maxlength on name input. Enforced in HTML attribute.
+
+Item 12 — #theme-error element. DOM element consumed by validation
+           error display logic.
+
+Item 13 — #theme-network-error element. DOM element consumed by
+           network/API error display logic.
+
+Item 14 — "See suggestions" Tier 1 word fallback link. Referenced by
+           error state logic.
+
+Item 15 — "Checking..." submit state. Transient submit button state
+           during /api/validate-theme call.
+
+Item 16 — Notion logging. Uses NOTION_API_KEY and
+           NOTION_MODERATION_DB_ID environment variables. Logs all
+           moderation rejections to Notion database
+           c8506fad-4656-4dac-b0a0-13aed19067be. Console.error fallback
+           on Notion failure.
+
+Item 17 — Submit URL to wizkoo-plan-generator.vercel.app. Specific
+           param names (childName, childAge, theme, email, wigglyKid).
+           Changing param names breaks the handoff.
+
+Item 18 — All existing :root design tokens in index.html. Token removal
+           is a Layer 2 hygiene task with its own scoped prompt, not a
+           side effect of form work.
+
+Item 19 — netlify/functions/validate-theme.js. Entire file is locked
+           from form-work prompts. Server-side Layer 2 and 3 moderation
+           logic lives here.
+
+### ADDING NEW REGISTRIES
+
+This section is designed to expand. Candidate surfaces that may warrant
+their own preservation registries as they harden: Plan Generator
+onboarding form (Next.js app), Plan Generator webhook handlers (Stripe,
+Clerk), Plan Generator cron jobs, Elementum game state management
+(game.js monolith), Atlas continent palette and geographic data, Safety
+gate logic (safety.ts).
+
+New registries are added via the Transfer Queue. Each new registry
+follows the same format: surface name, origin context, numbered items
+with one-line rationale per item. Registries never shrink except by
+deliberate decision logged in LOCKED DECISIONS with a superseding entry.
+
+---
+
 ## OPEN ITEMS (post-launch follow-up)
 
 1. BRUSHSTROKE SVG ASSET — UPGRADE REQUIRED
@@ -2728,6 +3138,24 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v2.5 — April 21, 2026
+  Periodic Code Hygiene Protocol added to Layer 1 (four-layer taxonomy:
+  dead code, token consolidation, responsive audit, full refactor;
+  triggers for each; optimization distinction; 5 pre-written prompts
+  following the six-section Prompt Construction Discipline standard).
+  Preservation Locks Registry added to Layer 6 as a new section with
+  Homepage Form subsection covering 19 locked items. Registry designed
+  to expand as additional surfaces harden.
+
+v2.4 — April 21, 2026
+  Notion mirror sync enforcement added: Layer 0 Hierarchy Rule
+  disambiguated (Technical Runbook authority separated from Light
+  Standard authority); Layer 1 Step 2 extended with mirror sync
+  requirement and 9 child page IDs; Close Protocol Step 6 extended
+  with MANDATORY MIRROR SYNC paragraph; Verification Gate ledger
+  extended with NOTION MIRROR SYNCED line. Closes the drift gap
+  between local TECHNICAL_RUNBOOK.md and Notion mirror.
 
 v2.3 — April 21, 2026
   Three Transfer Queue items applied:
