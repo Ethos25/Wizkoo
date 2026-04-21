@@ -42,21 +42,16 @@
   /* ── Element family colors ── */
   --elem-nonmetal: #5B8C5A;
   --elem-noble-gas: #7B68AE;
-  --elem-alkali: #D4654A;
   --elem-transition: #4A7FB5;
   --elem-metalloid: #8B7355;
 
   /* ── Program colors ── */
   --prog-atlas: #2D7A8A;
   --prog-elementum: var(--saffron);
-  --prog-reading: #8B6B5A;
-  --prog-handson: #C4714A;
-  --prog-mystery: #6B5B8A;
 
   /* ── Animation timing ── */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-fast: 200ms;
   --duration-normal: 400ms;
   --duration-slow: 700ms;
   --duration-reveal: 900ms;

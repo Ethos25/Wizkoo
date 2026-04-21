@@ -205,11 +205,6 @@ body {
 .abc-tagline {
   display: none;
 }
-/* dummy closing so the block below is correct */
-.abc-tagline-placeholder {
-  margin-top: 4px;
-}
-
 /* ── Filter Bar ──────────────────────────────────────────────────────────── */
 .lib-filters {
   padding: 0 var(--content-pad) 24px;
@@ -272,54 +267,6 @@ body {
 .lib-active-filters.has-chips {
   display: block;
 }
-.lib-chips {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-.lib-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  background: var(--saffron);
-  color: var(--ink);
-}
-.lib-chip-remove {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  line-height: 1;
-  padding: 0;
-  color: var(--ink);
-  opacity: .6;
-  transition: opacity .15s;
-}
-.lib-chip-remove:hover { opacity: 1; }
-.lib-clear-all {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--mid);
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  padding: 4px;
-  transition: color .15s;
-}
-.lib-clear-all:hover { color: var(--ink); }
-
 /* ── Book Grid Section ───────────────────────────────────────────────────── */
 .lib-grid-section {
   padding: 0 var(--content-pad) clamp(64px, 10vh, 120px);
@@ -362,30 +309,6 @@ body {
   background: linear-gradient(90deg, rgba(232,175,56,0.35), transparent);
   margin-bottom: 20px;
 }
-/* legacy label kept for fallback */
-.lib-theme-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: #8C91A5;
-}
-.lib-theme-pdf-btn {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: rgba(232,175,56,0.65);
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  padding: 0;
-  transition: color .15s;
-}
-.lib-theme-pdf-btn:hover { color: #E8AF38; }
-
 /* Band view — rendered when a band card is clicked */
 .lib-band-view { padding: 0 0 64px; }
 
@@ -435,30 +358,6 @@ body {
   border-color: rgba(232,175,56,0.5);
 }
 
-/* Age band section header (legacy) */
-.lib-band-header {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin: 56px 0 8px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.lib-band-header:first-child { margin-top: 0; }
-.lib-band-title {
-  font-family: 'Sora', sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-  letter-spacing: -.02em;
-  color: #F0F2F8;
-}
-.lib-band-role {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: #E8AF38;
-}
 .lib-band-pdf-btn {
   margin-left: auto;
   font-family: 'Space Mono', monospace;
@@ -591,9 +490,6 @@ body {
   font-size: 7px;
   color: rgba(12,16,32,0.4);
   margin-bottom: 0;
-}
-.book-card-hook {
-  display: none;
 }
 .book-card-orbital {
   display: flex;
