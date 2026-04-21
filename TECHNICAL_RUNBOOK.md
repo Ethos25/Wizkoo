@@ -1289,23 +1289,12 @@ CSS directory (C:\Users\amyog\Desktop\wizkoo\css\):
                       design tokens. All pages import this first.
   base.css            Global reset, custom cursor, wordmark, primary/secondary
                       buttons, skip-nav. (~4.9 KB)
-  nav.css             Navigation bar styles. Defines sticky behavior, z-index,
-                      announcement bar, wordmark, CTA, hamburger, mobile menu.
-                      (~6.8 KB). Note: nav.js overrides/extends these.
   footer.css          Footer styles. Primarily nav resets inside footer context
                       and .footer-fade gradient transition zone. The dark
                       planetarium background lives in footer.js inline styles.
-  animations.css      Scroll reveal system: .reveal, .reveal-left, .reveal-right,
-                      .reveal-scale, .reveal-stagger, grain overlay. (~2.3 KB)
-  homepage.css        All homepage section styles. Hero, plan split, same-room,
-                      orientation, games band, philosophy, testimonials, FAQ,
-                      CTA. (~21.2 KB)
   library.css         Library and book pages. Dark space theme, star field,
                       age band selector, filter pills, book grid, book cards,
-                      book detail (.bk-*), modal. (~32.7 KB)
-  planner.css         Plan generator tool styles: progress bar, form inputs,
-                      theme grid, loading screen, plan output, day sections,
-                      same-room snapshot, print styles. (~17.8 KB)
+                      book detail (.bk-*), modal. (1146 lines, ~30 KB)
   games.css           Games pages: hub cards, showcase hero, feature blocks,
                       postcard grid, element cards, CTA section. (~6.8 KB)
 
@@ -2417,6 +2406,22 @@ CSS rule), not the semantic label you expected the class to have.
 Never accept "not present" until a mechanism-based search
 confirms absence.
 
+PATTERN 10 — RESPONSIVE OVERRIDE MISS
+When removing a dead top-level selector, the audit will miss
+corresponding responsive overrides for that same selector
+defined inside @media query blocks lower in the same file.
+Example: During the April 2026 dead CSS cleanup, top-level
+rules like .hero-eyebrow, .hero-cascade, .hcard* and .id-tags-*
+were correctly identified and removed, but their mobile overrides
+inside @media(max-width:768px) were not flagged in the original
+audit and were only caught during execution.
+Prevention rule: After removing any top-level dead selector,
+immediately grep for that selector name across all @media
+blocks in the same file before declaring the removal complete.
+Any responsive override for a dead selector is also dead.
+The audit pass is not complete until both the top-level rule
+and all its responsive overrides have been confirmed removed.
+
 ---
 
 ## PRESERVATION LOCKS REGISTRY
@@ -2571,8 +2576,8 @@ deliberate decision logged in LOCKED DECISIONS with a superseding entry.
 3. --expo EASING TOKEN — CONSOLIDATION REQUIRED
    Current state: --expo is defined in index.html's inline :root. --ease-out-expo
      is defined in css/tokens.css. They are the same curve. css/tokens.css is not
-     linked from index.html. Components and linked stylesheets (animations.css,
-     components.css) use --ease-out-expo from tokens.css. Inline index.html styles
+     linked from index.html. Components and linked stylesheets (components.css)
+     use --ease-out-expo from tokens.css. Inline index.html styles
      use --expo. This is fragmentation of the same token across two files.
    What to do: Link css/tokens.css from index.html. Remove --expo from the inline
      :root (or alias it to --ease-out-expo for backwards compatibility). Update all
@@ -2580,6 +2585,16 @@ deliberate decision logged in LOCKED DECISIONS with a superseding entry.
      This unifies the token under one name, one file, one definition.
    Related: Known Bug #7 (--ease-out-expo not linked in index.html).
    Priority: Dedicated tokens cleanup session. Do not mix into feature work.
+
+4. .lib-active-filters DUPLICATE — DEFERRED
+   Current state: .lib-active-filters is defined twice in css/library.css:
+     once in the main block (~line 228) and again in the responsive section
+     (~line 746). These are structurally distinct contexts (base vs. mobile
+     override), but the duplication was flagged in the April 2026 dead CSS
+     audit as Category 4 Finding 4.1 and deferred by Amy's explicit decision.
+   What to do: Audit both blocks. If one is genuinely dead, remove it.
+     If both are live but producing the same output, consolidate.
+   Priority: Dedicated library.css cleanup session.
 
 ---
 
@@ -2611,7 +2626,7 @@ or prompt system internals. Do not read on every session.
 
 ## CSS CUSTOM PROPERTIES — MARKETING SITE
 
-Source: C:\Users\amyog\Desktop\wizkoo\css\tokens.css (67 lines, :root block)
+Source: C:\Users\amyog\Desktop\wizkoo\css\tokens.css (62 lines, :root block)
 
 Colors:
   --saffron:              #E8AF38                                         (line 3)
@@ -2652,28 +2667,23 @@ Shadows:
 Element family colors (Elementum app):
   --elem-nonmetal:        #5B8C5A                                         (line 43)
   --elem-noble-gas:       #7B68AE                                         (line 44)
-  --elem-alkali:          #D4654A                                         (line 45)
-  --elem-transition:      #4A7FB5                                         (line 46)
-  --elem-metalloid:       #8B7355                                         (line 47)
+  --elem-transition:      #4A7FB5                                         (line 45)
+  --elem-metalloid:       #8B7355                                         (line 46)
 
 Program colors:
-  --prog-atlas:           #2D7A8A                                         (line 50)
-  --prog-elementum:       var(--saffron)                                  (line 51)
-  --prog-reading:         #8B6B5A                                         (line 52)
-  --prog-handson:         #C4714A                                         (line 53)
-  --prog-mystery:         #6B5B8A                                         (line 54)
+  --prog-atlas:           #2D7A8A                                         (line 49)
+  --prog-elementum:       var(--saffron)                                  (line 50)
 
 Animation:
-  --ease-out-expo:        cubic-bezier(0.16, 1, 0.3, 1)                  (line 57)
-  --ease-out-back:        cubic-bezier(0.34, 1.56, 0.64, 1)              (line 58)
-  --duration-fast:        200ms                                           (line 59)
-  --duration-normal:      400ms                                           (line 60)
-  --duration-slow:        700ms                                           (line 61)
-  --duration-reveal:      900ms                                           (line 62)
+  --ease-out-expo:        cubic-bezier(0.16, 1, 0.3, 1)                  (line 53)
+  --ease-out-back:        cubic-bezier(0.34, 1.56, 0.64, 1)              (line 54)
+  --duration-normal:      400ms                                           (line 55)
+  --duration-slow:        700ms                                           (line 56)
+  --duration-reveal:      900ms                                           (line 57)
 
 Texture:
-  --grain-opacity:        0.03                                            (line 65)
-  --noise-url:            SVG data URL (fractalNoise baseFrequency 0.9, 4 octaves) (line 66)
+  --grain-opacity:        0.03                                            (line 60)
+  --noise-url:            SVG data URL (fractalNoise baseFrequency 0.9, 4 octaves) (line 61)
 
 Additional tokens defined inline in nav.js (injected into :root, lines 27–31):
   --expo:                 cubic-bezier(0.16,1,0.3,1)
@@ -3138,6 +3148,35 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v2.6 — April 21, 2026
+  Dead CSS audit execution (HIGH-confidence findings only):
+  Deleted 4 orphaned CSS files: css/homepage.css (~21.2 KB),
+    css/planner.css (~17.8 KB), css/nav.css (~6.8 KB),
+    css/animations.css (~2.3 KB). Combined ~48 KB removed.
+  Removed 5 unused tokens from css/tokens.css (67 → 62 lines):
+    --elem-alkali, --prog-reading, --prog-handson, --prog-mystery,
+    --duration-fast.
+  Removed 6 dead selector blocks from css/library.css
+    (1250 → 1146 lines): .abc-tagline-placeholder, .lib-chips group
+    (6 selectors), .lib-theme-label/.lib-theme-pdf-btn group,
+    .lib-band-header group, .book-card-hook.
+  Removed 19 dead inline style blocks from index.html plus 4
+    surgical media query edits (3216 → 3030 lines). Key removals:
+    .hero-cascade/.hcard* group, .id-tags-* group,
+    .thread-section group, .arrival group, .hz3 group,
+    .open-seat-zone group, and all responsive overrides for these.
+  Removed 3 dead JS null-guards from index.html.
+  Preserved: getOSDotPos() null-guard (still called by live
+    firefly animation — element absent from DOM but function
+    required for coordinate fallback).
+  Deferred: .lib-active-filters duplicate (Category 4 Finding 4.1)
+    by Amy's explicit decision. Logged in OPEN ITEMS item 4.
+  New failure pattern documented: Pattern 10 — Responsive Override
+    Miss (responsive overrides for dead selectors not caught by
+    top-level-only audit pass).
+  CRITICAL FILE MAP and CSS CUSTOM PROPERTIES sections updated
+    to reflect deleted files and removed tokens.
 
 v2.5 — April 21, 2026
   Periodic Code Hygiene Protocol added to Layer 1 (four-layer taxonomy:
