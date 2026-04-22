@@ -102,10 +102,11 @@ State out loud:
   1. Both local codebase paths
   2. Canonical saffron hex value
   3. Environment assigned to the page you will work on today
-  4. Confirm Operating Principles active by naming all six by number:
+  4. Confirm Operating Principles active by naming all seven by number:
      (1) Pre-flight audit, (2) Clean state requirement,
      (3) Report superseded rules, (4) Three-strike reset rule,
-     (5) Specificity hygiene, (6) One source of truth per component.
+     (5) Specificity hygiene, (6) One source of truth per component,
+     (7) Viewport verification requirement.
 Do not begin work until all four are confirmed. Stating the principles
 is not optional — it confirms they are active for the session, not
 just present in the document.
@@ -496,9 +497,18 @@ scopes, consolidate during the change. If consolidation is out of scope for
 the current change, flag it and propose a separate cleanup pass. Do not add
 to a distributed mess.
 
+PRINCIPLE 7 — VIEWPORT VERIFICATION REQUIREMENT
+Any visual change to the homepage or any page with a viewport-height-locked
+hero section must include verification at the four target viewports defined
+in Layer 4 VIEWPORT REALITY CONSTRAINTS: 1440x900 native, 1280x540 compressed
+desktop, 375x667 iPhone SE, 430x932 iPhone 15 Pro Max. Verification belongs
+in the VERIFICATION section of the six-section prompt standard. Skipping this
+check is the single most common source of "it looked fine in design but broke
+in production" failures. Not optional on visual changes.
+
 SESSION-START INSTRUCTION (verbatim, every session):
   "This session operates under Claude Code Operating Principles
-   (see Wizkoo technical runbook). Apply all six principles to every
+   (see Wizkoo technical runbook). Apply all seven principles to every
    change in this session. Pre-flight audit before every non-trivial
    change. Report superseded rules as part of every change. If three
    consecutive tweaks fail, request a reset."
@@ -2138,6 +2148,82 @@ a specific weight, every animation has a named curve, and every pixel has a reas
 
 ---
 
+## VIEWPORT REALITY CONSTRAINTS
+
+### WHY THIS SUBSECTION EXISTS
+
+Breakpoint values documented in CSS are not the same thing as the viewports
+real users actually see. A codebase can have correct 768px and 1024px
+breakpoints and still fail in production because the actual usable viewport
+of a real user's setup does not match the theoretical width. The most common
+source of this mismatch: DPI scale.
+
+A 1440x900 laptop display running at 200% DPI scale renders content as if
+the viewport is 1280x540. Add a Chrome bookmarks bar and the usable vertical
+drops to roughly 500px. This is not an edge case. Parents over 40 with
+standard eyesight turn up DPI scaling by default. Chrome bookmarks bars are
+default behavior. A significant share of the actual audience experiences this
+compressed viewport.
+
+This subsection names the four target viewports every homepage visual change
+must pass before signoff. It moves viewport compliance from per-session recall
+(Amy remembering to mention it) to ambient constraint (the runbook asserting
+it for every session).
+
+### THE FOUR TARGET VIEWPORTS
+
+PRIMARY DESKTOP
+  Dimensions: 1440x900 native resolution.
+  DPI scale: 100%.
+  Chrome bookmarks bar: absent.
+  Role: baseline design target. Most marketing screenshots and design mockups
+  are produced at this setting.
+
+COMPRESSED DESKTOP
+  Dimensions: 1440x900 at 200% DPI scale equals 1280x540 usable.
+  Chrome bookmarks bar: present (standard Chrome default).
+  Usable vertical after browser chrome plus bookmarks bar: approximately 500px.
+  Role: Amy's own working setup. Represents a major real user segment — parents
+  over 40, anyone with standard eyesight who turns up scaling. This is NOT an
+  edge case. Submit button on homepage MUST remain above the fold at this setting.
+
+MOBILE IPHONE SE
+  Dimensions: 375x667.
+  Role: narrow mobile floor. Submit button must be reachable within one scroll gesture.
+
+MOBILE IPHONE 15 PRO MAX
+  Dimensions: 430x932.
+  Role: tall mobile ceiling. Submit button must be reachable within one scroll
+  gesture. Content should not leave awkward empty space in the vertical.
+
+### THE VERIFICATION REQUIREMENT
+
+Any visual change to the homepage or to any page with a viewport-height-locked
+hero section must be verified at all four target viewports before signoff. Not
+"designed for." Actually opened in a browser or dev tools emulator at each
+setting and checked.
+
+Claude Code prompts that touch homepage visual surface must include this
+four-viewport verification in the VERIFICATION section of the six-section
+prompt standard. Example VERIFICATION clause:
+
+  "Open index.html in dev server. Verify at four target viewports per Layer 4
+  Viewport Reality Constraints: (1) 1440x900 native, (2) 1280x540 emulated
+  compressed desktop, (3) 375x667 iPhone SE, (4) 430x932 iPhone 15 Pro Max.
+  Submit button must be visible without scroll at compressed desktop and
+  reachable within one scroll gesture on both mobile viewports. Report any
+  viewport that fails the check."
+
+### RELATED RUNBOOK CONTENT
+
+Height-query scope (899/700/500px breakpoints on index.html only) exists
+precisely to handle the compressed desktop case. See Layer 5 for the full
+Wizkoo Viewport Standard (Tier 1 universal rules). See Layer 6 Homepage Form
+Preservation Locks Registry for surface-protection constraints that operate
+alongside viewport constraints.
+
+---
+
 ═══════════════════════════════════════
 LAYER 5 — COMPONENT SPECS
 Read this layer when working on animated or interactive components.
@@ -3681,6 +3767,16 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v3.1 — April 22, 2026
+  Viewport Reality Constraints subsection added to Layer 4 codifying four
+  target viewports (1440x900 primary, 1280x540 compressed desktop, 375x667
+  iPhone SE, 430x932 iPhone 15 Pro Max) every homepage visual change must
+  pass. Operating Principles extended with Principle 7 (Viewport Verification
+  Requirement). Session Startup Step 1 and session-start instruction updated
+  to reference "all seven principles." Applied from Transfer Queue item dated
+  2026-04-21 evening. Moves viewport compliance from per-session recall to
+  ambient constraint.
 
 v3.0 — April 22, 2026
   Wizkoo Viewport Standard added to Layer 5 as "Section 3 — Everything
