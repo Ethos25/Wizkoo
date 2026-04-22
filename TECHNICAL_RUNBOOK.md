@@ -65,7 +65,7 @@ When a decision is made: add it to Locked Decisions before closing.
 When the Light Standard updates: reconcile this file against it.
 The Light Standard is always the authority. This file is the fast lookup.
 
-Last updated: April 21, 2026
+Last updated: April 22, 2026
 Maintained by: Amy Oguntala
 
 ---
@@ -77,7 +77,7 @@ LAYER 1 — OPERATIONAL PROTOCOLS: Session startup, close protocol, git protocol
 LAYER 2 — LIVE STATE: Pages status, known bugs, nav deliberate hold, locked decisions
 LAYER 3 — SYSTEM MAP: Codebase locations, file maps, environment variables, dependencies, deployment
 LAYER 4 — DESIGN SYSTEM: Surfaces, color system, typography, motion, nav system, $200 standard
-LAYER 5 — COMPONENT SPECS: Generation spectacle, firefly, homepage hero, atlas continent palette
+LAYER 5 — COMPONENT SPECS: Generation spectacle, firefly, homepage hero, atlas continent palette, Section 3 viewport standard + diagnostic protocol + implementation reference
 LAYER 6 — FAILURE PREVENTION: Known Claude Code failure patterns, accessibility, performance
 LAYER 7 — DEEP REFERENCE: CSS custom properties (both codebases), API surface, prompt templates
 LAYER 8 — HISTORY: Version history
@@ -1226,6 +1226,9 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Hero headline line 2 ("homeschool plans."): locked at 192px. Was 216px. Reduced April 20, 2026 per user request.
 - CTA button typography ("SHOW ME THIS WEEK →"): Sora 600, 0.68rem, letter-spacing 0.06em. Matches Open Seat page `.btn-sky` treatment. Not Space Mono.
 - css/components.css easing (lines 24/25/26): cubic-bezier(0.16,1,0.3,1) left hardcoded intentionally. Consumers (index.html, the-open-seat.html) do not link tokens.css and have no --ease-out-expo in scope. Replacing with var(--ease-out-expo) would produce unresolved custom property. Option A per April 21, 2026 token consolidation pass. Revisit when OPEN ITEM 6 (link tokens.css to 8 pages) is resolved.
+- Section height at max-height:700px: MUST be height:100vh. NEVER height:max(Nvh, fixed-px). Locked April 22, 2026. A fixed-px floor that exceeds the viewport (e.g. 500px in a 396px viewport) creates scroll-position drift — padding-top appears to change between loads depending on where the scroll lands. Only 100vh guarantees consistent padding behavior.
+- ec-proofs column-gap (desktop base): 4px. Locked April 22, 2026. Reduced from 28px original → 16px → 4px per user preference. Do not increase without explicit instruction.
+- ec-col-copy padding-top at short-wide query (max-height:700px, min-width:768px): 96px. Locked April 22, 2026. Minimum for nav clearance at production display (combined nav + announcement ≈100px CSS). Do not reduce below 96px at this breakpoint.
 
 ---
 
@@ -1273,6 +1276,12 @@ Root-level pages (every HTML file is a self-contained page):
   404.html            Error page.
   README.md           Points to this Technical Runbook. First file
                       any AI or developer reads when opening the repo.
+  SECTION_3_BASELINE_2026-04-22.md
+                      Known-good baseline snapshot for Section 3 (ec-scenario)
+                      captured April 22, 2026. All CSS line numbers, active query
+                      logic, locked values. Quick-paste Notion artifact. Superseded
+                      structurally by TIER 1–3 section in Layer 5 of this runbook,
+                      but retained as standalone restore reference.
 
 Config and tooling:
   CLAUDE.md           Claude Code project instructions. Dev server setup
@@ -2304,6 +2313,285 @@ Saffron (#E8AF38) NEVER appears as a geographic color.
 
 ---
 
+## SECTION 3 — "EVERYTHING CONNECTS" RESPONSIVE STANDARD
+
+This section documents, in three tiers, everything established while building
+Section 3 (the turtle/space scenario pair). Tier 1 and Tier 2 apply universally
+to every section on this site. Tier 3 is the Section 3 implementation reference.
+
+---
+
+### TIER 1 — WIZKOO VIEWPORT STANDARD (universal)
+
+**Primary development environment**
+
+  window.innerWidth:   ≈756 CSS px
+  window.innerHeight:  ≈396 CSS px
+  devicePixelRatio:    2.625
+  OS scaling:          Windows 200%
+  Chrome zoom:         Below 100%
+
+Chrome zoom inflation note: Chrome zoom below 100% inflates the effective CSS layout
+width while window.innerWidth reports the pre-zoom value. At this environment,
+window.innerWidth ≈756 but the effective CSS layout width may be ≥1100px. The site
+renders at desktop breakpoints (≥768px) even though window.innerWidth suggests a
+narrow viewport. All media queries use the inflated effective width for layout
+decisions, not window.innerWidth. Playwright screenshots do NOT replicate this
+inflation — always test at both 756×396 and 1440×396.
+
+**The four layout regime breakpoints (site-wide)**
+
+  Desktop overlay:  base styles (≥768px, no max-height limit)
+    Photo full-bleed. Copy absolutely positioned left column.
+
+  Mobile stack:  @media(max-width:767px)
+    Photo stacked above copy. Copy position:static, full-width.
+
+  Landscape short:  @media(max-height:420px) and (min-width:600px)
+    Overlay restored at short viewports. Compact type sizes.
+    Declared AFTER mobile stack — cascade order is load-bearing.
+    At CSS widths 600–767px with height ≤420px, landscape short
+    overrides mobile stack's position:static with position:absolute.
+
+  Short-wide:  @media(max-height:700px) and (min-width:768px)
+    Overlay at production display (height≈396px). Nav-safe padding applied.
+    Declared AFTER landscape short — overrides padding at ≥768px width.
+
+**Universal section-height rule**
+
+Any section with a full-bleed photograph or full-viewport background MUST use
+height:100vh at @media(max-height:700px) breakpoints.
+
+NEVER use height:max(Nvh, fixed-px) where fixed-px can exceed the viewport.
+
+Reason: A section taller than the viewport allows scroll-position drift. At
+production (396px viewport), a 500px section means the user's scroll landing
+position determines how much top padding is visible — any padding value will
+appear unreliable and "jump" between refreshes.
+
+**Universal photograph-height rule (mobile stack)**
+
+  height: min(67vw, 50vh);  min-height: 160px
+
+Reason: Plain 67vw at a short landscape viewport = 505px, overflowing the entire
+viewport. The 50vh cap ensures the photograph never exceeds half the viewport
+height in any orientation.
+
+**Universal nav safe-zone rule**
+
+Minimum padding-top: 96px on the first content element at @media(max-height:700px).
+
+Reason: Combined nav + announcement bar ≈100px CSS at production display. Content
+with padding-top below 96px will appear behind or immediately adjacent to the nav.
+96px provides clearance across the production display's zoom range.
+
+Site-wide standard at base desktop (no max-height limit): padding-top 172px,
+which reserves space for the full nav + announcement bar stack plus buffer.
+
+**Nav backdrop system**  (index.html lines 1368–1400)
+
+  Scroll threshold: window.scrollY > 20 → adds nav--scrolled class  (line 1392)
+
+  Light surface (default scrolled):
+    class:            nav--scrolled
+    background:       rgba(242,240,234,0.45)
+    backdrop-filter:  blur(6px)
+    line:             1370
+
+  Dark surface (turtle scenario, linen-hero):
+    class:            nav--scrolled.nav--surface-dark
+    background:       rgba(12,16,32,0.25)
+    backdrop-filter:  blur(4px)
+    line:             1371
+
+  Transition: background-color .25s cubic-bezier(.25,.1,.25,1)  (line 1369)
+
+  Dark sections registered in JS:  #linen-hero, .ec-scenario--turtle  (lines 1385–1386)
+  Light sections registered in JS: .ec-scenario--space               (line 1389)
+
+**Global color tokens**  (:root — index.html line 161)
+
+  --saffron:  #E8AF38   Kicker text, accents, saffron rule
+  --ink:      #0C1020   Dark section background, space headline, body text
+  --linen:    #F2F0EA   Page background, turtle headline
+  --paper:    #FAFAFA   Light surface variant
+  --warm-bg:  #ECEAE3   Warm background variant
+
+---
+
+### TIER 2 — DIAGNOSTIC PROTOCOL (when viewport issues appear)
+
+Run these checks IN ORDER before making any CSS changes. Do not skip ahead.
+
+CHECK 1 — Get the actual viewport
+  Have user paste into DevTools console:
+    window.innerWidth + ', ' + window.innerHeight + ', ' + window.devicePixelRatio
+  Production display returns: 756, 396, 2.625
+  If values differ, recalculate all breakpoint logic before proceeding.
+
+CHECK 2 — Identify the active media query
+  Given user's innerWidth, innerHeight, and Chrome zoom:
+  1. Is effective CSS layout width ≥768px? (Chrome zoom inflates past innerWidth)
+  2. Does height ≤700px?  → short-wide query fires  (padding:96px wins)
+  3. Does height ≤420px AND effective width ≥600px?  → landscape short fires (178px)
+  4. Is innerWidth (raw) ≤767px?  → mobile stack fires (position:static)
+  If both #2 and #3 fire, #2 is declared later in source and wins.
+  If only #3 fires (effective width 600–767px), landscape short controls.
+
+CHECK 3 — Verify dev server is serving current file
+  If user reports changes not appearing, restart:
+    npx serve . -p 3000
+  A clean restart is sufficient. Do not add cache-busting query strings.
+
+CHECK 4 — Verify the user is viewing the correct URL
+  Must be: localhost:3000
+  NOT: file:///C:/Users/... (local file), index-mockup-*.html, or any variant.
+  Changes to index.html will not appear in mockup or alternate files.
+
+CHECK 5 — Take Playwright screenshots at user's actual CSS dimensions
+  await p.setViewportSize({ width: 756, height: 396 });   // shows mobile stack
+  await p.setViewportSize({ width: 1440, height: 396 });  // approximates inflated layout
+  Never use theoretical 1440×900 for short-viewport debugging.
+  Force .visible class to bypass IntersectionObserver opacity gates:
+    await p.evaluate(() =>
+      document.querySelectorAll('.ec-scenario').forEach(el => el.classList.add('visible'))
+    );
+
+---
+
+### TIER 3 — SECTION 3 IMPLEMENTATION (known-good reference as of 2026-04-22)
+
+This tier documents how the universal viewport standard is implemented in Section 3.
+When adding new sections or debugging existing ones, Tier 1 rules apply universally.
+Tier 3 serves as a pattern reference.
+
+Commit: cbac52e
+Section HTML root: <section class="ec-section">  line 1784
+Two scenarios: .ec-scenario--turtle (line 1787) and .ec-scenario--space (line 1826)
+
+**Section container**
+
+  .ec-section    background:var(--ink)  padding:0  overflow:hidden     line 567
+  .ec-inner      max-width:none  padding:0                              line 568
+  .ec-scenario   position:relative  height:80vh  overflow:hidden        line 569
+
+**Scenario height by media query**
+
+  Base (≥768px, no height limit):                    80vh              line 569
+  max-width:767px:                                   auto              line 628
+  max-height:420px AND min-width:600px:              100vh             line 643
+  max-height:700px AND min-width:768px (active):     100vh  ← CRITICAL  line 657
+
+**Copy column (desktop overlay base)**
+
+  .ec-col-copy  position:absolute  top:0  left:0  width:42%  height:100%
+                z-index:2  overflow:hidden  display:flex  flex-direction:column
+                justify-content:flex-start  padding:172px 4% 0 7%         line 579
+
+**Copy column padding-top by breakpoint**
+
+  Base desktop:                          172px   line 579
+  Mobile stack (max-w:767px):             48px   line 630
+  Landscape short (max-h:420, min-w:600): 178px  line 645
+  Short-wide (max-h:700, min-w:768):       96px  line 658  ← production display
+
+**Typography**
+
+  Headline
+    font: 'Fraunces' serif  italic  weight 500
+    size: 28px (base/mobile/short-wide)  |  20px (landscape short)
+    line-height: 1.08  |  letter-spacing: -0.02em  |  max-width: 320px
+    color: turtle #F2F0EA  |  space #0C1020
+    opacity: 0 → 1 on .visible  transition 0.8s delay 0.7s          lines 584-587
+
+  Kicker
+    font: 'Fraunces' serif  italic  weight 400
+    size: 22px (base)  |  18px (mobile/short-wide)  |  15px (landscape short)
+    line-height: 1.2  |  color: #E8AF38 (both scenarios)
+    opacity: 0 → 1 on .visible  transition 0.8s delay 0.7s          lines 588-589
+
+  Eyebrow
+    font: 'Space Mono' monospace  9px  letter-spacing: 0.18em
+    color: turtle rgba(242,240,234,0.7)  |  space rgba(12,16,32,0.7)
+    display:none in landscape short                                   lines 580-583
+
+  Proof label
+    font: 'Space Mono' monospace
+    size: 11px (base)  |  9px (short-wide)  |  8px (landscape short)
+    letter-spacing: 0.24em (base)  |  0.16em (landscape short)
+    color: subject Shade 3 (turtle)  |  subject Shade 2 (space)      lines 592, 653, 663
+
+  Proof body
+    font: 'Inter' system-ui
+    size: 12.5px (base)  |  12px (short-wide)  |  10px (landscape short)
+    line-height: 1.4 (base)  |  1.3 (landscape short)
+    max-width: 200px in landscape short (enforces 2-line wrap)
+    color: turtle rgba(242,240,234,0.92)  |  space rgba(12,16,32,0.92)
+                                                                      lines 593, 606, 619
+
+**Proof matrix**
+
+  Base grid (.ec-proofs):
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-template-rows: repeat(3, auto)
+    grid-auto-flow: column
+    column-gap: 4px  |  row-gap: 9px                                  line 590
+
+  Mobile stack: display:block  per-proof margin-bottom:12px           lines 637-638
+  Landscape short: column-gap:8px  row-gap:4px                        line 651
+  Short-wide: per-proof margin-bottom:8px                             line 662
+
+  Per-item: padding-left:16px  |  border-left:2px solid [subject color]  line 591
+  Flow: col 1 (rows 1-3) = Reading, Math, Science
+        col 2 (rows 1-3) = Atlas, Art, Elementum
+
+**Photograph treatment**
+
+  Desktop:  .ec-col-photo  position:absolute  inset:0  overflow:hidden    line 571
+  Mobile:   position:relative  inset:unset  height:min(67vw,50vh)
+            min-height:160px                                               line 629
+
+  .ec-photo-img  width:100%  height:100%  object-fit:cover
+    opacity: 0 → 1 on .visible  transition: 1.2s cubic-bezier(.25,.1,.25,1)
+    animation: kb-zoom 8s ease-in-out infinite alternate (scale 1→1.03)   lines 570, 572
+
+  object-position: turtle center 55%  |  space center 30%               lines 573-574
+
+**Scrims** (.ec-col-photo::after — line 576)
+
+  Space:   radial-gradient(ellipse 55% 100% at 20% 50%,
+           rgba(12,16,32,0.15) 0%, transparent 100%)                      line 577
+  Turtle:  radial-gradient(ellipse 55% 100% at 20% 50%,
+           rgba(12,16,32,0.62) 0%, transparent 100%)                      line 578
+
+**Scroll reveal stagger**
+
+  Photo:    1.2s  delay 0s    line 575
+  Eyebrow:  0.4s  delay 0.5s  line 583
+  Headline: 0.8s  delay 0.7s  line 587
+  Kicker:   0.8s  delay 0.7s  line 589
+  Proof 1:  0.4s  delay 1.3s  line 620
+  Proof 2:  0.4s  delay 1.4s  line 621
+  Proof 3:  0.4s  delay 1.5s  line 622
+  Proof 4:  0.4s  delay 1.6s  line 623
+  Proof 5:  0.4s  delay 1.7s  line 624
+  Proof 6:  0.4s  delay 1.8s  line 625
+  Total composition reveal: 2.2s
+  Trigger: IntersectionObserver → adds .visible class to .ec-scenario
+
+**Subject colors**
+
+  Subject     Shade 3 (turtle)   Shade 2 (space)   Lines
+  Reading     #3848D0            #2030A0           607 / 594
+  Math        #E8D800            #9A8600           608 / 595
+  Science     #38B060            #247840           609 / 596
+  Atlas       #F08A20            #CC6000           610 / 597
+  Art         #8848E0            #6030B0           611 / 598
+  Elementum   #38B060            #247840           612 / 599
+
+---
+
 ═══════════════════════════════════════
 LAYER 6 — FAILURE PREVENTION
 Read this layer before every session. These are the documented ways
@@ -2422,6 +2710,21 @@ blocks in the same file before declaring the removal complete.
 Any responsive override for a dead selector is also dead.
 The audit pass is not complete until both the top-level rule
 and all its responsive overrides have been confirmed removed.
+
+PATTERN 11 — SECTION HEIGHT OVERFLOW CAUSES PHANTOM PADDING DRIFT
+When a full-bleed section is taller than the viewport (e.g. height:max(80vh,500px)
+at a 396px viewport = 500px section), the user's scroll landing position determines
+how much of the section's top padding is above the fold. This makes padding-top
+appear unreliable — the same value produces different headline positions on different
+loads depending on scroll velocity and browser snap behavior. Claude Code's failure
+mode: increase padding-top repeatedly trying to "push the copy down" without
+diagnosing the root cause. Each change appears to work then regresses.
+Example: April 22, 2026 — ec-scenario padding-top was changed 6+ times (56→148→96→76→96px)
+before root cause was identified as section height 500px in a 396px viewport.
+Prevention rule: Before tuning padding-top on a full-bleed section, verify the
+section height equals 100vh at the active breakpoint. If it does not, fix the
+section height first. height:100vh is the only value that makes padding-top
+consistent. See LOCKED DECISIONS for the universal section-height rule.
 
 ---
 
@@ -3378,6 +3681,20 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v3.0 — April 22, 2026
+  Wizkoo Viewport Standard added to Layer 5 as "Section 3 — Everything
+  Connects Responsive Standard" in three tiers: (1) Universal viewport
+  rules for the primary development environment (Windows 200% scaling,
+  innerWidth≈756, innerHeight≈396, DPR=2.625) including four layout
+  regime breakpoints, universal section-height rule, photograph-height
+  rule, nav safe-zone rule, nav backdrop system, and global color tokens;
+  (2) Five-step diagnostic protocol for viewport issues; (3) Section 3
+  known-good implementation reference (typography, proof matrix, photograph
+  treatment, scrims, scroll reveal stagger, subject colors) at commit
+  cbac52e. Standalone SECTION_3_BASELINE_2026-04-22.md also written to
+  repo root as Notion-pasteable snapshot. Last updated date updated to
+  April 22, 2026. Transfer Queue entry added for Notion mirror sync.
 
 v2.9 — April 21, 2026
   Homepage Form Preservation Locks Registry upgraded from 19 items to 25
