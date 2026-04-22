@@ -1,7 +1,12 @@
 :root {
   /* ── Colors ── */
   --saffron: #E8AF38;
+  --saffron-deep: #B88414;
   --saffron-pale: #FFF9EE;
+  --ink-60: rgba(12, 16, 32, 0.60);
+  --ink-45: rgba(12, 16, 32, 0.45);
+  --ink-28: rgba(12, 16, 32, 0.28);
+  --ink-12: rgba(12, 16, 32, 0.12);
   --ink: #0C1020;
   --paper: #FAFAFA;
   --warm-bg: #ECEAE3;

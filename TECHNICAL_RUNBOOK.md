@@ -2858,6 +2858,7 @@ Covers the full behavioral surface — SEO/accessibility structure, copy,
 mechanics, submit chain, and post-submit gate. Breaking any item below
 produces a silent regression: SEO loss, accessibility failure, copy-voice
 drift, validation bypass, or form deadlock in production.
+Registry version: v3.0 (2026-04-22). 35 items across Clusters A–F. Items 1–25 anchored against commit 2087f59. Items 26–35 added by the V14 Q-resolution session (2026-04-21 evening) and will receive line-number anchors as their respective V14 prompts ship; until then, they cite their introducing prompt. Retired items (4, 10, 11, 14, 15, 25) remain in the registry as retirement markers with forward pointers to their supersessions, and close completely once their underlying markup is removed by the V14 reskin.
 
 ANCHORING CONVENTION. Every item lists three kinds of anchors where
 available:
@@ -2904,6 +2905,11 @@ Item 4  — Age combobox ARIA contract.
            announcement of the dropdown state.
            Selector: #age-trigger (combobox), #age-panel (listbox)
            Lines (2026-04-21): 1609-1622
+           RETIRED (2026-04-21 V14 Q6). Superseded by: Item 26 (Age
+           Stepper Native-First Contract). The custom combobox is replaced
+           in V14 by a native <input type="number"> stepper. Item 4 remains
+           in this registry as a retirement marker until the V14 reskin
+           removes the underlying markup; after that, this item is closed.
 
 CLUSTER B — COPY LOCKS
 
@@ -2952,6 +2958,10 @@ Item 10 — Theme-sizer auto-expand.
            input width and loses the variable-width visual.
            Selector: #theme-sizer, #theme[style*="--w"]
            Lines (2026-04-21): 1598, 2920-3016
+           RETIRES WITH V14. Superseded by: V14 static placeholder + tag
+           chips pattern. Dynamic input width is no longer needed once the
+           rotating placeholder is retired and replaced by chips per Item 21
+           (updated) and Q7.
 
 Item 11 — Rotating placeholder system.
            Semantic: two-tier placeholder pool — tier1 (10 words) and
@@ -2962,6 +2972,11 @@ Item 11 — Rotating placeholder system.
            Selector: .theme-ph overlay element, tier1[] and tier2[] arrays
            in the IIFE
            Lines (2026-04-21): 2911-2991
+           RETIRES WITH V14. Superseded by: V14 static placeholder +
+           click-to-fill tag chips. Tier 1 pool content migrates into the
+           tag chip data source (per V14 Prompt 3). "See suggestions"
+           affordance (part of Item 21) retires concurrently because chips
+           ARE the suggestion surface natively.
 
 Item 12 — Two-word cap via keydown.
            Semantic: keydown handler blocks leading space, double space,
@@ -2979,7 +2994,7 @@ Item 13 — Paste sanitizer.
            Selector: #theme input paste listener
            Lines (2026-04-21): 3036-3044
 
-CLUSTER D — AGE COMBOBOX MECHANICS
+CLUSTER D — AGE INPUT MECHANICS
 
 Item 14 — Position:fixed anchoring.
            Semantic: getBoundingClientRect() on trigger; manual flip
@@ -2989,6 +3004,10 @@ Item 14 — Position:fixed anchoring.
            bug — other logic assumes this positioning model.
            Selector: #age-panel positioning logic in the combobox IIFE
            Lines (2026-04-21): 2744-2764
+           RETIRES WITH V14. Superseded by: Item 26 (Age Stepper
+           Native-First Contract). No panel anchoring needed because the
+           native number input renders inline. Retirement happens
+           concurrently with the combobox markup removal in V14 Prompt 1.
 
 Item 15 — Scroll-close on capture phase.
            Semantic: scroll listener with {capture: true} third argument,
@@ -2997,17 +3016,20 @@ Item 15 — Scroll-close on capture phase.
            nested container.
            Selector: window scroll listener registered with capture:true
            Line (2026-04-21): 2801
+           RETIRES WITH V14. Superseded by: Item 26. The scroll-close
+           mechanism only exists to manage the position:fixed panel from
+           Item 14. Both retire together.
 
-Item 16 — Age range placeholder value (OPEN CORRECTION).
-           Semantic: age range placeholder currently reads "2-12". Per
-           April 20 decision, must update to "3-12". This is a known fix,
-           not a design question. One prompt touches three locations:
-           trigger placeholder at 1609, listbox option to remove at 1611,
-           fallback value at 2734.
+Item 16 — Age range placeholder value.
+           Semantic: placeholder currently reads "2-12". Per April 20
+           decision, must update to "3-12". Known fix, not a design
+           question. Touches three locations: trigger placeholder at 1609,
+           listbox option to remove at 1611, fallback value at 2734.
            Selector: #age-trigger placeholder attribute; #age-panel first
-           <li>; JS fallback constant
-           Lines (2026-04-21): 1609, 1611, 2734
-           Status: OPEN, fix pending.
+           <li>; JS fallback constant | Lines (2026-04-21): 1609, 1611,
+           2734 | Status: RESOLVED automatically by V14 Prompt 1 when the
+           native stepper ships with min=3 max=12 and the combobox DOM
+           retires entirely.
 
 CLUSTER E — SUBMIT VALIDATION CHAIN (THE CONTENT GATE)
 
@@ -3055,6 +3077,14 @@ Item 21 — Error UI states.
            Selector: #theme-error, #theme-network-error, .see-suggestions
            link
            Lines (2026-04-21): 1645-1646, 3120-3141
+           UPDATED (2026-04-21 V14 Q7). THREE original states reduce to
+           TWO. Retire the "see suggestions" link entirely — V14 chips are
+           the suggestion surface natively, so the link has nothing to add.
+           Retained: theme-error (blocked) and theme-network-error
+           (timeout). Both use aria-live="polite". Copy and visual register
+           updated per Q7 tier structure and Item 29 Content Gate Error
+           Register. The .see-suggestions link element and its handler are
+           removed by V14 Prompt 3. Re-verify line anchors on session open.
 
 Item 22 — Blocked-theme recovery flow.
            Semantic: on block, clear input + reset width + show overlay +
@@ -3063,8 +3093,15 @@ Item 22 — Blocked-theme recovery flow.
            Removing the rotation restart is a subtle voice regression.
            Selector: block handler in submit listener
            Lines (2026-04-21): 3171-3175
+           UPDATED (2026-04-21 V14 Q7). On block, clear input + reset
+           width + show overlay (Tier 1 error message per Item 29) + fire
+           chip-row sweep animation per Item 29. Rotation restart is
+           retired along with Item 11 — the form now feels alive through
+           the chip sweep + saffron focus pulse rather than through
+           placeholder rotation. Re-verify line anchors after V14 Prompts
+           3 and 6 ship.
 
-CLUSTER F — POST-SUBMIT GATE + EMAIL CAPTURE
+CLUSTER F — GATE READY STATE + SAMPLE DISPLAY
 
 Item 23 — Two-stage gate (progress + ready).
            Semantic: gate has two visual states — progress (4 animated
@@ -3075,6 +3112,18 @@ Item 23 — Two-stage gate (progress + ready).
            Selector: .gate-progress, .gate-ready, #gate-age/#gate-theme/
            #gate-name/#gate-theme2
            Lines (2026-04-21): 1655-1680, 2848-2903
+           PARTIALLY SUPERSEDED (2026-04-21 V14 Q8). RETAINED in
+           structure, CHANGED in content. Progress state (three seconds of
+           server validation): retained. Saffron progress hairline per
+           Item 28. 900ms-per-step timing from V13 is retired; V14 uses a
+           single 3-second saffron hairline animation that matches the
+           server validation window, not four choreographed steps. Ready
+           state: retained in structure, changed in content. Displays the
+           matched static sample week from the library, NOT a generated
+           plan. Personalization swap-ins (#gate-age, #gate-theme,
+           #gate-name, #gate-theme2) remain, applied to the sample label
+           per Item 33 and subscribe CTA per Item 34. Re-verify line
+           anchors after V14 Prompt 8 ships.
 
 Item 24 — Onboarding URL construction.
            Semantic: hands off name, age, theme, email, and wigglyKid to
@@ -3084,6 +3133,17 @@ Item 24 — Onboarding URL construction.
            Selector: submit handoff URL construction in gate ready-state
            listener
            Lines (2026-04-21): 2893-2898
+           CONTRACT EVOLVED (2026-04-21 V14 Q8 + Q4). V13 passed
+           name/age/theme/email/wigglyKid as query params to
+           /plan/onboarding. Under Q8's static-sample product model and
+           Q4's multi-child architecture, the handoff contract evolves:
+           Children stored as array in component state (per R14); array
+           passed to Phase 2 via sessionStorage OR query params (decision
+           pending from Amir). Demographic combo (theme, age of child 01,
+           wigglyKid) drives closest-match lookup to static sample library.
+           Email NOT captured at this handoff — moves to Phase 2
+           subscription checkout per Item 35. Re-verify anchors after V14
+           Prompt 5 and Prompt 8 ship.
 
 Item 25 — Progressive email-enable.
            Semantic: the final submit button stays disabled until the
@@ -3094,6 +3154,172 @@ Item 25 — Progressive email-enable.
            Selector: email input listener + submit button disabled
            property
            Lines (2026-04-21): 2877-2886
+           RETIRED (2026-04-21 V14 Q8). Superseded by: Item 35 (Email
+           Capture at Subscription, Not Pre-Subscription). No email field
+           exists at the homepage submit or the gate ready state. Submit
+           button enablement is driven by theme + first child's name + age
+           completeness only. The email input element and its listener are
+           removed by V14 Prompts 1 and 6.
+
+Item 26 — Age Stepper Native-First Contract. NEW (2026-04-21 V14 Q6).
+           Semantic: Native <input type="number"> with min=3, max=12,
+           step=1, required, inputmode="numeric", autocomplete="off",
+           aria-describedby="age-error". Arrow buttons are chrome that
+           call stepUp() / stepDown(). NO custom role="spinbutton" or
+           aria-valuenow overrides. Error state uses aria-invalid +
+           aria-describedby + visually-hidden aria-live="polite" region.
+           Home/End keys implemented custom. prefers-reduced-motion
+           disables touch-hold auto-increment. forced-colors uses system
+           colors via native input defaults. MUST SURVIVE all future
+           refactors. The temptation to simplify by removing required,
+           autocomplete="off", or aria-describedby is the exact
+           simplification that breaks this lock — each attribute addresses
+           a specific accessibility failure mode.
+           Selector: #f-age (native number input), .age-box (wrapper),
+           .stepper-decrement, .stepper-increment, #age-error
+           (visually-hidden aria-live region) | Lines: TBD, introduced by
+           V14 Prompt 1 (DOM), full behavior Prompt 4 | Re-verify line
+           anchors on session open.
+           Source: V14 Spec Q6 resolution, 2026-04-21 evening.
+           Amy directive 2026-04-22: readonly attribute added to native
+           input. No typing permitted. Steppers, wheel, keyboard arrows,
+           and touch-hold are the only input surfaces.
+           Constraint-by-construction.
+
+Item 27 — Content Gate Tier Structure. NEW (2026-04-21 V14 Q7).
+           Semantic: Blocklist entries must carry a tier field. Tier 0 =
+           safety-critical (grooming, CSAM, child exploitation signals).
+           Tier 1 = age-appropriateness (keywords with legitimate
+           educational context but not a fit for Wizkoo's register). Tier
+           0 rejections show ZERO UI feedback — surfacing the trigger
+           keywords teaches bad actors what to avoid. Tier 1 rejections
+           use the Item 29 error pattern with chip sweep. Tier assignments
+           reviewed quarterly by Amy with Amir. MUST SURVIVE. The
+           temptation to simplify by collapsing tiers is the exact
+           simplification that surfaces Tier 0 keywords to bad actors.
+           Selector: BLOCKLIST array entries gain a tier field;
+           isThemeBlocked() returns {blocked, tier} not just a boolean;
+           submit handler branches on tier | Lines: TBD, schema designed
+           by V14 Prompt 3 prerequisite (Amir Open Item). Re-verify
+           anchors after Prompt 3 ships.
+           Source: V14 Spec Q7 resolution, 2026-04-21 evening.
+
+Item 28 — 3-Second Server Validation Progress Signal. NEW (2026-04-21 V14).
+           Semantic: During server validation (POST /api/validate-theme
+           with 3-second abort timeout per Item 20), a saffron progress
+           hairline animates below the CTA. Respects
+           prefers-reduced-motion — static hairline under reduced motion.
+           CTA stays disabled during validation window. Protects against
+           perceived-broken-form during the three seconds between click
+           and response. MUST SURVIVE.
+           Selector: #cta-progress-hairline element beneath primary CTA;
+           wired to fetch start/end events | Lines: TBD, DOM stub
+           introduced by V14 Prompt 1, behavior introduced by V14 Prompt
+           6. Re-verify on session open.
+           Source: V14 Spec Items 28 + Q7 context, 2026-04-21 evening.
+
+Item 29 — Content Gate Error Register. NEW (2026-04-21 V14 Q7).
+           Semantic: Error messages on content-gate rejections use saffron
+           #B88414 (darker saffron for text contrast), single or
+           two-clause copy with parental agency preserved, NO red colors,
+           NO exclamation marks, NO apology copy, NO "Oops." Chip-row
+           sweep animation fires on Tier 1 blocked-theme rejection
+           (left-to-right saffron hairline sweep over 600ms, fading
+           transparent over next 200ms). aria-live="polite" announcement.
+           Under prefers-reduced-motion, static saffron underline on first
+           chip for 2 seconds then fade. MUST SURVIVE.
+           Selector: #theme-error copy + saffron text color; chip-row
+           sweep animation CSS class + JS trigger | Lines: TBD, introduced
+           by V14 Prompt 3. Re-verify on session open.
+           Source: V14 Spec Q7 resolution, 2026-04-21 evening.
+
+Item 30 — No Live Generation on Homepage Submit. NEW (2026-04-21 V14 Q8).
+           Semantic: The homepage submit flow runs validation only (Items
+           17, 18, 19, 20). Generation fires only for authenticated,
+           paying subscribers inside Phase 2. The gate ready state displays
+           a static sample matched by demographic lookup. Any Claude Code
+           session tempted to "add live generation back to the free flow"
+           is violating this lock. The product model is
+           curation-subscription, not per-visitor AI generation. At $0.08
+           per generation, live generation per visitor bleeds money to
+           scrapers, abuse vectors, and non-converting traffic.
+           Curation-subscription scales with revenue, not traffic. MUST
+           SURVIVE.
+           Selector: submit chain terminates at lookup + render; NO calls
+           to generation API in public-path code | Verification: server
+           logs must show zero generation API calls originating from
+           public-path submits (per V14 Spec Section 11.4).
+           Source: V14 Spec Q8 resolution, 2026-04-21 evening.
+
+Item 31 — Homepage CTA Expectation Microcopy. NEW (2026-04-21 V14 R19).
+           Semantic: The space below the primary CTA renders EXACTLY: "See
+           a sample week. Personalized plans come with subscription." Two
+           full sentences. Plus Jakarta Sans 500, 12px, ink #0C1020 at 60%
+           opacity (rgba(12, 16, 32, 0.60)). Renders directly below the
+           CTA, above R11 support copy. No em-dash. No exclamation marks.
+           No "free sample" or "no email / no card" residue copy. MUST
+           SURVIVE.
+           Selector: microcopy element beneath primary CTA; renders R19
+           copy verbatim | Lines: TBD, introduced by V14 Prompt 1 (DOM +
+           copy), styled by V14 Prompt 6. Re-verify on session open.
+           Source: V14 Spec R19 + Q8, 2026-04-21 evening.
+
+Item 32 — Primary CTA Button Text. NEW (2026-04-21 V14 R18).
+           Semantic: Homepage submit button text is EXACTLY: "See a sample
+           week →". Arrow glyph is part of the button text, not
+           decoration. NOT "Show me this week," NOT "Build your plan," NOT
+           "Get started," NOT "Try Wizkoo," NOT "Make my week." The button
+           is load-bearing honesty under the Q8 product model — the
+           first-read meaning must match what actually happens on click (a
+           sample, not a personalized plan). Any Claude Code session
+           tempted to punchify this button is violating this lock.
+           Selector: primary CTA button textContent | Lines: TBD,
+           introduced by V14 Prompt 1. Re-verify on session open.
+           Source: V14 Spec R18 + Q8, 2026-04-21 evening.
+
+Item 33 — Sample Label Template. NEW (2026-04-21 V14 Q8).
+           Semantic: Sample label copy on the gate ready state renders
+           EXACTLY: "This is a sample week for age [X]. Subscribe to build
+           [Name]'s plan around what they said in the car." Where [X] and
+           [Name] are variables bound to the parent's form inputs. Copy
+           structure MUST NOT change — the "what they said in the car"
+           clause maintains Q1 continuity with the theme field aux label.
+           Typography: Plus Jakarta Sans 500, 14px, ink at 60% opacity,
+           16px margin above the sample card. MUST SURVIVE.
+           Selector: sample label element in gate ready state; swap-ins
+           #gate-age and #gate-name bound to form inputs | Lines: TBD,
+           introduced by V14 Prompt 8. Re-verify on session open.
+           Source: V14 Spec Item 33 + Q8, 2026-04-21 evening.
+
+Item 34 — Subscribe CTA Copy Template. NEW (2026-04-21 V14 Q8).
+           Semantic: The primary subscribe CTA on the sample renders
+           EXACTLY: "Start [Name]'s plan →" where [Name] is bound to the
+           parent's form input. Using the kid's name in the subscribe CTA
+           is a commitment-psychology pattern that CANNOT be traded for
+           generic "Subscribe" or "Start free trial" copy even if A/B
+           testing suggests generic performs better. Secondary link "How
+           Wizkoo works" renders below the primary button as a typographic
+           link, not a button. MUST SURVIVE.
+           Selector: subscribe CTA primary button (filled saffron, Pattern
+           1 per Light Standard v5 CTA Pattern System); secondary link
+           (typographic, not button) | Lines: TBD, introduced by V14
+           Prompt 8. Re-verify on session open.
+           Source: V14 Spec Item 34 + Q8, 2026-04-21 evening.
+
+Item 35 — Email Capture at Subscription, Not Pre-Subscription. NEW (2026-04-21 V14 Q8).
+           Semantic: Email is captured at payment checkout (Phase 2),
+           NEVER at homepage submit or gate ready state. No email opt-in
+           gate between homepage and sample. Any Claude Code session
+           tempted to capture email for a nurture list before subscription
+           is violating this lock. Nurture opt-ins, if built, live on
+           methodology / footer / blog pages, NOT on the homepage
+           conversion path. MUST SURVIVE.
+           Selector: no email input element on homepage; no email input on
+           gate ready state; no pre-subscription email API calls |
+           Verification: grep for type="email" and name="email" in
+           homepage and gate markup must return zero matches after V14
+           Prompt 1 and Prompt 8 ship.
+           Source: V14 Spec Item 35 + Q8, 2026-04-21 evening.
 
 ### ADDING NEW REGISTRIES
 
@@ -3767,6 +3993,19 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v3.2 — April 22, 2026
+  Layer 6 registry synchronized from Notion v3.0. Items 26-35 added
+  (Cluster D age stepper native-first contract, Cluster E tier structure
+  + progress signal + error register, Cluster F no-live-generation + CTA
+  + microcopy + sample label + subscribe CTA + email-at-subscription).
+  Items 4, 10, 11, 14, 15, 25 marked RETIRED with forward pointers.
+  Items 16, 21, 22, 23, 24 marked UPDATED. Cluster D renamed AGE
+  COMBOBOX MECHANICS → AGE INPUT MECHANICS. Cluster F renamed POST-SUBMIT
+  GATE + EMAIL CAPTURE → GATE READY STATE + SAMPLE DISPLAY. Registry
+  version header added: v3.0 (2026-04-22), 35 items. Amy directive
+  2026-04-22: Item 26 gains readonly attribute (no typing,
+  constraint-by-construction).
 
 v3.1 — April 22, 2026
   Viewport Reality Constraints subsection added to Layer 4 codifying four
