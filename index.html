@@ -415,7 +415,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .phi{padding:24px 0;border-top:1px solid rgba(255,255,255,0.06);opacity:0;transform:translateY(16px);transition:opacity .6s var(--expo),transform .6s var(--expo)}.phi.visible{opacity:1;transform:translateY(0)}.phi:last-child{border-bottom:1px solid rgba(255,255,255,0.06)}
 .phi h3{font-family:'Sora',sans-serif;font-weight:600;font-size:0.82rem;color:var(--saffron);margin-bottom:8px}.phi p{font-size:0.72rem;color:rgba(250,250,250,0.35);line-height:1.7}
 
-.faq-section{padding:80px 48px;max-width:var(--max-width);margin:0 auto}.faq-inner{max-width:680px}
+.faq-section{padding:100px 48px;max-width:var(--max-width);margin:0 auto}.faq-inner{max-width:680px}
 .faq-section h2{font-family:'Sora',sans-serif;font-weight:200;font-size:1.8rem;line-height:1.15;letter-spacing:-0.025em;margin-bottom:36px}.faq-section h2 strong{font-weight:700}
 .faq-list{border-top:1px solid var(--rule)}.faq-item{border-bottom:1px solid var(--rule)}
 .faq-q{width:100%;text-align:left;background:transparent;border:none;padding:18px 0;font-family:'Sora',sans-serif;font-weight:600;font-size:0.82rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.4;transition:color .2s}.faq-q:hover{color:var(--saffron)}
@@ -479,13 +479,6 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .sr-track{flex-direction:column}
   .sr-card{flex:none;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
   .sr-card:last-child{border-bottom:none}
-  /* ── Everything Connects ── */
-  .ec-section{padding:48px 20px}
-  .ec-headline{font-size:1.5rem}
-  .ec-hook{font-size:0.88rem}
-  .ec-subjects{grid-template-columns:1fr}
-  .ec-subj{max-width:100%}
-
   /* ── Orientation ── */
   .orientation{padding:40px 20px;gap:24px;grid-template-columns:1fr}
 
@@ -571,27 +564,108 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @media(max-width:768px){.firefly{display:none!important}}
 
 /* ═══ EVERYTHING CONNECTS ═══ */
-.ec-section{background:var(--warm-bg);padding:80px 48px;position:relative;overflow:hidden}
-.ec-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(12,16,32,0.012) 59px,rgba(12,16,32,0.012) 60px);pointer-events:none}
-.ec-section>*{position:relative;z-index:1}
-.ec-inner{max-width:900px;margin:0 auto}
-.ec-tag{font-family:'Space Mono',monospace;font-size:var(--tag-size);letter-spacing:0.14em;text-transform:uppercase;color:var(--saffron);margin-bottom:32px;text-align:center}
-.ec-scenario{margin-bottom:56px}
-.ec-scenario:last-child{margin-bottom:0}
-.ec-headline{font-family:'Sora',sans-serif;font-weight:200;font-size:2.4rem;line-height:1.1;letter-spacing:-0.03em;text-align:center;margin-bottom:8px}
-.ec-headline strong{font-weight:700}
-.ec-hook{font-family:'Sora',sans-serif;font-weight:300;font-size:1rem;color:var(--saffron);text-align:center;margin-bottom:28px;letter-spacing:-0.01em}
-.ec-subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-.ec-subj{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.1em;text-transform:uppercase;border:1.5px solid var(--ink);padding:8px 14px;background:#fff;line-height:1.5;opacity:0;transform:translateY(10px);transition:opacity .5s var(--expo),transform .5s var(--expo)}
-.ec-subj .ec-subj-label{color:var(--saffron);font-weight:700;display:block;margin-bottom:2px;font-size:0.42rem;letter-spacing:0.14em}
-.ec-scenario.visible .ec-subj{opacity:1;transform:translateY(0)}
-.ec-scenario.visible .ec-subj:nth-child(1){transition-delay:.1s}
-.ec-scenario.visible .ec-subj:nth-child(2){transition-delay:.18s}
-.ec-scenario.visible .ec-subj:nth-child(3){transition-delay:.26s}
-.ec-scenario.visible .ec-subj:nth-child(4){transition-delay:.34s}
-.ec-scenario.visible .ec-subj:nth-child(5){transition-delay:.42s}
-.ec-scenario.visible .ec-subj:nth-child(6){transition-delay:.50s}
-.ec-divider{width:40px;height:1px;background:var(--saffron);margin:48px auto;opacity:0.3}
+.ec-section{padding:0;overflow:hidden;background:var(--ink)}
+.ec-inner{max-width:none;padding:0}
+.ec-scenario{position:relative;height:80vh;overflow:hidden}
+@keyframes kb-zoom{from{transform:scale(1)}to{transform:scale(1.03)}}
+.ec-col-photo{position:absolute;inset:0;overflow:hidden}
+.ec-photo-img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 1.2s cubic-bezier(.25,.1,.25,1);animation:kb-zoom 8s ease-in-out infinite alternate}
+.ec-scenario--turtle .ec-photo-img{object-position:center 55%}
+.ec-scenario--space .ec-photo-img{object-position:center 30%}
+.ec-scenario.visible .ec-photo-img{opacity:1}
+.ec-col-photo::after{content:'';position:absolute;inset:0;pointer-events:none}
+.ec-scenario--space .ec-col-photo::after{background:radial-gradient(ellipse 55% 100% at 20% 50%,rgba(12,16,32,0.15) 0%,transparent 100%)}
+.ec-scenario--turtle .ec-col-photo::after{background:radial-gradient(ellipse 55% 100% at 20% 50%,rgba(12,16,32,0.62) 0%,transparent 100%)}
+.ec-col-copy{position:absolute;top:0;left:0;width:42%;height:100%;z-index:2;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;padding:172px 4% 0 7%}
+.ec-eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 12px;opacity:0;transition:opacity .4s cubic-bezier(.25,.1,.25,1) .5s}
+.ec-scenario--turtle .ec-eyebrow{color:rgba(242,240,234,0.7)}
+.ec-scenario--space .ec-eyebrow{color:rgba(12,16,32,0.7)}
+.ec-scenario.visible .ec-eyebrow{opacity:1}
+.ec-headline{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:28px;line-height:1.08;letter-spacing:-0.02em;max-width:320px;margin:0 0 12px;opacity:0;transition:opacity .8s cubic-bezier(.25,.1,.25,1) .7s}
+.ec-scenario--space .ec-headline{color:#0C1020}
+.ec-scenario--turtle .ec-headline{color:#F2F0EA}
+.ec-scenario.visible .ec-headline{opacity:1}
+.ec-kicker{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.2;color:#E8AF38;max-width:380px;margin:0 0 30px;opacity:0;transition:opacity .8s cubic-bezier(.25,.1,.25,1) .7s}
+.ec-scenario.visible .ec-kicker{opacity:1}
+.ec-proofs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;column-gap:4px;row-gap:9px;margin:0}
+.ec-proof{padding-left:16px;margin-bottom:0;opacity:0;transition:opacity .4s cubic-bezier(.25,.1,.25,1)}
+.ec-proof-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;display:block;margin-bottom:2px}
+.ec-proof-body{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:12.5px;line-height:1.4;max-width:100%;margin:0}
+.ec-scenario--space .ec-proof--reading{border-left:2px solid #2030A0}
+.ec-scenario--space .ec-proof--math{border-left:2px solid #9A8600}
+.ec-scenario--space .ec-proof--science{border-left:2px solid #247840}
+.ec-scenario--space .ec-proof--atlas{border-left:2px solid #CC6000}
+.ec-scenario--space .ec-proof--art{border-left:2px solid #6030B0}
+.ec-scenario--space .ec-proof--elementum{border-left:2px solid #247840}
+.ec-scenario--space .ec-proof--reading .ec-proof-label{color:#2030A0}
+.ec-scenario--space .ec-proof--math .ec-proof-label{color:#9A8600}
+.ec-scenario--space .ec-proof--science .ec-proof-label{color:#247840}
+.ec-scenario--space .ec-proof--atlas .ec-proof-label{color:#CC6000}
+.ec-scenario--space .ec-proof--art .ec-proof-label{color:#6030B0}
+.ec-scenario--space .ec-proof--elementum .ec-proof-label{color:#247840}
+.ec-scenario--space .ec-proof-body{color:rgba(12,16,32,0.92)}
+.ec-scenario--turtle .ec-proof--reading{border-left:2px solid #3848D0}
+.ec-scenario--turtle .ec-proof--math{border-left:2px solid #E8D800}
+.ec-scenario--turtle .ec-proof--science{border-left:2px solid #38B060}
+.ec-scenario--turtle .ec-proof--atlas{border-left:2px solid #F08A20}
+.ec-scenario--turtle .ec-proof--art{border-left:2px solid #8848E0}
+.ec-scenario--turtle .ec-proof--elementum{border-left:2px solid #38B060}
+.ec-scenario--turtle .ec-proof--reading .ec-proof-label{color:#3848D0}
+.ec-scenario--turtle .ec-proof--math .ec-proof-label{color:#E8D800}
+.ec-scenario--turtle .ec-proof--science .ec-proof-label{color:#38B060}
+.ec-scenario--turtle .ec-proof--atlas .ec-proof-label{color:#F08A20}
+.ec-scenario--turtle .ec-proof--art .ec-proof-label{color:#8848E0}
+.ec-scenario--turtle .ec-proof--elementum .ec-proof-label{color:#38B060}
+.ec-scenario--turtle .ec-proof-body{color:rgba(242,240,234,0.92)}
+.ec-scenario.visible .ec-proof:nth-child(1){opacity:1;transition-delay:1.3s}
+.ec-scenario.visible .ec-proof:nth-child(2){opacity:1;transition-delay:1.4s}
+.ec-scenario.visible .ec-proof:nth-child(3){opacity:1;transition-delay:1.5s}
+.ec-scenario.visible .ec-proof:nth-child(4){opacity:1;transition-delay:1.6s}
+.ec-scenario.visible .ec-proof:nth-child(5){opacity:1;transition-delay:1.7s}
+.ec-scenario.visible .ec-proof:nth-child(6){opacity:1;transition-delay:1.8s}
+.ec-divider{width:100%;height:2px;background:var(--saffron);margin:0;opacity:0.15;display:block}
+@media(max-width:767px){
+  .ec-scenario{height:auto;overflow:visible}
+  .ec-col-photo{position:relative;inset:unset;height:min(67vw,50vh);min-height:160px}
+  .ec-col-copy{position:static;width:100%;height:auto;padding:48px 24px 40px;justify-content:flex-start}
+  .ec-scenario--space .ec-col-copy{background:#F2F0EA}
+  .ec-scenario--space .ec-eyebrow{color:rgba(12,16,32,0.7)}
+  .ec-scenario--space .ec-headline{color:#0C1020}
+  .ec-scenario--turtle .ec-col-copy{background:var(--ink)}
+  .ec-headline{font-size:28px;max-width:100%}
+  .ec-kicker{font-size:18px;max-width:100%;margin-bottom:32px}
+  .ec-proofs{display:block}
+  .ec-proof{margin-bottom:12px}
+  .ec-proof-body{max-width:100%}
+  .ec-divider{height:1px;opacity:0.3}
+}
+@media(max-height:420px) and (min-width:600px){
+  .ec-scenario{height:100vh;overflow:hidden}
+  .ec-col-photo{position:absolute;inset:0;height:auto}
+  .ec-col-copy{position:absolute;top:0;left:0;width:60%;height:100%;padding:178px 3% 0 6%;overflow:hidden}
+  .ec-scenario--turtle .ec-col-copy{background:none}
+  .ec-scenario--space .ec-col-copy{background:none}
+  .ec-eyebrow{display:none}
+  .ec-headline{font-size:20px;line-height:1.08;margin:0 0 6px}
+  .ec-kicker{font-size:15px;line-height:1.15;margin:0 0 10px}
+  .ec-proofs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;column-gap:8px;row-gap:4px}
+  .ec-proof{margin-bottom:0}
+  .ec-proof-label{font-size:8px;letter-spacing:0.16em;margin-bottom:1px}
+  .ec-proof-body{font-size:10px;line-height:1.3;max-width:200px}
+}
+@media(max-height:700px) and (min-width:768px){
+  .ec-scenario{height:100vh}
+  .ec-col-copy{padding:96px 4% 0 7%}
+  .ec-eyebrow{margin:0 0 12px}
+  .ec-headline{font-size:28px;margin:0 0 8px}
+  .ec-kicker{font-size:18px;margin:0 0 18px}
+  .ec-proof{margin-bottom:8px}
+  .ec-proof-label{font-size:9px}
+  .ec-proof-body{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .ec-photo-img{animation:none}
+}
 
 /* ═══ PREFERS REDUCED MOTION ═══ */
 @media(prefers-reduced-motion:reduce){
@@ -784,6 +858,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .linen-hero-text{animation:none!important;opacity:1!important;transform:none!important}
 }
 
+@media(max-height:420px) and (min-width:600px){
+  .linen-hero{height:calc(100dvh + 24px)!important;overflow:hidden!important;padding-top:48px!important}
+}
+
 /* ═══ HERO ORBITAL ZONE ═══ */
 .hero-orbital-zone{position:relative;overflow:visible;background:transparent;display:flex;flex-direction:column}
 .hero-orbital-zone::before{display:none}
@@ -809,7 +887,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* ═══ A PLAN IS NOT A PROMPT ═══ */
-.nap-section{background:var(--warm-bg);padding:clamp(24px,4vh,44px) 48px clamp(20px,3vh,36px);position:relative;overflow:hidden}
+.nap-section{background:var(--warm-bg);padding:100px 48px clamp(20px,3vh,36px);position:relative;overflow:hidden}
 .nap-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(12,16,32,0.012) 59px,rgba(12,16,32,0.012) 60px);pointer-events:none}
 .nap-section>*{position:relative;z-index:1}
 .nap-center{max-width:640px;margin:0 auto}
@@ -1285,20 +1363,37 @@ body.page-home{
   border-color:#E8AF38!important;
   box-shadow:none!important;
 }
+/* Dark surface: CTA cream */
+.page-home .nav.nav--surface-dark .nav-cta{color:#F0F2F8!important;border-color:rgba(242,240,234,0.5)!important}
+/* Nav scrolled: translucent backdrop */
+.page-home .nav{transition:background-color .25s cubic-bezier(.25,.1,.25,1)!important}
+.page-home .nav.nav--scrolled{background:rgba(242,240,234,0.45)!important;backdrop-filter:blur(6px)!important;-webkit-backdrop-filter:blur(6px)!important}
+.page-home .nav.nav--scrolled.nav--surface-dark{background:rgba(12,16,32,0.25)!important;backdrop-filter:blur(4px)!important;-webkit-backdrop-filter:blur(4px)!important}
 </style>
 <!-- ═══ NAV SURFACE DETECTION ═══ -->
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   var nav=document.getElementById('site-nav');
-  var linenHero=document.getElementById('linen-hero');
-  if(!nav||!linenHero)return;
+  if(!nav)return;
+  function navBottom(){return nav.offsetHeight+2;}
+  function isUnder(el){
+    if(!el)return false;
+    var r=el.getBoundingClientRect();
+    return r.top<=navBottom()&&r.bottom>0;
+  }
+  var darkSections=[
+    document.getElementById('linen-hero'),
+    document.querySelector('.ec-scenario--turtle')
+  ];
+  var lightSections=[
+    document.querySelector('.ec-scenario--space')
+  ];
   function update(){
-    var r=linenHero.getBoundingClientRect();
-    if(r.top<=nav.offsetHeight+2){
-      nav.classList.add('nav--surface-dark');
-    } else {
-      nav.classList.remove('nav--surface-dark');
-    }
+    nav.classList.toggle('nav--scrolled',window.scrollY>20);
+    var overDark=darkSections.some(isUnder);
+    var overLight=!overDark&&lightSections.some(isUnder);
+    nav.classList.toggle('nav--surface-dark',overDark);
+    nav.classList.toggle('nav--surface-light',overLight);
   }
   window.addEventListener('scroll',update,{passive:true});
   update();
@@ -1688,35 +1783,83 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- EVERYTHING CONNECTS -->
 <section class="ec-section">
   <div class="ec-inner">
-    <div class="ec-tag">Everything connects</div>
 
-    <div class="ec-scenario reveal">
-      <div class="ec-headline"><strong>Your daughter found a turtle</strong> in the backyard.</div>
-      <div class="ec-hook">That became the whole week.</div>
-      <div class="ec-subjects">
-        <div class="ec-subj"><span class="ec-subj-label">Reading</span>Reptile habitats. Where do turtles sleep in winter?</div>
-        <div class="ec-subj"><span class="ec-subj-label">Math</span>Estimate a turtle's age by counting shell rings.</div>
-        <div class="ec-subj"><span class="ec-subj-label">Science</span>Cold-blooded vs. warm-blooded: what's the difference?</div>
-        <div class="ec-subj"><span class="ec-subj-label">Atlas</span>Visit the Galápagos Islands. Find the giant tortoises.</div>
-        <div class="ec-subj"><span class="ec-subj-label">Art</span>Watercolor turtle shell patterns. Every shell is unique.</div>
-        <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Carbon: the element inside every shell, every scale, every claw.</div>
+    <div class="ec-scenario reveal ec-scenario--turtle">
+      <div class="ec-col-photo">
+        <img class="ec-photo-img" src="assets/turtle-girl.jpg" alt="A young girl lies on a hardwood floor in warm afternoon light, one hand reaching toward a small turtle walking across the wood.">
+      </div>
+      <div class="ec-col-copy">
+        <div class="ec-eyebrow">Everything connects</div>
+        <h2 class="ec-headline"><em>Your daughter found a turtle</em> in the backyard.</h2>
+        <div class="ec-kicker">That became the whole week.</div>
+        <div class="ec-proofs">
+          <div class="ec-proof ec-proof--reading">
+            <span class="ec-proof-label">Reading</span>
+            <p class="ec-proof-body">Reptile habitats. Where do turtles sleep in winter?</p>
+          </div>
+          <div class="ec-proof ec-proof--math">
+            <span class="ec-proof-label">Math</span>
+            <p class="ec-proof-body">Estimate a turtle&#8217;s age by counting shell rings.</p>
+          </div>
+          <div class="ec-proof ec-proof--science">
+            <span class="ec-proof-label">Science</span>
+            <p class="ec-proof-body">Cold-blooded vs. warm-blooded: what&#8217;s the difference?</p>
+          </div>
+          <div class="ec-proof ec-proof--atlas">
+            <span class="ec-proof-label">Atlas</span>
+            <p class="ec-proof-body">Visit the Gal&#225;pagos Islands. Find the giant tortoises.</p>
+          </div>
+          <div class="ec-proof ec-proof--art">
+            <span class="ec-proof-label">Art</span>
+            <p class="ec-proof-body">Watercolor turtle shell patterns. Every shell is unique.</p>
+          </div>
+          <div class="ec-proof ec-proof--elementum">
+            <span class="ec-proof-label">Elementum</span>
+            <p class="ec-proof-body">Carbon: the element inside every shell, scale, and claw.</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="ec-divider"></div>
 
-    <div class="ec-scenario reveal">
-      <div class="ec-headline"><strong>Your son wouldn't stop talking about space.</strong></div>
-      <div class="ec-hook">Every subject just found its center of gravity.</div>
-      <div class="ec-subjects">
-        <div class="ec-subj"><span class="ec-subj-label">Reading</span>The true story of the Apollo 11 mission.</div>
-        <div class="ec-subj"><span class="ec-subj-label">Math</span>How far is the moon? Measure it in school buses.</div>
-        <div class="ec-subj"><span class="ec-subj-label">Science</span>Why do astronauts float? What is gravity, really?</div>
-        <div class="ec-subj"><span class="ec-subj-label">Atlas</span>Visit Kazakhstan. Find the launchpad where it all started.</div>
-        <div class="ec-subj"><span class="ec-subj-label">Art</span>Paint the phases of the moon. Observe tonight, draw tomorrow.</div>
-        <div class="ec-subj"><span class="ec-subj-label">Elementum</span>Helium: the element that lifts balloons and powers the sun.</div>
+    <div class="ec-scenario reveal ec-scenario--space">
+      <div class="ec-col-photo">
+        <img class="ec-photo-img" src="assets/boy-rocket.jpg" alt="A young boy in glasses sits at a wood table holding a handmade paper rocket, studying it closely, in warm interior light.">
+      </div>
+      <div class="ec-col-copy">
+        <div class="ec-eyebrow">Everything connects</div>
+        <h2 class="ec-headline"><em>Your son wouldn&#8217;t stop talking about space.</em></h2>
+        <div class="ec-kicker">Every subject just found its center of gravity.</div>
+        <div class="ec-proofs">
+          <div class="ec-proof ec-proof--reading">
+            <span class="ec-proof-label">Reading</span>
+            <p class="ec-proof-body">The true story of the Apollo 11 mission.</p>
+          </div>
+          <div class="ec-proof ec-proof--math">
+            <span class="ec-proof-label">Math</span>
+            <p class="ec-proof-body">How far is the moon? Measure it in school buses.</p>
+          </div>
+          <div class="ec-proof ec-proof--science">
+            <span class="ec-proof-label">Science</span>
+            <p class="ec-proof-body">Why do astronauts float? What is gravity, really?</p>
+          </div>
+          <div class="ec-proof ec-proof--atlas">
+            <span class="ec-proof-label">Atlas</span>
+            <p class="ec-proof-body">Visit Kazakhstan. Find the launchpad where it all started.</p>
+          </div>
+          <div class="ec-proof ec-proof--art">
+            <span class="ec-proof-label">Art</span>
+            <p class="ec-proof-body">Paint the phases of the moon. Observe tonight, draw tomorrow.</p>
+          </div>
+          <div class="ec-proof ec-proof--elementum">
+            <span class="ec-proof-label">Elementum</span>
+            <p class="ec-proof-body">Helium: the element that lifts balloons and powers the sun.</p>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
