@@ -8,7 +8,9 @@
   --ink-28: rgba(12, 16, 32, 0.28);
   --ink-12: rgba(12, 16, 32, 0.12);
   --ink: #0C1020;
+  --cream: #F4F1E8;
   --paper: #FAFAFA;
+  --day-sky: #2868CC;
   --warm-bg: #ECEAE3;
   --mid: #4A4850;
   --faint: #A8A6B0;
@@ -55,6 +57,7 @@
   --prog-elementum: var(--saffron);
 
   /* ── Animation timing ── */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-normal: 400ms;
