@@ -163,6 +163,7 @@
   --body-size:0.85rem;--small-size:0.82rem;--tag-size:0.58rem;--button-size:0.68rem;
   --expo:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.22,1,0.36,1);
   --day-sky:#2868CC;--ease:cubic-bezier(0.16,1,0.3,1);
+  --ink-12:rgba(12,16,32,0.12);--ink-28:rgba(12,16,32,0.28);--ink-45:rgba(12,16,32,0.45);--ink-60:rgba(12,16,32,0.60);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 a{background:transparent;border:none;box-shadow:none;outline:none;-webkit-appearance:none}
@@ -1032,10 +1033,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .cta-note{font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:12px;color:rgba(12,16,32,0.60);line-height:1.5;letter-spacing:0;text-transform:none;margin-top:16px}
 .cta-note strong{color:var(--saffron-deep);font-weight:700}
 .support-note{font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:12px;color:rgba(12,16,32,0.45);line-height:1.5;letter-spacing:0;text-transform:none;margin-top:8px}
-.right-close{margin-top:32px;text-align:right;font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink-45)}
-.right-close .meta-em{display:inline-block}
 .sub-cta{font-family:'Space Mono',monospace;font-weight:400;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-45);line-height:1;display:inline-flex;align-items:baseline;gap:8px;pointer-events:none;user-select:none}
 .sub-cta-action{color:var(--ink);font-weight:500;border-bottom:1px solid var(--saffron);padding-bottom:2px;opacity:0.85}
+.sub-cta-action::before{content:'· ';color:var(--ink-28);font-weight:400;margin-right:2px}
 .gate{max-width:460px;margin-top:24px}
 /* -- Paper grain scoped to hero (Resolution A: position:absolute not fixed, avoids sky-system conflict) -- */
 section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.80 0 0 0 0 0.72 0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;mix-blend-mode:multiply}
@@ -1551,7 +1551,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   <span class="aux">their first name &amp; age</span>
                 </div>
                 <div class="field-input-row">
-                  <input id="nh-name" name="childName" class="name-input" type="text" placeholder="their name" autocomplete="off" maxlength="30" style="--w:12ch">
+                  <input id="nh-name" name="childName" class="name-input" type="text" placeholder="name" autocomplete="off" maxlength="30" style="--w:12ch">
                   <div class="age-group">
                     <span class="lbl">age</span>
                     <div class="age-box">
@@ -1601,14 +1601,11 @@ document.addEventListener('DOMContentLoaded', function() {
             <button type="submit" class="lbracket" id="nh-submit" disabled>
               See a sample week<span class="arrow">&#x2192;</span>
             </button>
-            <span class="sub-cta" id="more-kids-cta" data-state="telegraph" aria-hidden="true">More kids? <span class="sub-cta-action">Add them next</span></span>
+            <span class="sub-cta" id="more-kids-cta" data-state="telegraph" aria-hidden="true">MORE KIDS? <span class="sub-cta-action">ADD THEM NEXT</span></span>
             <div id="cta-progress-hairline" hidden></div>
           </div>
-          <p class="cta-note">See a sample week. Personalized plans come with subscription.</p>
-          <p class="support-note">One theme per week. Personalized for every kid in your household.</p>
-          <div class="right-close">
-            <span class="meta-em">— ONE THEME · EVERY KID</span>
-          </div>
+          <p class="cta-note">Sample, not your plan. Subscribe to build theirs.</p>
+          <p class="support-note">One theme per week. Personalized for every kid in your household with a subscription.</p>
 
         </form>
 
