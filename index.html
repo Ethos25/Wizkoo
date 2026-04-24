@@ -568,7 +568,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* ═══ EVERYTHING CONNECTS ═══ */
 .ec-section{padding:0;overflow:hidden;background:var(--ink)}
 .ec-inner{max-width:none;padding:0}
-.ec-scenario{position:relative;height:80vh;overflow:hidden}
+.ec-scenario{position:relative;min-height:80vh;overflow:hidden}
 @keyframes kb-zoom{from{transform:scale(1)}to{transform:scale(1.03)}}
 .ec-col-photo{position:absolute;inset:0;overflow:hidden}
 .ec-photo-img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 1.2s cubic-bezier(.25,.1,.25,1);animation:kb-zoom 8s ease-in-out infinite alternate}
@@ -587,12 +587,12 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .ec-scenario--space .ec-headline{color:#0C1020}
 .ec-scenario--turtle .ec-headline{color:#F2F0EA}
 .ec-scenario.visible .ec-headline{opacity:1}
-.ec-kicker{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.2;color:#E8AF38;max-width:380px;margin:0 0 30px;opacity:0;transition:opacity .8s cubic-bezier(.25,.1,.25,1) .7s}
+.ec-kicker{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.2;color:#E8AF38;max-width:380px;margin:0 0 24px;opacity:0;transition:opacity .8s cubic-bezier(.25,.1,.25,1) .7s}
 .ec-scenario.visible .ec-kicker{opacity:1}
-.ec-proofs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;column-gap:4px;row-gap:9px;margin:0}
+.ec-proofs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;column-gap:4px;row-gap:8px;margin:0}
 .ec-proof{padding-left:16px;margin-bottom:0;opacity:0;transition:opacity .4s cubic-bezier(.25,.1,.25,1)}
 .ec-proof-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;display:block;margin-bottom:2px}
-.ec-proof-body{font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:12.5px;line-height:1.4;max-width:100%;margin:0}
+.ec-proof-body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;font-size:12.5px;line-height:1.4;max-width:100%;margin:0}
 .ec-scenario--space .ec-proof--reading{border-left:2px solid #2030A0}
 .ec-scenario--space .ec-proof--math{border-left:2px solid #9A8600}
 .ec-scenario--space .ec-proof--science{border-left:2px solid #247840}
@@ -642,25 +642,25 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .ec-divider{height:1px;opacity:0.3}
 }
 @media(max-height:420px) and (min-width:600px){
-  .ec-scenario{height:100vh;overflow:hidden}
+  .ec-scenario{min-height:100vh;overflow:hidden}
   .ec-col-photo{position:absolute;inset:0;height:auto}
   .ec-col-copy{position:absolute;top:0;left:0;width:60%;height:100%;padding:178px 3% 0 6%;overflow:hidden}
   .ec-scenario--turtle .ec-col-copy{background:none}
   .ec-scenario--space .ec-col-copy{background:none}
   .ec-eyebrow{display:none}
   .ec-headline{font-size:20px;line-height:1.08;margin:0 0 6px}
-  .ec-kicker{font-size:15px;line-height:1.15;margin:0 0 10px}
+  .ec-kicker{font-size:15px;line-height:1.15;margin:0 0 8px}
   .ec-proofs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;column-gap:8px;row-gap:4px}
   .ec-proof{margin-bottom:0}
-  .ec-proof-label{font-size:8px;letter-spacing:0.16em;margin-bottom:1px}
+  .ec-proof-label{font-size:8px;letter-spacing:0.16em;margin-bottom:4px}
   .ec-proof-body{font-size:10px;line-height:1.3;max-width:200px}
 }
 @media(max-height:700px) and (min-width:768px){
-  .ec-scenario{height:100vh}
+  .ec-scenario{min-height:100vh}
   .ec-col-copy{padding:96px 4% 0 7%}
   .ec-eyebrow{margin:0 0 12px}
   .ec-headline{font-size:28px;margin:0 0 8px}
-  .ec-kicker{font-size:18px;margin:0 0 18px}
+  .ec-kicker{font-size:18px;margin:0 0 16px}
   .ec-proof{margin-bottom:8px}
   .ec-proof-label{font-size:9px}
   .ec-proof-body{font-size:12px}
@@ -747,9 +747,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hz1-inner{max-width:1200px;margin:0 auto;padding:0 48px 0 clamp(48px,10vw,14vw)}
 .hz1-eyebrow{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;display:flex;align-items:center;gap:9px;margin-bottom:10px;opacity:0;transform:translateY(12px)}
 .hz-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#E8AF38;flex-shrink:0;display:inline-block}
-.hz1-h1{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(2.2rem,3.4vw,3.2rem);line-height:1.1;letter-spacing:-0.03em;color:#F0F2F8;margin:0 0 4px -3px;opacity:0;transform:translateY(12px)}
+.hz1-h1{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;font-weight:700;font-size:clamp(2.2rem,3.4vw,3.2rem);line-height:1.1;letter-spacing:-0.03em;color:#F0F2F8;margin:0 0 4px -3px;opacity:0;transform:translateY(12px)}
 .hz-hl-dot{display:inline-block;width:clamp(7px,0.8vw,10px);height:clamp(7px,0.8vw,10px);border-radius:50%;background:#E8AF38;margin-left:2px;vertical-align:baseline;position:relative;top:0;opacity:0}
-.hz1-sub{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1rem,2vw,1.4rem);line-height:1.12;letter-spacing:-0.02em;color:rgba(240,242,248,0.72);margin:0 0 32px 0;opacity:0;transform:translateY(12px)}
+.hz1-sub{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;font-weight:300;font-size:clamp(1rem,2vw,1.4rem);line-height:1.12;letter-spacing:-0.02em;color:rgba(240,242,248,0.72);margin:0 0 32px 0;opacity:0;transform:translateY(12px)}
 .hz-q-wrap{position:relative;display:inline-block;line-height:1}
 .hz-q-dot{position:absolute;bottom:0.22em;left:50%;transform:translateX(-50%);width:clamp(5px,0.6vw,8px);height:clamp(5px,0.6vw,8px);border-radius:50%;background:#E8AF38;box-shadow:0 0 8px rgba(232,175,56,0.3);opacity:0}
 
@@ -764,12 +764,11 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hz2-mob-list{width:100%;border-left:1.5px solid rgba(232,175,56,0.3);padding-left:16px;display:flex;flex-direction:column;gap:16px}
 .hz2-mob-item{position:relative}
 .hz2-mob-item::before{content:'';position:absolute;left:-19px;top:6px;width:6px;height:6px;border-radius:50%;background:#E8AF38}
-.hz2-mob-label{font-family:'Sora',sans-serif;font-weight:600;font-size:10px;letter-spacing:0.04em;text-transform:uppercase;color:#E8AF38;display:block;margin-bottom:3px}
-.hz2-mob-text{font-family:'Sora',sans-serif;font-size:13px;line-height:1.7;color:#C8CDDA;letter-spacing:0.005em}
+.hz2-mob-label{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;font-weight:600;font-size:10px;letter-spacing:0.04em;text-transform:uppercase;color:#E8AF38;display:block;margin-bottom:4px}
+.hz2-mob-text{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;font-size:13px;line-height:1.7;color:#C8CDDA;letter-spacing:0.005em}
 
 /* ── Responsive ── */
-@media(max-width:1024px){.hz2-inner{padding:0 32px}}
-@media(max-width:768px){
+@media(max-width:767px){
   .hz1{padding:0}
   .hz1-inner{padding:0 20px 0 20px}
   .hz2{margin-top:16px;padding:28px 0 48px;height:auto}
@@ -777,7 +776,6 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   #hz2-orbital-svg{display:none}
   .hz2-mob-fallback{display:flex!important}
 }
-@media(max-width:480px){.hz1-inner{padding:0 16px 0 16px}}
 @media(prefers-reduced-motion:reduce){
   .hz1-eyebrow,.hz1-h1,.hz-hl-dot,.hz1-sub,.hz-q-dot,.hz2-inner{opacity:1!important;transform:none!important}
 }
@@ -797,7 +795,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .linen-hero::after{display:none}
 
 /* Left text zone */
-.linen-hero-text{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding-top:25px;padding-bottom:20px;overflow:visible;min-height:0}
+.linen-hero-text{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding-top:176px;padding-bottom:24px;overflow:visible;min-height:0}
 
 /* Override hz1-inner padding in new hero context */
 .linen-hero .hz1-inner{padding:0 clamp(24px,4vw,48px) 0 48px;max-width:none;margin:0}
@@ -808,7 +806,6 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* Fear-killer micro-copy — absolutely positioned below the sphere */
 .hero-sphere-stack{display:flex;flex-direction:column;align-items:center;gap:18px}
 .hero-sphere-micro{font-family:'Space Mono',monospace;font-size:0.57rem;letter-spacing:0.13em;text-transform:uppercase;color:#8C91A5;text-align:center;white-space:nowrap;line-height:1;pointer-events:none}
-@media(max-width:375px){.hero-sphere-micro{white-space:normal;line-height:2.2}.hsm-sep{display:none}.hsm-phrase{display:block;text-align:center}}
 
 /* Hero CTA circle — matches orbital nucleus exactly */
 @keyframes sphere-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.008)}}
@@ -829,10 +826,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hero-cta-circle-text{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(0.85rem,1.2vw,1.05rem);color:rgba(12,16,32,0.55);letter-spacing:0.08em;pointer-events:none}
 
 /* Mobile: stack text above circle */
-@media(max-width:768px){
+@media(max-width:767px){
   .linen-hero{height:auto;min-height:calc(100dvh - 82px);overflow-y:auto}
   .hero-body{grid-template-columns:1fr;height:auto}
-  .linen-hero-text{padding-top:32px;padding-bottom:0;justify-content:flex-start;overflow:visible}
+  .linen-hero-text{padding-top:120px;padding-bottom:0;justify-content:flex-start;overflow:visible}
   .hero-circle-zone{flex:none;width:100%;max-width:100%;padding:24px 0 40px}
   .hero-cta-circle{width:clamp(100px,28vw,150px);height:clamp(100px,28vw,150px)}
   .linen-hero .hz1-inner{padding:8px 20px 0 20px}
@@ -850,9 +847,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* ═══ HERO CTA WRAP ═══ */
 .hero-cta-wrap{padding:0 0 0 48px;padding-right:16px;display:flex;flex-direction:column;align-items:flex-start;position:relative;z-index:2;overflow:visible}
 .hero-cta-wrap .btn-main{font-size:0.82rem;padding:14px 38px;box-shadow:6px 6px 0 #E8AF38}
-@media(max-width:768px){.hero-cta-wrap{padding:0 20px}}
+@media(max-width:767px){.hero-cta-wrap{padding:0 20px}}
 
-@media(max-width:768px){
+@media(max-width:767px){
   .linen-hero-text::after{display:none}
 }
 
@@ -861,7 +858,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 @media(max-height:420px) and (min-width:600px){
-  .linen-hero{height:calc(100dvh + 24px)!important;overflow:hidden!important;padding-top:48px!important}
+  .linen-hero{min-height:100dvh;overflow:hidden!important;padding-top:48px!important}
+}
+@media(max-height:700px) and (min-width:768px){
+  .linen-hero-text{padding-top:96px}
 }
 
 /* ═══ HERO ORBITAL ZONE ═══ */
@@ -876,7 +876,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hero-orbital-zone #hz2-inner{position:relative;z-index:1}
 
 /* ═══ HERO SETUP LINE ═══ */
-.hero-setup-line{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(14px,1.4vw,18px);color:rgba(240,242,248,0.54);letter-spacing:-0.01em;line-height:1.4;margin-bottom:8px;opacity:1}
+.hero-setup-line{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;font-weight:300;font-size:clamp(14px,1.4vw,18px);color:rgba(240,242,248,0.54);letter-spacing:-0.01em;line-height:1.4;margin-bottom:8px;opacity:1}
 
 /* ═══ OS THREAD ═══ */
 .os-thread{display:flex;align-items:center;gap:10px;margin-top:20px;opacity:1}
@@ -884,7 +884,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .os-thread-copy{font-family:'Space Mono',monospace;font-size:6.5px;letter-spacing:0.13em;text-transform:uppercase;color:rgba(240,242,248,0.54);line-height:1.7;margin:0}
 .os-thread-link{color:#E8AF38;text-decoration:none;border-bottom:1px solid rgba(232,175,56,0.35);padding-bottom:1px}
 
-@media(max-width:768px){
+@media(max-width:767px){
   .hero-orbital-zone{min-height:300px}
 }
 
@@ -1211,7 +1211,6 @@ body.page-home{
 <!-- ═══ v5 DESIGN SYSTEM OVERRIDES ═══ -->
 <style id="hp-v5-design">
 /* ── Display headlines: Fraunces 600 ── */
-.hz1-h1,
 .moment-headline,
 .ec-headline,
 .cta-dark h2,
@@ -1742,45 +1741,45 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- ─── Callout text groups ─── -->
         <!-- READING: upper-left — text centered BELOW dot at (333,114) -->
         <g id="callout-reading" opacity="0">
-          <text x="333" y="133" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">READING</text>
-          <text x="333" y="149" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">The man who accidentally</text>
-          <text x="333" y="163" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">saw through his wife's hand.</text>
+          <text x="333" y="133" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">READING</text>
+          <text x="333" y="149" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">The man who accidentally</text>
+          <text x="333" y="163" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">saw through his wife's hand.</text>
         </g>
         <!-- MATH: right zone — text to the RIGHT of dot at (728,225) -->
         <g id="callout-math" opacity="0">
-          <text x="742" y="221" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">MATH</text>
-          <text x="742" y="237" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Measuring bone lengths.</text>
-          <text x="742" y="252" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Which is longest?</text>
+          <text x="742" y="221" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">MATH</text>
+          <text x="742" y="237" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Measuring bone lengths.</text>
+          <text x="742" y="252" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Which is longest?</text>
         </g>
         <!-- SCIENCE: lower-right zone — text to the RIGHT of dot at (610,399) -->
         <g id="callout-science" opacity="0">
-          <text x="624" y="395" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">SCIENCE</text>
-          <text x="624" y="411" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">How fractures heal.</text>
-          <text x="624" y="426" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Why does a cast work?</text>
+          <text x="624" y="395" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">SCIENCE</text>
+          <text x="624" y="411" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">How fractures heal.</text>
+          <text x="624" y="426" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Why does a cast work?</text>
         </g>
         <!-- HISTORY: bottom-center zone -->
         <g id="callout-history" opacity="0">
-          <text x="424" y="439" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">HISTORY</text>
-          <text x="424" y="456" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">1895. One accident changed</text>
-          <text x="424" y="471" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">medicine forever.</text>
+          <text x="424" y="439" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">HISTORY</text>
+          <text x="424" y="456" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">1895. One accident changed</text>
+          <text x="424" y="471" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">medicine forever.</text>
         </g>
         <!-- GEOGRAPHY: lower-left zone — text anchored adjacent to dot at (289,396) -->
         <g id="callout-geo" opacity="0">
-          <text x="148" y="363" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em">GEOGRAPHY</text>
-          <text x="148" y="379" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Visit Würzburg, Germany.</text>
-          <text x="148" y="394" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Where X-rays were born.</text>
+          <text x="148" y="363" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em">GEOGRAPHY</text>
+          <text x="148" y="379" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Visit Würzburg, Germany.</text>
+          <text x="148" y="394" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Where X-rays were born.</text>
         </g>
         <!-- ART: left-center zone — text-anchor end, right edge 10 units left of dot at (173,289) -->
         <g id="callout-art" opacity="0">
-          <text x="163" y="258" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="end">ART</text>
-          <text x="163" y="274" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Sketch the human skeleton.</text>
-          <text x="163" y="289" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Label every bone you can name.</text>
+          <text x="163" y="258" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="end">ART</text>
+          <text x="163" y="274" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Sketch the human skeleton.</text>
+          <text x="163" y="289" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Label every bone you can name.</text>
         </g>
         <!-- WRITING: text below-right of dot at (499.76, 37.13) — dot_x+12, dot_y+16/30/43 -->
         <g id="callout-writing" opacity="0">
-          <text x="512" y="53" font-family="'Sora',sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">WRITING</text>
-          <text x="512" y="69" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">A get-well letter to Granddad.</text>
-          <text x="512" y="83" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">What would you say?</text>
+          <text x="512" y="53" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">WRITING</text>
+          <text x="512" y="69" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">A get-well letter to Granddad.</text>
+          <text x="512" y="83" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">What would you say?</text>
         </g>
       </svg>
 
