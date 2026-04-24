@@ -499,10 +499,11 @@ to a distributed mess.
 
 PRINCIPLE 7 — VIEWPORT VERIFICATION REQUIREMENT
 Any visual change to the homepage or any page with a viewport-height-locked
-hero section must include verification at the four target viewports defined
+hero section must include verification at the five target viewports defined
 in Layer 4 VIEWPORT REALITY CONSTRAINTS: 1440x900 native, 1280x540 compressed
-desktop, 375x667 iPhone SE, 430x932 iPhone 15 Pro Max. Verification belongs
-in the VERIFICATION section of the six-section prompt standard. Skipping this
+desktop, 1440x396 Amy production environment, 375x667 iPhone SE, 430x932
+iPhone 15 Pro Max. Verification belongs in the VERIFICATION section of the
+six-section prompt standard. Skipping this
 check is the single most common source of "it looked fine in design but broke
 in production" failures. Not optional on visual changes.
 
@@ -2165,12 +2166,12 @@ standard eyesight turn up DPI scaling by default. Chrome bookmarks bars are
 default behavior. A significant share of the actual audience experiences this
 compressed viewport.
 
-This subsection names the four target viewports every homepage visual change
+This subsection names the five target viewports every homepage visual change
 must pass before signoff. It moves viewport compliance from per-session recall
 (Amy remembering to mention it) to ambient constraint (the runbook asserting
 it for every session).
 
-### THE FOUR TARGET VIEWPORTS
+### THE FIVE TARGET VIEWPORTS
 
 PRIMARY DESKTOP
   Dimensions: 1440x900 native resolution.
@@ -2196,23 +2197,110 @@ MOBILE IPHONE 15 PRO MAX
   Role: tall mobile ceiling. Submit button must be reachable within one scroll
   gesture. Content should not leave awkward empty space in the vertical.
 
+AMY PRODUCTION ENVIRONMENT
+  Dimensions: 1440x396.
+  Context: Windows 200% OS scaling + Chrome bookmarks bar + Chrome zoom.
+    Matches the documented production display environment described in the
+    Wizkoo Viewport Standard (Tier 1).
+  Role: Amy's actual working viewport. A section passing all other four target
+    viewports while failing at 1440x396 means the section fails for Amy
+    specifically — a real failure, not an edge case. Added 2026-04-24 following
+    Section 2 (.linen-hero) bleed diagnostic.
+
+### OVERFLOW + MIN-HEIGHT COUPLING RULE
+
+Added: 2026-04-24
+Status: Active — apply to all sections, present and future
+Source: Section 2 (.linen-hero) bleed diagnostic, 2026-04-24
+
+THE RULE
+
+If a section declares overflow:hidden (or overflow:hidden!important) AND
+min-height:100dvh (or 100vh, or 100svh) at any breakpoint, the section
+MUST use min-height:calc(100dvh + 96px) instead.
+
+Minimum buffer value: 96px.
+Maximum: discretionary, but 96px is the verified-working baseline from
+Section 2 remediation.
+
+WHY THIS RULE EXISTS
+
+When overflow:hidden and min-height:100dvh co-exist, min-height stops
+acting as a floor (minimum) and becomes a ceiling (maximum). The section
+is forced to be exactly the viewport size — no more, no less.
+
+At exact viewport size, the next section's first pixel lands on the
+current section's terminal edge. Any rendering variance — font load
+timing, browser rounding, webfont metrics — causes the next section to
+bleed into the current viewport frame as a visible strip at the bottom.
+
+The +96px buffer extends the section past the viewport fold by a
+structurally guaranteed amount, eliminating the bleed regardless of
+content height or rendering variance.
+
+DIAGNOSTIC QUESTION
+
+If a strip of the next section is visible at the bottom of a
+full-viewport section at any viewport:
+
+  Does this section have overflow:hidden paired with
+  min-height:100dvh (or 100vh, or 100svh)?
+
+If YES → this is the cause. Fix by changing min-height to
+calc(100dvh + 96px).
+
+If NO → different issue. Diagnose separately.
+
+COMPLIANT vs NON-COMPLIANT EXAMPLES
+
+NON-COMPLIANT:
+  .my-section {
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
+NON-COMPLIANT:
+  @media (max-height: 420px) and (min-width: 600px) {
+    .my-section {
+      min-height: 100dvh;
+      overflow: hidden !important;
+    }
+  }
+
+COMPLIANT (option A — add buffer):
+  .my-section {
+    min-height: calc(100dvh + 96px);
+    overflow: hidden;
+  }
+
+COMPLIANT (option B — remove clip):
+  .my-section {
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+Choose Option A when the section must clip overflow for design reasons
+(e.g., full-bleed photograph must not bleed past section boundary).
+Choose Option B when natural content expansion is acceptable.
+
 ### THE VERIFICATION REQUIREMENT
 
 Any visual change to the homepage or to any page with a viewport-height-locked
-hero section must be verified at all four target viewports before signoff. Not
+hero section must be verified at all five target viewports before signoff. Not
 "designed for." Actually opened in a browser or dev tools emulator at each
 setting and checked.
 
 Claude Code prompts that touch homepage visual surface must include this
-four-viewport verification in the VERIFICATION section of the six-section
+five-viewport verification in the VERIFICATION section of the six-section
 prompt standard. Example VERIFICATION clause:
 
-  "Open index.html in dev server. Verify at four target viewports per Layer 4
+  "Open index.html in dev server. Verify at five target viewports per Layer 4
   Viewport Reality Constraints: (1) 1440x900 native, (2) 1280x540 emulated
-  compressed desktop, (3) 375x667 iPhone SE, (4) 430x932 iPhone 15 Pro Max.
-  Submit button must be visible without scroll at compressed desktop and
-  reachable within one scroll gesture on both mobile viewports. Report any
-  viewport that fails the check."
+  compressed desktop, (3) 1440x396 Amy production environment, (4) 375x667
+  iPhone SE, (5) 430x932 iPhone 15 Pro Max. Submit button must be visible
+  without scroll at compressed desktop and reachable within one scroll gesture
+  on both mobile viewports. No section boundary bleed at any viewport. Report
+  any viewport that fails the check."
 
 ### RELATED RUNBOOK CONTENT
 

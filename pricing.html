@@ -23,7 +23,7 @@ body{font-family:'Sora',sans-serif;background:var(--ink);color:var(--ink);overfl
 .sr-btn{opacity:0;transition:opacity 600ms ease}.sr-btn.v{opacity:1}
 
 /* ═══ HERO — dark, centered, pricing up front ═══ */
-.hero{background:var(--ink);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(52px + clamp(40px,8vh,80px)) 48px clamp(60px,10vh,120px);position:relative;overflow:hidden;text-align:center}
+.hero{background:var(--ink);min-height:calc(100vh + 96px);min-height:calc(100svh + 96px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(52px + clamp(40px,8vh,80px)) 48px clamp(60px,10vh,120px);position:relative;overflow:hidden;text-align:center}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,.012) 59px,rgba(255,255,255,.012) 60px);pointer-events:none}
 .hero::after{content:'';position:absolute;width:60%;height:60%;top:20%;left:20%;background:radial-gradient(ellipse at 50% 45%,rgba(24,40,72,.45) 0%,transparent 65%);pointer-events:none}
 .hero-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--saffron);margin-bottom:clamp(20px,3vh,32px);position:relative;z-index:1;opacity:0;animation:fu .5s var(--expo) forwards .25s}
