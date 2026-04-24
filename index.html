@@ -956,19 +956,17 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 /* -- Left column -- */
 .left{padding:8px 88px 8px 0;display:flex;flex-direction:column;position:relative}
-.left-header{display:flex;align-items:center;gap:14px;margin-bottom:44px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--ink-45)}
+.left-header{display:flex;align-items:center;gap:14px;margin-bottom:56px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--ink-45)}
 .left-header .tick{width:20px;height:1px;background:#E8AF38;opacity:0.9;display:inline-block}
 .left-header .saffron{color:#E8AF38;font-weight:700}
 .left h1{font-family:'Fraunces',serif;line-height:0.96;letter-spacing:-0.035em;color:#0C1020;text-wrap:balance;margin:0}
 .left h1 .l1{display:block;font-weight:300;opacity:0.78;font-size:clamp(2.2rem,3.6vw,3.2rem);font-style:normal;letter-spacing:-0.025em}
-.left h1 .l2{display:block;font-weight:700;color:#E8AF38;font-size:clamp(2.8rem,5vw,4.6rem);margin-top:-2px;letter-spacing:-0.04em}
-.left h1 .l3{display:block;margin-top:6px;font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.6rem,2.4vw,2rem);letter-spacing:-0.02em;color:#0C1020;opacity:0.88}
-.left-and-sub{margin-top:6px;margin-left:96px;font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:16px;line-height:1.5;color:var(--ink-60);max-width:34ch;text-wrap:pretty}
+.left h1 .l2{display:block;font-weight:700;color:#E8AF38;font-size:clamp(2.8rem,5vw,4.6rem);margin-top:0;letter-spacing:-0.04em}
+.left h1 .l3{display:block;margin-top:10px;font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.6rem,2.4vw,2rem);letter-spacing:-0.02em;color:#0C1020;opacity:0.88}
+.left-and-sub{margin-top:10px;margin-left:96px;font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:16px;line-height:1.5;color:var(--ink-60);max-width:34ch;text-wrap:pretty}
 .left-and-sub::before{content:'\2026\00a0';color:#E8AF38;opacity:0.7}
-.left .desk{margin-top:40px;max-width:460px}
-.left-foot{margin-top:28px;padding-top:22px;border-top:1px solid var(--ink-12);max-width:460px;display:flex;align-items:baseline;gap:20px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-45);line-height:1.8}
-.left-foot .dot{width:3px;height:3px;border-radius:50%;background:#E8AF38;opacity:0.8;display:inline-block;transform:translateY(-3px)}
-.left-foot em{font-style:normal;color:#0C1020;font-weight:700;letter-spacing:0.18em}
+.left .desk{margin-top:56px;max-width:460px}
+
 
 /* -- Right column -- */
 .right{padding:8px 0 8px 80px;position:relative;display:flex;flex-direction:column}
@@ -1045,7 +1043,6 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .left{padding:0 60px 0 0}
   .right{padding:0 0 0 56px}
   .left .desk{margin-top:24px;max-width:420px}
-  .left-foot{margin-top:16px;padding-top:14px}
   .cta-row{margin-top:24px;padding-top:18px}
   .fields{gap:20px}
   .left h1 .l1{font-size:clamp(1.8rem,3vw,2.6rem)}
@@ -1070,7 +1067,6 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .desk-head{margin-bottom:6px}
   .desk-body{font-size:13px;line-height:1.45}
   .desk-foot{margin-top:8px;padding-top:6px}
-  .left-foot{margin-top:10px;padding-top:8px}
   .form-head{margin-bottom:12px;padding-bottom:6px}
   .form-head h2{font-size:clamp(1.2rem,1.6vw,1.5rem)}
   .right-meta{margin-bottom:10px}
@@ -1096,7 +1092,6 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .desk-head{margin-bottom:2px}
   .desk-body{font-size:11px;line-height:1.35}
   .desk-foot{margin-top:4px;padding-top:2px}
-  .left-foot{margin-top:4px;padding-top:4px}
   .right-meta{margin-bottom:0}
   .form-head{margin-bottom:2px;padding-bottom:2px}
   .fields{gap:11px}
@@ -1124,7 +1119,6 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .left h1 .l2{font-size:2.6rem}
   .left h1 .l3{font-size:1.5rem}
   .left .desk{margin-top:32px;max-width:none}
-  .left-foot{max-width:none}
   .right{padding:0}
   .right-meta{margin-bottom:16px}
   .toggle-row{flex-wrap:wrap}
@@ -1521,11 +1515,6 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </article>
 
-        <div class="left-foot">
-          <span><em>One price</em></span>
-          <span class="dot"></span>
-          <span>Up to <em>4 children</em></span>
-        </div>
       </div>
 
       <!-- RIGHT COLUMN -->
@@ -1607,7 +1596,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="toggle-opt-label">No</span>
                       </label>
                     </div>
-                    <p class="toggle-note" id="wiggly-note">We weave themed movement into the week &mdash; dance breaks, obstacle play, outdoor missions.</p>
+                    <p class="toggle-note" id="wiggly-note">We weave themed movement in &mdash; dance breaks, obstacle play, outdoor missions.</p>
                   </div>
                 </fieldset>
               </div>
@@ -2763,8 +2752,8 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   });
 
   /* ── Wiggly toggle note ── */
-  var wigglyNoteYes = 'We weave themed movement into the week \u2014 dance breaks, obstacle play, outdoor missions.';
-  var wigglyNoteNo  = 'We build long focus into the week \u2014 deep reads, long builds, big questions.';
+  var wigglyNoteYes = 'We weave themed movement in \u2014 dance breaks, obstacle play, outdoor missions.';
+  var wigglyNoteNo  = 'We build deeper focus in \u2014 deep reads, long builds, big questions.';
   document.querySelectorAll('input[name="wigglyKid"]').forEach(function(radio){
     radio.addEventListener('change', function(){
       var note = document.getElementById('wiggly-note');
