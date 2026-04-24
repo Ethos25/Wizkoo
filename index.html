@@ -949,7 +949,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .desk-foot em{font-style:normal;color:var(--ink-45)}
 
 /* -- Hero layout -- */
-.hero{padding:72px 0 96px;position:relative}
+.hero{padding:72px 0 96px;position:relative;min-height:100vh}
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 56px;box-sizing:border-box}
 .hero-grid{display:grid;gap:0;align-items:start;position:relative;background:linear-gradient(to right,transparent calc(50.5% - 8px),rgba(12,16,32,0.04) 50.5%,transparent calc(50.5% + 8px))}
 .hero-grid::before{content:'';position:absolute;left:calc(50.5% - 0.5px);top:24px;bottom:24px;width:1px;background:linear-gradient(180deg,transparent 0%,#E8AF38 16%,#E8AF38 84%,transparent 100%);opacity:0.42}
@@ -1112,7 +1112,7 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
 
 /* -- Mobile stacking (375×667 iPhone SE baseline) -- */
 @media(max-width:767px){
-  .hero{padding:48px 0 72px}
+  .hero{padding:48px 0 72px;min-height:100svh}
   .wrap{padding:0 24px}
   .hero-grid{grid-template-columns:1fr;gap:48px}
   .hero-grid::before,.hero-grid::after{display:none}
