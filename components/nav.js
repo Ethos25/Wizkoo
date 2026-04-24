@@ -293,7 +293,7 @@
     '<div class="announce" role="banner" aria-label="Site announcement"' +
       (_hp ? ' style="background:var(--ink);backdrop-filter:none;-webkit-backdrop-filter:none"' : '') + '>',
     '  <span class="announce-text"' +
-      (_hp ? ' style="color:rgba(232,175,56,0.75)"' : '') + '>Personalized homeschool learning plans, ages 2 to 12. Books. Games. Connected by one theme.</span>',
+      (_hp ? ' style="color:rgba(232,175,56,0.75)"' : '') + '>Personalized homeschool learning plans, ages 3 to 12. Books. Games. Connected by one theme.</span>',
     '</div>',
 
     /* 2. Frosted glass nav — sticky top:30px, always present on desktop */

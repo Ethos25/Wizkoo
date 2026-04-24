@@ -12,7 +12,7 @@
    see Open Item: move tokens to shared tokens.css).
    ────────────────────────────────────────────────────────── */
 .l-bracket-cta {
-  box-shadow: 6px 6px 0 var(--saffron);
+  box-shadow: 8px 8px 0 var(--saffron);
   background: transparent;
   border: none;
   display: inline-block;
@@ -28,7 +28,7 @@
 
 .l-bracket-cta:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0 var(--saffron);
+  box-shadow: 10px 10px 0 var(--saffron);
 }
 
 /* Form-gated CTAs: use .cta-needs-ready to opt in to the dim→full color gate */
