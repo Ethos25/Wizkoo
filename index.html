@@ -937,10 +937,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- Desk note: imported from reference verbatim (no tape, no rotation) -- */
 .desk{position:relative;background:#FBF7EB;padding:26px 30px 22px;box-shadow:0 1px 0 rgba(12,16,32,0.04),0 22px 48px -32px rgba(12,16,32,0.28),inset 0 0 0 0.5px rgba(184,132,20,0.08);margin-bottom:42px}
 .desk::before{content:'';position:absolute;top:-8px;left:0;right:0;height:10px;background:radial-gradient(circle at 7px 10px,#FBF7EB 5px,transparent 5.6px),radial-gradient(circle at 22px 8px,#FBF7EB 4.2px,transparent 4.8px),radial-gradient(circle at 38px 10px,#FBF7EB 5px,transparent 5.6px),radial-gradient(circle at 53px 8px,#FBF7EB 4.2px,transparent 4.8px);background-size:60px 10px;background-repeat:repeat-x}
-.desk-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:12px}
+.desk-head{margin-bottom:12px}
 .desk-title{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:22px;letter-spacing:-0.015em;color:#0C1020;line-height:1.15}
 .desk-title::first-letter{color:#E8AF38}
-.desk-kicker{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-28);white-space:nowrap}
 .desk-body{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:15px;line-height:1.55;color:rgba(12,16,32,0.82);text-wrap:pretty}
 .desk-body strong{font-style:normal;font-weight:500;color:#0C1020}
 .desk-body .hl{font-style:normal;font-weight:500;color:var(--day-sky);border-bottom:1px solid rgba(40,104,204,0.38);padding-bottom:1px}
@@ -1018,7 +1017,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .age-steppers button:hover{color:var(--saffron-deep);background:rgba(232,175,56,0.12)}
 .age-hint{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-28)}
 .wiggly-fieldset{border:none;padding:0;margin:0}
-.toggle-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:6px}
+.toggle-row{display:flex;align-items:flex-start;gap:16px;flex-wrap:nowrap;margin-top:6px}
 .toggle-segment{display:inline-flex;align-items:stretch;position:relative}
 .toggle-opt{position:relative;padding:4px 10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-45);transition:color .2s;display:flex;align-items:center;gap:7px}
 .toggle-opt+.toggle-opt{border-left:none}
@@ -1128,6 +1127,7 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .left-foot{max-width:none}
   .right{padding:0}
   .right-meta{margin-bottom:16px}
+  .toggle-row{flex-wrap:wrap}
   .cta-row{gap:20px}
 }
 
@@ -1507,7 +1507,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <article class="desk">
           <div class="desk-head">
             <div class="desk-title">What we ask first.</div>
-            <div class="desk-kicker">Two minutes &middot; No account</div>
           </div>
           <p class="desk-body">
             What your child <strong>can't stop talking about.</strong>
@@ -2763,10 +2762,12 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   });
 
   /* ── Wiggly toggle note ── */
+  var wigglyNoteYes = 'We weave themed movement into the week \u2014 dance breaks, obstacle play, outdoor missions.';
+  var wigglyNoteNo  = 'We build long focus into the week \u2014 deep reads, long builds, big questions.';
   document.querySelectorAll('input[name="wigglyKid"]').forEach(function(radio){
     radio.addEventListener('change', function(){
       var note = document.getElementById('wiggly-note');
-      if(note) note.hidden = (this.value === 'false' && this.checked);
+      if(note) note.textContent = this.value === 'true' ? wigglyNoteYes : wigglyNoteNo;
     });
   });
 
