@@ -992,8 +992,8 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 #field-wiggly .field-label{flex-shrink:0}
 #field-wiggly .toggle-row{margin-top:0;flex:1}
 #field-wiggly .toggle-note{flex:1}
-.theme-input,.name-input{font-family:'Fraunces',serif;font-weight:400;font-style:italic;color:#0C1020;letter-spacing:-0.01em;background:transparent;border:0;outline:0;padding:4px 2px;margin:0;line-height:1.2;border-bottom:2px solid var(--ink-12);transition:border-bottom-color .25s,background .25s,color .2s}
-.theme-input{font-size:24px;width:100%;max-width:100%;margin-top:6px}
+.theme-input,.name-input{font-family:'Fraunces',serif;font-weight:400;font-style:italic;color:#0C1020;letter-spacing:-0.01em;background:transparent;border:0;outline:0;padding:4px 6px;margin:0;line-height:1.2;border-bottom:2px solid var(--ink-12);transition:border-bottom-color .25s,background .25s,color .2s}
+.theme-input{font-size:20px;width:100%;max-width:100%;margin-top:6px}
 .name-input{font-size:20px;width:var(--w,12ch)}
 .theme-input::placeholder,.name-input::placeholder{color:var(--ink-28);font-style:italic}
 .theme-input:focus,.name-input:focus{border-bottom-color:#E8AF38;background:linear-gradient(to top,rgba(232,175,56,0.10) 0%,rgba(232,175,56,0) 45%)}
@@ -1076,7 +1076,7 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .field-num{padding-top:2px}
   .field-body{gap:2px}
   .field-input-row{gap:8px}
-  .theme-input{font-size:20px}
+  .theme-input{font-size:18px}
   .name-input{font-size:18px}
   .theme-examples{margin-top:6px}
   .toggle-note{font-size:12px;line-height:1.3;padding-left:12px}
@@ -1099,7 +1099,7 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .fields{gap:18px}
   .field-body{gap:0}
   .field-input-row{gap:4px}
-  .theme-input{font-size:18px}
+  .theme-input{font-size:16px}
   .name-input{font-size:16px}
   .theme-examples{margin-top:0}
   .theme-chip{font-size:10px}
@@ -1561,7 +1561,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   For
                 </div>
                 <div class="field-input-row">
-                  <input id="nh-name" name="childName" class="name-input" type="text" placeholder="name" autocomplete="off" maxlength="30" style="--w:12ch">
+                  <input id="nh-name" name="childName" class="name-input" type="text" placeholder="Name" autocomplete="off" maxlength="30" style="--w:12ch">
                   <div class="age-group">
                     <span class="lbl">age</span>
                     <div class="age-box">
