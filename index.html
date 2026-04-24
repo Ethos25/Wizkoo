@@ -973,7 +973,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 /* -- Form -- */
 .form-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-top:22px;margin-bottom:28px;padding-bottom:12px;border-bottom:1px solid var(--ink-12)}
-.form-head h2{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.5rem,2vw,1.85rem);line-height:1.15;letter-spacing:-0.02em;color:var(--saffron)}
+.form-head h2{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(1.5rem,2vw,1.85rem);line-height:1.15;letter-spacing:-0.02em;color:#0C1020}
 .form-head .count{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink-45);white-space:nowrap}
 .form-head .count em{font-style:normal;color:#E8AF38;font-weight:700}
 .fields{display:flex;flex-direction:column;gap:26px}
@@ -981,7 +981,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .field-num{font-family:'Fraunces',serif;font-weight:500;font-size:16px;font-variation-settings:'opsz' 14;color:var(--saffron);padding-top:4px}
 .field-body{display:flex;flex-direction:column;gap:4px}
 .field-label{font-family:'Fraunces',serif;font-weight:500;font-style:normal;font-size:15px;color:#0C1020;letter-spacing:-0.01em;line-height:1.3;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.field-label .aux{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-45)}
+.field-label .aux{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:15px;letter-spacing:-0.005em;text-transform:none;color:var(--saffron);line-height:1.3}
 .field-input-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 #field-name .field-body{flex-direction:row;align-items:baseline;gap:12px}
 #field-name .field-label{flex-shrink:0}
@@ -1536,7 +1536,7 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="field-body">
                 <div class="field-label">
                   Build a week around
-                  <span class="aux">the thing they said in the car</span>
+                  <span class="aux">The thing they said in the car.</span>
                 </div>
                 <input id="nh-theme" name="theme" class="theme-input" type="text" placeholder="Superheroes" autocomplete="off" maxlength="60">
                 <div class="theme-examples">
