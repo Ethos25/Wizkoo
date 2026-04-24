@@ -955,7 +955,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hero-grid::after{content:'';position:absolute;left:calc(50.5% - 3px);top:48%;width:7px;height:1px;background:#E8AF38;opacity:0.6}
 
 /* -- Left column -- */
-.left{padding:8px 72px 8px 0;display:flex;flex-direction:column;position:relative}
+.left{padding:8px 80px 8px 0;display:flex;flex-direction:column;position:relative}
 .left-header{display:flex;align-items:center;gap:14px;margin-bottom:56px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--ink-45)}
 .left-header .tick{width:20px;height:1px;background:#E8AF38;opacity:0.9;display:inline-block}
 .left-header .saffron{color:#E8AF38;font-weight:700}
@@ -987,9 +987,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 #field-name .field-label{flex-shrink:0}
 #field-name .field-input-row{flex:1}
 #field-name .name-input{flex:1;width:auto;min-width:0}
-#field-wiggly .wiggly-fieldset{display:flex;align-items:baseline;gap:12px}
+#field-wiggly .wiggly-fieldset{display:flex;align-items:baseline;gap:8px}
 #field-wiggly .field-label{flex-shrink:0}
-#field-wiggly .toggle-row{margin-top:0}
+#field-wiggly .toggle-row{margin-top:0;flex:1}
+#field-wiggly .toggle-note{flex:1}
 .theme-input,.name-input{font-family:'Fraunces',serif;font-weight:400;font-style:italic;color:#0C1020;letter-spacing:-0.01em;background:transparent;border:0;outline:0;padding:4px 2px;margin:0;line-height:1.2;border-bottom:2px solid var(--ink-12);transition:border-bottom-color .25s,background .25s,color .2s}
 .theme-input{font-size:24px;width:100%;max-width:100%}
 .name-input{font-size:20px;width:var(--w,12ch)}
@@ -1015,7 +1016,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .age-steppers button:hover{color:var(--saffron-deep);background:rgba(232,175,56,0.12)}
 .age-hint{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-28)}
 .wiggly-fieldset{border:none;padding:0;margin:0}
-.toggle-row{display:flex;align-items:flex-start;gap:16px;flex-wrap:nowrap;margin-top:6px}
+.toggle-row{display:flex;align-items:flex-start;gap:15px;flex-wrap:nowrap;margin-top:6px}
 .toggle-segment{display:inline-flex;align-items:stretch;position:relative}
 .toggle-opt{position:relative;padding:4px 10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-45);transition:color .2s;display:flex;align-items:center;gap:7px}
 .toggle-opt+.toggle-opt{border-left:none}
@@ -1040,8 +1041,8 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
 @media(max-height:700px) and (min-width:768px){
   body::after{width:40vmax;left:6%;top:-8%}
   .hero{padding:40px 0 48px}
-  .left{padding:0 52px 0 0}
-  .right{padding:0 0 0 44px}
+  .left{padding:0 56px 0 0}
+  .right{padding:0 0 0 50px}
   .left .desk{margin-top:24px;max-width:420px}
   .cta-row{margin-top:24px;padding-top:18px}
   .fields{gap:20px}
@@ -1055,8 +1056,8 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
 
 @media(max-height:540px) and (min-width:768px){
   .hero{padding:20px 0 28px}
-  .left{padding:0 40px 0 0}
-  .right{padding:0 0 0 38px}
+  .left{padding:0 44px 0 0}
+  .right{padding:0 0 0 44px}
   .left-header{margin-bottom:18px}
   .left h1 .l1{font-size:clamp(1.5rem,2.5vw,2rem)}
   .left h1 .l2{font-size:clamp(1.8rem,3.2vw,2.6rem);margin-top:-1px}
@@ -1479,7 +1480,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ═══ NEW HERO SECTION ═══ -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-grid" style="grid-template-columns:1fr 1.12fr">
+    <div class="hero-grid" style="grid-template-columns:1fr 1.10fr">
 
       <!-- LEFT COLUMN -->
       <div class="left">
