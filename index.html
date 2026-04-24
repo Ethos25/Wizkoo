@@ -795,7 +795,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .linen-hero::after{display:none}
 
 /* Left text zone */
-.linen-hero-text{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding-top:176px;padding-bottom:24px;overflow:visible;min-height:0}
+.linen-hero-text{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding-top:176px;padding-bottom:96px;overflow:visible;min-height:0}
 
 /* Override hz1-inner padding in new hero context */
 .linen-hero .hz1-inner{padding:0 clamp(24px,4vw,48px) 0 48px;max-width:none;margin:0}
@@ -829,7 +829,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @media(max-width:767px){
   .linen-hero{height:auto;min-height:100dvh;overflow-y:auto}
   .hero-body{grid-template-columns:1fr;height:auto}
-  .linen-hero-text{padding-top:120px;padding-bottom:0;justify-content:flex-start;overflow:visible}
+  .linen-hero-text{padding-top:120px;padding-bottom:48px;justify-content:flex-start;overflow:visible}
   .hero-circle-zone{flex:none;width:100%;max-width:100%;padding:24px 0 40px}
   .hero-cta-circle{width:clamp(100px,28vw,150px);height:clamp(100px,28vw,150px)}
   .linen-hero .hz1-inner{padding:8px 20px 0 20px}
@@ -858,10 +858,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 @media(max-height:420px) and (min-width:600px){
-  .linen-hero{min-height:100dvh;overflow:hidden!important;padding-top:48px!important}
+  .linen-hero{min-height:calc(100dvh + 96px);overflow:hidden!important;padding-top:48px!important}
 }
 @media(max-height:700px) and (min-width:768px){
-  .linen-hero-text{padding-top:96px}
+  .linen-hero-text{padding-top:96px;padding-bottom:72px}
 }
 
 /* ═══ HERO ORBITAL ZONE ═══ */
