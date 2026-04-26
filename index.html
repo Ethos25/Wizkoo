@@ -410,12 +410,6 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @keyframes sparkPop{0%{opacity:1;transform:scale(0)}40%{transform:scale(2.5)}100%{opacity:0;transform:scale(0)}}
 .panel-link{display:inline-block;margin-top:20px;font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--faint);padding-bottom:2px;transition:border-color .2s,color .2s}.panel-link:hover{border-color:var(--saffron);color:var(--saffron)}.panel-heading-link{color:inherit;text-decoration:none;transition:color 0.25s var(--expo)}.panel-heading-link:hover{color:var(--saffron)}
 
-.philo{background:var(--ink);color:var(--paper);padding:80px 48px;display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start;position:relative}
-.philo::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}.philo>*{position:relative;z-index:1}
-.philo-left{position:sticky;top:80px}.philo .tag{color:var(--saffron);margin-bottom:16px}
-.philo h2{font-family:'Sora',sans-serif;font-weight:200;font-size:2rem;line-height:1.12;letter-spacing:-0.02em}.philo h2 strong{font-weight:700;color:var(--saffron)}
-.phi{padding:24px 0;border-top:1px solid rgba(255,255,255,0.06);opacity:0;transform:translateY(16px);transition:opacity .6s var(--expo),transform .6s var(--expo)}.phi.visible{opacity:1;transform:translateY(0)}.phi:last-child{border-bottom:1px solid rgba(255,255,255,0.06)}
-.phi h3{font-family:'Sora',sans-serif;font-weight:600;font-size:0.82rem;color:var(--saffron);margin-bottom:8px}.phi p{font-size:0.72rem;color:rgba(250,250,250,0.35);line-height:1.7}
 
 .faq-section{padding:100px 48px;max-width:var(--max-width);margin:0 auto}.faq-inner{max-width:680px}
 .faq-section h2{font-family:'Sora',sans-serif;font-weight:200;font-size:1.8rem;line-height:1.15;letter-spacing:-0.025em;margin-bottom:36px}.faq-section h2 strong{font-weight:700}
@@ -450,8 +444,6 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .orientation{grid-template-columns:1fr}
   .games-band{grid-template-columns:1fr}
   .game-panel:first-child{border-right:none;border-bottom:1px solid var(--rule)}
-  .philo{grid-template-columns:1fr}
-  .philo-left{position:relative;top:0}
   .week-compare{grid-template-columns:1fr;max-width:480px;margin:0 auto}
   .sr-track{flex-wrap:wrap}
   .sr-card{flex:1 1 45%}
@@ -489,11 +481,6 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .game-panel{padding:32px 20px}
   .game-panel:first-child{border-right:none;border-bottom:1px solid var(--rule)}
   .game-panel h3{font-size:1.5rem}
-
-  /* ── Philosophy ── */
-  .philo{padding:48px 20px;grid-template-columns:1fr;gap:32px}
-  .philo-left{position:relative;top:0}
-  .philo h2{font-size:1.6rem}
 
   /* ── FAQ ── */
   .faq-section{padding:48px 20px}
@@ -715,25 +702,15 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .sr-progress{height:3px}
 }
 
-/* ═══ THE MOMENT ═══ */
-.the-moment{background:var(--warm-bg);padding:100px 48px;position:relative}
-.the-moment-inner{max-width:780px;margin:0 auto}
-.moment-headline{font-family:'Sora',sans-serif;font-weight:200;font-size:clamp(1.9rem,3.5vw,3rem);line-height:1.12;letter-spacing:-0.03em;color:var(--ink);margin-bottom:28px}
-.moment-headline strong{font-weight:700}
-.moment-body{font-size:0.88rem;color:var(--mid);line-height:1.8;max-width:540px}
-
 /* ═══ LAYERS BAND ═══ */
 .layers-intro{background:var(--linen);padding:56px 48px 0;max-width:1100px;margin:0 auto}
 .layers-intro-text{font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(1rem,1.8vw,1.2rem);color:var(--mid);line-height:1.5;letter-spacing:-0.01em;max-width:680px}
 .layers-intro-text strong{font-weight:600;color:var(--ink)}
 
 @media(max-width:1024px){
-  .the-moment{padding:72px 32px}
   .layers-intro{padding:40px 32px 0}
 }
 @media(max-width:768px){
-  .the-moment{padding:56px 20px}
-  .moment-headline{font-size:1.6rem}
   .layers-intro{padding:32px 20px 0}
 }
 
@@ -1193,12 +1170,10 @@ body.page-home{
 <!-- ═══ v5 DESIGN SYSTEM OVERRIDES ═══ -->
 <style id="hp-v5-design">
 /* ── Display headlines: Fraunces 600 ── */
-.moment-headline,
 .ec-headline,
 .cta-dark h2,
 .or-title,
 .same-room h2,
-.philo h2,
 .nap-heading,
 .faq-section h2,
 .thread-intro-text {
@@ -1206,7 +1181,7 @@ body.page-home{
   font-weight:600;
 }
 /* ── Body text on cream: Plus Jakarta Sans 500 ── */
-.sr-activity,.phi p,.moment-body,.or-sub,
+.sr-activity,.or-sub,
 .founder-line,.founder-detail,
 .wc-detail,.wc-spiral,.gd,.moment,
 .nap-lead,.nap-ev-text,.nap-counterpoint,
@@ -1259,7 +1234,7 @@ body.page-home{
 
 /* ── Fraunces italic for emphasis within headlines ── */
 .ec-headline strong,.cta-dark h2 strong,.or-title strong,
-.same-room h2 strong,.philo h2 strong,.moment-headline strong{
+.same-room h2 strong{
   font-family:'Fraunces',serif;
   font-weight:600;
   font-style:italic;
@@ -1368,7 +1343,6 @@ document.addEventListener('DOMContentLoaded',function(){
   var darkSections=[
     document.getElementById('linen-hero'),
     document.querySelector('.ec-scenario--turtle'),
-    document.querySelector('.philo'),
     document.getElementById('pricing'),
     document.getElementById('site-footer')
   ];
@@ -1976,18 +1950,6 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 </div>
-
-<!-- THE MOMENT -->
-<section class="the-moment">
-  <div class="the-moment-inner reveal">
-    <div class="tag-light">The moment</div>
-    <h2 class="moment-headline">In an AI world, the advantage is <strong>knowing that facts connect.</strong></h2>
-    <p class="moment-body">Your child already thinks this way. Math leads somewhere. That country connects to something. Every element has a story. Children who learn to move between domains early will carry that for life. The world is finally catching up to the way they already think.</p>
-  </div>
-</section>
-
-<!-- PHILOSOPHY -->
-<section class="philo"><div class="philo-left reveal"><h2>The hard part was never teaching<span class="sp"></span><br>It was knowing <strong>what to teach next</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>He can't read yet. But he's learning from her.</h3><p>When every child studies the same theme at their own level, the 7-year-old becomes the teacher. The 4-year-old becomes the student. The 2-year-old just wants to be in the room. That's not a side effect. That's the whole point.</p></div><div class="phi"><h3>Sunday night is yours again.</h3><p>Type one theme. See the week. Walk into Monday knowing exactly what to do.</p></div><div class="phi"><h3>Your kid was never the one in the textbook.</h3><p>Every curriculum you've tried was built for a child who sits still, finishes worksheets, and fits neatly into a grade. Yours doesn't. This builds a week around the children you actually have. Their ages, their reading levels, the way they actually learn.</p></div><div class="phi"><h3>She's five. She reads like she's seven. We noticed.</h3><p>A 5-year-old who reads at a second-grade level gets second-grade reading. A 7-year-old who needs more time with addition gets more time with addition. Age is an input. Readiness is what we build for.</p></div></div></section>
 
 <!-- FAQ -->
 <section class="faq-section reveal" id="faq"><div class="faq-inner"><h2>Questions parents ask<span style="color:var(--saffron)">.</span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 2 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>A prompt gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>Plans generate in your browser. We never collect children's data.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>$50/month or $499/year. Your first plan is free — no account required.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>

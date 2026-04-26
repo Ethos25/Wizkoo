@@ -15,7 +15,7 @@
 <meta name="twitter:image" content="assets/wizkoo-og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Plus+Jakarta+Sans:wght@500&family=Sora:wght@200;300;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -673,6 +673,18 @@ body {
 .s1-title{font-size:clamp(1.8rem,min(5vw,5.5vh),4.5rem)!important}
 .s1-eyebrow{margin-bottom:clamp(8px,2vh,24px)!important}
 
+/* ══════════════════════════════════════════════
+   PHILOSOPHY SECTION
+══════════════════════════════════════════════ */
+.philo{background:var(--ink);color:var(--paper);padding:80px 48px;display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start;position:relative}
+.philo::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}.philo>*{position:relative;z-index:1}
+.philo-left{position:sticky;top:80px}.philo .tag{color:var(--saffron);margin-bottom:16px}
+.philo h2{font-family:'Sora',sans-serif;font-weight:200;font-size:2rem;line-height:1.12;letter-spacing:-0.02em}.philo h2 strong{font-weight:600;color:var(--saffron);font-family:'Fraunces',serif;font-style:italic}
+.phi{padding:24px 0;border-top:1px solid rgba(255,255,255,0.06);opacity:0;transform:translateY(16px);transition:opacity .6s var(--expo),transform .6s var(--expo)}.phi.visible{opacity:1;transform:translateY(0)}.phi:last-child{border-bottom:1px solid rgba(255,255,255,0.06)}
+.phi h3{font-family:'Sora',sans-serif;font-weight:600;font-size:0.82rem;color:var(--saffron);margin-bottom:8px}.phi p{font-size:0.72rem;color:rgba(250,250,250,0.35);line-height:1.7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500}
+@media(max-width:1024px){.philo{grid-template-columns:1fr}.philo-left{position:relative;top:0}}
+@media(max-width:768px){.philo{padding:48px 20px;grid-template-columns:1fr;gap:32px}.philo-left{position:relative;top:0}.philo h2{font-size:1.6rem}}
+
 </style>
 </head>
 <body data-footer-treatment="b">
@@ -894,6 +906,10 @@ body {
   </div>
 </section>
 
+
+<!-- PHILOSOPHY -->
+<section class="philo"><div class="philo-left reveal"><h2>The hard part was never teaching<span class="sp"></span><br>It was knowing <strong>what to teach next</strong><span class="sp"></span></h2></div><div><div class="phi"><h3>He can't read yet. But he's learning from her.</h3><p>When every child studies the same theme at their own level, the 7-year-old becomes the teacher. The 4-year-old becomes the student. The 2-year-old just wants to be in the room. That's not a side effect. That's the whole point.</p></div><div class="phi"><h3>Sunday night is yours again.</h3><p>Type one theme. See the week. Walk into Monday knowing exactly what to do.</p></div><div class="phi"><h3>Your kid was never the one in the textbook.</h3><p>Every curriculum you've tried was built for a child who sits still, finishes worksheets, and fits neatly into a grade. Yours doesn't. This builds a week around the children you actually have. Their ages, their reading levels, the way they actually learn.</p></div><div class="phi"><h3>She's five. She reads like she's seven. We noticed.</h3><p>A 5-year-old who reads at a second-grade level gets second-grade reading. A 7-year-old who needs more time with addition gets more time with addition. Age is an input. Readiness is what we build for.</p></div></div></section>
+
 </main>
 
 <!-- ═══ FOOTER ═══ -->
@@ -1010,6 +1026,20 @@ body {
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   reveals.forEach(function (el) { revealObs.observe(el); });
+})();
+
+/* ─── Philosophy cards: staggered reveal ─── */
+(function () {
+  if (!window.IntersectionObserver) return;
+  var phiObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        phiObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.phi').forEach(function (el) { phiObs.observe(el); });
 })();
 
 /* ─── Dark rising sections ─── */
