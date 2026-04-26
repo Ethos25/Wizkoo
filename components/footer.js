@@ -364,7 +364,7 @@
     '      <a href="/plan">The Plan</a>',
     '      <a href="/games">The Games</a>',
     '      <a href="/library">The Library</a>',
-    '      <a href="/themes">Themes</a>',
+    '      <a href="/themes">Themes to Explore</a>',
     '      <a href="/methodology">The Science</a>',
     '      <a href="/ages">The Ages</a>',
     '      <a href="/pricing">The Price</a>',
