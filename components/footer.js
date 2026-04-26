@@ -144,9 +144,9 @@
       /* ── Col 1: Brand ── */
       '#wizkoo-footer .wf-brand .footer-wm{',
       '  font-family:\'Sora\',sans-serif;',
-      '  font-weight:700;',
+      '  font-weight:800;',
       '  font-size:20px;',
-      '  letter-spacing:-0.02em;',
+      '  letter-spacing:-0.04em;',
       '  color:#F0F2F8;',
       '  text-decoration:none;',
       '  display:inline-flex;',
@@ -179,7 +179,7 @@
       '  font-family:\'Plus Jakarta Sans\',sans-serif;',
       '  font-weight:400;',
       '  font-size:13px;',
-      '  color:rgba(240,242,248,0.45);',
+      '  color:rgba(240,242,248,0.65);',
       '  line-height:1.65;',
       '  margin-top:14px;',
       '}',
@@ -188,7 +188,7 @@
       '  font-family:\'Plus Jakarta Sans\',sans-serif;',
       '  font-weight:400;',
       '  font-size:13px;',
-      '  color:rgba(240,242,248,0.32);',
+      '  color:rgba(240,242,248,0.65);',
       '  text-decoration:none;',
       '  transition:color 0.25s ease;',
       '}',
@@ -354,7 +354,7 @@
     '      <a href="/" class="footer-wm" aria-label="Wizkoo home">',
     '        w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wf-o-dot">o</span>',
     '      </a>',
-    '      <p class="wf-tagline">Weekly learning plans<br>for families, ages 2 to 12.</p>',
+    '      <p class="wf-tagline">Weekly learning plans<br>for families, ages 3 to 12.</p>',
     '      <div class="wf-email"><a href="mailto:hello@wizkoo.com">hello@wizkoo.com</a></div>',
     '    </div>',
 
@@ -406,11 +406,11 @@
     var isTreatmentA = treatment === 'a';
     /* Treatment A: stars in lower 45% of footer (container already starts at top:55%)
        Treatment B: stars throughout, higher density */
-    var count = isTreatmentA ? 52 : 120;
+    var count = isTreatmentA ? 52 : 289;
     var starHtml = '';
 
     /* Anchor stars (bright, 2-3px) */
-    for (var i = 0; i < (isTreatmentA ? 6 : 12); i++) {
+    for (var i = 0; i < (isTreatmentA ? 6 : 24); i++) {
       var x = (Math.random() * 100).toFixed(2);
       var y = (Math.random() * 100).toFixed(2);
       var dur = (2 + Math.random() * 3).toFixed(1);
@@ -430,13 +430,13 @@
              + '--lo:0.45;--hi:0.85;"></div>';
 
     /* Medium stars */
-    for (var j = 0; j < (isTreatmentA ? 15 : 30); j++) {
+    for (var j = 0; j < (isTreatmentA ? 15 : 65); j++) {
       var x2 = (Math.random() * 100).toFixed(2);
       var y2 = (Math.random() * 100).toFixed(2);
       var dur2 = (2.5 + Math.random() * 3.5).toFixed(1);
       var del2 = (Math.random() * 5).toFixed(1);
-      var lo2 = (0.25 + Math.random() * 0.15).toFixed(2);
-      var hi2 = (0.55 + Math.random() * 0.20).toFixed(2);
+      var lo2 = (0.40 + Math.random() * 0.15).toFixed(2);
+      var hi2 = (0.70 + Math.random() * 0.20).toFixed(2);
       starHtml += '<div style="position:absolute;border-radius:50%;background:rgba(245,245,220,0.70);'
                + 'left:' + x2 + '%;top:' + y2 + '%;'
                + 'width:1.5px;height:1.5px;'
@@ -445,14 +445,14 @@
     }
 
     /* Soft stars */
-    for (var k = 0; k < (isTreatmentA ? 30 : 78); k++) {
+    for (var k = 0; k < (isTreatmentA ? 30 : 200); k++) {
       var x3 = (Math.random() * 100).toFixed(2);
       var y3 = (Math.random() * 100).toFixed(2);
       var dur3 = (3 + Math.random() * 4).toFixed(1);
       var del3 = (Math.random() * 5).toFixed(1);
-      var lo3 = (0.08 + Math.random() * 0.08).toFixed(2);
-      var hi3 = (0.25 + Math.random() * 0.15).toFixed(2);
-      starHtml += '<div style="position:absolute;border-radius:50%;background:rgba(245,245,220,0.35);'
+      var lo3 = (0.22 + Math.random() * 0.12).toFixed(2);
+      var hi3 = (0.50 + Math.random() * 0.20).toFixed(2);
+      starHtml += '<div style="position:absolute;border-radius:50%;background:rgba(245,245,220,0.65);'
                + 'left:' + x3 + '%;top:' + y3 + '%;'
                + 'width:1px;height:1px;'
                + 'animation:wfTwinkle ' + dur3 + 's ease-in-out infinite ' + del3 + 's;'

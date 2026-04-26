@@ -8,10 +8,10 @@
   --ink-28: rgba(12, 16, 32, 0.28);
   --ink-12: rgba(12, 16, 32, 0.12);
   --ink: #0C1020;
-  --cream: #F4F1E8;
+  --cream: #F8F4E9;
   --paper: #FAFAFA;
   --day-sky: #2868CC;
-  --warm-bg: #ECEAE3;
+  --warm-bg: #F8F4E9;
   --mid: #4A4850;
   --faint: #A8A6B0;
   --rule: #E0DED6;
@@ -34,7 +34,7 @@
   --button-size: 0.78rem;
 
   /* ── Warm background stops ── */
-  --linen: #F2F0EA;
+  --linen: #F8F4E9;
 
   /* ── Section background alternation ── */
   --section-light: var(--linen);

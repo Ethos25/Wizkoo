@@ -3,7 +3,6 @@
    Authoritative footer styles live inline in footer.js as #wizkoo-footer { … } blocks.
    This file provides:
      1. The nav-reset rule required by pages that load nav.css
-     2. The linen-page transition zone class (.footer-fade)
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ─── Critical: reset nav.css position:fixed for <nav> inside footer ─── */
@@ -18,21 +17,3 @@ footer nav,
   box-shadow: none !important;
 }
 
-/* ─── Linen-page transition zone ──────────────────────────────────────────
-   Add <div class="footer-fade"></div> immediately before #site-footer on
-   pages whose last content surface is linen/warm (index, pricing, about,
-   ages, what-we-believe). Creates a 100px fade from the linen surface into
-   the dark footer rather than a hard cut.
-   ─────────────────────────────────────────────────────────────────────── */
-.footer-fade {
-  height: 80px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #F08838 100%
-  );
-  pointer-events: none;
-  position: relative;
-  z-index: 10;
-  margin-top: -80px;
-}
