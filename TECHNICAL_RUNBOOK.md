@@ -65,7 +65,7 @@ When a decision is made: add it to Locked Decisions before closing.
 When the Light Standard updates: reconcile this file against it.
 The Light Standard is always the authority. This file is the fast lookup.
 
-Last updated: April 22, 2026
+Last updated: April 26, 2026
 Maintained by: Amy Oguntala
 
 ---
@@ -1240,6 +1240,9 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Section height at max-height:700px: MUST be height:100vh. NEVER height:max(Nvh, fixed-px). Locked April 22, 2026. A fixed-px floor that exceeds the viewport (e.g. 500px in a 396px viewport) creates scroll-position drift — padding-top appears to change between loads depending on where the scroll lands. Only 100vh guarantees consistent padding behavior.
 - ec-proofs column-gap (desktop base): 4px. Locked April 22, 2026. Reduced from 28px original → 16px → 4px per user preference. Do not increase without explicit instruction.
 - ec-col-copy padding-top at short-wide query (max-height:700px, min-width:768px): 96px. Locked April 22, 2026. Minimum for nav clearance at production display (combined nav + announcement ≈100px CSS). Do not reduce below 96px at this breakpoint.
+- Footer link vocabulary: the /themes page link must read "Themes to Explore" — never the shorter "Themes". "Themes to Explore" is the brand vocabulary lock from Phase 1. Locked April 26, 2026.
+- Footer column placement for "Themes to Explore": LEARN MORE column (wf-learn), not PRODUCT column (wf-nav). Locked April 26, 2026. Do not move without explicit instruction.
+- Footer column naming discrepancy: production footer uses column headers Product / Learn More / Connect. The Light Standard v5 spec calls them Learn / Join / Wizkoo. This is a known divergence. Do not rename columns without explicit instruction — that is a separate design decision, not in scope for Phase 7.
 
 ---
 
@@ -1280,6 +1283,12 @@ Root-level pages (every HTML file is a self-contained page):
   library.html        Book library. Environment: Night Sky.
   methodology.html    The Science. Needs rethink — full content and layout redesign.
   the-open-seat.html  The Open Seat. Environment: Day Sky. LOCKED FINAL.
+  themes.html         Themes to Explore. 70 curated weekly themes, 4 age stages
+                      (Wonderer 3-4, Apprentice 5-6, Artisan 7-9, Scholar 10-12).
+                      Expand interaction per row. 7 Heads Up lead lines (sensitive
+                      themes). 5 JSON-LD blocks. Landscape-short viewport fix.
+                      Environment: Linen. Route: /themes (301 from themes.html).
+                      Shipped April 26, 2026.
   what-we-believe.html Philosophy/beliefs page.
   scope.html          Scope document.
   privacy.html        Privacy policy.
@@ -2900,6 +2909,50 @@ section height equals 100vh at the active breakpoint. If it does not, fix the
 section height first. height:100vh is the only value that makes padding-top
 consistent. See LOCKED DECISIONS for the universal section-height rule.
 
+PATTERN 12 — PLAYWRIGHT / DEV-SERVER / LIVE-SITE VERIFICATION GAP
+During the 2026-04-23 V14 composition session, Claude Code's Playwright
+verification screenshots consistently reported "changes visible, match target"
+while Amy's real render (at localhost and later at wizkoo.com) showed a
+different state — sometimes pre-commit, sometimes partial. Three instances
+observed: (1) Prompt 10 gutter — Playwright confirmed gray radial rendering
+but at 0.08 opacity it was imperceptible to the human eye against linen;
+(2) Prompt 10 toggle box removal — Playwright showed no borders, but Amy's
+browser required dev server restart before the change rendered; (3) post-push
+wizkoo.com — museum tabs reverted to bordered-chip style despite the commit
+being in the pushed stack.
+Root cause: Playwright renders a clean headless environment with no browser
+cache, no CDN cache, and no local build-step artifacts that affect what Amy
+actually sees in her own browser or on the deployed site.
+Prevention rule: Before declaring a visual commit "verified," run three-layer
+verification: (1) Playwright screenshot at target viewport, (2) curl
+localhost:3000/<path> | grep <expected-change> to confirm the served file
+matches the committed file, (3) state explicitly "Amy should hard-refresh
+and/or restart the dev server to invalidate any local caching before visual
+review." For post-push verification, additionally state "Amy should wait for
+CDN propagation before judging the live site; TTL varies by provider and may
+take several minutes." When Amy reports "my render doesn't match your
+screenshot," default to diagnostic mode — compare served file vs committed
+file byte-for-byte, then check Netlify build log, then check CDN — before
+iterating on new CSS. The cache/build gap is the first hypothesis to
+eliminate, not the last.
+
+PATTERN 13 — SPEC/IMPLEMENTATION NAMING DIVERGENCE
+When a spec and the live codebase use different names for the same
+architectural element (e.g. spec calls a footer column "Learn"; the
+production footer labels it "Product"), Claude Code will infer a
+content-based mapping and may place content in the wrong column
+from the user's literal perspective.
+Example: April 26, 2026 — "Themes to Explore" footer link placed in
+the Product column because its content (educational catalog) mapped to
+the spec's "Learn" column intent. User meant the column literally
+labeled "Learn More" in the production footer. Required a second correction.
+Prevention rule: When column names or section names conflict between
+a spec and the current codebase, do not infer mapping. Ask explicitly:
+"The spec calls this column 'Learn' but the current footer labels it
+'Product.' Do you mean the column labeled Product, or the one labeled
+Learn More?" One clarifying question costs 30 seconds. A wrong placement
+costs a second deploy.
+
 ---
 
 ## PRESERVATION LOCKS REGISTRY
@@ -3339,18 +3392,30 @@ Item 30 — No Live Generation on Homepage Submit. NEW (2026-04-21 V14 Q8).
            public-path submits (per V14 Spec Section 11.4).
            Source: V14 Spec Q8 resolution, 2026-04-21 evening.
 
-Item 31 — Homepage CTA Expectation Microcopy. NEW (2026-04-21 V14 R19).
-           Semantic: The space below the primary CTA renders EXACTLY: "See
-           a sample week. Personalized plans come with subscription." Two
-           full sentences. Plus Jakarta Sans 500, 12px, ink #0C1020 at 60%
-           opacity (rgba(12, 16, 32, 0.60)). Renders directly below the
-           CTA, above R11 support copy. No em-dash. No exclamation marks.
-           No "free sample" or "no email / no card" residue copy. MUST
-           SURVIVE.
-           Selector: microcopy element beneath primary CTA; renders R19
-           copy verbatim | Lines: TBD, introduced by V14 Prompt 1 (DOM +
-           copy), styled by V14 Prompt 6. Re-verify on session open.
-           Source: V14 Spec R19 + Q8, 2026-04-21 evening.
+Item 31 — Homepage CTA Expectation Microcopy. RETIRED (2026-04-23 V14 Prompt 9).
+           Semantic (original): The space below the primary CTA rendered:
+           "See a sample week. Personalized plans come with subscription."
+           Plus Jakarta Sans 500, 12px, ink 60% opacity. Two sentences
+           beneath CTA, above R11 support copy. Introduced by V14 Prompt 6
+           (commit TBD), briefly revised to "Sample, not your plan.
+           Subscribe to build theirs." (Marcus Cole Candidate 2, committed
+           at c1f0f55 on 2026-04-22) before full retirement.
+           Retirement reason: Amy design review (2026-04-23 Morning Amy
+           session) determined the microcopy was redundant with Item 32 CTA
+           button honesty ("See a sample week →") and Item 33 sample label
+           template. Both existing locks carry the sample-not-plan semantic
+           natively. R11 support copy retired in the same pass for the same
+           reason.
+           Superseded by: Items 32 (CTA button text) and 33 (sample label
+           template). No under-CTA microcopy exists or should be
+           re-introduced.
+           Status: .cta-note DOM element and all associated CSS rules
+           deleted by Claude Code in commit ecf6944 (Prompt 9, 2026-04-23).
+           Grep for class "cta-note" in index.html must return zero matches.
+           Any future prompt reintroducing microcopy under the primary CTA
+           violates this retirement.
+           Source: V14 Spec R19 (2026-04-21 evening) + 2026-04-23 Morning
+           Amy design review (retirement).
 
 Item 32 — Primary CTA Button Text. NEW (2026-04-21 V14 R18).
            Semantic: Homepage submit button text is EXACTLY: "See a sample
@@ -3408,6 +3473,35 @@ Item 35 — Email Capture at Subscription, Not Pre-Subscription. NEW (2026-04-21
            homepage and gate markup must return zero matches after V14
            Prompt 1 and Prompt 8 ship.
            Source: V14 Spec Item 35 + Q8, 2026-04-21 evening.
+
+Item 36 — CTA + Sub-CTA Unit Integrity. NEW (2026-04-23 Morning Amy).
+           Semantic: The primary CTA button ("See a sample week →") and
+           the sub-CTA ("MORE KIDS? · ADD THEM NEXT") are a single visual
+           unit. They sit on the same baseline, they move together, they
+           align together. Reference pattern: the-open-seat.html "OPEN A
+           SEAT →" button + "HOW THE OPEN SEAT WORKS" sub-CTA — button
+           left, sub-CTA inline to the right on the same baseline, one
+           composition, one decision moment. NEVER separate them: not via
+           vertical stacking at narrow viewports (except when mobile layout
+           cascades force it), not via independent positioning (e.g.,
+           button left + sub-CTA right), not via competing alignment
+           strategies. Any change to CTA positioning must move the whole
+           unit as one container. Any change to sub-CTA typography,
+           underline, or positioning must preserve its spatial relationship
+           to the button. Any Claude Code session tempted to "right-align
+           the CTA" or "stack the sub-CTA" independently is violating this
+           lock. MUST SURVIVE.
+           Selector: .cta-row flex container at line ~1023 governs both
+           .lbracket button and .sub-cta span; they share a single flex
+           row with baseline alignment | Verification: at all desktop
+           viewports (>=768px), button top and sub-CTA top must differ by
+           <=8px; they are never on separate lines except at
+           max-width:767px mobile stack where the whole unit stacks
+           together.
+           Source: 2026-04-23 Morning Amy design review, after Prompt 14
+           CTA replication. Triggered when Claude chat suggested
+           right-aligning the CTA independently; Amy corrected — the
+           sub-CTA and CTA are one unit, period.
 
 ### ADDING NEW REGISTRIES
 
@@ -3509,6 +3603,24 @@ deliberate decision logged in LOCKED DECISIONS with a superseding entry.
    Priority: Dedicated tokens cleanup session. Coordinate with OPEN ITEM 3
      (--expo / --ease-out-expo consolidation) — both should be resolved
      in the same pass.
+
+8. GOOGLE SEARCH CONSOLE — /themes INDEXING SUBMISSION PENDING
+   Current state: https://www.wizkoo.com/themes is live and sitemap.xml updated.
+     Google Search Console URL inspection + Request Indexing not yet submitted.
+     Requires browser login to GSC — cannot be completed by Claude Code.
+   What to do: Open Google Search Console → select wizkoo.com property →
+     URL Inspection → paste https://www.wizkoo.com/themes → Request Indexing.
+     Also: confirm sitemap.xml is accepted in GSC Coverage report.
+   Priority: Amy to complete manually. First available session after April 26, 2026.
+
+9. GOOGLE RICH RESULTS TEST — /themes PENDING
+   Current state: 5 JSON-LD blocks are in themes.html (confirmed locally and on
+     production). Rich Results Test at search.google.com/test/rich-results not
+     yet run against the live URL. Cannot be completed by Claude Code (requires
+     browser).
+   What to do: Go to search.google.com/test/rich-results → paste
+     https://www.wizkoo.com/themes → run test. All 5 blocks should pass.
+   Priority: Amy to complete manually. First available session after April 26, 2026.
 
 7. HOVER QUERY CENTRALIZATION INTO base.css — DEFERRED
    Current state: All pages now use consistent OR syntax
@@ -4081,6 +4193,34 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v3.4 — April 26, 2026
+  Phase 7 deploy: /themes page shipped to production (wizkoo.com/themes).
+  themes.html built: 70 curated weekly themes, 4 age stages (Wonderer/
+  Apprentice/Artisan/Scholar), expand interaction, 7 Heads Up lead lines,
+  5 JSON-LD blocks, landscape-short viewport fix. Environment: Linen.
+  Footer updated: "Themes to Explore" link added to Learn More column
+  (vocabulary lock: full name required, not shortened "Themes").
+  sitemap.xml: /themes entry added, lastmod 2026-04-25.
+  scripts/themes_jsonld_backup.txt added as JSON-LD restore reference.
+  LOCKED DECISIONS: footer vocabulary lock, Learn More column placement,
+  column naming discrepancy flagged.
+  OPEN ITEMS 8, 9 added: GSC indexing submission and Rich Results Test
+  pending Amy's manual completion.
+  Pattern 13 added: spec/implementation naming divergence.
+  Commits: 0cbd32b, cf59977, 8ed4ce2, 354e1da.
+
+v3.3 — April 25, 2026
+  Three Transfer Queue items applied from 2026-04-23 V14 morning session:
+  (1) Item 31 → RETIRED (Homepage CTA Expectation Microcopy — redundant
+  with Items 32 and 33; .cta-note deleted in commit ecf6944). (2) Item 36
+  → ADDED (CTA + Sub-CTA Unit Integrity — the two are one visual unit,
+  never separated). (3) Pattern 12 → ADDED (Playwright/Dev-Server/Live-Site
+  Verification Gap — three-layer verification protocol required before
+  declaring visual commits verified). Note: local Pattern 11 (Section
+  Height Overflow) predated Transfer Queue's Pattern 11 numbering; incoming
+  Playwright pattern assigned Pattern 12 per local-wins hierarchy rule.
+  Notion Layer 6 mirror and Layer 8 to be updated this session.
 
 v3.2 — April 22, 2026
   Layer 6 registry synchronized from Notion v3.0. Items 26-35 added
