@@ -1272,8 +1272,8 @@ copy it exactly. Never approximate. Never guess. Always read from source.
 ## CRITICAL FILE MAP — MARKETING SITE
 
 Root-level pages (every HTML file is a self-contained page):
-  index.html          Homepage. Hero, plan split, same-room, games band, philosophy, FAQ.
-                      Contains inline firefly JS (lines 1897–2159).
+  index.html          Homepage. Hero, plan split, same-room, games band, FAQ.
+                      Philosophy section removed (April 26, 2026). Firefly JS inline.
   about.html          About page.
   ages.html           Age guide. Locked environment: Linen.
   contact.html        Contact form.
@@ -1281,7 +1281,9 @@ Root-level pages (every HTML file is a self-contained page):
   esa.html            Education Savings Account page (~34 KB).
   games.html          Games hub.
   library.html        Book library. Environment: Night Sky.
-  methodology.html    The Science. Needs rethink — full content and layout redesign.
+  methodology.html    The Science. 8 sections + philosophy section (added April 26, 2026)
+                      as final section before footer. Fraunces + Plus Jakarta Sans loaded
+                      for philosophy styles. .phi IntersectionObserver in inline JS.
   the-open-seat.html  The Open Seat. Environment: Day Sky. LOCKED FINAL.
   themes.html         Themes to Explore. 70 curated weekly themes, 4 age stages
                       (Wonderer 3-4, Apprentice 5-6, Artisan 7-9, Scholar 10-12).
@@ -3604,6 +3606,19 @@ deliberate decision logged in LOCKED DECISIONS with a superseding entry.
      (--expo / --ease-out-expo consolidation) — both should be resolved
      in the same pass.
 
+10. ORPHANED SELECTORS IN index.html — CLEANUP DEFERRED
+   Current state: Two selectors remain in index.html that reference moved/removed
+     sections and are now no-ops:
+     (a) .philo-section rule (~line 1166) — background:transparent!important rule
+         targeting a class that does not appear in any HTML on the page. This is a
+         different class from .philo (the moved section) and likely predates it.
+     (b) .phi selector in the homepage scroll reveal querySelectorAll (~line 2206)
+         — querySelectorAll('.reveal,.plan-card-entrance,.phi,.cta-reveal') will
+         return an empty NodeList for .phi since no .phi elements exist on the
+         homepage after the section move. Harmless but dead.
+   What to do: Remove both in the next Layer 1 dead code hygiene pass.
+   Priority: Next dead code sweep. Do not mix into feature work.
+
 8. GOOGLE SEARCH CONSOLE — /themes INDEXING SUBMISSION PENDING
    Current state: https://www.wizkoo.com/themes is live and sitemap.xml updated.
      Google Search Console URL inspection + Request Indexing not yet submitted.
@@ -4193,6 +4208,21 @@ v2.2 — April 20, 2026
   Locked decisions updated: cta-needs-ready color gate, wax seal spec,
     headline line 2 size, CTA typography.
   Form audit (read-only) completed. No code changes from audit.
+
+v3.5 — April 26, 2026
+  Phase 8: homepage section removals + philo section relocation.
+  Removed: .the-moment section from index.html (HTML + 6 CSS rules + 3 media
+    query entries + 3 shared selector references).
+  Moved: .philo section from index.html to methodology.html as final section
+    before footer. CSS block + responsive rules added inline to methodology.html.
+    Fraunces (ital 600) + Plus Jakarta Sans (500) added to methodology.html font
+    import. .phi IntersectionObserver added to methodology.html JS.
+    darkSections array in index.html: .philo entry removed.
+    Shared selector lists in index.html: .philo h2, .phi p, .philo h2 strong removed.
+  CRITICAL FILE MAP: index.html and methodology.html descriptions updated.
+  OPEN ITEM 10 added: two orphaned selectors in index.html (.philo-section,
+    .phi in querySelectorAll) deferred to next dead code sweep.
+  Commits: e707e53 (index.html + methodology.html only — no other files touched).
 
 v3.4 — April 26, 2026
   Phase 7 deploy: /themes page shipped to production (wizkoo.com/themes).
