@@ -1,17 +1,47 @@
+# ⚠️ PROJECT GUARD — READ FIRST
+
+**Project:** Wizkoo.
+
+**Scope:** This document governs the Wizkoo codebase — BOTH the marketing site at wizkoo/ AND the plan generator at wizkoo-plan-generator/. Plan-generator folder contains a pointer file, not a duplicate runbook.
+
+**Do not apply updates from this document to any other project's Technical Runbook.** If you find yourself reading this while working on Learnkoo or any other project, stop — you have the wrong file open.
+
+**Inherits from:** AMY_TECHNICAL_STANDARDS.md (located at C:\Users\amyog\Desktop\wizkoo\AMY_TECHNICAL_STANDARDS.md). Read that first.
+
+---
+
 # TECHNICAL RUNBOOK — WIZKOO
 # Filename: TECHNICAL_RUNBOOK.md
-# Version 2.0 — April 17, 2026
-#
-# ══════════════════════════════════════
-# TO START EVERY BUILD SESSION:
-# Say: "Run the Technical Runbook"
-# That single instruction triggers everything below.
-# ══════════════════════════════════════
-#
-# Read this file end to end.
-# Confirm you have read it by stating the four items
-# in the SESSION STARTUP INSTRUCTION in Layer 1.
-# Then execute the startup sequence before any work begins.
+
+Project-specific runbook. Inherits global standards from AMY_TECHNICAL_STANDARDS.md — read that first.
+
+This file contains only what is specific to Wizkoo. Global session mechanics, Operating
+Principles, prompt standards, code hygiene, failure patterns, accessibility, and performance
+targets live in AMY_TECHNICAL_STANDARDS.md and are not duplicated here.
+
+---
+TO START EVERY BUILD SESSION: Say "Run the Technical Runbook"
+That single instruction triggers everything below.
+Read this file end to end. Confirm you have read it by stating the four items
+in the SESSION STARTUP INSTRUCTION. Then execute the startup sequence.
+---
+
+Last updated: April 27, 2026
+Maintained by: Amy Oguntala
+
+---
+
+## TABLE OF CONTENTS
+
+LAYER 0 — IDENTITY: Governing documents, quality filter, hierarchy rule, maintenance rule
+LAYER 1 — OPERATIONAL PROTOCOLS: Wizkoo-specific session steps, decision write-back, $200 standard
+LAYER 2 — LIVE STATE: Pages status, known bugs, nav deliberate hold, locked decisions
+LAYER 3 — SYSTEM MAP: Codebase locations, file maps, environment variables, dependencies, deployment
+LAYER 4 — DESIGN SYSTEM: Surfaces, color system, typography, motion, nav system, $200 standard
+LAYER 5 — COMPONENT SPECS: Generation spectacle, firefly, homepage hero, atlas continent palette, Section 3
+LAYER 6 — FAILURE PREVENTION: Wizkoo-specific failure patterns, preservation locks, open items
+LAYER 7 — DEEP REFERENCE: CSS custom properties (both codebases), API surface, prompt templates
+LAYER 8 — HISTORY: Version history
 
 ---
 
@@ -34,8 +64,8 @@ If this file and the code disagree, THE LIGHT STANDARD WINS.
 
 TECHNICAL RUNBOOK AUTHORITY: This local file (TECHNICAL_RUNBOOK.md) is the source of
 truth for the Technical Runbook itself. The Notion mirror (page
-347335a8d332818bbd18d10b2a2170de) is a chat-session-facing copy kept in sync with this
-file through the Transfer Queue. If the local file and the Notion mirror disagree,
+347335a8d332818bbd18d10b2a2170de) is a chat-session-facing copy kept in sync with
+this file through the Transfer Queue. If the local file and the Notion mirror disagree,
 THE LOCAL FILE WINS and the mirror is re-synced.
 
 ---
@@ -65,53 +95,37 @@ When a decision is made: add it to Locked Decisions before closing.
 When the Light Standard updates: reconcile this file against it.
 The Light Standard is always the authority. This file is the fast lookup.
 
-Last updated: April 26, 2026
-Maintained by: Amy Oguntala
-
----
-
-## TABLE OF CONTENTS
-
-LAYER 0 — IDENTITY: Governing documents, quality filter, hierarchy rule, maintenance rule
-LAYER 1 — OPERATIONAL PROTOCOLS: Session startup, close protocol, git protocol, completion standard
-LAYER 2 — LIVE STATE: Pages status, known bugs, nav deliberate hold, locked decisions
-LAYER 3 — SYSTEM MAP: Codebase locations, file maps, environment variables, dependencies, deployment
-LAYER 4 — DESIGN SYSTEM: Surfaces, color system, typography, motion, nav system, $200 standard
-LAYER 5 — COMPONENT SPECS: Generation spectacle, firefly, homepage hero, atlas continent palette, Section 3 viewport standard + diagnostic protocol + implementation reference
-LAYER 6 — FAILURE PREVENTION: Known Claude Code failure patterns, accessibility, performance
-LAYER 7 — DEEP REFERENCE: CSS custom properties (both codebases), API surface, prompt templates
-LAYER 8 — HISTORY: Version history
-
 ---
 
 ═══════════════════════════════════════
 LAYER 1 — OPERATIONAL PROTOCOLS
-Read this layer at the start and end of every session.
-These are the mandatory procedures that govern how all work is done.
+Read AMY_TECHNICAL_STANDARDS.md first for global session mechanics.
+This layer contains Wizkoo-specific additions to those protocols.
 ═══════════════════════════════════════
 
 ## SESSION STARTUP INSTRUCTION
+Enforces Standards §1.1 (Session Startup) via Wizkoo-specific confirmation items and Transfer Queue pull.
 
-Every build session starts with one line from Amy:
-"Run the Technical Runbook"
+Every build session starts with one line from Amy: "Run the Technical Runbook"
 
-Execute all four steps before touching any file.
+Execute all four steps before touching any file. The global framework is in
+AMY_TECHNICAL_STANDARDS.md Section 1. Wizkoo-specific content follows.
 
-STEP 1 — CONFIRM YOU READ THIS FILE
+STEP 1 — CONFIRM YOU READ THIS FILE (Wizkoo specifics)
 State out loud:
-  1. Both local codebase paths
-  2. Canonical saffron hex value
-  3. Environment assigned to the page you will work on today
+  1. Both local codebase paths:
+       Marketing site: C:\Users\amyog\Desktop\wizkoo
+       Plan generator: C:\Users\amyog\Desktop\wizkoo-plan-generator
+  2. Canonical saffron hex value: #E8AF38
+  3. Environment assigned to the page you will work on today (from ENVIRONMENT MAP in Layer 4)
   4. Confirm Operating Principles active by naming all seven by number:
      (1) Pre-flight audit, (2) Clean state requirement,
      (3) Report superseded rules, (4) Three-strike reset rule,
      (5) Specificity hygiene, (6) One source of truth per component,
      (7) Viewport verification requirement.
-Do not begin work until all four are confirmed. Stating the principles
-is not optional — it confirms they are active for the session, not
-just present in the document.
+Do not begin work until all four are confirmed.
 
-STEP 2 — CHECK THE TRANSFER QUEUE
+STEP 2 — CHECK THE TRANSFER QUEUE (Wizkoo backlog mechanism)
 Use the Notion tool to fetch page:
 345335a8d33281ea9f86e19c5018624a
 (Technical Runbook Transfer Queue)
@@ -145,70 +159,26 @@ If any items show STATUS: PENDING:
     Layer 7 — Deep Reference:        347335a8d33281148b84f97714ff1523
     Layer 8 — History:               347335a8d33281698c4ccacaf86fbdbf
 
-If queue is empty:
-  State: "Transfer Queue clear. Proceeding."
-
-Do not skip this step. A decision deposited by a chat
-session that is not applied before work begins will be
-overwritten or ignored by this session's changes.
+If queue is empty: State "Transfer Queue clear. Proceeding."
+Do not skip this step.
 
 STEP 3 — GIT STATUS CHECK
-Run: git status
-Run: git log --oneline -3
-Report findings before touching any file.
-If uncommitted changes exist from a prior session:
-  "WARNING: [X] uncommitted files from prior session.
-  Files: [list]. Commit, review, or discard?"
-Do not begin new work until Amy responds.
+(Per AMY_TECHNICAL_STANDARDS.md Section 1)
 
 STEP 4 — BEGIN WORK
-State what the session will accomplish.
-Then proceed.
+State what the session will accomplish. Then proceed.
 
 ---
 
-## BUILD SESSION CLOSE PROTOCOL
+## BUILD SESSION CLOSE PROTOCOL — WIZKOO ADDITIONS
+Enforces Standards §1.2 (Build Session Close Protocol) via Transfer Queue deposit, mandatory Notion mirror sync, and Wizkoo-specific ledger format.
 
-Mandatory. Every session. Non-negotiable.
+The global close protocol (10 steps) is in AMY_TECHNICAL_STANDARDS.md Section 1.
+Wizkoo adds the following requirements on top of the global protocol.
 
-TRIGGER LANGUAGE — Claude Code initiates without being asked
-when Amy says any of the following:
-  "wrap it up" / "close it out" / "let's close"
-  "I'm done" / "that's it" / "stepping away"
-  "write the baton" / "pass it off"
-  OR when primary deliverable is complete and context
-  is getting heavy.
-Do not wait to be asked. When the signal fires, run
-the protocol immediately.
-
-STEP 1 — DELIVERABLE CHECK
-Is the primary task complete per the Completion Standard?
-Built. Migrated. Verified. Old version removed.
-System in clean unambiguous state.
-If any step is incomplete, name it explicitly.
-Never present partial completion as done.
-
-STEP 2 — OPEN ITEMS SWEEP
-What was started but not finished this session?
-What was discovered that needs a follow-up session?
-What was deferred and why?
-Each item goes into KNOWN BUGS or OPEN ITEMS in the
-Technical Runbook. Not noted in chat. Written to file.
-
-STEP 3 — DECISION WRITE-BACK (two directions)
-
-Direction 1 — Codebase decisions to Technical Runbook:
-Every decision made this session that affects the codebase
-gets written to LOCKED DECISIONS before closing.
-If it reverses a prior locked decision, remove the old
-entry and note why it was superseded.
-A decision that exists only in the chat transcript
-does not exist. It will be relitigated next session.
-
-Direction 2 — Product/brand decisions to Transfer Queue:
-If this session surfaced any decision that affects the
-chat-side system (new surface assignment, product direction,
-GTM implication, brand decision, design principle):
+ADDITIONAL STEP — DIRECTION 2: TRANSFER QUEUE
+If this session surfaced any decision that affects the chat-side system (new surface
+assignment, product direction, GTM implication, brand decision, design principle):
 Use the Notion tool to add it to the Transfer Queue:
   Page: 345335a8d33281ea9f86e19c5018624a
   Format:
@@ -216,81 +186,36 @@ Use the Notion tool to add it to the Transfer Queue:
     SECTION: [which Technical Runbook section this belongs in]
     DECISION: [exactly what needs to be added or changed]
     STATUS: PENDING
-If nothing to deposit: state "Nothing to deposit to
-Transfer Queue this session."
+If nothing to deposit: state "Nothing to deposit to Transfer Queue this session."
 
-STEP 4 — CODEBASE IMPACT TRACE
-What else in the codebase is affected by what changed?
-What components consume a token that was modified?
-What files import from a file that was renamed or moved?
-What adjacent code shares a failure pattern that was fixed?
-Verify those surfaces before closing.
-If broken: fix it or document it as a known bug.
-Do not leave a downstream breakage undocumented.
+MANDATORY MIRROR SYNC (added to Step 6):
+For every layer modified this session, fetch the corresponding layer child page
+under the Technical Runbook — Wizkoo parent (347335a8d332818bbd18d10b2a2170de)
+and apply the same change to that page. Child page IDs are listed in the
+Session Startup Step 2. The Notion mirror sync is same-tier as copying between
+the two local repo folders: not optional, not deferrable.
 
-STEP 5 — FAILURE PATTERN SWEEP
-Did this session reveal a new Claude Code failure pattern?
-A new way the executor gets things wrong in this codebase?
-If yes: add it to KNOWN CLAUDE CODE FAILURE PATTERNS
-in Layer 6. Name it. Describe it. State the prevention rule.
-If nothing new: state "No new failure patterns this session."
-This is the build session equivalent of Twin Calibration.
-The system learns from its failures only if they are
-documented before the session closes.
+WIZKOO VERIFICATION GATE (replaces global Step 7 ledger):
+Enforces Standards §1.2 Step 7 via Wizkoo-specific line-count checks and Notion mirror confirmation.
 
-STEP 6 — RUNBOOK UPDATE
-Update TECHNICAL_RUNBOOK.md with everything that changed:
-New files: add to CRITICAL FILE MAP with path and purpose.
-Changed tokens: update CSS CUSTOM PROPERTIES section.
-Resolved bugs: mark resolved with fix summary and location.
-New bugs: add with file, line, root cause, fix spec.
-New failure patterns: add to Layer 6.
-Copy updated file to both codebase folders.
+  BUILD SESSION WRITE-BACK VERIFICATION
+  ✓ UPDATED: [what] → TECHNICAL_RUNBOOK.md ([X] lines)
+  ✓ COPIED: C:\Users\amyog\Desktop\wizkoo ([X] lines)
+  ✓ COPIED: C:\Users\amyog\Desktop\wizkoo-plan-generator ([X] lines)
+  ✓ NOTION MIRROR SYNCED: [list of layer child pages updated] OR "no layers modified this session"
+  ✓ TRANSFER QUEUE: [items deposited OR "nothing to deposit"]
+  ✓ FAILURE PATTERNS: [captured OR "none this session"]
+  ✗ NOT DONE: [item] → [Amy deferred / technical blocker only]
 
-MANDATORY MIRROR SYNC: Also update the Notion mirror to match.
-For every layer modified this session, fetch the corresponding
-layer child page under the Technical Runbook — Wizkoo parent
-(347335a8d332818bbd18d10b2a2170de) and apply the same change to
-that page. Child page IDs are listed in Step 2 of the Session
-Startup Instruction. The Notion mirror sync is same-tier as
-copying between the two local repo folders: not optional, not
-deferrable. The Verification Gate in Step 7 must include a line
-confirming every modified layer was synced to Notion.
+  Line counts must match across both copies. If they differ, the copy failed. Redo it.
 
-STEP 7 — VERIFICATION GATE
-Produce this ledger before closing:
-
-BUILD SESSION WRITE-BACK VERIFICATION
-✓ UPDATED: [what] → TECHNICAL_RUNBOOK.md ([X] lines)
-✓ COPIED: C:\Users\amyog\Desktop\wizkoo ([X] lines)
-✓ COPIED: C:\Users\amyog\Desktop\wizkoo-plan-generator ([X] lines)
-✓ NOTION MIRROR SYNCED: [list of layer child pages updated] OR "no layers modified this session"
-✓ TRANSFER QUEUE: [items deposited OR "nothing to deposit"]
-✓ FAILURE PATTERNS: [captured OR "none this session"]
-✗ NOT DONE: [item] → [Amy deferred / technical blocker only]
-
-Line counts must match across both copies.
-If they differ, the copy failed. Redo it.
-Identifying the work IS the instruction to do the work.
-"Recommend updating" is not a valid close.
-
-STEP 8 — GIT CLOSE
-Run: git status
-Stage all changes including runbook updates.
-Commit with descriptive message:
-  "YYYY-MM-DD — [what was built/fixed/changed]"
-  Specific enough that reading git log tomorrow tells
-  you exactly what this session did.
-Run: git push
-Confirm: "Committed and pushed. Remote is current."
-
-STEP 9 — FLIGHT LOG ENTRY
+WIZKOO FLIGHT LOG (added to Step 9):
 Use the Notion tool to write to the ATC Flight Log.
 Database ID: b132ce969d3041348b4b7b6a6082cb99
 Data source: 4a4a8f2e-3c19-4e23-9b9d-5d4084fee57e
 
-First: search the database for a page where
-date:Date:start matches today's actual date in YYYY-MM-DD format.
+First: search the database for a page where date:Date:start matches today's actual
+date in YYYY-MM-DD format.
 
 If today's page EXISTS:
   Fetch it. Append a BUILD SESSION block to its content.
@@ -298,8 +223,8 @@ If today's page EXISTS:
 If today's page DOES NOT EXIST:
   Create a new page with these properties:
     Day: "[full day name + date — compute from today's actual date.
-      Example format: Friday, April 17, 2026]"
-    date:Date:start: "2026-04-17"
+          Example format: Friday, April 17, 2026]"
+    date:Date:start: "[today in YYYY-MM-DD format]"
     date:Date:is_datetime: 0
     Status: "Open"
     Session Count: 1
@@ -316,97 +241,8 @@ Drift: [did session expand beyond intent? brief note]
 ---
 
 This is Amy's productivity record. Not a technical log.
-Morning Amy reads this to know what the build system
-produced. Keep it scannable. Ten lines maximum.
-
-STEP 10 — VERSION LOG
-Add one line to VERSION HISTORY in the Technical Runbook:
-  v[next] — [date] — [one sentence: what this session did]
-  Also update the MAINTENANCE RULE "Last updated" date
-  in Layer 0 to today's date.
-
-MINIMUM VIABLE CLOSE:
-Steps 3, 6, 7, 8, 9, and 10. Never less than that.
-If Amy says "just close it" push back once:
-"Minimum close is Steps 3, 6, 7, 8, 9, and 10.
-Under five minutes. Proceeding now."
-
----
-
-## GIT PROTOCOL — EVERY SESSION
-
-SESSION OPEN (before any work begins):
-Run: git status
-Run: git log --oneline -5
-Report findings before touching any file.
-If uncommitted changes exist from a prior session:
-  State: "WARNING: Uncommitted changes exist from a
-  prior session. Affected files: [list]. Commit,
-  review, or discard before proceeding?"
-Do not begin new work until Amy responds.
-
-SESSION CLOSE (final step, after all other close steps):
-Run: git status
-Commit all changes with a descriptive message.
-Commit message format:
-  "YYYY-MM-DD — [what was built/fixed/changed]"
-  Example: "2026-04-17 — firefly velocity rebuilt,
-  nav rgba source hunt, runbook updated"
-Run: git push
-Confirm: "Committed and pushed. Remote is current."
-If push is deferred by Amy, state explicitly:
-  "[X] commits staged locally. Remote is behind.
-  Push required before next deploy."
-
-COMMIT MESSAGE STANDARD:
-Specific enough that reading git log tomorrow tells
-you exactly what each session changed.
-Never: "fix" "updates" "changes" "wip"
-Always: what changed, where, and why in one sentence.
-
-RULES:
-Never close a session with uncommitted work without
-explicitly flagging it to Amy first.
-Never build on top of uncommitted work from a prior
-session without surfacing it to Amy first.
-
----
-
-## THE COMPLETION STANDARD (from Operating Philosophy)
-
-Source document (Notion): 334335a8d33281e894a0f75017d48957
-
-"Done" does not mean "the new thing exists."
-Done means the full chain is complete:
-
-1. BUILD the new thing.
-2. MIGRATE the data from the old thing.
-3. VERIFY the migration is correct.
-4. REMOVE the old thing.
-5. CONFIRM the system is in a clean, unambiguous state.
-
-Stopping at step 2 creates two sources of truth.
-Two sources of truth is worse than one bad source.
-Nobody knows which one is current.
-
-THE TEST: If someone opens this codebase tomorrow with no verbal briefing
-from Amy, will they find one clean consistent state? Or artifacts, duplicates,
-and half-finished work that requires Amy to explain?
-If it requires explanation, it is not done.
-
-CLAUDE CODE APPLICATION:
-Before presenting any task as complete, walk the chain:
-Did I build it, migrate it, verify it, remove the old version,
-and confirm the system is consistent?
-
-If any step is incomplete, name it explicitly:
-"I have completed steps 1-3. Steps 4-5 remain: the old CSS rule
-needs to be removed and the specificity conflict needs to be verified
-in DevTools. Want me to do that now?"
-
-Never present 60% of a task as 100% of a task.
-Never leave an old rule in place when a new one has been added.
-Never add a new CSS rule when the winning rule should be changed at source.
+Morning Amy reads this to know what the build system produced.
+Keep it scannable. Ten lines maximum.
 
 ---
 
@@ -419,93 +255,15 @@ The answer to "will a parent screenshot this?" must be yes.
 
 ---
 
-## CLAUDE CODE OPERATING PRINCIPLES
+## CLAUDE CODE OPERATING PRINCIPLES — WIZKOO SCOPE
+Enforces Standards §2 (Claude Code Operating Principles) via Amy-approval gate on additions and permanent-lock on removals.
 
-Source: Amy Oguntala, April 19, 2026, after the Wizkoo homepage hero reset session.
-Notion: Technical Runbook — Wizkoo (347335a8d332818bbd18d10b2a2170de), Section 2.
+Full principle definitions: AMY_TECHNICAL_STANDARDS.md Section 2.
 
-Non-negotiable rules that govern every Claude Code session on Wizkoo.
-Same tier as the Wizkoo Operating Philosophy and the Completion Standard.
-These principles exist because accumulated technical debt from
-additive-without-reconciliation changes has been observed to compound into
-unrecoverable states that require full resets. These principles prevent
-that class of failure.
-
-CONTEXT:
-Born from a homepage hero build session where five consecutive tweak prompts
-layered conflicting CSS rules without reconciling them, producing a broken state
-that required a full reset. The correction revealed the principle underneath:
-Claude Code's default is additive, not reconciliative. Reconciliation must be
-made explicit.
-
-THE STANDARD:
-Every Claude Code session operates under the six principles below. They are
-non-negotiable. They apply equally at the start of a session, mid-session,
-and in the final deploy. "Fast but accumulates debt" is not permitted. The
-Completion Standard applies to code the same way it applies to every other
-Wizkoo output.
-
-PRINCIPLE 1 — PRE-FLIGHT AUDIT
-Before executing any visual or structural change, report the current state of
-the affected element: its CSS rules, HTML structure, JavaScript bindings.
-Confirm understanding before touching code.
-This is not optional commentary. It is a verification checkpoint. If the
-pre-flight audit reveals conflicts or ambiguities that the prompt did not
-address, stop and report. Do not proceed on assumptions.
-
-PRINCIPLE 2 — CLEAN STATE REQUIREMENT
-Every change leaves the affected system in a known-clean state. New rules
-replace old rules. Old rules are removed. No orphaned CSS, no dead variables,
-no commented-out code left as "just in case." If the change supersedes prior
-work, the prior work is deleted, not left dormant.
-The test: if someone else opens this codebase tomorrow with no verbal briefing
-from Amy, will they find one clean, consistent state? Or will they find
-artifacts, duplicates, and half-finished work?
-
-PRINCIPLE 3 — REPORT SUPERSEDED RULES
-As part of any change, list the specific CSS rules, HTML elements, or
-JavaScript that will be removed or modified. This list is part of the
-pre-flight audit and part of the execution report. It is not optional.
-The purpose: Amy can catch a supersession that was not intended before the
-change is executed. If Principle 3 is skipped, unintended deletions are
-discovered only after deployment — which is too late.
-
-PRINCIPLE 4 — THREE-STRIKE RESET RULE
-If three consecutive tweak prompts on the same element do not produce the
-intended result, stop tweaking. The problem is no longer the tweak — it is
-the foundation.
-Request a reset of that element. Reset means: identify and strip all CSS
-rules, HTML structure, and JavaScript related to the element that are not
-being preserved in the final intent, then rebuild from the preserved intent
-as if starting fresh.
-Iterative tweaking of a broken foundation is always slower than a reset.
-The reset rule prevents compounding failure.
-
-PRINCIPLE 5 — SPECIFICITY HYGIENE
-When multiple CSS rules could apply to an element, the winning rule is stated
-explicitly and competing rules are removed. Do not use !important to win
-specificity fights. If specificity is unclear, consolidate the rules.
-!important is permitted only for third-party override scenarios where the
-underlying rule cannot be modified. It is never used to resolve an internal
-specificity conflict within Wizkoo code.
-
-PRINCIPLE 6 — ONE SOURCE OF TRUTH PER COMPONENT
-Each visual element has one governing CSS rule set. Each HTML component has
-one governing template. Each JavaScript behavior has one governing function.
-When rules, templates, or behaviors are distributed across multiple files or
-scopes, consolidate during the change. If consolidation is out of scope for
-the current change, flag it and propose a separate cleanup pass. Do not add
-to a distributed mess.
-
-PRINCIPLE 7 — VIEWPORT VERIFICATION REQUIREMENT
-Any visual change to the homepage or any page with a viewport-height-locked
-hero section must include verification at the five target viewports defined
-in Layer 4 VIEWPORT REALITY CONSTRAINTS: 1440x900 native, 1280x540 compressed
-desktop, 1440x396 Amy production environment, 375x667 iPhone SE, 430x932
-iPhone 15 Pro Max. Verification belongs in the VERIFICATION section of the
-six-section prompt standard. Skipping this
-check is the single most common source of "it looked fine in design but broke
-in production" failures. Not optional on visual changes.
+WIZKOO GOVERNANCE:
+  Additions require Amy's explicit decision.
+  Removals are not permitted.
+  Applies to every Claude Code session on Wizkoo — wizkoo.com and the plan generator.
 
 SESSION-START INSTRUCTION (verbatim, every session):
   "This session operates under Claude Code Operating Principles
@@ -514,300 +272,14 @@ SESSION-START INSTRUCTION (verbatim, every session):
    change. Report superseded rules as part of every change. If three
    consecutive tweaks fail, request a reset."
 
-WHY THESE PRINCIPLES EXIST:
-Claude Code's default behavior, given a change request, is to find the
-smallest delta that produces the requested visual or functional change.
-"Smallest delta" often means: add a new rule with higher specificity,
-leave the old rule in place, move on.
-This default is not wrong in isolation. It is catastrophically wrong at
-scale. Across a multi-prompt session, the accumulated orphaned rules produce
-a codebase where every change fights invisible competing rules from earlier
-changes. Eventually the fight is unwinnable and a full reset is required.
-The six principles make reconciliation explicit. They do not slow the work.
-They prevent the compounding failure that is slower than the work itself.
-
-GOVERNANCE:
-  Additions require Amy's explicit decision.
-  Removals are not permitted.
-  Applies to every Claude Code session on Wizkoo — wizkoo.com and
-  the plan generator.
-
 ---
 
-## PROMPT CONSTRUCTION DISCIPLINE
-
-### WHY THIS SUBSECTION EXISTS
-
-Claude Code's default behavior is additive. Given a request to fix X,
-it produces the smallest delta that makes X work — usually by adding a
-new rule on top of existing rules, leaving superseded rules in place.
-Across a multi-prompt session, these leftover rules accumulate into
-competing logic that every future change has to navigate around. The
-compound effect is a codebase where prompts get harder to land because
-the noise drowns out the signal.
-
-The most common operator mistake that feeds this failure is the phrase
-"do not touch anything else." That instruction forbids reconciliation.
-It protects the operator from unwanted structural changes, but it also
-prevents the executor from cleaning up what its own change replaces.
-
-The fix is not to remove scope protection. The fix is to distinguish
-scope (what the executor may change) from reconciliation (what cleanup
-is authorized within scope). Every prompt to Claude Code must name both,
-explicitly and separately.
-
-This subsection defines the six-section standard that makes that
-distinction enforceable.
-
-### THE SIX-SECTION PROMPT STANDARD
-
-Every prompt sent to Claude Code must contain all six sections, in this
-order, with the section headers written as stated. If any section is
-missing, the prompt is not ready. Return it to the drafter before
-sending.
-
-  1. TASK
-  2. SCOPE
-  3. RECONCILIATION AUTHORIZED
-  4. PRESERVATION LOCKS
-  5. REPORTING
-  6. VERIFICATION
-
-Each section is defined below with its purpose and what goes in it.
-
-### SECTION 1 — TASK
-
-  Purpose: give Claude Code a verifiable goal.
-  Contents: what needs to happen, stated as a concrete outcome, not a
-    process.
-
-  Good: "Fix the announcement bar text color so it reads saffron on all
-    non-homepage pages."
-  Not good: "Help me figure out what is wrong with the announcement bar."
-
-  A task without a concrete outcome cannot be declared done.
-
-### SECTION 2 — SCOPE
-
-  Purpose: draw the boundary. Prevent Claude Code from wandering into
-    code it was not invited to touch.
-  Contents: which files, components, or surfaces the executor may change,
-    named explicitly. Out-of-scope items named explicitly as well.
-
-  Good: "In scope: components/nav.js lines 80 to 100. Out of scope: all
-    other files, all other components, the plan generator entirely."
-  Not good: "Just fix the nav."
-
-### SECTION 3 — RECONCILIATION AUTHORIZED
-
-  Purpose: separate narrow protection from additive-only execution.
-    Scope says what Claude Code MAY touch. This section says what
-    Claude Code SHOULD clean up when it touches.
-  Contents: what cleanup is explicitly permitted within scope. Removal
-    of superseded rules, deletion of dead code, consolidation of
-    duplicates. Also what cleanup is NOT authorized (restructuring,
-    renaming, refactoring).
-
-  Good: "You are authorized to remove the current .announce-text color
-    rule and any superseded overrides related to announcement bar text
-    color within the named scope. You are not authorized to restructure
-    the nav component or rename any selector."
-  Not good: silence. If this section is missing, Claude Code defaults
-    to additive-only, which is the failure mode this subsection exists
-    to prevent.
-
-### SECTION 4 — PRESERVATION LOCKS
-
-  Purpose: name fragile systems explicitly so Claude Code cannot
-    accidentally break them, even within authorized scope.
-  Contents: what must not change, even if the executor believes a change
-    would improve things. Pulls from the Preservation Locks Registry
-    (see Layer 6) for any prompt touching a system with registered locks.
-
-  Good: "Do not touch: any form-related code in index.html, any
-    BLOCKLIST or BLOCKLIST_EXACT array, netlify/functions/validate-
-    theme.js, any :root design token definition."
-  Not good: "Do not break anything." Vague preservation instructions
-    are not enforceable.
-
-### SECTION 5 — REPORTING
-
-  Purpose: prevent silent changes. Every modification Claude Code makes
-    must be nameable. If it cannot be named, it should not have happened.
-  Contents: what findings and changes Claude Code must state in its
-    response.
-
-  Two kinds of reporting:
-    Pre-execution: "Before making any change, list every file you will
-      modify and the specific change per file. Wait for approval."
-    Post-execution: "After completing, produce a ledger of files
-      changed, selectors removed, lines affected, and any finding from
-      the audit you chose not to execute."
-
-### SECTION 6 — VERIFICATION
-
-  Purpose: establish the gate between "change applied" and "change
-    shipped." Catch broken states before they hit the remote repository.
-  Contents: how correctness and integrity get confirmed.
-
-  Typical verification steps:
-    Run git status and git diff --stat before committing.
-    Confirm no file outside the named scope was modified.
-    Open the relevant pages in the dev server. Confirm no console
-      errors and no visual regressions.
-    Run the build if one exists.
-    Commit with a descriptive message.
-    Do not push without explicit approval from Amy.
-
-### DISTINGUISHING REPORTING FROM VERIFICATION
-
-The two sections are easy to confuse. Keep this distinction in mind:
-
-  REPORTING answers:    "What did you change?"
-  VERIFICATION answers: "Did it work and is the system still sound?"
-
-Reporting is a narrative Claude Code writes about its own work.
-Verification is a test Claude Code or Amy runs against the result.
-
-A prompt can have thorough reporting and fail verification — the change
-was named honestly and also broke the page. A prompt can pass
-verification with weak reporting — the page still renders, but nobody
-can tell what changed or why. Both sections must be present. They serve
-different functions.
-
-### THE RETURN RULE
-
-Any prompt missing one or more sections is not ready for execution.
-Return it to the drafter for completion before sending.
-
-This rule applies equally when:
-  Amy drafts the prompt herself.
-  A chat assistant drafts the prompt for Amy.
-  A prior session's baton includes a prompt to re-send.
-
-The executor (Claude Code) enforces this rule on the receiving side:
-when a prompt arrives missing one or more sections, Claude Code must
-request clarification and list the missing sections by name before
-executing. The drafter enforces this rule on the sending side.
-
-Two-sided enforcement prevents silent bypass.
-
-### MINIMUM VIABLE PROMPT
-
-For genuinely trivial changes (typo fixes, single-line comment
-corrections, one-word copy edits with no structural impact), a
-compressed prompt is acceptable:
-
-  TASK: [what]
-  SCOPE: [where — single file, single line]
-  RECONCILIATION: none needed
-  PRESERVATION: none at risk
-  REPORTING: show the diff
-  VERIFICATION: confirm no unintended matches in grep before committing
-
-All six sections are still named. The content is compressed because the
-change is small. Do not use this pattern for anything that touches a
-component, a system, or more than one file.
-
----
-
-## PERIODIC CODE HYGIENE PROTOCOL
-
-### WHY THIS SUBSECTION EXISTS
-
-In-the-moment hygiene catches most accumulation. The Completion Standard
-enforces old-thing removal at write time. Principle 2 (Clean State
-Requirement) enforces clean state after every change. Pattern 5 (Raw Hex
-Instead of Token) catches hardcoded values as they are written. These
-rules cover the 80% case.
-
-The remaining 20% requires periodic passes. Orphaned rules slip in when
-a component is rewritten and the old rule is not caught. Token drift
-accumulates over dozens of files. Breakpoint systems get confused when
-multiple sessions touch responsive logic without the full picture. These
-failures are not caught by in-the-moment rules. They require a scheduled
-scan.
-
-This subsection defines when to run each periodic pass, what each pass
-does, and which prompt to use. The protocol moves the decision of when
-and how out of Amy's working memory and into a checklist that lives in
-the runbook.
-
-### THE FOUR LAYERS
-
-Code hygiene is an umbrella discipline with four distinct layers. Each
-layer addresses a different kind of accumulated mess. Each has its own
-risk profile and its own trigger.
-
-Layer 1 — Dead code removal. Delete CSS selectors, JS functions, and
-HTML elements that nothing references. Lowest risk because dead code
-cannot break what it does not touch. Highest immediate payoff because
-removal is mechanical and substantial debt accumulates here.
-
-Layer 2 — Token consolidation. Find hardcoded values in component files
-and replace with var(--token-name) references to the existing design
-token registry. Low risk, compounding payoff (one-line updates later
-when tokens evolve).
-
-Layer 3 — Responsive strategy audit. Examine breakpoints for coherence.
-Identify conflicts between width-based and height-based breakpoints.
-Decide whether to consolidate or formally document rules of engagement.
-Judgment-heavy. Not mechanical.
-
-Layer 4 — Full refactor. Reorganize how code is structured without
-changing what it does. Biggest lift. Highest risk. Only runs when a
-specific new feature is blocked by current architecture, never
-prophylactically.
-
-### THE OPTIMIZATION DISTINCTION
-
-Optimization is not hygiene. Hygiene is about correctness and
-maintainability. Optimization is about performance. They are different
-disciplines with different triggers, different risks, and different
-success criteria.
-
-Hygiene triggers on accumulation. Optimization triggers on measured slow
-performance. "Feels slow" is not an optimization trigger — instrumentation
-is. Before optimizing, measure. If the measurement does not show a problem,
-do not optimize.
-
-If Claude Code notices an optimization opportunity during a hygiene pass,
-flag it as a separate task. Do not bundle performance changes into a
-hygiene commit. The risks are different and mixing them makes regression
-diagnosis impossible.
-
-### TRIGGERS
-
-Layer 1 (Dead code removal) runs when:
-- Before any major redesign that will touch existing surfaces.
-- After locking a design direction (to clean up the abandoned iterations).
-- When prompts start taking longer to land than they used to (compounding
-  debt signal).
-- As a default cadence every 50 to 100 build prompts.
-
-Layer 2 (Token consolidation) runs when:
-- All Layer 1 triggers above, typically paired with a Layer 1 pass.
-- After any session that added or changed design tokens (to catch
-  hardcoded values that slipped in elsewhere).
-
-Layer 3 (Responsive strategy audit) runs when:
-- Before major layout changes that will touch breakpoints (run before
-  the redesign, not after).
-- When rendering bugs appear at odd screen sizes and it is unclear which
-  rule is winning.
-
-Layer 4 (Full refactor) runs when:
-- A specific new feature is blocked by current code architecture. The
-  trigger is mechanical: "I tried to add X and it broke Y because of
-  how the code is organized."
-- Never prophylactically. Never because the code "feels messy." The
-  trigger is a named blocked feature.
-
-### PRE-WRITTEN PROMPTS
-
-Five prompts below, all following the six-section Prompt Construction
-Discipline standard. Copy, adjust specifics as needed, paste into
-Claude Code.
+## WIZKOO CODE HYGIENE PROMPTS
+Enforces Standards §4 (Code Hygiene) via templates pre-filled with Wizkoo file paths and scoped exclusion lists.
+
+Global hygiene framework: AMY_TECHNICAL_STANDARDS.md Section 4.
+The prompts below are the Wizkoo-specific versions of the five templates,
+with actual file paths filled in.
 
 PROMPT 1 — LAYER 1 DEAD CODE AUDIT (REPORT-ONLY)
 
@@ -819,11 +291,9 @@ SCOPE: In scope: all CSS files under css/ at repo root, any <style>
   components/nav.js. Out of scope: /games/ subdirectory, plan generator
   repo entirely, any JavaScript logic.
 
-RECONCILIATION AUTHORIZED: None. This is report-only. Do not modify
-  any file.
+RECONCILIATION AUTHORIZED: None. This is report-only. Do not modify any file.
 
-PRESERVATION LOCKS: All files. No modifications of any kind permitted
-  in this pass.
+PRESERVATION LOCKS: All files. No modifications of any kind permitted in this pass.
 
 REPORTING: Produce DEAD_CSS_AUDIT_REPORT.md with findings in four
   categories: orphaned selectors, unused custom properties, commented-
@@ -895,8 +365,7 @@ RECONCILIATION AUTHORIZED: Replace hardcoded values with var(--token-name)
 
 PRESERVATION LOCKS: Do not touch tokens.css itself except to remove tokens
   that become unused. Do not touch any :root block in index.html
-  (Preservation Locks Registry item 18). Do not touch any form-related
-  code.
+  (Preservation Locks Registry item 18). Do not touch any form-related code.
 
 REPORTING: Before executing, produce a report: every hardcoded value
   found, which file and line, which token it would map to, confidence
@@ -994,42 +463,23 @@ what is frozen, and what decisions are locked.
    Root cause: The default .announce-text rule was written with dark ink. The homepage
      is a special case that applies saffron via an inline override at nav.js lines
      288–289 (the _hp branch). All other pages fall through to the default dark value.
-     Nobody updated the default to match the spec.
-   What has been attempted: Nothing documented. The homepage override exists as evidence
-     that saffron was the intended color — someone fixed it for the homepage and
-     forgot the default.
    The fix (exact):
-     In C:\Users\amyog\Desktop\wizkoo\components\nav.js, change line 84 from:
+     In nav.js, change line 84 from:
        '  color:rgba(12,16,32,0.75);',
      to:
        '  color:rgba(232,175,56,0.60);',
-     That is the only change required. The homepage inline override at lines 288–289
-     can remain — it uses rgba(232,175,56,0.75) (slightly brighter) which is fine on
-     the solid #0C1020 bar. The default change brings all other pages into spec.
-   Verify in browser: Open ages.html (a linen page with the standard bar, not the
-     homepage). Inspect the announcement bar text. It should be legible saffron
-     against the dark bar, not nearly invisible dark ink. Check the same on
-     library.html (night-sky surface) to confirm it reads on dark backgrounds too.
+   Verify in browser: Open ages.html (linen surface). Inspect announcement bar text.
+     Should be legible saffron against the dark bar. Check library.html (night sky) too.
 
 2. NAV CTA STYLE — GHOST VS FILLED (REQUIRES AMY CONFIRMATION BEFORE FIXING)
-   What is broken: The Light Standard spec says Nav CTA must be saffron fill:
+   What is broken: Light Standard spec says Nav CTA must be saffron fill:
      background: #E8AF38, color: #0C1020 (dark text on saffron button).
-     The current implementation at nav.js lines 199–219 is ghost style:
-     background: transparent, color: #E8AF38, border: 1px solid rgba(232,175,56,0.65).
-   Origin: C:\Users\amyog\Desktop\wizkoo\components\nav.js lines 199–219 (.nav-cta rule)
-   Root cause theory: The nav background was changed from frosted glass to solid dark
-     (rgba(12,16,32,0.96)) as a locked decision. A filled saffron CTA against an opaque
-     dark bar creates a visually heavy look — someone may have switched to ghost to
-     reduce visual weight and never documented the change as intentional. Alternatively
-     it may simply be an unrecorded decision.
-   What has been attempted: Nothing documented. This state has been in the codebase
-     since at least April 12, 2026. The Locked Decisions section records the nav
-     background change but says nothing about the CTA style.
+     Current implementation at nav.js lines 199–219 is ghost style.
    DO NOT FIX without Amy confirming this is a bug and not an intentional design choice.
-     Ask: "The nav CTA is currently ghost style (transparent, saffron border). The Light
-     Standard says it should be saffron fill. Should I change it back to filled?"
+   Ask: "The nav CTA is currently ghost style (transparent, saffron border). The Light
+   Standard says it should be saffron fill. Should I change it back to filled?"
    If Amy confirms it is a bug, the fix (exact):
-     In C:\Users\amyog\Desktop\wizkoo\components\nav.js, change lines 206–214:
+     In nav.js, change lines 206–214:
        Current:
          '  background:transparent;',
          '  color:#E8AF38;',
@@ -1048,26 +498,14 @@ what is frozen, and what decisions are locked.
          '  background:#EDBA45;',
          '  filter:brightness(1.04);',
          (remove the border-color and box-shadow lines from hover)
-   Verify in browser: Nav CTA should render as a solid saffron rectangle (#E8AF38)
-     with dark ink text (#0C1020). Hover should lighten to #EDBA45. No translation
-     (translateY) on hover — spec says NO translation.
+   Verify: Nav CTA should render as solid saffron (#E8AF38), dark ink text (#0C1020).
+     Hover lightens to #EDBA45. No translateY on hover — spec says NO translation.
 
 3. PRICING PAGE — CTA FIREFLY MISSING
-   What is broken: pricing.html has no firefly implementation at all. The "Firefly fix
-     pending" note in Pages Status refers to this page, not to the #pricing section of
-     index.html. The pricing.html CTA section (.cta / .cta-btn) has no animation.
-   Origin: C:\Users\amyog\Desktop\wizkoo\pricing.html — no firefly code exists anywhere
-     in the file (confirmed by search of all 258 lines). The page has a .cta section
-     (lines 82–88, 197–201) with class .cta-btn on the primary button (line 201).
-   Root cause: The CTA firefly in index.html (lines 2356–2401) targets
-     document.getElementById('pricing') and cta.querySelector('.btn-main'). Neither
-     selector matches anything in pricing.html. That code only runs on index.html. The
-     pricing page was never given its own firefly implementation.
-   What has been attempted: Nothing. The "fix pending" note records the intent to add
-     a firefly but it was never built.
+   What is broken: pricing.html has no firefly implementation.
+   Origin: C:\Users\amyog\Desktop\wizkoo\pricing.html — no firefly code anywhere.
    The fix (exact): Add the following script to pricing.html, immediately before
-     </body> (after the existing scroll-reveal script block). Adapt element selectors
-     from index.html's implementation to match pricing.html's class names:
+     </body> (after the existing scroll-reveal script block):
 
      <script>
      /* ─── CTA Firefly — pricing page ─── */
@@ -1121,84 +559,48 @@ what is frozen, and what decisions are locked.
      })();
      </script>
 
-   BEFORE adding this: verify the .cta element has position:relative (it does —
-     pricing.html line 82: .cta{...position:relative;overflow:hidden}). The overflow:hidden
-     will clip the firefly if it drifts outside .cta bounds. The drift range is ±14px
-     horizontally and ±10px vertically from the button center — ensure the .cta section
-     is tall enough that the firefly won't be clipped at its extremes.
-   Verify in browser: Scroll the pricing.html CTA section ("Ready to build your first
-     week?") into view. Within 300ms of intersection, a 5px saffron dot should appear
-     at the left edge of the "Build Your Plan" button and drift for 2.6s then fade out.
-     Confirm it is clipped by .cta bounds (not visible outside the section).
-     Confirm it does not appear on mobile (<768px) or with prefers-reduced-motion.
+   BEFORE adding: verify .cta has position:relative (it does — pricing.html line 82).
+   Verify in browser: Scroll CTA section into view. Within 300ms of intersection,
+     a 5px saffron dot appears at left edge of "Build Your Plan" button, drifts
+     2.6s then fades. Does not appear on mobile (<768px) or prefers-reduced-motion.
 
 4. GAMES PAGES — INVALID SORA WEIGHT VALUES
-   What is broken: Multiple elements across the games pages use Sora font-weight 600,
-     which is not in the approved Sora weight set (200, 300, 700, 800 only).
-     Weight 600 is a prohibited weight that does not exist in the licensed Sora subset
-     and falls back to the nearest available weight — producing inconsistent rendering.
-   NOTE on "Nav": All three games pages correctly load components/nav.js via
-     <div id="wizkoo-nav"> + <script src="/components/nav.js">. No nav bugs confirmed
-     by code inspection. If a visual nav issue exists it requires a browser audit session.
-   NOTE on "Saffron deployment": No wrong saffron colors found (all usages are either
-     #E8AF38 or var(--saffron) or correctly using saffron). Hardcoded hex strings in
-     JS inline styles (games.html line 101) are functionally correct even if they could
-     use CSS vars. Not a saffron deployment error in the color-correctness sense.
+   Multiple elements use Sora font-weight 600, not in the approved weight set (200, 300, 700, 800).
 
    SUB-BUG 4a — atlas.html, Sora weight 600 on postcard body text:
      File: C:\Users\amyog\Desktop\wizkoo\games\atlas.html, line 94
-     Current: font-family:'Sora',sans-serif;font-weight:600;font-size:0.95rem;
-     Wrong because: 600 is not a loaded Sora weight.
-     Fix: Change font-weight:600 to font-weight:700 on that inline style.
+     Fix: Change font-weight:600 to font-weight:700.
 
    SUB-BUG 4b — elementum.html, Sora weight 600 on element name label:
      File: C:\Users\amyog\Desktop\wizkoo\games\elementum.html, line 62
-     Current: style="font-family:'Sora',sans-serif;font-weight:600;font-size:1rem;..."
-     Wrong because: 600 is not a loaded Sora weight.
-     Fix: Change font-weight:600 to font-weight:700 on that inline style.
+     Fix: Change font-weight:600 to font-weight:700.
 
-   Additional weight-system audit needed: pricing.html also has invalid Sora weights:
+   Additional — pricing.html also has invalid Sora weights:
      pricing.html line 58: .feature-title font-weight:600 → change to 700
      pricing.html line 76: .faq-q font-weight:500 → change to 700
      pricing.html line 47: .hero-btn font-weight:600 → change to 700
      pricing.html line 87: .cta-btn font-weight:600 → change to 700
-     (pricing.html is NOT listed in the games bug but has the same class of error)
 
-   Verify in browser: Inspect any element using font-family Sora in the games or pricing
-     pages. In DevTools > Computed, the resolved font-weight must be 200, 300, 700, or
-     800. Any other value (400 fallback from 500/600 mismatch) is a bug. The most
-     visible symptom: a headline that looks thinner than expected (600 falling back to
-     400 because 600 isn't loaded).
+   Verify: In DevTools > Computed, resolved font-weight must be 200, 300, 700, or 800.
 
 5. METHODOLOGY PAGE — NEEDS RETHINK
-   What is broken: Full content and layout redesign required. Page does not
-     meet the $200 Standard or current design language.
+   What is broken: Full content and layout redesign required.
    Location: C:\Users\amyog\Desktop\wizkoo\methodology.html
    Status: Unresolved. Requires a design session before any code work.
 
 6. HOMEPAGE ENVIRONMENT — UNRESOLVED
    What is broken: The environment assignment for the homepage is TBD.
      The decision between "linen only" or "multi-surface" has not been made.
-   Location: ENVIRONMENT MAP section of this document.
-   Status: Unresolved. No code work should proceed on homepage surface until
-     this is decided and locked into the Environment Map.
+   Status: Unresolved. No code work on homepage surface until decided and locked.
 
 7. --ease-out-expo TOKEN NOT LINKED IN index.html
-   What is broken: `--ease-out-expo` is defined in css/tokens.css (same curve as
-     --expo: cubic-bezier(0.16, 1, 0.3, 1)) but css/tokens.css is NOT linked from
-     index.html. All var(--ease-out-expo) references in index.html inline CSS fall
-     back to browser default `ease` instead of the editorial expo curve.
-   Origin: css/tokens.css defines the token; index.html links its own inline :root
-     with --expo but not tokens.css.
-   Root cause: Two parallel token definitions were never unified. The inline :root
-     in index.html has --expo but not --ease-out-expo. Linked files (animations.css,
-     components.css) that reference --ease-out-expo resolve it from tokens.css — but
-     inline styles in index.html cannot reach tokens.css rules.
+   What is broken: --ease-out-expo is defined in css/tokens.css but css/tokens.css
+     is NOT linked from index.html. All var(--ease-out-expo) references in index.html
+     inline CSS fall back to browser default ease.
    Fix: Either (a) add --ease-out-expo to index.html's inline :root, or (b) link
      css/tokens.css from index.html and remove the inline --expo duplication.
      Option (b) is the correct long-term fix per Operating Principle 6.
-   Status: Unresolved. Low visual impact (fallback `ease` is close). Fix in a
-     dedicated tokens cleanup session.
+   Status: Low visual impact. Fix in a dedicated tokens cleanup session.
 
 ---
 
@@ -1227,29 +629,31 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Three equal saffron lines in headline: never. One saffron moment per headline.
 - Frosted glass nav on linen: solved with dark nav. Do not suggest reverting.
 - Time masthead ("08:17 · THURSDAY · WK 4 · SPRING TERM"): removed April 19, 2026. Do not reintroduce.
-- Kicker and kicker rule in hero left column: removed with the time masthead. First visible element above headline is empty space. Do not reintroduce either element.
-- Hero left column alignment rule: `.nh-left{padding-top:305px}` governs baseline alignment at 1440px. Alignment is container-driven, not element-driven. Do not change without re-verifying diff measurement.
-- Desk note width: 50% of `.nh-right` content area. Single tape piece (`::after` only), centered at `left:calc(50% - 28px)`. Do not add a second tape piece.
-- Blocklist architecture: `suicide`, `murder`, `weed` are BLOCKLIST_EXACT (exact-match only). Phrased uses ("murder mystery", "suicide prevention", "garden weeds") pass to Layer 3 AI moderation. Both client (index.html) and server (validate-theme.js) lists must stay in sync.
+- Kicker and kicker rule in hero left column: removed with the time masthead. Do not reintroduce either element.
+- Hero left column alignment rule: .nh-left{padding-top:305px} governs baseline alignment at 1440px. Container-driven, not element-driven.
+- Desk note width: 50% of .nh-right content area. Single tape piece (::after only), centered at left:calc(50% - 28px). Do not add a second tape piece.
+- Blocklist architecture: suicide, murder, weed are BLOCKLIST_EXACT (exact-match only). Both client (index.html) and server (validate-theme.js) lists must stay in sync.
 - Email provider for moderation digest: Resend. Do not swap provider without updating both sendEmail() and env var names in moderation-digest.js.
-- `.cta-needs-ready` gating: uses `color: rgba(12,16,32,0.40)` on unready state, NOT `opacity`. Box-shadow stays full saffron always. Transition is `color`, not `opacity`. Source of truth: css/components.css. Root cause of prior pale-yellow bug was element-level opacity dimming the box-shadow.
-- Wax seal (editorial note): inline SVG, 56×56px display, 80×80 viewBox. Organic blob path (not circle). 3-layer W monogram (shadow/base/highlight text offsets). Do not revert to div+span. Do not use the 6-lobe deboss-filter variant (reverted — user rejected it).
-- Hero headline line 2 ("homeschool plans."): locked at 192px. Was 216px. Reduced April 20, 2026 per user request.
-- CTA button typography ("SHOW ME THIS WEEK →"): Sora 600, 0.68rem, letter-spacing 0.06em. Matches Open Seat page `.btn-sky` treatment. Not Space Mono.
-- css/components.css easing (lines 24/25/26): cubic-bezier(0.16,1,0.3,1) left hardcoded intentionally. Consumers (index.html, the-open-seat.html) do not link tokens.css and have no --ease-out-expo in scope. Replacing with var(--ease-out-expo) would produce unresolved custom property. Option A per April 21, 2026 token consolidation pass. Revisit when OPEN ITEM 6 (link tokens.css to 8 pages) is resolved.
-- Section height at max-height:700px: MUST be height:100vh. NEVER height:max(Nvh, fixed-px). Locked April 22, 2026. A fixed-px floor that exceeds the viewport (e.g. 500px in a 396px viewport) creates scroll-position drift — padding-top appears to change between loads depending on where the scroll lands. Only 100vh guarantees consistent padding behavior.
-- ec-proofs column-gap (desktop base): 4px. Locked April 22, 2026. Reduced from 28px original → 16px → 4px per user preference. Do not increase without explicit instruction.
-- ec-col-copy padding-top at short-wide query (max-height:700px, min-width:768px): 96px. Locked April 22, 2026. Minimum for nav clearance at production display (combined nav + announcement ≈100px CSS). Do not reduce below 96px at this breakpoint.
-- Footer link vocabulary: the /themes page link must read "Themes to Explore" — never the shorter "Themes". "Themes to Explore" is the brand vocabulary lock from Phase 1. Locked April 26, 2026.
-- Footer column placement for "Themes to Explore": LEARN MORE column (wf-learn), not PRODUCT column (wf-nav). Locked April 26, 2026. Do not move without explicit instruction.
-- Footer column naming discrepancy: production footer uses column headers Product / Learn More / Connect. The Light Standard v5 spec calls them Learn / Join / Wizkoo. This is a known divergence. Do not rename columns without explicit instruction — that is a separate design decision, not in scope for Phase 7.
+- .cta-needs-ready gating: uses color: rgba(12,16,32,0.40) on unready state, NOT opacity. Box-shadow stays full saffron always. Transition is color, not opacity. Source of truth: css/components.css.
+- Wax seal (editorial note): inline SVG, 56×56px display, 80×80 viewBox. Organic blob path (not circle). 3-layer W monogram (shadow/base/highlight text offsets). Do not revert to div+span.
+- Hero headline line 2 ("homeschool plans."): locked at 192px. Reduced April 20, 2026 per user request.
+- CTA button typography ("SHOW ME THIS WEEK →"): Sora 600, 0.68rem, letter-spacing 0.06em. Matches Open Seat page .btn-sky treatment. Not Space Mono.
+- css/components.css easing (lines 24/25/26): cubic-bezier(0.16,1,0.3,1) left hardcoded intentionally. Consumers do not link tokens.css. Revisit when OPEN ITEM 6 is resolved.
+- Section height at max-height:700px: MUST be height:100vh. NEVER height:max(Nvh, fixed-px). Locked April 22, 2026.
+- ec-proofs column-gap (desktop base): 4px. Locked April 22, 2026.
+- ec-col-copy padding-top at short-wide query (max-height:700px, min-width:768px): 96px. Locked April 22, 2026. Minimum for nav clearance. Do not reduce below 96px.
+- Footer link vocabulary: the /themes page link must read "Themes to Explore" — never the shorter "Themes". Locked April 26, 2026.
+- Footer column placement for "Themes to Explore": LEARN MORE column (wf-learn), not PRODUCT column (wf-nav). Locked April 26, 2026.
+- Footer column naming discrepancy: production footer uses Product / Learn More / Connect. Light Standard v5 spec calls them Learn / Join / Wizkoo. Known divergence. Do not rename without explicit instruction.
+- Canonical guard format — three-file architecture locked April 27, 2026: AMY_TECHNICAL_STANDARDS.md uses SCOPE GUARD (project-agnostic scope, Do NOT add project-specific content, Promotion rule). wizkoo/TECHNICAL_RUNBOOK.md uses PROJECT GUARD with explicit Scope (both codebases + pointer note), Do not apply cross-project warning, full Standards path. Learnkoo TECHNICAL_RUNBOOK.md uses PROJECT GUARD with Scope (Learnkoo only), Do not apply cross-project warning, full Standards path. Do not paraphrase or abbreviate guard text.
+- Standards path in guards: C:\Users\amyog\Desktop\wizkoo\AMY_TECHNICAL_STANDARDS.md — full absolute path used in both project guards. Do not shorten to filename-only.
 
 ---
 
 ═══════════════════════════════════════
 LAYER 3 — SYSTEM MAP
-Read this layer when you need to find a file, understand the codebase
-structure, or check environment setup and deployment configuration.
+Read when you need to find a file, understand codebase structure,
+or check environment setup and deployment configuration.
 ═══════════════════════════════════════
 
 ## CODEBASE LOCATIONS
@@ -1296,19 +700,16 @@ Root-level pages (every HTML file is a self-contained page):
   privacy.html        Privacy policy.
   terms.html          Terms of service.
   404.html            Error page.
-  README.md           Points to this Technical Runbook. First file
-                      any AI or developer reads when opening the repo.
+  README.md           Points to this Technical Runbook. First file any AI or developer
+                      reads when opening the repo.
   SECTION_3_BASELINE_2026-04-22.md
                       Known-good baseline snapshot for Section 3 (ec-scenario)
                       captured April 22, 2026. All CSS line numbers, active query
-                      logic, locked values. Quick-paste Notion artifact. Superseded
-                      structurally by TIER 1–3 section in Layer 5 of this runbook,
-                      but retained as standalone restore reference.
+                      logic, locked values. Superseded structurally by TIER 1–3 in
+                      Layer 5, but retained as standalone restore reference.
 
 Config and tooling:
-  CLAUDE.md           Claude Code project instructions. Dev server setup
-                      (npm run serve → localhost:3000) and Playwright
-                      visual verification workflow for this codebase.
+  CLAUDE.md           Claude Code project instructions. Dev server and Playwright workflow.
   package.json        Node dependencies: serve, @playwright/test, pg.
   netlify.toml        Netlify config: /plan proxy redirect to Vercel.
   _redirects          Netlify redirect rules (clean URL rewrites, .html removal).
@@ -1322,8 +723,7 @@ CSS directory (C:\Users\amyog\Desktop\wizkoo\css\):
   base.css            Global reset, custom cursor, wordmark, primary/secondary
                       buttons, skip-nav. (~4.9 KB)
   footer.css          Footer styles. Primarily nav resets inside footer context
-                      and .footer-fade gradient transition zone. The dark
-                      planetarium background lives in footer.js inline styles.
+                      and .footer-fade gradient transition zone.
   library.css         Library and book pages. Dark space theme, star field,
                       age band selector, filter pills, book grid, book cards,
                       book detail (.bk-*), modal. (1146 lines, ~30 KB)
@@ -1348,8 +748,7 @@ JavaScript (C:\Users\amyog\Desktop\wizkoo\js\):
   supabase-config.js  Supabase client initialization. (510 bytes)
 
 Scripts (C:\Users\amyog\Desktop\wizkoo\scripts\):
-  screenshot.js       Playwright screenshot automation. Captures full-page
-                      screenshots of every marketing page for visual QA.
+  screenshot.js       Playwright screenshot automation. Full-page screenshots for QA.
                       Run with: node scripts/screenshot.js
   build-esa-pages.py  Generates ESA content pages.
   import-library.js   Bulk library data import.
@@ -1368,26 +767,21 @@ Root config:
                       0.82.0, @clerk/nextjs 7.0.8, Supabase, Drizzle ORM,
                       framer-motion 12.38.0. Package manager: pnpm only.
   next.config.ts      basePath: /plan. Exposes NEXT_PUBLIC_BASE_PATH=/plan.
-                      skipTrailingSlashRedirect: true.
   tsconfig.json       Path alias @/* → ./src/*. Target ES2017. Strict mode.
   drizzle.config.ts   ORM migrations from /drizzle directory.
   vercel.json         Vercel deployment config.
-  README.md           Points to this Technical Runbook. First file
-                      any AI or developer reads when opening the repo.
-  sentry.*.config.ts  Sentry error tracking (client and server configs).
 
 Global design tokens:
-  src/app/globals.css Three-layer token system (primitives → semantic →
-                      component). Contains all keyframe animations and utility
-                      classes. (~1444 lines). See CSS CUSTOM PROPERTIES section.
+  src/app/globals.css Three-layer token system (primitives → semantic → component).
+                      Contains all keyframe animations and utility classes. (~1444 lines).
 
 App routes (src/app/):
   layout.tsx                Root layout: fonts, providers.
   (app)/dashboard/          Authenticated dashboard.
   (app)/generate/spectacle/ Loading animation during plan generation.
-    SpectacleVisualLayer.tsx  9-subsystem spectacle (1157 lines). See below.
+    SpectacleVisualLayer.tsx  9-subsystem spectacle (1157 lines).
   (app)/onboarding/         5-step intake flow.
-    page.tsx                  Reads URL params at lines 474–495. See below.
+    page.tsx                  Reads URL params at lines 474–495.
   (app)/plans/[id]/         Plan view and print routes.
   (app)/orbit-reports/      Weekly learning reports.
   (app)/settings/           User settings.
@@ -1395,9 +789,8 @@ App routes (src/app/):
   api/                      Next.js App Router API route handlers.
 
 Components (src/components/):
-  GenerationSpectacle.tsx   Canvas-based plan generation animation.
-                            1293 lines. See GENERATION SPECTACLE section.
-  Footer.tsx                Plan generator footer. 107 lines. See below.
+  GenerationSpectacle.tsx   Canvas-based plan generation animation. 1293 lines.
+  Footer.tsx                Plan generator footer. 107 lines.
   NavBar.tsx                Authenticated nav (Dashboard, Settings). 128 lines.
 
 Other key source dirs:
@@ -1412,71 +805,48 @@ Other key source dirs:
 ## ENVIRONMENT VARIABLES
 
 MARKETING SITE (C:\Users\amyog\Desktop\wizkoo)
-  No .env files. No build step. No server-side secrets in the
-  static site itself.
+  No .env files. No build step. No server-side secrets in the static site itself.
 
-  Supabase credentials are exposed as window globals in:
-    C:\Users\amyog\Desktop\wizkoo\js\supabase-config.js
-    WIZKOO_SUPABASE_URL      — Supabase project URL
-    WIZKOO_SUPABASE_ANON_KEY — Supabase anon/public key
-  These are intentionally public-facing. Row Level Security
-  policies (sql/library-schema.sql) control data access.
+  Supabase credentials: window globals in C:\Users\amyog\Desktop\wizkoo\js\supabase-config.js
+    WIZKOO_SUPABASE_URL      — Supabase project URL (intentionally public-facing)
+    WIZKOO_SUPABASE_ANON_KEY — Supabase anon/public key (intentionally public-facing)
+    Row Level Security (sql/library-schema.sql) controls data access.
 
-  Netlify Functions (set in Netlify Dashboard > Site Settings >
-  Environment Variables — NOT committed to repo):
-
-    OPENAI_API_KEY        — OpenAI Moderation API (Layer 3 of
-                            theme content moderation). Used by
-                            netlify/functions/validate-theme.js.
-
-    NOTION_API_KEY        — Notion API key for writing rejected
-                            theme logs to the moderation database.
-
+  Netlify Functions (set in Netlify Dashboard — NOT committed to repo):
+    OPENAI_API_KEY        — OpenAI Moderation API (Layer 3 theme content moderation).
+                            Used by netlify/functions/validate-theme.js.
+    NOTION_API_KEY        — Notion API key for rejected theme logs.
     NOTION_MODERATION_DB_ID — Notion database for moderation logs.
                             Value: c8506fad-4656-4dac-b0a0-13aed19067be
-                            (Theme / Timestamp / Layer / IP Hash / Status)
+    IP_HASH_SALT          — MUST NEVER ROTATE. Rotating breaks repeat-offender
+                            hash comparability across all historical log entries.
+    RESEND_API_KEY        — Resend API key for weekly moderation digest email.
+    RESEND_FROM_EMAIL     — Value: moderation@wizkoo.com
+    ADMIN_EMAIL           — Value: amy@wizkoo.com
 
-    IP_HASH_SALT          — One-time generated salt for IP address
-                            hashing. MUST NEVER ROTATE. Rotating breaks
-                            repeat-offender hash comparability across
-                            all historical log entries.
-
-    RESEND_API_KEY        — Resend API key for weekly moderation
-                            digest email (moderation-digest.js).
-
-    RESEND_FROM_EMAIL     — Sending address for moderation digest.
-                            Value: moderation@wizkoo.com
-
-    ADMIN_EMAIL           — Recipient for moderation digest.
-                            Value: amy@wizkoo.com
-
-  Source commits: 857b057 (Layer 1 implementation), b042e35
-  (BLOCKLIST_EXACT dual-tier, regex fix, test matrix).
+  Source commits: 857b057 (Layer 1 implementation), b042e35 (BLOCKLIST_EXACT dual-tier).
 
 PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator)
-  Source: .env.example (22 variables)
-  All secrets go in .env.local (never committed).
+  Source: .env.example (22 variables). All secrets in .env.local (never committed).
 
   Database:
     DATABASE_URL          — Postgres connection string (pooler via Supabase)
     DIRECT_URL            — Direct DB URL for drizzle-kit migrations.
                             Must use db.{ref}.supabase.co:5432, NOT pooler host.
 
-  Clerk Authentication (5 vars):
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY — Client-side Clerk key
-    CLERK_SECRET_KEY                  — Server-side Clerk key
-    CLERK_WEBHOOK_SECRET              — Verifies Clerk webhook signatures
+  Clerk Authentication:
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+    CLERK_SECRET_KEY
+    CLERK_WEBHOOK_SECRET
     NEXT_PUBLIC_CLERK_SIGN_IN_URL     — Set to /sign-in
     NEXT_PUBLIC_CLERK_SIGN_UP_URL     — Set to /sign-up
-    (NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL and AFTER_SIGN_UP_URL
-     also in .env.example: /dashboard and /onboarding)
 
-  Stripe Payments (4 + 2 price IDs):
-    STRIPE_SECRET_KEY              — Server-side Stripe key
-    STRIPE_WEBHOOK_SECRET          — Verifies Stripe webhook events
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY — Client-side Stripe key
-    STRIPE_MONTHLY_PRICE_ID        — Monthly plan price ID from Stripe Dashboard
-    STRIPE_ANNUAL_PRICE_ID         — Annual plan price ID from Stripe Dashboard
+  Stripe Payments:
+    STRIPE_SECRET_KEY
+    STRIPE_WEBHOOK_SECRET
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+    STRIPE_MONTHLY_PRICE_ID
+    STRIPE_ANNUAL_PRICE_ID
 
   AI:
     ANTHROPIC_API_KEY    — Claude API key (main plan generation + orbit reports + safety)
@@ -1485,14 +855,14 @@ PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator)
     RESEND_API_KEY       — Resend transactional email service
 
   Error tracking:
-    SENTRY_DSN           — Sentry project DSN (client + server configs)
+    SENTRY_DSN           — Sentry project DSN
 
   Analytics:
     POSTHOG_API_KEY      — PostHog product analytics
 
   Rate limiting:
-    UPSTASH_REDIS_REST_URL   — Upstash Redis REST endpoint
-    UPSTASH_REDIS_REST_TOKEN — Upstash Redis auth token
+    UPSTASH_REDIS_REST_URL
+    UPSTASH_REDIS_REST_TOKEN
 
   Cron job auth:
     CRON_SECRET          — Bearer token checked by all four /api/cron/* routes
@@ -1505,26 +875,19 @@ Applies to: netlify/functions/validate-theme.js,
             index.html (client-side IIFE),
             netlify/functions/moderation-digest.js
 
-Three-layer architecture. Every theme submission passes all three
-layers in sequence. A rejection at any layer stops submission.
+Three-layer architecture. Every theme submission passes all three layers.
 
 LAYER 1 — CLIENT-SIDE BLOCKLIST (index.html)
   ~100 terms. Evaluated before any network request.
-  Matching: word-boundary regex (\bterm\b) — catches plurals and
-    suffixes without false positives on substrings.
-  Leetspeak normalization applied before matching:
-    0→o, 3→e, 1→i and l, 4→a, 5→s, @→a, !→i
-  Dual-tier structure (applied in same client-side pass):
-    BLOCKLIST       — word-boundary match. Catches plurals, suffixes,
-                      compounds. For terms that should never appear.
-    BLOCKLIST_EXACT — full-input match only. For terms (e.g. "weed",
-                      "murder") that must allow legitimate phrased use
-                      but should be rejected as standalone themes.
+  Matching: word-boundary regex (\bterm\b).
+  Leetspeak normalization applied first: 0→o, 3→e, 1→i and l, 4→a, 5→s, @→a, !→i
+  Dual-tier structure:
+    BLOCKLIST       — word-boundary match. For terms that should never appear.
+    BLOCKLIST_EXACT — full-input match only. For terms like "weed", "murder" that
+                      allow legitimate phrased use but reject as standalone themes.
 
 LAYER 2 — SERVER-SIDE BLOCKLIST (netlify/functions/validate-theme.js)
-  Same blocklist as Layer 1, re-run server-side. Prevents client-side
-  bypass. Fail-closed: 3-second timeout blocks submission with a
-  generic error message. Never fails open.
+  Same blocklist as Layer 1, re-run server-side. Fail-closed: 3-second timeout.
 
 LAYER 3 — OPENAI MODERATION API (validate-theme.js)
   Endpoint: https://api.openai.com/v1/moderations
@@ -1532,21 +895,11 @@ LAYER 3 — OPENAI MODERATION API (validate-theme.js)
   Timeout: 3 seconds. On timeout, submission is blocked (fail-closed).
 
 REJECTION LOGGING
-  Rejected themes are written to Notion database:
-    NOTION_MODERATION_DB_ID: c8506fad-4656-4dac-b0a0-13aed19067be
-  Fields: Theme, Timestamp, Layer (which layer caught it), IP Hash,
-          Status.
-  IP address is hashed with IP_HASH_SALT before storage.
-  If Notion write fails: console.error fallback to Netlify function logs.
-
-REJECTION UI
-  Inline error below theme field: "Let's try a different theme."
-  "See suggestions" link surfaces a random Tier 1 safe word.
-  Submit button shows "Checking…" during validation.
+  Notion database: NOTION_MODERATION_DB_ID c8506fad-4656-4dac-b0a0-13aed19067be
+  Fields: Theme, Timestamp, Layer, IP Hash, Status.
 
 WEEKLY DIGEST
-  netlify/functions/moderation-digest.js sends a weekly summary via
-  Resend (RESEND_API_KEY) from RESEND_FROM_EMAIL to ADMIN_EMAIL.
+  netlify/functions/moderation-digest.js sends weekly summary via Resend.
 
 FILES AFFECTED
   index.html                              — Layer 1 IIFE (client blocklist)
@@ -1557,59 +910,48 @@ FILES AFFECTED
 
 ## DEPENDENCY INVENTORY
 
-MARKETING SITE (C:\Users\amyog\Desktop\wizkoo\package.json)
+MARKETING SITE
   devDependencies (3):
     @playwright/test  ^1.58.2   — Playwright test runner (screenshot automation)
     pg                ^8.20.0   — PostgreSQL client (library data import scripts)
     serve             ^14.2.6   — Local static dev server (npm run serve)
   No runtime dependencies. Static site. No build step.
-  Package manager: npm (no lockfile constraint).
+  Package manager: npm.
 
-PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator\package.json)
+PLAN GENERATOR
   Package manager: pnpm ONLY. (preinstall script enforces this.)
   Node required: >=20.0.0
 
-  dependencies (23):
-    @anthropic-ai/sdk   ^0.82.0    — Anthropic Claude API client
-    @clerk/nextjs       ^7.0.8     — Clerk auth (Next.js integration)
-    @sentry/nextjs      ^10.47.0   — Sentry error tracking
-    @supabase/supabase-js ^2.101.1 — Supabase JS client
-    @tanstack/react-query ^5.96.1  — Server state management
-    @upstash/ratelimit  ^2.0.8     — Rate limiting (uses Upstash Redis)
-    @upstash/redis      ^1.37.0    — Upstash Redis client
-    clsx                ^2.1.1     — Class name utility
-    drizzle-orm         ^0.45.2    — ORM for Postgres/Supabase
-    framer-motion       ^12.38.0   — Animation library
-    nanoid              ^5.1.7     — Unique ID generation
-    next                16.2.2     — Next.js framework (PINNED — do not auto-upgrade)
-    postgres            ^3.4.8     — Postgres driver (used by Drizzle)
-    posthog-js          ^1.364.7   — PostHog analytics (client-side)
-    posthog-node        ^5.28.11   — PostHog analytics (server-side)
-    qrcode.react        ^4.2.0     — QR code generation (plan sharing)
-    react               19.2.4     — React (PINNED — matches Next.js 16 requirement)
-    react-dom           19.2.4     — React DOM (PINNED)
-    resend              ^6.10.0    — Transactional email
-    stripe              ^22.0.0    — Stripe payments SDK
-    svix                ^1.90.0    — Webhook signature verification (Clerk webhooks)
-    tailwind-merge      ^3.5.0     — Tailwind class merging utility
-    zod                 ^4.3.6     — Schema validation
-    zustand             ^5.0.12    — Client state management
+  Key dependencies:
+    next                16.2.2     — PINNED — do not auto-upgrade
+    react               19.2.4     — PINNED — matches Next.js 16 requirement
+    react-dom           19.2.4     — PINNED
+    @anthropic-ai/sdk   ^0.82.0
+    @clerk/nextjs       ^7.0.8
+    @sentry/nextjs      ^10.47.0
+    @supabase/supabase-js ^2.101.1
+    @tanstack/react-query ^5.96.1
+    @upstash/ratelimit  ^2.0.8
+    @upstash/redis      ^1.37.0
+    drizzle-orm         ^0.45.2
+    framer-motion       ^12.38.0
+    posthog-js          ^1.364.7
+    posthog-node        ^5.28.11
+    resend              ^6.10.0
+    stripe              ^22.0.0
+    zod                 ^4.3.6
+    zustand             ^5.0.12
+    (+ clsx, nanoid, postgres, qrcode.react, svix, tailwind-merge)
 
-  devDependencies (8):
-    @tailwindcss/postcss  ^4       — Tailwind v4 PostCSS integration
-    @types/node           ^20      — Node.js TypeScript types
-    @types/react          ^19      — React TypeScript types
-    @types/react-dom      ^19      — React DOM TypeScript types
-    drizzle-kit           ^0.31.10 — Drizzle ORM migration CLI
-    eslint                ^9       — Linter
-    eslint-config-next    16.2.2   — Next.js ESLint config (PINNED to match Next)
-    tailwindcss           ^4       — Tailwind CSS v4
-    typescript            ^5       — TypeScript compiler
+  devDependencies:
+    @tailwindcss/postcss  ^4
+    drizzle-kit           ^0.31.10
+    eslint-config-next    16.2.2   — PINNED to match Next
+    tailwindcss           ^4
+    typescript            ^5
 
-  PIN NOTE: next@16.2.2, react@19.2.4, react-dom@19.2.4, and
-  eslint-config-next@16.2.2 are intentionally pinned. React 19
-  and Next 16 are paired versions. Do not upgrade without a
-  dedicated upgrade session.
+  PIN NOTE: next@16.2.2, react@19.2.4, react-dom@19.2.4, eslint-config-next@16.2.2
+  are intentionally pinned. Do not upgrade without a dedicated upgrade session.
 
 ---
 
@@ -1617,21 +959,18 @@ PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator\package.json)
 
 MARKETING SITE → Netlify (wizkoo.com)
   Config file: C:\Users\amyog\Desktop\wizkoo\netlify.toml
-  Publish directory: . (repo root — serves static files directly)
-  Build command: none (no build step)
+  Publish directory: . (repo root — static files served directly)
+  Build command: none
   Deploy trigger: push to main branch on GitHub (Ethos25/Wizkoo)
 
   Proxy rules (netlify.toml):
-    /plan      → https://wizkoo-plan-generator.vercel.app/plan   (200 proxy)
+    /plan      → https://wizkoo-plan-generator.vercel.app/plan (200 proxy)
     /plan/*    → https://wizkoo-plan-generator.vercel.app/plan/:splat (200 proxy)
   Legacy redirects (301):
-    /planner     → /plan
-    /planner.html → /plan
+    /planner → /plan  |  /planner.html → /plan
     /what-we-believe.html → /what-we-believe
-    /games.html  → /games
-    /methodology.html → /methodology
-  Library book detail rewrite (200):
-    /library/:slug → /library/book.html
+    /games.html → /games  |  /methodology.html → /methodology
+  Library book detail rewrite (200): /library/:slug → /library/book.html
 
   Deploy checklist:
     1. Ensure TECHNICAL_RUNBOOK.md changes are committed
@@ -1641,43 +980,29 @@ MARKETING SITE → Netlify (wizkoo.com)
 
 PLAN GENERATOR → Vercel (wizkoo.com/plan)
   Config file: C:\Users\amyog\Desktop\wizkoo-plan-generator\vercel.json
-  Framework: Next.js (auto-detected by Vercel)
   Build command: pnpm build (next build)
-  Output: .next directory
   basePath: /plan (set in next.config.ts)
   Deploy trigger: push to master branch
 
-  Environment variables: all 22 vars from ENVIRONMENT VARIABLES
-  section above must be set in Vercel Dashboard > Settings > Environment Variables
-  for both Production and Preview environments.
-
-  Cron jobs (vercel.json — runs on Vercel's cron infrastructure):
-    orbit-report      — 0 6 * * 0   (Sundays 6am UTC)
-                        Path: /plan/api/cron/orbit-report
-                        Generates weekly learning narrative emails.
-    plan-lifecycle    — 0 3 * * *   (Daily 3am UTC)
-                        Path: /plan/api/cron/plan-lifecycle
-                        Handles plan expiry, archiving, subscription checks.
-    auth-reconciliation — 0 7 * * 1 (Mondays 7am UTC)
-                        Path: /plan/api/cron/auth-reconciliation
-                        Syncs Clerk auth state with database user records.
-    re-engagement     — 0 14 * * *  (Daily 2pm UTC)
-                        Path: /plan/api/cron/re-engagement
-                        Sends re-engagement emails to inactive users.
+  Cron jobs (vercel.json):
+    orbit-report        — 0 6 * * 0   (Sundays 6am UTC)
+    plan-lifecycle      — 0 3 * * *   (Daily 3am UTC)
+    auth-reconciliation — 0 7 * * 1   (Mondays 7am UTC)
+    re-engagement       — 0 14 * * *  (Daily 2pm UTC)
   All cron routes validate CRON_SECRET bearer token before executing.
 
   Deploy checklist:
     1. Ensure pnpm build passes locally: pnpm build
     2. Push to master: git push
-    3. Monitor Vercel dashboard for build logs (~2-3 min build time)
+    3. Monitor Vercel dashboard for build logs (~2-3 min)
     4. Verify at wizkoo.com/plan after deploy completes
 
 ---
 
 ═══════════════════════════════════════
 LAYER 4 — DESIGN SYSTEM
-Read this layer before touching any visual element, color, type,
-motion, or surface. All design values live here.
+Read before touching any visual element, color, type,
+motion, or surface. All Wizkoo design values live here.
 ═══════════════════════════════════════
 
 ## SURFACE ARCHITECTURE — THREE WORLDS, ONE DOOR
@@ -1713,35 +1038,13 @@ Universal Footer: Every page. No exceptions.
       rgba(255,255,255,0.012) 60px
     ),
     #0C1020;
-  Four layers in order (top = first):
+  Four layers:
     Layer 1: Saffron sun bleed — ellipse 100% 20% at 50% 0%, rgba(232,175,56,0.06)
-    Layer 2: Deep space center glow — ellipse at 50% 45%, rgba(24,40,72,0.60) → rgba(16,24,48,0.30)
+    Layer 2: Deep space center glow — rgba(24,40,72,0.60) → rgba(16,24,48,0.30)
     Layer 3: Pinstripe texture — repeating 60px vertical lines, rgba(255,255,255,0.012)
-    Layer 4: Base — #0C1020
-  Note: Base is #0C1020 NOT #101830. Confirmed April 12, 2026.
-  Note: The saffron sun layer (Layer 1) must be present. Earlier versions of this
-        document omitted it. The source file is the authority.
-
-  Star field implementation (footer.js lines 322–344):
-    Container: <div class="wf-stars"> — position:absolute; inset:0; z-index:0;
-               pointer-events:none. Sits behind all footer content (z-index:1).
-    Count: 120 stars generated by JS loop.
-    Each star is a <div> with inline styles:
-      position: absolute; border-radius: 50%; background: #F0F2F8;
-      left: [0–100]%; top: [0–100]%;
-      width/height: 1px (70% of stars), 1.5px (20%), or 2px (10%)
-        (determined by: r<0.7 → 1px, r<0.9 → 1.5px, else → 2px)
-      animation: wfTwinkle [dur]s ease-in-out infinite [del]s;
-      --lo: [0.05–0.17] (random, min opacity)
-      --hi: [0.28–0.73] (random, max opacity)
-      dur: 2–6 seconds (random)
-      del: 0–5 seconds (random)
-    Keyframe (footer.js lines 17–20):
-      @keyframes wfTwinkle {
-        0%, 100% { opacity: var(--lo, 0.12); }
-        50%       { opacity: var(--hi, 0.55); }
-      }
-  STAR FIELD IS THE SOURCE OF TRUTH. Copy from footer.js. Never rebuild from scratch.
+    Layer 4: Base — #0C1020 (NOT #101830)
+  Note: The saffron sun layer (Layer 1) must be present. Earlier versions omitted it.
+  STAR FIELD: footer.js lines 322–344. 120 stars. IS THE SOURCE OF TRUTH.
 
 ---
 
@@ -1781,56 +1084,41 @@ LINEN (the warm surface you trust)
   Emotional register: trust, warmth, the parent's domestic world.
 
 ULTRAMARINE (the cool architecture that holds everything)
-  Replaces generic black (#0A0A0A) across the entire ecosystem.
-  #0C1020 — Ink (96% dark). All text, borders, card outlines on Wizkoo.
+  #0C1020 — Ink (96% dark). All text, borders, card outlines.
   #0C1428 — Sidebar/overlay. Deepest UI layer. Modal backgrounds.
   #101830 — App background base (Atlas, Elementum, night sky pages).
   #182848 — App background center glow. Creates planetarium effect.
   rgba(12,16,32,0.95) + backdrop-filter blur — Nav/footer.
   #1A2A5A — Link hover, focus rings, subtle UI accents in apps.
   #0A41B2 — Cursor phenomenon (exclusion-blend of saffron on linen).
-             ONLY at point-scale: cursor, task dots, focus rings.
-             NEVER a surface color.
-  #7898D0 — Atlas ocean. Bright, watery. Lightest ultramarine member.
+             ONLY at point-scale: cursor, task dots, focus rings. NEVER a surface.
+  #7898D0 — Atlas ocean.
 
 DAY SKY (the threshold — the open world between parent and child)
   Locked April 12, 2026. The sky at high noon.
-  Emotional register: aspiration, access, openness. A deep breath.
-
   Sky background gradient:
   linear-gradient(180deg,
     #1A4EC2 0%, #1E54C6 8%, #2260CC 18%,
     #2868CC 30%, #2E6ECE 42%, #306CCC 54%,
     #2C68C6 64%, #2860B8 74%, #2054A8 84%,
     #174496 92%, #123485 100%)
-
   Sky midpoint reference: #2868CC
-
   DEPRECATED — NEVER USE: #1848B8
-  This appeared in early briefing documents. It is wrong.
-  Any session referencing #1848B8 must be corrected before work proceeds.
 
-  Sun corona (above sky, radial at top center):
+  Sun corona:
   radial-gradient(ellipse 90% 60% at 50% -5%,
-    rgba(200,130,0,0.90) 0%,
-    rgba(232,175,56,0.72) 8%,
-    rgba(232,175,56,0.48) 20%,
-    rgba(232,175,56,0.24) 36%,
-    rgba(220,162,38,0.08) 54%,
-    transparent 70%)
+    rgba(200,130,0,0.90) 0%, rgba(232,175,56,0.72) 8%,
+    rgba(232,175,56,0.48) 20%, rgba(232,175,56,0.24) 36%,
+    rgba(220,162,38,0.08) 54%, transparent 70%)
 
-  Sun disc (above corona, tight bright core):
+  Sun disc:
   radial-gradient(ellipse 22% 18% at 50% -2%,
-    rgba(255,255,220,0.85) 0%,
-    rgba(255,240,140,0.65) 18%,
-    rgba(232,175,56,0.45) 38%,
-    transparent 65%)
+    rgba(255,255,220,0.85) 0%, rgba(255,240,140,0.65) 18%,
+    rgba(232,175,56,0.45) 38%, transparent 65%)
 
   Text on day sky:
-    Primary: #FAFAFA
-    Secondary: rgba(255,255,255,0.42)
-    Eyebrow/label: rgba(255,255,255,0.30)
-    Saffron accent: #E8AF38 (unchanged on all surfaces)
+    Primary: #FAFAFA  |  Secondary: rgba(255,255,255,0.42)
+    Eyebrow/label: rgba(255,255,255,0.30)  |  Saffron accent: #E8AF38 (unchanged)
 
 ---
 
@@ -1838,8 +1126,7 @@ DAY SKY (the threshold — the open world between parent and child)
 
 Marketing Site (Wizkoo):
   Sora — Display headlines, hero text, CTA buttons
-    Weights: 200, 300, 700, 800 ONLY
-    Weights 400, 500, 600 never appear in headlines
+    Weights: 200, 300, 700, 800 ONLY. Weights 400, 500, 600 never appear in headlines.
   Inter — Body, UI, descriptions, form fields, prose
   Space Mono — Labels, eyebrows, nav, buttons, micro-copy (uppercase, letterspaced)
 
@@ -1878,7 +1165,7 @@ Snap (Plan Generator UI): cubic-bezier(0.22, 1, 0.36, 1) — 280ms state changes
 
 ## CROSS-SYSTEM CONSISTENCY — FIVE IMMUTABLE ELEMENTS
 
-These are pixel-identical across linen, night sky, and day sky. No exceptions.
+Pixel-identical across linen, night sky, and day sky. No exceptions.
 
 1. Typefaces: Sora + Space Mono + Inter on marketing. No others.
 2. Saffron: #E8AF38 exactly. Never adjusted per surface.
@@ -1891,156 +1178,80 @@ These are pixel-identical across linen, night sky, and day sky. No exceptions.
 ## NAV SYSTEM (v4.1 — final locked spec, April 12, 2026)
 
 NAV STATUS: DELIBERATE HOLD — April 17, 2026
-
-Four unresolved questions requiring a dedicated nav session.
-Do not touch the nav in any session that does not
-explicitly state "this is the nav session."
+Do not touch the nav in any session that does not explicitly state
+"this is the nav session."
 
 QUESTION 1 — SPEC VS IMPLEMENTATION
-Light Standard specifies frosted glass nav.
-Deployed code is solid rgba(12,16,32,0.96).
+Light Standard specifies frosted glass nav. Deployed code is solid rgba(12,16,32,0.96).
 Amy must decide which is correct.
-This is a design decision. Claude Code does not decide.
 
 QUESTION 2 — MARKETING NAV ITEM INVENTORY
-The full item list for the marketing nav has not
-been finalized. Do not add or remove nav items
-without explicit instruction.
+The full item list has not been finalized. Do not add or remove items without explicit instruction.
 
 QUESTION 3 — PLAN GENERATOR NAV ITEM INVENTORY
-The plan generator nav serves authenticated parents only.
-Its full item list has not been finalized.
-Do not assume marketing nav items apply here.
+Serves authenticated parents only. Item list not finalized.
 
 QUESTION 4 — VISUAL RELATIONSHIP BETWEEN THE TWO NAVS
-Whether both navs share the same visual treatment
-or are intentionally distinct has not been decided.
-
-All four require a single dedicated nav session.
-Until that session happens and answers are recorded here:
-nav is frozen exactly as deployed.
-Zero nav changes. Zero nav suggestions in other sessions.
-
----
+Whether both navs share visual treatment has not been decided.
 
 Source files:
   Marketing nav:       C:\Users\amyog\Desktop\wizkoo\components\nav.js (403 lines)
   Plan generator nav:  C:\Users\amyog\Desktop\wizkoo-plan-generator\src\components\NavBar.tsx (128 lines)
 
-One nav component. Zero modifications per page.
-Floats above all three environments unchanged.
-One nav. Three moods. Zero code differences.
-
-IMPORTANT — SPEC vs IMPLEMENTATION DIVERGENCE (nav.js lines 90–105):
-  The Light Standard spec describes a frosted glass gradient nav. The actual
-  implementation was changed to a solid dark nav. Locked decision:
-  "Frosted glass nav on linen: solved with dark nav. Do not suggest reverting."
-  The current implementation below is what is actually deployed.
-
 Nav Bar CSS — ACTUAL CURRENT CODE (nav.js lines 90–105, .nav rule):
-  height: 52px;
-  margin: 0;
-  padding: 0 40px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(12,16,32,0.96);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  height: 52px; margin: 0; padding: 0 40px;
+  position: relative; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(12,16,32,0.96); backdrop-filter: none; -webkit-backdrop-filter: none;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   box-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 4px 24px rgba(12,16,32,0.08);
-  isolation: isolate;
-  pointer-events: auto;
+  isolation: isolate; pointer-events: auto;
 
 Container sticky behavior (nav.js lines 274–276):
-  #wizkoo-nav element: position:sticky; top:-30px; z-index:20;
-  (top:-30px = negative of announce bar height — bar clips above viewport
-   as page scrolls 30px, then nav locks at top of viewport)
-
-Nav ::before (noise texture, lines 108–117):
-  opacity: 0.030; background-size: 256px 256px; SVG fractalNoise grain; z-index:-1;
+  #wizkoo-nav: position:sticky; top:-30px; z-index:20;
 
 Nav links (.nav-link, lines 167–196):
-  font-family: 'Space Mono', monospace;
-  font-weight: 400; font-size: 7.5px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
+  font-family: 'Space Mono', monospace; font-weight: 400; font-size: 7.5px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.65);
   ::after underline: height 1px, background #E8AF38, width:0 → 100% on hover
-  Hover: rgba(255,255,255,0.90)
-  Active: color #FAFAFA, ::after width:100% (permanent)
 
 Nav links are absolute-centered (.nav-center, lines 153–164):
-  position: absolute; left: 50%; transform: translateX(-50%);
-  gap: 26px between links.
+  position: absolute; left: 50%; transform: translateX(-50%); gap: 26px.
 
-Nav CTA — ACTUAL CURRENT CODE (nav.js lines 199–219, .nav-cta):
-  NOTE: Current implementation is GHOST style (transparent bg, saffron border/text).
-  The Light Standard spec says saffron fill (#E8AF38 bg, #0C1020 text).
-  This is a known divergence. The ghost CTA is what is deployed.
-  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 9px;
-  letter-spacing: 0.07em; text-transform: uppercase;
-  padding: 8px 18px;
-  background: transparent; color: #E8AF38;
+Nav CTA — ACTUAL CURRENT CODE (ghost style, light Standard says filled — see Known Bug 2):
+  font-family: 'Sora'; font-weight: 700; font-size: 9px; letter-spacing: 0.07em;
+  padding: 8px 18px; background: transparent; color: #E8AF38;
   border: 1px solid rgba(232,175,56,0.65);
-  Hover: border-color rgba(232,175,56,1.0);
-         box-shadow: 0 0 0 1px rgba(232,175,56,0.20), 0 2px 12px rgba(232,175,56,0.18);
 
-Announcement Bar — ACTUAL CURRENT CODE (nav.js lines 58–87, .announce):
-  height: 30px; position: relative;
-  background: rgba(12,16,32,0.44); backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  Text (.announce-text): Space Mono, 7px, letter-spacing 0.28em, uppercase
-  Text color (non-homepage): rgba(12,16,32,0.75)   ← DARK INK (see bug note)
+Announcement Bar — ACTUAL CURRENT CODE (nav.js lines 58–87):
+  height: 30px; background: rgba(12,16,32,0.44); backdrop-filter: blur(14px);
+  Text: Space Mono, 7px, letter-spacing 0.28em, uppercase
+  Text color (non-homepage): rgba(12,16,32,0.75) ← DARK INK (see Known Bug 1)
   Text color (homepage only): rgba(232,175,56,0.75) ← saffron via inline override
-  Homepage bar background override: #0C1020, backdrop-filter: none.
-  NOTE: Light Standard spec says text color rgba(232,175,56,0.60) (saffron) on
-        all pages. Current code only applies saffron on homepage. See KNOWN BUGS.
 
 Nav Wordmark (nav.js lines 131–148):
-  font-family: 'Sora'; font-weight: 800; font-size: 17px;
-  letter-spacing: -0.04em; color: #FAFAFA;
+  font-family: 'Sora'; font-weight: 800; font-size: 17px; letter-spacing: -0.04em;
   'k': color: var(--saffron), rotate(8deg), transform-origin bottom center;
-  Hover 'k': animation kGiggle 0.8s ease-in-out;
-  .wm-dot (the superscript saffron circle): position absolute, ::after pseudo-element,
-    width .22em height .22em, border-radius 50%, background var(--saffron),
-    top .1em right -.2em
 
-Mobile (nav.js lines 259–265):
-  < 768px: center nav hidden, hamburger shown, CTA font-size 8px, padding 6px 12px.
-  Mobile menu: position:fixed top:52px, slides in with 300ms cubic-bezier(0.16,1,0.3,1).
-
-IMPLEMENTATION WARNING: Most common failure = parent element with overflow: hidden
-clipping position: sticky. Verify no parent above #wizkoo-nav has overflow: hidden.
-If nav disappears on scroll, that is the cause.
-
-Plan Generator Nav (authenticated — separate from marketing nav):
-  File: C:\Users\amyog\Desktop\wizkoo-plan-generator\src\components\NavBar.tsx
-  Functional destinations only: Dashboard, Settings.
-  Does not contain any marketing nav items.
-  A logged-in parent never sees The Plan, The Science, The Ages, etc.
-  Links: Space Mono, uppercase, 0.5rem, saffron underline (animated scaleX).
-  Scroll behavior: saffron gradient border fades in at scrollY > 10.
+Mobile (<768px): center nav hidden, hamburger shown.
+IMPLEMENTATION WARNING: Parent overflow:hidden clips position:sticky. Verify no parent
+above #wizkoo-nav has overflow:hidden. If nav disappears on scroll, that is the cause.
 
 ---
 
 ## TEXT COLOR HIERARCHY — DARK SURFACES
 
-Three planes at rest (Lotte van der Berg + Jiu Yoon):
+Three planes at rest:
   Foreground: #F0F2F8 — Names, titles, headlines (always visible)
   Midground:  #C8CDDA — Body text, descriptions (always visible)
-  Background: Family color at 35% or #8C91A5 — Labels (always visible)
+  Background: #8C91A5 — Labels (always visible)
 
-On engagement (adds two more):
+On engagement (two more):
   Meta:   #8C91A5 — Dates, progress, counters
   Ghost:  #50556E — Ambient detail
 
 Accent (moments only): #E8AF38
-
 Maximum five text treatments on any single viewport.
-Three at rest. Five on engagement. Never all seven simultaneously.
-
-Why #F0F2F8 not white: Pure white floats on ultramarine.
-Cool-tinted white sits — it shares the blue DNA of the surface.
+Why #F0F2F8 not white: Pure white floats on ultramarine. Cool-tinted white sits.
 
 ---
 
@@ -2048,29 +1259,24 @@ Cool-tinted white sits — it shares the blue DNA of the surface.
 
 Source document (Notion): 338335a8d33281f699d4d705f973d430
 Read the full document before any build session on the plan generator.
-Everything below is binding. Do not weaken it.
 
 ### What $200 Feels Like
 
-You know the feeling when you walk into a hotel and within 3 seconds
-you know it costs $400 a night? Nobody told you the price.
-The lighting is warmer than it needs to be. The spacing is more generous
-than it needs to be. Every surface communicates: someone spent more time
-on this than they had to.
+You know the feeling when you walk into a hotel and within 3 seconds you know it
+costs $400 a night? Nobody told you the price. The lighting is warmer than it needs
+to be. The spacing is more generous than it needs to be. Every surface communicates:
+someone spent more time on this than they had to.
 
 That is what Wizkoo must feel like.
 
 A parent opens the app. Within 3 seconds, before they read a word:
 the linen warmth. The weight of the typography. The saffron that appears
 in exactly two places and nowhere else. The silence where other apps
-would have confetti. The space between elements that says "we chose not
-to cram more in."
+would have confetti. The space between elements that says "we chose not to cram more in."
 
 They don't think "$200 product." They feel "this is unusually good."
 Then they see $50 and the gap between what they feel and what they pay
-becomes the story they tell their friend.
-
-THAT GAP IS THE PRODUCT.
+becomes the story they tell their friend. THAT GAP IS THE PRODUCT.
 
 ### What Kills the $200 Feeling (instantly, not gradually)
 
@@ -2083,17 +1289,12 @@ An error message that says "Oops! Something went wrong!" Dead.
 A default Tailwind gray where the warm paper-crease border should be. Dead.
 
 One plastic cup and the entire illusion collapses.
-The parent doesn't think "everything else was great but the cup was cheap."
-The parent thinks "this place is pretending."
-
-Your job: zero plastic cups.
 "Style the card nicely" is how plastic cups get in.
 "Paper background (#FAFAFA), 1.5px border in #0C1020, 8px saffron offset
 pseudo-element shadow, sharp corners (2px), hover lifts translateY(-2px)
-with cubic-bezier(0.16,1,0.3,1) while shadow stays planted" is how
-you prevent them.
+with cubic-bezier(0.16,1,0.3,1) while shadow stays planted" is how you prevent them.
 
-### The Parent's Internal Monologue (the sequence that must not break)
+### The Parent's Internal Monologue
 
 SECOND 1:  "Oh. This is warm. This doesn't look like an app. Stationery."
 SECOND 3:  "That font. Light but confident. Like a magazine, not a website."
@@ -2104,57 +1305,12 @@ MINUTE 2:  "This plan looks like it came from a design studio. I want to print t
 MINUTE 3:  "This is $50? How is this $50?"
 
 If any step breaks, the parent never reaches the last thought.
-Miss one and the cascade fails.
-
-### $50 vs $200 — Concrete Examples
-
-THE DASHBOARD
-  $50: Rounded corners, gray shadow, "1 Plan Generated" stat, green badge, system font.
-  $200: Sharp corners, saffron offset pseudo-element shadow, no stat cards (the plan
-        IS the dashboard), saffron dot for subscription status, Space Mono uppercase
-        nav with saffron underline on hover, parent's family initial floating quietly
-        on the right.
-
-THE ONBOARDING
-  $50: Multi-field form, "Submit" button, progress dots, "Enter your child's name."
-  $200: Full-viewport single question per screen. "Who's learning this week?" in
-        Sora 200. Cursor already blinking in the name field. Input borders invisible
-        at rest, bloom saffron on focus. "Generate Our Plan" as the singular saffron
-        moment. A 2px saffron progress line that slides forward silently.
-
-THE ERROR
-  $50: Red box, exclamation icon. "Oops! Something went wrong. Please try again later."
-  $200: No box. No red. No icon. Calm text in existing layout. "Taking longer than
-        usual. Try again?" One button. Same typography as everything else. The error
-        doesn't scream. It speaks.
-
-THE GENERATION WAIT
-  $50: Spinning circle. "Loading your plan..."
-  $200: A 12px saffron dot that breathes (scale 0.85 to 1.15). No text. The parent
-        watches. Then their child's name appears, woven into a sentence about what
-        the plan is building. The parent's breath catches. The dot is still breathing.
-        The plan materializes.
-
-### The Final Test
-
-Open the product on your phone at 10 PM in a dark room.
-Hold it at arm's length.
-Does it glow like a luxury object?
-Does the linen feel warm?
-Does the saffron feel precious?
-Does the typography feel editorial?
-Does the silence between elements feel intentional?
-
-Yes = $200 product.
-"Sort of" = $100 product.
-"It looks fine" = $50 product that will be replaced by the next app that looks fine.
 
 ### The Prompt Standard
 
 Before writing any Claude Code prompt, ask:
 "Will this produce a surface a parent would screenshot and send to a friend?"
 
-If the answer is "probably" or "most of it" — the prompt is not specific enough.
 The answer must be "yes, because every color traces to a token, every font has
 a specific weight, every animation has a named curve, and every pixel has a reason."
 
@@ -2162,170 +1318,71 @@ a specific weight, every animation has a named curve, and every pixel has a reas
 
 ## VIEWPORT REALITY CONSTRAINTS
 
-### WHY THIS SUBSECTION EXISTS
+The global framework (five viewports, overflow/min-height coupling rule, section-height
+rule, nav safe-zone rule) is in AMY_TECHNICAL_STANDARDS.md Section 5.
 
-Breakpoint values documented in CSS are not the same thing as the viewports
-real users actually see. A codebase can have correct 768px and 1024px
-breakpoints and still fail in production because the actual usable viewport
-of a real user's setup does not match the theoretical width. The most common
-source of this mismatch: DPI scale.
+WIZKOO PRIMARY DEVELOPMENT ENVIRONMENT:
+  window.innerWidth:   ≈756 CSS px
+  window.innerHeight:  ≈396 CSS px
+  devicePixelRatio:    2.625
+  OS scaling:          Windows 200%
+  Chrome zoom:         Below 100%
 
-A 1440x900 laptop display running at 200% DPI scale renders content as if
-the viewport is 1280x540. Add a Chrome bookmarks bar and the usable vertical
-drops to roughly 500px. This is not an edge case. Parents over 40 with
-standard eyesight turn up DPI scaling by default. Chrome bookmarks bars are
-default behavior. A significant share of the actual audience experiences this
-compressed viewport.
+Chrome zoom inflation note: Chrome zoom below 100% inflates effective CSS layout
+width. window.innerWidth ≈756 but effective CSS layout width may be ≥1100px.
+Site renders at desktop breakpoints (≥768px) even though window.innerWidth suggests
+narrow. Playwright screenshots do NOT replicate this inflation — always test at both
+756×396 and 1440×396.
 
-This subsection names the five target viewports every homepage visual change
-must pass before signoff. It moves viewport compliance from per-session recall
-(Amy remembering to mention it) to ambient constraint (the runbook asserting
-it for every session).
+THE FOUR LAYOUT REGIME BREAKPOINTS (site-wide):
+  Desktop overlay:  base styles (≥768px, no max-height limit)
+  Mobile stack:     @media(max-width:767px)
+  Landscape short:  @media(max-height:420px) and (min-width:600px)
+  Short-wide:       @media(max-height:700px) and (min-width:768px)
+  Cascade order is load-bearing: landscape short declared AFTER mobile stack.
 
-### THE FIVE TARGET VIEWPORTS
-
-PRIMARY DESKTOP
-  Dimensions: 1440x900 native resolution.
-  DPI scale: 100%.
-  Chrome bookmarks bar: absent.
-  Role: baseline design target. Most marketing screenshots and design mockups
-  are produced at this setting.
-
-COMPRESSED DESKTOP
-  Dimensions: 1440x900 at 200% DPI scale equals 1280x540 usable.
-  Chrome bookmarks bar: present (standard Chrome default).
-  Usable vertical after browser chrome plus bookmarks bar: approximately 500px.
-  Role: Amy's own working setup. Represents a major real user segment — parents
-  over 40, anyone with standard eyesight who turns up scaling. This is NOT an
-  edge case. Submit button on homepage MUST remain above the fold at this setting.
-
-MOBILE IPHONE SE
-  Dimensions: 375x667.
-  Role: narrow mobile floor. Submit button must be reachable within one scroll gesture.
-
-MOBILE IPHONE 15 PRO MAX
-  Dimensions: 430x932.
-  Role: tall mobile ceiling. Submit button must be reachable within one scroll
-  gesture. Content should not leave awkward empty space in the vertical.
-
-AMY PRODUCTION ENVIRONMENT
-  Dimensions: 1440x396.
-  Context: Windows 200% OS scaling + Chrome bookmarks bar + Chrome zoom.
-    Matches the documented production display environment described in the
-    Wizkoo Viewport Standard (Tier 1).
-  Role: Amy's actual working viewport. A section passing all other four target
-    viewports while failing at 1440x396 means the section fails for Amy
-    specifically — a real failure, not an edge case. Added 2026-04-24 following
-    Section 2 (.linen-hero) bleed diagnostic.
-
-### OVERFLOW + MIN-HEIGHT COUPLING RULE
-
-Added: 2026-04-24
-Status: Active — apply to all sections, present and future
-Source: Section 2 (.linen-hero) bleed diagnostic, 2026-04-24
-
-THE RULE
-
-If a section declares overflow:hidden (or overflow:hidden!important) AND
-min-height:100dvh (or 100vh, or 100svh) at any breakpoint, the section
-MUST use min-height:calc(100dvh + 96px) instead.
-
-Minimum buffer value: 96px.
-Maximum: discretionary, but 96px is the verified-working baseline from
-Section 2 remediation.
-
-WHY THIS RULE EXISTS
-
-When overflow:hidden and min-height:100dvh co-exist, min-height stops
-acting as a floor (minimum) and becomes a ceiling (maximum). The section
-is forced to be exactly the viewport size — no more, no less.
-
-At exact viewport size, the next section's first pixel lands on the
-current section's terminal edge. Any rendering variance — font load
-timing, browser rounding, webfont metrics — causes the next section to
-bleed into the current viewport frame as a visible strip at the bottom.
-
-The +96px buffer extends the section past the viewport fold by a
-structurally guaranteed amount, eliminating the bleed regardless of
-content height or rendering variance.
-
-DIAGNOSTIC QUESTION
-
-If a strip of the next section is visible at the bottom of a
-full-viewport section at any viewport:
-
-  Does this section have overflow:hidden paired with
-  min-height:100dvh (or 100vh, or 100svh)?
-
-If YES → this is the cause. Fix by changing min-height to
-calc(100dvh + 96px).
-
-If NO → different issue. Diagnose separately.
-
-COMPLIANT vs NON-COMPLIANT EXAMPLES
-
-NON-COMPLIANT:
-  .my-section {
-    min-height: 100dvh;
-    overflow: hidden;
-  }
-
-NON-COMPLIANT:
-  @media (max-height: 420px) and (min-width: 600px) {
-    .my-section {
-      min-height: 100dvh;
-      overflow: hidden !important;
-    }
-  }
-
-COMPLIANT (option A — add buffer):
-  .my-section {
-    min-height: calc(100dvh + 96px);
-    overflow: hidden;
-  }
-
-COMPLIANT (option B — remove clip):
-  .my-section {
-    min-height: 100dvh;
-    overflow: visible;
-  }
-
-Choose Option A when the section must clip overflow for design reasons
-(e.g., full-bleed photograph must not bleed past section boundary).
-Choose Option B when natural content expansion is acceptable.
-
-### THE VERIFICATION REQUIREMENT
-
-Any visual change to the homepage or to any page with a viewport-height-locked
-hero section must be verified at all five target viewports before signoff. Not
-"designed for." Actually opened in a browser or dev tools emulator at each
-setting and checked.
-
-Claude Code prompts that touch homepage visual surface must include this
-five-viewport verification in the VERIFICATION section of the six-section
-prompt standard. Example VERIFICATION clause:
-
+FIVE-VIEWPORT VERIFICATION CLAUSE (use in VERIFICATION section of any prompt
+touching homepage visual surface):
   "Open index.html in dev server. Verify at five target viewports per Layer 4
-  Viewport Reality Constraints: (1) 1440x900 native, (2) 1280x540 emulated
-  compressed desktop, (3) 1440x396 Amy production environment, (4) 375x667
-  iPhone SE, (5) 430x932 iPhone 15 Pro Max. Submit button must be visible
-  without scroll at compressed desktop and reachable within one scroll gesture
-  on both mobile viewports. No section boundary bleed at any viewport. Report
-  any viewport that fails the check."
+  Viewport Reality Constraints: (1) 1440×900 native, (2) 1280×540 compressed
+  desktop, (3) 1440×396 Amy production environment, (4) 375×667 iPhone SE,
+  (5) 430×932 iPhone 15 Pro Max. Submit button must be visible without scroll at
+  compressed desktop and reachable within one scroll gesture on mobile. No section
+  boundary bleed at any viewport. Report any viewport that fails."
 
-### RELATED RUNBOOK CONTENT
+DIAGNOSTIC PROTOCOL — run these checks IN ORDER before making CSS changes:
 
-Height-query scope (899/700/500px breakpoints on index.html only) exists
-precisely to handle the compressed desktop case. See Layer 5 for the full
-Wizkoo Viewport Standard (Tier 1 universal rules). See Layer 6 Homepage Form
-Preservation Locks Registry for surface-protection constraints that operate
-alongside viewport constraints.
+CHECK 1 — Get the actual viewport
+  Have user paste into DevTools console:
+    window.innerWidth + ', ' + window.innerHeight + ', ' + window.devicePixelRatio
+  Production display returns: 756, 396, 2.625
+
+CHECK 2 — Identify the active media query
+  Is effective CSS layout width ≥768px? (Chrome zoom inflates past innerWidth)
+  Does height ≤700px? → short-wide fires (padding:96px wins)
+  Does height ≤420px AND effective width ≥600px? → landscape short fires (178px)
+  Is innerWidth (raw) ≤767px? → mobile stack fires (position:static)
+  If #2 and #3 both fire, #2 wins (declared later in source).
+
+CHECK 3 — Verify dev server is serving current file
+  Restart: npx serve . -p 3000
+
+CHECK 4 — Verify user is viewing correct URL
+  Must be: localhost:3000 — NOT file:/// or any mockup variant.
+
+CHECK 5 — Playwright screenshots at user's actual CSS dimensions
+  await p.setViewportSize({ width: 756, height: 396 });   // shows mobile stack
+  await p.setViewportSize({ width: 1440, height: 396 });  // approximates inflated layout
+  Force .visible class to bypass IntersectionObserver opacity gates:
+    await p.evaluate(() =>
+      document.querySelectorAll('.ec-scenario').forEach(el => el.classList.add('visible'))
+    );
 
 ---
 
 ═══════════════════════════════════════
 LAYER 5 — COMPONENT SPECS
-Read this layer when working on animated or interactive components.
+Read when working on animated or interactive components.
 Every spec here is locked — do not approximate from memory.
 ═══════════════════════════════════════
 
@@ -2341,27 +1398,17 @@ Source files:
     1157 lines. 9 subsystems: Nucleus Glow, Orbital Paths, Ember Dots,
     Breathing Dot, Resolve Transform, Crystallization Tone, Editorial Pacing,
     Signature Capture, Afterglow.
-  CSS tokens for spectacle:
-    C:\Users\amyog\Desktop\wizkoo-plan-generator\src\app\globals.css lines 176–252
-    All --spectacle-* custom properties. See CSS CUSTOM PROPERTIES section.
 
 Background: Must match footer night sky exactly.
   Navigate to: C:\Users\amyog\Desktop\wizkoo\components\footer.js
-  Read the #wizkoo-footer background value (lines 23–41). Copy it exactly.
-  Do not approximate. See SURFACE ARCHITECTURE — World 2 for the gradient values.
-
-Star field: Copied from footer.js implementation exactly (lines 322–344).
-  Same density (120 stars), same size distribution, same opacity ranges,
-  same twinkle timing. z-index must sit beneath ALL existing spectacle elements.
+  Read #wizkoo-footer background (lines 23–41). Copy it exactly.
 
 Elements that may NEVER be touched in the spectacle:
   - Nucleus and glow effects
   - Orbital connector lines
   - Child name labels and positioning
   - Subject dot elements and animations
-  - Theme headline
-  - Generation progress copy
-  - Saffron progress bar
+  - Theme headline, generation progress copy, saffron progress bar
   - Any timing, easing, or animation on existing elements
 
 SpectacleVisualLayer phase states: idle | waiting | streaming | assembling |
@@ -2375,72 +1422,38 @@ Source file: C:\Users\amyog\Desktop\wizkoo\index.html
   DOM element: <div class="firefly" id="firefly"> at line 1152
   Main firefly JS: lines 1897–2159 (IIFE, runs immediately on DOMContentLoaded)
   CSS: lines 585–596 (inline <style> in index.html)
-    .firefly { display:none!important }  ← hidden by default
-    .firefly.alive { opacity:1 }         ← class added by JS at 2s
-    @keyframes fireflyPulse { ... }      ← defined but glow handled by JS
   CTA Firefly (#pricing section): lines 2356–2401 (separate IIFE)
-
-Current animation state:
-  The main firefly is ACTIVE. display:none!important is overridden when the
-  .alive class is added. Mobile (<768px) and prefers-reduced-motion: hidden.
-  The hero-firefly element (line 1211) has display:none inline style — HIDDEN,
-  parked. Do not reintroduce.
 
 State machine (6 states):
   waiting → birth → t_move ↔ t_pause → idle ↔ a_move ↔ a_flee
-  waiting:  parked at spawn, 2s delay before any motion
-  birth:    fade + scale in over 350ms using cbEase (Newton-Raphson bezier solver)
+  waiting:  parked at spawn, 2s delay
+  birth:    fade + scale in over 350ms
   t_move:   travel hop — quadratic bezier arc, 580–880ms per hop
-  t_pause:  brief rest between travel hops, 200–480ms
+  t_pause:  brief rest between hops, 200–480ms
   idle:     hovering in place, 800–1800ms. Two incommensurate sin frequencies
             (1.8 Hz + 2.9 Hz) → 2–3px vertical drift
   a_move:   autonomous hop inside play area, 42–68px, 600–900ms
-  a_flee:   mouse within 80px → dart 42–68px away, 300–420ms, then enter idle
+  a_flee:   mouse within 80px → dart 42–68px away, 300–420ms, then idle
 
 Spawn (lines 1931–1937):
-  Origin: .nav-wm .wm-dot element getBoundingClientRect().
-  Exact math: x = el.right + fontSize*0.09, y = el.top + fontSize*0.21
-  (centers on the ::after saffron circle superscript)
-  Spawns 2000ms after page load.
+  Origin: .nav-wm .wm-dot getBoundingClientRect().
+  x = el.right + fontSize*0.09, y = el.top + fontSize*0.21
 
-Travel (lines 1996–2046):
-  7–10 hops of 42–68px each toward .nh-right play area.
-  Each hop is a quadratic bezier arc with ±14/11px control point jitter.
-  Play area bounds: .nh-right getBoundingClientRect(), 20px inset on all sides.
-
-Glow system — independent of movement (lines 1975–1993):
-  States: dim → flash → fade → dim
-  Flash: 0 → 1 in 80ms
-  Fade: 1 → 0.55 over 600–1000ms
-  Next flash interval: 2000–4000ms after fade completes
-  Applied via JS: opacity = 0.4 + gAmt*0.6; boxShadow = dual saffron rings
+Glow system (lines 1975–1993):
+  Flash: 0 → 1 in 80ms. Fade: 1 → 0.55 over 600–1000ms.
+  Next flash interval: 2000–4000ms.
   Inner ring: rgba(232,175,56,0.25–0.75), 3–11px blur
   Outer ring: rgba(232,175,56,0.07–0.24), 7–18px blur
 
-Flee (lines 2070–2082):
-  Mouse within 80px (6400 px² dist check) → doFlee()
-  Dart angle: atan2(ffy-my, ffx-mx) ± 0.32 radians
-  Distance: 42–68px, duration 300–420ms
-  After flee: enter idle 800–1600ms
-
-Hide on deep scroll (lines 2215–2223):
-  Opacity → 0 when scrollY > 1.5× viewport height.
-  Restores when scrolled back up.
+Flee (lines 2070–2082): Mouse within 80px → dart 42–68px away.
 
 CTA Firefly — #pricing section (lines 2356–2401):
-  Separate IIFE. Triggered by IntersectionObserver at 0.4 threshold.
-  One-shot: fires once when #pricing scrolls 40% into view.
-  Spawns at left edge of .btn-main, drifts 2600ms with sin/cos pattern:
-    x offset: sin(t*2.1)*14 + sin(t*4.7)*6
-    y offset: cos(t*1.6)*10 + cos(t*3.3)*4
-  Fades out after 2600ms. Does not repeat.
-  Size: 5px circle, #E8AF38, box-shadow saffron glow.
-  Status: Fix pending (see KNOWN BUGS).
+  One-shot. IntersectionObserver at 0.4 threshold.
+  Spawns at left edge of .btn-main, drifts 2600ms then fades.
+  Drift: x = sin(t*2.1)*14 + sin(t*4.7)*6 / y = cos(t*1.6)*10 + cos(t*3.3)*4
+  Size: 5px circle, #E8AF38.
 
-Mobile below 768px: hidden (display:none!important in CSS).
-  Resize handler kills and hides if window shrinks below 768px.
-prefers-reduced-motion: hidden (display:none!important in CSS).
-JS only. requestAnimationFrame loop. No CSS keyframes for movement.
+Mobile below 768px: hidden. prefers-reduced-motion: hidden.
 
 ---
 
@@ -2453,19 +1466,17 @@ Left column (62%):
   Saffron rule: 32px, 1.5px, #E8AF38
   Eyebrow: "ONE PRICE. EVERY CHILD." Space Mono, 10px, letterspaced uppercase
   H1 span 1: "Personalized weekly" — Sora 200, rgba(12,16,32,0.72), display:block
-  H1 span 2: "homeschool plans." — Sora 800, #0C1020, display:block
+  H1 span 2: "homeschool plans." — Sora 800, #0C1020, display:block, 192px
   H1 span 3: "And tracking." — Sora 700, #E8AF38, 0.65em. PERIOD. NEVER EXCLAMATION.
-  Line break locked after "weekly": add <br> tag, not browser-dependent.
-  Subtext 1: "...so you always know where you stand." Sora 300, italic,
-             rgba(12,16,32,0.52), padding-left: 20px
-  Subtext 2: "Covers every domain of every US educational standard. Automatically."
-             Sora 300, rgba(12,16,32,0.72)
+  Line break locked after "weekly": <br> tag, not browser-dependent.
+  Subtext 1: "...so you never wonder what's missing." Sora 300, italic, rgba(12,16,32,0.52)
+  Subtext 2: "Covers every domain..." Sora 300, rgba(12,16,32,0.72)
 
 Right column (38%):
-  Saffron left border: 2px, #E8AF38 (column separator)
+  Saffron left border: 2px, #E8AF38
   Label: "TELL US ABOUT YOUR FAMILY." Space Mono, 9px, rgba(12,16,32,0.38)
   Field 1: child name (text input)
-  Field 2: age select — 1-12, NUMBERS ONLY, NO "years old" descriptor
+  Field 2: age select — 1-12, NUMBERS ONLY, NO "years old"
   Field 3: theme text input
   Suggestion buttons: DINOSAURS / SPACE / OCEANS / ANCIENT EGYPT
     Space Mono, sharp corners, saffron on hover, NO EMOJI EVER
@@ -2475,11 +1486,7 @@ Right column (38%):
 
 Handoff URL:
   wizkoo.com/plan/onboarding?childName=[name]&childAge=[age]&theme=[theme]
-  Confirmed working. Parameters read in onboarding/page.tsx lines 474-495.
-
-Section 2 (Granddad):
-  Full night sky both panels.
-  "Granddad broke his foot." Existing orbital diagram. Seven subject labels.
+  Parameters read in onboarding/page.tsx lines 474–495.
 
 ---
 
@@ -2500,1166 +1507,263 @@ Saffron (#E8AF38) NEVER appears as a geographic color.
 
 ## SECTION 3 — "EVERYTHING CONNECTS" RESPONSIVE STANDARD
 
-This section documents, in three tiers, everything established while building
-Section 3 (the turtle/space scenario pair). Tier 1 and Tier 2 apply universally
-to every section on this site. Tier 3 is the Section 3 implementation reference.
+Global viewport rules (Tier 1 and Tier 2) are now in AMY_TECHNICAL_STANDARDS.md
+Section 5. This section documents the Section 3 implementation reference only (Tier 3).
 
----
-
-### TIER 1 — WIZKOO VIEWPORT STANDARD (universal)
-
-**Primary development environment**
-
-  window.innerWidth:   ≈756 CSS px
-  window.innerHeight:  ≈396 CSS px
-  devicePixelRatio:    2.625
-  OS scaling:          Windows 200%
-  Chrome zoom:         Below 100%
-
-Chrome zoom inflation note: Chrome zoom below 100% inflates the effective CSS layout
-width while window.innerWidth reports the pre-zoom value. At this environment,
-window.innerWidth ≈756 but the effective CSS layout width may be ≥1100px. The site
-renders at desktop breakpoints (≥768px) even though window.innerWidth suggests a
-narrow viewport. All media queries use the inflated effective width for layout
-decisions, not window.innerWidth. Playwright screenshots do NOT replicate this
-inflation — always test at both 756×396 and 1440×396.
-
-**The four layout regime breakpoints (site-wide)**
-
-  Desktop overlay:  base styles (≥768px, no max-height limit)
-    Photo full-bleed. Copy absolutely positioned left column.
-
-  Mobile stack:  @media(max-width:767px)
-    Photo stacked above copy. Copy position:static, full-width.
-
-  Landscape short:  @media(max-height:420px) and (min-width:600px)
-    Overlay restored at short viewports. Compact type sizes.
-    Declared AFTER mobile stack — cascade order is load-bearing.
-    At CSS widths 600–767px with height ≤420px, landscape short
-    overrides mobile stack's position:static with position:absolute.
-
-  Short-wide:  @media(max-height:700px) and (min-width:768px)
-    Overlay at production display (height≈396px). Nav-safe padding applied.
-    Declared AFTER landscape short — overrides padding at ≥768px width.
-
-**Universal section-height rule**
-
-Any section with a full-bleed photograph or full-viewport background MUST use
-height:100vh at @media(max-height:700px) breakpoints.
-
-NEVER use height:max(Nvh, fixed-px) where fixed-px can exceed the viewport.
-
-Reason: A section taller than the viewport allows scroll-position drift. At
-production (396px viewport), a 500px section means the user's scroll landing
-position determines how much top padding is visible — any padding value will
-appear unreliable and "jump" between refreshes.
-
-**Universal photograph-height rule (mobile stack)**
-
-  height: min(67vw, 50vh);  min-height: 160px
-
-Reason: Plain 67vw at a short landscape viewport = 505px, overflowing the entire
-viewport. The 50vh cap ensures the photograph never exceeds half the viewport
-height in any orientation.
-
-**Universal nav safe-zone rule**
-
-Minimum padding-top: 96px on the first content element at @media(max-height:700px).
-
-Reason: Combined nav + announcement bar ≈100px CSS at production display. Content
-with padding-top below 96px will appear behind or immediately adjacent to the nav.
-96px provides clearance across the production display's zoom range.
-
-Site-wide standard at base desktop (no max-height limit): padding-top 172px,
-which reserves space for the full nav + announcement bar stack plus buffer.
-
-**Nav backdrop system**  (index.html lines 1368–1400)
-
-  Scroll threshold: window.scrollY > 20 → adds nav--scrolled class  (line 1392)
-
-  Light surface (default scrolled):
-    class:            nav--scrolled
-    background:       rgba(242,240,234,0.45)
-    backdrop-filter:  blur(6px)
-    line:             1370
-
-  Dark surface (turtle scenario, linen-hero):
-    class:            nav--scrolled.nav--surface-dark
-    background:       rgba(12,16,32,0.25)
-    backdrop-filter:  blur(4px)
-    line:             1371
-
-  Transition: background-color .25s cubic-bezier(.25,.1,.25,1)  (line 1369)
-
-  Dark sections registered in JS:  #linen-hero, .ec-scenario--turtle  (lines 1385–1386)
-  Light sections registered in JS: .ec-scenario--space               (line 1389)
-
-**Global color tokens**  (:root — index.html line 161)
-
-  --saffron:  #E8AF38   Kicker text, accents, saffron rule
-  --ink:      #0C1020   Dark section background, space headline, body text
-  --linen:    #F2F0EA   Page background, turtle headline
-  --paper:    #FAFAFA   Light surface variant
-  --warm-bg:  #ECEAE3   Warm background variant
-
----
-
-### TIER 2 — DIAGNOSTIC PROTOCOL (when viewport issues appear)
-
-Run these checks IN ORDER before making any CSS changes. Do not skip ahead.
-
-CHECK 1 — Get the actual viewport
-  Have user paste into DevTools console:
-    window.innerWidth + ', ' + window.innerHeight + ', ' + window.devicePixelRatio
-  Production display returns: 756, 396, 2.625
-  If values differ, recalculate all breakpoint logic before proceeding.
-
-CHECK 2 — Identify the active media query
-  Given user's innerWidth, innerHeight, and Chrome zoom:
-  1. Is effective CSS layout width ≥768px? (Chrome zoom inflates past innerWidth)
-  2. Does height ≤700px?  → short-wide query fires  (padding:96px wins)
-  3. Does height ≤420px AND effective width ≥600px?  → landscape short fires (178px)
-  4. Is innerWidth (raw) ≤767px?  → mobile stack fires (position:static)
-  If both #2 and #3 fire, #2 is declared later in source and wins.
-  If only #3 fires (effective width 600–767px), landscape short controls.
-
-CHECK 3 — Verify dev server is serving current file
-  If user reports changes not appearing, restart:
-    npx serve . -p 3000
-  A clean restart is sufficient. Do not add cache-busting query strings.
-
-CHECK 4 — Verify the user is viewing the correct URL
-  Must be: localhost:3000
-  NOT: file:///C:/Users/... (local file), index-mockup-*.html, or any variant.
-  Changes to index.html will not appear in mockup or alternate files.
-
-CHECK 5 — Take Playwright screenshots at user's actual CSS dimensions
-  await p.setViewportSize({ width: 756, height: 396 });   // shows mobile stack
-  await p.setViewportSize({ width: 1440, height: 396 });  // approximates inflated layout
-  Never use theoretical 1440×900 for short-viewport debugging.
-  Force .visible class to bypass IntersectionObserver opacity gates:
-    await p.evaluate(() =>
-      document.querySelectorAll('.ec-scenario').forEach(el => el.classList.add('visible'))
-    );
-
----
-
-### TIER 3 — SECTION 3 IMPLEMENTATION (known-good reference as of 2026-04-22)
-
-This tier documents how the universal viewport standard is implemented in Section 3.
-When adding new sections or debugging existing ones, Tier 1 rules apply universally.
-Tier 3 serves as a pattern reference.
-
-Commit: cbac52e
-Section HTML root: <section class="ec-section">  line 1784
+Section HTML root: <section class="ec-section"> line 1784
 Two scenarios: .ec-scenario--turtle (line 1787) and .ec-scenario--space (line 1826)
+Commit: cbac52e
 
-**Section container**
-
+SECTION CONTAINER:
   .ec-section    background:var(--ink)  padding:0  overflow:hidden     line 567
   .ec-inner      max-width:none  padding:0                              line 568
   .ec-scenario   position:relative  height:80vh  overflow:hidden        line 569
 
-**Scenario height by media query**
-
+SCENARIO HEIGHT BY MEDIA QUERY:
   Base (≥768px, no height limit):                    80vh              line 569
   max-width:767px:                                   auto              line 628
   max-height:420px AND min-width:600px:              100vh             line 643
   max-height:700px AND min-width:768px (active):     100vh  ← CRITICAL  line 657
 
-**Copy column (desktop overlay base)**
-
-  .ec-col-copy  position:absolute  top:0  left:0  width:42%  height:100%
-                z-index:2  overflow:hidden  display:flex  flex-direction:column
-                justify-content:flex-start  padding:172px 4% 0 7%         line 579
-
-**Copy column padding-top by breakpoint**
-
+COPY COLUMN PADDING-TOP BY BREAKPOINT:
   Base desktop:                          172px   line 579
   Mobile stack (max-w:767px):             48px   line 630
   Landscape short (max-h:420, min-w:600): 178px  line 645
   Short-wide (max-h:700, min-w:768):       96px  line 658  ← production display
 
-**Typography**
-
-  Headline
-    font: 'Fraunces' serif  italic  weight 500
-    size: 28px (base/mobile/short-wide)  |  20px (landscape short)
-    line-height: 1.08  |  letter-spacing: -0.02em  |  max-width: 320px
-    color: turtle #F2F0EA  |  space #0C1020
-    opacity: 0 → 1 on .visible  transition 0.8s delay 0.7s          lines 584-587
-
-  Kicker
-    font: 'Fraunces' serif  italic  weight 400
-    size: 22px (base)  |  18px (mobile/short-wide)  |  15px (landscape short)
-    line-height: 1.2  |  color: #E8AF38 (both scenarios)
-    opacity: 0 → 1 on .visible  transition 0.8s delay 0.7s          lines 588-589
-
-  Eyebrow
-    font: 'Space Mono' monospace  9px  letter-spacing: 0.18em
-    color: turtle rgba(242,240,234,0.7)  |  space rgba(12,16,32,0.7)
-    display:none in landscape short                                   lines 580-583
-
-  Proof label
-    font: 'Space Mono' monospace
-    size: 11px (base)  |  9px (short-wide)  |  8px (landscape short)
-    letter-spacing: 0.24em (base)  |  0.16em (landscape short)
-    color: subject Shade 3 (turtle)  |  subject Shade 2 (space)      lines 592, 653, 663
-
-  Proof body
-    font: 'Inter' system-ui
-    size: 12.5px (base)  |  12px (short-wide)  |  10px (landscape short)
-    line-height: 1.4 (base)  |  1.3 (landscape short)
-    max-width: 200px in landscape short (enforces 2-line wrap)
-    color: turtle rgba(242,240,234,0.92)  |  space rgba(12,16,32,0.92)
-                                                                      lines 593, 606, 619
-
-**Proof matrix**
-
-  Base grid (.ec-proofs):
-    display: grid
-    grid-template-columns: 1fr 1fr
-    grid-template-rows: repeat(3, auto)
-    grid-auto-flow: column
-    column-gap: 4px  |  row-gap: 9px                                  line 590
-
-  Mobile stack: display:block  per-proof margin-bottom:12px           lines 637-638
-  Landscape short: column-gap:8px  row-gap:4px                        line 651
-  Short-wide: per-proof margin-bottom:8px                             line 662
-
-  Per-item: padding-left:16px  |  border-left:2px solid [subject color]  line 591
+PROOF MATRIX (.ec-proofs):
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column; column-gap: 4px; row-gap: 9px
   Flow: col 1 (rows 1-3) = Reading, Math, Science
         col 2 (rows 1-3) = Atlas, Art, Elementum
 
-**Photograph treatment**
+PHOTOGRAPH TREATMENT:
+  Desktop: position:absolute; inset:0; overflow:hidden
+  Mobile: position:relative; inset:unset; height:min(67vw,50vh); min-height:160px
 
-  Desktop:  .ec-col-photo  position:absolute  inset:0  overflow:hidden    line 571
-  Mobile:   position:relative  inset:unset  height:min(67vw,50vh)
-            min-height:160px                                               line 629
-
-  .ec-photo-img  width:100%  height:100%  object-fit:cover
-    opacity: 0 → 1 on .visible  transition: 1.2s cubic-bezier(.25,.1,.25,1)
-    animation: kb-zoom 8s ease-in-out infinite alternate (scale 1→1.03)   lines 570, 572
-
-  object-position: turtle center 55%  |  space center 30%               lines 573-574
-
-**Scrims** (.ec-col-photo::after — line 576)
-
-  Space:   radial-gradient(ellipse 55% 100% at 20% 50%,
-           rgba(12,16,32,0.15) 0%, transparent 100%)                      line 577
-  Turtle:  radial-gradient(ellipse 55% 100% at 20% 50%,
-           rgba(12,16,32,0.62) 0%, transparent 100%)                      line 578
-
-**Scroll reveal stagger**
-
-  Photo:    1.2s  delay 0s    line 575
-  Eyebrow:  0.4s  delay 0.5s  line 583
-  Headline: 0.8s  delay 0.7s  line 587
-  Kicker:   0.8s  delay 0.7s  line 589
-  Proof 1:  0.4s  delay 1.3s  line 620
-  Proof 2:  0.4s  delay 1.4s  line 621
-  Proof 3:  0.4s  delay 1.5s  line 622
-  Proof 4:  0.4s  delay 1.6s  line 623
-  Proof 5:  0.4s  delay 1.7s  line 624
-  Proof 6:  0.4s  delay 1.8s  line 625
+SCROLL REVEAL STAGGER:
+  Photo:    1.2s  delay 0s    |  Eyebrow:  0.4s  delay 0.5s
+  Headline: 0.8s  delay 0.7s  |  Kicker:   0.8s  delay 0.7s
+  Proofs 1–6: 0.4s, delays 1.3s–1.8s (0.1s stagger)
   Total composition reveal: 2.2s
-  Trigger: IntersectionObserver → adds .visible class to .ec-scenario
 
-**Subject colors**
-
-  Subject     Shade 3 (turtle)   Shade 2 (space)   Lines
-  Reading     #3848D0            #2030A0           607 / 594
-  Math        #E8D800            #9A8600           608 / 595
-  Science     #38B060            #247840           609 / 596
-  Atlas       #F08A20            #CC6000           610 / 597
-  Art         #8848E0            #6030B0           611 / 598
-  Elementum   #38B060            #247840           612 / 599
+SUBJECT COLORS:
+  Reading:   Turtle #3848D0 / Space #2030A0
+  Math:      Turtle #E8D800 / Space #9A8600
+  Science:   Turtle #38B060 / Space #247840
+  Atlas:     Turtle #F08A20 / Space #CC6000
+  Art:       Turtle #8848E0 / Space #6030B0
+  Elementum: Turtle #38B060 / Space #247840
 
 ---
 
 ═══════════════════════════════════════
 LAYER 6 — FAILURE PREVENTION
-Read this layer before every session. These are the documented ways
-this project has gone wrong — do not repeat them.
+Read before every session.
 ═══════════════════════════════════════
 
-## KNOWN CLAUDE CODE FAILURE PATTERNS
+## WIZKOO-SPECIFIC FAILURE PATTERNS
 
-These are documented failure modes Claude Code has
-exhibited in this codebase. Read before every session.
-Do not repeat them.
-
-PATTERN 1 — CACHE BLAME
-When a visual fix does not land, Claude Code defaults
-to blaming browser cache. If the problem persists in
-incognito, it is not cache. It is the wrong file or
-the wrong rule. Require a source hunt before accepting
-any cache explanation.
-
-PATTERN 2 — DESTINATION-BASED ANIMATION
-Claude Code defaults to bezier-from-A-to-B animation
-for any movement task. This produces mechanical,
-predictable motion. For organic movement (firefly,
-particles, ambient elements) the architecture must be
-velocity-based with steering, not destination-based.
-If you find yourself writing a bezier to a point,
-the architecture is wrong.
-
-PATTERN 3 — WRONG FILE EDITED
-When a specificity conflict exists, Claude Code will
-sometimes edit a secondary file instead of finding
-and changing the winning rule at source. Always run
-a full specificity audit before making any CSS change.
-Find the winning rule. Change it there. Do not add
-new rules on top of conflicting ones.
-
-PATTERN 4 — PARTIAL COMPLETION PRESENTED AS DONE
-Claude Code will sometimes complete steps 1-2 of a
-5-step task and present the result as finished.
-Apply the Completion Standard to every task:
-built, migrated, verified, old version removed,
-system clean. If any step is missing, name it.
-
-PATTERN 5 — RAW HEX INSTEAD OF TOKEN
-Claude Code will hardcode color values directly in
-components instead of consuming the CSS custom property.
-Every color in this codebase has a token definition.
-Use the variable. Never the raw hex in a component.
-If you see a raw hex in a component file, that is a bug.
-
-PATTERN 6 — APPROXIMATED VALUES
-When Claude Code cannot immediately find a source value,
-it will sometimes use a close approximation instead of
-reading the source file. This is never acceptable.
-If a value is in the runbook, use that exact value.
-If a value is not in the runbook, navigate to the source
-file and read it. Never approximate.
+Global failure patterns (1–12) are in AMY_TECHNICAL_STANDARDS.md Section 6.
 
 PATTERN 8 — CLIENT/SERVER LIST DIVERGENCE
-When a moderation rule exists in both a server function
-(validate-theme.js) and a client-side IIFE (index.html),
-Claude Code will update one and not the other. The two
-lists are independent copies — they do not share a module.
-Prevention rule: Any change to BLOCKLIST or BLOCKLIST_EXACT
-must be applied to BOTH files in the same commit. After
-editing either file, grep the other for the changed term
-before committing. A commit that updates one list and not
-the other is incomplete by definition.
-
-PATTERN 7 — HARDCODED TEMPORAL VALUES IN PROCEDURAL INSTRUCTIONS
-When writing procedural instructions (close protocol, startup
-sequence, flight log steps), Claude Code will sometimes embed
-the current session's date or context-specific values directly
-into the instruction text — values that must stay dynamic.
-Example: writing "2026-04-17" into a step that will be
-executed on future dates with different values.
-Prevention rule: Any date, hash, or session-specific value
-inside a procedural instruction must use a placeholder or
-formula, never a literal from the current session.
-Correct: "today's actual date in YYYY-MM-DD format"
-Wrong: "2026-04-17"
-If you wrote a literal where a formula belongs, it is a bug.
-Correct it before closing the session.
-
-PATTERN 9 — CLASS-NAME AUDIT MISSES VISUAL CONSTRUCTS
-When an audit searches for a visual by class name (e.g. "find
-the L-bracket") it will miss constructs whose visual effect is
-produced through a mechanism whose CSS class name does not match
-the visual's name — e.g. box-shadow tricks, pseudo-elements,
-or positioned siblings named for their semantic role, not their
-appearance.
-Example: the Open Seat hero button had `box-shadow: 6px 6px 0
-#E8AF38` producing the L-bracket effect, but the class was
-`.btn-sky`. Searching "bracket" found nothing and the audit
-reported the element as absent.
-Prevention rule: If an audit returns "element does not exist"
-but the visual is clearly present in the rendered page, the
-audit has failed. Re-scan using the visual's mechanism as the
-search target (the color value, the property name, the specific
-CSS rule), not the semantic label you expected the class to have.
-Never accept "not present" until a mechanism-based search
-confirms absence.
-
-PATTERN 10 — RESPONSIVE OVERRIDE MISS
-When removing a dead top-level selector, the audit will miss
-corresponding responsive overrides for that same selector
-defined inside @media query blocks lower in the same file.
-Example: During the April 2026 dead CSS cleanup, top-level
-rules like .hero-eyebrow, .hero-cascade, .hcard* and .id-tags-*
-were correctly identified and removed, but their mobile overrides
-inside @media(max-width:768px) were not flagged in the original
-audit and were only caught during execution.
-Prevention rule: After removing any top-level dead selector,
-immediately grep for that selector name across all @media
-blocks in the same file before declaring the removal complete.
-Any responsive override for a dead selector is also dead.
-The audit pass is not complete until both the top-level rule
-and all its responsive overrides have been confirmed removed.
-
-PATTERN 11 — SECTION HEIGHT OVERFLOW CAUSES PHANTOM PADDING DRIFT
-When a full-bleed section is taller than the viewport (e.g. height:max(80vh,500px)
-at a 396px viewport = 500px section), the user's scroll landing position determines
-how much of the section's top padding is above the fold. This makes padding-top
-appear unreliable — the same value produces different headline positions on different
-loads depending on scroll velocity and browser snap behavior. Claude Code's failure
-mode: increase padding-top repeatedly trying to "push the copy down" without
-diagnosing the root cause. Each change appears to work then regresses.
-Example: April 22, 2026 — ec-scenario padding-top was changed 6+ times (56→148→96→76→96px)
-before root cause was identified as section height 500px in a 396px viewport.
-Prevention rule: Before tuning padding-top on a full-bleed section, verify the
-section height equals 100vh at the active breakpoint. If it does not, fix the
-section height first. height:100vh is the only value that makes padding-top
-consistent. See LOCKED DECISIONS for the universal section-height rule.
-
-PATTERN 12 — PLAYWRIGHT / DEV-SERVER / LIVE-SITE VERIFICATION GAP
-During the 2026-04-23 V14 composition session, Claude Code's Playwright
-verification screenshots consistently reported "changes visible, match target"
-while Amy's real render (at localhost and later at wizkoo.com) showed a
-different state — sometimes pre-commit, sometimes partial. Three instances
-observed: (1) Prompt 10 gutter — Playwright confirmed gray radial rendering
-but at 0.08 opacity it was imperceptible to the human eye against linen;
-(2) Prompt 10 toggle box removal — Playwright showed no borders, but Amy's
-browser required dev server restart before the change rendered; (3) post-push
-wizkoo.com — museum tabs reverted to bordered-chip style despite the commit
-being in the pushed stack.
-Root cause: Playwright renders a clean headless environment with no browser
-cache, no CDN cache, and no local build-step artifacts that affect what Amy
-actually sees in her own browser or on the deployed site.
-Prevention rule: Before declaring a visual commit "verified," run three-layer
-verification: (1) Playwright screenshot at target viewport, (2) curl
-localhost:3000/<path> | grep <expected-change> to confirm the served file
-matches the committed file, (3) state explicitly "Amy should hard-refresh
-and/or restart the dev server to invalidate any local caching before visual
-review." For post-push verification, additionally state "Amy should wait for
-CDN propagation before judging the live site; TTL varies by provider and may
-take several minutes." When Amy reports "my render doesn't match your
-screenshot," default to diagnostic mode — compare served file vs committed
-file byte-for-byte, then check Netlify build log, then check CDN — before
-iterating on new CSS. The cache/build gap is the first hypothesis to
-eliminate, not the last.
-
-PATTERN 13 — SPEC/IMPLEMENTATION NAMING DIVERGENCE
-When a spec and the live codebase use different names for the same
-architectural element (e.g. spec calls a footer column "Learn"; the
-production footer labels it "Product"), Claude Code will infer a
-content-based mapping and may place content in the wrong column
-from the user's literal perspective.
-Example: April 26, 2026 — "Themes to Explore" footer link placed in
-the Product column because its content (educational catalog) mapped to
-the spec's "Learn" column intent. User meant the column literally
-labeled "Learn More" in the production footer. Required a second correction.
-Prevention rule: When column names or section names conflict between
-a spec and the current codebase, do not infer mapping. Ask explicitly:
-"The spec calls this column 'Learn' but the current footer labels it
-'Product.' Do you mean the column labeled Product, or the one labeled
-Learn More?" One clarifying question costs 30 seconds. A wrong placement
-costs a second deploy.
+When a moderation rule exists in both a server function (validate-theme.js) and a
+client-side IIFE (index.html), Claude Code will update one and not the other. The
+two lists are independent copies — they do not share a module.
+Prevention rule: Any change to BLOCKLIST or BLOCKLIST_EXACT must be applied to BOTH
+files in the same commit. After editing either file, grep the other for the changed
+term before committing. A commit that updates one list and not the other is
+incomplete by definition.
 
 ---
 
 ## PRESERVATION LOCKS REGISTRY
+Enforces Standards §3.4 (Preservation Locks prompt section) via a session-start ambient registry, eliminating per-prompt recitation.
 
 ### WHY THIS SECTION EXISTS
 
-Preservation locks are systems, files, or code sections that must not
-be modified even when Claude Code believes a modification would improve
-things. Without a registry, these locks live only in Amy's prompt
-context — listed manually every session that touches a surface with
-locked systems. Forgetting to include a lock in a prompt produces
-silent breaks: Claude Code sees the locked code, assesses it as
-cleanable, and modifies it. The break is not discovered until the
-broken system is exercised.
-
-This registry moves the locks from per-prompt recitation to session-
-start ambient protection. The Session Startup Instruction loads Layer 6
-at every session. Locks registered here are known to Claude Code from
-the first prompt forward. Amy's prompts reference the registry by name
-instead of re-listing items.
+Preservation locks are systems, files, or code sections that must not be modified
+even when Claude Code believes a modification would improve things. Without a registry,
+these locks live only in Amy's prompt context — listed manually every session.
+Forgetting one produces a silent break discovered only when the broken system is
+exercised. This registry moves locks from per-prompt recitation to session-start
+ambient protection.
 
 ### HOW TO USE THE REGISTRY
 
-Operator side (Amy drafting prompts): in the PRESERVATION LOCKS section
-of any prompt touching a registered surface, reference the registry by
-name. Example: "Do not touch any item in the Homepage Form Preservation
-Locks Registry." Do not re-list items inline. If the prompt targets a
-specific registered surface, name it. If the prompt is broader,
-reference all relevant registries.
+Operator side (Amy): in the PRESERVATION LOCKS section of any prompt touching a
+registered surface, reference the registry by name. Example: "Do not touch any item
+in the Homepage Form Preservation Locks Registry." Do not re-list items inline.
 
-Executor side (Claude Code receiving prompts): Layer 6 is loaded at
-session start. Every registered lock is known from session open. If a
-prompt appears to touch a registered surface but does not explicitly
-reference the registry in its PRESERVATION LOCKS section, Claude Code
-must proactively apply the registry and confirm with Amy before
-executing. Enforcement by default, not by invocation.
+Executor side (Claude Code): Layer 6 is loaded at session start. Every registered
+lock is known from session open. If a prompt appears to touch a registered surface
+but does not reference the registry, apply the registry proactively and confirm with
+Amy before executing.
 
 ### HOMEPAGE FORM PRESERVATION LOCKS
 
-Surface: the intake form on the homepage hero (index.html). Origin:
-line-by-line preservation registry produced by Amy's AI team
-(2026-04-21 evening session), reconciled against production index.html.
-Covers the full behavioral surface — SEO/accessibility structure, copy,
-mechanics, submit chain, and post-submit gate. Breaking any item below
-produces a silent regression: SEO loss, accessibility failure, copy-voice
-drift, validation bypass, or form deadlock in production.
-Registry version: v3.0 (2026-04-22). 35 items across Clusters A–F. Items 1–25 anchored against commit 2087f59. Items 26–35 added by the V14 Q-resolution session (2026-04-21 evening) and will receive line-number anchors as their respective V14 prompts ship; until then, they cite their introducing prompt. Retired items (4, 10, 11, 14, 15, 25) remain in the registry as retirement markers with forward pointers to their supersessions, and close completely once their underlying markup is removed by the V14 reskin.
+Surface: the intake form on the homepage hero (index.html).
+Registry version: v3.0 (2026-04-22). 35 items across Clusters A–F.
+Items 1–25 anchored against commit 2087f59. Items 26–35 added 2026-04-21 evening.
+Retired items (4, 10, 11, 14, 15, 25) remain as retirement markers.
 
-ANCHORING CONVENTION. Every item lists three kinds of anchors where
-available:
-  - Semantic description (primary, stable across refactors)
-  - Element ID or selector (stable when element exists)
-  - Line number (current-state reference as of 2026-04-21, commit
-    2087f59; expected to drift)
-When prompts cite items from this registry, use semantic description +
-ID. Line numbers are for fast lookup only and must be re-verified by
-Claude Code on each session open.
+ANCHORING CONVENTION: Every item lists semantic description (primary, stable),
+element ID or selector (stable), and line number (drifts — re-verify each session).
 
 CLUSTER A — STRUCTURAL LOCKS (SEO + ACCESSIBILITY)
 
-Item 1  — Visually-hidden H1 for SEO.
-           Semantic: the <h1 class="visually-hidden"> element containing
-           the full product description. The visible <h2 class="nh-h1">
-           is display-only — removing the hidden H1 tanks SEO.
-           Selector: h1.visually-hidden
-           Line (2026-04-21): 1565
-
-Item 2  — novalidate on both forms.
-           Semantic: both the theme form and the email-gate form have
-           novalidate explicitly set. Native browser validation is
-           intentionally off because all validation is JS-driven (theme
-           blocklist, server validation, two-word cap). Restoring native
-           validation breaks the three-layer gate.
-           Selector: form[novalidate] (both forms)
-           Lines (2026-04-21): 1592, 1669
-
-Item 3  — Wiggly kid fieldset semantics.
-           Semantic: <fieldset> + <legend class="visually-hidden"> + radio
-           inputs with default checked on the yes option. Screen readers
-           depend on the legend to announce the question. The default-yes
-           reflects the assumed-wiggly-kid copy bet.
-           Selector: fieldset containing name="wigglyKid" radios
-           Lines (2026-04-21): 1628-1642
-
-Item 4  — Age combobox ARIA contract.
-           Semantic: role="combobox" aria-haspopup="listbox"
-           aria-expanded="false" tabindex="0" on the trigger;
-           role="listbox" on the panel; role="option" aria-selected on
-           each option. Assistive tech depends on this exact contract —
-           renaming or dropping any attribute breaks screen reader
-           announcement of the dropdown state.
-           Selector: #age-trigger (combobox), #age-panel (listbox)
-           Lines (2026-04-21): 1609-1622
-           RETIRED (2026-04-21 V14 Q6). Superseded by: Item 26 (Age
-           Stepper Native-First Contract). The custom combobox is replaced
-           in V14 by a native <input type="number"> stepper. Item 4 remains
-           in this registry as a retirement marker until the V14 reskin
-           removes the underlying markup; after that, this item is closed.
+Item 1  — Visually-hidden H1 for SEO. Selector: h1.visually-hidden. Line ~1565.
+Item 2  — novalidate on both forms. All validation is JS-driven. Line ~1592, 1669.
+Item 3  — Wiggly kid fieldset semantics. <fieldset> + <legend class="visually-hidden">
+           + radio inputs with default checked on yes. Selector: fieldset[name="wigglyKid"].
+Item 4  — RETIRED (2026-04-21 V14 Q6). Age combobox ARIA contract. Superseded by
+           Item 26 (native number input stepper).
 
 CLUSTER B — COPY LOCKS
 
-Item 5  — H1 three-line composition.
-           Semantic: "Personalized weekly / homeschool plans. / And
-           tracking." The standalone "And tracking." line is a
-           load-bearing strategic claim per the April 20 decision, not a
-           secondary feature. Three lines, not two, not merged.
-           Selector: .nh-h1-line1, .nh-h1-line2, .nh-h1-line3
-           Lines (2026-04-21): 1568-1572
-
-Item 6  — Subline.
-           Semantic: "...so you never wonder what's missing." Locked April
-           20, superseded the earlier "...so you always know where you
-           stand." Do not revert.
-           Selector: .nh-subline (or equivalent)
-           Line (2026-04-21): 1573
-
-Item 7  — Desk note kernel.
-           Semantic: "What your child can't stop talking about. Dragons.
-           Tornadoes. Volcanoes." The three-noun cadence is the distinctive
-           voice element. Replacing the examples or collapsing the cadence
-           flattens the voice.
-           Selector: .desk-body (or equivalent containing the kernel)
-           Line (2026-04-21): 1584
-
-Item 8  — Desk signature pair.
-           Semantic: "— THE WIZKOO DESK" plus dateline. Matched structure
-           — losing either half breaks the paper-note register.
-           Selector: .desk-signature + .desk-date (or equivalent)
-           Lines (2026-04-21): 1586-1587
-
-Item 9  — Proof line.
-           Semantic: "ONE PRICE · UP TO 4 CHILDREN" — locked wording and
-           locked position at the bottom of the left column.
-           Selector: .nh-proof (or equivalent)
-           Line (2026-04-21): 1575
+Item 5  — H1 three-line composition: "Personalized weekly / homeschool plans. /
+           And tracking." Three lines. Not two. Not merged. Selectors: .nh-h1-line1/2/3.
+Item 6  — Subline: "...so you never wonder what's missing." Selector: .nh-subline.
+Item 7  — Desk note kernel: "What your child can't stop talking about. Dragons.
+           Tornadoes. Volcanoes." Three-noun cadence is the distinctive voice element.
+Item 8  — Desk signature pair: "— THE WIZKOO DESK" plus dateline. Both halves required.
+Item 9  — Proof line: "ONE PRICE · UP TO 4 CHILDREN" — locked wording, locked position.
 
 CLUSTER C — THEME FIELD MECHANICS
 
-Item 10 — Theme-sizer auto-expand.
-           Semantic: hidden #theme-sizer span with CSS inheritance measures
-           rendered text width; input width is set via the --w custom
-           property, clamped between 15ch and 30ch. Replacing the input
-           element breaks the binding. Removal falls back to default HTML
-           input width and loses the variable-width visual.
-           Selector: #theme-sizer, #theme[style*="--w"]
-           Lines (2026-04-21): 1598, 2920-3016
-           RETIRES WITH V14. Superseded by: V14 static placeholder + tag
-           chips pattern. Dynamic input width is no longer needed once the
-           rotating placeholder is retired and replaced by chips per Item 21
-           (updated) and Q7.
-
-Item 11 — Rotating placeholder system.
-           Semantic: two-tier placeholder pool — tier1 (10 words) and
-           tier2 (30 words) — shuffled together, rotating every 2800ms,
-           pausing on focus and when the input has a value. Tier1 is also
-           the "suggest" fallback pool used by Item 21. Removing either
-           tier breaks the "See suggestions" affordance.
-           Selector: .theme-ph overlay element, tier1[] and tier2[] arrays
-           in the IIFE
-           Lines (2026-04-21): 2911-2991
-           RETIRES WITH V14. Superseded by: V14 static placeholder +
-           click-to-fill tag chips. Tier 1 pool content migrates into the
-           tag chip data source (per V14 Prompt 3). "See suggestions"
-           affordance (part of Item 21) retires concurrently because chips
-           ARE the suggestion surface natively.
-
-Item 12 — Two-word cap via keydown.
-           Semantic: keydown handler blocks leading space, double space,
-           and any third word. Hyphens and apostrophes are NOT word
-           separators — "super-hero" counts as one word. Naive re-
-           implementation using space-split breaks compound terms.
-           Selector: #theme input keydown listener
-           Lines (2026-04-21): 3027-3034
-
-Item 13 — Paste sanitizer.
-           Semantic: collapses whitespace on paste, takes first two
-           tokens, uses execCommand('insertText') for cursor-aware
-           insertion. Replacing with event.clipboardData.setData without
-           execCommand breaks cursor position after paste.
-           Selector: #theme input paste listener
-           Lines (2026-04-21): 3036-3044
+Item 10 — RETIRES WITH V14. Theme-sizer auto-expand. Superseded by static placeholder.
+Item 11 — RETIRES WITH V14. Rotating placeholder system. Superseded by tag chips.
+Item 12 — Two-word cap via keydown. Hyphens and apostrophes are NOT word separators.
+Item 13 — Paste sanitizer: collapses whitespace, takes first two tokens, uses
+           execCommand('insertText') for cursor-aware insertion.
 
 CLUSTER D — AGE INPUT MECHANICS
 
-Item 14 — Position:fixed anchoring.
-           Semantic: getBoundingClientRect() on trigger; manual flip
-           above-or-below based on window.innerHeight minus rect.bottom;
-           centered horizontally via (rect.width - panelW) / 2. Known
-           anchoring bug present in production; load-bearing despite the
-           bug — other logic assumes this positioning model.
-           Selector: #age-panel positioning logic in the combobox IIFE
-           Lines (2026-04-21): 2744-2764
-           RETIRES WITH V14. Superseded by: Item 26 (Age Stepper
-           Native-First Contract). No panel anchoring needed because the
-           native number input renders inline. Retirement happens
-           concurrently with the combobox markup removal in V14 Prompt 1.
-
-Item 15 — Scroll-close on capture phase.
-           Semantic: scroll listener with {capture: true} third argument,
-           fires on any scroll in any container. Without capture-phase,
-           the panel drifts off its anchor when the user scrolls inside a
-           nested container.
-           Selector: window scroll listener registered with capture:true
-           Line (2026-04-21): 2801
-           RETIRES WITH V14. Superseded by: Item 26. The scroll-close
-           mechanism only exists to manage the position:fixed panel from
-           Item 14. Both retire together.
-
-Item 16 — Age range placeholder value.
-           Semantic: placeholder currently reads "2-12". Per April 20
-           decision, must update to "3-12". Known fix, not a design
-           question. Touches three locations: trigger placeholder at 1609,
-           listbox option to remove at 1611, fallback value at 2734.
-           Selector: #age-trigger placeholder attribute; #age-panel first
-           <li>; JS fallback constant | Lines (2026-04-21): 1609, 1611,
-           2734 | Status: RESOLVED automatically by V14 Prompt 1 when the
-           native stepper ships with min=3 max=12 and the combobox DOM
-           retires entirely.
+Item 14 — RETIRES WITH V14. Position:fixed anchoring for age panel.
+Item 15 — RETIRES WITH V14. Scroll-close on capture phase.
+Item 16 — Age range placeholder: 3-12. Status: RESOLVED automatically by V14 Prompt 1.
+Item 26 — Age Stepper Native-First Contract. Native <input type="number"> with
+           min=3, max=12, step=1, required, inputmode="numeric", autocomplete="off",
+           aria-describedby="age-error". readonly attribute added (2026-04-22):
+           no typing permitted. Steppers, wheel, keyboard arrows, touch-hold only.
+           Selector: #f-age, .age-box, .stepper-decrement, .stepper-increment, #age-error.
 
 CLUSTER E — SUBMIT VALIDATION CHAIN (THE CONTENT GATE)
 
-Item 17 — Capture-phase submit intercept.
-           Semantic: first-wins submit listener that fires before the
-           bubble-phase listener. Uses a validationPassed flag and re-
-           dispatches a synthetic submit event to hand control to the gate
-           flow. Architecture is two listeners, two phases, one flag.
-           Understanding this is non-negotiable before touching submit —
-           naive "consolidate the listeners" refactor will break the gate.
-           Selector: form submit listener registered with {capture: true}
-           Lines (2026-04-21): 3143-3177
-
-Item 18 — Client blocklist with leet normalization.
-           Semantic: BLOCKLIST array checked against the theme input via
-           word-boundary regex (\b on left, no right boundary to catch
-           suffixed variants like "pornographic"), with leet-to-latin
-           normalization applied first (0→o, 3→e, 1→i, 4→a, 5→s, @→a,
-           !→i, $→s, 7→t).
-           Selector: BLOCKLIST const + normalizeLeet() + isThemeBlocked()
-           Lines (2026-04-21): 3047-3085, 3095-3100
-
-Item 19 — Exact-match blocklist.
-           Semantic: BLOCKLIST_EXACT array for context-sensitive terms
-           that pass in phrase form but block alone. Examples: "sex"
-           blocks, "sex education" passes; "gun" blocks, "gun safety"
-           passes. Do NOT collapse into BLOCKLIST — the semantic
-           distinction is deliberate.
-           Selector: BLOCKLIST_EXACT const + isExactBlocked()
-           Lines (2026-04-21): 3087-3093
-
-Item 20 — Server-side validation via Netlify function.
-           Semantic: POST to /api/validate-theme (Netlify function) with
-           3-second abort timeout. Separate logging request fires on
-           clientBlocked:true for analytics. The param contract and
-           timeout value are both locked.
-           Selector: /api/validate-theme fetch call in submit handler
-           Lines (2026-04-21): 3165, 3189
-
-Item 21 — Error UI states.
-           Semantic: three states — theme-error (blocked), theme-network-
-           error (timeout), see-suggestions link (auto-fills a random
-           tier1 word). aria-live="polite" on both error elements. "See
-           suggestions" is a trust-recovery mechanism, not optional.
-           Selector: #theme-error, #theme-network-error, .see-suggestions
-           link
-           Lines (2026-04-21): 1645-1646, 3120-3141
-           UPDATED (2026-04-21 V14 Q7). THREE original states reduce to
-           TWO. Retire the "see suggestions" link entirely — V14 chips are
-           the suggestion surface natively, so the link has nothing to add.
-           Retained: theme-error (blocked) and theme-network-error
-           (timeout). Both use aria-live="polite". Copy and visual register
-           updated per Q7 tier structure and Item 29 Content Gate Error
-           Register. The .see-suggestions link element and its handler are
-           removed by V14 Prompt 3. Re-verify line anchors on session open.
-
-Item 22 — Blocked-theme recovery flow.
-           Semantic: on block, clear input + reset width + show overlay +
-           restart rotation. The rotation restart is specific — it keeps
-           the form feeling alive after a rejection instead of defeated.
-           Removing the rotation restart is a subtle voice regression.
-           Selector: block handler in submit listener
-           Lines (2026-04-21): 3171-3175
-           UPDATED (2026-04-21 V14 Q7). On block, clear input + reset
-           width + show overlay (Tier 1 error message per Item 29) + fire
-           chip-row sweep animation per Item 29. Rotation restart is
-           retired along with Item 11 — the form now feels alive through
-           the chip sweep + saffron focus pulse rather than through
-           placeholder rotation. Re-verify line anchors after V14 Prompts
-           3 and 6 ship.
+Item 17 — Capture-phase submit intercept. Two listeners, two phases, one validationPassed
+           flag. Do NOT consolidate without understanding this architecture.
+Item 18 — Client blocklist with leet normalization. BLOCKLIST + normalizeLeet() + isThemeBlocked().
+Item 19 — Exact-match blocklist. BLOCKLIST_EXACT + isExactBlocked(). Do NOT collapse into BLOCKLIST.
+Item 20 — Server-side validation via /api/validate-theme (Netlify function). 3-second timeout.
+Item 21 — Error UI states (UPDATED V14 Q7): two states — theme-error (blocked) and
+           theme-network-error (timeout). Both use aria-live="polite". See-suggestions link RETIRED.
+Item 22 — Blocked-theme recovery flow (UPDATED V14 Q7): clear input + show error + chip sweep.
+Item 27 — Content Gate Tier Structure. Tier 0 = safety-critical (ZERO UI feedback).
+           Tier 1 = age-appropriateness (chip sweep + saffron error). MUST SURVIVE.
+Item 28 — 3-Second Server Validation Progress Signal. Saffron progress hairline animates
+           during server validation. prefers-reduced-motion: static hairline. MUST SURVIVE.
+Item 29 — Content Gate Error Register. saffron #B88414 text, NO red, NO exclamation,
+           NO apology copy. Chip-row sweep 600ms on Tier 1 rejection. MUST SURVIVE.
 
 CLUSTER F — GATE READY STATE + SAMPLE DISPLAY
 
-Item 23 — Two-stage gate (progress + ready).
-           Semantic: gate has two visual states — progress (4 animated
-           steps, 900ms each) transitioning to ready (personalized swap-
-           ins for gate-age, gate-theme, gate-name, gate-theme2). The
-           900ms timing is tested — shorter feels frantic, longer feels
-           broken. Do not tune the timing without user testing.
-           Selector: .gate-progress, .gate-ready, #gate-age/#gate-theme/
-           #gate-name/#gate-theme2
-           Lines (2026-04-21): 1655-1680, 2848-2903
-           PARTIALLY SUPERSEDED (2026-04-21 V14 Q8). RETAINED in
-           structure, CHANGED in content. Progress state (three seconds of
-           server validation): retained. Saffron progress hairline per
-           Item 28. 900ms-per-step timing from V13 is retired; V14 uses a
-           single 3-second saffron hairline animation that matches the
-           server validation window, not four choreographed steps. Ready
-           state: retained in structure, changed in content. Displays the
-           matched static sample week from the library, NOT a generated
-           plan. Personalization swap-ins (#gate-age, #gate-theme,
-           #gate-name, #gate-theme2) remain, applied to the sample label
-           per Item 33 and subscribe CTA per Item 34. Re-verify line
-           anchors after V14 Prompt 8 ships.
-
-Item 24 — Onboarding URL construction.
-           Semantic: hands off name, age, theme, email, and wigglyKid to
-           /plan/onboarding as query parameters. The receiving route
-           depends on EXACTLY these param names. Renaming any param breaks
-           the handoff silently (the receiving route reads undefined).
-           Selector: submit handoff URL construction in gate ready-state
-           listener
-           Lines (2026-04-21): 2893-2898
-           CONTRACT EVOLVED (2026-04-21 V14 Q8 + Q4). V13 passed
-           name/age/theme/email/wigglyKid as query params to
-           /plan/onboarding. Under Q8's static-sample product model and
-           Q4's multi-child architecture, the handoff contract evolves:
-           Children stored as array in component state (per R14); array
-           passed to Phase 2 via sessionStorage OR query params (decision
-           pending from Amir). Demographic combo (theme, age of child 01,
-           wigglyKid) drives closest-match lookup to static sample library.
-           Email NOT captured at this handoff — moves to Phase 2
-           subscription checkout per Item 35. Re-verify anchors after V14
-           Prompt 5 and Prompt 8 ship.
-
-Item 25 — Progressive email-enable.
-           Semantic: the final submit button stays disabled until the
-           email field has a value. Not enforced by a native HTML
-           constraint — manual JS logic. If the manual logic is removed
-           while relying on native validation, the field bypasses the
-           gate.
-           Selector: email input listener + submit button disabled
-           property
-           Lines (2026-04-21): 2877-2886
-           RETIRED (2026-04-21 V14 Q8). Superseded by: Item 35 (Email
-           Capture at Subscription, Not Pre-Subscription). No email field
-           exists at the homepage submit or the gate ready state. Submit
-           button enablement is driven by theme + first child's name + age
-           completeness only. The email input element and its listener are
-           removed by V14 Prompts 1 and 6.
-
-Item 26 — Age Stepper Native-First Contract. NEW (2026-04-21 V14 Q6).
-           Semantic: Native <input type="number"> with min=3, max=12,
-           step=1, required, inputmode="numeric", autocomplete="off",
-           aria-describedby="age-error". Arrow buttons are chrome that
-           call stepUp() / stepDown(). NO custom role="spinbutton" or
-           aria-valuenow overrides. Error state uses aria-invalid +
-           aria-describedby + visually-hidden aria-live="polite" region.
-           Home/End keys implemented custom. prefers-reduced-motion
-           disables touch-hold auto-increment. forced-colors uses system
-           colors via native input defaults. MUST SURVIVE all future
-           refactors. The temptation to simplify by removing required,
-           autocomplete="off", or aria-describedby is the exact
-           simplification that breaks this lock — each attribute addresses
-           a specific accessibility failure mode.
-           Selector: #f-age (native number input), .age-box (wrapper),
-           .stepper-decrement, .stepper-increment, #age-error
-           (visually-hidden aria-live region) | Lines: TBD, introduced by
-           V14 Prompt 1 (DOM), full behavior Prompt 4 | Re-verify line
-           anchors on session open.
-           Source: V14 Spec Q6 resolution, 2026-04-21 evening.
-           Amy directive 2026-04-22: readonly attribute added to native
-           input. No typing permitted. Steppers, wheel, keyboard arrows,
-           and touch-hold are the only input surfaces.
-           Constraint-by-construction.
-
-Item 27 — Content Gate Tier Structure. NEW (2026-04-21 V14 Q7).
-           Semantic: Blocklist entries must carry a tier field. Tier 0 =
-           safety-critical (grooming, CSAM, child exploitation signals).
-           Tier 1 = age-appropriateness (keywords with legitimate
-           educational context but not a fit for Wizkoo's register). Tier
-           0 rejections show ZERO UI feedback — surfacing the trigger
-           keywords teaches bad actors what to avoid. Tier 1 rejections
-           use the Item 29 error pattern with chip sweep. Tier assignments
-           reviewed quarterly by Amy with Amir. MUST SURVIVE. The
-           temptation to simplify by collapsing tiers is the exact
-           simplification that surfaces Tier 0 keywords to bad actors.
-           Selector: BLOCKLIST array entries gain a tier field;
-           isThemeBlocked() returns {blocked, tier} not just a boolean;
-           submit handler branches on tier | Lines: TBD, schema designed
-           by V14 Prompt 3 prerequisite (Amir Open Item). Re-verify
-           anchors after Prompt 3 ships.
-           Source: V14 Spec Q7 resolution, 2026-04-21 evening.
-
-Item 28 — 3-Second Server Validation Progress Signal. NEW (2026-04-21 V14).
-           Semantic: During server validation (POST /api/validate-theme
-           with 3-second abort timeout per Item 20), a saffron progress
-           hairline animates below the CTA. Respects
-           prefers-reduced-motion — static hairline under reduced motion.
-           CTA stays disabled during validation window. Protects against
-           perceived-broken-form during the three seconds between click
-           and response. MUST SURVIVE.
-           Selector: #cta-progress-hairline element beneath primary CTA;
-           wired to fetch start/end events | Lines: TBD, DOM stub
-           introduced by V14 Prompt 1, behavior introduced by V14 Prompt
-           6. Re-verify on session open.
-           Source: V14 Spec Items 28 + Q7 context, 2026-04-21 evening.
-
-Item 29 — Content Gate Error Register. NEW (2026-04-21 V14 Q7).
-           Semantic: Error messages on content-gate rejections use saffron
-           #B88414 (darker saffron for text contrast), single or
-           two-clause copy with parental agency preserved, NO red colors,
-           NO exclamation marks, NO apology copy, NO "Oops." Chip-row
-           sweep animation fires on Tier 1 blocked-theme rejection
-           (left-to-right saffron hairline sweep over 600ms, fading
-           transparent over next 200ms). aria-live="polite" announcement.
-           Under prefers-reduced-motion, static saffron underline on first
-           chip for 2 seconds then fade. MUST SURVIVE.
-           Selector: #theme-error copy + saffron text color; chip-row
-           sweep animation CSS class + JS trigger | Lines: TBD, introduced
-           by V14 Prompt 3. Re-verify on session open.
-           Source: V14 Spec Q7 resolution, 2026-04-21 evening.
-
-Item 30 — No Live Generation on Homepage Submit. NEW (2026-04-21 V14 Q8).
-           Semantic: The homepage submit flow runs validation only (Items
-           17, 18, 19, 20). Generation fires only for authenticated,
-           paying subscribers inside Phase 2. The gate ready state displays
-           a static sample matched by demographic lookup. Any Claude Code
-           session tempted to "add live generation back to the free flow"
-           is violating this lock. The product model is
-           curation-subscription, not per-visitor AI generation. At $0.08
-           per generation, live generation per visitor bleeds money to
-           scrapers, abuse vectors, and non-converting traffic.
-           Curation-subscription scales with revenue, not traffic. MUST
-           SURVIVE.
-           Selector: submit chain terminates at lookup + render; NO calls
-           to generation API in public-path code | Verification: server
-           logs must show zero generation API calls originating from
-           public-path submits (per V14 Spec Section 11.4).
-           Source: V14 Spec Q8 resolution, 2026-04-21 evening.
-
-Item 31 — Homepage CTA Expectation Microcopy. RETIRED (2026-04-23 V14 Prompt 9).
-           Semantic (original): The space below the primary CTA rendered:
-           "See a sample week. Personalized plans come with subscription."
-           Plus Jakarta Sans 500, 12px, ink 60% opacity. Two sentences
-           beneath CTA, above R11 support copy. Introduced by V14 Prompt 6
-           (commit TBD), briefly revised to "Sample, not your plan.
-           Subscribe to build theirs." (Marcus Cole Candidate 2, committed
-           at c1f0f55 on 2026-04-22) before full retirement.
-           Retirement reason: Amy design review (2026-04-23 Morning Amy
-           session) determined the microcopy was redundant with Item 32 CTA
-           button honesty ("See a sample week →") and Item 33 sample label
-           template. Both existing locks carry the sample-not-plan semantic
-           natively. R11 support copy retired in the same pass for the same
-           reason.
-           Superseded by: Items 32 (CTA button text) and 33 (sample label
-           template). No under-CTA microcopy exists or should be
-           re-introduced.
-           Status: .cta-note DOM element and all associated CSS rules
-           deleted by Claude Code in commit ecf6944 (Prompt 9, 2026-04-23).
+Item 23 — Two-stage gate (PARTIALLY SUPERSEDED V14 Q8): progress state retained
+           (single 3-second saffron hairline). Ready state: displays matched static
+           sample week, not a generated plan.
+Item 24 — Onboarding URL construction (CONTRACT EVOLVED V14 Q8+Q4):
+           Children stored as array; passed via sessionStorage OR query params
+           (decision pending). Email NOT captured at this handoff.
+Item 25 — RETIRED (V14 Q8). Email capture moved to Phase 2 subscription checkout.
+Item 30 — No Live Generation on Homepage Submit. Submit chain terminates at lookup
+           + render only. NO calls to generation API in public-path code. MUST SURVIVE.
+Item 31 — RETIRED (V14 Prompt 9). Homepage CTA Expectation Microcopy deleted.
            Grep for class "cta-note" in index.html must return zero matches.
-           Any future prompt reintroducing microcopy under the primary CTA
-           violates this retirement.
-           Source: V14 Spec R19 (2026-04-21 evening) + 2026-04-23 Morning
-           Amy design review (retirement).
-
-Item 32 — Primary CTA Button Text. NEW (2026-04-21 V14 R18).
-           Semantic: Homepage submit button text is EXACTLY: "See a sample
-           week →". Arrow glyph is part of the button text, not
-           decoration. NOT "Show me this week," NOT "Build your plan," NOT
-           "Get started," NOT "Try Wizkoo," NOT "Make my week." The button
-           is load-bearing honesty under the Q8 product model — the
-           first-read meaning must match what actually happens on click (a
-           sample, not a personalized plan). Any Claude Code session
-           tempted to punchify this button is violating this lock.
-           Selector: primary CTA button textContent | Lines: TBD,
-           introduced by V14 Prompt 1. Re-verify on session open.
-           Source: V14 Spec R18 + Q8, 2026-04-21 evening.
-
-Item 33 — Sample Label Template. NEW (2026-04-21 V14 Q8).
-           Semantic: Sample label copy on the gate ready state renders
-           EXACTLY: "This is a sample week for age [X]. Subscribe to build
-           [Name]'s plan around what they said in the car." Where [X] and
-           [Name] are variables bound to the parent's form inputs. Copy
-           structure MUST NOT change — the "what they said in the car"
-           clause maintains Q1 continuity with the theme field aux label.
-           Typography: Plus Jakarta Sans 500, 14px, ink at 60% opacity,
-           16px margin above the sample card. MUST SURVIVE.
-           Selector: sample label element in gate ready state; swap-ins
-           #gate-age and #gate-name bound to form inputs | Lines: TBD,
-           introduced by V14 Prompt 8. Re-verify on session open.
-           Source: V14 Spec Item 33 + Q8, 2026-04-21 evening.
-
-Item 34 — Subscribe CTA Copy Template. NEW (2026-04-21 V14 Q8).
-           Semantic: The primary subscribe CTA on the sample renders
-           EXACTLY: "Start [Name]'s plan →" where [Name] is bound to the
-           parent's form input. Using the kid's name in the subscribe CTA
-           is a commitment-psychology pattern that CANNOT be traded for
-           generic "Subscribe" or "Start free trial" copy even if A/B
-           testing suggests generic performs better. Secondary link "How
-           Wizkoo works" renders below the primary button as a typographic
-           link, not a button. MUST SURVIVE.
-           Selector: subscribe CTA primary button (filled saffron, Pattern
-           1 per Light Standard v5 CTA Pattern System); secondary link
-           (typographic, not button) | Lines: TBD, introduced by V14
-           Prompt 8. Re-verify on session open.
-           Source: V14 Spec Item 34 + Q8, 2026-04-21 evening.
-
-Item 35 — Email Capture at Subscription, Not Pre-Subscription. NEW (2026-04-21 V14 Q8).
-           Semantic: Email is captured at payment checkout (Phase 2),
-           NEVER at homepage submit or gate ready state. No email opt-in
-           gate between homepage and sample. Any Claude Code session
-           tempted to capture email for a nurture list before subscription
-           is violating this lock. Nurture opt-ins, if built, live on
-           methodology / footer / blog pages, NOT on the homepage
-           conversion path. MUST SURVIVE.
-           Selector: no email input element on homepage; no email input on
-           gate ready state; no pre-subscription email API calls |
-           Verification: grep for type="email" and name="email" in
-           homepage and gate markup must return zero matches after V14
-           Prompt 1 and Prompt 8 ship.
-           Source: V14 Spec Item 35 + Q8, 2026-04-21 evening.
-
-Item 36 — CTA + Sub-CTA Unit Integrity. NEW (2026-04-23 Morning Amy).
-           Semantic: The primary CTA button ("See a sample week →") and
-           the sub-CTA ("MORE KIDS? · ADD THEM NEXT") are a single visual
-           unit. They sit on the same baseline, they move together, they
-           align together. Reference pattern: the-open-seat.html "OPEN A
-           SEAT →" button + "HOW THE OPEN SEAT WORKS" sub-CTA — button
-           left, sub-CTA inline to the right on the same baseline, one
-           composition, one decision moment. NEVER separate them: not via
-           vertical stacking at narrow viewports (except when mobile layout
-           cascades force it), not via independent positioning (e.g.,
-           button left + sub-CTA right), not via competing alignment
-           strategies. Any change to CTA positioning must move the whole
-           unit as one container. Any change to sub-CTA typography,
-           underline, or positioning must preserve its spatial relationship
-           to the button. Any Claude Code session tempted to "right-align
-           the CTA" or "stack the sub-CTA" independently is violating this
-           lock. MUST SURVIVE.
-           Selector: .cta-row flex container at line ~1023 governs both
-           .lbracket button and .sub-cta span; they share a single flex
-           row with baseline alignment | Verification: at all desktop
-           viewports (>=768px), button top and sub-CTA top must differ by
-           <=8px; they are never on separate lines except at
-           max-width:767px mobile stack where the whole unit stacks
-           together.
-           Source: 2026-04-23 Morning Amy design review, after Prompt 14
-           CTA replication. Triggered when Claude chat suggested
-           right-aligning the CTA independently; Amy corrected — the
-           sub-CTA and CTA are one unit, period.
+Item 32 — Primary CTA Button Text: EXACTLY "See a sample week →". No substitutions.
+           Load-bearing honesty under Q8 product model.
+Item 33 — Sample Label Template: "This is a sample week for age [X]. Subscribe to
+           build [Name]'s plan around what they said in the car." MUST SURVIVE.
+Item 34 — Subscribe CTA: "Start [Name]'s plan →". Name bound to form input.
+           Secondary link "How Wizkoo works" below (typographic, not button). MUST SURVIVE.
+Item 35 — Email Capture at Subscription, Not Pre-Subscription. No email input on
+           homepage or gate ready state. Grep for type="email" must return zero. MUST SURVIVE.
+Item 36 — CTA + Sub-CTA Unit Integrity. Primary CTA and sub-CTA ("MORE KIDS? · ADD THEM NEXT")
+           are one visual unit. They move together, align together. Never separate them
+           independently. MUST SURVIVE.
 
 ### ADDING NEW REGISTRIES
 
-This section is designed to expand. Candidate surfaces that may warrant
-their own preservation registries as they harden: Plan Generator
-onboarding form (Next.js app), Plan Generator webhook handlers (Stripe,
-Clerk), Plan Generator cron jobs, Elementum game state management
-(game.js monolith), Atlas continent palette and geographic data, Safety
-gate logic (safety.ts).
+Candidate surfaces for their own registries as they harden:
+Plan Generator onboarding form, webhook handlers (Stripe, Clerk), cron jobs,
+Elementum game state management (game.js), Atlas geographic data, safety.ts.
 
-New registries are added via the Transfer Queue. Each new registry
-follows the same format: surface name, origin context, numbered items
-with one-line rationale per item. Registries never shrink except by
-deliberate decision logged in LOCKED DECISIONS with a superseding entry.
+New registries are added via the Transfer Queue. Format: surface name, origin context,
+numbered items with one-line rationale. Registries never shrink except by deliberate
+decision logged in LOCKED DECISIONS.
 
 ---
 
 ## OPEN ITEMS (post-launch follow-up)
 
 1. BRUSHSTROKE SVG ASSET — UPGRADE REQUIRED
-   Current state: The brushstroke checkmark in the homepage hero form (Field 1
-     fill, Field 2 fill, Wiggly kid toggle on-state) uses a close approximation
-     built from a single quadratic bezier path (SVG <path> Q command). It reads
-     as a checkmark but lacks genuine hand-drawn character.
-   Location: index.html — three identical inline SVG instances within .brushcheck
-     elements; wiggly toggle uses fourth instance in .wiggly-check-svg.
-   What to do: Commission a hand-drawn brushstroke checkmark illustration (Figma
-     with pen tool, Procreate, or Illustrator) and export as optimized SVG.
-     Replace placeholder <path> across all four instances. The SVG must have
-     stroke-dasharray/stroke-dashoffset set to path length so the SMIL draw
-     animation works. Measure the new path length and update both attributes.
-   Priority: Post-launch polish. Current state passes visual QA at normal reading
-     distance. Do not block launch on this.
+   Current: placeholder quadratic bezier checkmark in .brushcheck elements (4 instances).
+   What to do: Commission hand-drawn brushstroke checkmark, export as optimized SVG
+     with stroke-dasharray/stroke-dashoffset for SMIL draw animation.
+   Priority: Post-launch polish. Does not block launch.
 
 2. css/components.css — FUTURE PAGES MUST LINK
-   Current state: css/components.css was created April 19, 2026 as the single
-     source of truth for .l-bracket-cta per Operating Principle 6.
-     Currently linked from: index.html, the-open-seat.html.
-   What to do: Every page that uses the L-bracket CTA pattern must link
-     css/components.css in its <head>. Do not duplicate the rule inline.
-     Before adding any new L-bracket to a new page, confirm the link exists.
-   Prevention: Add to pre-flight audit checklist for any new page build:
-     "Does this page link css/components.css if it uses .l-bracket-cta?"
+   Current: linked from index.html and the-open-seat.html only.
+   What to do: Every page using L-bracket CTA must link css/components.css.
+   Prevention: Pre-flight checklist item for new page builds.
 
 3. --expo EASING TOKEN — CONSOLIDATION REQUIRED
-   Current state: --expo is defined in index.html's inline :root. --ease-out-expo
-     is defined in css/tokens.css. They are the same curve. css/tokens.css is not
-     linked from index.html. Components and linked stylesheets (components.css)
-     use --ease-out-expo from tokens.css. Inline index.html styles
-     use --expo. This is fragmentation of the same token across two files.
-   What to do: Link css/tokens.css from index.html. Remove --expo from the inline
-     :root (or alias it to --ease-out-expo for backwards compatibility). Update all
-     inline index.html references from var(--expo) to var(--ease-out-expo).
-     This unifies the token under one name, one file, one definition.
-   Related: Known Bug #7 (--ease-out-expo not linked in index.html).
-   Priority: Dedicated tokens cleanup session. Do not mix into feature work.
+   Current: --expo in index.html inline :root; --ease-out-expo in css/tokens.css. Same curve.
+   What to do: Link tokens.css from index.html. Remove --expo from inline :root.
+   Priority: Dedicated tokens cleanup session. Coordinate with OPEN ITEM 6.
 
 4. .lib-active-filters DUPLICATE — DEFERRED
-   Current state: .lib-active-filters is defined twice in css/library.css:
-     once in the main block (~line 228) and again in the responsive section
-     (~line 746). These are structurally distinct contexts (base vs. mobile
-     override), but the duplication was flagged in the April 2026 dead CSS
-     audit as Category 4 Finding 4.1 and deferred by Amy's explicit decision.
-   What to do: Audit both blocks. If one is genuinely dead, remove it.
-     If both are live but producing the same output, consolidate.
+   Current: defined twice in css/library.css (~line 228 and ~line 746).
+   What to do: Audit both blocks. Consolidate if duplicate.
    Priority: Dedicated library.css cleanup session.
 
 5. components.css line 48 — rgba(232,175,56,1) STILL HARDCODED
-   Current state: @keyframes bracket-pulse contains two keyframe stops using
-     rgba(232,175,56,1) at 0%/100% and rgba(232,175,56,0.9) at 50%.
-     The 0%/100% value was an approved Section B MEDIUM replacement in the
-     April 21, 2026 token consolidation pass, but was skipped at execution
-     time because it is inside a keyframe interpolation. Replacing with
-     var(--saffron) is technically safe (custom properties resolve before
-     animation interpolation) but was conservatively excluded per preflight
-     rules.
-   Location: css/components.css — @keyframes bracket-pulse, line 48.
-   What to do: Replace rgba(232,175,56,1) with var(--saffron) in the
-     0%/100% keyframe stop. Verify the bracket-pulse animation still
-     renders correctly in browser (saffron fully opaque → 0.9 opacity
-     pulse should be imperceptible but intact).
-   Note: rgba(232,175,56,0.9) at the 50% stop has no matching token
-     (no opacity tint tokens exist). Leave that value hardcoded.
-   Priority: Next token consolidation pass or standalone 1-line fix.
+   What to do: Replace with var(--saffron) in @keyframes bracket-pulse 0%/100% stop.
+   Note: rgba(232,175,56,0.9) at 50% stop has no matching token — leave hardcoded.
+   Priority: Next token consolidation pass.
 
 6. 8 HTML PAGES — INLINE :root INSTEAD OF LINKING tokens.css
-   Current state: ages.html, contact.html, esa.html, pricing.html,
-     privacy.html, terms.html, what-we-believe.html, the-open-seat.html
-     each define their own inline :root block with token values
-     (--saffron, --ink, --linen, --paper, etc.) instead of linking
-     css/tokens.css. This creates 8 parallel sources of truth for the
-     same token values. Any future token change must be applied in 9
-     places (tokens.css + 8 inline blocks).
-   What to do: For each page: add <link rel="stylesheet" href="css/tokens.css">
-     to <head>, then remove or reduce the inline :root to only page-specific
-     overrides (e.g. --expo, --snap, --m-col if not in tokens.css).
-     Verify the page renders correctly after each change.
-   Note: index.html is excluded (Preservation Lock item 18).
-   Priority: Dedicated tokens cleanup session. Coordinate with OPEN ITEM 3
-     (--expo / --ease-out-expo consolidation) — both should be resolved
-     in the same pass.
-
-10. ORPHANED SELECTORS IN index.html — CLEANUP DEFERRED
-   Current state: Two selectors remain in index.html that reference moved/removed
-     sections and are now no-ops:
-     (a) .philo-section rule (~line 1166) — background:transparent!important rule
-         targeting a class that does not appear in any HTML on the page. This is a
-         different class from .philo (the moved section) and likely predates it.
-     (b) .phi selector in the homepage scroll reveal querySelectorAll (~line 2206)
-         — querySelectorAll('.reveal,.plan-card-entrance,.phi,.cta-reveal') will
-         return an empty NodeList for .phi since no .phi elements exist on the
-         homepage after the section move. Harmless but dead.
-   What to do: Remove both in the next Layer 1 dead code hygiene pass.
-   Priority: Next dead code sweep. Do not mix into feature work.
-
-8. GOOGLE SEARCH CONSOLE — /themes INDEXING SUBMISSION PENDING
-   Current state: https://www.wizkoo.com/themes is live and sitemap.xml updated.
-     Google Search Console URL inspection + Request Indexing not yet submitted.
-     Requires browser login to GSC — cannot be completed by Claude Code.
-   What to do: Open Google Search Console → select wizkoo.com property →
-     URL Inspection → paste https://www.wizkoo.com/themes → Request Indexing.
-     Also: confirm sitemap.xml is accepted in GSC Coverage report.
-   Priority: Amy to complete manually. First available session after April 26, 2026.
-
-9. GOOGLE RICH RESULTS TEST — /themes PENDING
-   Current state: 5 JSON-LD blocks are in themes.html (confirmed locally and on
-     production). Rich Results Test at search.google.com/test/rich-results not
-     yet run against the live URL. Cannot be completed by Claude Code (requires
-     browser).
-   What to do: Go to search.google.com/test/rich-results → paste
-     https://www.wizkoo.com/themes → run test. All 5 blocks should pass.
-   Priority: Amy to complete manually. First available session after April 26, 2026.
+   Pages: ages.html, contact.html, esa.html, pricing.html, privacy.html,
+          terms.html, what-we-believe.html, the-open-seat.html.
+   What to do: Add <link rel="stylesheet" href="css/tokens.css"> to each, then remove
+     duplicate inline :root values. index.html is excluded (Preservation Lock item 18).
+   Priority: Dedicated tokens cleanup session.
 
 7. HOVER QUERY CENTRALIZATION INTO base.css — DEFERRED
-   Current state: All pages now use consistent OR syntax
-     `(hover:none),(pointer:coarse)` (standardized April 21, 2026).
-     However, each page still declares its own hover media query inline
-     rather than inheriting from css/base.css, which already declares
-     the correct OR form at line 29.
-   What to do: For each page that declares `@media(hover:none),(pointer:coarse)`
-     inline, verify that css/base.css:29 already covers the same selectors,
-     then remove the per-page inline declaration. Pages to audit:
-     index.html (lines 543, 569, 849), about.html (134), pricing.html (91),
-     what-we-believe.html (81), ages.html (62), esa.html (129).
-   Note: Some per-page blocks contain page-specific hover resets
-     (e.g. about.html .tier:hover, what-we-believe.html .belief:hover)
-     that cannot move to base.css without creating specificity dependencies.
-     These must remain per-page; only the shared .cursor{display:none}
-     pattern is a candidate for centralization.
-   Priority: Dedicated hover centralization session. Do not mix into
-     feature work. Deferred from April 21, 2026 responsive audit (Conflict 4).
+   Current: All pages use consistent OR syntax (hover:none),(pointer:coarse) but
+     declare it per-page instead of inheriting from css/base.css:29.
+   What to do: Audit per-page blocks; remove those covered by base.css.
+     Note: page-specific hover resets must remain per-page.
+   Priority: Dedicated hover centralization session.
+
+8. GOOGLE SEARCH CONSOLE — /themes INDEXING SUBMISSION PENDING
+   What to do: GSC → wizkoo.com → URL Inspection → paste wizkoo.com/themes → Request Indexing.
+   Priority: Amy to complete manually (requires browser login).
+
+9. GOOGLE RICH RESULTS TEST — /themes PENDING
+   What to do: search.google.com/test/rich-results → paste wizkoo.com/themes.
+   Priority: Amy to complete manually.
+
+10. ORPHANED SELECTORS IN index.html — CLEANUP DEFERRED
+    (a) .philo-section rule (~line 1166): targets a class not in any HTML.
+    (b) .phi in querySelectorAll (~line 2206): no .phi elements on homepage after section move.
+    What to do: Remove both in the next Layer 1 dead code hygiene pass.
 
 ---
 
 ## ACCESSIBILITY (non-negotiable)
 
+Global minimums: AMY_TECHNICAL_STANDARDS.md Section 7.
+
+Wizkoo-specific:
 prefers-reduced-motion: kills all particle effects. Opacity-only transitions.
 All interactive elements: keyboard equivalents.
 Dragon state changes: aria-live.
@@ -3671,7 +1775,9 @@ Audio: "gentle sounds" mode removes all sudden-onset sounds.
 
 ## PERFORMANCE (non-negotiable)
 
-Target device: 2020 iPad Air, Safari, 3 tabs open.
+Global targets: AMY_TECHNICAL_STANDARDS.md Section 8.
+
+Wizkoo target device: 2020 iPad Air, Safari, 3 tabs open.
 No CSS filter:blur() on simultaneously visible tiles.
 One orbiting particle per tile maximum on grid.
 All animation loops pause via IntersectionObserver when offscreen.
@@ -3680,7 +1786,7 @@ All animation loops pause via IntersectionObserver when offscreen.
 
 ═══════════════════════════════════════
 LAYER 7 — DEEP REFERENCE
-Read this layer only when you need exact token values, API details,
+Read only when you need exact token values, API details,
 or prompt system internals. Do not read on every session.
 ═══════════════════════════════════════
 
@@ -3689,66 +1795,66 @@ or prompt system internals. Do not read on every session.
 Source: C:\Users\amyog\Desktop\wizkoo\css\tokens.css (62 lines, :root block)
 
 Colors:
-  --saffron:              #E8AF38                                         (line 3)
-  --saffron-pale:         #FFF9EE                                         (line 4)
-  --ink:                  #0C1020                                         (line 5)
-  --paper:                #FAFAFA                                         (line 6)
-  --warm-bg:              #ECEAE3                                         (line 7)
-  --mid:                  #4A4850                                         (line 8)
-  --faint:                #A8A6B0                                         (line 9)
-  --rule:                 #E0DED6                                         (line 10)
-  --linen:                #F2F0EA                                         (line 30)
-  --section-light:        var(--linen)                                    (line 33)
-  --section-warm:         var(--warm-bg)                                  (line 34)
+  --saffron:              #E8AF38                (line 3)
+  --saffron-pale:         #FFF9EE                (line 4)
+  --ink:                  #0C1020                (line 5)
+  --paper:                #FAFAFA                (line 6)
+  --warm-bg:              #ECEAE3                (line 7)
+  --mid:                  #4A4850                (line 8)
+  --faint:                #A8A6B0                (line 9)
+  --rule:                 #E0DED6                (line 10)
+  --linen:                #F2F0EA                (line 30)
+  --section-light:        var(--linen)           (line 33)
+  --section-warm:         var(--warm-bg)         (line 34)
 
 Spacing:
-  --section-pad:          80px                                            (line 13)
-  --section-pad-mobile:   48px                                            (line 14)
-  --content-pad:          48px                                            (line 15)
-  --content-pad-mobile:   24px                                            (line 16)
-  --max-width:            1200px                                          (line 17)
+  --section-pad:          80px                   (line 13)
+  --section-pad-mobile:   48px                   (line 14)
+  --content-pad:          48px                   (line 15)
+  --content-pad-mobile:   24px                   (line 16)
+  --max-width:            1200px                 (line 17)
 
 Type scale:
-  --hero-size:            4.8rem                                          (line 20)
-  --hero-size-mobile:     2.4rem                                          (line 21)
-  --h2-size:              2.8rem                                          (line 22)
-  --h2-size-mobile:       1.8rem                                          (line 23)
-  --body-size:            1.05rem                                         (line 24)
-  --small-size:           0.95rem                                         (line 25)
-  --tag-size:             0.6rem                                          (line 26)
-  --button-size:          0.78rem                                         (line 27)
+  --hero-size:            4.8rem                 (line 20)
+  --hero-size-mobile:     2.4rem                 (line 21)
+  --h2-size:              2.8rem                 (line 22)
+  --h2-size-mobile:       1.8rem                 (line 23)
+  --body-size:            1.05rem                (line 24)
+  --small-size:           0.95rem                (line 25)
+  --tag-size:             0.6rem                 (line 26)
+  --button-size:          0.78rem                (line 27)
 
 Shadows:
-  --shadow-soft:          0 4px 24px rgba(10, 10, 10, 0.06)              (line 37)
-  --shadow-card:          0 8px 32px rgba(10, 10, 10, 0.08)              (line 38)
-  --shadow-elevated:      0 16px 48px rgba(10, 10, 10, 0.12)             (line 39)
-  --shadow-saffron-glow:  0 8px 32px rgba(232, 175, 56, 0.15)            (line 40)
+  --shadow-soft:          0 4px 24px rgba(10,10,10,0.06)              (line 37)
+  --shadow-card:          0 8px 32px rgba(10,10,10,0.08)              (line 38)
+  --shadow-elevated:      0 16px 48px rgba(10,10,10,0.12)             (line 39)
+  --shadow-saffron-glow:  0 8px 32px rgba(232,175,56,0.15)            (line 40)
 
 Element family colors (Elementum app):
-  --elem-nonmetal:        #5B8C5A                                         (line 43)
-  --elem-noble-gas:       #7B68AE                                         (line 44)
-  --elem-transition:      #4A7FB5                                         (line 45)
-  --elem-metalloid:       #8B7355                                         (line 46)
+  --elem-nonmetal:        #5B8C5A                (line 43)
+  --elem-noble-gas:       #7B68AE                (line 44)
+  --elem-transition:      #4A7FB5                (line 45)
+  --elem-metalloid:       #8B7355                (line 46)
 
 Program colors:
-  --prog-atlas:           #2D7A8A                                         (line 49)
-  --prog-elementum:       var(--saffron)                                  (line 50)
+  --prog-atlas:           #2D7A8A                (line 49)
+  --prog-elementum:       var(--saffron)         (line 50)
 
 Animation:
-  --ease-out-expo:        cubic-bezier(0.16, 1, 0.3, 1)                  (line 53)
-  --ease-out-back:        cubic-bezier(0.34, 1.56, 0.64, 1)              (line 54)
-  --duration-normal:      400ms                                           (line 55)
-  --duration-slow:        700ms                                           (line 56)
-  --duration-reveal:      900ms                                           (line 57)
+  --ease-out-expo:        cubic-bezier(0.16,1,0.3,1)                  (line 53)
+  --ease-out-back:        cubic-bezier(0.34,1.56,0.64,1)              (line 54)
+  --duration-normal:      400ms                  (line 55)
+  --duration-slow:        700ms                  (line 56)
+  --duration-reveal:      900ms                  (line 57)
 
 Texture:
-  --grain-opacity:        0.03                                            (line 60)
+  --grain-opacity:        0.03                   (line 60)
   --noise-url:            SVG data URL (fractalNoise baseFrequency 0.9, 4 octaves) (line 61)
 
-Additional tokens defined inline in nav.js (injected into :root, lines 27–31):
-  --expo:                 cubic-bezier(0.16,1,0.3,1)
-  --saffron:              #E8AF38   (duplicate — nav ensures fallback)
-  --ink:                  #0C1020   (duplicate — nav ensures fallback)
+Additional tokens injected by nav.js into :root (lines 27–31):
+  --expo:    cubic-bezier(0.16,1,0.3,1)   (duplicate of --ease-out-expo)
+  --saffron: #E8AF38                       (duplicate — nav ensures fallback)
+  --ink:     #0C1020                       (duplicate — nav ensures fallback)
 
 ---
 
@@ -3759,240 +1865,116 @@ Source: C:\Users\amyog\Desktop\wizkoo-plan-generator\src\app\globals.css
 LAYER 1: PRIMITIVE TOKENS (lines 13–125)
 
 Colors — The Triad:
-  --color-saffron:                    #E8AF38                            (line 15)
-  --color-saffron-hover:              #F0BD50                            (line 16)
-  --color-saffron-pressed:            #D4A030                            (line 17)
-  --color-ink:                        #0C1020                            (line 18)
-  --color-linen:                      #F2F0EA                            (line 19)
-  --color-paper:                      #FAFAFA                            (line 20)
-  --color-warm-bg:                    #ECEAE3                            (line 21)
-  --color-rule:                       #E0DED6                            (line 22)
+  --color-saffron:                    #E8AF38        (line 15)
+  --color-saffron-hover:              #F0BD50        (line 16)
+  --color-saffron-pressed:            #D4A030        (line 17)
+  --color-ink:                        #0C1020        (line 18)
+  --color-linen:                      #F2F0EA        (line 19)
+  --color-paper:                      #FAFAFA        (line 20)
+  --color-warm-bg:                    #ECEAE3        (line 21)
+  --color-rule:                       #E0DED6        (line 22)
 
 Colors — Ultramarine spectrum:
-  --color-ultramarine-sidebar:        #0C1428                            (line 25)
-  --color-ultramarine-base:           #101830                            (line 26)
-  --color-ultramarine-glow:           #182848                            (line 27)
-  --color-ultramarine-mid:            #1A2A5A                            (line 28)
-  --color-ultramarine-cursor:         #0A41B2                            (line 29)
+  --color-ultramarine-sidebar:        #0C1428        (line 25)
+  --color-ultramarine-base:           #101830        (line 26)
+  --color-ultramarine-glow:           #182848        (line 27)
+  --color-ultramarine-mid:            #1A2A5A        (line 28)
+  --color-ultramarine-cursor:         #0A41B2        (line 29)
 
 Colors — Semantic states:
-  --color-error:                      #E85A5A                            (line 35)
-  --color-warning:                    rgba(232, 175, 56, 0.6)            (line 36)
+  --color-error:                      #E85A5A        (line 35)
+  --color-warning:                    rgba(232,175,56,0.6) (line 36)
 
 Colors — Text on light surfaces:
-  --color-text-primary:               #0C1020                            (line 39)
-  --color-text-secondary:             #4A4850                            (line 40)
-  --color-text-tertiary:              #666666                            (line 41)
-  --color-text-muted:                 #999999                            (line 42)
-  --color-text-muted-aa:              #666666  (WCAG AA fix)             (line 46)
+  --color-text-primary:               #0C1020        (line 39)
+  --color-text-secondary:             #4A4850        (line 40)
+  --color-text-tertiary:              #666666        (line 41)
+  --color-text-muted:                 #999999        (line 42)
+  --color-text-muted-aa:              #666666  (WCAG AA fix) (line 46)
 
 Colors — Text on dark surfaces:
-  --color-text-primary-dark:          #F0F2F8                            (line 49)
-  --color-text-body-dark:             #C8CDDA                            (line 50)
-  --color-text-meta-dark:             #8C91A5                            (line 51)
-  --color-text-ghost-dark:            #50556E                            (line 52)
+  --color-text-primary-dark:          #F0F2F8        (line 49)
+  --color-text-body-dark:             #C8CDDA        (line 50)
+  --color-text-meta-dark:             #8C91A5        (line 51)
+  --color-text-ghost-dark:            #50556E        (line 52)
 
 Colors — Dark surface elevations:
-  --color-surface-sidebar:            #0C1428                            (line 55)
-  --color-surface-floor:              #101830                            (line 56)
-  --color-surface-card-dark:          #1A2440                            (line 57)
-  --color-surface-modal-dark:         #202C4A                            (line 58)
+  --color-surface-sidebar:            #0C1428        (line 55)
+  --color-surface-floor:              #101830        (line 56)
+  --color-surface-card-dark:          #1A2440        (line 57)
+  --color-surface-modal-dark:         #202C4A        (line 58)
 
 Spacing (4px base):
-  --space-xs:    4px                                                     (line 61)
-  --space-sm:    8px                                                     (line 62)
-  --space-md:    16px                                                    (line 63)
-  --space-lg:    24px                                                    (line 64)
-  --space-xl:    32px                                                    (line 65)
-  --space-2xl:   48px                                                    (line 66)
-  --space-3xl:   64px                                                    (line 67)
-  --space-4xl:   80px                                                    (line 68)
+  --space-xs: 4px  --space-sm: 8px  --space-md: 16px  --space-lg: 24px
+  --space-xl: 32px  --space-2xl: 48px  --space-3xl: 64px  --space-4xl: 80px
 
 Typography — font families:
-  --font-display:    var(--font-sora, 'Sora', sans-serif)                (line 71)
-  --font-body:       var(--font-inter, 'Inter', system-ui, -apple-system, sans-serif) (line 72)
-  --font-mono:       var(--font-space-mono, 'Space Mono', monospace)     (line 73)
+  --font-display:    var(--font-sora, 'Sora', sans-serif)
+  --font-body:       var(--font-inter, 'Inter', system-ui, sans-serif)
+  --font-mono:       var(--font-space-mono, 'Space Mono', monospace)
 
 Typography — size scale:
-  --text-xs:     0.42rem                                                 (line 76)
-  --text-sm:     0.48rem                                                 (line 77)
-  --text-base:   0.72rem                                                 (line 78)
-  --text-md:     0.82rem                                                 (line 79)
-  --text-lg:     0.92rem                                                 (line 80)
-  --text-xl:     1.0rem                                                  (line 81)
-  --text-2xl:    1.2rem                                                  (line 82)
-  --text-3xl:    1.8rem                                                  (line 83)
-  --text-4xl:    2.4rem                                                  (line 84)
-  --text-hero:   clamp(2.25rem, 5vw, 4rem)                              (line 85)
+  --text-xs: 0.42rem  --text-sm: 0.48rem  --text-base: 0.72rem  --text-md: 0.82rem
+  --text-lg: 0.92rem  --text-xl: 1.0rem   --text-2xl: 1.2rem    --text-3xl: 1.8rem
+  --text-4xl: 2.4rem  --text-hero: clamp(2.25rem, 5vw, 4rem)
 
 Animation — easings:
-  --ease-editorial:  cubic-bezier(0.16, 1, 0.3, 1)                      (line 88)
-  --ease-snap:       cubic-bezier(0.22, 1, 0.36, 1)                     (line 89)
-  --ease-bounce:     cubic-bezier(0.34, 1.56, 0.64, 1)                  (line 90)
+  --ease-editorial:  cubic-bezier(0.16,1,0.3,1)
+  --ease-snap:       cubic-bezier(0.22,1,0.36,1)
+  --ease-bounce:     cubic-bezier(0.34,1.56,0.64,1)
 
 Animation — durations:
-  --duration-instant:    80ms                                            (line 93)
-  --duration-fast:       150ms                                           (line 94)
-  --duration-normal:     280ms                                           (line 95)
-  --duration-slow:       400ms                                           (line 96)
-  --duration-entrance:   600ms                                           (line 97)
+  --duration-instant: 80ms  --duration-fast: 150ms  --duration-normal: 280ms
+  --duration-slow: 400ms    --duration-entrance: 600ms
 
 Elevation — saffron offset shadows:
-  --shadow-card:          8px 8px 0 var(--color-saffron)                (line 100)
-  --shadow-card-hover:    12px 12px 0 var(--color-saffron)              (line 101)
-  --shadow-card-completed: 8px 8px 0 #D4D8E8                            (line 102)
-  --shadow-button:        6px 6px 0 var(--color-saffron)                (line 103)
-  --shadow-button-hover:  9px 9px 0 var(--color-saffron)                (line 104)
-  --shadow-subtle:        0 2px 4px rgba(12,16,32,0.04),
-                          0 8px 24px rgba(12,16,32,0.06)                (line 105)
+  --shadow-card:          8px 8px 0 var(--color-saffron)
+  --shadow-card-hover:    12px 12px 0 var(--color-saffron)
+  --shadow-button:        6px 6px 0 var(--color-saffron)
+  --shadow-button-hover:  9px 9px 0 var(--color-saffron)
 
 Border radius:
-  --radius-none:   0px                                                   (line 108)
-  --radius-sm:     2px                                                   (line 109)
-  --radius-md:     4px                                                   (line 110)
-  --radius-lg:     8px                                                   (line 111)
-  --radius-full:   9999px                                                (line 112)
+  --radius-none: 0px  --radius-sm: 2px  --radius-md: 4px  --radius-lg: 8px  --radius-full: 9999px
 
 Z-index scale:
-  --z-base:        0                                                     (line 115)
-  --z-card:        1                                                     (line 116)
-  --z-sticky:      10                                                    (line 117)
-  --z-overlay:     100                                                   (line 118)
-  --z-spectacle:   200                                                   (line 119)
-  --z-nav:         1000                                                  (line 120)
-  --z-cursor:      999999  (above Clerk popover)                        (line 124)
+  --z-base: 0  --z-card: 1  --z-sticky: 10  --z-overlay: 100
+  --z-spectacle: 200  --z-nav: 1000  --z-cursor: 999999
 
 LAYER 2: SEMANTIC TOKENS (lines 129–150)
-
-  --accent-primary:           var(--color-saffron)                       (line 130)
-  --accent-primary-hover:     var(--color-saffron-hover)                 (line 131)
-  --accent-primary-pressed:   var(--color-saffron-pressed)               (line 132)
-  --bg-page:                  var(--color-linen)                         (line 134)
-  --bg-card:                  var(--color-paper)                         (line 135)
-  --bg-section-alt:           var(--color-warm-bg)                       (line 136)
-  --bg-input:                 var(--color-paper)                         (line 137)
-  --border-default:           var(--color-ink)                           (line 139)
-  --border-subtle:            var(--color-rule)                          (line 140)
-  --focus-ring-color:         var(--color-ultramarine-cursor)            (line 142)
-  --focus-ring-width:         2px                                        (line 143)
-  --focus-ring-offset:        2px                                        (line 144)
-  --nav-height:               48px                                       (line 147)
-  --nav-bg:                   rgba(12, 16, 32, 0.95)                    (line 148)
-  --blur-nav:                 12px                                       (line 149)
+  --accent-primary:           var(--color-saffron)
+  --bg-page:                  var(--color-linen)
+  --bg-card:                  var(--color-paper)
+  --bg-section-alt:           var(--color-warm-bg)
+  --focus-ring-color:         var(--color-ultramarine-cursor)
+  --nav-height:               48px
+  --nav-bg:                   rgba(12,16,32,0.95)
+  --blur-nav:                 12px
 
 LAYER 3: COMPONENT TOKENS (lines 154–172)
-
-Plan card:
-  --plan-card-bg:             var(--bg-card)                             (line 156)
-  --plan-card-border-width:   1.5px                                      (line 157)
-  --plan-card-radius:         var(--radius-sm)                           (line 158)
-  --plan-card-padding:        var(--space-lg)                            (line 159)
-  --plan-card-shadow-offset:  8px                                        (line 160)
-  --plan-card-shadow-color:   var(--color-saffron)                       (line 161)
-
-Block card:
-  --block-card-border-left:   2px solid var(--accent-primary)            (line 164)
-  --block-card-bg-hover:      rgba(232, 175, 56, 0.03)                   (line 165)
-  --block-card-bg-completed:  rgba(232, 175, 56, 0.02)                   (line 166)
-
-Intake:
-  --intake-max-width:         480px                                      (line 169)
-  --intake-progress-height:   2px                                        (line 170)
-  --intake-continue-height:   56px                                       (line 171)
+  Plan card: --plan-card-bg, --plan-card-border-width: 1.5px, --plan-card-radius: var(--radius-sm)
+             --plan-card-padding: var(--space-lg), --plan-card-shadow-offset: 8px
+  Block card: --block-card-border-left: 2px solid var(--accent-primary)
+  Intake:     --intake-max-width: 480px  --intake-progress-height: 2px  --intake-continue-height: 56px
 
 SPECTACLE TOKENS (lines 176–252) — all prefixed --spectacle-*
-
-Nucleus Glow (A9):
-  --spectacle-nucleus-glow-opacity-min:          0.04                   (line 178)
-  --spectacle-nucleus-glow-opacity-max:          0.06                   (line 179)
-  --spectacle-nucleus-glow-opacity-spike:        0.12                   (line 180)
-  --spectacle-nucleus-glow-cycle-resting:        6s                     (line 181)
-  --spectacle-nucleus-glow-cycle-active:         4.5s                   (line 182)
-  --spectacle-nucleus-glow-radius:               40%                    (line 183)
-  --spectacle-nucleus-glow-radius-mobile:        50%                    (line 184)
-  --spectacle-nucleus-glow-radius-contracted:    36%                    (line 185)
-  --spectacle-nucleus-glow-materialize-duration: 800ms                  (line 186)
-
-Orbital Paths (A9):
-  --spectacle-orbit-stroke-opacity-1:       0.05                        (line 189)
-  --spectacle-orbit-stroke-opacity-2:       0.04                        (line 190)
-  --spectacle-orbit-stroke-opacity-3:       0.03                        (line 191)
-  --spectacle-orbit-stroke-opacity-4:       0.025                       (line 192)
-  --spectacle-orbit-stroke-width-1:         1px                         (line 193)
-  --spectacle-orbit-stroke-width-4:         0.8px                       (line 194)
-  --spectacle-orbit-rotation-resting:       120s                        (line 195)
-  --spectacle-orbit-rotation-assembling:    180s                        (line 196)
-  --spectacle-orbit-entrance-stagger:       150ms                       (line 197)
-  --spectacle-orbit-entrance-start:         400ms                       (line 198)
-  --spectacle-orbit-fade-duration:          500ms                       (line 199)
-
-Breathing Dot (A9):
-  --spectacle-dot-size-birth:               12px                        (line 202)
-  --spectacle-dot-size-evolved:             6px                         (line 203)
-  --spectacle-dot-migration-duration:       400ms                       (line 204)
-  --spectacle-dot-breathe-cycle:            2s                          (line 205)
-
-Tier Warmth (D17-020):
-  --spectacle-tier-warmth-base:             1.0                         (line 208)
-  --spectacle-tier-warmth-returning:        1.1  (5–19 plans)           (line 209)
-  --spectacle-tier-warmth-veteran:          1.15 (≥20 plans)            (line 210)
-
-Freshness (D17-018):
-  --spectacle-freshness-angle-variance:     15                          (line 213)
-
-Settle Revert (D17-024/D17-026):
-  --spectacle-settle-revert-duration:       150ms                       (line 216)
-
-Ember Dots (A10):
-  --spectacle-ember-size:                   5px                         (line 219)
-  --spectacle-ember-opacity-resting:        0.4                         (line 220)
-  --spectacle-ember-opacity-flash:          0.8                         (line 221)
-  --spectacle-ember-glow-radius-resting:    8px                         (line 222)
-  --spectacle-ember-glow-radius-flash:      20px                        (line 223)
-  --spectacle-ember-flash-duration:         600ms                       (line 224)
-  --spectacle-ember-drift-streaming:        0.7                         (line 225)
-  --spectacle-ember-drift-assembling:       0.4                         (line 226)
-  --spectacle-ember-drift-settling:         0.05                        (line 227)
-  --spectacle-ember-converge-duration:      300ms                       (line 228)
-
-Resolve Mode (A11):
-  --spectacle-resolve-clip-start:           circle(36% at 50% 50%)      (line 231)
-  --spectacle-resolve-transform-duration:   500ms                       (line 232)
-  --spectacle-resolve-transform-delay:      300ms                       (line 233)
-
-Crystallization Tone (A11):
-  --spectacle-tone-freq-warm:               196  (G3 Hz)                (line 236)
-  --spectacle-tone-freq-cool:               247  (B3 Hz)                (line 237)
-  --spectacle-tone-volume:                  0.4                         (line 238)
-  --spectacle-tone-attack:                  200ms                       (line 239)
-  --spectacle-tone-sustain:                 600ms                       (line 240)
-  --spectacle-tone-release:                 700ms                       (line 241)
-
-Haptic (A11):
-  --spectacle-haptic-duration:              15  (ms)                    (line 244)
-
-Afterglow (A11):
-  --spectacle-afterglow-bg-opacity:         0.03                        (line 247)
-  --spectacle-afterglow-duration:           3s                          (line 248)
-
-Shadow Settle (A11):
-  --spectacle-shadow-settle-duration:       800ms                       (line 251)
-  --spectacle-shadow-settle-dip:            0.95                        (line 252)
-
-Tailwind 4 integration (lines 257–262):
-  --color-background:   var(--bg-page)                                   (line 258)
-  --color-foreground:   var(--color-text-primary)                        (line 259)
-  --font-sans:          var(--font-body)                                 (line 260)
-  --font-mono:          var(--font-mono)                                 (line 261)
+  Full list in TECHNICAL_RUNBOOK.md Layer 7 (original). Abbreviated here:
+  Nucleus Glow: opacity-min 0.04, opacity-max 0.06, opacity-spike 0.12, cycle-resting 6s
+  Orbital Paths: stroke opacities 0.05/0.04/0.03/0.025, rotation-resting 120s
+  Breathing Dot: size-birth 12px, size-evolved 6px, breathe-cycle 2s
+  Tier Warmth: base 1.0, returning 1.1, veteran 1.15
+  Ember Dots: size 5px, opacity-resting 0.4, opacity-flash 0.8, flash-duration 600ms
+  Resolve Mode: clip-start circle(36% at 50% 50%), transform-duration 500ms
+  Crystallization: freq-warm 196Hz (G3), freq-cool 247Hz (B3), volume 0.4
+  Afterglow: bg-opacity 0.03, duration 3s
 
 ---
 
 ## EXTERNAL API SURFACE
 
 ANTHROPIC / CLAUDE
-  Client: C:\Users\amyog\Desktop\wizkoo-plan-generator\src\lib\ai\client.ts
-    Lazy singleton. Model pinned: claude-sonnet-4-20250514 (main generation).
-    claude-haiku-4-5-20251001 used in safety.ts for contextual safety check.
+  Client: src\lib\ai\client.ts — lazy singleton.
+  Model pinned: claude-sonnet-4-20250514 (main generation).
+  claude-haiku-4-5-20251001 for safety.ts contextual safety check.
   Plan generation: src\lib\ai\compose-prompt.ts → tool use via generate_weekly_plan
   Orbit reports: src\lib\ai\orbit.ts → structured JSON narrative generation
   Safety classifier: src\lib\ai\safety.ts → 6-category rubric via Haiku
@@ -4000,42 +1982,32 @@ ANTHROPIC / CLAUDE
 SUPABASE (Database)
   Marketing site: window globals in js/supabase-config.js (anon key, public)
     Used for: library book queries, reading progress data
-  Plan generator: @supabase/supabase-js via NEXT_PUBLIC_SUPABASE_* (anon) +
-    DATABASE_URL + DIRECT_URL (server-side Drizzle ORM queries)
+  Plan generator: @supabase/supabase-js via NEXT_PUBLIC_SUPABASE_* + Drizzle ORM
     Used for: user plans, family profiles, learning objectives, orbit reports
   Schema: drizzle/ directory (migration files)
 
 CLERK (Authentication)
   Package: @clerk/nextjs
-  Used in: middleware.ts (route protection), server components (currentUser()),
-    API routes (auth()), webhooks (CLERK_WEBHOOK_SECRET validation via svix)
-  Webhook handler: syncs Clerk user events (created, updated, deleted)
-    to Supabase user table via auth-reconciliation cron
+  Used in: middleware.ts, server components (currentUser()), API routes (auth())
+  Webhook: syncs Clerk user events to Supabase via auth-reconciliation cron
 
 STRIPE (Payments)
-  Package: stripe (server-side), NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY (client)
-  Used for: subscription creation, webhook handling (payment events),
-    subscription status checks in plan-lifecycle cron
-  Webhook handler: validates STRIPE_WEBHOOK_SECRET, processes subscription
-    lifecycle events (created, updated, canceled)
+  Package: stripe (server), NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY (client)
+  Webhook: validates STRIPE_WEBHOOK_SECRET, processes subscription lifecycle events
 
 RESEND (Email)
   Package: resend
   Used for: orbit report delivery, re-engagement emails, transactional emails
-  Called from: orbit-report cron, re-engagement cron
 
 SENTRY (Error Tracking)
-  Package: @sentry/nextjs
-  Configs: sentry.client.config.ts, sentry.server.config.ts (repo root)
-  SENTRY_DSN required at build time and runtime
+  Configs: sentry.client.config.ts, sentry.server.config.ts
 
 POSTHOG (Analytics)
   Packages: posthog-js (client), posthog-node (server)
-  Used for: product analytics, feature flag reads, session recording
+  Used for: product analytics, feature flags, session recording
 
 UPSTASH REDIS (Rate Limiting)
   Packages: @upstash/redis, @upstash/ratelimit
-  Used for: API route rate limiting (plan generation endpoint)
   Protects: /plan/api/generate from abuse
 
 ---
@@ -4045,350 +2017,73 @@ UPSTASH REDIS (Rate Limiting)
 Source directory: C:\Users\amyog\Desktop\wizkoo-plan-generator\src\lib\ai\
 
 ASSEMBLY — compose-prompt.ts
-  Assembles three message components for Claude tool use:
-    Static system prompt: t-system + t-safety + t-negative + t-schema
-                          + t-quality + t-progress (age-filtered objectives)
-    Dynamic section: filtered learning objectives for children's age range
-    User message: t-profile + t-theme + t-history + weekly volume
-
+  Static system prompt: t-system + t-safety + t-negative + t-schema + t-quality + t-progress
+  Dynamic section: filtered learning objectives for children's age range
+  User message: t-profile + t-theme + t-history + weekly volume
   Primary model: claude-sonnet-4-20250514
   Tool use: generate_weekly_plan (defined in tool-schema.ts)
-  Output schema validated before delivery (Gate 2 — schema check)
-  Safety validated after schema (Gate 3 — safety.ts)
 
 TEMPLATES (src\lib\ai\templates\ — 9 files)
   t-system.txt   — Core role: Orbital Learning methodology, parent-facing tone,
                    three personalization tiers (new/returning/veteran)
-  t-safety.txt   — Physical/developmental/content/materials safety rules by
-                   age range. Non-negotiable constraints for all activities.
-  t-negative.txt — Anti-patterns: generic activities, filler, jargon,
-                   passive screen activities. What Claude must not produce.
+  t-safety.txt   — Physical/developmental/content/materials safety rules by age range.
+  t-negative.txt — Anti-patterns: generic activities, filler, jargon, passive screen.
   t-schema.txt   — Tool schema guidance: plan_header, clusters, blocks.
-                   Describes required output structure.
-  t-quality.txt  — 8 required block components, prescriptiveness gradient
-                   (activities get more specific as children get older)
-  t-progress.txt — Dynamic injection point: age-filtered learning objectives
-                   from the Orbital Learning curriculum framework
-  t-profile.txt  — Family-specific injection: children names/ages, parent
-                   preferences, household notes
-  t-theme.txt    — Theme of the week + any prior theme history.
-                   Contains SECURITY NOTICE for prompt injection prevention.
-  t-history.txt  — Spiral learning rules: revisit windows, topic rotation,
-                   no-regeneration rule (identical theme cannot repeat <6 weeks)
+  t-quality.txt  — 8 required block components, prescriptiveness gradient by age.
+  t-progress.txt — Dynamic injection: age-filtered learning objectives.
+  t-profile.txt  — Family-specific: children names/ages, parent preferences, household notes.
+  t-theme.txt    — Theme of week + prior history. SECURITY NOTICE for prompt injection.
+  t-history.txt  — Spiral learning rules: revisit windows, no-regeneration rule (<6 weeks).
 
 TOOL SCHEMA — tool-schema.ts
-  Defines generate_weekly_plan tool for Claude tool use.
   Output shape:
     plan_header: { family_name, week_of, theme, theme_rationale, week_summary }
     clusters: [ { cluster_id, day, subject_area, blocks: [...] } ]
-    block fields: block_id, type, learning_objective_id, duration, activity,
-                  differentiation, subject_tag, game_integration, is_tell_someone,
-                  spiral_reference, preference_adaptations, materials
     governance: { safety_attestation, age_appropriateness_check, materials_check }
 
 ORBIT REPORT — orbit.ts
-  Separate generation flow (not compose-prompt.ts).
   Model: claude-sonnet-4-20250514 (max_tokens: 1500)
-  Output: JSON with narrative (400-600 words), headline, vocabularyHighlights,
-          completionSummary
-  Called by: orbit-report cron job (Sundays 6am UTC)
+  Output: narrative (400-600 words), headline, vocabularyHighlights, completionSummary
+  Called by: orbit-report cron (Sundays 6am UTC)
 
 SAFETY — safety.ts
-  Two-pass gate. Runs after schema validation.
-  Pass 1: Keyword scan (safety-keywords.json, <1ms, no API call)
-           Tight keyword list. Fails on exact match. Zero false negatives.
-  Pass 2: Haiku contextual classifier (~$0.001, ~200ms)
-           6-category rubric. Only runs if Pass 1 clears.
-           Fails OPEN on Haiku error (returns pass:true to prevent
-           availability risk from a false safety rejection)
+  Pass 1: Keyword scan (safety-keywords.json, <1ms, no API call). Fails on exact match.
+  Pass 2: Haiku contextual classifier (~$0.001, ~200ms). 6-category rubric.
+  Fails OPEN on Haiku error (returns pass:true to prevent false safety rejections).
   Model: claude-haiku-4-5-20251001
 
-UPGRADE PROTOCOL — UPGRADE_PROTOCOL.md (in src\lib\ai\)
-  Documents how to safely update prompts, models, and schemas.
+UPGRADE PROTOCOL — UPGRADE_PROTOCOL.md in src\lib\ai\
   Read before modifying any file in src\lib\ai\.
 
 ---
 
 ═══════════════════════════════════════
 LAYER 8 — HISTORY
-A record of what changed and when. Read when you need to understand
-what version of the document you are working with.
+A record of what changed and when.
 ═══════════════════════════════════════
 
 ## VERSION HISTORY
 
-v1.0 — April 17, 2026
-  Initial runbook created from Light Standard, session decisions,
-  and design system values.
-
-v1.1 — April 17, 2026
-  Gap-filling session 1: file maps, token registry, known bugs added,
-  footer fourth layer corrected (saffron sun bleed layer was missing),
-  star field implementation documented.
-
-v1.2 — April 17, 2026
-  Gap-filling session 2: all six known bugs expanded to cold-start
-  standard (file path, line number, root cause, fix spec, verification
-  steps for each).
-
-v1.3 — April 17, 2026
-  Elite runbook session: build session close protocol, git protocol,
-  known Claude Code failure patterns, environment variables,
-  dependency inventory, deployment protocol, external API surface,
-  prompt template system, nav deliberate hold added.
-
-v1.4 — April 17, 2026 — v24 snapshot file removed from repo root.
-
-v1.5 — April 17, 2026 — Full document restructure. Content unchanged.
-  Reorganized into 8 labeled layers with table of contents for AI
-  and developer readability.
-
-v1.6 — April 17, 2026
-  Document renamed to Technical Runbook.
-  Header updated with single-line session trigger.
-  Session Startup Instruction updated with Transfer Queue
-  check (Notion page 345335a8d33281ea9f86e19c5018624a).
-  System now fully wired: one line starts every session.
-
-v1.7 — April 17, 2026
-  Document renamed to Technical Runbook — WIZKOO.
-  Single-line session trigger added to header.
-  Session Startup Instruction: autonomous Transfer Queue
-  check via Notion tool (Step 2), git status check (Step 3).
-  Build Session Close Protocol expanded to 10 steps:
-  trigger language, two-direction decision write-back,
-  failure pattern sweep, autonomous flight log write to
-  ATC Flight Log (b132ce969d3041348b4b7b6a6082cb99),
-  version log. Minimum viable close updated to
-  Steps 3, 6, 7, 8, 9, 10.
-
-v1.8 — April 17, 2026 — Six corrections applied:
-  hardcoded flight log date made dynamic, README.md added
-  to both file maps, Games status corrected (nav loads
-  correctly), CLAUDE.md reference resolved, close protocol
-  Step 10 updated to include Maintenance Rule date update.
-
-v1.9 — April 17, 2026 — Session close. Pattern 7 added to
-  Layer 6 (hardcoded temporal values in procedural
-  instructions). No code files touched this session.
-
-v2.0 — April 17, 2026 — File renamed from WIZKOO_REFERENCES.md
-  to TECHNICAL_RUNBOOK.md. All internal references and
-  README pointers updated.
-
-v2.1 — April 19, 2026
-  Hero editorial pass + moderation hardening session.
-  Fix A: left column padding-top 305px for zero-diff baseline
-  alignment. Fix B: desk note 50% width, single centered tape
-  piece. Time masthead, kicker, kicker rule removed from hero
-  left column. suicide/murder/weed moved to BLOCKLIST_EXACT in
-  both client (index.html) and server (validate-theme.js).
-  Pattern 8 added (client/server list divergence). Locked
-  decisions updated with masthead removal, desk spec, blocklist
-  architecture, and Resend as digest email provider.
-
-v2.1 — April 19, 2026 — Claude Code Operating Principles added to
-  Layer 1 (six principles, session-start instruction, governance rules).
-  Session Startup Step 1 updated from three-item to four-item confirmation
-  (item 4: name all six Operating Principles before work begins).
-  Notion mirror updated in same session. Transfer Queue cleared.
-
-v2.2 — April 20, 2026
-  Hero CTA + wax seal + headline session.
-  Fix A: L-bracket CTA pale-yellow resolved — `.cta-needs-ready` now uses
-    `color` gating (not opacity) in css/components.css; box-shadow stays
-    full saffron in all states.
-  Fix B: CTA typography set to Sora 600 0.68rem 0.06em (matching Open Seat
-    page). Padding 10px 24px.
-  Fix C: Wax seal rebuilt as inline SVG — organic blob path, 3-layer W
-    monogram (shadow/base/highlight), grain texture, gloss, double ring.
-    Replaces prior div+span implementation.
-  Fix D: "homeschool plans." font reduced 216px → 192px across all
-    breakpoints.
-  Locked decisions updated: cta-needs-ready color gate, wax seal spec,
-    headline line 2 size, CTA typography.
-  Form audit (read-only) completed. No code changes from audit.
-
-v3.5 — April 26, 2026
-  Phase 8: homepage section removals + philo section relocation.
-  Removed: .the-moment section from index.html (HTML + 6 CSS rules + 3 media
-    query entries + 3 shared selector references).
-  Moved: .philo section from index.html to methodology.html as final section
-    before footer. CSS block + responsive rules added inline to methodology.html.
-    Fraunces (ital 600) + Plus Jakarta Sans (500) added to methodology.html font
-    import. .phi IntersectionObserver added to methodology.html JS.
-    darkSections array in index.html: .philo entry removed.
-    Shared selector lists in index.html: .philo h2, .phi p, .philo h2 strong removed.
-  CRITICAL FILE MAP: index.html and methodology.html descriptions updated.
-  OPEN ITEM 10 added: two orphaned selectors in index.html (.philo-section,
-    .phi in querySelectorAll) deferred to next dead code sweep.
-  Commits: e707e53 (index.html + methodology.html only — no other files touched).
-
-v3.4 — April 26, 2026
-  Phase 7 deploy: /themes page shipped to production (wizkoo.com/themes).
-  themes.html built: 70 curated weekly themes, 4 age stages (Wonderer/
-  Apprentice/Artisan/Scholar), expand interaction, 7 Heads Up lead lines,
-  5 JSON-LD blocks, landscape-short viewport fix. Environment: Linen.
-  Footer updated: "Themes to Explore" link added to Learn More column
-  (vocabulary lock: full name required, not shortened "Themes").
-  sitemap.xml: /themes entry added, lastmod 2026-04-25.
-  scripts/themes_jsonld_backup.txt added as JSON-LD restore reference.
-  LOCKED DECISIONS: footer vocabulary lock, Learn More column placement,
-  column naming discrepancy flagged.
-  OPEN ITEMS 8, 9 added: GSC indexing submission and Rich Results Test
-  pending Amy's manual completion.
-  Pattern 13 added: spec/implementation naming divergence.
-  Commits: 0cbd32b, cf59977, 8ed4ce2, 354e1da.
-
-v3.3 — April 25, 2026
-  Three Transfer Queue items applied from 2026-04-23 V14 morning session:
-  (1) Item 31 → RETIRED (Homepage CTA Expectation Microcopy — redundant
-  with Items 32 and 33; .cta-note deleted in commit ecf6944). (2) Item 36
-  → ADDED (CTA + Sub-CTA Unit Integrity — the two are one visual unit,
-  never separated). (3) Pattern 12 → ADDED (Playwright/Dev-Server/Live-Site
-  Verification Gap — three-layer verification protocol required before
-  declaring visual commits verified). Note: local Pattern 11 (Section
-  Height Overflow) predated Transfer Queue's Pattern 11 numbering; incoming
-  Playwright pattern assigned Pattern 12 per local-wins hierarchy rule.
-  Notion Layer 6 mirror and Layer 8 to be updated this session.
-
-v3.2 — April 22, 2026
-  Layer 6 registry synchronized from Notion v3.0. Items 26-35 added
-  (Cluster D age stepper native-first contract, Cluster E tier structure
-  + progress signal + error register, Cluster F no-live-generation + CTA
-  + microcopy + sample label + subscribe CTA + email-at-subscription).
-  Items 4, 10, 11, 14, 15, 25 marked RETIRED with forward pointers.
-  Items 16, 21, 22, 23, 24 marked UPDATED. Cluster D renamed AGE
-  COMBOBOX MECHANICS → AGE INPUT MECHANICS. Cluster F renamed POST-SUBMIT
-  GATE + EMAIL CAPTURE → GATE READY STATE + SAMPLE DISPLAY. Registry
-  version header added: v3.0 (2026-04-22), 35 items. Amy directive
-  2026-04-22: Item 26 gains readonly attribute (no typing,
-  constraint-by-construction).
-
-v3.1 — April 22, 2026
-  Viewport Reality Constraints subsection added to Layer 4 codifying four
-  target viewports (1440x900 primary, 1280x540 compressed desktop, 375x667
-  iPhone SE, 430x932 iPhone 15 Pro Max) every homepage visual change must
-  pass. Operating Principles extended with Principle 7 (Viewport Verification
-  Requirement). Session Startup Step 1 and session-start instruction updated
-  to reference "all seven principles." Applied from Transfer Queue item dated
-  2026-04-21 evening. Moves viewport compliance from per-session recall to
-  ambient constraint.
-
-v3.0 — April 22, 2026
-  Wizkoo Viewport Standard added to Layer 5 as "Section 3 — Everything
-  Connects Responsive Standard" in three tiers: (1) Universal viewport
-  rules for the primary development environment (Windows 200% scaling,
-  innerWidth≈756, innerHeight≈396, DPR=2.625) including four layout
-  regime breakpoints, universal section-height rule, photograph-height
-  rule, nav safe-zone rule, nav backdrop system, and global color tokens;
-  (2) Five-step diagnostic protocol for viewport issues; (3) Section 3
-  known-good implementation reference (typography, proof matrix, photograph
-  treatment, scrims, scroll reveal stagger, subject colors) at commit
-  cbac52e. Standalone SECTION_3_BASELINE_2026-04-22.md also written to
-  repo root as Notion-pasteable snapshot. Last updated date updated to
-  April 22, 2026. Transfer Queue entry added for Notion mirror sync.
-
-v2.9 — April 21, 2026
-  Homepage Form Preservation Locks Registry upgraded from 19 items to 25
-  items, sourced from line-by-line read of production index.html by Amy's
-  AI team (2026-04-21 evening session). Adds Structural Locks cluster
-  (SEO + accessibility) and Copy Locks cluster, both missing from the
-  initial v2.5 registry. Adopts tiered anchoring convention (semantic +
-  selector + line number). Six clusters: Structural, Copy, Theme Field
-  Mechanics, Age Combobox, Submit Validation Chain, Post-Submit Gate.
-  One open correction logged: Item 16 (age range 2-12 to 3-12 per April
-  20 decision) is a known fix awaiting execution. Note: Transfer Queue
-  labeled this v2.6 but that number was already taken by the dead CSS
-  audit; assigned v2.9 instead.
-
-v2.8 — April 21, 2026
-  Layer 3 Responsive Strategy Audit: RESPONSIVE_AUDIT_REPORT.md produced
-  (5 conflicts, 4 coverage gaps). All 5 conflicts resolved mechanically:
-  Conflict 1: index.html 767px → 768px (.hz1 padding). Conflict 2:
-  index.html 1023px → 1024px (hero headline type tier). Conflict 3:
-  index.html JS comparator < 768 → <= 768 (CTA firefly guard). Conflict 4:
-  hover query AND → OR across 8 locations in 6 files. Conflict 5:
-  nav.js:258 comment documenting 1100px as nav-internal breakpoint.
-  Hover centralization into base.css deferred → OPEN ITEM 7.
-  3 commits pushed: 391090f (Pass 1), d23562d (Pass 2), 2087f59 (annotation).
-
-v2.6 — April 21, 2026
-  Dead CSS audit execution (HIGH-confidence findings only):
-  Deleted 4 orphaned CSS files: css/homepage.css (~21.2 KB),
-    css/planner.css (~17.8 KB), css/nav.css (~6.8 KB),
-    css/animations.css (~2.3 KB). Combined ~48 KB removed.
-  Removed 5 unused tokens from css/tokens.css (67 → 62 lines):
-    --elem-alkali, --prog-reading, --prog-handson, --prog-mystery,
-    --duration-fast.
-  Removed 6 dead selector blocks from css/library.css
-    (1250 → 1146 lines): .abc-tagline-placeholder, .lib-chips group
-    (6 selectors), .lib-theme-label/.lib-theme-pdf-btn group,
-    .lib-band-header group, .book-card-hook.
-  Removed 19 dead inline style blocks from index.html plus 4
-    surgical media query edits (3216 → 3030 lines). Key removals:
-    .hero-cascade/.hcard* group, .id-tags-* group,
-    .thread-section group, .arrival group, .hz3 group,
-    .open-seat-zone group, and all responsive overrides for these.
-  Removed 3 dead JS null-guards from index.html.
-  Preserved: getOSDotPos() null-guard (still called by live
-    firefly animation — element absent from DOM but function
-    required for coordinate fallback).
-  Deferred: .lib-active-filters duplicate (Category 4 Finding 4.1)
-    by Amy's explicit decision. Logged in OPEN ITEMS item 4.
-  New failure pattern documented: Pattern 10 — Responsive Override
-    Miss (responsive overrides for dead selectors not caught by
-    top-level-only audit pass).
-  CRITICAL FILE MAP and CSS CUSTOM PROPERTIES sections updated
-    to reflect deleted files and removed tokens.
-
-v2.5 — April 21, 2026
-  Periodic Code Hygiene Protocol added to Layer 1 (four-layer taxonomy:
-  dead code, token consolidation, responsive audit, full refactor;
-  triggers for each; optimization distinction; 5 pre-written prompts
-  following the six-section Prompt Construction Discipline standard).
-  Preservation Locks Registry added to Layer 6 as a new section with
-  Homepage Form subsection covering 19 locked items. Registry designed
-  to expand as additional surfaces harden.
-
-v2.4 — April 21, 2026
-  Notion mirror sync enforcement added: Layer 0 Hierarchy Rule
-  disambiguated (Technical Runbook authority separated from Light
-  Standard authority); Layer 1 Step 2 extended with mirror sync
-  requirement and 9 child page IDs; Close Protocol Step 6 extended
-  with MANDATORY MIRROR SYNC paragraph; Verification Gate ledger
-  extended with NOTION MIRROR SYNCED line. Closes the drift gap
-  between local TECHNICAL_RUNBOOK.md and Notion mirror.
-
-v2.3 — April 21, 2026
-  Three Transfer Queue items applied:
-  (1) Environment Variables section updated: Marketing Site now
-    documents 7 Netlify Function env vars (OPENAI_API_KEY,
-    NOTION_API_KEY, NOTION_MODERATION_DB_ID, IP_HASH_SALT,
-    RESEND_API_KEY, RESEND_FROM_EMAIL, ADMIN_EMAIL) with source
-    commits 857b057 and b042e35.
-  (2) Content Moderation Architecture section added to Layer 3:
-    three-layer architecture documented (client blocklist /
-    server blocklist / OpenAI Moderation API), dual-tier
-    BLOCKLIST vs BLOCKLIST_EXACT structure, fail-closed posture,
-    rejection logging, weekly digest, affected files.
-  (3) Prompt Construction Discipline subsection added to Layer 1
-    (after Operating Principles, before Layer 2): six-section
-    prompt standard (TASK, SCOPE, RECONCILIATION AUTHORIZED,
-    PRESERVATION LOCKS, REPORTING, VERIFICATION), Return Rule,
-    and Minimum Viable Prompt pattern. Layer 0 Last updated
-    date updated to April 21, 2026.
-
-v2.7 — April 21, 2026
-  Token consolidation pass (Layer 2 — PROMPT 3). 53 hardcoded
-  values replaced with var(--token) references across 16 files:
-  css/base.css (2), css/components.css (4), css/games.css (2),
-  css/library.css (17), 11 HTML pages (21), components/nav.js (7).
-  Tokens used: --saffron, --ink, --linen, --paper, --ease-out-expo,
-  --expo. 1 approved replacement skipped (components.css line 48
-  rgba keyframe interpolation — see OPEN ITEM 5). 3 replacements
-  deferred per Option A (components.css lines 24/25/26 easing —
-  see LOCKED DECISIONS). Structural finding: 8 pages with inline
-  :root instead of tokens.css link (see OPEN ITEM 6). Commit cce9476.
-  OPEN ITEMS 5 and 6 added. LOCKED DECISIONS updated with
-  components.css easing decision.
+v1.0 — April 17, 2026: Initial runbook created from Light Standard, session decisions, design system values.
+v1.1 — April 17, 2026: File maps, token registry, known bugs, footer fourth layer corrected, star field documented.
+v1.2 — April 17, 2026: All six known bugs expanded to cold-start standard.
+v1.3 — April 17, 2026: Build session close protocol, git protocol, failure patterns, env vars, dependencies, deployment, API surface, prompt templates, nav deliberate hold.
+v1.4 — April 17, 2026: v24 snapshot file removed from repo root.
+v1.5 — April 17, 2026: Full document restructure. 8 labeled layers with table of contents.
+v1.6 — April 17, 2026: Document renamed to Technical Runbook. Header updated. Transfer Queue check added to startup.
+v1.7 — April 17, 2026: Session trigger added. Transfer Queue autonomous check (Notion). Build Session Close expanded to 10 steps: flight log (ATC), two-direction write-back, failure pattern sweep, version log.
+v1.8 — April 17, 2026: Six corrections: hardcoded date made dynamic, README.md added, Games status corrected.
+v1.9 — April 17, 2026: Pattern 7 added (hardcoded temporal values in procedural instructions).
+v2.0 — April 17, 2026: File renamed from WIZKOO_REFERENCES.md to TECHNICAL_RUNBOOK.md.
+v2.1 — April 19, 2026: Hero editorial pass + moderation hardening. Left column padding-top 305px. Desk note 50% width, single tape piece. Time masthead/kicker removed. suicide/murder/weed moved to BLOCKLIST_EXACT. Pattern 8 added.
+v2.1 — April 19, 2026: Claude Code Operating Principles added to Layer 1 (six principles → seven with Principle 7 added later). Notion mirror updated.
+v2.2 — April 20, 2026: Hero CTA + wax seal + headline session. L-bracket CTA pale-yellow resolved via color gating in components.css. CTA typography set Sora 600 0.68rem. Wax seal rebuilt as inline SVG. "homeschool plans." reduced 216px → 192px.
+v2.9 — April 21, 2026: Homepage Form Preservation Locks Registry upgraded to 25 items.
+v3.0 — April 22, 2026: Wizkoo Viewport Standard added to Layer 5 as Section 3 three-tier standard. SECTION_3_BASELINE_2026-04-22.md written.
+v3.1 — April 22, 2026: Viewport Reality Constraints added to Layer 4. Principle 7 added. Five target viewports codified.
+v3.2 — April 22, 2026: Layer 6 registry synchronized from Notion v3.0. Items 26–35 added. Items 4, 10, 11, 14, 15, 25 retired.
+v3.3 — April 25, 2026: Three Transfer Queue items applied: Item 31 retired, Item 36 added, Pattern 12 added.
+v3.4 — April 26, 2026: /themes page shipped. Footer "Themes to Explore" in Learn More column. Locked decisions: footer vocabulary lock, column placement, naming discrepancy. Pattern 13 added.
+v3.5 — April 26, 2026: Phase 8: .the-moment removed from index.html. .philo section moved to methodology.html. Open Item 10 added.
+v4.0 — April 26, 2026: Runbook split into AMY_TECHNICAL_STANDARDS.md (project-agnostic) and TECHNICAL_RUNBOOK.md (this file). Global engineering standards extracted to standalone document. Wizkoo-specific content retained here with references to Standards.
+v4.1 — April 27, 2026: Project guard headers added to all three local runbook files. Canonical guard format locked for AMY_TECHNICAL_STANDARDS.md (SCOPE GUARD), wizkoo/TECHNICAL_RUNBOOK.md (PROJECT GUARD — Wizkoo), and Learnkoo/TECHNICAL_RUNBOOK.md (PROJECT GUARD — Learnkoo). Full absolute path to Standards locked in both project guards.
