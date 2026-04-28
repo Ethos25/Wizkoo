@@ -15,11 +15,12 @@
   /* ── Constants ───────────────────────────────────────────────────────────── */
   var COVER_PLACEHOLDER_SVG = '<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="4" width="32" height="40" rx="2" stroke="white" stroke-width="1.5" stroke-opacity="0.3"/><line x1="13" y1="18" x2="35" y2="18" stroke="white" stroke-width="1.5" stroke-opacity="0.2"/><line x1="13" y1="24" x2="35" y2="24" stroke="white" stroke-width="1.5" stroke-opacity="0.2"/><line x1="13" y1="30" x2="28" y2="30" stroke="white" stroke-width="1.5" stroke-opacity="0.2"/><circle cx="24" cy="10" r="2" fill="#E8AF38" fill-opacity="0.4"/></svg>';
 
+  // Locked Age Architecture — Phase 6. band IDs must match library_age_bands values in Supabase.
   var BANDS = [
-    { id: '2-4',   label: 'Ages 2–4',   role: 'Read Together' },
-    { id: '5-7',   label: 'Ages 5–7',   role: 'Read Side by Side' },
-    { id: '8-10',  label: 'Ages 8–10',  role: 'Read and Discuss' },
-    { id: '10-12', label: 'Ages 11–12', role: 'Read and Explore' },
+    { id: '3-4',   name: 'Wonderer',   label: 'Ages 3-4',   role: 'Read Side by Side' },
+    { id: '5-6',   name: 'Apprentice', label: 'Ages 5-6',   role: 'Read and Wonder' },
+    { id: '7-9',   name: 'Artisan',    label: 'Ages 7-9',   role: 'Read and Discuss' },
+    { id: '10-12', name: 'Scholar',    label: 'Ages 10-12', role: 'Read and Explore' },
   ];
 
   var THEMES_PER_BAND  = 6;   // max theme clusters shown per band
@@ -60,11 +61,13 @@
         .select('theme, theme_label')
         .order('theme_label'),
 
-      // 2. All active books with junction data needed for grouping + PDF
+      // 2. All active, browse-visible books with junction data needed for grouping + PDF.
+      //    browse_visible=false books are filtered here — they remain queryable by the
+      //    plan-generator backend but do not appear in /library browse.
       client
         .from('library_books')
         .select([
-          'id, slug, title, author, hook, orbital_score',
+          'id, slug, title, author, hook, orbital_score, heads_up',
           'cover_image_url, book_format, reading_level',
           'library_age_bands(age_band)',
           'library_themes(theme)',
@@ -89,6 +92,7 @@
       state.allBooks   = (booksResult.data || []).map(normalizeBook);
 
       updateBandCounts();
+      renderFeaturedCluster();
     });
   }
 
@@ -221,12 +225,20 @@
     // Band heading + PDF trigger
     html += '<div class="lib-band-view-header">';
     html += '<div class="lib-band-view-title-row">';
-    html += '<h2 class="lib-band-view-title">' + esc(bandConfig.label) + '</h2>';
+    html += '<h2 class="lib-band-view-title">' + esc(bandConfig.name) +
+      ' <span class="lib-band-view-age">(' + esc(bandConfig.label) + ')</span></h2>';
     html += '<span class="lib-band-view-role">' + esc(bandConfig.role) + '</span>';
     html += '</div>';
     html += '<button class="lib-band-pdf-btn" data-band="' + bandId + '">' +
       'Print this list for your library visit.</button>';
     html += '</div>'; // .lib-band-view-header
+
+    // Artisan transitional copy — locked verbatim, Phase 6 P4.
+    // Addresses parents of 7-year-olds mid-transition between side-by-side and independent reading.
+    if (bandId === '7-9') {
+      html += '<p class="lib-artisan-note">Some kids at this age pick up a chapter book and ' +
+        'disappear into it; others want you on the couch beside them. Both are reading.</p>';
+    }
 
     var orbDiv = '<div class="lib-orbital-div" aria-hidden="true">' +
       '<div class="lib-orb-line"></div>' +
@@ -258,6 +270,48 @@
       btn.addEventListener('click', function () { openModal(btn.dataset.band); });
     });
 
+    setupLazyImages(container);
+  }
+
+  /* ── Featured cluster (placeholder) ─────────────────────────────────────── */
+  // TODO: P3 featured cluster JSON config gates on re-scoring sweep.
+  // Replace with editorial selection post-sweep.
+  // Current behavior: picks the highest orbital_score book from each of
+  // Apprentice (5-6), Artisan (7-9), Scholar (10-12).
+  function renderFeaturedCluster() {
+    var container = document.getElementById('lib-featured-cluster');
+    if (!container || !state.allBooks.length) return;
+
+    var featureBands = [
+      { id: '5-6',   name: 'Apprentice' },
+      { id: '7-9',   name: 'Artisan' },
+      { id: '10-12', name: 'Scholar' },
+    ];
+
+    var picks = [];
+    featureBands.forEach(function (fb) {
+      // allBooks already sorted desc by orbital_score — first match is the best
+      var match = state.allBooks.find(function (b) {
+        return b.age_bands.indexOf(fb.id) !== -1;
+      });
+      if (match) picks.push({ book: match, bandName: fb.name });
+    });
+
+    if (picks.length === 0) return;
+
+    var html = '<div class="lib-featured-inner">' +
+      '<p class="lib-featured-label">Featured from The Library</p>' +
+      '<div class="lib-featured-grid">';
+
+    picks.forEach(function (p) {
+      html += '<div class="lib-featured-group">' +
+        '<span class="lib-featured-group-name">' + esc(p.bandName) + '</span>' +
+        renderBookCard(p.book) +
+        '</div>';
+    });
+
+    html += '</div></div>';
+    container.innerHTML = html;
     setupLazyImages(container);
   }
 
@@ -296,6 +350,8 @@
       : '<div class="book-card-cover-placeholder">' + COVER_PLACEHOLDER_SVG +
         '<span class="book-card-cover-placeholder-text">No cover</span></div>';
 
+    // TODO: Re-scoring sweep pending per Phase 6 P2 finding. Visual treatment of the
+    // score may be revisited post-sweep. See Notion subpage 34f335a8d332818cb4ddee045b20f58f.
     var orbitalDots = '';
     for (var i = 1; i <= 5; i++) {
       orbitalDots += '<span class="orbital-dot' + (i > book.orbital_score ? ' empty' : '') +
@@ -431,7 +487,9 @@
     if (!jsPDF) { window.print(); return; }
 
     var bandConfig = BANDS.find(function (b) { return b.id === band; });
-    var bandLabel  = bandConfig ? bandConfig.label + ' — ' + bandConfig.role : 'Full Collection';
+    var bandLabel  = bandConfig
+      ? bandConfig.name + ' (' + bandConfig.label + ') · ' + bandConfig.role
+      : 'Full Collection';
 
     var doc      = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
     var pageW    = doc.internal.pageSize.getWidth();
