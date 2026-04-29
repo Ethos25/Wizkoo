@@ -95,6 +95,9 @@
       state.allBooks   = (booksResult.data || []).map(normalizeBook)
         .filter(function (b) { return !!b.cover_image_url; });
 
+      // DEBUG phase-6c cover_quality — remove before merge
+      console.log('cover_quality on first book:', state.allBooks[0]?.cover_quality, 'type:', typeof state.allBooks[0]?.cover_quality);
+
       updateBandCounts();
       renderFeaturedCluster();
     });
@@ -306,6 +309,9 @@
     // cover_quality gate: only books marked cover_quality='featured' are eligible.
     // If a band has no featured-quality books, that slot is omitted entirely —
     // better to render two high-quality cards than three with one degraded cover.
+    // DEBUG phase-6c cover_quality — remove before merge
+    console.log('featured count:', state.allBooks.filter(b => b.cover_quality === 'featured').length);
+
     var pickedIds = {};
     var picks = [];
     featureBands.forEach(function (fb) {
@@ -320,6 +326,9 @@
         picks.push({ book: match, bandName: fb.name, bandLabel: fb.label });
       }
     });
+
+    // DEBUG phase-6c cover_quality — remove before merge
+    console.log('picks:', picks.map(p => p.book.title + ' - ' + p.book.cover_quality));
 
     if (picks.length === 0) return;
 
