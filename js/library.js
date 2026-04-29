@@ -89,7 +89,11 @@
       }
 
       state.metaThemes = themesResult.data || [];
-      state.allBooks   = (booksResult.data || []).map(normalizeBook);
+      // Path A (Phase 6B defect fix): books with no cover_image_url are excluded from /library
+      // browse at the JS layer. They remain active in the database and are queryable by the
+      // plan-generator. Restore to browse once cover art is sourced and the field is populated.
+      state.allBooks   = (booksResult.data || []).map(normalizeBook)
+        .filter(function (b) { return !!b.cover_image_url; });
 
       updateBandCounts();
       renderFeaturedCluster();
@@ -278,6 +282,11 @@
   // Replace with editorial selection post-sweep.
   // Current behavior: picks the highest orbital_score book from each of
   // Apprentice (5-6), Artisan (7-9), Scholar (10-12).
+  //
+  // Constraint: Featured cluster must show three distinct books across Apprentice, Artisan,
+  // and Scholar slots. Books carrying multiple band tags are picked in only one slot based
+  // on the order: Apprentice → Artisan → Scholar. Each subsequent slot skips any book
+  // already picked by a higher-priority slot.
   function renderFeaturedCluster() {
     var container = document.getElementById('lib-featured-cluster');
     if (!container || !state.allBooks.length) return;
@@ -288,13 +297,20 @@
       { id: '10-12', name: 'Scholar' },
     ];
 
+    // Track picked book IDs so multi-band books only appear in one slot.
+    // Apprentice picks first, then Artisan, then Scholar — each falls through
+    // to its next-highest candidate if its top pick is already taken.
+    var pickedIds = {};
     var picks = [];
     featureBands.forEach(function (fb) {
-      // allBooks already sorted desc by orbital_score — first match is the best
+      // allBooks already sorted desc by orbital_score — first unpicked match is the best
       var match = state.allBooks.find(function (b) {
-        return b.age_bands.indexOf(fb.id) !== -1;
+        return b.age_bands.indexOf(fb.id) !== -1 && !pickedIds[b.id];
       });
-      if (match) picks.push({ book: match, bandName: fb.name });
+      if (match) {
+        pickedIds[match.id] = true;
+        picks.push({ book: match, bandName: fb.name });
+      }
     });
 
     if (picks.length === 0) return;
@@ -381,10 +397,19 @@
   /* ── Lazy image setup ────────────────────────────────────────────────────── */
   function setupLazyImages(container) {
     function applyFallback(img) {
-      var cover = img.parentNode;
-      if (cover) {
-        cover.innerHTML = '<div class="book-card-cover-placeholder">' + COVER_PLACEHOLDER_SVG +
-          '<span class="book-card-cover-placeholder-text">No cover</span></div>';
+      // Path A (Phase 6B defect fix): if a cover URL is present but the image fails to load
+      // (broken URL, 1×1 GIF from OpenLibrary, network error), hide the card from browse
+      // rather than rendering a "No cover" placeholder. Consistent with the null-cover filter
+      // applied at load time. Card is hidden — not removed — so DOM structure stays intact.
+      var card = img.closest ? img.closest('.book-card') : null;
+      if (card) {
+        card.style.display = 'none';
+      } else {
+        var cover = img.parentNode;
+        if (cover) {
+          cover.innerHTML = '<div class="book-card-cover-placeholder">' + COVER_PLACEHOLDER_SVG +
+            '<span class="book-card-cover-placeholder-text">No cover</span></div>';
+        }
       }
     }
 
