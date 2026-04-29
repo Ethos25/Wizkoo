@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Curator Pass — Phase 6C | Wizkoo</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0B0F1A;
+    color: #F0F2F8;
+    font-family: 'Sora', sans-serif;
+    padding: 48px 32px 80px;
+  }
+
+  .curator-header {
+    max-width: 1200px;
+    margin: 0 auto 56px;
+    border-bottom: 1px solid rgba(240,242,248,0.12);
+    padding-bottom: 32px;
+  }
+
+  .curator-header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #F0B429;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .curator-header p {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(240,242,248,0.55);
+    line-height: 1.6;
+  }
+
+  .curator-header .instructions {
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: rgba(240,180,41,0.08);
+    border: 1px solid rgba(240,180,41,0.25);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    color: rgba(240,242,248,0.75);
+    line-height: 1.7;
+  }
+
+  .curator-header .instructions strong {
+    color: #F0B429;
+  }
+
+  .band-section {
+    max-width: 1200px;
+    margin: 0 auto 64px;
+  }
+
+  .band-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(240,242,248,0.1);
+  }
+
+  .band-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #F0B429;
+  }
+
+  .band-ages {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: rgba(240,242,248,0.45);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .band-count {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: rgba(240,242,248,0.35);
+  }
+
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(240,242,248,0.04);
+    border: 1px solid rgba(240,242,248,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .book-card:hover {
+    border-color: rgba(240,180,41,0.4);
+  }
+
+  .book-row-num {
+    padding: 6px 10px 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #F0B429;
+    background: rgba(240,180,41,0.08);
+    border-bottom: 1px solid rgba(240,242,248,0.06);
+  }
+
+  .book-cover {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+    background: rgba(240,242,248,0.06);
+  }
+
+  .book-cover-placeholder {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(240,242,248,0.06);
+    color: rgba(240,242,248,0.25);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+
+  .book-meta {
+    padding: 10px 10px 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .book-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #F0F2F8;
+  }
+
+  .book-author {
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(240,242,248,0.5);
+    line-height: 1.3;
+  }
+
+  .book-year {
+    font-size: 0.67rem;
+    font-weight: 400;
+    color: rgba(240,180,41,0.7);
+    margin-top: 2px;
+    letter-spacing: 0.03em;
+  }
+
+  .book-id {
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: rgba(240,242,248,0.2);
+    margin-top: 4px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 900px) {
+    .book-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 580px) {
+    .book-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="curator-header">
+  <h1>Cover Curator Pass — Phase 6C</h1>
+  <p>Top 15 candidates per band · sorted by orbital_score DESC, year_published DESC · browse_visible = true · cover_image_url not null</p>
+  <div class="instructions">
+    <strong>How to pick:</strong> Review each section. Choose 3–5 books per band that have strong, print-ready covers. Reply with row numbers in this format:<br>
+    <strong>Apprentice: 2, 7, 11 / Artisan: 1, 4, 9 / Scholar: 3, 6, 12</strong><br>
+    Books appearing in multiple bands are deduplicated in the featured cluster — the highest-priority band wins.
+    After picks are submitted, SQL UPDATE will set <code>cover_quality = 'featured'</code> for selected IDs.
+  </div>
+</div>
+
+<!-- ═══ APPRENTICE (5-6) ═══ -->
+<section class="band-section">
+  <div class="band-heading">
+    <span class="band-name">Apprentice</span>
+    <span class="band-ages">Ages 5–6</span>
+    <span class="band-count">15 candidates</span>
+  </div>
+  <div class="book-grid">
+
+    <div class="book-card">
+      <div class="book-row-num">#1</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81lOYFCD6RL._SL500_.jpg" alt="The Dream Builder's Blueprint" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Dream Builder's Blueprint</div>
+        <div class="book-author">Alice Faye Duncan</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">616acf9b</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#2</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91dJaqoh1BL._SL500_.jpg" alt="We Are American, Too" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">We Are American, Too</div>
+        <div class="book-author">Kristen Mei Chase</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">722f52c3</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#3</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81RYQfK1FvL._SL500_.jpg" alt="Teaching for Change: Septima Clark" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Teaching for Change: Septima Clark</div>
+        <div class="book-author">Yvonne Clark-Rhines</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">ca8399a2</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#4</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81OWA11HLPL._SL500_.jpg" alt="Change Is in the Air" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Change Is in the Air</div>
+        <div class="book-author">Rebecca Donnelly</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">ab228eee</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#5</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91x+ABRKlRL._SL500_.jpg" alt="Marie's Magic Eggs" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Marie's Magic Eggs</div>
+        <div class="book-author">Sandra Neil Wallace</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">3c6bab30</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#6</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/813KRXN-FyL._SL500_.jpg" alt="The Great Lakes" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Great Lakes</div>
+        <div class="book-author">Barb Rosenstock</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">a67ffa2a</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#7</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/9780063245990-L.jpg" alt="Seeds of Discovery" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Seeds of Discovery</div>
+        <div class="book-author">Lori Alexander</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">6a9eeb44</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#8</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/9781459838970-L.jpg" alt="Octopus Ocean" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Octopus Ocean</div>
+        <div class="book-author">Mark Leiren-Young</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">93d7dbb7</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#9</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81h1l7BBtyL._SL500_.jpg" alt="Just in Case" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Just in Case</div>
+        <div class="book-author">Megan Clendenan</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">c21c1a05</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#10</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81Gd+Coxq5L._SL500_.jpg" alt="The Camel Library" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Camel Library</div>
+        <div class="book-author">Marzieh Abbas</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">d95072da</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#11</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/A1-5Wg5KzuL._SL500_.jpg" alt="The Friendship Train" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Friendship Train</div>
+        <div class="book-author">Debbie Levy</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">e51b27a0</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#12</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91S2OngvkrL._SL500_.jpg" alt="The Five Sides of Marjorie Rice" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Five Sides of Marjorie Rice</div>
+        <div class="book-author">Amy Alznauer</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">b8f858b3</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#13</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/id/14810609-L.jpg" alt="Almost Underwear" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Almost Underwear</div>
+        <div class="book-author">Jonathan Roth</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">1c5e53e9</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#14</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/9781526638281-L.jpg" alt="Finding Home" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Finding Home</div>
+        <div class="book-author">Mike Unwin</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">f9a830bc</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#15</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/9781623545826-L.jpg" alt="A Flea for Justice" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">A Flea for Justice</div>
+        <div class="book-author">Valerie Bolling</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">f1a40664</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ ARTISAN (7-9) ═══ -->
+<section class="band-section">
+  <div class="band-heading">
+    <span class="band-name">Artisan</span>
+    <span class="band-ages">Ages 7–9</span>
+    <span class="band-count">15 candidates</span>
+  </div>
+  <div class="book-grid">
+
+    <div class="book-card">
+      <div class="book-row-num">#1</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81OWA11HLPL._SL500_.jpg" alt="Change Is in the Air" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Change Is in the Air</div>
+        <div class="book-author">Rebecca Donnelly</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">ab228eee</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#2</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81mmNj2YxbL._SL500_.jpg" alt="Extreme Birdwatching" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Extreme Birdwatching</div>
+        <div class="book-author">Loree Griffin Burns</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">47703cc1</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#3</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91dJaqoh1BL._SL500_.jpg" alt="We Are American, Too" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">We Are American, Too</div>
+        <div class="book-author">Kristen Mei Chase</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">722f52c3</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#4</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91x+ABRKlRL._SL500_.jpg" alt="Marie's Magic Eggs" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Marie's Magic Eggs</div>
+        <div class="book-author">Sandra Neil Wallace</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">3c6bab30</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#5</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81lOYFCD6RL._SL500_.jpg" alt="The Dream Builder's Blueprint" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Dream Builder's Blueprint</div>
+        <div class="book-author">Alice Faye Duncan</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">616acf9b</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#6</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81RYQfK1FvL._SL500_.jpg" alt="Teaching for Change: Septima Clark" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Teaching for Change: Septima Clark</div>
+        <div class="book-author">Yvonne Clark-Rhines</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">ca8399a2</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#7</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91pdb6+E+eL._SL500_.jpg" alt="Dead Ends!" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Dead Ends!</div>
+        <div class="book-author">Lindsey Fitzharris</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">73f249f3</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#8</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/A1-5Wg5KzuL._SL500_.jpg" alt="The Friendship Train" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Friendship Train</div>
+        <div class="book-author">Debbie Levy</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">e51b27a0</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#9</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/9781526638281-L.jpg" alt="Finding Home" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Finding Home</div>
+        <div class="book-author">Mike Unwin</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">f9a830bc</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#10</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81Gd+Coxq5L._SL500_.jpg" alt="The Camel Library" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Camel Library</div>
+        <div class="book-author">Marzieh Abbas</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">d95072da</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#11</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81h1l7BBtyL._SL500_.jpg" alt="Just in Case" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Just in Case</div>
+        <div class="book-author">Megan Clendenan</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">c21c1a05</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#12</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81YKK7q1a3L._SL500_.jpg" alt="Before the Ships" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Before the Ships</div>
+        <div class="book-author">Maisha Oso</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">b3c0ed00</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#13</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91S2OngvkrL._SL500_.jpg" alt="The Five Sides of Marjorie Rice" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Five Sides of Marjorie Rice</div>
+        <div class="book-author">Amy Alznauer</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">b8f858b3</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#14</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81T-rCVhRzL._SL500_.jpg" alt="The Vanishing of Lake Peigneur" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Vanishing of Lake Peigneur</div>
+        <div class="book-author">Allan Wolf</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">5577338e</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#15</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/813KRXN-FyL._SL500_.jpg" alt="The Great Lakes" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Great Lakes</div>
+        <div class="book-author">Barb Rosenstock</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">a67ffa2a</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ SCHOLAR (10-12) ═══ -->
+<section class="band-section">
+  <div class="band-heading">
+    <span class="band-name">Scholar</span>
+    <span class="band-ages">Ages 10–12</span>
+    <span class="band-count">15 candidates</span>
+  </div>
+  <div class="book-grid">
+
+    <div class="book-card">
+      <div class="book-row-num">#1</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91ThebAN-UL._SL500_.jpg" alt="Footeprint" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Footeprint</div>
+        <div class="book-author">Lindsay H. Metcalf</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">e2590991</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#2</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81mmNj2YxbL._SL500_.jpg" alt="Extreme Birdwatching" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Extreme Birdwatching</div>
+        <div class="book-author">Loree Griffin Burns</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">47703cc1</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#3</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81FJ7OcexSL._SL500_.jpg" alt="Discovering Life's Story" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Discovering Life's Story</div>
+        <div class="book-author">Joy Hakim</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">98d7a3ec</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#4</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/910CdwWN+jL._SL500_.jpg" alt="Baseball's Shining Season" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Baseball's Shining Season</div>
+        <div class="book-author">Sandler &amp; Sandler</div>
+        <div class="book-year">2026</div>
+        <div class="book-id">1cd2d48f</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#5</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/id/14852967-L.jpg" alt="Botticelli's Apprentice" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Botticelli's Apprentice</div>
+        <div class="book-author">Ursula Murray Husted</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">d7acaf08</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#6</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/9781665931434-L.jpg" alt="Daughter of the Light-Footed People" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Daughter of the Light-Footed People</div>
+        <div class="book-author">Belen Medina</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">19e8e348</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#7</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81w1GXyXqSL._SL500_.jpg" alt="An Immense World YR" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">An Immense World YR</div>
+        <div class="book-author">Ed Yong</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">10d01d03</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#8</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81YKK7q1a3L._SL500_.jpg" alt="Before the Ships" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Before the Ships</div>
+        <div class="book-author">Maisha Oso</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">b3c0ed00</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#9</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/id/14605731-L.jpg" alt="The Bard and the Book" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Bard and the Book</div>
+        <div class="book-author">Ann Bausum</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">9e8239af</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#10</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/91pdb6+E+eL._SL500_.jpg" alt="Dead Ends!" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">Dead Ends!</div>
+        <div class="book-author">Lindsey Fitzharris</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">73f249f3</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#11</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81AlZC03PtL._SL500_.jpg" alt="A Most Perilous World" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">A Most Perilous World</div>
+        <div class="book-author">Kristina R. Gaddy</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">7a1bfbc7</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#12</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81T-rCVhRzL._SL500_.jpg" alt="The Vanishing of Lake Peigneur" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Vanishing of Lake Peigneur</div>
+        <div class="book-author">Allan Wolf</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">5577338e</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#13</div>
+      <img class="book-cover" src="https://m.media-amazon.com/images/I/81Or6Zm9-dL._SL500_.jpg" alt="The Pecan Sheller" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Pecan Sheller</div>
+        <div class="book-author">Lupe Ruiz-Flores</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">0791ad02</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#14</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/9781534497047-L.jpg" alt="The Six" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Six</div>
+        <div class="book-author">Loren Grush</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">727df2ff</div>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-row-num">#15</div>
+      <img class="book-cover" src="https://covers.openlibrary.org/b/id/15164835-L.jpg" alt="The Doomsday Detectives" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="book-cover-placeholder" style="display:none">No cover</div>
+      <div class="book-meta">
+        <div class="book-title">The Doomsday Detectives</div>
+        <div class="book-author">Cindy Jenson-Elliott</div>
+        <div class="book-year">2025</div>
+        <div class="book-id">5176c3ad</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
