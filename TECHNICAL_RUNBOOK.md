@@ -26,7 +26,7 @@ Read this file end to end. Confirm you have read it by stating the four items
 in the SESSION STARTUP INSTRUCTION. Then execute the startup sequence.
 ---
 
-Last updated: April 27, 2026
+Last updated: April 29, 2026
 Maintained by: Amy Oguntala
 
 ---
@@ -647,6 +647,9 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Footer column naming discrepancy: production footer uses Product / Learn More / Connect. Light Standard v5 spec calls them Learn / Join / Wizkoo. Known divergence. Do not rename without explicit instruction.
 - Canonical guard format — three-file architecture locked April 27, 2026: AMY_TECHNICAL_STANDARDS.md uses SCOPE GUARD (project-agnostic scope, Do NOT add project-specific content, Promotion rule). wizkoo/TECHNICAL_RUNBOOK.md uses PROJECT GUARD with explicit Scope (both codebases + pointer note), Do not apply cross-project warning, full Standards path. Learnkoo TECHNICAL_RUNBOOK.md uses PROJECT GUARD with Scope (Learnkoo only), Do not apply cross-project warning, full Standards path. Do not paraphrase or abbreviate guard text.
 - Standards path in guards: C:\Users\amyog\Desktop\wizkoo\AMY_TECHNICAL_STANDARDS.md — full absolute path used in both project guards. Do not shorten to filename-only.
+- Band-Name Pairing Rule (locked April 29, 2026): band name must always appear with age range on any public-facing surface. Format: Name · Ages X-Y (e.g. Wonderer · Ages 3-4, Apprentice · Ages 5-6, Artisan · Ages 7-9, Scholar · Ages 10-12). Reserved bands follow same pattern when shipped. The Luminary takes no age pairing. Architecture-level lock — not a copy preference. Do not render bare band names on any public surface.
+- cover_quality field (locked April 29, 2026): TEXT DEFAULT 'standard' CHECK (cover_quality IN ('featured','standard','hidden')). Featured cluster in renderFeaturedCluster() gates exclusively on cover_quality = 'featured'. If no featured book is available for a band slot, that slot is omitted entirely — never fall back to standard-quality books. Starter set: 9 books as of April 29, 2026. Any expansion requires a curator pass, not a code change.
+- Two-tier cover height system (locked April 29, 2026): band grid cards: height: min(180px, 25vh); featured cluster cards: height: min(280px, 35vh). Both: object-fit: contain; background: var(--linen) for letterbox fill on non-portrait covers. The min() function self-adjusts across viewport sizes including 200% display scaling. Do not revert to fixed-px heights or aspect-ratio approach.
 
 ---
 
@@ -1577,6 +1580,22 @@ incomplete by definition.
 
 ---
 
+PATTERN 9 — DOM INSPECTION DEFERRED TOO LATE
+When a render anomaly is suspected (wrong element appearing in the wrong location),
+the default diagnostic sequence runs outward — JS logic, API response, browser cache,
+service worker, CDN headers — before ever inspecting the DOM to confirm where the
+suspect element actually renders.
+In the Phase 6C "Sheltie" investigation, six diagnostic rounds (API replication, JS
+source audit, browser cache rules-out, service worker check, CDN headers, unique deploy
+URL) all returned clean before DOM inspection revealed the element was never inside the
+suspected DOM container to begin with. It was rendering in an adjacent section.
+Prevention rule: DOM inspection of the actual suspect element is the FIRST diagnostic,
+not the last. Open DevTools → Elements → locate the element → confirm its actual parent
+container before running any other diagnostic. A render bug cannot be in the JS if the
+JS is not writing to the location you think it is.
+
+---
+
 ## PRESERVATION LOCKS REGISTRY
 Enforces Standards §3.4 (Preservation Locks prompt section) via a session-start ambient registry, eliminating per-prompt recitation.
 
@@ -1756,6 +1775,21 @@ decision logged in LOCKED DECISIONS.
     (a) .philo-section rule (~line 1166): targets a class not in any HTML.
     (b) .phi in querySelectorAll (~line 2206): no .phi elements on homepage after section move.
     What to do: Remove both in the next Layer 1 dead code hygiene pass.
+
+11. COVER URL VALIDATION PASS
+    Current: library_books.cover_image_url values are not validated against live HTTP
+      responses. Broken URLs were observed during Phase 6C curator pass. Books with
+      broken URLs are invisible at /library due to the null-cover filter in state.allBooks.
+    What to do: HTTP HEAD-check every library_books.cover_image_url; surface 4xx/5xx
+      responses and entries with non-image content-types for re-sourcing or removal.
+    Priority: Separate pass before next cover_quality curator expansion.
+
+12. TRIPLE-TAG AUDIT — 76 POPULATION C BOOKS
+    Current: 76 books carry the structural triple-tag default (3-4 + 5-6 + 7-9) assigned
+      during Session 13 Phase 6 audit. Not all may genuinely scale across all three bands.
+    What to do: Beth-led per-book confirmation pass. Example flagged by Amy during Phase 6C
+      curator pass: How to Find a Fox (likely too late at 7-9). Estimated 30-45 minutes.
+    Priority: Pre-next-library-iteration.
 
 ---
 
@@ -2087,3 +2121,4 @@ v3.4 — April 26, 2026: /themes page shipped. Footer "Themes to Explore" in Lea
 v3.5 — April 26, 2026: Phase 8: .the-moment removed from index.html. .philo section moved to methodology.html. Open Item 10 added.
 v4.0 — April 26, 2026: Runbook split into AMY_TECHNICAL_STANDARDS.md (project-agnostic) and TECHNICAL_RUNBOOK.md (this file). Global engineering standards extracted to standalone document. Wizkoo-specific content retained here with references to Standards.
 v4.1 — April 27, 2026: Project guard headers added to all three local runbook files. Canonical guard format locked for AMY_TECHNICAL_STANDARDS.md (SCOPE GUARD), wizkoo/TECHNICAL_RUNBOOK.md (PROJECT GUARD — Wizkoo), and Learnkoo/TECHNICAL_RUNBOOK.md (PROJECT GUARD — Learnkoo). Full absolute path to Standards locked in both project guards.
+v4.2 — April 29, 2026: Phase 6C shipped to production. Band-Name Pairing Rule locked (Architecture-level, public-facing surfaces). cover_quality schema added to library_books (CHECK constraint, default standard, starter set 9 books). Two-tier cover height min() system locked (180px/25vh band grid, 280px/35vh featured cluster). Pattern 9 added (DOM inspection deferred too late). Open Items 11–12 added (cover URL validation pass, triple-tag audit). PR #7 merged phase-6c-cover-and-pairing → main, SHA 46106b11.
