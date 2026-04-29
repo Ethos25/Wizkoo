@@ -348,6 +348,9 @@
 
     html += '</div></div>';
     container.innerHTML = html;
+    // DEBUG phase-6c cover_quality — remove before merge
+    var gridEl = container.querySelector('.lib-featured-grid');
+    console.log('featured-grid innerHTML after set:', gridEl ? gridEl.innerHTML.substring(0, 400) : 'GRID NOT FOUND');
     setupLazyImages(container);
   }
 
