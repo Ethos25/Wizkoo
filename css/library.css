@@ -172,8 +172,9 @@ body {
   flex-direction: column;
   gap: 8px;
 }
+.lib-featured-grid .book-card-cover,
 .lib-featured-group .book-card-cover {
-  height: 380px;
+  height: min(280px, 35vh);
 }
 .lib-featured-group-name {
   font-family: 'Space Mono', monospace;
@@ -458,7 +459,7 @@ body {
 }
 .book-card-cover {
   width: 100%;
-  height: 200px;
+  height: min(180px, 25vh);
   overflow: hidden;
   background: var(--linen);
   display: flex;
