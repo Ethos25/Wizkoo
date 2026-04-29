@@ -68,7 +68,7 @@
         .from('library_books')
         .select([
           'id, slug, title, author, hook, orbital_score, heads_up',
-          'cover_image_url, book_format, reading_level',
+          'cover_image_url, cover_quality, book_format, reading_level',
           'library_age_bands(age_band)',
           'library_themes(theme)',
           'library_standards(standard_code, standard_type)',
@@ -291,25 +291,33 @@
     var container = document.getElementById('lib-featured-cluster');
     if (!container || !state.allBooks.length) return;
 
+    // Band-Name Pairing Rule (locked April 29, 2026): band name must always appear with age range
+    // on public-facing surfaces. lib-featured-group-name is a public surface; pair format required.
     var featureBands = [
-      { id: '5-6',   name: 'Apprentice' },
-      { id: '7-9',   name: 'Artisan' },
-      { id: '10-12', name: 'Scholar' },
+      { id: '5-6',   name: 'Apprentice', label: 'Ages 5-6' },
+      { id: '7-9',   name: 'Artisan',    label: 'Ages 7-9' },
+      { id: '10-12', name: 'Scholar',    label: 'Ages 10-12' },
     ];
 
     // Track picked book IDs so multi-band books only appear in one slot.
     // Apprentice picks first, then Artisan, then Scholar — each falls through
     // to its next-highest candidate if its top pick is already taken.
+    //
+    // cover_quality gate: only books marked cover_quality='featured' are eligible.
+    // If a band has no featured-quality books, that slot is omitted entirely —
+    // better to render two high-quality cards than three with one degraded cover.
     var pickedIds = {};
     var picks = [];
     featureBands.forEach(function (fb) {
-      // allBooks already sorted desc by orbital_score — first unpicked match is the best
+      // allBooks already sorted desc by orbital_score — first unpicked featured match is the best
       var match = state.allBooks.find(function (b) {
-        return b.age_bands.indexOf(fb.id) !== -1 && !pickedIds[b.id];
+        return b.age_bands.indexOf(fb.id) !== -1 &&
+               b.cover_quality === 'featured' &&
+               !pickedIds[b.id];
       });
       if (match) {
         pickedIds[match.id] = true;
-        picks.push({ book: match, bandName: fb.name });
+        picks.push({ book: match, bandName: fb.name, bandLabel: fb.label });
       }
     });
 
@@ -320,8 +328,11 @@
       '<div class="lib-featured-grid">';
 
     picks.forEach(function (p) {
+      // Band-Name Pairing Rule: render as "APPRENTICE · AGES 5-6" matching band-selector pill style.
       html += '<div class="lib-featured-group">' +
-        '<span class="lib-featured-group-name">' + esc(p.bandName) + '</span>' +
+        '<span class="lib-featured-group-name">' +
+          esc(p.bandName.toUpperCase()) + ' · ' + esc(p.bandLabel.toUpperCase()) +
+        '</span>' +
         renderBookCard(p.book) +
         '</div>';
     });
