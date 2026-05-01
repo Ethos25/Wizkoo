@@ -172,6 +172,9 @@ body {
   flex-direction: column;
   gap: 8px;
 }
+.lib-featured-group .book-card {
+  flex: 1;
+}
 .lib-featured-grid .book-card-cover,
 .lib-featured-group .book-card-cover {
   height: min(280px, 35vh);
