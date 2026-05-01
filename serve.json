@@ -1,8 +1,6 @@
 {
   "rewrites": [
     { "source": "/library", "destination": "/library.html" },
-    { "source": "/library/actual-size", "destination": "/library/actual-size.html" },
-    { "source": "/library/actual-size.html", "destination": "/library/actual-size.html" },
     { "source": "/library/**", "destination": "/library/book.html" }
   ],
   "headers": [
