@@ -380,17 +380,27 @@
   }
 
   /* ── Orbital diagram ─────────────────────────────────────────────────────── */
-  var CANONICAL_SUBJECTS = [
-    'Language Arts', 'Mathematics', 'Science', 'Social Studies',
-    'Creative Arts', 'PE & Health', 'World Languages', 'Life Skills'
-  ];
+  /* Maps DB subject slugs to display names for the orbital diagram.
+     geography + history both fold into Social Studies (deduped below). */
+  var SUBJECT_DISPLAY = {
+    'science':          'Science',
+    'math':             'Mathematics',
+    'language-arts':    'Language Arts',
+    'art':              'Creative Arts',
+    'geography':        'Social Studies',
+    'history':          'Social Studies',
+    'social-emotional': 'Life Skills'
+  };
 
   function validateSubjects(subjects) {
-    return subjects.map(function (s) { return s.trim(); }).filter(function (s) {
-      var valid = CANONICAL_SUBJECTS.indexOf(s) !== -1;
-      if (!valid) console.warn('[Wizkoo] Non-canonical subject filtered: "' + s + '"');
-      return valid;
-    });
+    var seen = {};
+    return subjects.reduce(function (acc, s) {
+      var slug    = s.trim().toLowerCase();
+      var display = SUBJECT_DISPLAY[slug];
+      if (!display) { console.warn('[Wizkoo] Unmapped subject slug: "' + slug + '"'); return acc; }
+      if (!seen[display]) { seen[display] = true; acc.push(display); }
+      return acc;
+    }, []);
   }
 
   var ORBITS = {
