@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actual Size · Steve Jenkins — Wizkoo Library</title>
+<meta name="description" content="Steve Jenkins prints animals at real-world scale — a great white shark's tooth, a goliath bird-eating spider, a giant squid's eye — so a child's hand can lay flat against the page beside them.">
+<link rel="canonical" href="https://wizkoo.com/library/actual-size">
+<meta property="og:title" content="Actual Size · Steve Jenkins — Wizkoo Library">
+<meta property="og:description" content="Steve Jenkins prints animals at real-world scale — a great white shark's tooth, a goliath bird-eating spider, a giant squid's eye.">
+<meta property="og:type" content="book">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+
+<style>
+/* ─────────────────────────────────────────────────
+   ACTUAL SIZE — BOOK DETAIL PAGE  D5
+   Surface: Warm Chalk #F8F4E9
+   Footer: Treatment B (Continuous-Night, binary cut)
+   Light Standard tokens locked. Do not modify.
+
+   Layout reshuffle summary:
+   - Score constellation moved: right column → left column (below cover caption)
+   - Metadata colophon moved: full-width strip below scan → right column between byline + CTA
+   - Eyebrow moved: separate .bk-entry-row grid → first element of right column
+   - CTA pair: follows colophon strip, no max-width cap
+   Superseded: .bk-entry-row, .bk-entry-row-left (removed entirely)
+───────────────────────────────────────────────── */
+
+/* ── SURFACE RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #F8F4E9;
+  color: #0C1020;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── SHARED UTILITIES ── */
+.bk-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem; /* 12px */
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E8AF38;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.bk-eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #E8AF38;
+  flex-shrink: 0;
+}
+
+/* ── WRAP ── */
+.bk-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ══════════════════════════════════════
+   ENTRY EYEBROW — editorial register above title
+   "AN ENTRY IN THE WIZKOO LIBRARY"
+   Replaces navigational breadcrumb with curatorial identity.
+══════════════════════════════════════ */
+
+/* ══════════════════════════════════════
+   SCAN ZONE — 2×2 grid: two bands, two columns
+   Band 1 (Identity): cover+caption | title+deck+lead+byline
+   Band 2 (Decision): orbital       | metadata/CTA card
+   Row 2 elements share the same top edge — co-equal visual partners.
+══════════════════════════════════════ */
+.bk-scan {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  grid-template-areas:
+    "band1-left band1-right"
+    "band2-left band2-right";
+  column-gap: 36px;
+  row-gap: 10px;
+  padding-top: 8px;
+  align-items: start;
+}
+
+/* ── BAND 1: Identity ── */
+.bk-band1-left  { grid-area: band1-left; }
+.bk-band1-right { grid-area: band1-right; padding-top: 4px; }
+
+/* ── BAND 2: Decision ── */
+.bk-band2-left  { grid-area: band2-left; }
+.bk-band2-right { grid-area: band2-right; }
+
+/* cover frame */
+.bk-cover-frame {
+  width: 100%;
+}
+.bk-cover-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  display: block;
+}
+.bk-cover-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+/* placeholder cover */
+.bk-cover-ph {
+  width: 100%; height: 100%;
+  background: linear-gradient(155deg, #C8852A 0%, #A86A1A 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  text-align: center;
+}
+.bk-cover-ph-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #E8AF38;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+.bk-cover-ph-author {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(232,175,56,0.65);
+}
+.bk-cover-ph-stamp {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.46rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232,175,56,0.35);
+  margin-top: 28px;
+  border: 1px solid rgba(232,175,56,0.22);
+  padding: 4px 10px;
+}
+
+/* cover caption */
+.bk-cover-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 6px;
+  width: 100%;
+}
+.bk-cover-caption-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.8125rem; /* 13px — hugs cover */
+  color: rgba(12,16,32,0.48);
+  line-height: 1.4;
+}
+
+/* caption-to-orbital threshold rule — architectural rhyme with pre-title rule */
+.bk-caption-orbital-rule {
+  width: 45%;
+  height: 1px;
+  background: rgba(232,175,56,0.60);
+  margin-top: 14px;
+}
+.bk-cover-plate {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.46rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.28);
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+/* ══════════════════════════════════════
+   ORBITAL DIAGRAM — generative, positions computed by renderOrbitalDiagram()
+   Five gradients in SVG <defs>. Planets injected into #bk-planets.
+   Colophon set by JS to "[COUNT] CONNECTED SUBJECTS".
+   Width matches .bk-cover-frame (320px) for flush-left alignment.
+══════════════════════════════════════ */
+.bk-score-wrap {
+  width: calc(100% + 226px);
+  margin-left: -113px;
+  margin-top: 4px;
+}
+.bk-score-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.bk-score-fig {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.625rem; /* 10px */
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.65);
+  margin-top: 6px;
+  text-align: center;
+}
+.bk-score-standards {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem; /* 8px — smaller than connected-subjects line */
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.45);
+  margin-top: 4px;
+  text-align: center;
+}
+.bk-score-extra {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.40rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.25);
+  margin-top: 4px;
+}
+
+/* ── RIGHT COLUMN ── */
+.bk-scan-right {
+  padding-top: 4px;
+}
+
+/* entry eyebrow — editorial register above title */
+.bk-entry-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem; /* 12px */
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E8AF38;
+  margin-bottom: 12px;
+}
+
+/* pre-title saffron rule — signals "entry begins here" */
+.bk-pre-title-rule {
+  width: 56px;
+  height: 2px;
+  background: #E8AF38;
+  margin-bottom: 10px;
+}
+
+/* title */
+.bk-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 0.94;
+  color: #0C1020;
+  letter-spacing: -0.025em;
+  margin-bottom: 10px;
+}
+.bk-title-italic { font-style: italic; }
+.bk-title-dot { color: #E8AF38; }
+
+/* title rule */
+.bk-title-rule {
+  width: 65%;
+  height: 1.5px;
+  background: #E8AF38;
+  margin-bottom: 10px;
+}
+
+/* standfirst */
+.bk-standfirst {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1875rem;
+  line-height: 1.45;
+  color: #0C1020;
+  margin-bottom: 10px;
+}
+.bk-standfirst-dot { color: #E8AF38; }
+
+/* lead paragraph — promoted to standfirst weight/size */
+.bk-lead {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: rgba(12,16,32,0.90);
+  max-width: 64%;
+  margin-bottom: 6px;
+}
+
+/* byline */
+.bk-byline {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.0rem;
+  color: #0C1020;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+/* ══════════════════════════════════════
+   CARD GRID — single 4-column grid spanning metadata + CTA
+   Metadata: 4 items, one per column (row 1)
+   CTA: add spans cols 1-2, save spans cols 3-4 (row 2)
+   The border between col 2 and col 3 is the SAME structural
+   boundary for both the LENGTH/READER divider and the CTA divider.
+   Pixel-perfect at any zoom level — no independent positioning.
+══════════════════════════════════════ */
+.bk-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.bk-col-item {
+  padding: 10px 20px;
+  border-right: 1px solid #E8E2D4;
+  border-bottom: 1px solid #E8E2D4;
+}
+.bk-col-item:first-child { padding-left: 0; }
+.bk-col-item:nth-child(4) { border-right: none; padding-right: 0; }
+.bk-col-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.46rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(232,175,56,0.80);
+  margin-bottom: 6px;
+  display: block;
+}
+.bk-col-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+  color: #0C1020;
+  line-height: 1.2;
+  display: block;
+  white-space: nowrap;
+}
+.bk-col-sub {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.8125rem; /* 13px */
+  color: rgba(12,16,32,0.75);
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════
+   DECISION CARD — metadata + CTA on Paper #FAFAFA
+   Architectural separation: "what is this book" (Warm Chalk) vs
+   "what do I need to decide" (Paper card, bounded).
+   Card hover: +2px lift + subtle shadow.
+══════════════════════════════════════ */
+.bk-decision-card {
+  background: #FAFAFA;
+  border: 1px solid #E8E2D4;
+  padding: 20px 28px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 0 rgba(12,16,32,0.04);
+  transition: box-shadow 300ms cubic-bezier(0.16,1,0.3,1),
+              transform  300ms cubic-bezier(0.16,1,0.3,1);
+}
+.bk-decision-card:hover {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 0 rgba(12,16,32,0.04), 0 4px 12px rgba(12,16,32,0.06);
+  transform: translateY(-2px);
+}
+
+/* ── CTA BUTTONS — grid items in .bk-card-grid ── */
+.bk-cta-add,
+.bk-cta-save {
+  padding: 14px 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #0C1020;
+  display: block;
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 0 #E8AF38;
+  transition: background 200ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow 200ms cubic-bezier(0.16,1,0.3,1);
+}
+.bk-cta-add {
+  grid-column: 1 / 3;
+  border-right: 1px solid #E8E2D4;
+}
+.bk-cta-save {
+  grid-column: 3 / 5;
+}
+.bk-cta-add:hover,
+.bk-cta-save:hover {
+  box-shadow: inset 0 -2px 0 0 #E8AF38;
+  background: rgba(232,175,56,0.12);
+}
+.bk-cta-add:active {
+  animation: bkSaffronPulse 100ms ease-in-out;
+}
+@keyframes bkSaffronPulse {
+  0%   { box-shadow: inset 0 -2px 0 0 #E8AF38; }
+  50%  { box-shadow: inset 0 -2px 0 0 rgba(232,175,56,0.7); }
+  100% { box-shadow: inset 0 -2px 0 0 #E8AF38; }
+}
+
+/* ══════════════════════════════════════
+   HEADS-UP
+══════════════════════════════════════ */
+.bk-headsup {
+  margin-top: 56px;
+  padding: 36px 0;
+  border-top: 1px solid #E8E2D4;
+  display: grid;
+  grid-template-columns: 160px 1fr 64px;
+  gap: 0 44px;
+  align-items: start;
+}
+.bk-headsup-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 2px;
+}
+.bk-headsup-keyword {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E8AF38;
+}
+.bk-headsup-sub {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.74rem;
+  color: rgba(12,16,32,0.48);
+  line-height: 1.4;
+}
+.bk-headsup-body {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.0rem;
+  line-height: 1.72;
+  color: #0C1020;
+}
+.bk-headsup-register {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.44rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.25);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  align-self: center;
+  justify-self: center;
+}
+
+/* ══════════════════════════════════════
+   FULL ENTRY BREAK
+══════════════════════════════════════ */
+.bk-break {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: 48px auto 64px;
+  width: fit-content;
+}
+.bk-break-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #E8AF38;
+  font-variant-numeric: lining-nums;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.bk-break-dots-svg { display: block; flex-shrink: 0; }
+.bk-break-rule {
+  width: 56px;
+  height: 1px;
+  background: #E8AF38;
+  opacity: 0.6;
+}
+
+/* ══════════════════════════════════════
+   DEPTH ZONE — On Reading / Orbital Description
+   Left column (360px) aligns under cover; right column runs to page edge.
+══════════════════════════════════════ */
+.bk-depth {
+  padding-bottom: 80px;
+}
+.bk-on-reading-card {
+  background: #FAFAFA;
+  border: 1px solid #E8E2D4;
+  padding: 24px;
+  width: 70%;
+  margin: 28px auto 28px 0;
+}
+.bk-on-reading-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(12,16,32,0.70);
+}
+.bk-orbital-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.0rem;
+  font-weight: 500;
+  line-height: 1.75;
+  color: rgba(12,16,32,0.76);
+  margin-bottom: 14px;
+}
+.bk-orbital-body .sw { color: #3458B0; }
+
+/* pull-quote */
+.bk-pull-quote {
+  margin: 30px 0 32px;
+  padding-top: 18px;
+  border-top: 1.5px solid #E8AF38;
+}
+.bk-pull-quote p {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.22;
+  color: #0C1020;
+}
+
+/* best for */
+.bk-best-for-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.0rem;
+  line-height: 1.75;
+  color: rgba(12,16,32,0.76);
+}
+
+/* ══════════════════════════════════════
+   CONNECTION ROW — four neighbor book cards
+   Horizontal row, Paper #FAFAFA, hairline border, hover lift.
+══════════════════════════════════════ */
+.bk-network {
+  padding: 0 0 80px;
+}
+.bk-network-header {
+  margin-bottom: 40px;
+}
+.bk-network-headline {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 2.1rem;
+  line-height: 1.15;
+  color: #0C1020;
+  margin-top: 10px;
+}
+.bk-network-headline em { font-style: italic; }
+.bk-network-deck {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: rgba(12,16,32,0.55);
+  margin-top: 10px;
+}
+
+.bk-row-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.bk-row-card {
+  background: #FAFAFA;
+  border: 1px solid #E8E2D4;
+  padding: 16px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 300ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow 300ms cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer;
+}
+.bk-row-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(12,16,32,0.08);
+}
+.bk-row-card:hover .bk-rc-cover-art {
+  transform: scale(1.025);
+}
+
+.bk-rc-cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.bk-rc-cover-art {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  text-align: center;
+  transition: transform 300ms cubic-bezier(0.16,1,0.3,1);
+}
+.bk-rc-cover-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 0.80rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.bk-rc-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #0C1020;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.bk-rc-author {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.74rem;
+  color: #3458B0;
+  margin-bottom: 10px;
+}
+.bk-rc-subjects {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+.bk-rc-subject {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.42rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.36);
+}
+.bk-rc-subject + .bk-rc-subject::before { content: ' · '; }
+
+/* ── THRESHOLD — hairline before footer ── */
+.bk-threshold {
+  border: none;
+  border-top: 1px solid #E8E2D4;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════
+   MEDIUM — narrows at ≤1100px CSS viewport
+   (e.g. 175% Windows DPI on 1920px monitor ≈ 1097px CSS)
+══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .bk-scan { grid-template-columns: 260px 1fr; }
+  .bk-score-wrap { width: calc(100% + 80px); margin-left: -40px; }
+  .bk-title { font-size: 2.5rem; }
+  .bk-decision-card { padding: 16px 20px; }
+}
+
+/* ══════════════════════════════════════
+   HIGH-DPI WIDE — same compact rules for DPR ≥ 1.5 on CSS viewports > 1100px
+   Targets: Windows 175%+ DPI on ultrawide (e.g. 3440px physical → 1966px CSS, DPR=1.75)
+   Also fires on Retina displays at wide CSS widths, which is fine.
+══════════════════════════════════════ */
+@media (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 1101px),
+       (min-resolution: 144dpi) and (min-width: 1101px) {
+  .bk-scan { grid-template-columns: 260px 1fr; }
+  .bk-score-wrap { width: calc(100% + 80px); margin-left: -40px; }
+  .bk-title { font-size: 2.5rem; }
+  .bk-decision-card { padding: 16px 20px; }
+}
+
+/* ══════════════════════════════════════
+   LANDSCAPE-SHORT — fires before short-wide in cascade
+   @media(max-height:420px) and (min-width:600px)
+══════════════════════════════════════ */
+@media (max-height: 420px) and (min-width: 600px) {
+  .bk-title { font-size: 2rem; line-height: 0.96; }
+  .bk-scan { grid-template-columns: 200px 1fr; column-gap: 24px; }
+}
+
+/* ══════════════════════════════════════
+   SHORT-WIDE — Amy's production environment
+   height ≈396px triggers this; declared last so it wins
+   over landscape-short when both fire.
+══════════════════════════════════════ */
+@media (max-height: 700px) and (min-width: 768px) {
+  .bk-title { font-size: 2rem; line-height: 0.96; }
+  .bk-scan { grid-template-columns: 220px 1fr; column-gap: 28px; }
+  .bk-decision-card { padding: 24px; }
+  .bk-break { margin: 72px auto 48px; }
+}
+
+/* ══════════════════════════════════════
+   MOBILE — 375px breakpoint
+══════════════════════════════════════ */
+@media (max-width: 767px) {
+  .bk-wrap { padding: 0 20px; }
+
+  .bk-entry-tag { display: none; }
+
+  /* scan zone: single column, bands stack in reading order */
+  .bk-scan {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "band1-left"
+      "band1-right"
+      "band2-left"
+      "band2-right";
+    row-gap: 0;
+    column-gap: 0;
+    padding-top: 20px;
+  }
+
+  .bk-cover-frame { width: 100%; }
+  .bk-cover-caption { width: 100%; }
+  .bk-score-wrap { width: 100%; margin-top: 20px; }
+  .bk-score-svg { max-width: 100%; }
+
+  .bk-band1-right { padding-top: 28px; }
+  .bk-band2-right { margin-top: 0; }
+
+  /* title */
+  .bk-title { font-size: 2.2rem; line-height: 0.96; }
+
+  /* card grid: 2-col metadata on mobile */
+  .bk-card-grid { grid-template-columns: 1fr 1fr; }
+  .bk-col-item { padding: 14px 12px; }
+  .bk-col-item:nth-child(odd)  { padding-left: 0; }
+  .bk-col-item:nth-child(even) { border-right: none; padding-right: 0; }
+  .bk-col-item:nth-child(3),
+  .bk-col-item:nth-child(4)    { border-bottom: none; }
+
+  /* card: reduced padding on mobile */
+  .bk-decision-card { padding: 20px; }
+
+  /* CTA: full width, stacked on mobile */
+  .bk-cta-add { grid-column: 1 / -1; border-right: none; padding: 16px 0; }
+  .bk-cta-save { grid-column: 1 / -1; }
+
+  /* orbital: reset bleed on mobile */
+  .bk-score-wrap { width: 100%; margin-left: 0; margin-top: 20px; }
+
+  /* heads-up */
+  .bk-headsup {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 28px 0;
+    margin-top: 36px;
+  }
+  .bk-headsup-label { flex-direction: row; align-items: baseline; gap: 10px; }
+  .bk-headsup-register { display: none; }
+
+  .bk-break { margin: 80px auto 56px; }
+
+  /* depth zone */
+  .bk-depth { padding-bottom: 56px; }
+  .bk-on-reading-card { width: 100%; margin-left: 0; }
+  .bk-on-reading-text { font-size: 0.82rem; }
+  .bk-pull-quote p { font-size: 1.3rem; }
+
+  /* connection row: 2×2 on mobile */
+  .bk-row-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .bk-rc-cover-title { font-size: 0.70rem; }
+}
+
+/* ══════════════════════════════════════
+   STANDARDS ROW — inside .bk-card-grid, spans all columns
+══════════════════════════════════════ */
+.bk-standards-row {
+  grid-column: 1 / -1;
+  padding: 10px 0;
+  border-bottom: 1px solid #E8E2D4;
+}
+.bk-standards-codes {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: rgba(12,16,32,0.65);
+  display: block;
+  margin-top: 4px;
+}
+
+/* ══════════════════════════════════════
+   TERTIARY LINKS — FIND AT LIBRARY + BUY INDIE
+   Below CTA pair, inside .bk-decision-card
+══════════════════════════════════════ */
+.bk-tertiary-links {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #E8E2D4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bk-tertiary-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.55);
+  text-decoration: none;
+  transition: color 200ms cubic-bezier(0.16,1,0.3,1);
+}
+.bk-tertiary-link:hover {
+  color: #0C1020;
+  text-decoration: underline;
+  text-decoration-color: #E8AF38;
+  text-underline-offset: 2px;
+}
+.bk-tertiary-link-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: #E8AF38;
+}
+
+/* ══════════════════════════════════════
+   WHAT MAKES IT ORBITAL — single load-bearing sentence
+   Full-width, between visual break and depth zone
+══════════════════════════════════════ */
+.bk-what-orbital {
+  margin-bottom: 48px;
+}
+.bk-what-orbital-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: #0C1020;
+}
+
+/* ══════════════════════════════════════
+   TALK ABOUT — discussion question cards
+══════════════════════════════════════ */
+.bk-talk-about {
+  margin-bottom: 48px;
+}
+.bk-talk-about-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bk-talk-about-card {
+  background: #FAFAFA;
+  border: 1px solid #E8E2D4;
+  padding: 24px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1.0rem;
+  line-height: 1.65;
+  color: #0C1020;
+}
+
+/* ══════════════════════════════════════
+   PAIRS WITH — cross-product integration
+══════════════════════════════════════ */
+.bk-pairs-with {
+  margin-bottom: 56px;
+}
+.bk-pairs-with-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1.0rem;
+  line-height: 1.65;
+  color: rgba(12,16,32,0.76);
+}
+.bk-pairs-with-body em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════
+   NAV — cream-room transparent treatment
+   Mirrors homepage nav exactly. Page class .page-library scopes all overrides.
+══════════════════════════════════════ */
+/* Announce bar: solid dark background, saffron text */
+.page-library .announce{
+  background:#0C1020!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.page-library .announce-text{
+  color:rgba(232,175,56,0.75)!important;
+}
+/* Nav: fully transparent on cream surface */
+.page-library .nav{
+  background:transparent!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  border-bottom:none!important;
+  box-shadow:none!important;
+  transition:background-color .25s cubic-bezier(.25,.1,.25,1)!important;
+}
+.page-library .nav::before{display:none!important}
+/* Ink-coloured wordmark + links (cream-room inversion) */
+.page-library .nav-wm{color:#0C1020!important}
+.page-library .nav-link{color:rgba(12,16,32,0.55)!important}
+.page-library .nav-link:hover{color:rgba(12,16,32,0.90)!important}
+.page-library .nav-link.active{color:#0C1020!important}
+.page-library .nav-hamburger-line{background:rgba(12,16,32,0.7)!important}
+/* CTA: ink border on cream */
+.page-library .nav-cta{
+  background:transparent!important;
+  color:#0C1020!important;
+  border:1.5px solid #E8AF38!important;
+}
+.page-library .nav-cta:hover{
+  background:#E8AF38!important;
+  color:#0C1020!important;
+  border-color:#E8AF38!important;
+  box-shadow:none!important;
+}
+/* Scrolled: cream frosted glass — same values as homepage linen scroll state */
+.page-library .nav.nav--scrolled{
+  background:rgba(248,244,233,0.55)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+</style>
+</head>
+<!-- Footer treatment B: Continuous-Night — binary cut from Warm Chalk to Night Sky at .bk-threshold -->
+<body class="page-library" data-footer-treatment="b">
+<div class="cursor" id="cursor"></div>
+<div id="wizkoo-nav"></div>
+<script src="/components/nav.js"></script>
+<script>
+/* Nav scroll state — cream surface only (no dark-section detection needed on library pages) */
+document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('site-nav');
+  if (!nav) return;
+  function update() { nav.classList.toggle('nav--scrolled', window.scrollY > 20); }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+});
+</script>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<main id="main-content">
+<div class="bk-wrap">
+
+  <!-- ══ SCAN ZONE — 2×2 grid ══ -->
+  <div class="bk-scan">
+
+    <!-- ══ BAND 1 LEFT: Cover + Caption ══ -->
+    <div class="bk-band1-left">
+      <div class="bk-cover-frame">
+        <div class="bk-cover-img">
+          <div class="bk-cover-ph" aria-label="Book cover placeholder for Actual Size">
+            <div class="bk-cover-ph-title">Actual<br>Size</div>
+            <div class="bk-cover-ph-author">Steve Jenkins</div>
+            <div class="bk-cover-ph-stamp">[ Cover Placeholder ]</div>
+          </div>
+        </div>
+      </div>
+      <div class="bk-cover-caption">
+        <span class="bk-cover-caption-text">Hand-cut paper sculpture by Steve Jenkins, 2004.</span>
+      </div>
+      <div class="bk-caption-orbital-rule" aria-hidden="true"></div>
+    </div><!-- /bk-band1-left -->
+
+    <!-- ══ BAND 1 RIGHT: Title + Deck + Lead + Byline ══ -->
+    <div class="bk-band1-right">
+      <p class="bk-entry-eyebrow">An Entry in the Wizkoo Library</p>
+      <div class="bk-pre-title-rule" aria-hidden="true"></div>
+      <h1 class="bk-title">Actual <span class="bk-title-italic">Size</span><span class="bk-title-dot">.</span></h1>
+      <div class="bk-title-rule" aria-hidden="true"></div>
+      <p class="bk-standfirst">A picture-book colophon of the natural world, printed at one-to-one<span class="bk-standfirst-dot">.</span></p>
+      <p class="bk-lead">Steve Jenkins prints animals at real-world scale — a great white shark's tooth, a goliath bird-eating spider, a giant squid's eye — so a child's hand can lay flat against the page beside them.</p>
+      <p class="bk-byline">Written and illustrated by Steve Jenkins.</p>
+    </div><!-- /bk-band1-right -->
+
+    <!-- ══ BAND 2 LEFT: Orbital Diagram ══ -->
+    <div class="bk-band2-left">
+      <div class="bk-score-wrap" id="bk-score-wrap">
+        <svg class="bk-score-svg" id="bk-score-svg"
+             viewBox="-200 4 1150 517"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg"
+             role="img"
+             aria-label="Orbital diagram">
+          <defs>
+            <radialGradient id="nucleusFire" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#FDE9A0"/>
+              <stop offset="30%"  stop-color="#F0C050"/>
+              <stop offset="55%"  stop-color="#E8AF38"/>
+              <stop offset="80%"  stop-color="#C89030"/>
+              <stop offset="100%" stop-color="#A07020"/>
+            </radialGradient>
+            <radialGradient id="haze1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.12"/>
+              <stop offset="60%"  stop-color="#E8AF38" stop-opacity="0.04"/>
+              <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="haze2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.06"/>
+              <stop offset="50%"  stop-color="#E8AF38" stop-opacity="0.02"/>
+              <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="hz-dot-halo" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="hz-dot-core" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#FDE9A0"/>
+              <stop offset="40%"  stop-color="#F0C050"/>
+              <stop offset="100%" stop-color="#E8AF38"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="450" cy="250" rx="310" ry="178" transform="rotate(-32 450 250)" stroke="rgba(12,16,32,0.45)" stroke-width="1.5" fill="none"/>
+          <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)" stroke="#E8AF38" stroke-width="1.25" stroke-opacity="0.55" fill="none" stroke-dasharray="6 8"/>
+          <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)" stroke="#E8AF38" stroke-width="1.25" stroke-opacity="0.15" fill="none"/>
+          <ellipse cx="450" cy="250" rx="240" ry="135" transform="rotate(25 450 250)" stroke="rgba(12,16,32,0.30)" stroke-width="1.0" fill="none"/>
+          <circle cx="450" cy="250" r="170" fill="url(#haze2)" opacity="0.5"/>
+          <circle cx="450" cy="250" r="120" fill="url(#haze1)"/>
+          <circle cx="450" cy="250" r="42"  fill="url(#nucleusFire)"/>
+          <g id="bk-planets"></g>
+        </svg>
+        <p class="bk-score-fig" id="bk-score-fig"></p>
+        <p class="bk-score-standards">Aligned to · CCSS.MATH.CONTENT.2.MD.A.1 · NGSS.3-LS4-3</p>
+      </div>
+    </div><!-- /bk-band2-left -->
+
+    <!-- ══ BAND 2 RIGHT: Metadata + CTA Card ══ -->
+    <div class="bk-band2-right">
+      <div class="bk-decision-card">
+        <div class="bk-card-grid" role="group" aria-label="Book details and actions">
+          <div class="bk-col-item">
+            <span class="bk-col-label">Ages</span>
+            <span class="bk-col-value">5–9</span>
+            <span class="bk-col-sub">Apprentice + Artisan</span>
+          </div>
+          <div class="bk-col-item">
+            <span class="bk-col-label">Format</span>
+            <span class="bk-col-value">Picture Book</span>
+            <span class="bk-col-sub">Nonfiction</span>
+          </div>
+          <div class="bk-col-item">
+            <span class="bk-col-label">Length</span>
+            <span class="bk-col-value">32 pages</span>
+            <span class="bk-col-sub">~12 min read-aloud</span>
+          </div>
+          <div class="bk-col-item">
+            <span class="bk-col-label">Reader</span>
+            <span class="bk-col-value">Side by Side</span>
+            <span class="bk-col-sub">then independent</span>
+          </div>
+          <button class="bk-cta-add" type="button">Add to Plan</button>
+          <button class="bk-cta-save" type="button">Save for Later</button>
+        </div>
+        <div class="bk-tertiary-links">
+          <a href="https://www.worldcat.org/search?q=isbn:9780618375943" class="bk-tertiary-link" target="_blank" rel="noopener">
+            <svg class="bk-tertiary-link-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="2" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/>
+              <line x1="7" y1="2" x2="7" y2="12" stroke="currentColor" stroke-width="1.2"/>
+              <line x1="1" y1="5" x2="13" y2="5" stroke="currentColor" stroke-width="0.8"/>
+            </svg>
+            Find at Your Library
+          </a>
+          <a href="https://bookshop.org/search?keywords=9780618375943" class="bk-tertiary-link" target="_blank" rel="noopener">
+            <svg class="bk-tertiary-link-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M2 3h10l-1 7H3L2 3Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M5 3V2a2 2 0 0 1 4 0v1" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            Buy from an Independent Bookstore
+          </a>
+        </div>
+      </div>
+    </div><!-- /bk-band2-right -->
+
+  </div><!-- /bk-scan -->
+
+  <!-- ══ BELOW SCAN: full-width zones in order ══ -->
+
+  <!-- Heads-Up editorial note -->
+  <div class="bk-headsup">
+    <div class="bk-headsup-label">
+      <span class="bk-headsup-keyword">Heads-Up</span>
+      <span class="bk-headsup-sub">Read together first.</span>
+    </div>
+    <p class="bk-headsup-body">A few of the spreads — the great white's open mouth, the saltwater crocodile — surprise children. Most love it. A small number ask to skip those pages. Read it together the first time.</p>
+    <span class="bk-headsup-register" aria-hidden="true">Editorial Note</span>
+  </div>
+
+  <!-- — · · · The Full Entry · · · — visual break -->
+  <div class="bk-break" role="separator" aria-hidden="true">
+    <span class="bk-break-label">—&thinsp;<svg class="bk-break-dots-svg" width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="3.5" fill="#E8AF38"/><circle cx="15" cy="4" r="3.5" fill="#E8AF38"/><circle cx="26" cy="4" r="3.5" fill="#E8AF38"/></svg>&thinsp;The Full Entry&thinsp;<svg class="bk-break-dots-svg" width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="3.5" fill="#E8AF38"/><circle cx="15" cy="4" r="3.5" fill="#E8AF38"/><circle cx="26" cy="4" r="3.5" fill="#E8AF38"/></svg>&thinsp;—</span>
+    <div class="bk-break-rule"></div>
+  </div>
+
+  <!-- What Makes It Orbital -->
+  <div class="bk-what-orbital">
+    <div class="bk-eyebrow">What Makes It Orbital</div>
+    <p class="bk-what-orbital-body">A book that uses scale as its only argument. The premise needs no narration; the page is the experiment.</p>
+  </div>
+
+  <!-- Depth zone — single column -->
+  <div class="bk-depth">
+    <div class="bk-eyebrow">The Orbital Description</div>
+    <p class="bk-orbital-body">From there, the book opens onto more than one door. It is a <span class="sw">math</span> book about <span class="sw">measurement and proportion</span>. It is a <span class="sw">geography</span> book about the <span class="sw">rainforests and oceans</span> where these creatures live. It is a <span class="sw">biology</span> book about <span class="sw">adaptation</span>. The reader does the connecting — which is the whole point.</p>
+    <p class="bk-orbital-body">What Jenkins resists is interpretation. The text is small and factual, never narrating the wonder back to you — children form their own comparisons, and those comparisons are what stay.</p>
+    <div class="bk-on-reading-card">
+      <div class="bk-eyebrow">On Reading</div>
+      <p class="bk-on-reading-text">Best read together the first time, then left within the child's reach. Most children return to the comparison spreads on their own — the goliath spider, the squid's eye — and that quiet re-reading is where the connections form.</p>
+    </div>
+    <div class="bk-pull-quote">
+      <p>The reader does the connecting — which is the whole point.</p>
+    </div>
+    <div class="bk-eyebrow">Best For</div>
+    <p class="bk-best-for-text">For the child who already loves animals and is ready to be told the truth about how big a tongue, a tooth, an eye really is. For the child who is not yet sure whether she likes nonfiction. This book converts.</p>
+  </div><!-- /bk-depth -->
+
+  <!-- Talk About -->
+  <div class="bk-talk-about">
+    <div class="bk-eyebrow">Talk About</div>
+    <div class="bk-talk-about-cards">
+      <div class="bk-talk-about-card">Which animal surprised you the most when you saw its real size?</div>
+      <div class="bk-talk-about-card">If this book showed a blue whale at actual size, how big would the page need to be?</div>
+    </div>
+  </div>
+
+  <!-- Pairs With -->
+  <div class="bk-pairs-with">
+    <div class="bk-eyebrow">Pairs With</div>
+    <p class="bk-pairs-with-body">Plan themes: <em>Animals</em>, <em>Measurement</em>, <em>Scale</em>. Atlas: habitats of featured animals.</p>
+  </div>
+
+  <!-- Connection row — four neighbor books -->
+  <section class="bk-network" aria-labelledby="connection-heading">
+    <div class="bk-network-header">
+      <div class="bk-eyebrow">The Constellation</div>
+      <h2 class="bk-network-headline" id="connection-heading">Books that share a door with <em>Actual Size</em>.</h2>
+      <p class="bk-network-deck">Four books that open the same rooms — science, scale, the natural world — by a different door.</p>
+    </div>
+
+    <div class="bk-row-cards">
+
+      <div class="bk-row-card">
+        <div class="bk-rc-cover">
+          <div class="bk-rc-cover-art" style="background:#1C3870; width:100%; height:100%;">
+            <div class="bk-rc-cover-title" style="color:#F0F4FA;">A Drop<br>of Water</div>
+          </div>
+        </div>
+        <div class="bk-rc-title">A Drop of Water</div>
+        <div class="bk-rc-author">Walter Wick</div>
+        <div class="bk-rc-subjects">
+          <span class="bk-rc-subject">Science</span>
+          <span class="bk-rc-subject">Mathematics</span>
+        </div>
+      </div>
+
+      <div class="bk-row-card">
+        <div class="bk-rc-cover">
+          <div class="bk-rc-cover-art" style="background:#1E3D28; width:100%; height:100%;">
+            <svg width="52" height="66" viewBox="0 0 52 66" fill="none" aria-hidden="true">
+              <ellipse cx="26" cy="33" rx="20" ry="26" fill="rgba(100,160,100,0.55)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="bk-rc-title">What Is a Whale?</div>
+        <div class="bk-rc-author">Bobbie Kalman</div>
+        <div class="bk-rc-subjects">
+          <span class="bk-rc-subject">Science</span>
+          <span class="bk-rc-subject">Social Studies</span>
+        </div>
+      </div>
+
+      <div class="bk-row-card">
+        <div class="bk-rc-cover">
+          <div class="bk-rc-cover-art" style="background:#8B5E2A; width:100%; height:100%;">
+            <svg width="54" height="66" viewBox="0 0 54 66" fill="none" aria-hidden="true">
+              <polygon points="27,6 50,60 4,60" fill="rgba(60,30,0,0.55)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="bk-rc-title">Volcanoes!</div>
+        <div class="bk-rc-author">Anne Schreiber</div>
+        <div class="bk-rc-subjects">
+          <span class="bk-rc-subject">Science</span>
+          <span class="bk-rc-subject">Social Studies</span>
+        </div>
+      </div>
+
+      <div class="bk-row-card">
+        <div class="bk-rc-cover">
+          <div class="bk-rc-cover-art" style="background:#C4A870; width:100%; height:100%;">
+            <div class="bk-rc-cover-title" style="color:rgba(50,30,10,0.75); font-style:italic; font-size:1.4rem; letter-spacing:0; text-transform:none;">Sheltie</div>
+          </div>
+        </div>
+        <div class="bk-rc-title">Sheltie</div>
+        <div class="bk-rc-author">Peter Clover</div>
+        <div class="bk-rc-subjects"></div>
+      </div>
+
+    </div><!-- /bk-row-cards -->
+  </section>
+
+</div><!-- /bk-wrap -->
+
+<!-- Threshold: 1px Rule hairline — binary cut from Warm Chalk to Night Sky planetarium footer -->
+<hr class="bk-threshold" aria-hidden="true">
+</main>
+
+<!-- Planetarium footer — Treatment B (Continuous-Night), unchanged from footer.js source of truth -->
+<div id="site-footer"></div>
+<script src="/components/footer.js"></script>
+
+<script>
+/* ── Orbital Diagram — generative planet placement ── */
+(function() {
+
+  /* Wizkoo Curriculum Registry — eight canonical parent-facing subject names.
+     Locked in Curriculum Alignment Summary (Beth Holloway, April 2026).
+     No other values are valid orbital planet labels. */
+  var CANONICAL_SUBJECTS = [
+    'Language Arts',
+    'Mathematics',
+    'Science',
+    'Social Studies',
+    'Creative Arts',
+    'PE & Health',
+    'World Languages',
+    'Life Skills'
+  ];
+
+  function validateSubjects(subjects) {
+    return subjects
+      .map(function(s) { return s.trim(); })
+      .filter(function(s) {
+        var valid = CANONICAL_SUBJECTS.indexOf(s) !== -1;
+        if (!valid) {
+          console.warn('[Wizkoo] Non-canonical subject filtered from orbital diagram: "' + s + '". Must be one of: ' + CANONICAL_SUBJECTS.join(', '));
+        }
+        return valid;
+      });
+  }
+
+  var ORBITS = {
+    C: { cx: 450, cy: 250, rx: 310, ry: 178, rotDeg: -32 },
+    A: { cx: 450, cy: 250, rx: 280, ry: 160, rotDeg: -8  },
+    B: { cx: 450, cy: 250, rx: 240, ry: 135, rotDeg:  25 }
+  };
+
+  /* Planets constrained to left half (t = 90°–270°) so labels — which always
+     extend leftward (text-anchor='end') — stay clear of both the nucleus and
+     the decision card on the right. Minimum 35° angular separation enforced. */
+  var DISTRIBUTIONS = {
+    1: [{ o:'C', t:180 }],
+    2: [{ o:'C', t:130 }, { o:'B', t:230 }],
+    3: [{ o:'C', t:110 }, { o:'A', t:180 }, { o:'B', t:250 }],
+    4: [{ o:'C', t:110 }, { o:'C', t:250 }, { o:'A', t:180 }, { o:'B', t:145 }],
+    5: [{ o:'C', t:110 }, { o:'C', t:250 }, { o:'A', t:180 }, { o:'B', t:130 }, { o:'B', t:230 }]
+  };
+
+  var NUCLEUS_CENTER = { x: 450, y: 250 };
+  var NUCLEUS_EXCLUSION = 160;
+
+  var COUNT_WORDS = ['', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'];
+
+  function ptOnOrbit(key, tDeg) {
+    var o  = ORBITS[key];
+    var t  = tDeg * Math.PI / 180;
+    var th = o.rotDeg * Math.PI / 180;
+    return {
+      x: o.cx + o.rx * Math.cos(t) * Math.cos(th) - o.ry * Math.sin(t) * Math.sin(th),
+      y: o.cy + o.rx * Math.cos(t) * Math.sin(th) + o.ry * Math.sin(t) * Math.cos(th)
+    };
+  }
+
+  function distFromNucleus(x, y) {
+    var dx = x - NUCLEUS_CENTER.x, dy = y - NUCLEUS_CENTER.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  /* Labels always extend leftward — text-anchor='end' anchors the right edge
+     of the text at (lx, ly), so the text body occupies space to the left. */
+  function labelAttrs(x, y) {
+    var dy = y - 250, GAP = 12;
+    var ly = Math.abs(dy) > 90
+      ? (dy < 0 ? y - GAP : y + GAP + 8)
+      : y + 5;
+    return { lx: x - GAP, ly: ly, anchor: 'end' };
+  }
+
+  function renderOrbitalDiagram(rawSubjects) {
+    var wrap    = document.getElementById('bk-score-wrap');
+    var svg     = document.getElementById('bk-score-svg');
+    var planetsG = document.getElementById('bk-planets');
+    var figEl   = document.getElementById('bk-score-fig');
+
+    /* validate against canonical list, sort alphabetically, cap at 5 */
+    var subjects = validateSubjects(rawSubjects).sort();
+    var extra = subjects.length > 5 ? subjects.slice(5) : [];
+    subjects  = subjects.slice(0, 5);
+    var count = subjects.length;
+
+    if (count === 0) { wrap.style.display = 'none'; return; }
+
+    var slots = DISTRIBUTIONS[count];
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var frag  = document.createDocumentFragment();
+
+    subjects.forEach(function(subject, i) {
+      var slot = slots[i];
+      var pt   = ptOnOrbit(slot.o, slot.t);
+
+      /* nucleus exclusion: if planet lands inside 160-unit radius, nudge angle
+         by ±5° increments (up to 60° sweep) until it clears */
+      if (distFromNucleus(pt.x, pt.y) < NUCLEUS_EXCLUSION) {
+        for (var delta = 5; delta <= 60; delta += 5) {
+          var ptA = ptOnOrbit(slot.o, slot.t + delta);
+          if (distFromNucleus(ptA.x, ptA.y) >= NUCLEUS_EXCLUSION) { pt = ptA; break; }
+          var ptB = ptOnOrbit(slot.o, slot.t - delta);
+          if (distFromNucleus(ptB.x, ptB.y) >= NUCLEUS_EXCLUSION) { pt = ptB; break; }
+        }
+        console.warn('[Wizkoo] Planet nudged out of nucleus exclusion zone for subject: ' + subject);
+      }
+
+      var lbl = labelAttrs(pt.x, pt.y);
+
+      /* halo + core planet group */
+      var g = document.createElementNS(svgNS, 'g');
+      g.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ')');
+      var halo = document.createElementNS(svgNS, 'circle');
+      halo.setAttribute('r', '18'); halo.setAttribute('fill', 'url(#hz-dot-halo)');
+      var core = document.createElementNS(svgNS, 'circle');
+      core.setAttribute('r', '8');  core.setAttribute('fill', 'url(#hz-dot-core)');
+      g.appendChild(halo); g.appendChild(core);
+      frag.appendChild(g);
+
+      /* label — Space Mono per Curriculum Registry display spec */
+      var txt = document.createElementNS(svgNS, 'text');
+      txt.setAttribute('x', lbl.lx.toFixed(1));
+      txt.setAttribute('y', lbl.ly.toFixed(1));
+      txt.setAttribute('font-family', "'Space Mono', monospace");
+      txt.setAttribute('font-weight', '700');
+      txt.setAttribute('font-size', '30');
+      txt.setAttribute('fill', '#E8AF38');
+      txt.setAttribute('letter-spacing', '0.04em');
+      txt.setAttribute('text-anchor', lbl.anchor);
+      txt.textContent = subject.toUpperCase();
+      frag.appendChild(txt);
+    });
+
+    planetsG.appendChild(frag);
+
+    /* aria-label */
+    svg.setAttribute('aria-label',
+      'Orbital diagram — ' + count + ' connected subject' + (count === 1 ? '' : 's') +
+      ': ' + subjects.join(', '));
+
+    /* colophon */
+    figEl.textContent = (COUNT_WORDS[count] || count) + ' CONNECTED SUBJECTS';
+
+    /* overflow line */
+    if (extra.length > 0) {
+      var extraEl = document.createElement('p');
+      extraEl.className = 'bk-score-extra';
+      extraEl.textContent = 'Also touches: ' + extra.map(function(s){ return s.toLowerCase(); }).join(', ');
+      figEl.insertAdjacentElement('afterend', extraEl);
+    }
+  }
+
+  /* ── Subjects for Actual Size by Steve Jenkins ── */
+  renderOrbitalDiagram(['Mathematics', 'Science', 'Social Studies']);
+})();
+
+/* ── Custom Cursor ── */
+(function(){
+  var c=document.getElementById('cursor'),cx=0,cy=0;
+  window.mx=0;window.my=0;
+  document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
+  document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
+  var sel='a,button,.bk-row-card';
+  document.addEventListener('mouseover',function(e){if(e.target.closest(sel))c.classList.add('hover')});
+  document.addEventListener('mouseout',function(e){if(e.target.closest(sel))c.classList.remove('hover')});
+  (function tick(){cx+=(window.mx-cx)*0.15;cy+=(window.my-cy)*0.15;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(tick)})();
+})();
+</script>
+</body>
+</html>
