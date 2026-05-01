@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" data-surface="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Title and meta injected dynamically by library-book.js -->
 <title>Loading… | Wizkoo Library</title>
 <meta name="description" content="A curated book in the Wizkoo Library — chosen because it opens more than one door.">
 <link rel="canonical" id="bk-canonical" href="https://wizkoo.com/library">
@@ -15,79 +14,906 @@
 <meta name="twitter:title" id="bk-tw-title" content="Wizkoo Library">
 <meta name="twitter:description" id="bk-tw-desc" content="A curated book in the Wizkoo Library.">
 <meta name="twitter:image" id="bk-tw-image" content="https://wizkoo.com/assets/wizkoo-og.png">
-<!-- Schema.org Book markup injected by library-book.js after data fetch -->
 <script type="application/ld+json" id="bk-schema"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&family=Sora:wght@700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/css/tokens.css">
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/footer.css">
-<link rel="stylesheet" href="/css/library.css">
+
+<style>
+/* ─────────────────────────────────────────────────
+   D5 BOOK DETAIL PAGE — production template
+   Surface: Warm Chalk #F8F4E9
+   Footer: Treatment B (Continuous-Night, binary cut)
+   Light Standard tokens locked.
+───────────────────────────────────────────────── */
+
+/* ── SURFACE RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #F8F4E9;
+  color: #0C1020;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── LOADING SHIMMER ── */
+@keyframes bkShimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+.bk-shimmer-block {
+  background: linear-gradient(90deg, #ece8dd 25%, #f4f0e6 50%, #ece8dd 75%);
+  background-size: 200% 100%;
+  animation: bkShimmer 1.4s ease-in-out infinite;
+  border-radius: 2px;
+}
+#bk-loading {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px 60px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  column-gap: 36px;
+}
+.bk-loading-cover {
+  aspect-ratio: 3 / 4;
+}
+.bk-loading-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 8px;
+}
+
+/* ── SHARED UTILITIES ── */
+.bk-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E8AF38;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.bk-eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #E8AF38;
+  flex-shrink: 0;
+}
+
+/* ── WRAP ── */
+.bk-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── SCAN ZONE ── */
+.bk-scan {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  grid-template-areas:
+    "band1-left band1-right"
+    "band2-left band2-right";
+  column-gap: 36px;
+  row-gap: 10px;
+  padding-top: 8px;
+  align-items: start;
+}
+.bk-band1-left  { grid-area: band1-left; }
+.bk-band1-right { grid-area: band1-right; padding-top: 4px; }
+.bk-band2-left  { grid-area: band2-left; }
+.bk-band2-right { grid-area: band2-right; }
+
+/* cover frame */
+.bk-cover-frame { width: 100%; }
+.bk-cover-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  display: block;
+}
+.bk-cover-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bk-cover-ph {
+  width: 100%; height: 100%;
+  background: linear-gradient(155deg, #C8852A 0%, #A86A1A 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  text-align: center;
+}
+.bk-cover-ph-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #E8AF38;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+.bk-cover-ph-author {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(232,175,56,0.65);
+}
+.bk-cover-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 6px;
+  width: 100%;
+}
+.bk-cover-caption-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: rgba(12,16,32,0.48);
+  line-height: 1.4;
+}
+.bk-caption-orbital-rule {
+  width: 45%;
+  height: 1px;
+  background: rgba(232,175,56,0.60);
+  margin-top: 14px;
+}
+
+/* orbital diagram */
+.bk-score-wrap {
+  width: calc(100% + 226px);
+  margin-left: -113px;
+  margin-top: 4px;
+}
+.bk-score-svg { width: 100%; height: auto; display: block; }
+.bk-score-fig {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.65);
+  margin-top: 6px;
+  text-align: center;
+}
+.bk-score-standards {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.45);
+  margin-top: 4px;
+  text-align: center;
+}
+.bk-score-extra {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.40rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.25);
+  margin-top: 4px;
+}
+
+/* right column */
+.bk-entry-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E8AF38;
+  margin-bottom: 12px;
+}
+.bk-pre-title-rule { width: 56px; height: 2px; background: #E8AF38; margin-bottom: 10px; }
+.bk-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 0.94;
+  color: #0C1020;
+  letter-spacing: -0.025em;
+  margin-bottom: 10px;
+}
+.bk-title-dot { color: #E8AF38; }
+.bk-title-rule { width: 65%; height: 1.5px; background: #E8AF38; margin-bottom: 10px; }
+.bk-standfirst {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1875rem;
+  line-height: 1.45;
+  color: #0C1020;
+  margin-bottom: 10px;
+}
+.bk-byline {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.0rem;
+  color: #0C1020;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+/* decision card */
+.bk-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.bk-col-item {
+  padding: 10px 20px;
+  border-right: 1px solid #E8E2D4;
+  border-bottom: 1px solid #E8E2D4;
+}
+.bk-col-item:first-child { padding-left: 0; }
+.bk-col-item:nth-child(4) { border-right: none; padding-right: 0; }
+.bk-col-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.46rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(232,175,56,0.80);
+  margin-bottom: 6px;
+  display: block;
+}
+.bk-col-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #0C1020;
+  line-height: 1.2;
+  display: block;
+  white-space: nowrap;
+}
+.bk-col-sub {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: rgba(12,16,32,0.75);
+  margin-top: 4px;
+  white-space: nowrap;
+}
+.bk-decision-card {
+  background: #FAFAFA;
+  border: 1px solid #E8E2D4;
+  padding: 20px 28px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 0 rgba(12,16,32,0.04);
+  transition: box-shadow 300ms cubic-bezier(0.16,1,0.3,1),
+              transform  300ms cubic-bezier(0.16,1,0.3,1);
+}
+.bk-decision-card:hover {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 0 rgba(12,16,32,0.04),
+              0 4px 12px rgba(12,16,32,0.06);
+  transform: translateY(-2px);
+}
+.bk-cta-add,
+.bk-cta-save {
+  padding: 14px 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.60rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #0C1020;
+  display: block;
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 0 #E8AF38;
+  transition: background 200ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow 200ms cubic-bezier(0.16,1,0.3,1);
+}
+.bk-cta-add { grid-column: 1 / 3; border-right: 1px solid #E8E2D4; }
+.bk-cta-save { grid-column: 3 / 5; }
+.bk-cta-add:hover,
+.bk-cta-save:hover {
+  box-shadow: inset 0 -2px 0 0 #E8AF38;
+  background: rgba(232,175,56,0.12);
+}
+.bk-tertiary-links {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #E8E2D4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bk-tertiary-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.55);
+  text-decoration: none;
+  transition: color 200ms cubic-bezier(0.16,1,0.3,1);
+}
+.bk-tertiary-link:hover {
+  color: #0C1020;
+  text-decoration: underline;
+  text-decoration-color: #E8AF38;
+  text-underline-offset: 2px;
+}
+.bk-tertiary-link-icon { width: 14px; height: 14px; flex-shrink: 0; color: #E8AF38; }
+
+/* heads-up */
+.bk-headsup {
+  margin-top: 56px;
+  padding: 36px 0;
+  border-top: 1px solid #E8E2D4;
+  display: grid;
+  grid-template-columns: 160px 1fr 64px;
+  gap: 0 44px;
+  align-items: start;
+}
+.bk-headsup-label { display: flex; flex-direction: column; gap: 5px; padding-top: 2px; }
+.bk-headsup-keyword {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E8AF38;
+}
+.bk-headsup-sub {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.74rem;
+  color: rgba(12,16,32,0.48);
+  line-height: 1.4;
+}
+.bk-headsup-body {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.0rem;
+  line-height: 1.72;
+  color: #0C1020;
+}
+.bk-headsup-register {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.44rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.25);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  align-self: center;
+  justify-self: center;
+}
+
+/* break */
+.bk-break {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: 48px auto 64px;
+  width: fit-content;
+}
+.bk-break-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #E8AF38;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.bk-break-dots-svg { display: block; flex-shrink: 0; }
+.bk-break-rule { width: 56px; height: 1px; background: #E8AF38; opacity: 0.6; }
+
+/* what makes it orbital */
+.bk-what-orbital { margin-bottom: 48px; }
+.bk-what-orbital-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: #0C1020;
+}
+
+/* depth zone */
+.bk-depth { padding-bottom: 80px; }
+.bk-on-reading-card {
+  background: #FAFAFA;
+  border: 1px solid #E8E2D4;
+  padding: 24px;
+  width: 70%;
+  margin: 28px auto 28px 0;
+}
+.bk-on-reading-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(12,16,32,0.70);
+}
+.bk-orbital-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.0rem;
+  font-weight: 500;
+  line-height: 1.75;
+  color: rgba(12,16,32,0.76);
+  margin-bottom: 14px;
+}
+.bk-best-for-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.0rem;
+  line-height: 1.75;
+  color: rgba(12,16,32,0.76);
+}
+
+/* talk about */
+.bk-talk-about { margin-bottom: 48px; }
+.bk-talk-about-cards { display: flex; flex-direction: column; gap: 12px; }
+.bk-talk-about-card {
+  background: #FAFAFA;
+  border: 1px solid #E8E2D4;
+  padding: 24px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1.0rem;
+  line-height: 1.65;
+  color: #0C1020;
+}
+
+/* pairs with */
+.bk-pairs-with { margin-bottom: 56px; }
+.bk-pairs-with-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  font-size: 1.0rem;
+  line-height: 1.65;
+  color: rgba(12,16,32,0.76);
+}
+.bk-pairs-with-body em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* connection row */
+.bk-network { padding: 0 0 80px; }
+.bk-network-header { margin-bottom: 40px; }
+.bk-network-headline {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 2.1rem;
+  line-height: 1.15;
+  color: #0C1020;
+  margin-top: 10px;
+}
+.bk-network-headline em { font-style: italic; }
+.bk-network-deck {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: rgba(12,16,32,0.55);
+  margin-top: 10px;
+}
+.bk-row-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.bk-row-card {
+  background: #FAFAFA;
+  border: 1px solid #E8E2D4;
+  padding: 16px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 300ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow 300ms cubic-bezier(0.16,1,0.3,1);
+}
+.bk-row-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(12,16,32,0.08);
+}
+.bk-rc-cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.bk-rc-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bk-rc-cover-art {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  text-align: center;
+}
+.bk-rc-cover-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 0.80rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.bk-rc-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #0C1020;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.bk-rc-author {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.74rem;
+  color: #3458B0;
+}
+
+/* threshold */
+.bk-threshold { border: none; border-top: 1px solid #E8E2D4; margin: 0; }
+
+/* ══════════════════════════════════════
+   MEDIUM — ≤1100px CSS viewport
+══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .bk-scan { grid-template-columns: 260px 1fr; }
+  .bk-score-wrap { width: calc(100% + 80px); margin-left: -40px; }
+  .bk-title { font-size: 2.5rem; }
+  .bk-decision-card { padding: 16px 20px; }
+  #bk-loading { grid-template-columns: 260px 1fr; }
+}
+
+/* ══════════════════════════════════════
+   HIGH-DPI WIDE — DPR ≥ 1.5 at CSS viewport > 1100px
+   e.g. Windows 175% DPI on ultrawide
+══════════════════════════════════════ */
+@media (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 1101px),
+       (min-resolution: 144dpi) and (min-width: 1101px) {
+  .bk-scan { grid-template-columns: 260px 1fr; }
+  .bk-score-wrap { width: calc(100% + 80px); margin-left: -40px; }
+  .bk-title { font-size: 2.5rem; }
+  .bk-decision-card { padding: 16px 20px; }
+  #bk-loading { grid-template-columns: 260px 1fr; }
+}
+
+/* ══════════════════════════════════════
+   LANDSCAPE-SHORT
+══════════════════════════════════════ */
+@media (max-height: 420px) and (min-width: 600px) {
+  .bk-title { font-size: 2rem; line-height: 0.96; }
+  .bk-scan { grid-template-columns: 200px 1fr; column-gap: 24px; }
+}
+
+/* ══════════════════════════════════════
+   SHORT-WIDE
+══════════════════════════════════════ */
+@media (max-height: 700px) and (min-width: 768px) {
+  .bk-title { font-size: 2rem; line-height: 0.96; }
+  .bk-scan { grid-template-columns: 220px 1fr; column-gap: 28px; }
+  .bk-decision-card { padding: 24px; }
+  .bk-break { margin: 72px auto 48px; }
+}
+
+/* ══════════════════════════════════════
+   MOBILE — 767px
+══════════════════════════════════════ */
+@media (max-width: 767px) {
+  .bk-wrap { padding: 0 20px; }
+  #bk-loading { padding: 60px 20px 40px; grid-template-columns: 1fr; }
+  .bk-loading-cover { max-width: 200px; }
+  .bk-scan {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "band1-left"
+      "band1-right"
+      "band2-left"
+      "band2-right";
+    row-gap: 0;
+    column-gap: 0;
+    padding-top: 20px;
+  }
+  .bk-cover-frame { width: 100%; }
+  .bk-score-wrap { width: 100%; margin-left: 0; margin-top: 20px; }
+  .bk-band1-right { padding-top: 28px; }
+  .bk-title { font-size: 2.2rem; line-height: 0.96; }
+  .bk-card-grid { grid-template-columns: 1fr 1fr; }
+  .bk-col-item { padding: 14px 12px; }
+  .bk-col-item:nth-child(odd)  { padding-left: 0; }
+  .bk-col-item:nth-child(even) { border-right: none; padding-right: 0; }
+  .bk-col-item:nth-child(3),
+  .bk-col-item:nth-child(4)    { border-bottom: none; }
+  .bk-decision-card { padding: 20px; }
+  .bk-cta-add { grid-column: 1 / -1; border-right: none; padding: 16px 0; }
+  .bk-cta-save { grid-column: 1 / -1; }
+  .bk-headsup {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 28px 0;
+    margin-top: 36px;
+  }
+  .bk-headsup-label { flex-direction: row; align-items: baseline; gap: 10px; }
+  .bk-headsup-register { display: none; }
+  .bk-break { margin: 80px auto 56px; }
+  .bk-depth { padding-bottom: 56px; }
+  .bk-on-reading-card { width: 100%; margin-left: 0; }
+  .bk-on-reading-text { font-size: 0.82rem; }
+  .bk-row-cards { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+
+/* ══════════════════════════════════════
+   NAV — cream-room transparent treatment
+══════════════════════════════════════ */
+.page-library .announce { background: #0C1020 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+.page-library .announce-text { color: rgba(232,175,56,0.75) !important; }
+.page-library .nav { background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-bottom: none !important; box-shadow: none !important; transition: background-color .25s cubic-bezier(.25,.1,.25,1) !important; }
+.page-library .nav::before { display: none !important; }
+.page-library .nav-wm { color: #0C1020 !important; }
+.page-library .nav-link { color: rgba(12,16,32,0.55) !important; }
+.page-library .nav-link:hover { color: rgba(12,16,32,0.90) !important; }
+.page-library .nav-link.active { color: #0C1020 !important; }
+.page-library .nav-hamburger-line { background: rgba(12,16,32,0.7) !important; }
+.page-library .nav-cta { background: transparent !important; color: #0C1020 !important; border: 1.5px solid #E8AF38 !important; }
+.page-library .nav-cta:hover { background: #E8AF38 !important; color: #0C1020 !important; border-color: #E8AF38 !important; box-shadow: none !important; }
+.page-library .nav.nav--scrolled { background: rgba(248,244,233,0.55) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; }
+
+/* error/not-found state */
+.bk-error-state {
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.bk-error-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.35);
+  margin-bottom: 16px;
+}
+.bk-error-msg {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: rgba(12,16,32,0.65);
+  margin-bottom: 12px;
+}
+.bk-error-sub {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(12,16,32,0.45);
+}
+.bk-error-sub a { color: #E8AF38; }
+</style>
 </head>
-<body data-footer-treatment="b">
+
+<!-- Footer treatment B: Continuous-Night — binary cut at .bk-threshold -->
+<body class="page-library" data-footer-treatment="b">
 <div class="cursor" id="cursor"></div>
 
 <div id="wizkoo-nav"></div>
 <script src="/components/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('site-nav');
+  if (!nav) return;
+  function update() { nav.classList.toggle('nav--scrolled', window.scrollY > 20); }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+});
+</script>
 <a href="#main-content" class="skip-nav">Skip to main content</a>
 
-<main id="main-content" class="bk-page">
+<main id="main-content">
 
-  <!-- ═══ BREADCRUMB ═══ -->
-  <div class="bk-breadcrumb" aria-label="Breadcrumb">
-    <div class="bk-breadcrumb-inner">
-      <a href="/library">The Library</a>
-      <span class="bk-breadcrumb-sep" aria-hidden="true">→</span>
-      <span id="bk-breadcrumb-title">…</span>
+  <!-- ═══ LOADING SHIMMER ═══ -->
+  <div id="bk-loading" aria-live="polite" aria-label="Loading book">
+    <div class="bk-loading-cover bk-shimmer-block"></div>
+    <div class="bk-loading-right">
+      <div class="bk-shimmer-block" style="height:10px; width:35%;"></div>
+      <div class="bk-shimmer-block" style="height:44px; width:75%; margin-top:4px;"></div>
+      <div class="bk-shimmer-block" style="height:13px; width:55%; margin-top:4px;"></div>
+      <div class="bk-shimmer-block" style="height:78px; width:88%; margin-top:12px;"></div>
+      <div class="bk-shimmer-block" style="height:110px; width:100%; margin-top:16px;"></div>
     </div>
   </div>
 
-  <!-- ═══ HERO CONTENT (injected by JS) ═══ -->
-  <div id="bk-content">
+  <!-- ═══ D5 BOOK CONTENT (populated + revealed by library-book.js) ═══ -->
+  <div id="bk-content" hidden>
+  <div class="bk-wrap">
 
-    <!-- Loading state -->
-    <div class="bk-hero" id="bk-loading" aria-live="polite">
-      <div class="bk-hero-grid">
-        <div class="bk-cover-col">
-          <div class="bk-cover" style="background:#1a1f30; box-shadow: 8px 8px 0 var(--saffron);">
-            <div style="width:100%; height:100%; background: linear-gradient(90deg, #1e2438 25%, #252c42 50%, #1e2438 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite;"></div>
-          </div>
+    <!-- ══ SCAN ZONE ══ -->
+    <div class="bk-scan">
+
+      <!-- Band 1 Left: Cover + Caption -->
+      <div class="bk-band1-left">
+        <div class="bk-cover-frame">
+          <div class="bk-cover-img" id="bk-cover-img"></div>
         </div>
-        <div class="bk-content-col">
-          <div style="display:flex; flex-direction:column; gap:12px; padding-top:8px;">
-            <div style="height:12px; width:40%; background: linear-gradient(90deg, #e8e6e0 25%, #f0ede7 50%, #e8e6e0 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite;"></div>
-            <div style="height:48px; width:80%; background: linear-gradient(90deg, #e8e6e0 25%, #f0ede7 50%, #e8e6e0 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite;"></div>
-            <div style="height:14px; width:55%; background: linear-gradient(90deg, #e8e6e0 25%, #f0ede7 50%, #e8e6e0 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite;"></div>
-            <div style="height:80px; width:90%; background: linear-gradient(90deg, #e8e6e0 25%, #f0ede7 50%, #e8e6e0 75%); background-size:200% 100%; animation: libShimmer 1.4s ease-in-out infinite; margin-top:16px;"></div>
-          </div>
+        <div class="bk-cover-caption" id="bk-cover-caption-row">
+          <span class="bk-cover-caption-text" id="bk-cover-caption-text"></span>
         </div>
+        <div class="bk-caption-orbital-rule" aria-hidden="true"></div>
+      </div>
+
+      <!-- Band 1 Right: Title + Standfirst + Byline -->
+      <div class="bk-band1-right">
+        <p class="bk-entry-eyebrow">An Entry in the Wizkoo Library</p>
+        <div class="bk-pre-title-rule" aria-hidden="true"></div>
+        <h1 class="bk-title" id="bk-title"></h1>
+        <div class="bk-title-rule" aria-hidden="true"></div>
+        <p class="bk-standfirst" id="bk-standfirst"></p>
+        <p class="bk-byline" id="bk-byline"></p>
+      </div>
+
+      <!-- Band 2 Left: Orbital Diagram -->
+      <div class="bk-band2-left">
+        <div class="bk-score-wrap" id="bk-score-wrap">
+          <svg class="bk-score-svg" id="bk-score-svg"
+               viewBox="-200 4 1150 517"
+               fill="none"
+               xmlns="http://www.w3.org/2000/svg"
+               role="img"
+               aria-label="Orbital diagram">
+            <defs>
+              <radialGradient id="nucleusFire" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stop-color="#FDE9A0"/>
+                <stop offset="30%"  stop-color="#F0C050"/>
+                <stop offset="55%"  stop-color="#E8AF38"/>
+                <stop offset="80%"  stop-color="#C89030"/>
+                <stop offset="100%" stop-color="#A07020"/>
+              </radialGradient>
+              <radialGradient id="haze1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.12"/>
+                <stop offset="60%"  stop-color="#E8AF38" stop-opacity="0.04"/>
+                <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="haze2" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.06"/>
+                <stop offset="50%"  stop-color="#E8AF38" stop-opacity="0.02"/>
+                <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hz-dot-halo" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hz-dot-core" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stop-color="#FDE9A0"/>
+                <stop offset="40%"  stop-color="#F0C050"/>
+                <stop offset="100%" stop-color="#E8AF38"/>
+              </radialGradient>
+            </defs>
+            <ellipse cx="450" cy="250" rx="310" ry="178" transform="rotate(-32 450 250)" stroke="rgba(12,16,32,0.45)" stroke-width="1.5" fill="none"/>
+            <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)"  stroke="#E8AF38" stroke-width="1.25" stroke-opacity="0.55" fill="none" stroke-dasharray="6 8"/>
+            <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)"  stroke="#E8AF38" stroke-width="1.25" stroke-opacity="0.15" fill="none"/>
+            <ellipse cx="450" cy="250" rx="240" ry="135" transform="rotate(25 450 250)"  stroke="rgba(12,16,32,0.30)" stroke-width="1.0" fill="none"/>
+            <circle cx="450" cy="250" r="170" fill="url(#haze2)" opacity="0.5"/>
+            <circle cx="450" cy="250" r="120" fill="url(#haze1)"/>
+            <circle cx="450" cy="250" r="42"  fill="url(#nucleusFire)"/>
+            <g id="bk-planets"></g>
+          </svg>
+          <p class="bk-score-fig" id="bk-score-fig"></p>
+          <p class="bk-score-standards" id="bk-score-standards"></p>
+        </div>
+      </div>
+
+      <!-- Band 2 Right: Decision Card -->
+      <div class="bk-band2-right">
+        <div class="bk-decision-card">
+          <div class="bk-card-grid" role="group" aria-label="Book details and actions">
+            <div class="bk-col-item" id="bk-col-ages">
+              <span class="bk-col-label">Ages</span>
+              <span class="bk-col-value" id="bk-ages-value">—</span>
+              <span class="bk-col-sub"   id="bk-ages-sub"></span>
+            </div>
+            <div class="bk-col-item" id="bk-col-format">
+              <span class="bk-col-label">Format</span>
+              <span class="bk-col-value" id="bk-format-value">—</span>
+              <span class="bk-col-sub"   id="bk-format-sub"></span>
+            </div>
+            <div class="bk-col-item" id="bk-col-length">
+              <span class="bk-col-label">Length</span>
+              <span class="bk-col-value" id="bk-length-value">—</span>
+              <span class="bk-col-sub"   id="bk-length-sub"></span>
+            </div>
+            <div class="bk-col-item" id="bk-col-reader">
+              <span class="bk-col-label">Reader</span>
+              <span class="bk-col-value" id="bk-reader-value">—</span>
+              <span class="bk-col-sub"   id="bk-reader-sub"></span>
+            </div>
+            <button class="bk-cta-add" type="button">Add to Plan</button>
+            <button class="bk-cta-save" type="button">Save for Later</button>
+          </div>
+          <div class="bk-tertiary-links" id="bk-tertiary-links"></div>
+        </div>
+      </div>
+
+    </div><!-- /bk-scan -->
+
+    <!-- ══ HEADS-UP ══ -->
+    <div class="bk-headsup" id="bk-headsup" style="display:none">
+      <div class="bk-headsup-label">
+        <span class="bk-headsup-keyword">Heads-Up</span>
+        <span class="bk-headsup-sub" id="bk-headsup-sub">For parents.</span>
+      </div>
+      <p class="bk-headsup-body" id="bk-headsup-body"></p>
+      <span class="bk-headsup-register" aria-hidden="true">Editorial Note</span>
+    </div>
+
+    <!-- ══ THE FULL ENTRY BREAK ══ -->
+    <div class="bk-break" role="separator" aria-hidden="true">
+      <span class="bk-break-label">—&thinsp;<svg class="bk-break-dots-svg" width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="3.5" fill="#E8AF38"/><circle cx="15" cy="4" r="3.5" fill="#E8AF38"/><circle cx="26" cy="4" r="3.5" fill="#E8AF38"/></svg>&thinsp;The Full Entry&thinsp;<svg class="bk-break-dots-svg" width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="3.5" fill="#E8AF38"/><circle cx="15" cy="4" r="3.5" fill="#E8AF38"/><circle cx="26" cy="4" r="3.5" fill="#E8AF38"/></svg>&thinsp;—</span>
+      <div class="bk-break-rule"></div>
+    </div>
+
+    <!-- ══ WHAT MAKES IT ORBITAL ══ -->
+    <div class="bk-what-orbital" id="bk-what-orbital" style="display:none">
+      <div class="bk-eyebrow">What Makes It Orbital</div>
+      <p class="bk-what-orbital-body" id="bk-what-orbital-body"></p>
+    </div>
+
+    <!-- ══ DEPTH ZONE ══ -->
+    <div class="bk-depth" id="bk-depth">
+      <div class="bk-eyebrow">The Orbital Description</div>
+      <div id="bk-orbital-body"></div>
+      <div class="bk-on-reading-card" id="bk-on-reading-card" style="display:none">
+        <div class="bk-eyebrow">On Reading</div>
+        <p class="bk-on-reading-text" id="bk-on-reading-text"></p>
+      </div>
+      <div id="bk-best-for-wrap" style="display:none">
+        <div class="bk-eyebrow">Best For</div>
+        <p class="bk-best-for-text" id="bk-best-for-text"></p>
       </div>
     </div>
 
-  </div>
-
-  <!-- ═══ MORE IN THIS THEME (injected by JS) ═══ -->
-  <div id="bk-more-container"></div>
-
-  <!-- ═══ SUBSCRIBER CTA ═══ -->
-  <section class="lib-subscriber-cta" aria-label="Get personalized recommendations">
-    <div class="lib-subscriber-cta-inner">
-      <p class="lib-cta-tag">Personalized to Your Children</p>
-      <h2 class="lib-cta-title">See this book in your child's weekly plan.</h2>
-      <p class="lib-cta-body">Wizkoo matches books from The Library to each child's age, reading level, and the theme your family is exploring — automatically, every week.</p>
-      <a href="/plan" class="lib-cta-btn">Build Your Plan Free</a>
+    <!-- ══ TALK ABOUT ══ -->
+    <div class="bk-talk-about" id="bk-talk-about" style="display:none">
+      <div class="bk-eyebrow">Talk About</div>
+      <div class="bk-talk-about-cards" id="bk-talk-about-cards"></div>
     </div>
-  </section>
 
-  <!-- ═══ ESA LINE ═══ -->
-  <div class="lib-esa-line">
-    <p>Homeschooling with ESA funds? Wizkoo is ESA-eligible. <a href="/esa">Learn more →</a></p>
-  </div>
+    <!-- ══ PAIRS WITH ══ -->
+    <div class="bk-pairs-with" id="bk-pairs-with" style="display:none">
+      <div class="bk-eyebrow">Pairs With</div>
+      <p class="bk-pairs-with-body" id="bk-pairs-with-body"></p>
+    </div>
+
+    <!-- ══ CONNECTION ROW (populated by renderRelated) ══ -->
+    <div id="bk-network-container"></div>
+
+    <hr class="bk-threshold" aria-hidden="true">
+
+  </div><!-- /bk-wrap -->
+  </div><!-- /bk-content -->
 
 </main>
 
@@ -101,12 +927,11 @@
 <script src="/js/library-book.js"></script>
 
 <script>
-/* ── Custom Cursor ── */
 (function(){
   var c=document.getElementById('cursor'),cx=0,cy=0;window.mx=0;window.my=0;
   document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
   document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
-  var sel='a,button,.bk-more-card,.bk-cover-link,.bk-badge';
+  var sel='a,button,.bk-row-card';
   document.addEventListener('mouseover',function(e){if(e.target.closest(sel))c.classList.add('hover')});
   document.addEventListener('mouseout',function(e){if(e.target.closest(sel))c.classList.remove('hover')});
   (function tick(){cx+=(window.mx-cx)*0.15;cy+=(window.my-cy)*0.15;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(tick)})();
