@@ -362,7 +362,7 @@
             '<div class="lib-featured-pill">' + esc(p.bandName) + ' · ' + esc(p.bandLabel) + osSuffix + '</div>' +
             '<p class="lib-featured-title">' + esc(b.title) + '</p>' +
             '<p class="lib-featured-author">by ' + esc(b.author) + '</p>' +
-            (b.hook ? '<p class="lib-featured-hook">&ldquo;' + esc(b.hook.length > 80 ? b.hook.slice(0, 80) + '…' : b.hook) + '&rdquo;</p>' : '') +
+            (b.hook ? '<p class="lib-featured-hook">&ldquo;' + esc(b.hook) + '&rdquo;</p>' : '') +
           '</div>' +
         '</a>' +
         '</div>';
