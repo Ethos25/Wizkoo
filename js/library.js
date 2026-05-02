@@ -351,7 +351,7 @@
         ? '<img data-src="' + esc(b.cover_image_url) + '" alt="Cover of ' + esc(b.title) + '" loading="lazy">'
         : '<div class="book-card-cover-placeholder">' + COVER_PLACEHOLDER_SVG +
           '<span class="book-card-cover-placeholder-text">No cover</span></div>';
-      var osHtml = b.orbital_score ? renderOSSvg(b.orbital_score, 18) : '';
+      var osHtml = b.orbital_score ? renderOSSvg(b.orbital_score, 24) : '';
 
       html += '<div class="lib-featured-group">' +
         '<a href="/library/' + esc(b.slug) + '" class="lib-featured-card">' +
@@ -400,9 +400,29 @@
     return html;
   }
 
-  /* ── Orbital Score SVG rings ─────────────────────────────────────────────── */
+  /* ── Orbital Score primitive ─────────────────────────────────────────────── */
+  /* ≤32px → numeric badge (square, saffron border, navy fill)                 */
+  /* >32px → concentric rings (title-scale expression)                         */
   function renderOSSvg(score, size) {
     size = size || 16;
+    return size <= 32 ? renderOSBadge(score, size) : renderOSRings(score, size);
+  }
+
+  function renderOSBadge(score, size) {
+    var fs = size <= 20 ? 9 : 11;
+    var half = size / 2;
+    return '<svg width="' + size + '" height="' + size +
+      '" viewBox="0 0 ' + size + ' ' + size + '" aria-hidden="true">' +
+      '<rect x="1" y="1" width="' + (size - 2) + '" height="' + (size - 2) +
+        '" fill="#0c1430" stroke="#e6a82e" stroke-width="2"/>' +
+      '<text x="' + half + '" y="' + half + '" text-anchor="middle"' +
+        ' dominant-baseline="central"' +
+        ' font-family="\'Space Mono\', monospace" font-size="' + fs + '"' +
+        ' fill="#e6a82e">' + score + '</text>' +
+      '</svg>';
+  }
+
+  function renderOSRings(score, size) {
     var rings = [];
     var spacing = size * 0.22;
     var outerR  = (size / 2) - 1;
@@ -427,7 +447,10 @@
       : '<div class="book-card-cover-placeholder">' + COVER_PLACEHOLDER_SVG +
         '<span class="book-card-cover-placeholder-text">No cover</span></div>';
 
-    var osRings = book.orbital_score ? renderOSSvg(book.orbital_score, 16) : '';
+    var osBadge = book.orbital_score
+      ? '<div class="book-card-os" aria-label="Orbital score: ' + book.orbital_score + ' of 5">' +
+          renderOSSvg(book.orbital_score, 16) + '</div>'
+      : '';
 
     var bandBadges = book.age_bands.map(function (ab) {
       return '<span class="book-badge band">Ages ' + esc(ab.replace('-', '–')) + '</span>';
@@ -439,12 +462,11 @@
 
     return '<a href="' + href + '" class="book-card" ' +
       'aria-label="' + esc(book.title) + ' by ' + esc(book.author) + '">' +
-      '<div class="book-card-cover">' + coverHtml + '</div>' +
+      '<div class="book-card-cover">' + coverHtml + osBadge + '</div>' +
       '<div class="book-card-body">' +
         '<div class="book-card-badges">' + bandBadges + formatBadge + '</div>' +
         '<p class="book-card-title">' + esc(book.title) + '</p>' +
         '<p class="book-card-author">by ' + esc(book.author) + '</p>' +
-        (book.orbital_score ? '<div class="book-card-orbital" aria-label="Orbital score: ' + book.orbital_score + ' out of 5">' + osRings + '</div>' : '') +
       '</div>' +
     '</a>';
   }

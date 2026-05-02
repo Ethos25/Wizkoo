@@ -203,7 +203,7 @@ body {
 .lib-featured-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: 22px;
 }
 .lib-featured-group {
   display: flex;
@@ -220,7 +220,8 @@ body {
 .lib-featured-cover {
   position: relative;
   width: 100%;
-  height: min(280px, 35vh);
+  aspect-ratio: 3 / 4;
+  height: auto;
   overflow: hidden;
   background: var(--linen);
 }
@@ -241,15 +242,18 @@ body {
   align-items: center;
 }
 .lib-featured-card-body {
-  padding: 14px 0 0;
+  background: var(--linen);
+  padding: 10px 10px 12px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: none;
 }
 .lib-featured-pill {
   font-family: 'Space Mono', monospace;
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--lib-dim);
-  margin-bottom: 8px;
+  color: rgba(12,16,32,0.45);
+  margin-bottom: 6px;
 }
 .lib-featured-title {
   font-family: 'Fraunces', serif;
@@ -633,6 +637,7 @@ body {
   box-shadow: none;
 }
 .book-card-cover {
+  position: relative;
   width: 100%;
   height: min(180px, 25vh);
   overflow: hidden;
@@ -644,6 +649,15 @@ body {
   border: 1px solid rgba(255,255,255,0.07);
   border-bottom: none;
   transition: border-color 0.35s var(--ease-out-expo);
+}
+
+/* OS numeric badge — top-right corner of cover image */
+.book-card-os {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  pointer-events: none;
+  line-height: 0;
 }
 .book-card:hover .book-card-cover {
   border-color: rgba(232,175,56,0.25);
