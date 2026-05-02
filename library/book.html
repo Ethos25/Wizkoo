@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-surface="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,8 +38,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: #F8F4E9;
-  color: #0C1020;
+  background: var(--lib-bg, #0c1430);
+  color: var(--lib-fg, #ece5d3);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -670,20 +670,77 @@ body {
 }
 
 /* ══════════════════════════════════════
-   NAV — cream-room transparent treatment
+   PLANETARIUM LAYER — navy ground + star field + nebulas
+══════════════════════════════════════ */
+.lib-star-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+@keyframes libTwinkle {
+  0%, 100% { opacity: var(--lo, 0.12); }
+  50%       { opacity: var(--hi, 0.55); }
+}
+.lib-nebula {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+.lib-nb1 {
+  width: 500px; height: 300px;
+  top: -60px; left: 20%;
+  background: radial-gradient(ellipse, rgba(230,168,46,0.055) 0%, transparent 70%);
+}
+.lib-nb2 {
+  width: 400px; height: 400px;
+  top: 200px; right: -80px;
+  background: radial-gradient(ellipse, rgba(100,130,220,0.04) 0%, transparent 70%);
+}
+.lib-nb3 {
+  width: 350px; height: 200px;
+  bottom: 0; left: 10%;
+  background: radial-gradient(ellipse, rgba(230,168,46,0.03) 0%, transparent 70%);
+}
+
+/* ══════════════════════════════════════
+   ENTRY CARD — cream on navy
+══════════════════════════════════════ */
+.lib-entry-card {
+  background: var(--lib-cream, #f3e9d2);
+  max-width: 92%;
+  margin: 2rem auto;
+  padding: 0;
+  border-radius: 0;
+  position: relative;
+  z-index: 2;
+  color: #0C1020;
+}
+@media (max-width: 767px) {
+  .lib-entry-card {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+/* ══════════════════════════════════════
+   NAV — dark-surface treatment (navy body)
 ══════════════════════════════════════ */
 .page-library .announce { background: #0C1020 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 .page-library .announce-text { color: rgba(232,175,56,0.75) !important; }
 .page-library .nav { background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-bottom: none !important; box-shadow: none !important; transition: background-color .25s cubic-bezier(.25,.1,.25,1) !important; }
 .page-library .nav::before { display: none !important; }
-.page-library .nav-wm { color: #0C1020 !important; }
-.page-library .nav-link { color: rgba(12,16,32,0.55) !important; }
-.page-library .nav-link:hover { color: rgba(12,16,32,0.90) !important; }
-.page-library .nav-link.active { color: #0C1020 !important; }
-.page-library .nav-hamburger-line { background: rgba(12,16,32,0.7) !important; }
-.page-library .nav-cta { background: transparent !important; color: #0C1020 !important; border: 1.5px solid #E8AF38 !important; }
-.page-library .nav-cta:hover { background: #E8AF38 !important; color: #0C1020 !important; border-color: #E8AF38 !important; box-shadow: none !important; }
-.page-library .nav.nav--scrolled { background: rgba(248,244,233,0.55) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; }
+.page-library .nav-wm { color: var(--lib-fg, #ece5d3) !important; }
+.page-library .nav-link { color: rgba(236,229,211,0.65) !important; }
+.page-library .nav-link:hover { color: var(--lib-fg, #ece5d3) !important; }
+.page-library .nav-link.active { color: var(--lib-fg, #ece5d3) !important; }
+.page-library .nav-hamburger-line { background: rgba(236,229,211,0.7) !important; }
+.page-library .nav-cta { background: transparent !important; color: var(--lib-fg, #ece5d3) !important; border: 1.5px solid var(--lib-saffron, #e6a82e) !important; }
+.page-library .nav-cta:hover { background: var(--lib-saffron, #e6a82e) !important; color: var(--lib-ink, #231a14) !important; border-color: var(--lib-saffron, #e6a82e) !important; box-shadow: none !important; }
+.page-library .nav.nav--scrolled { background: rgba(12,20,48,0.88) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; }
 
 /* error/not-found state */
 .bk-error-state {
@@ -734,6 +791,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <a href="#main-content" class="skip-nav">Skip to main content</a>
 
 <main id="main-content">
+
+  <div class="lib-star-field" id="bk-stars" aria-hidden="true"></div>
+  <div class="lib-nebula lib-nb1" aria-hidden="true"></div>
+  <div class="lib-nebula lib-nb2" aria-hidden="true"></div>
+  <div class="lib-nebula lib-nb3" aria-hidden="true"></div>
+
+  <section class="lib-entry-card" aria-label="Book entry">
 
   <!-- ═══ LOADING SHIMMER ═══ -->
   <div id="bk-loading" aria-live="polite" aria-label="Loading book">
@@ -915,6 +979,8 @@ document.addEventListener('DOMContentLoaded', function() {
   </div><!-- /bk-wrap -->
   </div><!-- /bk-content -->
 
+  </section><!-- /lib-entry-card -->
+
 </main>
 
 <!-- ═══ FOOTER ═══ -->
@@ -925,6 +991,28 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/library-book.js"></script>
+
+<script>
+(function(){
+  var s = document.getElementById('bk-stars');
+  if (!s) return;
+  var html = '';
+  for (var i = 0; i < 140; i++) {
+    var x  = Math.random() * 100;
+    var y  = Math.random() * 100;
+    var sz = Math.random() < 0.7 ? 1 : Math.random() < 0.6 ? 1.5 : 2;
+    var lo  = (0.05 + Math.random() * 0.12).toFixed(2);
+    var hi  = (0.28 + Math.random() * 0.45).toFixed(2);
+    var dur = (2 + Math.random() * 4).toFixed(1);
+    var del = (Math.random() * 5).toFixed(1);
+    html += '<div style="position:absolute;border-radius:50%;background:#F0F2F8;'
+          + 'left:'+x+'%;top:'+y+'%;width:'+sz+'px;height:'+sz+'px;'
+          + 'animation:libTwinkle '+dur+'s ease-in-out infinite '+del+'s;'
+          + '--lo:'+lo+';--hi:'+hi+';"></div>';
+  }
+  s.innerHTML = html;
+})();
+</script>
 
 <script>
 (function(){
