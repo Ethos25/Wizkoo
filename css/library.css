@@ -232,15 +232,6 @@ body {
   display: block;
   transition: opacity 0.3s;
 }
-.lib-featured-os-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 5px 9px;
-  background: rgba(12,20,48,0.78);
-  display: flex;
-  align-items: center;
-}
 .lib-featured-card-body {
   background: var(--linen);
   padding: 10px 10px 12px;
@@ -651,13 +642,13 @@ body {
   transition: border-color 0.35s var(--ease-out-expo);
 }
 
-/* OS numeric badge — top-right corner of cover image */
-.book-card-os {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  pointer-events: none;
-  line-height: 0;
+/* OS·N inline text in card metadata */
+.book-card-os-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .1em;
+  color: var(--lib-dim, rgba(236,229,211,0.6));
+  text-transform: uppercase;
 }
 .book-card:hover .book-card-cover {
   border-color: rgba(232,175,56,0.25);
