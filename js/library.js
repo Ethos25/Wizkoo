@@ -321,19 +321,51 @@
       }
     });
 
-    if (picks.length === 0) return;
+    if (picks.length === 0) {
+      // Empty featured state — curator quote + notification CTA
+      container.innerHTML =
+        '<div class="lib-featured-empty">' +
+          '<p class="lib-featured-empty-eyebrow">From the Curator</p>' +
+          '<p class="lib-featured-empty-quote">"I&rsquo;m rereading the next three picks this week. New featured books up Friday."</p>' +
+          '<p class="lib-featured-empty-sig">— Amy, founder &amp; reader-in-chief</p>' +
+          '<div class="lib-mcta lib-featured-mcta">' +
+            '<div class="lib-mcta-primary-wrap">' +
+              '<a href="/notify" class="lib-mcta-primary">GET NOTIFIED</a>' +
+            '</div>' +
+            '<a href="/how-it-works" class="lib-mcta-secondary">WHAT GETS PICKED</a>' +
+          '</div>' +
+        '</div>';
+      return;
+    }
 
     var html = '<div class="lib-featured-inner">' +
-      '<p class="lib-featured-label">Featured from The Library</p>' +
+      '<div class="lib-featured-header">' +
+        '<p class="lib-featured-eyebrow">This Week&rsquo;s Picks</p>' +
+        '<p class="lib-featured-subtitle">Three books I keep handing to parents.</p>' +
+      '</div>' +
       '<div class="lib-featured-grid">';
 
     picks.forEach(function (p) {
-      // Band-Name Pairing Rule: render as "APPRENTICE · AGES 5-6" matching band-selector pill style.
+      var b = p.book;
+      var coverHtml = b.cover_image_url
+        ? '<img data-src="' + esc(b.cover_image_url) + '" alt="Cover of ' + esc(b.title) + '" loading="lazy">'
+        : '<div class="book-card-cover-placeholder">' + COVER_PLACEHOLDER_SVG +
+          '<span class="book-card-cover-placeholder-text">No cover</span></div>';
+      var osHtml = b.orbital_score ? renderOSSvg(b.orbital_score, 18) : '';
+
       html += '<div class="lib-featured-group">' +
-        '<span class="lib-featured-group-name">' +
-          esc(p.bandName.toUpperCase()) + ' · ' + esc(p.bandLabel.toUpperCase()) +
-        '</span>' +
-        renderBookCard(p.book) +
+        '<a href="/library/' + esc(b.slug) + '" class="lib-featured-card">' +
+          '<div class="lib-featured-cover">' +
+            coverHtml +
+            (osHtml ? '<div class="lib-featured-os-badge" aria-label="Orbital score: ' + b.orbital_score + '">' + osHtml + '</div>' : '') +
+          '</div>' +
+          '<div class="lib-featured-card-body">' +
+            '<div class="lib-featured-pill">' + esc(p.bandName) + ' · ' + esc(p.bandLabel) + '</div>' +
+            '<p class="lib-featured-title">' + esc(b.title) + '</p>' +
+            '<p class="lib-featured-author">by ' + esc(b.author) + '</p>' +
+            (b.hook ? '<p class="lib-featured-hook">&ldquo;' + esc(b.hook.length > 80 ? b.hook.slice(0, 80) + '…' : b.hook) + '&rdquo;</p>' : '') +
+          '</div>' +
+        '</a>' +
         '</div>';
     });
 
@@ -368,6 +400,24 @@
     return html;
   }
 
+  /* ── Orbital Score SVG rings ─────────────────────────────────────────────── */
+  function renderOSSvg(score, size) {
+    size = size || 16;
+    var rings = [];
+    var spacing = size * 0.22;
+    var outerR  = (size / 2) - 1;
+    for (var i = 0; i < score; i++) {
+      var r = outerR - i * spacing;
+      if (r <= 1) break;
+      var stroke = i === 0 ? '#e6a82e' : 'rgba(236,229,211,0.55)';
+      rings.push('<circle cx="' + (size / 2) + '" cy="' + (size / 2) + '" r="' + r.toFixed(1) +
+        '" fill="none" stroke="' + stroke + '" stroke-width="1.5"/>');
+    }
+    return '<svg width="' + size + '" height="' + size +
+      '" viewBox="0 0 ' + size + ' ' + size +
+      '" aria-hidden="true">' + rings.join('') + '</svg>';
+  }
+
   /* ── Book card ───────────────────────────────────────────────────────────── */
   function renderBookCard(book) {
     var href = '/library/' + esc(book.slug);
@@ -377,13 +427,7 @@
       : '<div class="book-card-cover-placeholder">' + COVER_PLACEHOLDER_SVG +
         '<span class="book-card-cover-placeholder-text">No cover</span></div>';
 
-    // TODO: Re-scoring sweep pending per Phase 6 P2 finding. Visual treatment of the
-    // score may be revisited post-sweep. See Notion subpage 34f335a8d332818cb4ddee045b20f58f.
-    var orbitalDots = '';
-    for (var i = 1; i <= 5; i++) {
-      orbitalDots += '<span class="orbital-dot' + (i > book.orbital_score ? ' empty' : '') +
-        '" aria-hidden="true"></span>';
-    }
+    var osRings = book.orbital_score ? renderOSSvg(book.orbital_score, 16) : '';
 
     var bandBadges = book.age_bands.map(function (ab) {
       return '<span class="book-badge band">Ages ' + esc(ab.replace('-', '–')) + '</span>';
@@ -400,7 +444,7 @@
         '<div class="book-card-badges">' + bandBadges + formatBadge + '</div>' +
         '<p class="book-card-title">' + esc(book.title) + '</p>' +
         '<p class="book-card-author">by ' + esc(book.author) + '</p>' +
-        (book.orbital_score ? '<div class="book-card-orbital" aria-label="Orbital score: ' + book.orbital_score + ' out of 5">' + orbitalDots + '</div>' : '') +
+        (book.orbital_score ? '<div class="book-card-orbital" aria-label="Orbital score: ' + book.orbital_score + ' out of 5">' + osRings + '</div>' : '') +
       '</div>' +
     '</a>';
   }

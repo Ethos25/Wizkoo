@@ -33,7 +33,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -41,13 +41,6 @@
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/footer.css">
 <link rel="stylesheet" href="/css/library.css">
-<style>
-.lib-hero{padding-top:clamp(16px,10vh,180px)!important;padding-bottom:clamp(12px,5vh,80px)!important}
-.lib-hero h1{font-size:clamp(1.8rem,min(6vw,7vh),4.8rem)!important;margin-bottom:clamp(6px,1.5vh,16px)!important}
-.lib-hero-tag{margin-bottom:clamp(6px,1.5vh,20px)!important}
-.lib-hero-sub{margin-bottom:clamp(6px,1.5vh,24px)!important}
-.lib-orbital-explainer{margin-bottom:clamp(6px,1.5vh,24px)!important}
-</style>
 </head>
 <body data-footer-treatment="b">
 <div class="cursor" id="cursor"></div>
@@ -70,37 +63,56 @@
   <!-- ═══ HERO ═══ -->
   <section class="lib-hero" aria-label="The Library">
     <div class="lib-hero-inner">
-      <p class="lib-hero-tag">Curated Reading</p>
-      <h1>The Library</h1>
-      <p class="lib-hero-sub">Books that orbit. Curated for ages 3–12.<br>Organized by the themes your family explores.</p>
-      <p class="lib-orbital-explainer">Every book is scored on how many subjects it connects. We call it the Orbital Score.</p>
-      <p class="lib-hero-body">Every book in The Library was chosen because it opens more than one door. A volcano book that also teaches geography, chemistry, and the history of Pompeii. A book about the ocean that connects to the periodic table. These are not reading lists. They are learning paths that start with a story.</p>
+      <p class="lib-hero-tag">Curated by hand · Updated weekly</p>
+      <h1>The <em>Library</em></h1>
+      <p class="lib-hero-anchor">Five hundred books. Each chosen because it<br>opens more than one door.</p>
+      <div class="lib-numbered-legend" aria-label="How the library works">
+        <div class="lib-legend-item">
+          <span class="lib-legend-num">01.</span>
+          <span class="lib-legend-text">One ring per subject the book connects — the Orbital Score.</span>
+        </div>
+        <div class="lib-legend-item">
+          <span class="lib-legend-num">02.</span>
+          <span class="lib-legend-text">Books organized by what reading looks like at home.</span>
+        </div>
+        <div class="lib-legend-item">
+          <span class="lib-legend-num">03.</span>
+          <span class="lib-legend-text">Every plan includes 2–3 matched picks from The Library.</span>
+        </div>
+      </div>
+      <p class="lib-volume-line">500+ books · curated &amp; growing</p>
     </div>
   </section>
 
   <!-- ═══ AGE BAND SELECTOR ═══ -->
   <section class="lib-bands" aria-label="Filter by age band">
     <div class="lib-bands-inner">
-      <p class="lib-collection-size">500+ books. Curated and growing.</p>
-      <p class="lib-collection-size">We don't sell books. We just help you find the right ones.</p>
+      <div class="lib-bands-header">
+        <span class="lib-bands-eyebrow">Choose Your Reader</span>
+        <p class="lib-bands-sub">Books are organized by what reading looks like at home.</p>
+      </div>
       <div class="age-band-cards" role="group" aria-label="Age bands — select one or more">
         <button class="age-band-card" data-band="3-4" aria-pressed="false">
-          <span class="abc-ages">Wonderer · Ages 3-4</span>
+          <span class="abc-ages">Ages 3–4</span>
+          <span class="abc-name">Wonderer</span>
           <span class="abc-role">Read Side by Side</span>
           <span class="abc-tagline">You read, they discover.</span>
         </button>
         <button class="age-band-card" data-band="5-6" aria-pressed="false">
-          <span class="abc-ages">Apprentice · Ages 5-6</span>
+          <span class="abc-ages">Ages 5–6</span>
+          <span class="abc-name">Apprentice</span>
           <span class="abc-role">Read and Wonder</span>
           <span class="abc-tagline">They follow along, you guide.</span>
         </button>
         <button class="age-band-card" data-band="7-9" aria-pressed="false">
-          <span class="abc-ages">Artisan · Ages 7-9</span>
+          <span class="abc-ages">Ages 7–9</span>
+          <span class="abc-name">Artisan</span>
           <span class="abc-role">Read and Discuss</span>
           <span class="abc-tagline">They read. You talk about it at dinner.</span>
         </button>
         <button class="age-band-card" data-band="10-12" aria-pressed="false">
-          <span class="abc-ages">Scholar · Ages 10-12</span>
+          <span class="abc-ages">Ages 10–12</span>
+          <span class="abc-name">Scholar</span>
           <span class="abc-role">Read and Explore</span>
           <span class="abc-tagline">They go deep. You go there with them.</span>
         </button>
@@ -159,10 +171,16 @@
   <!-- ═══ SUBSCRIBER CTA ═══ -->
   <section class="lib-subscriber-cta" aria-label="Get personalized recommendations">
     <div class="lib-subscriber-cta-inner">
-      <p class="lib-cta-tag">Personalized to Your Children</p>
-      <h2 class="lib-cta-title">Want to see which of these books match your child's weekly learning plan?</h2>
-      <p class="lib-cta-body">Every Wizkoo plan includes 2–3 book recommendations pulled from The Library, matched to your child's age, reading level, and the specific theme you're exploring that week.</p>
-      <a href="/plan" class="lib-cta-btn">Build Your Plan Free</a>
+      <p class="lib-cta-tag">Personalized to your child</p>
+      <h2 class="lib-cta-title">See which of these match <em>your child's plan.</em></h2>
+      <p class="lib-cta-body">Every Wizkoo plan includes 2–3 books from The Library, matched to age, reading level, and the theme you're exploring this week.</p>
+      <div class="lib-mcta">
+        <div class="lib-mcta-primary-wrap">
+          <a href="/plan" class="lib-mcta-primary">BUILD YOUR PLAN</a>
+        </div>
+        <a href="/how-it-works" class="lib-mcta-secondary">HOW THE LIBRARY FEEDS YOUR PLAN</a>
+      </div>
+      <p class="lib-cta-nodeal">We don't sell books. We just help you find the right ones.</p>
     </div>
   </section>
 

@@ -56,6 +56,18 @@
   --prog-atlas: #2D7A8A;
   --prog-elementum: var(--saffron);
 
+  /* ── Library page tokens ── */
+  --lib-bg: #0c1430;
+  --lib-fg: #ece5d3;
+  --lib-dim: rgba(236,229,211,0.6);
+  --lib-rule: rgba(236,229,211,0.16);
+  --lib-saffron: #e6a82e;
+  --lib-cream: #f3e9d2;
+  --lib-ink: #231a14;
+  --lib-ink-dim: rgba(35,26,20,0.6);
+  --lib-ink-rule: rgba(35,26,20,0.16);
+  --lib-saffron-dim: rgba(230,168,46,0.4);
+
   /* ── Animation timing ── */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
