@@ -204,7 +204,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  max-width: 760px;
+  max-width: 960px;
   margin: 0 auto;
 }
 .lib-featured-group {
@@ -225,7 +225,7 @@ body {
 .lib-featured-cover {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   background: rgba(236,229,211,0.06);
 }
