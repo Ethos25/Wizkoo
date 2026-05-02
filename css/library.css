@@ -235,7 +235,7 @@ body {
 .lib-featured-card-body {
   background: var(--linen);
   padding: 10px 10px 12px;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid var(--lib-ink-rule);
   border-top: none;
 }
 .lib-featured-pill {
@@ -243,28 +243,28 @@ body {
   font-size: 8px;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(12,16,32,0.45);
+  color: rgba(35,26,20,0.55);
   margin-bottom: 6px;
 }
 .lib-featured-title {
   font-family: 'Fraunces', serif;
   font-weight: 500;
   font-size: clamp(1.1rem, 1.6vw, 1.5rem);
-  color: var(--lib-fg);
+  color: var(--lib-ink);
   line-height: 1.15;
   margin: 0 0 4px;
 }
 .lib-featured-author {
   font-family: 'Inter', sans-serif;
   font-size: 13px;
-  color: var(--lib-dim);
+  color: var(--lib-ink-dim);
   margin: 0 0 12px;
 }
 .lib-featured-hook {
   font-family: 'Fraunces', serif;
   font-style: italic;
   font-size: 14px;
-  color: var(--lib-fg);
+  color: rgba(35,26,20,0.72);
   line-height: 1.5;
   opacity: 0.85;
   margin: 0;
