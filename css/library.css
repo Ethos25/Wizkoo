@@ -170,7 +170,7 @@ body {
 /* ── Featured Cluster ────────────────────────────────────────────────────── */
 .lib-featured-cluster {
   /* min-height fills viewport below nav (nav=82px), pushing hero below fold on all viewports */
-  padding: clamp(12px, 2vh, 24px) var(--content-pad) 0;
+  padding: clamp(12px, 2vh, 24px) var(--content-pad) clamp(24px, 4vh, 48px);
   min-height: calc(100vh - 82px);
   position: relative;
   z-index: 1;
@@ -190,7 +190,7 @@ body {
   font-size: 10px;
   letter-spacing: .28em;
   text-transform: uppercase;
-  color: var(--lib-dim);
+  color: var(--lib-saffron);
   margin-bottom: 8px;
 }
 .lib-featured-subtitle {
@@ -199,17 +199,8 @@ body {
   font-weight: 300;
   font-size: clamp(0.875rem, 1.2vw, 1.05rem);
   color: var(--lib-fg);
-  margin: 0;
+  margin: 0 0 32px;
   line-height: 1.3;
-}
-.lib-featured-subtitle::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--lib-saffron);
-  margin-right: 12px;
-  vertical-align: middle;
 }
 .lib-featured-grid {
   display: grid;
@@ -238,7 +229,8 @@ body {
   flex: 0 0 30%;
   aspect-ratio: 2 / 3;
   overflow: hidden;
-  background: rgba(236,229,211,0.06);
+  /* match page navy so object-fit:contain letterbox space is invisible */
+  background: var(--lib-bg);
 }
 .lib-featured-cover img {
   width: 100%;
