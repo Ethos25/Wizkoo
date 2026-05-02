@@ -67,7 +67,7 @@
       client
         .from('library_books')
         .select([
-          'id, slug, title, author, hook, orbital_score, heads_up',
+          'id, slug, title, display_title, author, hook, orbital_score, heads_up',
           'cover_image_url, cover_quality, book_format, reading_level',
           'library_age_bands(age_band)',
           'library_themes(theme)',
@@ -358,7 +358,7 @@
           '</div>' +
           '<div class="lib-featured-card-body">' +
             '<div class="lib-featured-pill">' + esc(p.bandName) + ' · ' + esc(p.bandLabel) + '</div>' +
-            '<p class="lib-featured-title">' + esc(b.title) + '</p>' +
+            '<p class="lib-featured-title">' + esc(b.display_title || b.title) + '</p>' +
             '<p class="lib-featured-author">by ' + esc(b.author) + '</p>' +
             (b.hook ? '<p class="lib-featured-hook">&ldquo;' + esc(b.hook) + '&rdquo;</p>' : '') +
           '</div>' +
@@ -457,7 +457,7 @@
       '<div class="book-card-cover">' + coverHtml + '</div>' +
       '<div class="book-card-body">' +
         '<div class="book-card-badges">' + bandBadges + formatBadge + '</div>' +
-        '<p class="book-card-title">' + esc(book.title) + '</p>' +
+        '<p class="book-card-title">' + esc(book.display_title || book.title) + '</p>' +
         '<p class="book-card-author">by ' + esc(book.author) + '</p>' +
       '</div>' +
     '</a>';
