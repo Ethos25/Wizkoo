@@ -170,7 +170,7 @@ body {
 /* ── Featured Cluster ────────────────────────────────────────────────────── */
 .lib-featured-cluster {
   /* min-height fills viewport below nav (nav=82px), pushing hero below fold on all viewports */
-  padding: clamp(12px, 2vh, 24px) var(--content-pad) clamp(24px, 4vh, 48px);
+  padding: 48px var(--content-pad) clamp(24px, 4vh, 48px);
   min-height: calc(100vh - 82px);
   position: relative;
   z-index: 1;
@@ -244,7 +244,7 @@ body {
   flex: 1;
   min-width: 0;
   background: transparent;
-  padding: 0 20px 0 0;
+  padding: 0 72px 0 0;
   border: none;
 }
 .lib-featured-pill {
@@ -292,7 +292,7 @@ body {
   line-height: 1.4;
   margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
