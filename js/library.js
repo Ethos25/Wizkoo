@@ -351,15 +351,13 @@
         ? '<img data-src="' + esc(b.cover_image_url) + '" alt="Cover of ' + esc(b.title) + '" loading="lazy">'
         : '<div class="book-card-cover-placeholder">' + COVER_PLACEHOLDER_SVG +
           '<span class="book-card-cover-placeholder-text">No cover</span></div>';
-      var osSuffix = b.orbital_score ? ' · OS·' + b.orbital_score : '';
-
       html += '<div class="lib-featured-group">' +
         '<a href="/library/' + esc(b.slug) + '" class="lib-featured-card">' +
           '<div class="lib-featured-cover">' +
             coverHtml +
           '</div>' +
           '<div class="lib-featured-card-body">' +
-            '<div class="lib-featured-pill">' + esc(p.bandName) + ' · ' + esc(p.bandLabel) + osSuffix + '</div>' +
+            '<div class="lib-featured-pill">' + esc(p.bandName) + ' · ' + esc(p.bandLabel) + '</div>' +
             '<p class="lib-featured-title">' + esc(b.title) + '</p>' +
             '<p class="lib-featured-author">by ' + esc(b.author) + '</p>' +
             (b.hook ? '<p class="lib-featured-hook">&ldquo;' + esc(b.hook) + '&rdquo;</p>' : '') +
@@ -454,15 +452,11 @@
       ? '<span class="book-badge">' + esc(formatLabel(book.book_format)) + '</span>'
       : '';
 
-    var osText = book.orbital_score
-      ? '<span class="book-card-os-text">OS·' + book.orbital_score + '</span>'
-      : '';
-
     return '<a href="' + href + '" class="book-card" ' +
       'aria-label="' + esc(book.title) + ' by ' + esc(book.author) + '">' +
       '<div class="book-card-cover">' + coverHtml + '</div>' +
       '<div class="book-card-body">' +
-        '<div class="book-card-badges">' + bandBadges + formatBadge + osText + '</div>' +
+        '<div class="book-card-badges">' + bandBadges + formatBadge + '</div>' +
         '<p class="book-card-title">' + esc(book.title) + '</p>' +
         '<p class="book-card-author">by ' + esc(book.author) + '</p>' +
       '</div>' +

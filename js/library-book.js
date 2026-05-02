@@ -336,7 +336,7 @@
     }
 
     /* ── Orbital diagram ── */
-    renderOrbitalDiagram(book.subjects);
+    renderOrbitalDiagram(book.subjects, book.orbital_score);
 
     /* ── Reveal content, remove shimmer ── */
     var loading = document.getElementById('bk-loading');
@@ -442,7 +442,7 @@
     return { lx: x - GAP, ly: ly, anchor: 'end' };
   }
 
-  function renderOrbitalDiagram(rawSubjects) {
+  function renderOrbitalDiagram(rawSubjects, orbitalScore) {
     var wrap    = document.getElementById('bk-score-wrap');
     var svg     = document.getElementById('bk-score-svg');
     var planetsG = document.getElementById('bk-planets');
@@ -504,6 +504,13 @@
       ': ' + subjects.join(', '));
 
     figEl.textContent = (COUNT_WORDS[count] || count) + ' CONNECTED SUBJECTS';
+
+    if (orbitalScore) {
+      var defEl = document.createElement('p');
+      defEl.className = 'bk-score-def';
+      defEl.textContent = 'Orbital Score: ' + orbitalScore + ' — connects ' + orbitalScore + ' subject' + (orbitalScore === 1 ? '' : 's') + '.';
+      figEl.insertAdjacentElement('afterend', defEl);
+    }
 
     if (extra.length > 0) {
       var extraEl = document.createElement('p');
