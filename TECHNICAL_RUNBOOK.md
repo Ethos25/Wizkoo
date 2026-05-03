@@ -170,6 +170,42 @@ State what the session will accomplish. Then proceed.
 
 ---
 
+## PRE-FLIGHT AUDIT CHECKLIST
+
+Run before executing any visual or structural change. Items 1–4 are global
+(from AMY_TECHNICAL_STANDARDS.md). Item 5 is Wizkoo-specific.
+
+  1. Environment — confirm the page's assigned world (Linen / Night Sky /
+     Day Sky) per ENVIRONMENT MAP. Report it before touching any CSS.
+
+  2. File map — confirm which file governs the element being changed.
+     One source of truth: find the winning CSS rule at source before
+     writing any new rule.
+
+  3. Fonts & tokens — confirm every value uses a CSS custom property, not
+     a raw hardcoded value. Saffron: var(--saffron) or var(--lib-saffron).
+     Spacing: var(--section-pad), var(--content-pad). If a raw value
+     appears, replace it with the token before proceeding.
+
+  4. Card geometry contract (if surface contains cards):
+     - Does this surface include a card-based component (browse grid,
+       featured cluster, article list)?
+     - If yes: declare the above-the-fold contract. What content must fit,
+       on which of the five canonical viewports (see CANONICAL TEST
+       VIEWPORTS matrix).
+     - Identify the closest canonical card pattern. Current canonical:
+       /library featured cluster for horizontal flex. Document new patterns
+       as they emerge.
+     - State explicitly: does this surface inherit canonical geometry or
+       deviate? Deviations require justification and five-viewport
+       validation before signoff.
+
+  5. Spacing — confirm top padding, section gap, and card gap values are
+     intentional relative to the active breakpoint. Short-viewport
+     breakpoints require explicit padding audit (96px nav safe-zone rule).
+
+---
+
 ## BUILD SESSION CLOSE PROTOCOL — WIZKOO ADDITIONS
 Enforces Standards §1.2 (Build Session Close Protocol) via Transfer Queue deposit, mandatory Notion mirror sync, and Wizkoo-specific ledger format.
 
@@ -650,6 +686,12 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Band-Name Pairing Rule (locked April 29, 2026): band name must always appear with age range on any public-facing surface. Format: Name · Ages X-Y (e.g. Wonderer · Ages 3-4, Apprentice · Ages 5-6, Artisan · Ages 7-9, Scholar · Ages 10-12). Reserved bands follow same pattern when shipped. The Luminary takes no age pairing. Architecture-level lock — not a copy preference. Do not render bare band names on any public surface.
 - cover_quality field (locked April 29, 2026): TEXT DEFAULT 'standard' CHECK (cover_quality IN ('featured','standard','hidden')). Featured cluster in renderFeaturedCluster() gates exclusively on cover_quality = 'featured'. If no featured book is available for a band slot, that slot is omitted entirely — never fall back to standard-quality books. Starter set: 9 books as of April 29, 2026. Any expansion requires a curator pass, not a code change.
 - Two-tier cover height system (locked April 29, 2026): band grid cards: height: min(180px, 25vh); featured cluster cards: height: min(280px, 35vh). Both: object-fit: contain; background: var(--linen) for letterbox fill on non-portrait covers. The min() function self-adjusts across viewport sizes including 200% display scaling. Do not revert to fixed-px heights or aspect-ratio approach.
+- D5 book detail — cream card canonical width (locked May 2, 2026): width: 90%; max-width: 1020px; margin: 0 auto. This is the canonical entry page value. Narrower than the library browse grid. Night Sky is intentionally visible (~210px per side at 1440px). Do not widen to full-bleed or beyond 1020px.
+- D5 book detail — unified cream card surface (locked May 2, 2026): Hero zone and depth zone share one continuous #F2F0EA (Linen) surface inside .bk-cream-card. No separate card below the section break. The Night Sky background shows outside the card. Section break is an editorial saffron rule + Space Mono label, not a surface change.
+- D5 book detail — TALK ABOUT magazine row layout (locked May 2, 2026): Two-column flex row. Left: 180px numeral column, Fraunces weight 300, clamp(5rem,8vw,6rem), #C8C5BC. Right: Fraunces italic question with saffron (#E8AF38) curly quote glyphs (U+201C / U+201D) as .bk-talk-quote spans. Hairline #E0DED6 rule between rows. Headline: "Three questions to bring to the dinner table." Do not change numeral weight, size, or color without a full D5 typography session.
+- D5 book detail — read-aloud metric rule (locked May 2, 2026): calcReadAloud() in library-book.js. Rates: picture-book/board-book = 10 sec/page; graphic-novel/poetry = 50 sec/page; all others = 100 sec/page. Threshold: totalMins ≤ 20 → "~N min read-aloud"; totalMins > 20 → "About N weeks at 30 min/day" (weeks = round(totalMins ÷ 150)). Minimum display: 1 min / 1 week. Do not change the 150 min/week denominator without updating this lock.
+- D5 book detail — theme pill fallback chain (locked May 2, 2026): domainsFromSubjects(book.subjects) → if empty, fall back to book.themes slugs formatted title-case → if both empty, hide pill row. Pills in hero right column, between hook and decision card. This fallback exists because library_subjects is not yet fully populated; once population pass is complete (see OPEN ITEM 16), the fallback branch becomes dormant but stays in code.
+- D5 book detail — Constellation capped at 3 books (locked May 2, 2026): renderRelated() and fetchRelated()/fetchRelatedByBand() both use .limit(3) / .slice(0, 3). Grid is repeat(3,1fr). Do not increase to 4 without a full constellation layout session.
 
 ---
 
@@ -1178,6 +1220,87 @@ Pixel-identical across linen, night sky, and day sky. No exceptions.
 
 ---
 
+## SAFFRON DISCIPLINE
+
+Saffron is rationed across seven reserved uses. Adding saffron to a new
+context is an explicit decision, not a default. Drift is one of the
+fastest ways the visual system loses coherence.
+
+RESERVED USES (as of May 2026):
+  1. Outermost ring of the Orbital Score primitive (entry pages only)
+  2. Active selectable states (active age-band card, active filter pill)
+  3. L-bracket accent on primary CTAs
+  4. Numerals in the numbered legend (01., 02., 03.)
+  5. Selected theme filter pills
+  6. Short saffron hairline (24px) as editorial anchor mark, applied consistently
+     across editorial moments: above byline-quote separation in featured cluster
+     cards, above each column in masthead legend
+  7. Section wayfinding labels (e.g., THIS WEEK'S PICKS on /library)
+
+EXPANSION RULE:
+  Adding an eighth use requires one of:
+    (a) Removing or downgrading an existing use, or
+    (b) Explicit acknowledgment that the discipline rule is being expanded
+        with a stated reason.
+
+REVIEW TRIGGER:
+  If a build session introduces saffron to a context not in the list above,
+  stop. Either find the existing reserved use that justifies it, or treat
+  it as a discipline expansion requiring explicit decision.
+
+---
+
+## SHAPE GRAMMAR
+
+Two shapes. Two meanings. No exceptions.
+
+SQUARES (border-radius: 0)
+  Signal: permanent UI — this element is architecture, not state.
+  Uses: all CTAs, age-band cards, entry page metadata blocks, top nav,
+  modal submit buttons, section containers.
+
+PILLS (border-radius: 999px)
+  Signal: ephemeral or descriptive UI — state, category, or metadata.
+  Uses: filter selectors, active filter chips, descriptive theme tags on
+  book cards, band tags, reading level tags.
+
+ACTIVE STATE:
+  Square active: saffron fill, dark text.
+  Pill active: saffron fill, dark text, with × dismissal if user-applied
+  (filter chips). No × if system-applied (band tags).
+
+DECISION RULE:
+  When introducing a new UI element, ask: is this permanent architecture
+  or ephemeral state? Permanent = square. Ephemeral = pill.
+  Do not mix shapes within a single functional category.
+  State change triggered by clicking → pill. Action executed by clicking
+  → square.
+
+---
+
+## BRAND VOICE — WE NOT I
+
+Wizkoo is a team (founder, lead curator Beth Holloway, voice curator Talia
+Brooks, operations). All curator-voice and team-voice copy uses "we"
+consistently.
+
+RULE:
+  First-person singular ("I", "my") is reserved only for direct quotes
+  attributed to a named individual, e.g.:
+    "— Amy, Founder & Reader-in-Chief"
+  No other context uses first-person singular on any Wizkoo surface.
+
+ENFORCEMENT:
+  Any new copy added to any page — cards, empty states, hero lines,
+  curator callouts, email copy — must use "we." Before shipping new copy,
+  scan for "I " (capital I followed by space) in the relevant file.
+
+APPLIED (May 2026):
+  - Featured cluster subtitle: "Three books we keep handing to parents."
+  - Empty state main line: "We read differently with a four-year-old…"
+
+---
+
 ## NAV SYSTEM (v4.1 — final locked spec, April 12, 2026)
 
 NAV STATUS: DELIBERATE HOLD — April 17, 2026
@@ -1353,6 +1476,33 @@ touching homepage visual surface):
   compressed desktop and reachable within one scroll gesture on mobile. No section
   boundary bleed at any viewport. Report any viewport that fails."
 
+CANONICAL TEST VIEWPORTS — ABOVE-THE-FOLD VALIDATION MATRIX
+
+  Above-the-fold validation requires testing on a specific five-viewport
+  matrix. Any surface where content must fit above the fold on initial
+  load must pass all five before signoff:
+
+    1. 1440 × 900 — MacBook Air / common laptop, 100% scale
+    2. 1366 × 768 — lower-end laptop, 100% scale
+    3. 1280 × 720 — small laptop, 100% scale
+    4. 1097 × 617 — Amy's primary working environment. Source: 1920×1080
+                    monitor at 175% Windows display scale. BINDING
+                    CONSTRAINT — the most constrained desktop viewport in
+                    active use. A surface failing here has failed.
+    5. 1024 × 768 — iPad landscape, 100% scale
+
+  A surface that passes viewports 1, 2, 3, and 5 but fails at 1097×617
+  has not passed validation. Always test all five.
+
+  PLAYWRIGHT SHORTHAND:
+    const VIEWPORTS = [
+      { name: '1440x900', w: 1440, h: 900  },
+      { name: '1366x768', w: 1366, h: 768  },
+      { name: '1280x720', w: 1280, h: 720  },
+      { name: '1097x617', w: 1097, h: 617  }, // BINDING CONSTRAINT
+      { name: '1024x768', w: 1024, h: 768  },
+    ];
+
 DIAGNOSTIC PROTOCOL — run these checks IN ORDER before making CSS changes:
 
 CHECK 1 — Get the actual viewport
@@ -1380,6 +1530,60 @@ CHECK 5 — Playwright screenshots at user's actual CSS dimensions
     await p.evaluate(() =>
       document.querySelectorAll('.ec-scenario').forEach(el => el.classList.add('visible'))
     );
+
+---
+
+## CARD PATTERNS — HORIZONTAL FLEX GEOMETRY
+
+When a card uses a horizontal flex layout (cover on one side, metadata on
+the other), card height is governed by the taller of:
+  - cover container height (fixed: aspect ratio × container width)
+  - metadata column height (variable: text length + font + line clamp)
+
+Visual balance requires these two heights to roughly match. Imbalance
+produces cards where one side "wins" while the other has dead space.
+
+METADATA COLUMN HEIGHT IS A FUNCTION OF:
+  Column width     — narrower forces more line wraps, increases height
+  Text length      — longer text creates more lines
+  Line height      — taller line height increases per-line vertical space
+  Line clamp value — caps maximum lines rendered
+
+THE PRIMARY BALANCE LEVER: Column width. Counter-intuitively, narrowing
+the metadata column makes it TALLER (more line wraps), bringing it into
+balance with a tall cover. This is the opposite of the intuition that
+"narrow = less content."
+
+TUNING PRIORITY ORDER — stop when balanced:
+  1. Vertical padding above the section (cheapest — no layout change)
+  2. Metadata column width via padding-right or max-width (primary lever)
+  3. Line clamp ceiling (caps overflow on longest cards)
+  4. Cover container aspect ratio (changes cover height directly)
+  5. Font sizes (last resort — never below 11px body or 10px band tags)
+
+CANONICAL REFERENCE — /LIBRARY FEATURED CLUSTER:
+  The /library featured cluster is the canonical horizontal flex card
+  pattern. Its locked values (as of May 2026):
+    Grid: max-width 1100px, 3-col, gap 20px
+    Card: flex-direction row, align-items flex-start, gap 10px
+    Cover: flex 0 0 30%, aspect-ratio 2/3, object-fit cover, object-position top
+    Card body: flex 1, min-width 0, padding-right 72px
+    Pill: 10px Space Mono, white-space nowrap, text-overflow ellipsis
+    Title: 14px Fraunces 500, 2-line CSS clamp
+    Author: 11px Inter, 65% opacity
+    Hook: 11px Fraunces italic, line-height 1.4, 3-line CSS clamp
+  Any new horizontal flex card inherits this geometry as the default.
+  Deviations require a stated reason and five-viewport validation per
+  CANONICAL TEST VIEWPORTS matrix.
+
+DISPLAY TITLE vs FULL TITLE:
+  Browse contexts (cards in any list or grid):
+    Render display_title (short, recognizable form).
+    Fallback: if display_title is null, render title.
+  Canonical surfaces (entry pages, schema markup, OG tags, page titles):
+    Always render title (full canonical form with subtitles/parentheticals).
+  Data model: library_books.display_title (text, nullable).
+  This applies to all browse contexts across all products.
 
 ---
 
@@ -1594,6 +1798,16 @@ not the last. Open DevTools → Elements → locate the element → confirm its 
 container before running any other diagnostic. A render bug cannot be in the JS if the
 JS is not writing to the location you think it is.
 
+PATTERN 10 — PLAYWRIGHT waitUntil:'networkidle' TIMEOUT ON SUPABASE PAGES
+Using waitUntil: 'networkidle' in Playwright screenshot scripts hangs indefinitely on
+pages that fetch from Supabase (or any open HTTP connection). The browser never reaches
+a truly idle network state because Supabase keeps the connection open.
+Observed in Round 6.6: screenshot script at library/book.html timed out with networkidle;
+switching to waitUntil: 'domcontentloaded' + page.waitForTimeout(2000) resolved it.
+Prevention rule: For any page that fetches from Supabase, always use
+waitUntil: 'domcontentloaded' with a manual 2-second wait. Never use 'networkidle' or
+'load' on DB-fetching pages. Apply this to all five canonical viewport scripts by default.
+
 ---
 
 ## PRESERVATION LOCKS REGISTRY
@@ -1790,6 +2004,36 @@ decision logged in LOCKED DECISIONS.
     What to do: Beth-led per-book confirmation pass. Example flagged by Amy during Phase 6C
       curator pass: How to Find a Fox (likely too late at 7-9). Estimated 30-45 minutes.
     Priority: Pre-next-library-iteration.
+
+13. DB FIELD — talk_about_themes TEXT[]
+    Current: Field does not exist in library_books. Code in library-book.js checks
+      Array.isArray(book.talk_about_themes) and hides the theme label gracefully when null.
+    What to do: Add talk_about_themes TEXT[] column to library_books. Populate per book.
+      Renders below each TALK ABOUT question as a Space Mono eyebrow tag (.bk-talk-theme).
+    Priority: Post-D5 editorial pass. Does not block page function.
+
+14. DB FIELD — talk_about_prompts TEXT[]
+    Current: Field does not exist in library_books. Code in library-book.js checks
+      Array.isArray(book.talk_about_prompts) and hides the prompt gracefully when null.
+    What to do: Add talk_about_prompts TEXT[] column to library_books. Populate per book.
+      Renders below the theme tag as italic Inter companion text (.bk-talk-prompt).
+    Priority: Post-D5 editorial pass. Does not block page function.
+
+15. DB FIELD — library_book_relations.connection_note
+    Current: Field does not exist. Constellation (renderRelated()) renders related book
+      cards without an editorial connection note.
+    What to do: Add connection_note TEXT column to library_book_relations. Populate per
+      relation pair. Renders as a short curatorial sentence below each Constellation card.
+    Priority: Post-D5 editorial pass. Does not block page function.
+
+16. library_subjects POPULATION PASS
+    Current: Some books (e.g., A Rover's Story) have entries in library_themes but no
+      entries in library_subjects. domainsFromSubjects() returns empty for these books;
+      the D5 page falls back to book.themes slugs for pills (LOCKED DECISION — fallback chain).
+    What to do: Audit all library_books entries. For any book where library_subjects is
+      empty but library_themes is populated, map themes to the 8 canonical curriculum domains
+      and insert into library_subjects. Run after OPEN ITEM 12 (triple-tag audit) is resolved.
+    Priority: Before next library curation expansion.
 
 ---
 
@@ -2122,3 +2366,4 @@ v3.5 — April 26, 2026: Phase 8: .the-moment removed from index.html. .philo se
 v4.0 — April 26, 2026: Runbook split into AMY_TECHNICAL_STANDARDS.md (project-agnostic) and TECHNICAL_RUNBOOK.md (this file). Global engineering standards extracted to standalone document. Wizkoo-specific content retained here with references to Standards.
 v4.1 — April 27, 2026: Project guard headers added to all three local runbook files. Canonical guard format locked for AMY_TECHNICAL_STANDARDS.md (SCOPE GUARD), wizkoo/TECHNICAL_RUNBOOK.md (PROJECT GUARD — Wizkoo), and Learnkoo/TECHNICAL_RUNBOOK.md (PROJECT GUARD — Learnkoo). Full absolute path to Standards locked in both project guards.
 v4.2 — April 29, 2026: Phase 6C shipped to production. Band-Name Pairing Rule locked (Architecture-level, public-facing surfaces). cover_quality schema added to library_books (CHECK constraint, default standard, starter set 9 books). Two-tier cover height min() system locked (180px/25vh band grid, 280px/35vh featured cluster). Pattern 9 added (DOM inspection deferred too late). Open Items 11–12 added (cover URL validation pass, triple-tag audit). PR #7 merged phase-6c-cover-and-pairing → main, SHA 46106b11.
+v4.3 — May 2, 2026: D5 library book detail page Rounds 6.1–6.7 complete. Unified cream card architecture (hero + depth zone, 90%/1020px Linen surface). TALK ABOUT magazine row layout (Fraunces 300 numerals, saffron curly quotes, hairline rows). Read-aloud metric rewrite (20-min threshold, 150 min/week denominator). Theme pill fallback chain (domains → themes slugs → hide). Constellation capped at 3 books. Six new LOCKED DECISIONS. Open Items 13–16 added.
