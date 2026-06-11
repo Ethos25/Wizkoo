@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>The Plan — Print</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Space+Mono:wght@400;700&family=Sora:wght@400;500;600;700&display=swap" />
+
+<link rel="stylesheet" href="print.css" />
+
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #1A1810; color: #F8F4E9; font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+  #root { width: 100vw; height: 100vh; }
+
+  /* Subtle drop shadow so each printed sheet feels like a sheet of paper on a table. */
+  .sheet { box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 8px 22px rgba(0,0,0,0.10), 0 24px 60px rgba(0,0,0,0.12); }
+</style>
+
+<!-- React + Babel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="print-data.jsx"></script>
+<script type="text/babel" src="print-shared.jsx"></script>
+<script type="text/babel" src="print-week-sheet.jsx"></script>
+<script type="text/babel" src="print-materials-master.jsx"></script>
+<script type="text/babel" src="print-block-sheet.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard } = window;
+
+function App() {
+  return (
+    <DesignCanvas
+      title="The Plan — Print"
+      subtitle="Three printable artifacts. Week 16 · Bridges and Engineering · the Walker family. Same vocabulary as the digital surfaces, redesigned for paper."
+    >
+      <DCSection
+        id="overview"
+        title="The fridge sheet"
+        subtitle="Landscape US Letter. Five columns, one per day. Compressed Ledger Quieter rows. Per-block checkboxes the parent crosses off as the week progresses."
+      >
+        <DCArtboard id="week-sheet" label="The Week Sheet · 11 × 8.5 in" width={1056} height={816} background="#1A1810">
+          <WeekSheet />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="materials"
+        title="Everything you need this week"
+        subtitle="Portrait US Letter. Items organized by where they live in the house. Notes for the week sit at the bottom, sourced from each cluster's logistics."
+      >
+        <DCArtboard id="materials-master" label="The Materials Master · 8.5 × 11 in" width={816} height={1056} background="#1A1810">
+          <MaterialsMaster />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="block"
+        title="One sheet per block"
+        subtitle="Portrait US Letter. The Fraunces italic block name is the masthead's center stage. Steps are numbered; per-child notes print inline at each step (paper has no expand affordance)."
+      >
+        <DCArtboard id="block-sheet" label="Block Sheet · Bridge Shape Engineering Station" width={816} height={1056} background="#1A1810">
+          <BlockSheet />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="note"
+        title="Designer's note"
+      >
+        <DCArtboard id="note-card" label="What carried, what changed" width={1056} height={520} background="#0E0C08">
+          <DesignerNote />
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+function DesignerNote() {
+  return (
+    <div style={{
+      width: "100%",
+      height: "100%",
+      padding: "56px 72px",
+      boxSizing: "border-box",
+      background: "#0E0C08",
+      color: "#F8F4E9",
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      columnGap: 56,
+      fontFamily: "Plus Jakarta Sans, sans-serif",
+    }}>
+      <div>
+        <div style={{
+          fontFamily: "Space Mono, monospace",
+          fontSize: 10,
+          letterSpacing: "0.22em",
+          textTransform: "uppercase",
+          color: "#8C8678",
+          marginBottom: 14,
+        }}>
+          PRINT EXTENSION OF LEDGER QUIETER
+        </div>
+        <div style={{
+          fontFamily: "Fraunces, serif",
+          fontStyle: "italic",
+          fontWeight: 400,
+          fontSize: 32,
+          lineHeight: 1.15,
+          letterSpacing: "-0.012em",
+          color: "#F8F4E9",
+          textWrap: "balance",
+        }}>
+          The medium changed. The vocabulary didn't.
+        </div>
+      </div>
+
+      <div style={{ fontSize: 13.5, lineHeight: 1.6, color: "#D8D2C0", textWrap: "pretty" }}>
+        <p style={{ marginTop: 0 }}>
+          <strong style={{ color: "#F8F4E9", fontWeight: 600 }}>What carried.</strong>{" "}
+          The same typography stack — Plus Jakarta Sans for working content, Fraunces reserved for theme moments, Space Mono for structural labels and time. The same cluster-row vocabulary: time-in-margin, cluster name as focal element, subject dot, mono labels. Subject color stays as a small precise dot, never a fill.
+        </p>
+        <p>
+          <strong style={{ color: "#F8F4E9", fontWeight: 600 }}>What changed.</strong>{" "}
+          The planetarium band became a typographic masthead — wordmark left, audit trail right, hairline rule below. Subject palette leaned to its deeper values; saturation that worked on dark chalk softened on paper. Tap targets became checkboxes the parent crosses off with a pen. Three-column digital layouts became print-native columns and lists.
+        </p>
+        <p>
+          <strong style={{ color: "#F8F4E9", fontWeight: 600 }}>What I cut, what I kept.</strong>{" "}
+          Per-child notes <em style={{ fontFamily: "Fraunces, serif" }}>print in full</em> on Block Sheets — paper has no expand. Logistics notes <em style={{ fontFamily: "Fraunces, serif" }}>moved</em> from each cluster onto the Materials Master under <em style={{ fontFamily: "Fraunces, serif" }}>NOTES FOR THE WEEK</em>. Vocabulary lists, educational rationale, and standards alignment <em style={{ fontFamily: "Fraunces, serif" }}>stayed digital</em> — the printed pages are operational, not informational.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

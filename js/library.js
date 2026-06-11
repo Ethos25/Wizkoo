@@ -341,7 +341,7 @@
     var html = '<div class="lib-featured-inner">' +
       '<div class="lib-featured-header">' +
         '<p class="lib-featured-eyebrow">This Week&rsquo;s Picks</p>' +
-        '<p class="lib-featured-subtitle">Three books I keep handing to parents.</p>' +
+        '<p class="lib-featured-subtitle">Three books we keep handing to parents.</p>' +
       '</div>' +
       '<div class="lib-featured-grid">';
 
@@ -689,8 +689,8 @@
     container.innerHTML =
       '<div class="lib-state" id="lib-initial-state">' +
         '<div class="lib-state-label">The Library</div>' +
-        '<p class="lib-state-msg">Books organized by the themes your family explores.</p>' +
-        '<p class="lib-state-sub">Select an age band above to browse the collection.</p>' +
+        '<p class="lib-state-msg">We read differently with a four-year-old than we do with a ten-year-old.<br>So we curate differently too.</p>' +
+        '<p class="lib-state-sub">&#8593; Choose your reader above to see the books we&rsquo;ve gathered for them.</p>' +
       '</div>';
   }
 

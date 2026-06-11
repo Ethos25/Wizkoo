@@ -1810,6 +1810,33 @@ waitUntil: 'domcontentloaded' with a manual 2-second wait. Never use 'networkidl
 
 ---
 
+PATTERN 11 — PLAYWRIGHT/DEV-SERVER/LIVE-SITE VERIFICATION GAP
+Playwright verification screenshots consistently reported "changes visible, match target"
+while Amy's live render at localhost and later at wizkoo.com showed different states
+(sometimes pre-commit state, sometimes partial changes). Three instances observed:
+(1) Prompt 10 gutter — Playwright confirmed gray radial rendering but at 0.08 opacity
+    was imperceptible to human eye;
+(2) Prompt 10 toggle box removal — Playwright screenshot showed no borders; Amy's browser
+    required dev server restart to render;
+(3) post-push wizkoo.com — museum tabs reverted to bordered-chip style despite Prompt 15
+    commit being in the pushed stack.
+Root cause: Playwright renders a clean headless environment without browser cache, CDN
+cache, or build-step artifacts that affect what Amy actually sees.
+Prevention rule: Before declaring a visual commit "verified," Claude Code must run
+three-layer verification:
+  (1) Playwright screenshot at target viewport,
+  (2) curl localhost:3000 index.html | grep <expected-change> to confirm the served
+      file matches the committed file,
+  (3) state explicitly "Amy should hard-refresh and/or restart dev server to invalidate
+      any local caching before visual review."
+For post-push verification: state "Amy should wait [N] minutes for CDN propagation
+before judging live site; CDN TTL varies."
+When Amy reports "my render doesn't match your screenshot," default to diagnostic mode
+(compare served file vs committed file byte-for-byte) before iterating on new CSS.
+The cache/build gap is the first hypothesis to eliminate, not the last.
+
+---
+
 ## PRESERVATION LOCKS REGISTRY
 Enforces Standards §3.4 (Preservation Locks prompt section) via a session-start ambient registry, eliminating per-prompt recitation.
 
@@ -2367,3 +2394,4 @@ v4.0 — April 26, 2026: Runbook split into AMY_TECHNICAL_STANDARDS.md (project-
 v4.1 — April 27, 2026: Project guard headers added to all three local runbook files. Canonical guard format locked for AMY_TECHNICAL_STANDARDS.md (SCOPE GUARD), wizkoo/TECHNICAL_RUNBOOK.md (PROJECT GUARD — Wizkoo), and Learnkoo/TECHNICAL_RUNBOOK.md (PROJECT GUARD — Learnkoo). Full absolute path to Standards locked in both project guards.
 v4.2 — April 29, 2026: Phase 6C shipped to production. Band-Name Pairing Rule locked (Architecture-level, public-facing surfaces). cover_quality schema added to library_books (CHECK constraint, default standard, starter set 9 books). Two-tier cover height min() system locked (180px/25vh band grid, 280px/35vh featured cluster). Pattern 9 added (DOM inspection deferred too late). Open Items 11–12 added (cover URL validation pass, triple-tag audit). PR #7 merged phase-6c-cover-and-pairing → main, SHA 46106b11.
 v4.3 — May 2, 2026: D5 library book detail page Rounds 6.1–6.7 complete. Unified cream card architecture (hero + depth zone, 90%/1020px Linen surface). TALK ABOUT magazine row layout (Fraunces 300 numerals, saffron curly quotes, hairline rows). Read-aloud metric rewrite (20-min threshold, 150 min/week denominator). Theme pill fallback chain (domains → themes slugs → hide). Constellation capped at 3 books. Six new LOCKED DECISIONS. Open Items 13–16 added.
+v4.4 — May 4, 2026: Applied 1 Transfer Queue item. Pattern 11 (Playwright/Dev-Server/Live-Site Verification Gap) added to Layer 6. Notion STATUS updated for Pattern 11 (new) and FIX 2, Item 36, Item 31 retirement (already applied in prior sessions). Both local runbooks updated.

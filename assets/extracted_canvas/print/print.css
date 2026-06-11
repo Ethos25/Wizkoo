@@ -1,0 +1,95 @@
+/* =============================================================
+ * Print stylesheet — Ledger Quieter for paper
+ * The print artifacts share these tokens. Paper is slightly warmer
+ * than pure white (#FAF7EE) and ink is the same ultramarine #0C1020.
+ * Subject colors lean to their *deeper* values per the brief.
+ * ============================================================= */
+
+:root {
+  --paper: #FAF7EE;
+  --paper-edge: #E8E1CE;          /* trim guides, hairlines */
+  --rule-strong: #C9C0A6;         /* primary hairlines */
+  --rule: #DDD5BE;                /* secondary hairlines */
+  --rule-faint: #ECE5CF;
+  --ink: #0C1020;
+  --mid: #4A4850;
+  --meta: #8C8678;                /* printable mid-tone */
+  --faint: #B7B0A0;
+  --saffron-print: #C68A14;       /* slightly deeper than #E8AF38 — saturates better on paper */
+
+  --la-print:   #2030A0;
+  --math-print: #876700;          /* a notch deeper than #9A8600 so MATH dot reads on cream */
+  --sci-print:  #1F6033;
+  --gh-print:   #B05000;
+  --ca-print:   #5028A0;
+
+  --pjs: "Plus Jakarta Sans", system-ui, sans-serif;
+  --fr: "Fraunces", "Times New Roman", serif;
+  --mono: "Space Mono", ui-monospace, monospace;
+  --sora: "Sora", "Plus Jakarta Sans", sans-serif;
+}
+
+.sheet {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--pjs);
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow: hidden;
+}
+
+.sheet.landscape { width: 1056px; height: 816px; }
+.sheet.portrait  { width: 816px;  height: 1056px; }
+
+.sheet .live { padding: 48px; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; }
+
+/* Trim marks — quiet corner ticks. */
+.trim {
+  position: absolute; width: 12px; height: 12px;
+  border-color: var(--paper-edge); border-style: solid; border-width: 0;
+}
+.trim.tl { top: 16px; left: 16px; border-top-width: 1px; border-left-width: 1px; }
+.trim.tr { top: 16px; right: 16px; border-top-width: 1px; border-right-width: 1px; }
+.trim.bl { bottom: 16px; left: 16px; border-bottom-width: 1px; border-left-width: 1px; }
+.trim.br { bottom: 16px; right: 16px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* Wordmark — Sora, used once per artifact in the masthead */
+.wordmark {
+  font-family: var(--sora);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.mono-print {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 9px;
+  color: var(--meta);
+}
+
+/* Checkbox vocabulary — drawn as inline-block squares */
+.box {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border: 1px solid var(--rule-strong);
+  box-sizing: border-box;
+  background: transparent;
+  vertical-align: middle;
+}
+.box.lg { width: 14px; height: 14px; border-width: 1px; }
+.box.xs { width: 8px; height: 8px; }
+
+/* Subject dot, deeper palette */
+.dot { display: inline-block; width: 5px; height: 5px; border-radius: 5px; vertical-align: middle; }
+.dot-la   { background: var(--la-print); }
+.dot-math { background: var(--math-print); }
+.dot-sci  { background: var(--sci-print); }
+.dot-gh   { background: var(--gh-print); }
+.dot-ca   { background: var(--ca-print); }
+
+/* Faint hairline */
+.rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+.rule-strong { border: 0; border-top: 1px solid var(--rule-strong); margin: 0; }

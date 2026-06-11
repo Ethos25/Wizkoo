@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Recap v2 — Diagnostic-First Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;500&family=Sora:wght@500;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     LIGHT STANDARD TOKENS
+  ============================================================ */
+  :root {
+    --warm-chalk: #F8F4E9;
+    --paper: #FAFAFA;
+    --warm-bg: #F2EEE0;
+    --diagnostic-tint: #F2EBDA;   /* slightly warmer/deeper for the FOR YOU zone */
+    --rule: #E8E2D4;
+    --rule-strong: #D8CFB8;       /* the architectural rule between zones */
+    --ink: #0C1020;
+    --saffron: #E8AF38;
+
+    --lang-ink:   #3848D0;
+    --math-polar: #18A0B8;
+    --sci-mala:   #38B060;
+    --geo-verm:   #C83030;
+    --arts-amth:  #8848E0;
+    --pe-ember:   #F08A20;
+
+    --garnet:        #5A2030;
+    --forest-emerald:#1F4E3D;
+    --lapis:         #1F3858;
+    --citrine:       #C09444;
+
+    --display: 'Fraunces', Georgia, serif;
+    --body:    'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono:    'Space Mono', ui-monospace, monospace;
+    --mark:    'Sora', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .canvas {
+    padding: 64px 48px 96px;
+    max-width: 1820px;
+    margin: 0 auto;
+  }
+
+  .canvas-header {
+    margin-bottom: 56px;
+  }
+  .canvas-header .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 12px;
+  }
+  .canvas-header h1 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: "opsz" 144;
+    font-size: 36px;
+    color: #f4f0e6;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .canvas-header p {
+    font-size: 14px;
+    color: #aaa;
+    max-width: 760px;
+    line-height: 1.55;
+  }
+  .canvas-header p + p { margin-top: 12px; }
+
+  .artboard-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .artboard-label .num { color: #555; }
+  .artboard-label .meta {
+    font-family: var(--body);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #777;
+    font-size: 11px;
+  }
+
+  .artboard { margin-bottom: 88px; }
+  .artboard-row {
+    display: flex;
+    gap: 56px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .canvas-section {
+    border-top: 1px dashed #333;
+    padding-top: 48px;
+    margin-top: 48px;
+  }
+  .canvas-section h2 {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: 22px;
+    color: #f4f0e6;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+  }
+
+  .note {
+    margin-top: 18px;
+    max-width: 380px;
+    font-family: var(--body);
+    font-size: 11px;
+    line-height: 1.55;
+    color: #888;
+    font-style: italic;
+  }
+  .note strong {
+    font-style: normal;
+    font-weight: 500;
+    color: #bbb;
+  }
+
+  /* ============================================================
+     FORM B — per-child identity
+  ============================================================ */
+  .child-name {
+    display: inline-flex;
+    align-items: baseline;
+    font-family: var(--body);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .child-name .initial {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.02em;
+    line-height: 0.85;
+  }
+  .child-name .rest {
+    font-style: italic;
+    line-height: 1.0;
+  }
+  .child-name.inflow .initial { font-size: 24px; }
+  .child-name.inflow .rest    { font-size: 17px; }
+  .child-name.reading .initial { font-size: 32px; }
+  .child-name.reading .rest    { font-size: 17px; }
+
+  .child-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .c-garnet  .initial, .child-chip.c-garnet  { color: var(--garnet); }
+  .c-emerald .initial, .child-chip.c-emerald { color: var(--forest-emerald); }
+  .c-lapis   .initial, .child-chip.c-lapis   { color: var(--lapis); }
+  .c-citrine .initial, .child-chip.c-citrine { color: var(--citrine); }
+
+  /* ============================================================
+     SUBJECT TREATMENT
+  ============================================================ */
+  .subj {
+    display: inline;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+    text-decoration-skip-ink: none;
+  }
+  .subj.lang  { text-decoration-color: var(--lang-ink); }
+  .subj.math  { text-decoration-color: var(--math-polar); }
+  .subj.sci   { text-decoration-color: var(--sci-mala); }
+  .subj.geo   { text-decoration-color: var(--geo-verm); }
+  .subj.arts  { text-decoration-color: var(--arts-amth); }
+  .subj.pe    { text-decoration-color: var(--pe-ember); }
+
+  /* ============================================================
+     DEVICE FRAME
+  ============================================================ */
+  .phone {
+    width: 390px;
+    background: var(--warm-chalk);
+    border-radius: 36px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 24px 60px -16px rgba(0,0,0,0.6),
+      0 8px 24px -8px rgba(0,0,0,0.4);
+    position: relative;
+  }
+  .phone-status {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px 0 32px;
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .phone-status .signal {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .tab-strip {
+    display: flex;
+    gap: 22px;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--warm-chalk);
+  }
+  .tab-strip .tab {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.40;
+    padding: 14px 0 13px;
+    position: relative;
+  }
+  .tab-strip .tab.active {
+    opacity: 1;
+  }
+  .tab-strip .tab.active::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 1.5px;
+    background: var(--saffron);
+  }
+
+  /* ============================================================
+     MASTHEAD (sits above both zones — week identification + share)
+  ============================================================ */
+  .recap-masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px 14px;
+  }
+  .masthead-meta {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+    line-height: 1.5;
+  }
+  .masthead-meta .week {
+    color: var(--ink);
+    opacity: 1;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .share-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    opacity: 0.55;
+  }
+  .share-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  /* ============================================================
+     ZONE 1 — DIAGNOSTIC (FOR YOU, never shared)
+     Visually distinct: warmer surface tint, FOR YOU eyebrow,
+     architectural rule beneath separating from share zone.
+  ============================================================ */
+  .zone-diagnostic {
+    background: var(--diagnostic-tint);
+    padding: 22px 24px 28px;
+    position: relative;
+  }
+  .zone-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .zone-eyebrow .label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+  }
+  .zone-eyebrow .privacy {
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.42;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .zone-eyebrow .privacy::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Pace headline — the load-bearing diagnostic answer */
+  .pace-block {
+    margin-bottom: 24px;
+  }
+  .pace-num {
+    font-family: var(--display);
+    font-weight: 600;
+    font-variation-settings: "opsz" 144;
+    font-size: 64px;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .pace-num .unit {
+    font-family: var(--display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    opacity: 0.65;
+  }
+  .pace-status {
+    margin-top: 6px;
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink);
+    opacity: 0.72;
+    letter-spacing: -0.002em;
+  }
+  .pace-status .pace-good { color: #1F4E3D; opacity: 0.95; font-weight: 500; }
+
+  /* Hours by subject */
+  .hours-block {
+    margin-bottom: 24px;
+  }
+  .hours-eyebrow {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.50;
+    margin-bottom: 12px;
+  }
+  .hours-bar {
+    display: flex;
+    height: 14px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1px;
+    margin-bottom: 14px;
+  }
+  .hours-bar .seg {
+    height: 100%;
+  }
+  .hours-bar .seg.lang  { background: var(--lang-ink); }
+  .hours-bar .seg.math  { background: var(--math-polar); }
+  .hours-bar .seg.sci   { background: var(--sci-mala); }
+  .hours-bar .seg.geo   { background: var(--geo-verm); }
+  .hours-bar .seg.arts  { background: var(--arts-amth); }
+  .hours-bar .seg.pe    { background: var(--pe-ember); }
+
+  .hours-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 18px;
+  }
+  .hours-list .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .hours-list .row .name {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.85;
+    display: inline-block;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid currentColor;
+  }
+  .hours-list .row .name.lang  { border-bottom-color: var(--lang-ink); }
+  .hours-list .row .name.math  { border-bottom-color: var(--math-polar); }
+  .hours-list .row .name.sci   { border-bottom-color: var(--sci-mala); }
+  .hours-list .row .name.geo   { border-bottom-color: var(--geo-verm); }
+  .hours-list .row .name.arts  { border-bottom-color: var(--arts-amth); }
+  .hours-list .row .name.pe    { border-bottom-color: var(--pe-ember); }
+  .hours-list .row .hrs {
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    opacity: 0.80;
+  }
+
+  /* Completion + carryforward */
+  .completion-block {
+    border-top: 1px solid rgba(216,207,184,0.6);
+    padding-top: 18px;
+  }
+  .completion-headline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .completion-headline .text {
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .completion-headline .ratio {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    opacity: 0.75;
+  }
+  .carryforward-eyebrow {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.50;
+    margin-bottom: 10px;
+  }
+  .carryforward-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .carryforward-list .item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .carryforward-list .item .who {
+    flex: 0 0 22px;
+  }
+  .carryforward-list .item .what {
+    flex: 1;
+  }
+  .carryforward-list .item .reason {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+  }
+
+  /* ============================================================
+     ARCHITECTURAL RULE — the boundary between zones
+     This is what the parent reads as "above is mine, below is shareable"
+  ============================================================ */
+  .zone-divider {
+    height: 0;
+    border-top: 1px solid var(--rule-strong);
+    position: relative;
+  }
+  .zone-divider::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 1px;
+    background: var(--saffron);
+  }
+
+  /* ============================================================
+     ZONE 2 — SHAREABLE (Hero, Story, mastery, voice line)
+  ============================================================ */
+  .zone-share {
+    background: var(--warm-chalk);
+    padding: 26px 24px 0;
+  }
+
+  /* Share-zone eyebrow tells the parent what shares from here */
+  .share-zone-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+  .share-zone-eyebrow .label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+  }
+  .share-zone-eyebrow .privacy {
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.42;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .share-zone-eyebrow .privacy::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Hero */
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    margin-bottom: 18px;
+    background-size: cover;
+    background-position: center;
+    box-shadow:
+      0 1px 0 rgba(12,16,32,0.04),
+      0 12px 24px -12px rgba(12,16,32,0.18);
+  }
+  .hero-photo.bridges {
+    background:
+      radial-gradient(ellipse 65% 50% at 35% 30%, rgba(248,232,180,0.55) 0%, transparent 70%),
+      linear-gradient(160deg,
+        #d4c098 0%,
+        #c2a878 22%,
+        #a88652 48%,
+        #7a5a38 78%,
+        #4a3220 100%);
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-photo.bridges::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(110deg, transparent 28%, rgba(58,38,22,0.35) 28.5%, rgba(58,38,22,0.35) 30%, transparent 30.5%),
+      linear-gradient(110deg, transparent 32%, rgba(48,30,18,0.28) 32.4%, rgba(48,30,18,0.28) 34%, transparent 34.4%),
+      linear-gradient(110deg, transparent 38%, rgba(58,38,22,0.32) 38.4%, rgba(58,38,22,0.32) 39.8%, transparent 40.2%),
+      radial-gradient(ellipse 30% 8% at 38% 78%, rgba(30,18,10,0.42) 0%, transparent 70%);
+    mix-blend-mode: multiply;
+  }
+  .hero-photo.bridges::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.6  0 0 0 0 0.5  0 0 0 0 0.35  0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.55;
+  }
+
+  .hero-voice {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: 30px;
+    line-height: 1.10;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  /* Story */
+  .story {
+    border-top: 1px solid var(--rule);
+    padding-top: 22px;
+    margin-bottom: 26px;
+  }
+  .story-eyebrow {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.45;
+    margin-bottom: 14px;
+  }
+  .story-body {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.62;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .story-body p + p { margin-top: 12px; }
+
+  /* Mastery shifts — sit in share zone as concept-language accomplishments */
+  .mastery {
+    border-top: 1px solid var(--rule);
+    padding-top: 22px;
+    margin-bottom: 8px;
+  }
+  .mastery-eyebrow {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.45;
+    margin-bottom: 14px;
+  }
+  .mastery-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mastery-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .mastery-row .who { flex: 0 0 22px; }
+  .mastery-row .what {
+    flex: 1;
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+  }
+  .mastery-row .shift {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+    margin-top: 3px;
+    display: block;
+    font-weight: 400;
+  }
+  .mastery-row .shift .arrow { opacity: 0.55; margin: 0 4px; }
+
+  /* Closing voice line */
+  .recap-foot {
+    padding: 28px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: var(--warm-chalk);
+  }
+  .recap-foot .day-made {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: 17px;
+    color: var(--ink);
+    opacity: 0.62;
+    letter-spacing: -0.005em;
+  }
+  .recap-foot .wm {
+    font-family: var(--mark);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    opacity: 0.40;
+  }
+  .recap-foot .wm .k {
+    color: var(--saffron);
+    display: inline-block;
+    transform: rotate(8deg);
+    transform-origin: bottom center;
+    opacity: 1;
+  }
+  .recap-foot .wm .dot {
+    color: var(--saffron);
+    opacity: 1;
+  }
+
+  /* ============================================================
+     SHARE PREVIEW — what gets captured when she taps share
+  ============================================================ */
+  .share-preview-frame {
+    width: 320px;
+    background: var(--warm-chalk);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 16px 40px -12px rgba(0,0,0,0.5);
+  }
+  .share-preview-frame .meta-strip {
+    padding: 18px 22px 14px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+  }
+  .share-preview-frame .hero-photo {
+    aspect-ratio: 4/3;
+    margin: 0 22px 16px;
+    width: auto;
+  }
+  .share-preview-frame .hero-voice {
+    font-size: 24px;
+    padding: 0 22px;
+    margin-bottom: 22px;
+  }
+  .share-preview-frame .story-section {
+    padding: 0 22px 20px;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    margin: 0 0 0;
+  }
+  .share-preview-frame .story-eyebrow { font-size: 9px; margin-bottom: 12px; }
+  .share-preview-frame .story-body { font-size: 14px; line-height: 1.58; }
+  .share-preview-frame .mastery-section {
+    padding: 0 22px 20px;
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+  }
+  .share-preview-frame .mastery-eyebrow { font-size: 9px; margin-bottom: 12px; }
+  .share-preview-frame .recap-foot {
+    padding: 18px 22px 24px;
+    gap: 6px;
+  }
+  .share-preview-frame .recap-foot .day-made { font-size: 14px; }
+  .share-preview-frame .recap-foot .wm { font-size: 9.5px; }
+
+  /* ============================================================
+     PRINT KEEPSAKE v2 — share zone only (no diagnostic data)
+  ============================================================ */
+  .print-keepsake {
+    width: 612px;
+    height: 792px;
+    background: var(--warm-chalk);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 24px 60px -16px rgba(0,0,0,0.55);
+    padding: 52px 56px 44px;
+    display: flex;
+    flex-direction: column;
+    color: var(--ink);
+  }
+  .print-masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 26px;
+  }
+  .print-masthead .left {
+    font-family: var(--mark);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  .print-masthead .left .k {
+    color: var(--saffron);
+    display: inline-block;
+    transform: rotate(8deg);
+    transform-origin: bottom center;
+  }
+  .print-masthead .left .dot { color: var(--saffron); }
+  .print-masthead .right {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  .print-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    margin-bottom: 22px;
+  }
+
+  .print-voice {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .print-story {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.62;
+    color: var(--ink);
+    margin-bottom: 28px;
+    letter-spacing: -0.003em;
+  }
+  .print-story p + p { margin-top: 12px; }
+
+  .print-divider {
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 22px;
+  }
+
+  .print-mastery .label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.50;
+    margin-bottom: 12px;
+  }
+  .print-mastery .row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .print-mastery .row .who { flex: 0 0 18px; }
+  .print-mastery .row .what { flex: 1; font-weight: 500; }
+  .print-mastery .row .shift {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.55;
+  }
+  .print-mastery .row .shift .arrow { opacity: 0.55; margin: 0 4px; }
+
+  .print-foot {
+    margin-top: auto;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .print-foot .day-made {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144;
+    font-size: 14px;
+    color: var(--ink);
+    opacity: 0.62;
+  }
+  .print-foot .meta {
+    font-family: var(--mono);
+    font-size: 8.5px;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.45;
+  }
+
+  /* ============================================================
+     ARCHITECTURE DIAGRAM CALLOUT
+  ============================================================ */
+  .arch-callout {
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 360px;
+  }
+  .arch-callout h3 {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 17px;
+    color: #f4f0e6;
+    margin-bottom: 12px;
+  }
+  .arch-callout .row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #ccc;
+    line-height: 1.5;
+  }
+  .arch-callout .row .marker {
+    flex: 0 0 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 4px;
+    background: #888;
+  }
+  .arch-callout .row.private .marker { background: transparent; border: 1px solid #888; }
+  .arch-callout .row.share .marker { background: var(--saffron); }
+  .arch-callout .row .label {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-right: 6px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="canvas">
+
+  <header class="canvas-header">
+    <div class="eyebrow">The Recap v2 · Diagnostic-First Architecture · 2026-05-04</div>
+    <h1>Two zones. One artifact. The share button knows the difference.</h1>
+    <p>The Recap is two artifacts in one frame. Above the rule: the diagnostic dashboard a parent opens to answer <em>did the week hold together?</em> — pace, hours, completion, carryforwards. For her eyes only. Hours and percentages do not survive contact with audiences trained on seat time. They never share.</p>
+    <p>Below the rule: the artifact she shares. Hero, Story, mastery shifts as concept-language accomplishments, voice line. The share gesture captures this zone only — not by the parent's discipline, but by architecture. There is no version of the share that includes the hours number, because the share button cannot reach above the rule.</p>
+  </header>
+
+  <!-- ============================================================
+       ARTBOARD 1 — THE FULL ARTIFACT, BOTH ZONES
+  ============================================================ -->
+  <div class="artboard">
+    <div class="artboard-label">
+      <span class="num">01</span>
+      <span>The Recap — diagnostic zone above, share zone below</span>
+      <span class="meta">phone viewport · 390px · the architectural rule between zones is the load-bearing decision</span>
+    </div>
+
+    <div class="artboard-row">
+
+      <!-- The full Recap -->
+      <div>
+        <div class="phone">
+          <div class="phone-status">
+            <span>9:47</span>
+            <span class="signal">●●● 5G</span>
+          </div>
+          <div class="tab-strip">
+            <div class="tab">The Plan</div>
+            <div class="tab active">The Recap</div>
+            <div class="tab">The Record</div>
+          </div>
+
+          <!-- Masthead: week ID + share -->
+          <div class="recap-masthead">
+            <div class="masthead-meta">
+              <span class="week">Week 14</span>
+              Mar 30 — Apr 3 · The Oguntalas
+            </div>
+            <div class="share-btn">
+              <svg viewBox="0 0 24 24"><path d="M12 16V4M12 4L7 9M12 4L17 9M5 12V19a1 1 0 001 1h12a1 1 0 001-1V12"/></svg>
+            </div>
+          </div>
+
+          <!-- ZONE 1: DIAGNOSTIC -->
+          <div class="zone-diagnostic">
+            <div class="zone-eyebrow">
+              <div class="label">For You</div>
+              <div class="privacy">Private</div>
+            </div>
+
+            <div class="pace-block">
+              <div class="pace-num">14<span class="unit">hours, 30 minutes</span></div>
+              <div class="pace-status">
+                <span class="pace-good">On pace.</span>
+                &nbsp;Year-to-date: 421 hours of 900.
+              </div>
+            </div>
+
+            <div class="hours-block">
+              <div class="hours-eyebrow">Hours by subject</div>
+              <div class="hours-bar">
+                <div class="seg sci"  style="width: 32%"></div>
+                <div class="seg math" style="width: 22%"></div>
+                <div class="seg lang" style="width: 20%"></div>
+                <div class="seg geo"  style="width: 14%"></div>
+                <div class="seg arts" style="width: 8%"></div>
+                <div class="seg pe"   style="width: 4%"></div>
+              </div>
+              <div class="hours-list">
+                <div class="row"><span class="name sci">Science</span><span class="hrs">4h 38m</span></div>
+                <div class="row"><span class="name math">Math</span><span class="hrs">3h 12m</span></div>
+                <div class="row"><span class="name lang">Lang Arts</span><span class="hrs">2h 54m</span></div>
+                <div class="row"><span class="name geo">Geo & Hist</span><span class="hrs">2h 02m</span></div>
+                <div class="row"><span class="name arts">Creative</span><span class="hrs">1h 08m</span></div>
+                <div class="row"><span class="name pe">PE</span><span class="hrs">36m</span></div>
+              </div>
+            </div>
+
+            <div class="completion-block">
+              <div class="completion-headline">
+                <div class="text">Blocks completed</div>
+                <div class="ratio">24 of 28</div>
+              </div>
+              <div class="carryforward-eyebrow">Carries forward to next week</div>
+              <div class="carryforward-list">
+                <div class="item">
+                  <span class="who"><span class="child-chip c-citrine">D</span></span>
+                  <span class="what">Friday's <span class="subj geo">history</span> block — bridges of ancient Rome</span>
+                </div>
+                <div class="item">
+                  <span class="who"><span class="child-chip c-garnet">L</span></span>
+                  <span class="what">Thursday's <span class="subj math">math</span> review</span>
+                </div>
+                <div class="item">
+                  <span class="who"><span class="child-chip c-emerald">M</span></span>
+                  <span class="what">Wednesday's <span class="subj arts">creative</span> block</span>
+                </div>
+                <div class="item">
+                  <span class="who"><span class="child-chip c-lapis">J</span></span>
+                  <span class="what">Tuesday's <span class="subj pe">PE</span> block — went outside instead</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARCHITECTURAL RULE -->
+          <div class="zone-divider"></div>
+
+          <!-- ZONE 2: SHAREABLE -->
+          <div class="zone-share">
+            <div class="share-zone-eyebrow">
+              <div class="label">The Week</div>
+              <div class="privacy">Shareable</div>
+            </div>
+
+            <div class="hero-photo bridges"></div>
+            <div class="hero-voice">Six bridges. One collapsed.</div>
+
+            <div class="story">
+              <div class="story-eyebrow">The Story</div>
+              <div class="story-body">
+                <p>The bridges held all week except Tuesday's.
+                  <span class="child-name inflow c-lapis"><span class="initial">J</span><span class="rest">ack</span></span>
+                  figured out triangulation by Wednesday and rebuilt the failed one twice as long.</p>
+                <p><span class="child-name inflow c-garnet"><span class="initial">L</span><span class="rest">eo</span></span>
+                  and
+                  <span class="child-name inflow c-emerald"><span class="initial">M</span><span class="rest">ax</span></span>
+                  spent most of the week in <span class="subj sci">science</span>; the popsicle-stick beams are still on the kitchen table.</p>
+              </div>
+            </div>
+
+            <div class="mastery">
+              <div class="mastery-eyebrow">What landed</div>
+              <div class="mastery-rows">
+                <div class="mastery-row">
+                  <div class="who"><span class="child-chip c-lapis">J</span></div>
+                  <div>
+                    <div class="what">Triangulation</div>
+                    <span class="shift">Halfway <span class="arrow">→</span> Full</span>
+                  </div>
+                </div>
+                <div class="mastery-row">
+                  <div class="who"><span class="child-chip c-garnet">L</span></div>
+                  <div>
+                    <div class="what">Multi-digit multiplication</div>
+                    <span class="shift">None <span class="arrow">→</span> Halfway</span>
+                  </div>
+                </div>
+                <div class="mastery-row">
+                  <div class="who"><span class="child-chip c-citrine">D</span></div>
+                  <div>
+                    <div class="what">Bridge engineering</div>
+                    <span class="shift">First encounter</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="recap-foot">
+            <div class="day-made">The day is made.</div>
+            <div class="wm">Wi<span class="k">k</span>oo<span class="dot">.</span></div>
+          </div>
+
+        </div>
+
+        <div class="note">
+          <strong>The architectural rule.</strong> A 1px line in the deeper warm tone (#D8CFB8) with a 40px saffron accent at center. Quiet but visible. The parent reads it as a fold — above is hers, below is what the artifact tells the world. The eyebrow on each zone (FOR YOU · Private | THE WEEK · Shareable) reinforces what the rule means without explaining it. Two visual cues, one architectural decision.
+        </div>
+      </div>
+
+      <!-- Architecture diagram callout -->
+      <div>
+        <div class="arch-callout">
+          <h3>What lives where, and why.</h3>
+
+          <div class="row private">
+            <div class="marker"></div>
+            <div><span class="label">For You</span><br>Pace status, total hours, hours by subject, blocks completed, carryforwards by name. Diagnostic. Invites comparison to seat-time when read by audiences trained on traditional school. Cannot share.</div>
+          </div>
+
+          <div class="row share">
+            <div class="marker"></div>
+            <div><span class="label">Shareable</span><br>Hero photograph, Story prose, mastery shifts as concept-language accomplishments, voice line. Expressed in subject-matter language, not metric language. Reads correctly to any audience. Default share.</div>
+          </div>
+
+          <div class="row" style="margin-top: 18px; padding-top: 16px; border-top: 1px solid #3a3a3a; color: #999;">
+            <div class="marker" style="background: #444;"></div>
+            <div><span class="label" style="color: #888;">Discipline</span><br>The share button cannot reach the For You zone. Not gated, not hidden — architecturally outside the share gesture's scope. The parent never has to remember what's safe to share.</div>
+          </div>
+        </div>
+
+        <div class="note" style="max-width: 360px;">
+          <strong>Why mastery shifts share but hours don't.</strong> A grandparent reads <em>Jack — triangulation, halfway to full</em> and thinks <em>my grandson learned a real geometry concept.</em> A grandparent reads <em>14 hours this week</em> and thinks <em>that's only three hours a day, is that enough?</em> Same week, two readings, depending entirely on whether the artifact uses subject-matter language or metric language. The share zone uses subject-matter language by design.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ARTBOARD 2 — THE SHARE PREVIEW (what gets captured)
+  ============================================================ -->
+  <div class="canvas-section">
+    <h2>What the share button captures.</h2>
+
+    <div class="artboard">
+      <div class="artboard-label">
+        <span class="num">02</span>
+        <span>Share preview — Hero · Story · mastery shifts · voice line</span>
+        <span class="meta">no hours · no completion · no carryforwards · architecturally unreachable</span>
+      </div>
+
+      <div class="artboard-row">
+
+        <div class="share-preview-frame">
+          <div class="meta-strip">Week 14 · Mar 30 — Apr 3 · The Oguntalas</div>
+          <div class="hero-photo bridges"></div>
+          <div class="hero-voice">Six bridges. One collapsed.</div>
+
+          <div class="story-section">
+            <div class="story-eyebrow">The Story</div>
+            <div class="story-body">
+              <p>The bridges held all week except Tuesday's.
+                <span class="child-name inflow c-lapis"><span class="initial">J</span><span class="rest">ack</span></span>
+                figured out triangulation by Wednesday and rebuilt the failed one twice as long.</p>
+            </div>
+          </div>
+
+          <div class="mastery-section">
+            <div class="mastery-eyebrow">What landed</div>
+            <div class="mastery-rows">
+              <div class="mastery-row">
+                <div class="who"><span class="child-chip c-lapis">J</span></div>
+                <div>
+                  <div class="what">Triangulation</div>
+                  <span class="shift">Halfway <span class="arrow">→</span> Full</span>
+                </div>
+              </div>
+              <div class="mastery-row">
+                <div class="who"><span class="child-chip c-garnet">L</span></div>
+                <div>
+                  <div class="what">Multi-digit multiplication</div>
+                  <span class="shift">None <span class="arrow">→</span> Halfway</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="recap-foot">
+            <div class="day-made">The day is made.</div>
+            <div class="wm">Wi<span class="k">k</span>oo<span class="dot">.</span></div>
+          </div>
+        </div>
+
+        <div class="note" style="max-width: 380px; padding-top: 24px;">
+          <strong>What goes to grandma.</strong> The full emotional artifact: photograph, voice line, Story prose, mastery shifts as concept-language accomplishments, the closing voice signature. No hours number. No completion ratio. No carryforwards. Nothing that invites the seat-time comparison.
+          <br><br>
+          <strong>The mastery shifts are the diagnostic substance that survives sharing.</strong> They tell the recipient what was actually learned in subject-matter terms — triangulation, multi-digit multiplication — rather than in time terms. A reader who has never homeschooled reads these and understands the work was real. The same reader looking at <em>14 hours</em> would compare it to a school day and conclude the opposite.
+          <br><br>
+          <strong>Architecturally:</strong> the share button captures everything between the architectural rule and the closing voice line. The For You zone above the rule is unreachable from the share gesture. The parent doesn't choose what to share — the artifact has already chosen for her.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ARTBOARD 3 — THE PRINT KEEPSAKE v2
+  ============================================================ -->
+  <div class="canvas-section">
+    <h2>The print keepsake — share zone only on paper.</h2>
+
+    <div class="artboard">
+      <div class="artboard-label">
+        <span class="num">03</span>
+        <span>Print Recap — 8.5 × 11 portrait · share-zone-only</span>
+        <span class="meta">print is inherently shared · same architecture, different medium</span>
+      </div>
+
+      <div class="artboard-row">
+
+        <div class="print-keepsake">
+          <div class="print-masthead">
+            <div class="left">Wi<span class="k">k</span>oo<span class="dot">.</span> &nbsp; The Recap</div>
+            <div class="right">
+              The Oguntalas<br>
+              Week 14 · Mar 30 — Apr 3, 2026
+            </div>
+          </div>
+
+          <div class="print-photo hero-photo bridges"></div>
+
+          <div class="print-voice">Six bridges. One collapsed.</div>
+
+          <div class="print-story">
+            <p>The bridges held all week except Tuesday's.
+              <span class="child-name inflow c-lapis"><span class="initial">J</span><span class="rest">ack</span></span>
+              figured out triangulation by Wednesday and rebuilt the failed one twice as long.
+              <span class="child-name inflow c-garnet"><span class="initial">L</span><span class="rest">eo</span></span>
+              and
+              <span class="child-name inflow c-emerald"><span class="initial">M</span><span class="rest">ax</span></span>
+              spent most of the week in <span class="subj sci">science</span>; the popsicle-stick beams are still on the kitchen table.</p>
+          </div>
+
+          <div class="print-divider"></div>
+
+          <div class="print-mastery">
+            <div class="label">What landed</div>
+            <div class="row">
+              <span class="who"><span class="child-chip c-lapis" style="width:18px;height:18px;font-size:14px;">J</span></span>
+              <span class="what">Triangulation</span>
+              <span class="shift">Halfway <span class="arrow">→</span> Full</span>
+            </div>
+            <div class="row">
+              <span class="who"><span class="child-chip c-garnet" style="width:18px;height:18px;font-size:14px;">L</span></span>
+              <span class="what">Multi-digit multiplication</span>
+              <span class="shift">None <span class="arrow">→</span> Halfway</span>
+            </div>
+            <div class="row">
+              <span class="who"><span class="child-chip c-citrine" style="width:18px;height:18px;font-size:14px;">D</span></span>
+              <span class="what">Bridge engineering</span>
+              <span class="shift">First encounter</span>
+            </div>
+          </div>
+
+          <div class="print-foot">
+            <div class="day-made">The day is made.</div>
+            <div class="meta">Generated Apr 3, 2026 · 11:59 PM</div>
+          </div>
+        </div>
+
+        <div class="note" style="max-width: 320px; padding-top: 24px;">
+          <strong>Print is inherently shared.</strong> The moment a parent prints a Recap, it can be left on a counter, mailed to a grandparent, or saved in a binder seen by anyone who walks through the home. The same architectural logic that protects the screen share applies to the print: the print captures the share zone only.
+          <br><br>
+          <strong>What's missing from the print, by design:</strong> total hours, hours-by-subject bar, completion ratio, carryforwards. None of these belong on paper a third party may see.
+          <br><br>
+          <strong>What earned its place:</strong> Hero photograph, voice line, Story prose, mastery shifts as concept-language accomplishments, closing signature. The keepsake artifact, on paper.
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

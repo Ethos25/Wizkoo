@@ -1,0 +1,11 @@
+[
+  "UPDATE library_books SET heads_up = 'Charlotte the spider dies peacefully on the page near the book''s end.' WHERE id = 'fa6321a2-dc99-44c0-bf99-c6c9e1c68fe7'",
+  "UPDATE library_books SET heads_up = 'The book is about loss; the destination is a place that holds grief.' WHERE id = '9ee7984d-8aad-4886-a270-05b920df4649'",
+  "UPDATE library_books SET heads_up = 'The book is about grief and loss, structured as a palindrome.' WHERE id = 'c00d0d42-e25d-45d2-aa3b-84605898acb2'",
+  "UPDATE library_books SET heads_up = 'A neighbor disappears from the window across the way; loss is implied.' WHERE id = '0b6f5c1e-fb5c-44b3-a092-88c2bd1a4876'",
+  "UPDATE library_books SET heads_up = 'The wordless final pages depict the end of a life.' WHERE id = 'ecc79c13-3650-4904-8dc5-a1ba61000232'",
+  "UPDATE library_books SET heads_up = 'Sylvester is missing for a year while his parents grieve, believing him dead.' WHERE id = '52ad8126-48d6-41b3-a97a-0cb4cedc2099'",
+  "UPDATE library_books SET heads_up = 'The book is about grief directly; loss of a loved one is the subject.' WHERE id = '2c233aaf-1132-4bf9-aeea-0f93cf6f1b4f'",
+  "UPDATE library_books SET heads_up = 'The mayfly lives and dies within a single day; mortality is central.' WHERE id = '8afd68f7-9ff5-4ee3-aa94-11fccfaa97e8'",
+  "UPDATE library_books SET heads_up = 'Raina''s anxiety, panic attacks, and recurring stomach symptoms are the book''s subject; some readers will see themselves, others may find it activating.' WHERE id = '4b949473-c1d6-478e-9d32-aece92e29bd5'"
+]

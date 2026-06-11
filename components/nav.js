@@ -81,7 +81,7 @@
       '  font-size:7px;',
       '  letter-spacing:0.28em;',
       '  text-transform:uppercase;',
-      '  color:rgba(12,16,32,0.75);',
+      '  color:rgba(232,175,56,0.75);',
       '  position:relative;',
       '  z-index:1;',
       '}',
@@ -290,10 +290,8 @@
   el.innerHTML = [
 
     /* 1. Announcement bar — sticky top:0, scrolls away on mobile */
-    '<div class="announce" role="banner" aria-label="Site announcement"' +
-      (_hp ? ' style="background:var(--ink);backdrop-filter:none;-webkit-backdrop-filter:none"' : '') + '>',
-    '  <span class="announce-text"' +
-      (_hp ? ' style="color:rgba(232,175,56,0.75)"' : '') + '>Personalized homeschool learning plans, ages 3 to 12. Books. Games. Connected by one theme.</span>',
+    '<div class="announce" role="banner" aria-label="Site announcement">',
+    '  <span class="announce-text">Personalized homeschool learning plans, ages 3 to 12. Books. Games. Connected by one theme.</span>',
     '</div>',
 
     /* 2. Frosted glass nav — sticky top:30px, always present on desktop */

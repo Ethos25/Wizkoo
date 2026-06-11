@@ -1,0 +1,288 @@
+{
+  "migration": "Phase 6A — Age Band Constraint + Corpus Retag",
+  "applied_at": "2026-04-28",
+  "csv_source": "migrations/library_phase6_p1_retag_audit.csv",
+  "csv_rows": 458,
+  "mode": "PRODUCTION APPLIED",
+  "steps": {
+    "step_a_constraint_change": {
+      "description": "DELETE old-format band rows; DROP old CHECK constraint; ADD new CHECK constraint",
+      "sql_summary": [
+        "DELETE FROM library_age_bands WHERE age_band IN ('2-4','5-7','8-10')",
+        "ALTER TABLE library_age_bands DROP CONSTRAINT library_age_bands_age_band_check",
+        "ALTER TABLE library_age_bands ADD CONSTRAINT library_age_bands_age_band_check CHECK (age_band IN ('3-4','5-6','7-9','10-12'))"
+      ],
+      "result": "SUCCESS",
+      "verify_invalid_bands_post": 0
+    },
+    "step_b_remove_from_database": {
+      "description": "DELETE 69 books from library_books (cascades to all junction tables)",
+      "rows_deleted": 69,
+      "result": "SUCCESS"
+    },
+    "step_c_retire_from_browse": {
+      "description": "SET browse_visible=false for 21 retire-from-browse books; DELETE their age_band rows",
+      "rows_updated": 21,
+      "band_rows_cleared": 0,
+      "note": "0 band rows cleared is correct — all 21 retire books were Population B (pre-1990, 2-4 only); Step A already deleted their bands",
+      "result": "SUCCESS"
+    },
+    "step_d_retag": {
+      "description": "DELETE existing bands for 368 retag books; INSERT new bands; UPDATE heads_up",
+      "band_rows_deleted": 19,
+      "band_rows_inserted": 791,
+      "heads_up_updates": 9,
+      "heads_up_books": [
+        {
+          "id": "fa6321a2-dc99-44c0-bf99-c6c9e1c68fe7",
+          "title": "Charlotte's Web"
+        },
+        {
+          "id": "9ee7984d-8aad-4886-a270-05b920df4649",
+          "title": "Night Walk"
+        },
+        {
+          "id": "c00d0d42-e25d-45d2-aa3b-84605898acb2",
+          "title": "Drawn Onward"
+        },
+        {
+          "id": "0b6f5c1e-fb5c-44b3-a092-88c2bd1a4876",
+          "title": "At the Window"
+        },
+        {
+          "id": "ecc79c13-3650-4904-8dc5-a1ba61000232",
+          "title": "In Every Life"
+        },
+        {
+          "id": "52ad8126-48d6-41b3-a97a-0cb4cedc2099",
+          "title": "Sylvester and the Magic Pebble"
+        },
+        {
+          "id": "2c233aaf-1132-4bf9-aeea-0f93cf6f1b4f",
+          "title": "Grief Is an Elephant"
+        },
+        {
+          "id": "8afd68f7-9ff5-4ee3-aa94-11fccfaa97e8",
+          "title": "One Day a Mayfly"
+        },
+        {
+          "id": "4b949473-c1d6-478e-9d32-aece92e29bd5",
+          "title": "Guts"
+        }
+      ],
+      "result": "SUCCESS"
+    },
+    "step_e_dedup_scan": {
+      "description": "SELECT title, author, year_published, COUNT(*) HAVING COUNT(*) > 1",
+      "duplicates_found": 0,
+      "result": "SUCCESS"
+    }
+  },
+  "post_migration_verification": {
+    "active_books": {
+      "value": 450,
+      "expected": 450,
+      "pass": true
+    },
+    "browse_visible_books": {
+      "value": 395,
+      "expected": 429,
+      "pass": false,
+      "note": "FINDING (not a migration error): 55 active books have browse_visible=false post-migration. Step C set 21 of them. The remaining 34 had browse_visible=false BEFORE this migration ran — they existed in the pre-migration corpus but were not captured in the dry-run assumption that all 519 were browse_visible=true. Migration logic is correct; pre-migration state was not fully clean."
+    },
+    "invalid_band_rows": {
+      "value": 0,
+      "expected": 0,
+      "pass": true
+    },
+    "books_with_bands": {
+      "value": 429,
+      "expected": 429,
+      "pass": true
+    },
+    "heads_up_count_for_migration_9": {
+      "value": 9,
+      "expected": 9,
+      "pass": true,
+      "note": "All 9 target books confirmed with correct heads_up text. Total heads_up in table is 54 (includes pre-existing values from prior data entry)."
+    },
+    "duplicates": {
+      "value": 0,
+      "expected": 0,
+      "pass": true
+    }
+  },
+  "corpus_summary": {
+    "before_active": 519,
+    "after_active": 450,
+    "removed": 69,
+    "before_browse_visible_assumed": 519,
+    "after_browse_visible_actual": 395,
+    "step_c_retired": 21,
+    "pre_existing_browse_visible_false": 34,
+    "new_constraint": "age_band IN ('3-4','5-6','7-9','10-12')",
+    "band_rows_total_in_table": 429
+  },
+  "open_items": [
+    "FINDING: 34 active books had browse_visible=false before this migration — not captured in audit CSV. Recommend a follow-up query to identify these books and confirm they are intentionally hidden.",
+    "Phase 6B pending: library.html update to render four band sections (Wonderer/Apprentice/Artisan/Scholar)"
+  ],
+  "patch_log_2": {
+    "applied_at": "2026-04-28",
+    "description": "Re-insertion of 7 books misclassified as remove-from-database by Session 13 substring-match logic",
+    "cause": "Bulk Amy-directive label application in Session 13 used substring matching to assign removal categories. Six books (and one additional) were swept into the remove-from-database bucket incorrectly — none had genuine content concerns matching the stated category. The deletions were bookkeeping errors, not curatorial decisions.",
+    "books_reinserted": [
+      {
+        "audit_index": "B-010",
+        "id": "4ed65746-1652-494c-95fd-649d3f1053b9",
+        "title": "Clifford the Big Red Dog",
+        "corrected_decision": "retag",
+        "bands": [
+          "3-4",
+          "5-6"
+        ],
+        "browse_visible": false
+      },
+      {
+        "audit_index": "B-023",
+        "id": "e233c979-8bb2-4fa5-9104-12f044ebbbd3",
+        "title": "The Big Red Barn",
+        "corrected_decision": "retag",
+        "bands": [
+          "3-4",
+          "5-6"
+        ],
+        "browse_visible": false
+      },
+      {
+        "audit_index": "B-061",
+        "id": "92abc47c-b823-4963-865a-df090866dbd4",
+        "title": "Dad, I Miss You",
+        "corrected_decision": "retag",
+        "bands": [
+          "3-4",
+          "5-6"
+        ],
+        "browse_visible": true
+      },
+      {
+        "audit_index": "C-024",
+        "id": "afdd6964-9729-4b39-bc67-7e61f4ec1abd",
+        "title": "My Daddy Is a Cowboy",
+        "corrected_decision": "retag",
+        "bands": [
+          "3-4",
+          "5-6",
+          "7-9"
+        ],
+        "browse_visible": true
+      },
+      {
+        "audit_index": "C-077",
+        "id": "f3dc1bda-55bd-4cf9-b5e8-e0d1a0a0fa12",
+        "title": "The Biggest Bear",
+        "corrected_decision": "retag+heads_up",
+        "bands": [
+          "5-6",
+          "7-9"
+        ],
+        "browse_visible": true,
+        "heads_up": "The bear cub Johnny raised must be released or destroyed; emotional separation depicted."
+      },
+      {
+        "audit_index": "C-159",
+        "id": "bd8424be-a34e-48be-8c9a-d218fd5ab4bd",
+        "title": "Ruthie Rose's Big Idea: A Poetry Story",
+        "corrected_decision": "retag",
+        "bands": [
+          "5-6",
+          "7-9"
+        ],
+        "browse_visible": true
+      },
+      {
+        "audit_index": "C-163",
+        "id": "da5b14b2-cede-4fac-9f15-f909f0c9bcd9",
+        "title": "Stalactite and Stalagmite: A Big Tale From a Little Cave",
+        "corrected_decision": "retag",
+        "bands": [
+          "5-6",
+          "7-9"
+        ],
+        "browse_visible": true
+      }
+    ],
+    "data_source": "exports/library_phase6_audit_export.csv (519-row pre-migration export)",
+    "fields_restored": [
+      "id",
+      "slug",
+      "title",
+      "author",
+      "orbital_score",
+      "reading_level",
+      "book_format",
+      "parent_role",
+      "hook",
+      "cover_image_url",
+      "year_published",
+      "browse_visible",
+      "heads_up",
+      "themes",
+      "subjects",
+      "age_bands"
+    ],
+    "fields_not_restored": {
+      "orbital_description": "empty string placeholder — needs editorial fill-in",
+      "best_for": "empty string placeholder — needs editorial fill-in",
+      "pairs_with": "empty string placeholder — needs editorial fill-in",
+      "library_diversity": "junction table rows not in export — needs fill-in"
+    },
+    "verification": {
+      "active_books": {
+        "value": 457,
+        "expected": 457,
+        "pass": true
+      },
+      "browse_visible_books": {
+        "value": 400,
+        "expected": 400,
+        "pass": true
+      },
+      "heads_up_count": {
+        "value": 55,
+        "expected": 55,
+        "pass": true
+      },
+      "band_rows_for_7_books": {
+        "value": 15,
+        "expected": 15,
+        "pass": true
+      },
+      "theme_rows_for_7_books": {
+        "value": 35,
+        "expected": 35,
+        "pass": true
+      },
+      "subject_rows_for_2_books": {
+        "value": 2,
+        "expected": 2,
+        "pass": true
+      },
+      "total_books_with_bands": {
+        "value": 457,
+        "expected": 457,
+        "pass": true
+      }
+    },
+    "csv_final_counts": {
+      "retag": 396,
+      "remove_from_database": 62,
+      "retire_from_browse": 0,
+      "total_rows": 458
+    },
+    "open_items": [
+      "orbital_description, best_for, pairs_with inserted as empty strings for all 7 books — require editorial fill-in before Phase 6B ships (these fields render in book detail views)",
+      "library_diversity rows not restored — original diversity tags unknown for these 7 books"
+    ]
+  }
+}

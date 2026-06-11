@@ -1,0 +1,3369 @@
+[
+  {
+    "id": "769a4e13-eef7-4616-bdd0-bf764d7b8f40",
+    "title": "Moonbird",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7fb8eb2e-b322-41a1-a5c7-90af54aecb92",
+    "title": "The Lost City of Z (Young Readers Edition)",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "843303ec-5968-4384-a319-452755e169fb",
+    "title": "Actual Size",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "80852334-2007-4931-908e-5c9ef2a39a3b",
+    "title": "Jumper: A Day in the Life of a Backyard Jumping Spider",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "43f2bcf6-b39d-49b6-a44c-e412b3d46def",
+    "title": "Life after Whale",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3c6bab30-5b44-49ee-ae89-c39c0d494a6a",
+    "title": "Marie's Magic Eggs: How Marie Procai Kept the Ukrainian Art of Pysanky Alive",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b38be417-362b-4101-95db-f6f91732825d",
+    "title": "Revolutionary Mary: The True Story of One Woman, the Declaration of Independence, and America's Fight for Freedom",
+    "new_bands": [
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d1151e1a-5f32-417d-9b2a-61507575c597",
+    "title": "The Cecilia Payne Story: Reaching for the Stars",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d82370df-abda-4756-ba5b-fc636779146d",
+    "title": "The Iguanodon's Horn: How Two Centuries of Mystery, Mistakes, and Fossil Fixes Changed the Way We Look at Dinosaurs",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6363a142-48a5-4cd7-be35-05a1b5cbe36f",
+    "title": "The Search for the Giant Arctic Jellyfish",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ecb5ab1f-95d8-4715-8323-d001546e9099",
+    "title": "Blockhead: The Life of Fibonacci",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "cff4c227-257c-4f73-8825-5079a271e779",
+    "title": "If You Made a Million",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3d8d04a8-c995-42af-872b-af90aa17834f",
+    "title": "One Grain of Rice",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7202ae61-a957-488d-baa2-f858ecbdeb5e",
+    "title": "Ox-Cart Man",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "84fa5cfc-c073-4b4c-9bb5-b31dcb2c513c",
+    "title": "Seeds of Change",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f4ee2fbb-9008-4c08-a882-986736b76901",
+    "title": "Six Dots: A Story of Young Louis Braille",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "147b0b62-b2cd-4830-9627-c32039aed9d9",
+    "title": "The Astronaut Who Painted the Moon",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f8c2e905-6943-4358-ad88-cfce286fb793",
+    "title": "The Bug Girl",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9b82155c-7913-4822-85d2-d86bf59254ee",
+    "title": "The Girl Who Thought in Pictures",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f39b3106-fb3e-489b-90f7-e610081fcc52",
+    "title": "The Great Kapok Tree",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "92398cb1-40ed-4273-bc03-56119e5731e5",
+    "title": "The Promise",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "15cbccb9-2acd-44af-9312-01d3e4f2e0f8",
+    "title": "The Shortest Day",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9bd750b9-047f-4b06-83b8-77af77a084a1",
+    "title": "Watercress",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fb45189c-ae1c-4c48-afa1-d28b2f08acd8",
+    "title": "A Rover's Story",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3c1799aa-25ec-4752-9c91-ac56f07b35cf",
+    "title": "A Sea of Lemon Trees: The Corrido of Roberto Alvarez",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7c40d0ff-9560-4e4b-b88e-45445c032aef",
+    "title": "And Then, Boom!",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "956c46e8-1222-4426-b6f4-8a5b5befcb49",
+    "title": "Benny on the Case",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fa6321a2-dc99-44c0-bf99-c6c9e1c68fe7",
+    "title": "Charlotte's Web",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": "Charlotte the spider dies peacefully on the page near the book's end."
+  },
+  {
+    "id": "a3f0255d-20da-4d4c-98bc-c8f957a187f9",
+    "title": "Chasing Vermeer",
+    "new_bands": [
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "91ef1055-a565-49b2-ada0-265608b63850",
+    "title": "City of Plagues and Perfumes",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b749b3a3-bedc-41dc-844c-afa21fa81009",
+    "title": "Elf Dog and Owl Head",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "47703cc1-76a7-4f81-9335-e4ff5a3e17b8",
+    "title": "Extreme Birdwatching: Measuring Change on a Galápagos Island",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3c0fc575-d2af-4436-96f2-a7e6463a2ff3",
+    "title": "Fablehaven",
+    "new_bands": [
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "25b9da9c-66ea-4175-ad35-38d8babe8d09",
+    "title": "Found Sound",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6a24899d-cfae-4ce2-b045-c6756c48997a",
+    "title": "Harriet the Spy",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2f9736ef-8086-4778-97f1-cbffe7f47ad3",
+    "title": "Hatchet",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4553101c-b6a5-4058-a44c-ce8c146987e3",
+    "title": "Hattie Mae Begins Again",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "37f69898-b81f-41eb-bd07-ff6c2cc1cd6f",
+    "title": "Hello, Stranger",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "82c0a2ac-8c49-45a1-9adb-1e7e2fe7c0e0",
+    "title": "Iveliz Explains It All",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "5c1d387e-e54f-4c06-8539-777384a1626a",
+    "title": "Maizy Chen's Last Chance",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9f09d8ce-e48b-4734-b823-cbb2db8219d7",
+    "title": "Octopus Moon",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8275d558-a86f-4b7d-bdb2-169ae666c966",
+    "title": "Phoenix",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "132926d5-66d5-43b6-9802-01a5f532e910",
+    "title": "Pony",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6fffd317-5286-4831-83c1-98bb3169ea41",
+    "title": "Popcorn",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3034b7ff-4fdf-4dd2-9bfb-154d6ec41a04",
+    "title": "Poppy",
+    "new_bands": [
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "26a6ece0-de29-4414-9afa-99ca733d22ab",
+    "title": "Radiant",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "eb66ab88-d998-4ff7-9de4-902c1e841a38",
+    "title": "Stuart Little",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "0b0ec8fb-264b-402d-b7f4-6c90636f0810",
+    "title": "Summer at Squee",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c53c654e-74ce-4533-949d-f2810f50a9e3",
+    "title": "The Boy Who Harnessed the Wind (Young Readers Edition)",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fbd33b8a-7fbb-45d1-8f43-8e7b039ac14c",
+    "title": "The Eyes and the Impossible",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "33d7446f-af57-4170-90f6-6f3789f8b710",
+    "title": "The First State of Being",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "31b4863b-8e82-4748-b9a4-1163dcf7195e",
+    "title": "The Great Wall of Lucy Wu",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "95fcebf3-cdf9-43c0-ac28-b0f6cff897cc",
+    "title": "The Hundred Dresses",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "66e09d05-82af-45f5-b301-ba0ebcda36bc",
+    "title": "The Incredibly Human Henson Blayze",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4b583c71-917b-4d6e-a693-f37ea19f85e4",
+    "title": "The Last Mapmaker",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1ae3aa56-373d-4ff4-ae95-37b15b2c7963",
+    "title": "The Lemonade War",
+    "new_bands": [
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "478900ef-be38-4908-bb99-f613975dcd6d",
+    "title": "The Lumbering Giants of Windy Pines",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b9d3cdbb-1352-44dc-8fc6-e5dbe3066e17",
+    "title": "The Map Trap",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9f92c599-c5e1-4f13-897c-32e6d87c1dc4",
+    "title": "The Marvellers",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1ca9506a-27de-44c1-87e3-20694c246137",
+    "title": "The Nine Moons of Han Yu and Luli",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "cb1d8d4c-cfe3-4daf-bc83-1c2016308fb2",
+    "title": "The One and Only Ivan",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "82349b5f-824f-4da9-acd9-633e4c85707f",
+    "title": "The One and Only Ruby",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "0791ad02-190d-477f-8bc8-14d8940c5c87",
+    "title": "The Pecan Sheller",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3d726590-8045-4247-8e6a-3e856186450a",
+    "title": "The Penderwicks on Gardam Street",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "bccdd045-7863-4dfa-b59d-cc199143a9a9",
+    "title": "The Phantom Tollbooth",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2846ce50-906b-4d29-aab4-734c7ee2cc8d",
+    "title": "The Poisoned King",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f569e72e-1c70-4194-a685-d6e98187d1f0",
+    "title": "The Shrew Detective: The Case of the Pilfered Pearls",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "bf68cb95-57e8-4004-8507-a60eaa6594e0",
+    "title": "The Tenth Mistake of Hank Hooperman",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f1e1a3f5-4000-4c71-b04b-3e857ede7dc6",
+    "title": "The Trumpet of the Swan",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d1c1427a-e4c8-450e-9530-f340178d6323",
+    "title": "The Wild Robot Protects",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "37779edd-b509-4b79-b766-90f5e2425123",
+    "title": "The Winter of the Dollhouse",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f3d07dec-4391-4bc7-9b2f-c5c82ffe31e4",
+    "title": "When the Sea Turned to Silver",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d7acaf08-7965-4c79-9132-d4b5d5fa6a9d",
+    "title": "Botticelli's Apprentice",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c33a58b7-cfb2-4498-9b8e-1edf2d3c3cd6",
+    "title": "Frizzy",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "60cc4f62-215b-482b-8f75-e8a003e3ff61",
+    "title": "Human Body Theater",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "74bdd11a-4b39-4b35-987f-cc0a8148196d",
+    "title": "J vs. K",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ea9a1df0-a65d-4e86-b64e-9f0390c32f67",
+    "title": "Mexikid",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "701d5fd5-4d3a-4718-bf41-0d41f82eee70",
+    "title": "Night Chef",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "771d8409-2080-43d8-84c7-821c6e0b85e6",
+    "title": "Remarkably Ruby",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d5f74373-af6a-44be-bf10-35bd82e6feb0",
+    "title": "Sashimi: A Graphic Novel",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ef03165d-ab2f-4078-b15f-c70943207bf6",
+    "title": "The Ink Witch",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "5577338e-7f22-437b-8bd0-63b21ee6375b",
+    "title": "The Vanishing of Lake Peigneur: A Graphic Novel Based on a True Story",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ae9f3932-7a33-46cc-8e40-9d87d9b9bcad",
+    "title": "Wrong Friend",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b1858f24-47bf-4366-9c8a-6f8b6a7a1beb",
+    "title": "A Drop of Water",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8515ce41-7c3f-4946-b367-6eb0fba6f064",
+    "title": "A Window into the Ocean Twilight Zone",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1c5e53e9-5189-40a1-9de1-8e0a7ccf16a9",
+    "title": "Almost Underwear: How a Piece of Cloth Traveled from Kitty Hawk to the Moon and Mars",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "10d01d03-4e42-4423-b475-77160130f560",
+    "title": "An Immense World (Young Readers Edition): How Animals Sense Earth's Amazing Secrets",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1cd2d48f-0fc7-4100-beba-4618e87a6ce4",
+    "title": "Baseball's Shining Season: America's Pastime on the Brink of War",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b3c0ed00-29a2-44ce-88c1-7183ca3ef818",
+    "title": "Before the Ships: The Birth of Black Excellence in American Aviation",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "800fea57-6662-4603-ba6a-713c9dddd4d5",
+    "title": "Ben Franklin's Almanac",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b57183ab-d9a4-4f90-90da-6ea888345ecb",
+    "title": "Bounce! The Wonderful, Wacky, World-Changing History of Rubber",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "adbdfed4-533a-4cd6-91be-f3af0d023496",
+    "title": "Call Me Roberto!: The Story of Roberto Clemente",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "77e83662-03df-4ab5-88a6-46ae6bd05fc3",
+    "title": "City Safari: A Young Naturalist's Guide to Discovering Nature in the City",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "19e8e348-c65a-4365-8982-fe55bb2aad97",
+    "title": "Daughter of the Light-Footed People: The Story of Indigenous Marathon Champion Lorena Ramírez",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "73f249f3-5ca4-4d18-8f6f-80c84586326d",
+    "title": "Dead Ends! Flukes, Flops, and Failures That Sparked Medical Marvels",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b9e3cac1-06cd-4d6c-a8c5-255a4d2a3a1c",
+    "title": "Earthrise: How the Apollo 8 Crew Photographed the World",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4c6cbef2-3a58-4893-a552-b23f766ac041",
+    "title": "Grand Canyon",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "59f97dc6-96c7-41e5-822c-963cfae4beb4",
+    "title": "Holding Her Own: The Exceptional Life of Jackie Ormes",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "cc1f604d-8b2e-46cb-9093-e9bc998fa8a3",
+    "title": "Judge Ketanji Brown Jackson: A Life Committed to Justice",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a97e9dcc-8605-411c-99b6-1422b1cd8d4b",
+    "title": "Mimic Makers: Biomimicry Inventors Inspired by Nature",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ffb5959d-8aa5-4f29-a26f-c01d7be5c43b",
+    "title": "My Antarctica: True Adventures in the Land of Mummified Seals, Space Robots, and So Much More",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8076a409-593f-44ac-9866-dfa940422b1d",
+    "title": "Neighborhood Sharks",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "93d7dbb7-66d2-45a5-bd9c-49fb1cc201a5",
+    "title": "Octopus Ocean: Geniuses of the Deep",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6a9eeb44-5953-43fc-a54b-7467a3401e5b",
+    "title": "Seeds of Discovery: How Barbara McClintock Used Corn and Curiosity to Solve a Science Mystery and Win a Nobel Prize",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8dbf5c30-09c9-4830-81c1-7017eb49e688",
+    "title": "Seen and Unseen: What Dorothea Lange, Toyo Miyatake, and Ansel Adams's Photographs Reveal About the Japanese American Incarceration",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "17a00390-9528-454e-a360-16460d43265c",
+    "title": "Shipwrecked! by the Laws of Science: How 14 Shipwrecks Redefined What We Know About Our World",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9e8239af-3c36-4e10-bfcf-b34a39d5c444",
+    "title": "The Bard and the Book: How the First Folio Saved the Plays of William Shakespeare from Oblivion",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fb75474b-fc92-4ec8-8fbb-04eb162b2185",
+    "title": "The Beetle Book",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2093f602-f7f1-4953-ac34-f8ff61299852",
+    "title": "The Book of Turtles",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "5176c3ad-1256-44ec-98db-5a05f7a1a9c9",
+    "title": "The Doomsday Detectives: How Walter and Luis Alvarez Solved the Mystery of Dinosaur Extinction",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "10d434b4-4436-45e2-a239-77387e5bc693",
+    "title": "The Enigma Girls: How Ten Teenagers Broke Ciphers, Kept Secrets, and Helped Win World War II",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b8f858b3-dc9e-4559-88ff-a71c1a24a52f",
+    "title": "The Five Sides of Marjorie Rice: How an Amateur Mathematician Discovered New Shapes",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b920893f-d8bc-4cbf-9d85-7d18dea16f49",
+    "title": "The Girl Who Drew Butterflies",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7895644f-0f3c-4a9a-b591-662adc18f8f5",
+    "title": "The Mona Lisa Vanishes: A Legendary Painter, a Shocking Heist, and the Birth of a Global Celebrity",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "727df2ff-83ef-4837-9fca-26dd0abbca2a",
+    "title": "The Six (Young Readers Edition): The Untold Story of America's First Women Astronauts",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3a4d3b3d-0d2b-4c3b-a5e2-5ba7f5a4f296",
+    "title": "The World Is Waiting for You",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fb6c3825-cf62-4cad-8443-704cbd5ca38a",
+    "title": "Tiny But Mighty",
+    "new_bands": [
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a304bfeb-1001-49c5-80fe-3b2c7ea0146f",
+    "title": "Wanda Hears the Stars: A Blind Astronomer Listens to the Universe",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a139a139-2319-4d73-84e3-517400c4e03a",
+    "title": "Counting on Katherine",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "99e9ea5f-7915-4bab-8f28-c64c030baec8",
+    "title": "Separate Is Never Equal",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c4a50948-cf53-4caa-853e-5281f9bbe239",
+    "title": "Shark Lady",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ee65fccd-ba74-498f-887b-acfd3d7ae998",
+    "title": "The Undefeated",
+    "new_bands": [
+      "7-9",
+      "10-12"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2ec9dcd8-b953-43c9-a9e6-038d112f28f4",
+    "title": "Wangari's Trees of Peace",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "35432dc8-06a8-4787-ae3c-334411f91d2e",
+    "title": "NOA",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "387d5b96-6ce7-4c00-a517-feea455729fb",
+    "title": "The Very Quiet Cricket",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "17998ab4-fa54-43d1-8609-2f8fa815b497",
+    "title": "In a Small Small Pond",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "aff545fa-511e-4399-b6b4-1c2029ee0b53",
+    "title": "Goodnight Gorilla",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7a8abd24-5ca4-4313-9fbf-e67f5780b5df",
+    "title": "If You Give a Pig a Pancake",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "59825a90-3e9c-4274-8451-0692c31be197",
+    "title": "How Do Dinosaurs Say Goodnight",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "68871a75-fe24-4269-b1a9-2c83e1a589a4",
+    "title": "The Way I Feel",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7b780b79-8ed2-4fb4-9559-f8031e1c0a18",
+    "title": "Don't Let the Pigeon Drive the Bus",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b147c16a-1c98-4973-864e-59ab4c1bf942",
+    "title": "Knuffle Bunny",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "31dbad49-7025-4c99-8245-4e12bbe74d79",
+    "title": "The Hello Goodbye Window",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6ce545e9-8d59-40fb-87ca-0f66818d56bf",
+    "title": "Duck and Goose",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "bfb3cd70-4933-42ff-b14d-861e9627c19f",
+    "title": "Not a Box",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b30985e9-8191-4af9-a34b-975972e36415",
+    "title": "To Market, To Market",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8d689bd5-3fae-4871-b65c-482ea37eba91",
+    "title": "Little Blue Truck",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1ad99951-287e-4460-8df5-fbe74420d633",
+    "title": "The Pout-Pout Fish",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "bfe96837-cc37-4a92-bebd-3c915c74752b",
+    "title": "Beautiful Oops",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "acabaf79-91f6-4fdb-82d8-993ccddf41ca",
+    "title": "Press Here",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c4bb0ab6-ee4c-4a3f-86fc-9666f291e713",
+    "title": "Dragons Love Tacos",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "127de517-98be-493e-8a0f-8982fb30b5de",
+    "title": "Rain!",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c9224cbe-4a82-4c0b-aab0-9d6141021e5c",
+    "title": "The Book With No Pictures",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f166d77a-714a-461a-88ba-53e0c2b7b86a",
+    "title": "If You Plant a Seed",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b757bb46-56e4-46c3-81fe-35d5d71049d4",
+    "title": "How to Find a Fox",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "75394ecd-118a-43d1-b61c-12ee40b0f9c8",
+    "title": "My Heart Fills with Happiness",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f547f4a0-0624-44fb-b4d6-6d6a664ca59c",
+    "title": "Everywhere, Wonder",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1f2900b1-9c81-4b0e-a4e5-dd2e47d20cb6",
+    "title": "Count on Me",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "85bea2e1-c46a-4df7-84c4-768780144e69",
+    "title": "Grumpy Monkey",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "31acd605-c68d-4caf-9101-83f2a7c319a9",
+    "title": "Mixed: A Colorful Story",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "64b561f6-80ac-4bcc-b8b8-48831eaedb7a",
+    "title": "The Honey Bee",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d39cfd58-7a23-480d-8e1c-a82179da2f55",
+    "title": "Tiny, Perfect Things",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c4bd77c6-eebc-43fb-ba90-39d6efcd571a",
+    "title": "Papá's Magical Water-Jug Clock",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b8fe33d4-df40-4627-836b-2596e8734c90",
+    "title": "Too Much: An Overwhelming Day",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4fd887ec-6984-4664-8564-e72eee0b5463",
+    "title": "Towed by Toad",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "25a09dce-3b01-46a5-8331-4d101a250924",
+    "title": "Aggie and the Ghost",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7a308cb7-81a3-44f8-ae7e-e41e427df1e5",
+    "title": "Before Colors",
+    "new_bands": [
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "81517935-02ce-4970-a526-362a924ce474",
+    "title": "Caboose",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a53b0201-8939-4aee-9a07-a3d0a8f4f96e",
+    "title": "Cranky, Crabby Crow (Saves the World)",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "07b8665d-05d3-45a6-9122-8726aa6aca95",
+    "title": "Croco",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7c8af3b6-effe-4be0-ac84-d509ed9734da",
+    "title": "Dawn: Watch the World Awaken",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a826ccf7-f052-446d-8946-ce11ace0ce49",
+    "title": "Every Monday Mabel",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "72f52208-41f1-4441-94ee-3475335f7688",
+    "title": "Fall Is for Beginnings",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9da2c9d7-8402-4de8-b6c8-b8c670b46e86",
+    "title": "Good Golden Sun",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c55c93ee-800a-4f25-b313-b90f8e81b453",
+    "title": "Menudo Sunday: A Spanglish Counting Book",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "07b9091f-2db4-42a9-87da-bf19c2773f75",
+    "title": "Mistaco",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9ee7984d-8aad-4886-a270-05b920df4649",
+    "title": "Night Walk",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": "The book is about loss; the destination is a place that holds grief."
+  },
+  {
+    "id": "3f0ad030-5fa9-48c8-953f-401439f02449",
+    "title": "Nightsong",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f83c9cf8-0ffe-4194-8ca9-f17884ed9582",
+    "title": "Our Lake",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "aa660822-a08c-424f-b413-132f477ff8dc",
+    "title": "Our Mothers' Names: Love in Many Languages",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ab20702c-51aa-4c26-814c-05f829ced34d",
+    "title": "Pencil",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f91b7100-69c7-424a-b9bc-8bf4379057c3",
+    "title": "Sunday",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e0b1627b-cacd-4c09-933e-7925c4561507",
+    "title": "The Bear Out There",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "71eabd85-0599-49f2-867b-b3de4230a3fb",
+    "title": "Tuck Me In! A Science Bedtime Story",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1f607623-2a18-431a-a092-98a523a298ac",
+    "title": "Wind Watchers",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "053ef464-08e1-4939-88e5-40e55ceb1b8f",
+    "title": "Awe!",
+    "new_bands": [
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9e1fbf66-af89-42cc-a91d-f4e6fe717e33",
+    "title": "Beautiful Black Boy",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "098a57d8-bcb7-4334-9ee8-c408e755ed75",
+    "title": "Is It Spring?",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f54e371e-c2c5-47a2-8d78-fad01a3a2cb2",
+    "title": "Loops",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "56289d90-91d3-41bd-8cbc-d38ccaf53bf0",
+    "title": "The Hair Book",
+    "new_bands": [
+      "3-4",
+      "5-6"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "be1f945f-4b45-4c5e-bd65-232dbd7fbd2c",
+    "title": "Fish and Wave",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "145e26b0-1c36-4a02-886e-8b1583875661",
+    "title": "Fox Has a Problem",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b5c2d026-d29b-4f9d-b5c2-c24ce733a0fd",
+    "title": "Fox Versus Fox",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f0247dc5-ea52-4988-a520-1b58c49846fa",
+    "title": "Frog and Toad Are Friends",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ea2a918c-ba66-4d0b-8035-daa668fade8e",
+    "title": "Gigi and Ojiji",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7bc55181-dde1-4725-9bf3-d59f4817b557",
+    "title": "Henry, Like Always",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "941f636f-b69a-400d-a8f4-ccf669a9220e",
+    "title": "I Did It!",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "5280e340-b84c-45df-aa64-ab6c93be3436",
+    "title": "Owl and Penguin",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "0a65cafe-2ed4-437b-91f7-c3d8b97ff8e3",
+    "title": "Owl at Home",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3812272a-c4ae-4966-9f81-d93ab32544bd",
+    "title": "Stop That Mop!",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2b83a332-fb31-482e-a34b-f46ab56e3b5b",
+    "title": "Alberto Salas Plays Paka Paka con la Papa",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a06d73c5-0ef8-4cd0-98b5-1323a742ad62",
+    "title": "From Seed to Plant",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "665c09d6-2481-4644-aaa9-8453d527439e",
+    "title": "How a House Is Built",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ca8399a2-59c4-4965-8a08-d56d2e7f08fe",
+    "title": "Teaching for Change: How Septima Clark Led the Civil Rights Movement to Voting Justice",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ad2a033f-c5f0-4e35-bbeb-2e736bbba0f4",
+    "title": "Click Clack Moo: Cows That Type",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "059bbc49-9742-4eae-8200-2bbd64e79188",
+    "title": "Diary of a Spider",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ff3e0389-e6f9-4b05-965b-39e3b5586f77",
+    "title": "Diary of a Worm",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1ba03b53-9997-46c0-aa65-c72caef1974c",
+    "title": "Don't Eat the Birthday Boy!",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c00d0d42-e25d-45d2-aa3b-84605898acb2",
+    "title": "Drawn Onward",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": "The book is about grief and loss, structured as a palindrome."
+  },
+  {
+    "id": "ee80fc08-e859-41e1-9112-a219cd469a82",
+    "title": "I Hear the Snow, I Smell the Sea",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9a3b440a-19f8-4e4a-b911-9d55fb113519",
+    "title": "Jumanji",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "565cb2b4-e06a-4bbd-83d5-bc0294d0072e",
+    "title": "Lola",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d5fec630-3776-41c7-9ede-018d1df57c84",
+    "title": "Once Upon a Book",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e1799254-5eb7-47d1-80a4-53498c75d9a3",
+    "title": "Popo the Xolo",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ef7c753b-eecf-48fb-a364-2f8eb23b3f2e",
+    "title": "The Arguers",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "013bbf8b-3c5c-485a-b29e-0e5475779d8f",
+    "title": "The Garden of Abdul Gasazi",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "723695f6-6f46-46a9-ace7-489368e8a998",
+    "title": "There Was a Party for Langston",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "73c66d22-6836-4eb8-90fb-de8ba318f613",
+    "title": "We Go Way Back: A Story of Life on Earth and How It All Began",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f64f1281-5773-481e-aa59-a2396bb0ff9e",
+    "title": "A Seed Grows",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1ec03ea0-db35-4e75-b6e0-3a16a9a54ee0",
+    "title": "How to Hatch: A Gosling's Guide to Breaking Free",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "64786a7e-2554-43b3-a1d6-269c03c9e3fa",
+    "title": "A Different Pond",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3e69cb1a-89cd-42dd-aebf-08e56f5f3777",
+    "title": "A-Ztec: A Bilingual Alphabet Book",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "61c912a2-2699-4243-907c-9e6899cb2c98",
+    "title": "Alexander and the Terrible Horrible No Good Very Bad Day",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "becc0e7e-b20e-4141-8b9c-cd750c8c5ab3",
+    "title": "Anything",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "0b6f5c1e-fb5c-44b3-a092-88c2bd1a4876",
+    "title": "At the Window",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": "A neighbor disappears from the window across the way; loss is implied."
+  },
+  {
+    "id": "6e1f2676-03fb-4c8f-a973-09578100de31",
+    "title": "Bartleby",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9bf459f7-ad66-4fed-a9e8-021ac99d3177",
+    "title": "Brave Irene",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "0b93858b-1484-42c5-993b-59aa28e6a98c",
+    "title": "Chooch Helped",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "25aba46b-c9ce-40d3-be9c-a0e32a8a8c07",
+    "title": "Chrysanthemum",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "684ebd3f-446d-4e68-b20a-dd5fe819d7d9",
+    "title": "Doctor De Soto",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2b0e837b-e50b-40db-8a86-75aedd4f2a23",
+    "title": "Don't Trust Fish",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9ecafe57-379b-4883-a410-b5f095437989",
+    "title": "Drum Dream Girl",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "aa6d9b53-68b4-4d6f-804d-30858fe9501d",
+    "title": "Enemy Pie",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2169090a-3ba3-4389-9d59-96a6313928d2",
+    "title": "Extra Yarn",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e616e2ea-24f7-45d4-8767-65b81505b43a",
+    "title": "Fireworks",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fe9950f6-4eab-4252-a098-de25830ae124",
+    "title": "Frederick",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ba0c7b74-edef-46b9-ac5f-5e492144459c",
+    "title": "Hair Love",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6df0d6b8-5528-486b-ac8d-7af57da421ed",
+    "title": "Hot Dog",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a0a9265c-c1e6-42f8-a89a-d4218e91eac3",
+    "title": "How Dinosaurs Went Extinct: A Safety Guide",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a3ee120a-fd01-4952-8d48-c095a9c4ca8a",
+    "title": "How to Count to 1",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "69c7aa1b-e76e-4d86-831f-4e11bf64564b",
+    "title": "I Like Myself!",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8bbb56d2-d371-4708-aa59-6fa2c6c27214",
+    "title": "Iggy Peck, Architect",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ecc79c13-3650-4904-8dc5-a1ba61000232",
+    "title": "In Every Life",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": "The wordless final pages depict the end of a life."
+  },
+  {
+    "id": "867cc1c0-1217-4cab-8e58-84b3563a9951",
+    "title": "Invisible Things",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4fe5696f-a74f-4be2-8a83-2bfd6a63a725",
+    "title": "Ish",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "dd309e54-98ed-48e5-a3ab-16a0542017f8",
+    "title": "Lilly's Purple Plastic Purse",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4b6a73aa-6697-4825-95bd-10ee3c421ab1",
+    "title": "Make Way for Ducklings",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "eefd9881-2568-477d-b194-38ee0ad5b41f",
+    "title": "Making Art",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "74adedf5-42d5-44e9-91b7-58f26aa8b2d8",
+    "title": "Mama Miti: Wangari Maathai and the Trees of Kenya",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "afe8975e-de44-4f66-b232-0a93212ab7ba",
+    "title": "Maybe Something Beautiful",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "cdafec6b-7f9b-4469-98cc-2ba297387371",
+    "title": "Mike Mulligan and His Steam Shovel",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "98dc0f3d-9fca-43ed-a79d-bd805395e6c7",
+    "title": "Miss Rumphius",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "67c7c414-aa58-4089-9c10-479bf96067ab",
+    "title": "Nell Plants a Tree",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d857f408-25a5-4b40-b85c-2b0847a94aad",
+    "title": "Officer Buckle and Gloria",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c37d386a-384f-4ebc-a192-d022a160982c",
+    "title": "Over and Under the Pond",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "413fd0ea-1b8e-412e-a3c8-8fb52e1614ea",
+    "title": "Owl Moon",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b99bb54f-d140-4be5-9905-868da408ea9d",
+    "title": "Rosie Revere, Engineer",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b843eeb9-cbac-46e8-91f8-67528a761b72",
+    "title": "Roxaboxen",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3374fa70-9372-46c2-84a2-d4de5f808858",
+    "title": "Sam and Dave Dig a Hole",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fc2b9d38-99f0-470f-8f2f-dc896bb523ee",
+    "title": "Stellaluna",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "32efc50d-50b3-4b06-b7d8-590d66b9e9d8",
+    "title": "Sulwe",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "75af5533-9a1e-4b78-ac74-82ed89b7d115",
+    "title": "Swimmy",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "52ad8126-48d6-41b3-a97a-0cb4cedc2099",
+    "title": "Sylvester and the Magic Pebble",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": "Sylvester is missing for a year while his parents grieve, believing him dead."
+  },
+  {
+    "id": "22e98cd3-6db4-4346-b4ac-df8b770c97bf",
+    "title": "The Day the Crayons Quit",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "51b5caee-1c68-41db-8be6-a053df58b774",
+    "title": "The Dot",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7898ea87-a970-4736-aed4-4853c99e7a04",
+    "title": "The Keeping Quilt",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c91b8f1f-ee92-473d-98d6-b5fadcb9f097",
+    "title": "The Lighthouse Keeper",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7b51ed13-7aff-498d-bef0-5917d58b88fd",
+    "title": "The Listening Walk",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ef8874ad-9b6f-4064-9066-c6838f9290e4",
+    "title": "The Little House",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "cb7e34e5-ae22-4901-8833-1632ca317434",
+    "title": "The Recess Queen",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d9e4d160-c321-4088-aa30-6f75fdd9b1cf",
+    "title": "The Relatives Came",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a91f8ae6-8fb6-43cd-9181-24d896e9bd19",
+    "title": "The Snail and the Whale",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3063c2bc-0e82-497d-806b-bdb62bcd24ed",
+    "title": "The Truth about Dragons",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "5bd407cd-074f-404c-adea-02af3c449cd3",
+    "title": "The Ugly Five",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "773a213f-f1ed-4df8-9a6a-f400de573c50",
+    "title": "The Water Princess",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "81ad82ba-60b4-4d23-b774-cf8839308b6f",
+    "title": "The Yellow Bus",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4207d9b3-eb32-454e-84b1-2655737f6804",
+    "title": "This Is Not My Hat",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "16a917e6-21c1-4d6f-98d7-7db99bd63f3b",
+    "title": "Thunder Cake",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3f342aec-3941-4d69-ab06-02534d97bcae",
+    "title": "Tops and Bottoms",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9216b1b4-e511-470d-812b-807dd7074942",
+    "title": "Unflappable",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e8dab9b4-63ba-485f-8314-e2f09773d625",
+    "title": "We Are Water Protectors",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e15a32d2-db46-45a1-b7c0-4bd0bc90bde8",
+    "title": "Wemberly Worried",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "7fb484a2-68af-4f00-8168-a64ab5a3de94",
+    "title": "What Do You Do with a Chance",
+    "new_bands": [
+      "3-4",
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e6420aaf-1a25-4930-9f0d-ba75334893dc",
+    "title": "Amelia Bedelia",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a87ce494-6264-494e-9861-a58e6dd3fd37",
+    "title": "Little Bear",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "268d5a5b-54b3-4d63-945d-9b1abd58d4db",
+    "title": "Worm and Caterpillar Are Friends",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f1a40664-c949-42b4-afdf-1df0dc3f441c",
+    "title": "A Flea for Justice: Marian Wright Edelman Stands Up for Change",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "89ce5948-df69-44d0-8c56-aa3873fdb223",
+    "title": "A Line Can Go Anywhere: The Brilliant, Resilient Life of Artist Ruth Asawa",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e93977d6-f035-4871-8148-3a25f2d78a1e",
+    "title": "Before Colors: Where Pigments and Dyes Come From",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "31a38fbb-d870-4725-b154-298e1993bd82",
+    "title": "Blast Off!: The Story of Mary Sherman Morgan, America's First Female Rocket Scientist",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ab228eee-437b-4c36-a41f-bb5227a72cd8",
+    "title": "Change Is in the Air: The Hidden Discoveries of Eunice Newton Foote, the First Climate Scientist",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6afdb8b6-c7b4-4608-a2f6-7879808da19c",
+    "title": "Creep, Leap, Crunch! A Food Chain Story",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d3176829-93dd-4713-ba5f-756782c72da2",
+    "title": "Debbie Allen's Rise to Fame",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d4217ade-e4f8-446c-8d5c-ff1428961ed6",
+    "title": "Digging Up Dinosaurs",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f9a830bc-648c-4897-aaa4-ba2fa0a2e771",
+    "title": "Finding Home: Amazing Places Animals Live",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9d4e9dea-4b4e-4e70-ab09-5e5ceb712b8d",
+    "title": "Flower Talk",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "020bb6d5-45fe-4d88-99e6-9319751c0598",
+    "title": "How a Bear Became a Book: The Collaboration That Created Winnie-the-Pooh",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c21c1a05-1ece-44c2-82c8-a9fefcac2796",
+    "title": "Just in Case: Saving Seeds in the Svalbard Global Seed Vault",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d63988e0-b0a0-4caa-8f9a-0d99578a4a53",
+    "title": "Napesni/Renegade: The Story of a Wild Bison",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fdf9f565-4fae-4ca3-82dc-bc0ec27930d8",
+    "title": "Never Give Up: Dr. Katalin Karikó and the Race to the COVID-19 Vaccine",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e9ff6801-04b5-4fcd-95a0-5aac18f98586",
+    "title": "Ode to Grapefruit: How James Earl Jones Found His Voice",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fb8514c6-dd24-4491-a3fe-c6efba4687d4",
+    "title": "Santiago Saw Things Differently: Santiago Ramón y Cajal, Scientific Artist",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a717fa07-f68a-436e-910c-d7a078c7d8aa",
+    "title": "Shining Star: Vera Rubin Discovers Dark Matter",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d95072da-e349-4f02-bb8c-4f074646ae5f",
+    "title": "The Camel Library: A True Story from Pakistan",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "616acf9b-6cda-49ec-a43b-7f704e5a93f0",
+    "title": "The Dream Builder's Blueprint: Dr. King's Message to Young People",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "71aacee5-d8a6-47ae-a69f-dc7cf0afe970",
+    "title": "The Fabulous Fannie Farmer: The Woman Who Changed the Way America Cooks",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e51b27a0-3ab6-4a9a-adeb-3419d475c92e",
+    "title": "The Friendship Train: A True Story of Helping and Healing After World War II",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a67ffa2a-5ddb-43ef-95ee-702572c3a7a3",
+    "title": "The Great Lakes: Our Freshwater Treasure",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "0617f359-3ded-47b4-ae70-9a8c7cafe126",
+    "title": "The Secret Life of a Sea Turtle",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ff48b7ac-28e1-4e6a-984a-b266f23ccf9e",
+    "title": "The Skeleton Inside You",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "722f52c3-6bc0-419d-a79b-c82849b83baa",
+    "title": "We Are American, Too",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "71cf6a77-21f7-42c2-8868-8b3867016890",
+    "title": "Wombats Are Pretty Weird: A (Not So) Serious Guide",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "57f72fc4-28b7-40a3-93d9-a238ca3b15c5",
+    "title": "You Can Move Mountains: The Artful Life of Painter Bob Ross",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "38e1a8cf-2ac9-414f-a693-6cb01188c1b8",
+    "title": "A Flicker of Hope: A Story of Migration",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "dc1d1d42-ddf4-4135-939f-a38df5639ba3",
+    "title": "Afloat",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "bb09c5f5-da2c-41f0-932f-40008ee4a227",
+    "title": "Bee Dance",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1bf4d23c-e1d8-4670-a224-9a1375e1260a",
+    "title": "Boxes for Katje",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8e478229-9125-411e-b7b8-7a51dc714b93",
+    "title": "Brave",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1c0ade34-f023-4e66-b5b7-a3aff9ad5ee7",
+    "title": "Broken",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c20f6e38-458d-498e-99fd-888520897f47",
+    "title": "Building Our House",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "74fca92f-7b4c-4fb8-ae2a-faf42357682e",
+    "title": "Cece Loves Science",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2f2b023f-1da6-43f1-ba87-7cd177e87077",
+    "title": "City Summer, Country Summer",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "864002ca-20a7-446f-acdf-f3e561045a4b",
+    "title": "Dragon Flower",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2c233aaf-1132-4bf9-aeea-0f93cf6f1b4f",
+    "title": "Grief Is an Elephant",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": "The book is about grief directly; loss of a loved one is the subject."
+  },
+  {
+    "id": "76b05da2-4bc2-4984-834b-608f1a735241",
+    "title": "Honeybird Blue",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1e6c0a94-6ab8-4cf4-b551-d35db3ee30f5",
+    "title": "How Many Seeds in a Pumpkin?",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "38172710-2447-45d0-860f-cadf6945ad61",
+    "title": "How to Write a Poem",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "14145661-8867-4553-b544-611760b58060",
+    "title": "In the Desert",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "5cfaf66f-6dd2-4aa5-a040-b7839ed3368e",
+    "title": "In the Desert: Poems of the Sahara",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "41667289-65ac-4a0d-93ab-c32b157b5600",
+    "title": "Island Storm",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "59d6dc24-da05-4440-a6ec-700b8376f0f0",
+    "title": "Little Rebels",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3e3ebe0b-16b7-45bc-b233-6dd49c7eab1f",
+    "title": "Mae and Gerty and the Matter with Matter",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2586df9d-d90d-475b-8e21-23c1656afec8",
+    "title": "Mama Panya's Pancakes",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "a896d96e-4ccc-48bc-8e45-d8a8450e57d8",
+    "title": "Moon Song",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "559451d4-05cc-4bc7-8d8c-e9ee0c911270",
+    "title": "Old Blue Is My Home",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8afd68f7-9ff5-4ee3-aa94-11fccfaa97e8",
+    "title": "One Day a Mayfly",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": "The mayfly lives and dies within a single day; mortality is central."
+  },
+  {
+    "id": "3f03eaeb-cf10-4d80-9e50-69376b0eb293",
+    "title": "One Day at the Bottom of the Deep Blue Sea",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6bd180f9-7b83-49c4-9bda-6da64f1e5fdd",
+    "title": "Planting the Wild Garden",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "0ebe6185-20ba-4934-b206-14a17be92d15",
+    "title": "Rumpelstiltskin",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "efaed6ec-9a0a-4fee-9413-8e137ffae9e7",
+    "title": "Sakina and the Uninvited Guests",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c3c1d469-8f19-4fe2-849b-d2086a5e32e8",
+    "title": "Sea in My Cells",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e2c73b81-552f-4cb2-b171-aba8200cea73",
+    "title": "Seven Skies All at Once",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2c9db5d8-fe20-4e87-8add-6cb4c56b701f",
+    "title": "Still Life",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "c74b07be-1021-45cd-94f3-454d568b3da1",
+    "title": "Stone Soup",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3932edb2-aea6-455d-be7b-d13100d9cae3",
+    "title": "Sundust",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "fbbd7850-73da-4b53-9c22-46b928ce02d1",
+    "title": "Swirl by Swirl: Spirals in Nature",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4b5f2b74-6606-4d42-a618-4ac1db4dd43f",
+    "title": "Tanning the Hide",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1e8c9021-9258-4612-a5d9-222682cdcbe3",
+    "title": "The Clock",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4f11b53c-6250-47bf-80ca-8778c3c644c4",
+    "title": "The Darkest Dark",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9ad06389-431f-4d26-b414-3f4c7e887032",
+    "title": "The Day the Books Disappeared",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e6035f6d-fe19-4018-a253-97e023950147",
+    "title": "The Fantastic Undersea Life of Jacques Cousteau",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "1bf8f9d6-ec31-4a51-b64f-7ca3dd8ef50a",
+    "title": "The Good Egg",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "3ed5cb33-d727-4358-a28e-59f861a4ccfb",
+    "title": "The History of We",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "33335f36-1a1d-458f-997e-ef9e5e2c4902",
+    "title": "The Invisible Parade",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "f7aebc9f-6d92-4da4-9de8-610f8423081b",
+    "title": "The Iridescence of Birds",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "96ef15a2-8de8-41d9-8dcb-bdea5c51d673",
+    "title": "The Last Stand",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "2f5f79d2-37cc-4e37-99a6-faf11d44d7a2",
+    "title": "The Library in the Woods",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "136580be-f8f4-4eec-a195-e71b9ca2f2a0",
+    "title": "The Most Magnificent Thing",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8b1eb658-0636-439f-8671-01ec44e019b0",
+    "title": "The Name Jar",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d88a55cb-2abe-467d-b373-63da0415438a",
+    "title": "The Outermost Mouse",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "d167c53f-f92b-4c19-b0c9-54523931a26c",
+    "title": "The Slightly Spooky Tale of Fox and Mole",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ad14c910-df68-417f-9831-6383a5c1f4ee",
+    "title": "Those Shoes",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6dfde4e8-3ea9-4721-b5b7-c7f85aadd8e9",
+    "title": "Tiny Creatures: The World of Microbes",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8340e93f-8287-4680-8e85-994578912a5b",
+    "title": "To See an Owl",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "e7e123fd-3d9b-40ec-a247-576cd0eadccc",
+    "title": "What Do You Do With an Idea?",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "5fb33474-a3aa-494f-9f93-359fbf1a2159",
+    "title": "Will's Race for Home",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "aca6c7d2-5c3b-4aed-9de3-d3c6690056d9",
+    "title": "Xolo: How One Good Dog Saved Humankind",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "dc77e1c0-9c84-4b26-ac88-c447ec6146d6",
+    "title": "Bat and the Business of Ferrets",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "8b2ea0be-bf21-4a2c-a4c0-bba3e132b99a",
+    "title": "Clementine",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "b30ff031-e7a8-4331-822d-a69e0fd23caf",
+    "title": "Fia Hosein Finds Her Beat",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "19013de9-4f4a-4440-a09e-892784d69cba",
+    "title": "Flat Stanley",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "ece6e720-e899-4d16-8b34-8ee6dd6b2e12",
+    "title": "My Father's Dragon",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "51497abd-9e63-46b5-a45c-8e1cd0f4f085",
+    "title": "Ramona the Pest",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "65aa12d0-d4aa-4ad1-9ce7-1d17ac1304dd",
+    "title": "Sideways Stories from Wayside School",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "9ae77054-f851-46ba-9ed1-d23eba9d9284",
+    "title": "After the Rain",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "0a10c794-5a1d-4a86-add4-977225aa055a",
+    "title": "Cora's Beach Adventure",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "6fa2ff94-4a46-487f-b5be-742708342e74",
+    "title": "My Presentation Today Is About the Anaconda",
+    "new_bands": [
+      "5-6",
+      "7-9"
+    ],
+    "heads_up": ""
+  },
+  {
+    "id": "4b949473-c1d6-478e-9d32-aece92e29bd5",
+    "title": "Guts",
+    "new_bands": [
+      "10-12"
+    ],
+    "heads_up": "Raina's anxiety, panic attacks, and recurring stomach symptoms are the book's subject; some readers will see themselves, others may find it activating."
+  }
+]

@@ -1,0 +1,44 @@
+import csv, json
+
+SWEEP_JSON = r'C:\Users\amyog\Desktop\Wizkoo\exports\sweep_books.json'
+OUT_PATH = r'C:\Users\amyog\Desktop\Wizkoo\exports\library_orbital_score_sweep_v2.csv'
+
+with open(SWEEP_JSON, encoding='utf-8') as f:
+    data = json.load(f)
+
+score5 = [b for b in data if b['current_score'] == 5]
+
+batch3 = [
+  {'idx':40,'v2':3,'decision':'drop-to-3','doors':2,'door_list':'social-emotional (friendship/empathy), narrative structure','sl':'n/a','rationale':'Two doors: social-emotional and narrative. Pie-as-friendship-device is the single concept; the empathy lesson is explicit and fully visible at 3-4. Narrow domain scope at picture-book density.'},
+  {'idx':41,'v2':3,'decision':'drop-to-3','doors':3,'door_list':'creativity/generosity, visual art/craft, magical realism narrative','sl':'n/a','rationale':'Three doors at picture-book density: creativity, craft, magical realism. Second layer absent: the infinite-generosity theme is the explicit point at every age; re-reading reveals appreciation, not new meaning.'},
+  {'idx':42,'v2':5,'decision':'hold-5','doors':5,'door_list':'ornithology/field biology, climate change measurement methodology, scientific process in practice, Galapagos natural history (Darwin), ecology/systems science','sl':'yes','rationale':'Five integrated doors: ornithology, climate measurement, scientific methodology, ecological history, systems science. Second layer holds: at 7-9 reads as adventure birdwatching on a famous island; at 10-12 the birdwatching reveals itself as a scientific instrument for measuring environmental change over time — same field activity, different meaning.'},
+  {'idx':43,'v2':4,'decision':'drop-to-4','doors':3,'door_list':'animal habitat ecology, geography (global biomes), adaptation science','sl':'n/a','rationale':'Three doors: ecology, geography, adaptation. Survey-format early-reader; breadth over depth. Does not reach five-door threshold.'},
+  {'idx':44,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'botany/plant biology, color theory and visual communication, pollination ecology, plant-pollinator signaling','sl':'no','rationale':'Four doors: botany, color theory, ecology, communication. Second layer fails: the flower-as-communicator framing is the books explicit thesis, not a layer the older reader discovers — it is stated directly throughout.'},
+  {'idx':45,'v2':4,'decision':'drop-to-4','doors':5,'door_list':'climate science history, womens rights history, 19th-century American history, biography, scientific methodology','sl':'no','rationale':'Five doors: climate science, womens rights, history, biography, methodology. Single band (10-12), advanced. Delivers dual-erasure narrative (climate suppressed, woman suppressed) explicitly in linear sequence; no structural re-reading layer.'},
+  {'idx':46,'v2':4,'decision':'drop-to-4','doors':5,'door_list':'geology/deep time, ecology/biology (Canyon species), visual art/illustration, geography, natural history','sl':'no','rationale':'Five doors: geology, ecology, art, geography, natural history. OD only 109ch at picture-book density; too thin for second-layer to be structurally embedded — the deep-time scale is labeled but not woven as a discoverable layer.'},
+  {'idx':47,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'mystery/detective reasoning, historical inn setting and lore, social-emotional (found family), geography (smuggling routes)','sl':'n/a','rationale':'Four doors: mystery, history, social-emotional, geography. OD only 93ch for an independent chapter-book — unusually thin. Single band (10-12). Does not confirm five-door threshold.'},
+  {'idx':48,'v2':3,'decision':'drop-to-3','doors':2,'door_list':'social-emotional (grief processing), metaphor/language arts','sl':'n/a','rationale':'Two doors: grief processing and metaphorical language. Single subject (social-emotional). The elephant metaphor is the whole book; narrow scope at picture-book density.'},
+  {'idx':49,'v2':4,'decision':'drop-to-4','doors':5,'door_list':'space history/NASA, mathematics, civil rights/racial history, gender history, biography (multiple subjects)','sl':'no','rationale':'Five doors: space, math, racial history, gender history, biography. Single band (10-12). Calibrates with Mama Miti anchor: biography with multi-domain reach delivered in linear sequence — teacher can build a 5-tier unit but the book delivers linearly.'},
+  {'idx':50,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'cartooning/art history, Black press history, racial history, gender history','sl':'no','rationale':'Four doors: art history, press history, racial history, gender history. Biography with multi-domain reach; no subject tags to confirm additional doors. Conservative hold at 4.'},
+  {'idx':51,'v2':3,'decision':'drop-to-3','doors':3,'door_list':'sensory overwhelm/mindfulness, urban-to-nature emotional contrast, visual storytelling','sl':'n/a','rationale':'Three doors at picture-book density: sensory experience, emotional regulation, visual art. Per rubric: Hot Dog explicitly scores 3. Award status (2023 Caldecott) carries no score weight.'},
+  {'idx':52,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'mathematics (multiplication/estimation/patterns), plant science (seed counts), social-emotional (size and worth), classroom community','sl':'no','rationale':'Four doors: math, botany, social-emotional, community. Second layer fails: the size-does-not-determine-worth message is stated explicitly by the end; both math and social layers fully accessible on first reading.'},
+  {'idx':53,'v2':4,'decision':'drop-to-4','doors':5,'door_list':'animal science (thirteen species), biography/memoir, philosophy of cross-species relationships, social-emotional wisdom, ecology','sl':'no','rationale':'Five doors: animal science, memoir, philosophy, social-emotional, ecology. Second layer fails: Sy Montgomery explicitly states the lesson each animal taught her — the philosophical layer is not embedded for discovery, it is named at each chapters conclusion. Iggy Peck anchor applies.'},
+  {'idx':54,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'anatomy/biology (body systems), health science, graphic novel literacy/art, systems thinking (how body systems interconnect)','sl':'no','rationale':'Four doors: anatomy, health, art, systems thinking. Strong science graphic novel; systems-thinking framing is the books explicit thesis rather than a discoverable second layer.'},
+  {'idx':55,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'architecture/engineering, artistic persistence, elementary school setting, rhyme/craft','sl':'no','rationale':'Per rubric: Iggy Peck is the 4 anchor. Adults-should-value-kid-creativity message explicitly stated at resolution. Holds at 4; does not cross the second-layer threshold.'},
+  {'idx':56,'v2':3,'decision':'drop-to-3','doors':2,'door_list':'philosophy of universal human experience, visual storytelling','sl':'n/a','rationale':'Two doors: life-philosophy and visual narrative. Universal-life-moments concept book at picture-book density; narrow scope. Singular idea (all lives share these moments) executed with craft but without cross-domain reach.'},
+  {'idx':57,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'mental health/anxiety, Puerto Rican cultural identity, school social dynamics, family relationships','sl':'no','rationale':'Four doors: mental health, cultural identity, school dynamics, family. Chapter-book without confirmed structural second layer; neurodivergence framing accessible to both bands but not revealed differently.'},
+  {'idx':58,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'legal history and judicial process, racial history, gender history, biography','sl':'n/a','rationale':'Four doors: law, racial history, gender history, biography. Single band (10-12). Linear biography; does not reach five-door threshold.'},
+  {'idx':59,'v2':4,'decision':'drop-to-4','doors':4,'door_list':'arachnology/spider biology, natural history narrative, predator-prey ecology, sensory perception science','sl':'no','rationale':'Four doors: spider biology, natural history, ecology, sensory science. Second layer fails: the hunting narrative reads as exciting at 5-6 and as detailed science at 7-9 — more depth, same fundamental meaning (a spider hunts).'},
+]
+
+with open(OUT_PATH, 'a', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f)
+    for b in batch3:
+        bk = score5[b['idx']]
+        writer.writerow([bk['id'], bk['title'], bk['author'], 5, b['v2'], b['decision'], b['doors'], b['door_list'], b['sl'], b['rationale']])
+
+print(f'Batch 3 appended: {len(batch3)} rows')
+holds = sum(1 for b in batch3 if b['decision']=='hold-5')
+drop4 = sum(1 for b in batch3 if b['decision']=='drop-to-4')
+drop3 = sum(1 for b in batch3 if b['decision']=='drop-to-3')
+print(f'  hold-5: {holds} | drop-to-4: {drop4} | drop-to-3: {drop3}')

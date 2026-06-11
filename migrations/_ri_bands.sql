@@ -1,0 +1,16 @@
+INSERT INTO library_age_bands (book_id, age_band) VALUES
+('4ed65746-1652-494c-95fd-649d3f1053b9', '3-4'),
+('4ed65746-1652-494c-95fd-649d3f1053b9', '5-6'),
+('e233c979-8bb2-4fa5-9104-12f044ebbbd3', '3-4'),
+('e233c979-8bb2-4fa5-9104-12f044ebbbd3', '5-6'),
+('92abc47c-b823-4963-865a-df090866dbd4', '3-4'),
+('92abc47c-b823-4963-865a-df090866dbd4', '5-6'),
+('afdd6964-9729-4b39-bc67-7e61f4ec1abd', '3-4'),
+('afdd6964-9729-4b39-bc67-7e61f4ec1abd', '5-6'),
+('afdd6964-9729-4b39-bc67-7e61f4ec1abd', '7-9'),
+('f3dc1bda-55bd-4cf9-b5e8-e0d1a0a0fa12', '5-6'),
+('f3dc1bda-55bd-4cf9-b5e8-e0d1a0a0fa12', '7-9'),
+('bd8424be-a34e-48be-8c9a-d218fd5ab4bd', '5-6'),
+('bd8424be-a34e-48be-8c9a-d218fd5ab4bd', '7-9'),
+('da5b14b2-cede-4fac-9f15-f909f0c9bcd9', '5-6'),
+('da5b14b2-cede-4fac-9f15-f909f0c9bcd9', '7-9') ON CONFLICT DO NOTHING

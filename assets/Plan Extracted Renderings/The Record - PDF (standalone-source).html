@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Record — Annual Compliance Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #2a2926; font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+  * { box-sizing: border-box; }
+  .page-stage {
+    min-height: 100vh;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 56px 24px 96px;
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<template id="__bundler_thumbnail" data-bg-color="#F8F4E9">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#F8F4E9"/>
+    <!-- Top rule -->
+    <rect x="360" y="200" width="480" height="3" fill="#0C1020"/>
+    <!-- Identity row stub -->
+    <rect x="360" y="232" width="220" height="10" fill="#0C1020" opacity="0.7"/>
+    <rect x="720" y="232" width="120" height="6" fill="#0C1020" opacity="0.4"/>
+    <!-- Bottom hairline -->
+    <rect x="360" y="268" width="480" height="1" fill="#0C1020" opacity="0.18"/>
+    <!-- Three headline numbers -->
+    <text x="360" y="380" font-family="Plus Jakarta Sans, sans-serif" font-weight="500" font-size="80" fill="#0C1020">421.0</text>
+    <text x="560" y="380" font-family="Plus Jakarta Sans, sans-serif" font-weight="500" font-size="80" fill="#0C1020">142</text>
+    <text x="720" y="380" font-family="Plus Jakarta Sans, sans-serif" font-weight="500" font-size="80" fill="#0C1020">38</text>
+    <!-- Table hairline -->
+    <rect x="360" y="460" width="480" height="1.5" fill="#0C1020"/>
+    <!-- Row underlines (subject palette) -->
+    <rect x="360" y="498" width="120" height="2" fill="#3848D0"/>
+    <rect x="360" y="528" width="100" height="2" fill="#18A0B8"/>
+    <rect x="360" y="558" width="80"  height="2" fill="#38B060"/>
+    <rect x="360" y="588" width="140" height="2" fill="#C83030"/>
+    <rect x="360" y="618" width="100" height="2" fill="#8848E0"/>
+    <rect x="360" y="648" width="90"  height="2" fill="#F08A20"/>
+    <!-- Saffron BEHIND mark -->
+    <rect x="780" y="678" width="60" height="6" fill="#E8AF38"/>
+  </svg>
+</template>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="record-pdf.jsx"></script>
+<script type="text/babel">
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<div className="page-stage"><RecordPDF /></div>);
+</script>
+</body>
+</html>
