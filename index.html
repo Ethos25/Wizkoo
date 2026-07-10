@@ -2689,7 +2689,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   }
   checkReady();
 
-  /* ── Submit stub (Prompt 1) ── */
+  /* ── Submit: hand off to the plan generator's intake, pre-filled ── */
   var form = document.getElementById('nh-form');
   if(!form) return;
   form.addEventListener('submit', function(e){
@@ -2698,8 +2698,10 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
     var theme  = (fTheme || {value:''}).value.trim();
     var age    = fAge ? parseInt(fAge.value, 10) : NaN;
     if(!name || isNaN(age) || !theme) return;
-    var gate = document.getElementById('nh-gate');
-    if(gate) gate.hidden = false;
+    window.location.href = '/plan/onboarding'
+      + '?childName=' + encodeURIComponent(name)
+      + '&childAge=' + age
+      + '&theme='    + encodeURIComponent(theme);
   });
 })()
 </script>

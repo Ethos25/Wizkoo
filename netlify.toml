@@ -6,6 +6,13 @@
 [functions."moderation-digest"]
   schedule = "0 14 * * 0"
 
+# ── Function alias: the homepage form POSTs /api/validate-theme ─────────────
+[[redirects]]
+  from    = "/api/validate-theme"
+  to      = "/.netlify/functions/validate-theme"
+  status  = 200
+  force   = true
+
 # ── Plan generator proxy ────────────────────────────────────────────────────
 [[redirects]]
   from    = "/plan"
