@@ -146,6 +146,29 @@ ever needed.
 Stripe keys (`pk_test_`/`sk_test_`). Live payments are effectively off.
 Confirm whether intentional (soft launch) and resolve.
 
+### Upstash Redis (rate limiting) — REPLACED 2026-07-10
+
+The original standalone-account Upstash database
+(`internal-polecat-91323.upstash.io`) was deleted upstream (free tier,
+inactivity) and its DNS stopped resolving — every generator API route that
+calls the rate limiter directly (8 of 12) returned 500 until replaced.
+Incident + fix: Day 8 seam audit.
+
+Replacement: **Vercel Marketplace resource `wizkoo-rate-limit`** (Upstash
+for Redis, plan **Pay As You Go**, region iad1, eviction on), installed on
+team `wizkoo` (installation `icfg_iLa1p1R8QFQJqeX9qobRO2o6`), billed
+through the team's Vercel payment method — no free-tier expiry class.
+Marketplace manages `KV_REST_API_URL` / `KV_REST_API_TOKEN` (+ `KV_URL`,
+`REDIS_URL`, read-only token) on the project; the code-expected
+`UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` were re-pointed to
+the same resource in Production and Development. **Preview env re-add kept
+failing via CLI — preview still lacks the UPSTASH_* pair (known residual;
+preview deploys have no env vars by policy anyway for wizkoo-app, but the
+generator's preview target previously had them).**
+
+Standing rule (Amy, 2026-07-10): dependencies on free tiers that expire or
+delete for inactivity are banned for production.
+
 ### Crons (Vercel, all on team wizkoo/Pro)
 
 | App | Path | Schedule |
