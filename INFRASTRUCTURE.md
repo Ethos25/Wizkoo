@@ -51,7 +51,11 @@ deploys:
   EthosSignal venture, not Wizkoo.
 
 Deployment protection on team `wizkoo`: `*.vercel.app` deployment URLs are
-SSO-protected; custom production domains are public.
+SSO-protected; custom production domains are public. CORRECTION (2026-07-12,
+WP-6 survey): the generator's production alias
+`wizkoo-plan-generator.vercel.app` measured publicly reachable (HTTP 200,
+no SSO) — the WP-6 Stage 3 watch depends on that URL staying public through
+the 14-day watch.
 
 ### Netlify
 

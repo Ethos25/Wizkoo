@@ -361,7 +361,7 @@
     '    <!-- Col 2: Product -->',
     '    <nav class="wf-nav" aria-label="Product">',
     '      <div class="wf-col-header" aria-hidden="true">Product</div>',
-    '      <a href="/plan">The Plan</a>',
+    '      <a href="https://app.wizkoo.com/generate">The Plan</a>',
     '      <a href="/games">The Games</a>',
     '      <a href="/library">The Library</a>',
     '      <a href="/methodology">The Science</a>',
