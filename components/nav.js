@@ -218,6 +218,9 @@
       '  box-shadow:0 0 0 1px rgba(232,175,56,0.20),0 2px 12px rgba(232,175,56,0.18);',
       '}',
 
+      /* ── Right group: sign-in link + CTA ── */
+      '.nav-right{display:flex;align-items:center;gap:22px;flex-shrink:0}',
+
       /* ── Hamburger (mobile only) ── */
       '.nav-hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;padding:0;background:transparent;border:none;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent}',
       '.nav-hamburger-line{display:block;width:20px;height:2px;background:rgba(250,250,250,0.7);border-radius:1px}',
@@ -260,6 +263,7 @@
       '@media(max-width:1100px){',
       '  .nav{padding:0 24px}',
       '  .nav-center{gap:16px}',
+      '  .nav-right{gap:16px}',
       '}',
 
       /* ═══ MOBILE ═══ */
@@ -268,6 +272,7 @@
       '  .nav-hamburger{display:flex}',
       '  .nav-mobile-menu{display:block}',
       '  .nav-center{display:none}',
+      '  .nav-signin{display:none}',
       '  .nav-cta{font-size:8px;padding:6px 12px}',
       '}'
 
@@ -311,7 +316,10 @@
     '    <span class="nav-hamburger-line"></span>',
     '    <span class="nav-hamburger-line"></span>',
     '  </button>',
-    '  <a href="https://app.wizkoo.com/generate" class="nav-cta">Build Your Plan</a>',
+    '  <div class="nav-right">',
+    '    <a href="https://app.wizkoo.com/sign-in" class="nav-link nav-signin">Sign In</a>',
+    '    <a href="https://app.wizkoo.com/generate" class="nav-cta">Build Your Plan</a>',
+    '  </div>',
     '</div>',
 
     /* 3. Mobile menu — position:fixed, opens below sticky nav */
@@ -324,6 +332,7 @@
     '    <a href="/ages">The Ages</a>',
     '    <a href="/the-open-seat">The Open Seat</a>',
     '    <a href="/pricing">The Price</a>',
+    '    <a href="https://app.wizkoo.com/sign-in">Sign In</a>',
     '  </div>',
     '</nav>'
 
