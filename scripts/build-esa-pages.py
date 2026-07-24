@@ -100,8 +100,8 @@ FOOTER_NOTE = """<div class="fnote">
 
 CTA_SECTION = """<section class="cta">
   <div class="cta-glow"></div>
-  <h2 class="cta-h sr">Build My Family's Week</h2>
-  <a href="/plan" class="cta-btn sr-btn" style="transition-delay:100ms" aria-label="Build My Family's Week">Build My Family's Week</a>
+  <h2 class="cta-h sr">Build Our Week</h2>
+  <a href="https://app.wizkoo.com/generate" class="cta-btn sr-btn" style="transition-delay:100ms" aria-label="Build Our Week">Build Our Week</a>
   <p class="cta-sub sr-btn" style="transition-delay:200ms">No credit card for first plan.</p>
 </section>"""
 
@@ -261,7 +261,7 @@ def build_t1(state, slug, title, meta_desc, hero_sub, program_name, esa_amount_l
   <div class="sec-inner sr">
     <div class="sec-ey">Using your {state} ESA for Wizkoo</div>
     <div class="sec-h">{wizkoo_section_h}</div>
-    <p style="font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.85;color:rgba(12,16,32,.6);margin-bottom:clamp(16px,2.5vh,24px)">Wizkoo is a personalized weekly learning platform for families with children ages 2 to 12. One theme connects every subject. Every child at the table gets a plan matched to their age and reading level.</p>
+    <p style="font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.85;color:rgba(12,16,32,.6);margin-bottom:clamp(16px,2.5vh,24px)">Wizkoo is a personalized weekly learning platform for families with children ages 3 to 12. One theme connects every subject. Every child at the table gets a plan matched to their age and reading level.</p>
     <p style="font-family:'Inter',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.85;color:rgba(12,16,32,.6);margin-bottom:0">{wizkoo_intro_extra}</p>
 {wiz_not_listed(platform, platform_contact)}
   </div>

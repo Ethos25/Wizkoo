@@ -310,6 +310,8 @@
     '    <a href="/ages"          class="nav-link">The Ages</a>',
     '    <a href="/the-open-seat" class="nav-link">The Open Seat</a>',
     '    <a href="/pricing"       class="nav-link">The Price</a>',
+    '    <a href="/esa"           class="nav-link">ESA</a>',
+    '    <a href="/about"         class="nav-link">About</a>',
     '  </div>',
     '  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">',
     '    <span class="nav-hamburger-line"></span>',
@@ -318,7 +320,7 @@
     '  </button>',
     '  <div class="nav-right">',
     '    <a href="https://app.wizkoo.com/sign-in" class="nav-link nav-signin">Sign In</a>',
-    '    <a href="https://app.wizkoo.com/generate" class="nav-cta">Build Your Plan</a>',
+    '    <a href="https://app.wizkoo.com/generate" class="nav-cta">Build Our Week</a>',
     '  </div>',
     '</div>',
 
@@ -332,6 +334,8 @@
     '    <a href="/ages">The Ages</a>',
     '    <a href="/the-open-seat">The Open Seat</a>',
     '    <a href="/pricing">The Price</a>',
+    '    <a href="/esa">ESA</a>',
+    '    <a href="/about">About</a>',
     '    <a href="https://app.wizkoo.com/sign-in">Sign In</a>',
     '  </div>',
     '</nav>'
