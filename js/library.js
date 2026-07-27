@@ -527,13 +527,7 @@
     if (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var emailInput = document.getElementById('pdf-email');
-        var email = emailInput ? emailInput.value.trim() : '';
-        if (!email || !email.includes('@')) {
-          if (emailInput) emailInput.focus();
-          return;
-        }
-        handlePdfDownload(email);
+        handlePdfDownload();
       });
     }
   }
@@ -548,8 +542,6 @@
     if (successView) successView.classList.remove('visible');
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    var input = document.getElementById('pdf-email');
-    if (input) setTimeout(function () { input.focus(); }, 50);
   }
 
   function closeModal() {
@@ -559,14 +551,13 @@
     state.pdfBand = null;
   }
 
-  function handlePdfDownload(email) {
+  function handlePdfDownload() {
     var booksForPdf = state.allBooks.filter(function (b) {
       if (!state.pdfBand) return true;
       return b.age_bands.indexOf(state.pdfBand) !== -1;
     });
 
     generatePDF(booksForPdf, state.pdfBand);
-    captureEmail(email, state.pdfBand);
 
     var formView    = document.getElementById('modal-form-view');
     var successView = document.getElementById('modal-success-view');
@@ -674,14 +665,6 @@
   }
 
   /* ── Email capture ───────────────────────────────────────────────────────── */
-  function captureEmail(email, band) {
-    var formData = new FormData();
-    formData.append('form-name', 'library-pdf-download');
-    formData.append('email', email);
-    formData.append('age_band', band || 'all');
-    fetch('/', { method: 'POST', body: formData }).catch(function () {});
-  }
-
   /* ── UI states ───────────────────────────────────────────────────────────── */
   function showInitialState() {
     var container = document.getElementById('lib-books-container');
