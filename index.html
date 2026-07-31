@@ -1048,9 +1048,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- The copy column -- */
 .hh-copy{
   position:absolute;
-  left:min(96px,6.6667vw);
+  left:min(96px,6.6667vw,calc(var(--u) * 96));
   top:min(68px,4.7222vw,calc(var(--u) * 68));
-  width:min(680px,47.2222vw);
+  width:min(680px,47.2222vw,calc(var(--u) * 680));
 }
 
 /* Eyebrow: gold rule then the line, the rule optically centred on the caps. */
@@ -1095,7 +1095,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 .hh-support{
   margin:min(18px,1.25vw,calc(var(--u) * 18)) 0 0;
-  width:min(390px,27.0833vw);
+  width:min(390px,27.0833vw,calc(var(--u) * 390));
   font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;
   font-size:min(17px,1.18056vw,calc(var(--u) * 17));
   line-height:1.6;
@@ -1105,14 +1105,14 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- The whisper and the window travel together, anchored to the fold -- */
 .hh-group{
   position:absolute;
-  right:min(88px,6.1111vw);
+  right:min(88px,6.1111vw,calc(var(--u) * 88));
   bottom:min(132px,9.1667vw,calc(var(--u) * 132));
-  width:min(560px,38.8889vw);
+  width:min(560px,38.8889vw,calc(var(--u) * 560));
 }
 /* The caption sits tight above the window and is allowed to run wider than it. */
 .hh-whisper{
   margin:0 0 min(11px,0.7639vw,calc(var(--u) * 11));
-  width:min(470px,32.6389vw);
+  width:min(470px,32.6389vw,calc(var(--u) * 470));
   margin-left:auto;
   font-family:'Fraunces',serif;font-weight:400;font-style:italic;
   font-size:min(20px,1.38889vw,calc(var(--u) * 20));
@@ -1229,9 +1229,9 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
       rgba(248,244,233,0.08) 100%);
   }
   .hh-copy{
-    left:min(6.9333vw,34px);
+    left:min(6.9333vw,34px,calc(var(--u) * 26));
     top:min(5.8667vw,30px,calc(var(--u) * 22));
-    width:min(86.1333vw,430px);
+    width:min(86.1333vw,430px,calc(var(--u) * 323));
   }
   .hh-eyebrow{
     font-size:min(2.4vw,12px,calc(var(--u) * 9));
@@ -1250,17 +1250,17 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .hh-answer{margin-top:min(4.8vw,24px,calc(var(--u) * 18));font-size:min(8vw,42px,calc(var(--u) * 30))}
   .hh-support{
     margin-top:min(2.6667vw,14px,calc(var(--u) * 10));
-    width:min(72vw,360px);
+    width:min(72vw,360px,calc(var(--u) * 270));
     font-size:min(3.6vw,18px,calc(var(--u) * 13.5));
     line-height:1.55;
   }
   .hh-group{
-    right:min(6.9333vw,34px);
+    right:min(6.9333vw,34px,calc(var(--u) * 26));
     bottom:min(5.8667vw,30px,calc(var(--u) * 22));
-    width:min(86.1333vw,430px);
+    width:min(86.1333vw,430px,calc(var(--u) * 323));
   }
   .hh-whisper{
-    width:min(66.6667vw,330px);
+    width:min(66.6667vw,330px,calc(var(--u) * 250));
     margin:0 auto min(1.0667vw,6px) 0;
     font-size:min(4.2667vw,22px,calc(var(--u) * 16));
     text-align:left;
