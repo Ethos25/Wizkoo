@@ -962,9 +962,15 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 .hh{
   position:relative;
+  /* One canvas unit. The reference canvas is 718px tall, so --u is 1px at the
+     approved 1440x800 frame and shrinks in step with the real canvas. Content
+     scaled by --u therefore keeps its proportion of the fold at every height.
+     A fixed min-height here is what pushed the window off the fold at 617 and
+     396: it held the canvas at 520 on a 396px screen. */
+  --u:calc((100vh - 82px) / 718);
+  --u:calc((100svh - 82px) / 718);
   height:calc(100vh - 82px);
   height:calc(100svh - 82px);
-  min-height:520px;
   overflow:hidden;
   background-color:#F8F4E9;
   background-image:radial-gradient(66% 54% at 20% 16%,rgba(255,253,245,0.80) 0%,rgba(248,244,233,0) 72%);
@@ -990,12 +996,42 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
    then warm afternoon at the bottom. Reference stops, verbatim. */
 .hh-veil{
   position:absolute;inset:0;z-index:1;pointer-events:none;
+  /* The reference control values are unchanged at 0/34/52/70/86/100; the ramp
+     between them is resampled through a monotone cubic. As six plain stops the
+     alpha slope roughly triples at 34% and the eye reads a Mach band straight
+     across the hero. The mockup hid it behind a 350px thumbnail; our sharper
+     photograph does not. */
   background:linear-gradient(
     rgba(248,244,233,0.94) 0%,
-    rgba(248,244,233,0.70) 34%,
+    rgba(248,244,233,0.916) 5.7%,
+    rgba(248,244,233,0.885) 11.3%,
+    rgba(248,244,233,0.848) 17%,
+    rgba(248,244,233,0.804) 22.7%,
+    rgba(248,244,233,0.754) 28.3%,
+    rgba(248,244,233,0.7) 34%,
+    rgba(249,244,233,0.635) 37%,
+    rgba(250,246,234,0.557) 40%,
+    rgba(252,247,236,0.473) 43%,
+    rgba(253,249,237,0.391) 46%,
+    rgba(253,249,237,0.318) 49%,
     rgba(248,244,233,0.26) 52%,
+    rgba(231,229,222,0.22) 55%,
+    rgba(199,200,200,0.191) 58%,
+    rgba(156,160,172,0.172) 61%,
+    rgba(108,117,140,0.157) 64%,
+    rgba(65,77,108,0.145) 67%,
     rgba(30,44,80,0.13) 70%,
+    rgba(13,25,57,0.114) 72.7%,
+    rgba(22,26,41,0.099) 75.3%,
+    rgba(56,46,33,0.086) 78%,
+    rgba(111,84,33,0.074) 80.7%,
+    rgba(177,133,42,0.066) 83.3%,
     rgba(232,175,56,0.06) 86%,
+    rgba(255,203,82,0.058) 88.3%,
+    rgba(255,223,121,0.061) 90.7%,
+    rgba(255,233,161,0.066) 93%,
+    rgba(255,238,194,0.071) 95.3%,
+    rgba(251,241,218,0.077) 97.7%,
     rgba(248,244,233,0.08) 100%);
 }
 /* Film grain: present, never an effect. 3.5% over the whole hero image. */
@@ -1013,7 +1049,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hh-copy{
   position:absolute;
   left:min(96px,6.6667vw);
-  top:min(68px,4.7222vw);
+  top:min(68px,4.7222vw,calc(var(--u) * 68));
   width:min(680px,47.2222vw);
 }
 
@@ -1022,8 +1058,8 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   display:flex;align-items:center;
   margin:0;
   font-family:'Space Mono',monospace;font-weight:400;
-  font-size:min(11px,0.7639vw);
-  letter-spacing:min(2.2px,0.15278vw);
+  font-size:min(11px,0.7639vw,calc(var(--u) * 11));
+  letter-spacing:min(2.2px,0.15278vw,calc(var(--u) * 2.2));
   text-transform:uppercase;
   color:rgba(12,16,32,0.5);
   line-height:1.45;
@@ -1031,16 +1067,16 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 .hh-eyebrow .rule{
   flex:0 0 auto;
-  width:min(32px,2.2222vw);height:1.5px;
-  margin-right:min(16px,1.1111vw);
+  width:min(32px,2.2222vw,calc(var(--u) * 32));height:1.5px;
+  margin-right:min(16px,1.1111vw,calc(var(--u) * 16));
   background:#E8AF38;
 }
 .hh-eyebrow strong{font-weight:400;color:#0C1020}
 
 .hh-arrest{
-  margin:min(28px,1.9444vw) 0 0;
+  margin:min(28px,1.9444vw,calc(var(--u) * 28)) 0 0;
   font-family:'Fraunces',serif;font-weight:800;
-  font-size:min(100px,6.9444vw);
+  font-size:min(100px,6.9444vw,calc(var(--u) * 100));
   line-height:0.92;
   letter-spacing:-0.04em;
   color:#0C1020;
@@ -1050,18 +1086,18 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hh-arrest .brk-m{display:none}
 
 .hh-answer{
-  margin:min(30px,2.0833vw) 0 0;
+  margin:min(30px,2.0833vw,calc(var(--u) * 30)) 0 0;
   font-family:'Fraunces',serif;font-weight:400;font-style:italic;
-  font-size:min(54px,3.75vw);
+  font-size:min(54px,3.75vw,calc(var(--u) * 54));
   line-height:1;
   letter-spacing:-0.02em;
   color:#E8AF38;
 }
 .hh-support{
-  margin:min(18px,1.25vw) 0 0;
+  margin:min(18px,1.25vw,calc(var(--u) * 18)) 0 0;
   width:min(390px,27.0833vw);
   font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;
-  font-size:min(17px,1.18056vw);
+  font-size:min(17px,1.18056vw,calc(var(--u) * 17));
   line-height:1.6;
   color:rgba(12,16,32,0.64);
 }
@@ -1070,16 +1106,16 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hh-group{
   position:absolute;
   right:min(88px,6.1111vw);
-  bottom:min(132px,9.1667vw);
+  bottom:min(132px,9.1667vw,calc(var(--u) * 132));
   width:min(560px,38.8889vw);
 }
 /* The caption sits tight above the window and is allowed to run wider than it. */
 .hh-whisper{
-  margin:0 0 min(11px,0.7639vw);
+  margin:0 0 min(11px,0.7639vw,calc(var(--u) * 11));
   width:min(470px,32.6389vw);
   margin-left:auto;
   font-family:'Fraunces',serif;font-weight:400;font-style:italic;
-  font-size:min(20px,1.38889vw);
+  font-size:min(20px,1.38889vw,calc(var(--u) * 20));
   line-height:1.45;
   text-align:right;
   color:rgba(12,16,32,0.6);
@@ -1111,60 +1147,41 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- Paper grain scoped to hero (Resolution A: position:absolute not fixed, avoids sky-system conflict) -- */
 section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.80 0 0 0 0 0.72 0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;mix-blend-mode:multiply}
 
-/* -- Short desktop (1280x540, 1440x396) --
-   The approved frame is a 1440x800 composition and there is no honest way to
-   fold it into 314px of canvas. Below 700px of height the absolute anchoring is
-   dropped and the two groups stack in arc order, so the hero runs past the fold
-   rather than colliding with itself. The photograph keeps bleeding. */
+/* -- Narrow desktop: hold a composed break, never a wrapped one.
+   Fraunces is optically sized, so its letterforms widen as the size drops: the
+   line 'Are they actually' costs 6.31x its font size at 100px but 7.2x at 65px.
+   Against a 47.2vw column the approved two-line break therefore stops fitting
+   below about 1123px and the line wraps on its own. Below 1200px the arrest
+   uses the phone frame's approved three-line staging instead, which is a
+   composed break rather than browser roulette. -- */
+@media(min-width:768px) and (max-width:1199px){
+  .hh-arrest .brk-m{display:inline}
+}
+
+/* -- Short desktop, including 1097x617 (BINDING, per the runbook's
+   above-the-fold matrix) and the 1440x396 production viewport.
+
+   These heights used to stack the composition, which pushed the window off the
+   fold on the one screen that matters most. They no longer do. Every value in
+   the base rules carries a third term keyed to height (V/8 vh equals V at the
+   reference 800px viewport), so the approved side-by-side composition simply
+   scales down and the whole arc stays above the fold. The copy column ends at
+   53.9vw and the window starts at 55vw, so they can never collide.
+
+   What remains here is only what height alone cannot solve. -- */
 @media(min-width:768px) and (max-height:700px){
   body::after{width:40vmax;left:6%;top:-8%}
-  /* The reference is keyed to width, which at 396px of height would leave a
-     100px arrest and an 880px hero. Below 700px the type also answers to
-     height, so the stack stays proportionate to the screen it is on. */
-  .hh-arrest{font-size:min(100px,6.9444vw,17.5vh)}
-  .hh-answer{font-size:min(54px,3.75vw,9.5vh)}
-  .hh-support{font-size:min(17px,1.18056vw,3vh)}
-  .hh-whisper{font-size:min(20px,1.38889vw,3.6vh)}
-  .lw-mount{height:min(340px,23.6111vw,60vh)}
-  .lw-sentence{font-size:min(31px,2.15278vw,5.6vh)}
-  .hh{height:auto;min-height:0;padding-bottom:min(52px,3.6vw)}
-  .hh-stage{height:auto;padding-top:min(56px,3.9vw)}
-  .hh-copy{position:static;left:auto;top:auto;width:min(680px,47.2222vw);margin-left:min(96px,6.6667vw)}
-  .hh-group{
-    position:static;right:auto;bottom:auto;
-    margin:min(34px,2.4vw) min(88px,6.1111vw) 0 auto;
-  }
+  /* Reclaim the frame's generous bottom margin as composition space. */
+  .hh-group{bottom:min(132px,9.1667vw,calc(var(--u) * 88))}
   .hero-aside{padding-bottom:56px}
 }
 @media(min-width:768px) and (max-height:540px){
-  .hh-stage{padding-top:min(40px,2.8vw)}
-  .hh-arrest{font-size:min(100px,6.9444vw,15vh)}
-  .hh-answer{font-size:min(54px,3.75vw,8.2vh)}
-  .lw-mount{height:min(340px,23.6111vw,54vh)}
-  .hh-group{margin-top:min(26px,1.8vw)}
+  .hh-group{bottom:min(132px,9.1667vw,calc(var(--u) * 64))}
   .hero-aside{padding-bottom:40px}
   .desk{padding:14px 18px 12px}
   .desk-title{font-size:18px}
   .desk-body{font-size:12.5px;line-height:1.45}
   .desk-foot{margin-top:8px;padding-top:6px}
-}
-
-/* -- 1440x396: Amy's production viewport (Windows 200% + bookmarks + zoom).
-   Nothing composes a 1440x800 frame into 314px of canvas. What the fold must
-   still do is carry the arc and let the window break it, so the door is
-   visibly there rather than rumoured. -- */
-@media(min-width:768px) and (max-height:440px){
-  .hh{padding-bottom:min(34px,2.4vw)}
-  .hh-stage{padding-top:min(26px,1.8vw)}
-  .hh-arrest{font-size:min(100px,6.9444vw,13vh);margin-top:min(18px,1.25vw)}
-  .hh-answer{font-size:min(54px,3.75vw,7vh);margin-top:min(16px,1.1vw)}
-  .hh-support{font-size:min(17px,1.18056vw,2.7vh);margin-top:min(10px,0.7vw);width:min(470px,32.6vw)}
-  .hh-whisper{font-size:min(20px,1.38889vw,3.2vh);width:min(470px,32.6vw)}
-  .hh-group{margin-top:min(18px,1.25vw)}
-  .lw-mount{height:min(340px,23.6111vw,46vh)}
-  .lw-sentence{font-size:min(31px,2.15278vw,4.8vh)}
-  .lw-body{top:min(38px,2.6389vw,4.4vh)}
-  .lw-foot{bottom:min(24px,1.6667vw,3vh);padding-top:min(25px,1.73611vw,3.4vh)}
 }
 
 /* -- Mobile, matched to the approved 375x700 reference frame --
@@ -1174,52 +1191,78 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
    are exact at 375 and scale up to the 768 break. */
 @media(max-width:767px){
   .wrap{padding:0 24px}
-  .hh{height:calc(100svh - 82px);min-height:480px}
+  /* The phone frame's canvas is 618px, so the unit is rebased there. */
+  .hh{--u:calc((100svh - 82px) / 618);height:calc(100svh - 82px)}
   .hh-photo img{--hh-zoom:1.06;--hh-shift:52%;object-position:54% 46%}
   .hh-veil{
     background:linear-gradient(
       rgba(248,244,233,0.94) 0%,
+      rgba(248,244,233,0.919) 5.3%,
+      rgba(248,244,233,0.891) 10.7%,
+      rgba(248,244,233,0.858) 16%,
+      rgba(248,244,233,0.818) 21.3%,
+      rgba(248,244,233,0.772) 26.7%,
       rgba(248,244,233,0.72) 32%,
+      rgba(249,244,233,0.656) 35.3%,
+      rgba(250,246,234,0.579) 38.7%,
+      rgba(252,248,236,0.495) 42%,
+      rgba(253,249,237,0.413) 45.3%,
+      rgba(253,249,237,0.339) 48.7%,
       rgba(248,244,233,0.28) 52%,
+      rgba(231,229,222,0.239) 55%,
+      rgba(199,200,201,0.209) 58%,
+      rgba(157,161,172,0.188) 61%,
+      rgba(110,119,140,0.171) 64%,
+      rgba(65,78,109,0.156) 67%,
       rgba(30,44,80,0.14) 70%,
+      rgba(13,24,57,0.122) 72.7%,
+      rgba(19,24,41,0.105) 75.3%,
+      rgba(51,43,33,0.09) 78%,
+      rgba(106,81,33,0.077) 80.7%,
+      rgba(174,131,42,0.067) 83.3%,
       rgba(232,175,56,0.06) 86%,
+      rgba(255,205,82,0.058) 88.3%,
+      rgba(255,225,122,0.06) 90.7%,
+      rgba(255,235,162,0.065) 93%,
+      rgba(255,239,194,0.071) 95.3%,
+      rgba(251,241,218,0.077) 97.7%,
       rgba(248,244,233,0.08) 100%);
   }
   .hh-copy{
     left:min(6.9333vw,34px);
-    top:min(5.8667vw,30px);
+    top:min(5.8667vw,30px,calc(var(--u) * 22));
     width:min(86.1333vw,430px);
   }
   .hh-eyebrow{
-    font-size:min(2.4vw,12px);
-    letter-spacing:min(0.432vw,2.2px);
+    font-size:min(2.4vw,12px,calc(var(--u) * 9));
+    letter-spacing:min(0.432vw,2.2px,calc(var(--u) * 1.62));
   }
   /* On the phone the approved frame stacks the rule above the line. */
   .hh-eyebrow{flex-direction:column;align-items:flex-start}
-  .hh-eyebrow .rule{width:min(7.4667vw,38px);margin:0 0 min(2.9333vw,15px)}
+  .hh-eyebrow .rule{width:min(7.4667vw,38px,calc(var(--u) * 28));margin:0 0 min(2.9333vw,15px,calc(var(--u) * 11))}
   .hh-arrest{
-    margin-top:min(4.8vw,24px);
-    font-size:min(12.2667vw,66px);
+    margin-top:min(4.8vw,24px,calc(var(--u) * 18));
+    font-size:min(12.2667vw,66px,calc(var(--u) * 46));
     line-height:0.93;
     letter-spacing:-0.038em;
   }
   .hh-arrest .brk-m{display:inline}
-  .hh-answer{margin-top:min(4.8vw,24px);font-size:min(8vw,42px)}
+  .hh-answer{margin-top:min(4.8vw,24px,calc(var(--u) * 18));font-size:min(8vw,42px,calc(var(--u) * 30))}
   .hh-support{
-    margin-top:min(2.6667vw,14px);
+    margin-top:min(2.6667vw,14px,calc(var(--u) * 10));
     width:min(72vw,360px);
-    font-size:min(3.6vw,18px);
+    font-size:min(3.6vw,18px,calc(var(--u) * 13.5));
     line-height:1.55;
   }
   .hh-group{
     right:min(6.9333vw,34px);
-    bottom:min(5.8667vw,30px);
+    bottom:min(5.8667vw,30px,calc(var(--u) * 22));
     width:min(86.1333vw,430px);
   }
   .hh-whisper{
     width:min(66.6667vw,330px);
     margin:0 auto min(1.0667vw,6px) 0;
-    font-size:min(4.2667vw,22px);
+    font-size:min(4.2667vw,22px,calc(var(--u) * 16));
     text-align:left;
   }
   .hero-aside{flex-direction:column;align-items:flex-start;gap:26px;padding-bottom:64px}
@@ -1227,13 +1270,9 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .hero-sample{margin-bottom:0}
 }
 
-/* -- Short phones: let the hero run rather than crush the arrest -- */
-@media(max-width:767px) and (max-height:660px){
-  .hh{height:auto;min-height:0;padding-bottom:min(8vw,34px)}
-  .hh-stage{height:auto;padding-top:min(9.2vw,46px)}
-  .hh-copy{position:static;left:auto;top:auto;margin-left:min(6.9333vw,34px)}
-  .hh-group{position:static;right:auto;bottom:auto;margin:min(6.4vw,30px) min(6.9333vw,34px) 0}
-}
+/* -- Short phones and the 756x396 production width both fall here. They used
+   to stack and run past the fold; the canvas unit now scales them instead, so
+   the window and its call stay on screen. -- */
 
 /* -- iPhone Plus refinement (430x932) -- */
 @media(min-width:400px) and (max-width:767px){

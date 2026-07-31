@@ -22,16 +22,16 @@
 
 .lw-mount{
   position:relative;
-  height:min(340px,23.6111vw);
+  height:min(340px,23.6111vw,calc(var(--u) * 340));
 }
 
 /* The luminous bleed: outside the window, under it, blurred. */
 .lw-bleed{
   position:absolute;
-  inset:max(-64px,-4.4444vw);
+  inset:max(-64px,-4.4444vw,calc(var(--u) * -64));
   z-index:0;
   pointer-events:none;
-  filter:blur(min(28px,1.9444vw));
+  filter:blur(min(28px,1.9444vw,calc(var(--u) * 28)));
   background:
     radial-gradient(58% 58% at 50% 48%,rgba(24,40,72,0.30) 0%,rgba(24,40,72,0) 72%),
     radial-gradient(44% 38% at 52% 22%,rgba(232,175,56,0.16) 0%,rgba(232,175,56,0) 74%);
@@ -86,15 +86,15 @@
   position:absolute;
   left:min(44px,3.0556vw);
   right:min(44px,3.0556vw);
-  top:min(38px,2.6389vw);
+  top:min(38px,2.6389vw,calc(var(--u) * 38));
   display:block;
 }
 
 .lw-label{
   display:flex;align-items:center;
   font-family:'Space Mono',monospace;font-weight:400;
-  font-size:min(9.5px,0.65972vw);
-  letter-spacing:min(2.47px,0.171528vw);
+  font-size:min(9.5px,0.65972vw,calc(var(--u) * 9.5));
+  letter-spacing:min(2.47px,0.171528vw,calc(var(--u) * 2.47));
   text-transform:uppercase;
   color:rgba(232,175,56,0.9);
   line-height:1.45;
@@ -102,16 +102,16 @@
 }
 .lw-label .rule{
   flex:0 0 auto;
-  width:min(26px,1.80556vw);height:1.5px;
-  margin-right:min(14px,0.97222vw);
+  width:min(26px,1.80556vw,calc(var(--u) * 26));height:1.5px;
+  margin-right:min(14px,0.97222vw,calc(var(--u) * 14));
   background:#E8AF38;
 }
 
 .lw-sentence{
   display:block;
-  margin-top:min(26px,1.80556vw);
+  margin-top:min(26px,1.80556vw,calc(var(--u) * 26));
   font-family:'Fraunces',serif;font-weight:400;
-  font-size:min(31px,2.15278vw);
+  font-size:min(31px,2.15278vw,calc(var(--u) * 31));
   line-height:1.34;
   letter-spacing:-0.012em;
   color:#F8F4E9;
@@ -148,8 +148,8 @@
   position:absolute;
   left:min(44px,3.0556vw);
   right:min(44px,3.0556vw);
-  bottom:min(24px,1.6667vw);
-  padding-top:min(25px,1.73611vw);
+  bottom:min(24px,1.6667vw,calc(var(--u) * 24));
+  padding-top:min(25px,1.73611vw,calc(var(--u) * 25));
   border-top:1px solid rgba(232,175,56,0.26);
   display:block;
 }
@@ -157,8 +157,8 @@
   display:block;                     /* its own line box, so the foot is exactly
                                         the reference's 25px + 17px tall */
   font-family:'Space Mono',monospace;font-weight:400;
-  font-size:min(12px,0.83333vw);
-  letter-spacing:min(3.12px,0.216667vw);
+  font-size:min(12px,0.83333vw,calc(var(--u) * 12));
+  letter-spacing:min(3.12px,0.216667vw,calc(var(--u) * 3.12));
   text-transform:uppercase;
   color:#E8AF38;
   line-height:1.4;
@@ -196,23 +196,23 @@
 
 /* ── Mobile: the approved 375 frame ── */
 @media(max-width:767px){
-  .lw-mount{height:min(60.2667vw,300px)}
+  .lw-mount{height:min(60.2667vw,300px,calc(var(--u) * 226))}
   .lw-bleed{inset:max(-40px,-10.6667vw);filter:blur(min(20px,5.3333vw))}
   .lw-body{
     left:min(6.4vw,32px);right:min(6.4vw,32px);
-    top:min(5.8667vw,30px);
+    top:min(5.8667vw,30px,calc(var(--u) * 22));
   }
-  .lw-label{font-size:min(2.1333vw,11px);letter-spacing:min(0.512vw,2.6px)}
-  .lw-label .rule{width:min(5.3333vw,27px);margin-right:min(2.6667vw,14px)}
+  .lw-label{font-size:min(2.1333vw,11px,calc(var(--u) * 8));letter-spacing:min(0.512vw,2.6px,calc(var(--u) * 1.92))}
+  .lw-label .rule{width:min(5.3333vw,27px,calc(var(--u) * 20));margin-right:min(2.6667vw,14px,calc(var(--u) * 10))}
   .lw-sentence{
-    margin-top:min(4.2667vw,22px);
-    font-size:min(5.3333vw,28px);
+    margin-top:min(4.2667vw,22px,calc(var(--u) * 16));
+    font-size:min(5.3333vw,28px,calc(var(--u) * 20));
     line-height:1.36;
   }
   .lw-foot{
     left:min(6.4vw,32px);right:min(6.4vw,32px);
-    bottom:min(4.8vw,24px);
-    padding-top:min(4.8vw,24px);
+    bottom:min(4.8vw,24px,calc(var(--u) * 18));
+    padding-top:min(4.8vw,24px,calc(var(--u) * 20));
   }
-  .lw-cta{font-size:min(2.8vw,14px);letter-spacing:min(0.672vw,3.4px)}
+  .lw-cta{font-size:min(2.8vw,14px,calc(var(--u) * 10.5));letter-spacing:min(0.672vw,3.4px,calc(var(--u) * 2.52))}
 }
