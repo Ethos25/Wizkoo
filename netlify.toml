@@ -6,13 +6,6 @@
 [functions."moderation-digest"]
   schedule = "0 14 * * 0"
 
-# ── Function alias: the homepage form POSTs /api/validate-theme ─────────────
-[[redirects]]
-  from    = "/api/validate-theme"
-  to      = "/.netlify/functions/validate-theme"
-  status  = 200
-  force   = true
-
 # ── /plan cutover to app.wizkoo.com (WP-6 Stage 3, July 12, 2026) ───────────
 # 302 is deliberate and load-bearing: browsers cache 301s forever, which would
 # kill the Stage 3 rollback (flip back to proxy). The 301 upgrade belongs to
