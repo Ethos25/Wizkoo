@@ -41,7 +41,9 @@
 (function () {
   'use strict';
 
-  /* Transport switch. null = queue only, nothing leaves the browser. */
+  /* Transport off pending privacy policy update — do not enable without
+     command clearance.
+     null = queue only, nothing leaves the browser. */
   var ENDPOINT = null;
 
   var queue = (window.wzEvents = window.wzEvents || []);

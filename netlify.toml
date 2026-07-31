@@ -2,9 +2,10 @@
   publish = "."
   functions = "netlify/functions"
 
-# ── Scheduled digest: Sundays 14:00 UTC (9 AM EST / 10 AM EDT) ─────────────
-[functions."moderation-digest"]
-  schedule = "0 14 * * 0"
+# moderation-digest retired 2026-07-31 (Excellence Round 1 addendum, ruling 3).
+# It read what validate-theme wrote; validate-theme died with the intake form,
+# so the digest would have emailed an empty report every Sunday forever.
+# Function file and its schedule both removed. Git history preserves both.
 
 # ── /plan cutover to app.wizkoo.com (WP-6 Stage 3, July 12, 2026) ───────────
 # 302 is deliberate and load-bearing: browsers cache 301s forever, which would
