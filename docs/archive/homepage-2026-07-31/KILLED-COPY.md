@@ -93,10 +93,31 @@ The form (`<form id="nh-form">`, index.html:1452–1544) was removed with its ri
 | `Wiggly kid?` | **KEPT** — see `KEPT-COPY.md`. |
 | `We weave themed movement in — dance breaks, obstacle play, outdoor missions.` | **KEPT** — see `KEPT-COPY.md`. |
 | `MORE KIDS? ADD THEM NEXT` | **KEPT** — see `KEPT-COPY.md`. |
-| `EVERY US STANDARD · AUTOMATICALLY` | **PROTECTED** — untouched, survives above the ruled hero line. |
-| `What we ask first.` and the full desk-card body | **PROTECTED** — untouched; live anonymity-architecture motif. |
+| `EVERY US STANDARD · AUTOMATICALLY` | ~~PROTECTED~~ → **RETIRED in the Hero Round.** See section 5. |
+| `What we ask first.` and the full desk-card body | **PROTECTED** — untouched; live anonymity-architecture motif. Demoted below the fold in the Hero Round; copy unchanged. |
 | `No credit card for first plan.` | **PROTECTED** — untouched in the founder slot. |
 
 ---
 
-**Count: 30 strings retired.**
+## 5. Hero Round — the Living Window (2026-07-31)
+
+Retired by ruling when the hero was rebuilt around the living window.
+Both entries were previously protected. **Protected status was protection from
+*unruled* edits; these are ruled supersessions**, and are recorded as such.
+
+| # | Verbatim string | Original location | Ruling |
+|---|---|---|---|
+| 31 | `Everyone keeps asking how you'll know they're learning. Some nights you lie there asking the same thing.` | index.html — `<h1 class="hero-line">`, shipped in Excellence Round 1 | **RETIRED, not moved.** `SUPERSEDED-BY-DISPLAY-SCALE-LAW`: hero copy is ruled at poster scale, and 18 words cannot occupy an 8-word arrest slot. **May return in body contexts by future ruling. It ships nowhere in the hero.** |
+| 32 | `Every US standard · Automatically` (rendered `EVERY US STANDARD · AUTOMATICALLY`) | index.html — `<div class="left-header">` eyebrow, above the hero line | **RETIRED from the hero.** The support slot carries the same claim in the truer form. The 2026-07-30 audit flagged "Every US standard" as an unsupported absolute (T4); "your state's standards" is exact-strength. One "automatically" per viewport. |
+
+### Note on string 31's line-break markup
+The retired line shipped with composed breaks. Recorded so the composition is
+recoverable, not just the words:
+
+- 1440, four lines: `Everyone keeps asking` / `how you'll know they're learning.` / `Some nights you lie there` / `asking the same thing.`
+- 375, five lines: an additional break after `how you'll know`.
+- The terminal period carried the hero's single saffron moment (`<span class="hl-dot">.</span>`).
+
+---
+
+**Count: 32 strings retired.**

@@ -1,0 +1,186 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   THE LIVING WINDOW
+   A postcard-to-A5 rendering of the certified /start sentence canvas
+   (wizkoo-app, wp-14-spectacle), mounted on the linen hero as a crafted
+   object. One component, one stylesheet.
+
+   WINDOW-LITE: the sentence and the once-per-sight ghost demonstration
+   only. No instruments, no submit, no interactivity inside the pane.
+   The window's single action is opening the door.
+
+   MOTION LAW: the demonstration is the ONLY motion in this hero.
+   No parallax, no scroll effects, no ken-burns, no ambient loops, and
+   deliberately no twinkle on the starfield. One breath, then stillness.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.lw{
+  display:block;
+  width:100%;
+  max-width:430px;                 /* postcard-to-A5 scale */
+  text-decoration:none;
+  color:inherit;
+  cursor:pointer;                  /* the window invites */
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ── The frame: real material, lit by warm daylight from upper left ──
+   Top and left edges catch the light. Right and bottom fall into shade.
+   The cast shadow falls down and to the right, consistent with that light. */
+.lw-frame{
+  position:relative;
+  border-radius:5px;
+  padding:17px 17px 0;
+  background:linear-gradient(158deg,#F3EEE0 0%,#E6E0CE 34%,#D3CCB8 74%,#C6BFAA 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.92),
+    inset 2px 0 0 rgba(255,255,255,0.50),
+    inset -2px 0 0 rgba(12,16,32,0.10),
+    inset 0 -2px 0 rgba(12,16,32,0.15),
+    0 1px 1px rgba(12,16,32,0.06),
+    0 3px 6px rgba(12,16,32,0.07),
+    0 14px 26px -8px rgba(12,16,32,0.24),
+    0 34px 60px -24px rgba(12,16,32,0.32),
+    0 60px 90px -50px rgba(12,16,32,0.30);
+  transition:transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s cubic-bezier(.16,1,.3,1);
+}
+
+/* ── The pane: night material, recessed into the frame ── */
+.lw-pane{
+  position:relative;
+  overflow:hidden;
+  border-radius:2px;
+  padding:clamp(34px,3.9vw,46px) clamp(24px,2.8vw,32px);
+  background:
+    radial-gradient(ellipse 70% 55% at 26% 20%,rgba(36,78,138,0.30) 0%,transparent 62%),
+    radial-gradient(ellipse 60% 50% at 78% 74%,rgba(66,42,122,0.22) 0%,transparent 66%),
+    radial-gradient(ellipse at 50% 45%,#1a2a50 0%,#121c36 58%,#0c1424 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(12,16,32,0.60),
+    inset 0 3px 16px rgba(0,0,0,0.60),
+    0 -1px 0 rgba(255,255,255,0.30),
+    0 1px 0 rgba(12,16,32,0.12);
+}
+
+/* Starfield: static. Restraint is the point. Never animated. */
+.lw-pane::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(1.3px 1.3px at 11% 19%,rgba(255,255,255,0.50) 50%,transparent 51%),
+    radial-gradient(1px 1px at 23% 71%,rgba(255,255,255,0.34) 50%,transparent 51%),
+    radial-gradient(1.4px 1.4px at 37% 12%,rgba(255,255,255,0.42) 50%,transparent 51%),
+    radial-gradient(1px 1px at 46% 84%,rgba(255,255,255,0.28) 50%,transparent 51%),
+    radial-gradient(1.2px 1.2px at 58% 31%,rgba(255,255,255,0.38) 50%,transparent 51%),
+    radial-gradient(1px 1px at 67% 63%,rgba(255,255,255,0.26) 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 79% 22%,rgba(255,255,255,0.46) 50%,transparent 51%),
+    radial-gradient(1px 1px at 88% 78%,rgba(255,255,255,0.30) 50%,transparent 51%),
+    radial-gradient(1.1px 1.1px at 93% 41%,rgba(255,255,255,0.34) 50%,transparent 51%),
+    radial-gradient(1px 1px at 16% 47%,rgba(255,255,255,0.24) 50%,transparent 51%),
+    radial-gradient(1.2px 1.2px at 71% 8%,rgba(255,255,255,0.32) 50%,transparent 51%),
+    radial-gradient(1px 1px at 52% 57%,rgba(255,255,255,0.22) 50%,transparent 51%);
+  background-repeat:no-repeat;
+}
+
+/* ── The chalk sentence ── */
+.lw-sentence{
+  position:relative;
+  z-index:1;
+  margin:0;
+  font-family:'Fraunces',serif;
+  font-weight:300;
+  font-style:italic;
+  font-size:clamp(1rem,1.32vw,1.22rem);
+  line-height:1.74;
+  letter-spacing:-0.008em;
+  color:rgba(240,242,248,0.90);
+  text-wrap:pretty;
+}
+
+/* Ghosts: the blanks the product fills. Saffron 0.55, underlined. */
+.lw-ghost{
+  font-style:normal;
+  font-weight:400;
+  color:rgba(232,175,56,0.55);
+  border-bottom:1px solid rgba(232,175,56,0.30);
+  padding-bottom:1px;
+  white-space:nowrap;
+}
+
+/* The theme ghost is the only element that moves. */
+.lw-theme{display:inline-block}
+.lw-theme.lw-out{
+  opacity:0;
+  transform:translateY(-0.16em);
+  transition:opacity 240ms cubic-bezier(.5,0,1,1), transform 240ms cubic-bezier(.5,0,1,1);
+}
+.lw-theme.lw-pre{opacity:0;transform:translateY(0.16em);transition:none}
+.lw-theme.lw-in{
+  opacity:1;
+  transform:translateY(0);
+  transition:opacity 280ms cubic-bezier(.16,1,.3,1), transform 280ms cubic-bezier(.16,1,.3,1);
+}
+
+/* ── The sill: the window's caption and handle. Not a stranded button. ── */
+.lw-sill{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:15px 6px 17px;
+}
+.lw-handle{
+  font-family:'Space Mono',monospace;
+  font-weight:700;
+  font-size:0.58rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:rgba(12,16,32,0.74);
+  line-height:1;
+}
+.lw-arrow{
+  display:inline-block;
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;
+  color:var(--saffron-deep,#B88414);
+  line-height:1;
+  transition:transform .35s cubic-bezier(.16,1,.3,1);
+}
+
+/* ── The door opens: hover lifts the window gently, nothing else ── */
+@media(hover:hover){
+  .lw:hover .lw-frame{
+    transform:translateY(-4px);
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,0.96),
+      inset 2px 0 0 rgba(255,255,255,0.54),
+      inset -2px 0 0 rgba(12,16,32,0.10),
+      inset 0 -2px 0 rgba(12,16,32,0.15),
+      0 1px 1px rgba(12,16,32,0.06),
+      0 4px 8px rgba(12,16,32,0.07),
+      0 20px 34px -8px rgba(12,16,32,0.26),
+      0 46px 76px -26px rgba(12,16,32,0.34),
+      0 76px 110px -54px rgba(12,16,32,0.32);
+  }
+  .lw:hover .lw-arrow{transform:translateX(3px)}
+  .lw:hover .lw-handle{color:rgba(12,16,32,0.92)}
+}
+.lw:focus-visible{outline:none}
+.lw:focus-visible .lw-frame{outline:2px solid var(--saffron-deep,#B88414);outline-offset:6px}
+
+/* ── Reduced motion: the settled state, no cycle, no lift ── */
+@media(prefers-reduced-motion:reduce){
+  .lw-frame,.lw-arrow{transition:none!important}
+  .lw-theme{opacity:1!important;transform:none!important;transition:none!important}
+  .lw:hover .lw-frame{transform:none}
+}
+
+/* ── Mobile ── */
+@media(max-width:767px){
+  .lw{max-width:none}
+  .lw-frame{padding:14px 14px 0}
+  .lw-pane{padding:30px 22px}
+  .lw-sentence{font-size:1.02rem;line-height:1.76}
+  .lw-handle{font-size:0.55rem;letter-spacing:0.18em}
+}

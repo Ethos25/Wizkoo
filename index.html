@@ -920,7 +920,11 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .nap-evidence:hover{transform:none;box-shadow:none}
 }
 
-/* ═══ HERO ═══ */
+/* ═══ HERO — THE LIVING WINDOW ═══ */
+/* Composition: arrest at poster scale -> answer beat -> the window as living
+   proof -> the door. The window fragment styles itself (css/hero-window.css).
+   Motion law: the window's demonstration is the only motion in this hero. */
+
 /* Accessibility utility — preserved from V13; architectural move to shared file deferred */
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
@@ -938,29 +942,61 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .desk-foot .left-sig{color:#0C1020;font-weight:700}
 .desk-foot em{font-style:normal;color:var(--ink-45)}
 
-/* -- Hero layout: one column, one hero (Excellence Round 1) -- */
-.hero{padding:72px 0 96px;position:relative;min-height:100vh;background:radial-gradient(ellipse 60% 80% at 50% 25%,transparent 90%,rgba(200,140,15,0.06) 100%)}
+/* -- Stage -- */
+.hero{padding:0;position:relative;background:radial-gradient(ellipse 60% 80% at 50% 25%,transparent 90%,rgba(200,140,15,0.06) 100%)}
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 56px;box-sizing:border-box}
-.hero-lede{position:relative;z-index:1;display:flex;flex-direction:column;max-width:1040px}
+.hero-stage{
+  position:relative;z-index:1;
+  min-height:100vh;min-height:100svh;
+  display:grid;
+  grid-template-columns:1fr minmax(340px,0.82fr);
+  gap:clamp(36px,5vw,88px);
+  align-items:center;
+  padding:clamp(88px,10vh,116px) 0 clamp(72px,12vh,148px);
+}
 
-/* -- Eyebrow (protected copy) -- */
-.left-header{display:flex;align-items:center;gap:14px;margin-bottom:clamp(36px,6vh,60px);font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--ink-45)}
-.left-header .tick{width:20px;height:1px;background:#E8AF38;opacity:0.9;display:inline-block}
-.left-header .saffron{color:#E8AF38;font-weight:700}
+/* -- The argument -- */
+.hero-argument{max-width:640px}
+.hero-arrest{
+  font-family:'Fraunces',serif;font-weight:600;
+  font-size:clamp(2.45rem,5.3vw,4.6rem);
+  line-height:1.02;letter-spacing:-0.036em;
+  color:#0C1020;margin:0;text-wrap:balance;
+}
+.hero-answer{
+  font-family:'Fraunces',serif;font-weight:600;font-style:italic;
+  font-size:clamp(1.85rem,3.8vw,3.25rem);
+  line-height:1.06;letter-spacing:-0.03em;
+  color:var(--saffron-deep,#B88414);
+  margin:clamp(12px,1.8vh,22px) 0 0;
+}
+.hero-support{
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;
+  font-size:clamp(0.9rem,1.05vw,1rem);
+  line-height:1.7;letter-spacing:-0.01em;
+  color:rgba(12,16,32,0.58);
+  margin:clamp(20px,3vh,34px) 0 0;
+  max-width:38ch;text-wrap:pretty;
+}
 
-/* -- The ruled line. Two sentences, two registers: the question the world
-      keeps asking (receded), then the same question from the inside (present).
-      One saffron moment: the terminal dot. -- */
-.hero-line{font-family:'Fraunces',serif;font-size:clamp(2rem,4.1vw,3.8rem);line-height:1.07;letter-spacing:-0.032em;color:#0C1020;margin:0;text-wrap:pretty}
-.hero-line .hl-s{display:block;font-weight:300;font-style:normal;color:rgba(12,16,32,0.62)}
-.hero-line .hl-s-turn{margin-top:0.34em;font-weight:600;color:#0C1020}
-.hero-line .hl-bm{display:none}
-.hero-line .hl-dot{color:#E8AF38}
+/* -- The proof -- */
+.hero-proof{display:flex;align-items:center;justify-content:flex-start}
 
-/* -- The turn: the desk card, and where the form used to stand, one quiet exit -- */
-.hero-turn{display:flex;align-items:flex-end;justify-content:flex-start;gap:clamp(36px,6vw,92px);margin-top:clamp(40px,7vh,76px)}
-.hero-turn .desk{margin-top:0;margin-bottom:0;flex:0 1 460px;max-width:460px}
-.hero-sample{flex:0 0 auto;margin-bottom:10px;font-family:'Space Mono',monospace;font-weight:600;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:#0C1020;text-decoration:none;white-space:nowrap;padding-bottom:7px;border-bottom:1px solid rgba(232,175,56,0.5);transition:border-bottom-color .25s var(--expo),color .25s var(--expo)}
+/* -- Below the fold: the quiet aside -- */
+.hero-aside{
+  display:flex;align-items:flex-end;
+  gap:clamp(32px,5vw,84px);
+  padding-bottom:clamp(56px,9vh,104px);
+}
+.hero-aside .desk{margin:0;flex:0 1 460px;max-width:460px}
+.hero-sample{
+  flex:0 0 auto;margin-bottom:10px;
+  font-family:'Space Mono',monospace;font-weight:600;
+  font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:#0C1020;text-decoration:none;white-space:nowrap;
+  padding-bottom:7px;border-bottom:1px solid rgba(232,175,56,0.5);
+  transition:border-bottom-color .25s var(--expo),color .25s var(--expo);
+}
 .hero-sample .arrow{display:inline-block;margin-left:0.5em;transition:transform .25s var(--expo)}
 .hero-sample:hover{border-bottom-color:#E8AF38}
 .hero-sample:hover .arrow{transform:translateX(3px)}
@@ -969,57 +1005,66 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- Paper grain scoped to hero (Resolution A: position:absolute not fixed, avoids sky-system conflict) -- */
 section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.80 0 0 0 0 0.72 0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;mix-blend-mode:multiply}
 
-/* -- Short-height desktop (compressed laptop, e.g. 1280×540) -- */
+/* -- Short-height desktop (compressed laptop, e.g. 1280x540) -- */
 @media(max-height:700px) and (min-width:768px){
   body::after{width:40vmax;left:6%;top:-8%}
-  .hero{padding:40px 0 48px}
-  .left-header{margin-bottom:30px}
-  .hero-line{font-size:clamp(1.65rem,2.95vw,2.45rem)}
-  .hero-turn{margin-top:32px}
-  .hero-turn .desk{flex-basis:420px;max-width:420px}
+  .hero-stage{padding:88px 0 40px;gap:clamp(28px,4vw,56px)}
+  .hero-arrest{font-size:clamp(1.85rem,3.5vw,2.7rem)}
+  .hero-answer{font-size:clamp(1.4rem,2.5vw,2rem)}
+  .hero-support{font-size:0.86rem;margin-top:16px}
+  .lw-pane{padding:22px 22px}
+  .lw-sentence{font-size:1rem;line-height:1.62}
+  .hero-aside{padding-bottom:56px}
 }
 
-/* -- 1440×396: Windows 200% scale + bookmarks bar + Chrome zoom (production viewport) -- */
+/* -- 1440x396: Windows 200% scale + bookmarks bar + Chrome zoom (production viewport) -- */
 @media(max-height:540px) and (min-width:768px){
-  .hero{padding:22px 0 26px;min-height:0}
-  .left-header{margin-bottom:18px}
-  .hero-line{font-size:clamp(1.35rem,2.35vw,1.9rem)}
-  .hero-turn{margin-top:22px}
-  .hero-turn .desk{flex-basis:400px;max-width:400px}
+  .hero-stage{min-height:0;padding:66px 0 26px;gap:clamp(24px,3.4vw,44px);align-items:center}
+  .hero-arrest{font-size:clamp(1.5rem,2.7vw,2.05rem);line-height:1.05}
+  .hero-answer{font-size:clamp(1.15rem,2vw,1.55rem);margin-top:8px}
+  .hero-support{font-size:0.78rem;line-height:1.6;margin-top:12px;max-width:42ch}
+  .lw-frame{padding:9px 9px 0}
+  .lw-pane{padding:16px 18px}
+  .lw-sentence{font-size:0.88rem;line-height:1.56}
+  .lw-sill{padding:8px 4px 9px}
+  .lw-handle{font-size:0.52rem}
+  .hero-aside{padding-bottom:40px}
   .desk{padding:14px 18px 12px}
-  .desk-head{margin-bottom:6px}
   .desk-title{font-size:18px}
   .desk-body{font-size:12.5px;line-height:1.45}
   .desk-foot{margin-top:8px;padding-top:6px}
-  .hero-sample{font-size:0.66rem;margin-bottom:6px}
 }
 
 @media(max-height:440px) and (min-width:768px){
-  .hero{padding:12px 0 16px}
-  .left-header{margin-bottom:12px}
-  .hero-line{font-size:clamp(1.15rem,1.95vw,1.55rem);line-height:1.1}
-  .hero-turn{margin-top:14px}
-  .desk{padding:10px 14px 8px}
-  .desk-title{font-size:16px}
-  .desk-body{font-size:11.5px;line-height:1.38}
-  .desk-foot{margin-top:5px;padding-top:4px;font-size:7.5px}
+  .hero-stage{padding:56px 0 18px}
+  .hero-arrest{font-size:clamp(1.3rem,2.2vw,1.7rem)}
+  .hero-answer{font-size:clamp(1rem,1.7vw,1.3rem)}
+  .hero-support{font-size:0.74rem;margin-top:10px}
+  .lw-pane{padding:13px 16px}
+  .lw-sentence{font-size:0.82rem;line-height:1.5}
 }
 
-/* -- Mobile (375×667 iPhone SE baseline) -- */
+/* -- Mobile (375x667 iPhone SE baseline) -- */
 @media(max-width:767px){
-  .hero{padding:44px 0 64px;min-height:100svh}
   .wrap{padding:0 24px}
-  .hero-lede{max-width:none}
-  .left-header{margin-bottom:28px;gap:10px;font-size:8.5px;letter-spacing:0.2em}
-  .hero-line{font-size:clamp(1.3rem,6.2vw,1.85rem);line-height:1.14;letter-spacing:-0.026em}
-  .hero-line .hl-bm{display:inline}
-  .hero-line .hl-s-turn{margin-top:0.44em}
-  .hero-turn{flex-direction:column;align-items:flex-start;gap:26px;margin-top:34px}
-  .hero-turn .desk{flex:none;width:100%;max-width:none}
+  .hero-stage{
+    grid-template-columns:1fr;
+    gap:clamp(30px,5vh,44px);
+    min-height:100svh;
+    padding:88px 0 40px;
+    align-content:center;
+  }
+  .hero-argument{max-width:none}
+  .hero-arrest{font-size:clamp(2rem,9.2vw,2.7rem);line-height:1.06;letter-spacing:-0.03em}
+  .hero-answer{font-size:clamp(1.5rem,6.6vw,2rem);margin-top:10px}
+  .hero-support{font-size:0.92rem;margin-top:16px;max-width:none}
+  .hero-proof{justify-content:stretch}
+  .hero-aside{flex-direction:column;align-items:flex-start;gap:26px;padding-bottom:64px}
+  .hero-aside .desk{flex:none;width:100%;max-width:none}
   .hero-sample{margin-bottom:0}
 }
 
-/* -- iPhone Plus refinement (430×932) -- */
+/* -- iPhone Plus refinement (430x932) -- */
 @media(min-width:400px) and (max-width:767px){
   .wrap{padding:0 28px}
 }
@@ -1140,6 +1185,7 @@ body.page-home{
 <meta name="twitter:image" content="https://wizkoo.com/wizkoo-og.png">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/hero-window.css">
 </head>
 <body class="page-home" data-footer-treatment="b">
 <!-- ═══ SKY SYSTEM: cream wash (fixed, behind all content) ═══ -->
@@ -1288,43 +1334,60 @@ document.addEventListener('DOMContentLoaded', function() {
   onScroll();
 });
 </script>
-<!-- ═══ HERO — single editorial column (Excellence Round 1) ═══ -->
+<!-- ═══ HERO — THE LIVING WINDOW ═══ -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-lede">
 
-      <div class="left-header">
-        <span class="tick"></span>
-        <span>Every <span class="saffron">US standard</span></span>
-        <span>&middot;</span>
-        <span>Automatically</span>
+    <div class="hero-stage">
+
+      <div class="hero-argument">
+        <!-- HERO_COPY_PENDING: ARREST. Placeholder, ruled string pending. Slot law: <=8 words, poster scale. -->
+        <h1 class="hero-arrest">Are they actually on track?</h1>
+        <!-- HERO_COPY_PENDING: ANSWER. Placeholder, ruled string pending. Slot law: <=3 words, saffron confidence. -->
+        <p class="hero-answer">You'll know.</p>
+        <!-- HERO_COPY_PENDING: SUPPORT. Placeholder, ruled string pending. Slot law: one breath. -->
+        <p class="hero-support">Every activity tracked to your state's standards. Automatically.</p>
       </div>
 
-      <h1 class="hero-line">
-        <span class="hl-s">Everyone keeps asking<br>how you'll know<br class="hl-bm"> they're learning.</span>
-        <span class="hl-s hl-s-turn">Some nights you lie there<br>asking the same thing<span class="hl-dot">.</span></span>
-      </h1>
-
-      <div class="hero-turn">
-        <article class="desk">
-          <div class="desk-head">
-            <div class="desk-title">What we ask first.</div>
+      <!-- The living window. The answer beat is not a claim; this is the
+           product performing. Fragment files: css/hero-window.css + js/hero-window.js -->
+      <div class="hero-proof">
+        <a class="lw" href="https://app.wizkoo.com/start" data-wz-cta="hero-living-window" aria-label="Build our week">
+          <div class="lw-frame">
+            <div class="lw-pane">
+              <p class="lw-sentence">Build a week for <span class="lw-ghost">your kid</span>, <span class="lw-ghost">6</span>, in <span class="lw-ghost">your state</span> exploring <span class="lw-ghost lw-theme">their thing</span>.</p>
+            </div>
+            <div class="lw-sill">
+              <span class="lw-handle">Build Our Week</span>
+              <span class="lw-arrow" aria-hidden="true">&#x2192;</span>
+            </div>
           </div>
-          <p class="desk-body">
-            What your child <strong>can't stop talking about.</strong>
-            <span class="hl">Dragons. Tornadoes. Volcanoes.</span>
-            The week builds from there, and every standard still gets met.
-            <a href="/methodology" class="hl">20-minute blocks</a>, the way kids actually work.
-          </p>
-          <div class="desk-foot">
-            <span class="left-sig">&mdash; The Wizkoo Desk</span>
-            <em id="desk-sig">Monday, afternoon</em>
-          </div>
-        </article>
-        <a class="hero-sample" href="#sample-week" data-wz-cta="hero-sample-week">See a sample week<span class="arrow">&#x2192;</span></a>
+        </a>
       </div>
 
     </div>
+
+    <!-- Desk card: demoted below the fold. A quiet aside; it may not compete
+         with the hero argument. -->
+    <aside class="hero-aside">
+      <article class="desk">
+        <div class="desk-head">
+          <div class="desk-title">What we ask first.</div>
+        </div>
+        <p class="desk-body">
+          What your child <strong>can't stop talking about.</strong>
+          <span class="hl">Dragons. Tornadoes. Volcanoes.</span>
+          The week builds from there, and every standard still gets met.
+          <a href="/methodology" class="hl">20-minute blocks</a>, the way kids actually work.
+        </p>
+        <div class="desk-foot">
+          <span class="left-sig">&mdash; The Wizkoo Desk</span>
+          <em id="desk-sig">Monday, afternoon</em>
+        </div>
+      </article>
+      <a class="hero-sample" href="#sample-week" data-wz-cta="hero-sample-week">See a sample week<span class="arrow">&#x2192;</span></a>
+    </aside>
+
   </div>
 </section>
 <!-- ═══ LINEN HERO (GRANDDAD SECTION) ═══ -->
@@ -1752,6 +1815,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="site-footer"></div>
 <script src="/components/footer.js"></script>
 <script src="/js/wz-events.js" defer></script>
+<script src="/js/hero-window.js" defer></script>
 
 <script>
 // ═══ CUSTOM CURSOR ═══
