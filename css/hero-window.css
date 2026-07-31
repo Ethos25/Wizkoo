@@ -1,212 +1,218 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   THE LIVING WINDOW
+   THE WINDOW: 4A, matched to the approved reference frame
 
-   An aperture in the page, not a screen on it. There is no frame, no bezel,
-   no chrome, no plaque. The night material meets the linen directly, and the
-   craft is entirely in that boundary:
+   Object treatment, all values measured off the approved frame: a 1px inner
+   border at 10% white, a ten-layer shadow stack (inner vignette, inner border,
+   top inner highlight, outer gold hairline, gold glow, blue ambient, then four
+   overlapping casts down and to the right, consistent with the photograph's
+   light from upper left), and a soft luminous bleed outside the boundary so it
+   reads as a light source rather than a shape.
 
-     the lip      the cut face of the page catching daylight from upper left
-     the depth    the page overhangs, so the opening's top and left fall dark
-     the return   light that entered lands faintly on the lower right interior
-     the dusk     atmosphere from inside breathing out onto the linen
+   The interior is NOT drawn here. It is the certified TwoLayerSky primitive,
+   ported verbatim (css/hero-sky.css, js/hero-sky.js). The sky element is laid
+   out at the primitive's own reference frame size and clipped by this window,
+   so what shows is a literal piece of the product's sky at certified density.
 
-   The whole surface is the door. The handle is set inside the lower edge, so
-   it belongs to the object rather than captioning it.
+   MOTION LAW: the certified sky's own drift, plus one demonstration beat (the
+   theme word's ghost-to-gold arrival, once per first sight, latched), plus the
+   hover lift. Nothing else moves.
 
-   MOTION LAW: the demonstration and the hover lift are the ONLY motion in
-   this hero. No parallax, no scroll effects, no ken-burns, no ambient loops,
-   and deliberately no twinkle on the starfield. One breath, then stillness.
+   Scale: reference value V is min(Vpx, (V/14.4)vw), exact at 1440.
    ═══════════════════════════════════════════════════════════════════════ */
 
-.lw{
-  display:block;
-  width:100%;
-  max-width:700px;                 /* fills its column, so the gutter to the
-                                      photograph is the grid's own gutter */
-  text-decoration:none;
-  color:inherit;
-  cursor:pointer;                  /* the window invites */
-  -webkit-tap-highlight-color:transparent;
+.lw-mount{
+  position:relative;
+  height:min(340px,23.6111vw);
 }
 
-/* ── The opening ── */
-.lw-cut{
-  position:relative;
-  border-radius:1px;                 /* a cut in paper is crisp */
-  padding:clamp(48px,10.6vh,124px) clamp(28px,3vw,44px) clamp(58px,9.6vh,112px);
+/* The luminous bleed: outside the window, under it, blurred. */
+.lw-bleed{
+  position:absolute;
+  inset:max(-64px,-4.4444vw);
+  z-index:0;
+  pointer-events:none;
+  filter:blur(min(28px,1.9444vw));
   background:
-    radial-gradient(ellipse 76% 58% at 24% 16%,rgba(38,82,144,0.32) 0%,transparent 64%),
-    radial-gradient(ellipse 62% 52% at 80% 78%,rgba(68,44,126,0.24) 0%,transparent 68%),
-    radial-gradient(ellipse at 50% 44%,#1a2a50 0%,#121c36 58%,#0b1222 100%);
-  /* A hole casts no shadow onto its own page, so there is no drop shadow here.
-     What sells the opening is the paper's cut face: with daylight from the
-     upper left, the bottom and right interior walls are lit linen, and the top
-     and left walls are the overhang falling into the dark. */
+    radial-gradient(58% 58% at 50% 48%,rgba(24,40,72,0.30) 0%,rgba(24,40,72,0) 72%),
+    radial-gradient(44% 38% at 52% 22%,rgba(232,175,56,0.16) 0%,rgba(232,175,56,0) 74%);
+}
+
+.lw{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:block;
+  overflow:hidden;
+  border-radius:2px;
+  background-color:#101830;
+  text-decoration:none;
+  color:inherit;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
   box-shadow:
-    /* occlusion: the linen darkens a hair right at the cut, and the dusk
-       inside breathes a short distance out onto the page */
-    0 0 0 1px rgba(28,40,70,0.10),
-    0 2px 5px -1px rgba(24,36,68,0.13),
-    0 9px 20px -12px rgba(24,36,68,0.20),
-    /* the cut face, lit: bottom wall then right wall */
-    inset 0 -2px 0 rgba(250,246,234,0.34),
-    inset -2px 0 0 rgba(250,246,234,0.19),
-    /* the overhang, dark: top wall then left wall */
-    inset 0 2px 0 rgba(4,8,18,0.88),
-    inset 2px 0 0 rgba(4,8,18,0.52),
-    /* the depth the overhang throws into the opening */
-    inset 0 11px 24px -4px rgba(0,0,0,0.62),
-    inset 8px 0 20px -7px rgba(0,0,0,0.44),
-    inset 0 -9px 22px -9px rgba(0,0,0,0.22);
+    rgba(6,10,22,0.6) 0 0 140px 56px inset,
+    rgba(255,255,255,0.1) 0 0 0 1px inset,
+    rgba(255,255,255,0.14) 0 1px 0 0 inset,
+    rgba(232,175,56,0.1) 0 0 0 1px,
+    rgba(232,175,56,0.18) 0 0 64px -6px,
+    rgba(24,40,72,0.32) 0 0 130px 12px,
+    rgba(10,15,30,0.34) 6px 8px 16px -8px,
+    rgba(10,15,30,0.42) 14px 20px 40px -16px,
+    rgba(10,15,30,0.5) 26px 44px 80px -34px,
+    rgba(16,24,48,0.55) 40px 80px 130px -70px;
   transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s cubic-bezier(.16,1,.3,1);
 }
 
-/* Starfield: static. Restraint is the point. Never animated. */
-.lw-cut::before{
-  content:'';
+/* The certified sky, at the primitive's own reference frame size (1232x420),
+   centred and clipped. Squashing a whole sky into this window would multiply
+   its per-area density; this shows a piece of it instead. */
+.lw-sky{
   position:absolute;
-  inset:0;
-  border-radius:2px;
+  left:50%;top:50%;
+  width:1232px;height:420px;
+  transform:translate(-50%,-50%);
   pointer-events:none;
-  background-image:
-    radial-gradient(1.3px 1.3px at 11% 19%,rgba(255,255,255,0.50) 50%,transparent 51%),
-    radial-gradient(1px 1px at 23% 71%,rgba(255,255,255,0.34) 50%,transparent 51%),
-    radial-gradient(1.4px 1.4px at 37% 12%,rgba(255,255,255,0.42) 50%,transparent 51%),
-    radial-gradient(1px 1px at 46% 84%,rgba(255,255,255,0.28) 50%,transparent 51%),
-    radial-gradient(1.2px 1.2px at 58% 31%,rgba(255,255,255,0.38) 50%,transparent 51%),
-    radial-gradient(1px 1px at 67% 63%,rgba(255,255,255,0.26) 50%,transparent 51%),
-    radial-gradient(1.5px 1.5px at 79% 22%,rgba(255,255,255,0.46) 50%,transparent 51%),
-    radial-gradient(1px 1px at 88% 78%,rgba(255,255,255,0.30) 50%,transparent 51%),
-    radial-gradient(1.1px 1.1px at 93% 41%,rgba(255,255,255,0.34) 50%,transparent 51%),
-    radial-gradient(1px 1px at 16% 47%,rgba(255,255,255,0.24) 50%,transparent 51%),
-    radial-gradient(1.2px 1.2px at 71% 8%,rgba(255,255,255,0.32) 50%,transparent 51%),
-    radial-gradient(1px 1px at 52% 57%,rgba(255,255,255,0.22) 50%,transparent 51%);
-  background-repeat:no-repeat;
 }
 
-/* Atmosphere at the boundary, and the dusk sitting low in the opening. */
-.lw-cut::after{
-  content:'';
+/* The window's own top sheen, over the sky, under the copy. */
+.lw-sheen{
+  position:absolute;left:0;right:0;top:0;
+  height:46%;
+  pointer-events:none;
+  background:linear-gradient(rgba(232,175,56,0.07) 0%,rgba(232,175,56,0) 100%);
+}
+
+.lw-body{
   position:absolute;
-  inset:0;
-  border-radius:2px;
-  pointer-events:none;
-  background:
-    linear-gradient(to bottom,rgba(158,186,232,0.10) 0%,rgba(158,186,232,0) 7%),
-    radial-gradient(ellipse 128% 46% at 50% 112%,rgba(232,175,56,0.10) 0%,rgba(232,175,56,0.03) 46%,transparent 72%);
+  left:min(44px,3.0556vw);
+  right:min(44px,3.0556vw);
+  top:min(38px,2.6389vw);
+  display:block;
 }
 
-/* ── The chalk sentence ── */
-.lw-sentence{
-  position:relative;
-  z-index:1;
-  margin:0;
-  font-family:'Fraunces',serif;
-  font-weight:300;
-  font-style:italic;
-  font-size:clamp(1.14rem,min(2.05vw,3.15vh),1.95rem);
-  line-height:1.58;
-  letter-spacing:-0.008em;
-  color:rgba(240,242,248,0.90);
-}
-/* Composed two-line staging. The theme ghost closes the sentence. */
-.lw-ln{display:block}
-
-/* Ghosts: the blanks the product fills. Saffron 0.55, underlined. */
-.lw-ghost{
-  font-style:normal;
-  font-weight:400;
-  color:rgba(232,175,56,0.55);
-  border-bottom:1px solid rgba(232,175,56,0.30);
-  padding-bottom:1px;
+.lw-label{
+  display:flex;align-items:center;
+  font-family:'Space Mono',monospace;font-weight:400;
+  font-size:min(9.5px,0.65972vw);
+  letter-spacing:min(2.47px,0.171528vw);
+  text-transform:uppercase;
+  color:rgba(232,175,56,0.9);
+  line-height:1.45;
   white-space:nowrap;
 }
-
-/* The theme ghost is the only element in the hero that moves. */
-.lw-theme{display:inline-block}
-.lw-theme.lw-out{
-  opacity:0;
-  transform:translateY(-0.16em);
-  filter:blur(2px);
-  transition:opacity 240ms cubic-bezier(.5,0,1,1),transform 240ms cubic-bezier(.5,0,1,1),filter 240ms cubic-bezier(.5,0,1,1);
-}
-.lw-theme.lw-pre{opacity:0;transform:translateY(0.16em);filter:blur(2px);transition:none}
-.lw-theme.lw-in{
-  opacity:1;
-  transform:translateY(0);
-  filter:blur(0);
-  transition:opacity 280ms cubic-bezier(.16,1,.3,1),transform 280ms cubic-bezier(.16,1,.3,1),filter 280ms cubic-bezier(.16,1,.3,1);
+.lw-label .rule{
+  flex:0 0 auto;
+  width:min(26px,1.80556vw);height:1.5px;
+  margin-right:min(14px,0.97222vw);
+  background:#E8AF38;
 }
 
-/* ── The handle, set inside the lower edge of the opening ── */
-.lw-handle{
-  position:absolute;
-  left:clamp(28px,3vw,44px);
-  bottom:clamp(26px,3.6vh,44px);
-  z-index:1;
-  font-family:'Space Mono',monospace;
-  font-weight:700;
-  font-size:0.6rem;
-  letter-spacing:0.22em;
-  text-transform:uppercase;
-  color:rgba(240,242,248,0.60);
-  line-height:1;
-  transition:color .35s cubic-bezier(.16,1,.3,1);
+.lw-sentence{
+  display:block;
+  margin-top:min(26px,1.80556vw);
+  font-family:'Fraunces',serif;font-weight:400;
+  font-size:min(31px,2.15278vw);
+  line-height:1.34;
+  letter-spacing:-0.012em;
+  color:#F8F4E9;
 }
-.lw-arrow{
+
+/* The certified ghost register, verbatim from the product's sentence canvas
+   (start.css .cl-ghost @ HEAD): saffron at 0.55 with its two-part shadow. */
+.lw-ghost{
+  color:rgba(232,175,56,0.55);
+  text-shadow:0 -1px 0 rgba(248,244,233,0.14),0 1px 1px rgba(12,16,32,0.35);
+}
+
+/* The theme word: full saffron, and the only element in the hero that moves. */
+.lw-theme{
   display:inline-block;
-  margin-left:0.9em;
-  color:var(--saffron,#E8AF38);
-  transition:transform .35s cubic-bezier(.16,1,.3,1);
+  color:#E8AF38;
+  text-shadow:0 -1px 0 rgba(248,244,233,0.14),0 1px 1px rgba(12,16,32,0.35);
+}
+/* The arrival, verbatim from the product's cl-demo-in / cl-ghost--leaving. */
+.lw-theme.lw-ghosted{color:rgba(232,175,56,0.55)}
+.lw-theme.lw-leaving{
+  opacity:0;
+  transform:translateY(-0.18em);
+  filter:blur(2px);
+  transition:opacity 240ms cubic-bezier(.16,1,.3,1),transform 240ms cubic-bezier(.16,1,.3,1),filter 240ms cubic-bezier(.16,1,.3,1);
+}
+.lw-theme.lw-arriving{animation:lw-demo-in 280ms cubic-bezier(.16,1,.3,1) both}
+@keyframes lw-demo-in{
+  from{opacity:0;transform:translateY(0.22em);filter:blur(2px)}
+  to{opacity:1;transform:translateY(0);filter:blur(0)}
 }
 
-/* ── The door opens: the opening comes toward her, nothing else ── */
+.lw-foot{
+  position:absolute;
+  left:min(44px,3.0556vw);
+  right:min(44px,3.0556vw);
+  bottom:min(24px,1.6667vw);
+  padding-top:min(25px,1.73611vw);
+  border-top:1px solid rgba(232,175,56,0.26);
+  display:block;
+}
+.lw-cta{
+  display:block;                     /* its own line box, so the foot is exactly
+                                        the reference's 25px + 17px tall */
+  font-family:'Space Mono',monospace;font-weight:400;
+  font-size:min(12px,0.83333vw);
+  letter-spacing:min(3.12px,0.216667vw);
+  text-transform:uppercase;
+  color:#E8AF38;
+  line-height:1.4;
+}
+
+/* ── The door opens: a gentle lift with the shadow blooming ── */
 @media(hover:hover){
-  /* The door swings toward her: the opening lifts off the page and the dusk
-     it holds blooms a little further onto the linen. */
-  .lw:hover .lw-cut{
+  .lw:hover{
     transform:translateY(-3px);
     box-shadow:
-      0 0 0 1px rgba(28,40,70,0.11),
-      0 4px 10px -2px rgba(24,36,68,0.16),
-      0 20px 44px -16px rgba(24,36,68,0.28),
-      inset 0 -2px 0 rgba(250,246,234,0.40),
-      inset -2px 0 0 rgba(250,246,234,0.22),
-      inset 0 2px 0 rgba(4,8,18,0.88),
-      inset 2px 0 0 rgba(4,8,18,0.52),
-      inset 0 11px 24px -4px rgba(0,0,0,0.58),
-      inset 8px 0 20px -7px rgba(0,0,0,0.42),
-      inset 0 -9px 22px -9px rgba(0,0,0,0.20);
+      rgba(6,10,22,0.6) 0 0 140px 56px inset,
+      rgba(255,255,255,0.14) 0 0 0 1px inset,
+      rgba(255,255,255,0.18) 0 1px 0 0 inset,
+      rgba(232,175,56,0.14) 0 0 0 1px,
+      rgba(232,175,56,0.26) 0 0 78px -6px,
+      rgba(24,40,72,0.38) 0 0 150px 14px,
+      rgba(10,15,30,0.34) 8px 11px 20px -8px,
+      rgba(10,15,30,0.42) 18px 26px 50px -16px,
+      rgba(10,15,30,0.5) 32px 56px 96px -34px,
+      rgba(16,24,48,0.55) 48px 96px 150px -70px;
   }
-  .lw:hover .lw-handle{color:rgba(240,242,248,0.92)}
-  .lw:hover .lw-arrow{transform:translateX(4px)}
 }
-.lw:focus-visible{outline:none}
-.lw:focus-visible .lw-cut{outline:2px solid var(--saffron,#E8AF38);outline-offset:5px}
+.lw:focus-visible{outline:2px solid #E8AF38;outline-offset:5px}
 
-/* ── Reduced motion: the settled state, no cycle, no lift ── */
+/* ── Reduced motion: the settled state, no arrival, no lift ── */
 @media(prefers-reduced-motion:reduce){
-  .lw-cut,.lw-arrow,.lw-handle{transition:none!important}
-  .lw-theme{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
-  .lw:hover .lw-cut{transform:none}
+  .lw{transition:none!important}
+  .lw:hover{transform:none}
+  .lw-theme{
+    color:#E8AF38!important;
+    opacity:1!important;transform:none!important;filter:none!important;
+    animation:none!important;transition:none!important;
+  }
 }
 
-/* ── Mobile: the opening runs the full measure of the phone ── */
+/* ── Mobile: the approved 375 frame ── */
 @media(max-width:767px){
-  .lw{max-width:none}
-  .lw-cut{padding:38px 24px 66px}
-  .lw-sentence{font-size:1.16rem;line-height:1.66}
-  .lw-ln{display:inline}          /* let it flow; two lines is a desktop staging */
-  .lw-handle{left:24px;bottom:26px;font-size:0.57rem;letter-spacing:0.2em}
-}
-
-/* ── Short desktop viewports: the opening keeps its sentence legible and
-   gives back the interior air instead ── */
-@media(max-height:700px) and (min-width:768px){
-  .lw-cut{padding:30px clamp(24px,2.6vw,36px) 52px}
-  .lw-handle{bottom:20px}
-}
-@media(max-height:440px) and (min-width:768px){
-  .lw-cut{padding:22px 24px 44px}
-  .lw-handle{bottom:16px;left:24px}
+  .lw-mount{height:min(60.2667vw,300px)}
+  .lw-bleed{inset:max(-40px,-10.6667vw);filter:blur(min(20px,5.3333vw))}
+  .lw-body{
+    left:min(6.4vw,32px);right:min(6.4vw,32px);
+    top:min(5.8667vw,30px);
+  }
+  .lw-label{font-size:min(2.1333vw,11px);letter-spacing:min(0.512vw,2.6px)}
+  .lw-label .rule{width:min(5.3333vw,27px);margin-right:min(2.6667vw,14px)}
+  .lw-sentence{
+    margin-top:min(4.2667vw,22px);
+    font-size:min(5.3333vw,28px);
+    line-height:1.36;
+  }
+  .lw-foot{
+    left:min(6.4vw,32px);right:min(6.4vw,32px);
+    bottom:min(4.8vw,24px);
+    padding-top:min(4.8vw,24px);
+  }
+  .lw-cta{font-size:min(2.8vw,14px);letter-spacing:min(0.672vw,3.4px)}
 }

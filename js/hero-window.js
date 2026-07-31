@@ -1,78 +1,58 @@
 /**
- * THE LIVING WINDOW — the demonstration
- * Hero fragment component. One component, one stylesheet (css/hero-window.css).
+ * THE DEMONSTRATION BEAT: the theme word's arrival
  *
  * WHAT IT DOES
- *   The theme ghost in the chalk sentence cycles once, on first sight:
- *     dinosaurs -> volcanoes -> doughnuts -> settles on "their thing"
- *   and is then still forever.
+ *   Once, on first sight, the theme word performs its ghost-to-gold arrival
+ *   into "space": it yields from the certified ghost register and rises back in
+ *   at full saffron. Then it is still forever.
  *
- * TIMING FAMILY (per word)
- *   rise-in 280ms / hold 620ms / yield 240ms
+ * TIMING AND EASING
+ *   Verbatim from the product's sentence canvas (start.css @ HEAD):
+ *     yield   240ms  .cl-ghost--leaving  (opacity, -0.18em, blur 2px)
+ *     hold    620ms  the timing family's beat between the two halves
+ *     arrival 280ms  .cl-demo-in         (opacity, +0.22em -> 0, blur 2px -> 0)
+ *   Easing is --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1).
  *
  * THE LAWS THIS FILE ENFORCES
- *   1. ONCE PER SIGHT. IntersectionObserver-gated, so it plays on arrival
- *      before her eyes, not on mount. A page loaded scrolled past the hero
- *      does not burn the demonstration.
- *   2. LATCHED. A single boolean, set before the first frame runs. The
- *      observer disconnects on play. Nothing re-triggers it: not hover,
- *      not focus, not idle, not resize, not scrolling back.
- *   3. SETTLED, NOT LOOPING. The sequence ends on "their thing" and stops.
- *      There is no interval, no requestAnimationFrame loop, no timer left
- *      running. Casino test: nothing here begs for attention twice.
- *   4. REDUCED MOTION. Static settled state, no cycle, no timers created.
+ *   1. ONCE PER SIGHT. IntersectionObserver at threshold 0.5, so the beat plays
+ *      when the window arrives before her eyes, not on mount.
+ *   2. LATCHED. A boolean set before the first frame; the observer disconnects
+ *      on play. Nothing re-triggers it: not hover, not focus, not resize, not
+ *      scrolling back.
+ *   3. SETTLED, NOT LOOPING. It ends on full saffron and stops. No interval, no
+ *      rAF loop, no timer left running.
+ *   4. REDUCED MOTION. The settled state, no beat, no timers created.
  *
- * The settled word is also what ships in the markup, so with JS disabled
- * the sentence reads correctly and the window is still a working door.
+ * The settled state is what ships in the markup, so with JS disabled or motion
+ * reduced the sentence reads correctly and the window is still a working door.
  */
 (function () {
   'use strict';
 
-  var win   = document.querySelector('.lw');
+  var win = document.querySelector('.lw');
   var theme = document.querySelector('.lw-theme');
   if (!win || !theme) return;
 
-  var CHIPS  = ['dinosaurs', 'volcanoes', 'doughnuts'];
-  var SETTLE = 'their thing';
-  var RISE = 280, HOLD = 620, YIELD = 240;
+  var YIELD = 240, HOLD = 620, ARRIVE = 280;
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if (reduced) { theme.textContent = SETTLE; return; }
+  if (reduced) return;                       /* markup is already the settled state */
 
   var latched = false;
 
-  function yieldOut(done) {
-    theme.classList.remove('lw-in');
-    theme.classList.add('lw-out');
-    setTimeout(done, YIELD);
-  }
-
-  function riseIn(word, done) {
-    theme.textContent = word;
-    theme.classList.remove('lw-out', 'lw-in');
-    theme.classList.add('lw-pre');
-    void theme.offsetWidth;                 /* commit the pre-state before transitioning */
-    theme.classList.remove('lw-pre');
-    theme.classList.add('lw-in');
-    setTimeout(done, RISE);
-  }
-
   function run() {
-    var i = 0;
-    (function next() {
-      if (i === CHIPS.length) {
-        yieldOut(function () {
-          riseIn(SETTLE, function () {
-            theme.classList.remove('lw-in');  /* settled. no classes, no timers, still. */
-          });
-        });
-        return;
-      }
-      var word = CHIPS[i++];
-      yieldOut(function () {
-        riseIn(word, function () { setTimeout(next, HOLD); });
-      });
-    })();
+    /* Start from the ghost register, the state the arrival resolves. */
+    theme.classList.add('lw-ghosted');
+    setTimeout(function () {
+      theme.classList.add('lw-leaving');
+      setTimeout(function () {
+        theme.classList.remove('lw-ghosted', 'lw-leaving');
+        theme.classList.add('lw-arriving');
+        setTimeout(function () {
+          theme.classList.remove('lw-arriving');   /* settled. no classes, no timers. */
+        }, ARRIVE);
+      }, YIELD);
+    }, HOLD);
   }
 
   function play() {

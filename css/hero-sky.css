@@ -1,0 +1,246 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   THE CERTIFIED SKY: ported verbatim from wizkoo-app
+   packages/ui/src/TwoLayerSky/TwoLayerSky.css @ e1a90b2 (wp-14-spectacle)
+   plus the authorized primitive amendment a62dc1d (filigree q3 quantize,
+   generation-side only, no CSS change).
+
+   Everything below this header is a BYTE-FOR-BYTE copy of the product
+   stylesheet, including its own comments and punctuation. Do not edit it
+   here, not even for house style. If the primitive changes in wizkoo-app,
+   re-copy it and re-run scripts/verify-sky-port.js.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/*
+ * TwoLayerSky — composite law styles (locked 2026-07-28, sky-lab FINAL).
+ * Craft floor: opacity/transform animation only, GPU-friendly, crisp at
+ * 1x/2x DPR.
+ *
+ * Reduced motion (media query or the harness [data-wk-motion='reduced']
+ * simulation): the designed frozen frame — every animation stops, stars
+ * and nebula hold their inline mid-brightness, shooters vanish. The
+ * !important marks out-cascade the app-level *-specificity kill-switch
+ * so the frozen state is designed, not a mid-keyframe accident.
+ */
+
+.wk-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wk-sky__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.wk-sky__star {
+  position: absolute;
+  border-radius: 50%;
+  animation-name: wk-sky-twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: opacity;
+}
+
+@keyframes wk-sky-twinkle {
+  0%, 100% { opacity: var(--wk-sky-lo, 0.1); }
+  50%      { opacity: var(--wk-sky-hi, 0.6); }
+}
+
+/* Anchor cross-glow: hairline gradient spikes, no extra DOM. */
+.wk-sky__star--spike::before,
+.wk-sky__star--spike::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 1px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, transparent 0%, currentColor 45%, currentColor 55%, transparent 100%);
+  color: inherit;
+  opacity: 0.5;
+}
+
+.wk-sky__star--spike::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.wk-sky__star--anchor {
+  background-image: radial-gradient(circle at 42% 40%, rgba(255, 255, 255, 0.9) 0%, transparent 65%);
+}
+
+/* ── Filigree constellations (tone-on-tone star-chart regions) ────── */
+
+.wk-sky__filigree-strokes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(0.4px);
+}
+
+.wk-sky__web {
+  stroke: var(--sky-filigree-web, #7288B4);
+  stroke-opacity: var(--wk-sky-web, 0.055);
+  stroke-width: 0.6;
+}
+
+.wk-sky__star--filigree {
+  background-color: var(--sky-filigree-star, #97ABD0);
+  box-shadow: none;
+}
+
+/* ── Nebula breath ─────────────────────────────────────────────────── */
+
+.wk-sky__nebula {
+  position: absolute;
+  filter: blur(18px);
+  animation-name: wk-sky-nebula-breathe;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: opacity;
+}
+
+@keyframes wk-sky-nebula-breathe {
+  from { opacity: calc(var(--wk-sky-nebula-o, 0.1) * 0.6); }
+  to   { opacity: var(--wk-sky-nebula-o, 0.1); }
+}
+
+/* ── Shooting stars (top perimeter band only) ──────────────────────── */
+
+.wk-sky__shooter {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(234, 242, 255, 0) 30%, rgba(234, 242, 255, 0.9) 100%);
+  border-radius: 1px;
+  opacity: 0;
+  transform-origin: left center;
+  animation-name: wk-sky-shoot;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes wk-sky-shoot {
+  0%    { opacity: 0; translate: 0 0; }
+  0.5%  { opacity: 0.9; }
+  3.5%  { opacity: 0; translate: var(--wk-sky-tx, 300px) var(--wk-sky-ty, 60px); }
+  100%  { opacity: 0; translate: var(--wk-sky-tx, 300px) var(--wk-sky-ty, 60px); }
+}
+
+/* ── Atmosphere: the medium between the objects (ratified mix) ─────── */
+
+.wk-sky__atmo-wash {
+  position: absolute;
+  filter: blur(26px);
+  animation-name: wk-sky-atmo-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes wk-sky-atmo-drift {
+  from { opacity: calc(var(--wk-sky-atmo-o, 0.1) * 0.55); translate: 0 0; }
+  to   { opacity: var(--wk-sky-atmo-o, 0.1); translate: var(--wk-sky-atmo-drift, 3%) -1.5%; }
+}
+
+.wk-sky__atmo-lobe {
+  position: absolute;
+  filter: blur(16px);
+  animation-name: wk-sky-atmo-breathe;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: opacity;
+}
+
+@keyframes wk-sky-atmo-breathe {
+  from { opacity: calc(var(--wk-sky-atmo-o, 0.1) * 0.6); }
+  to   { opacity: var(--wk-sky-atmo-o, 0.1); }
+}
+
+.wk-sky__airglow {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 15%;
+  background: linear-gradient(to top,
+    rgba(232, 220, 206, 0.15) 0%,
+    rgba(232, 220, 206, 0.08) 30%,
+    rgba(232, 220, 206, 0.03) 62%,
+    transparent 100%);
+  animation: wk-sky-atmo-breathe 60s ease-in-out infinite alternate;
+  will-change: opacity;
+}
+
+.wk-sky__airglow-line {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, rgba(238, 228, 214, 0.22) 30%, rgba(238, 228, 214, 0.22) 70%, transparent 100%);
+}
+
+.wk-sky__bandwash {
+  position: absolute;
+  background: radial-gradient(ellipse at center, rgba(226, 234, 248, 0.5) 0%, transparent 70%);
+  filter: blur(14px);
+}
+
+.wk-sky__banddust {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background-color: #E8EEF8;
+}
+
+.wk-sky__wisp {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(90deg, transparent 0%, rgba(150, 168, 200, 0.45) 30%, rgba(160, 178, 210, 0.55) 55%, rgba(150, 168, 200, 0.32) 75%, transparent 100%);
+  filter: blur(11px);
+  animation-name: wk-sky-wisp-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes wk-sky-wisp-drift {
+  from { opacity: calc(var(--wk-sky-atmo-o, 0.1) * 0.7); translate: 0 0; }
+  to   { opacity: var(--wk-sky-atmo-o, 0.1); translate: var(--wk-sky-atmo-drift, 4%) 0.6%; }
+}
+
+/* ── Reduced motion: the designed frozen frame ─────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .wk-sky__star,
+  .wk-sky__nebula,
+  .wk-sky__atmo-wash,
+  .wk-sky__atmo-lobe,
+  .wk-sky__airglow,
+  .wk-sky__wisp {
+    animation: none !important;
+  }
+  .wk-sky__shooter {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+[data-wk-motion='reduced'] .wk-sky__star,
+[data-wk-motion='reduced'] .wk-sky__nebula,
+[data-wk-motion='reduced'] .wk-sky__atmo-wash,
+[data-wk-motion='reduced'] .wk-sky__atmo-lobe,
+[data-wk-motion='reduced'] .wk-sky__airglow,
+[data-wk-motion='reduced'] .wk-sky__wisp {
+  animation: none !important;
+}
+
+[data-wk-motion='reduced'] .wk-sky__shooter {
+  animation: none !important;
+  opacity: 0 !important;
+}
