@@ -87,7 +87,7 @@
     for (var i = 0; i < entries.length; i++) {
       if (entries[i].isIntersecting) { io.disconnect(); play(); return; }
     }
-  }, { threshold: 0.55 });
+  }, { threshold: 0.5 });
 
   io.observe(win);
 })();

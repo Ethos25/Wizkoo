@@ -1,71 +1,72 @@
 /* ═══════════════════════════════════════════════════════════════════════
    THE LIVING WINDOW
-   A postcard-to-A5 rendering of the certified /start sentence canvas
-   (wizkoo-app, wp-14-spectacle), mounted on the linen hero as a crafted
-   object. One component, one stylesheet.
 
-   WINDOW-LITE: the sentence and the once-per-sight ghost demonstration
-   only. No instruments, no submit, no interactivity inside the pane.
-   The window's single action is opening the door.
+   An aperture in the page, not a screen on it. There is no frame, no bezel,
+   no chrome, no plaque. The night material meets the linen directly, and the
+   craft is entirely in that boundary:
 
-   MOTION LAW: the demonstration is the ONLY motion in this hero.
-   No parallax, no scroll effects, no ken-burns, no ambient loops, and
-   deliberately no twinkle on the starfield. One breath, then stillness.
+     the lip      the cut face of the page catching daylight from upper left
+     the depth    the page overhangs, so the opening's top and left fall dark
+     the return   light that entered lands faintly on the lower right interior
+     the dusk     atmosphere from inside breathing out onto the linen
+
+   The whole surface is the door. The handle is set inside the lower edge, so
+   it belongs to the object rather than captioning it.
+
+   MOTION LAW: the demonstration and the hover lift are the ONLY motion in
+   this hero. No parallax, no scroll effects, no ken-burns, no ambient loops,
+   and deliberately no twinkle on the starfield. One breath, then stillness.
    ═══════════════════════════════════════════════════════════════════════ */
 
 .lw{
   display:block;
   width:100%;
-  max-width:430px;                 /* postcard-to-A5 scale */
+  max-width:700px;                 /* fills its column, so the gutter to the
+                                      photograph is the grid's own gutter */
   text-decoration:none;
   color:inherit;
   cursor:pointer;                  /* the window invites */
   -webkit-tap-highlight-color:transparent;
 }
 
-/* ── The frame: real material, lit by warm daylight from upper left ──
-   Top and left edges catch the light. Right and bottom fall into shade.
-   The cast shadow falls down and to the right, consistent with that light. */
-.lw-frame{
+/* ── The opening ── */
+.lw-cut{
   position:relative;
-  border-radius:5px;
-  padding:17px 17px 0;
-  background:linear-gradient(158deg,#F3EEE0 0%,#E6E0CE 34%,#D3CCB8 74%,#C6BFAA 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255,255,255,0.92),
-    inset 2px 0 0 rgba(255,255,255,0.50),
-    inset -2px 0 0 rgba(12,16,32,0.10),
-    inset 0 -2px 0 rgba(12,16,32,0.15),
-    0 1px 1px rgba(12,16,32,0.06),
-    0 3px 6px rgba(12,16,32,0.07),
-    0 14px 26px -8px rgba(12,16,32,0.24),
-    0 34px 60px -24px rgba(12,16,32,0.32),
-    0 60px 90px -50px rgba(12,16,32,0.30);
-  transition:transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s cubic-bezier(.16,1,.3,1);
-}
-
-/* ── The pane: night material, recessed into the frame ── */
-.lw-pane{
-  position:relative;
-  overflow:hidden;
-  border-radius:2px;
-  padding:clamp(34px,3.9vw,46px) clamp(24px,2.8vw,32px);
+  border-radius:1px;                 /* a cut in paper is crisp */
+  padding:clamp(48px,10.6vh,124px) clamp(28px,3vw,44px) clamp(58px,9.6vh,112px);
   background:
-    radial-gradient(ellipse 70% 55% at 26% 20%,rgba(36,78,138,0.30) 0%,transparent 62%),
-    radial-gradient(ellipse 60% 50% at 78% 74%,rgba(66,42,122,0.22) 0%,transparent 66%),
-    radial-gradient(ellipse at 50% 45%,#1a2a50 0%,#121c36 58%,#0c1424 100%);
+    radial-gradient(ellipse 76% 58% at 24% 16%,rgba(38,82,144,0.32) 0%,transparent 64%),
+    radial-gradient(ellipse 62% 52% at 80% 78%,rgba(68,44,126,0.24) 0%,transparent 68%),
+    radial-gradient(ellipse at 50% 44%,#1a2a50 0%,#121c36 58%,#0b1222 100%);
+  /* A hole casts no shadow onto its own page, so there is no drop shadow here.
+     What sells the opening is the paper's cut face: with daylight from the
+     upper left, the bottom and right interior walls are lit linen, and the top
+     and left walls are the overhang falling into the dark. */
   box-shadow:
-    inset 0 0 0 1px rgba(12,16,32,0.60),
-    inset 0 3px 16px rgba(0,0,0,0.60),
-    0 -1px 0 rgba(255,255,255,0.30),
-    0 1px 0 rgba(12,16,32,0.12);
+    /* occlusion: the linen darkens a hair right at the cut, and the dusk
+       inside breathes a short distance out onto the page */
+    0 0 0 1px rgba(28,40,70,0.10),
+    0 2px 5px -1px rgba(24,36,68,0.13),
+    0 9px 20px -12px rgba(24,36,68,0.20),
+    /* the cut face, lit: bottom wall then right wall */
+    inset 0 -2px 0 rgba(250,246,234,0.34),
+    inset -2px 0 0 rgba(250,246,234,0.19),
+    /* the overhang, dark: top wall then left wall */
+    inset 0 2px 0 rgba(4,8,18,0.88),
+    inset 2px 0 0 rgba(4,8,18,0.52),
+    /* the depth the overhang throws into the opening */
+    inset 0 11px 24px -4px rgba(0,0,0,0.62),
+    inset 8px 0 20px -7px rgba(0,0,0,0.44),
+    inset 0 -9px 22px -9px rgba(0,0,0,0.22);
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s cubic-bezier(.16,1,.3,1);
 }
 
 /* Starfield: static. Restraint is the point. Never animated. */
-.lw-pane::before{
+.lw-cut::before{
   content:'';
   position:absolute;
   inset:0;
+  border-radius:2px;
   pointer-events:none;
   background-image:
     radial-gradient(1.3px 1.3px at 11% 19%,rgba(255,255,255,0.50) 50%,transparent 51%),
@@ -83,6 +84,18 @@
   background-repeat:no-repeat;
 }
 
+/* Atmosphere at the boundary, and the dusk sitting low in the opening. */
+.lw-cut::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:2px;
+  pointer-events:none;
+  background:
+    linear-gradient(to bottom,rgba(158,186,232,0.10) 0%,rgba(158,186,232,0) 7%),
+    radial-gradient(ellipse 128% 46% at 50% 112%,rgba(232,175,56,0.10) 0%,rgba(232,175,56,0.03) 46%,transparent 72%);
+}
+
 /* ── The chalk sentence ── */
 .lw-sentence{
   position:relative;
@@ -91,12 +104,13 @@
   font-family:'Fraunces',serif;
   font-weight:300;
   font-style:italic;
-  font-size:clamp(1rem,1.32vw,1.22rem);
-  line-height:1.74;
+  font-size:clamp(1.14rem,min(2.05vw,3.15vh),1.95rem);
+  line-height:1.58;
   letter-spacing:-0.008em;
   color:rgba(240,242,248,0.90);
-  text-wrap:pretty;
 }
+/* Composed two-line staging. The theme ghost closes the sentence. */
+.lw-ln{display:block}
 
 /* Ghosts: the blanks the product fills. Saffron 0.55, underlined. */
 .lw-ghost{
@@ -108,79 +122,91 @@
   white-space:nowrap;
 }
 
-/* The theme ghost is the only element that moves. */
+/* The theme ghost is the only element in the hero that moves. */
 .lw-theme{display:inline-block}
 .lw-theme.lw-out{
   opacity:0;
   transform:translateY(-0.16em);
-  transition:opacity 240ms cubic-bezier(.5,0,1,1), transform 240ms cubic-bezier(.5,0,1,1);
+  filter:blur(2px);
+  transition:opacity 240ms cubic-bezier(.5,0,1,1),transform 240ms cubic-bezier(.5,0,1,1),filter 240ms cubic-bezier(.5,0,1,1);
 }
-.lw-theme.lw-pre{opacity:0;transform:translateY(0.16em);transition:none}
+.lw-theme.lw-pre{opacity:0;transform:translateY(0.16em);filter:blur(2px);transition:none}
 .lw-theme.lw-in{
   opacity:1;
   transform:translateY(0);
-  transition:opacity 280ms cubic-bezier(.16,1,.3,1), transform 280ms cubic-bezier(.16,1,.3,1);
+  filter:blur(0);
+  transition:opacity 280ms cubic-bezier(.16,1,.3,1),transform 280ms cubic-bezier(.16,1,.3,1),filter 280ms cubic-bezier(.16,1,.3,1);
 }
 
-/* ── The sill: the window's caption and handle. Not a stranded button. ── */
-.lw-sill{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  padding:15px 6px 17px;
-}
+/* ── The handle, set inside the lower edge of the opening ── */
 .lw-handle{
+  position:absolute;
+  left:clamp(28px,3vw,44px);
+  bottom:clamp(26px,3.6vh,44px);
+  z-index:1;
   font-family:'Space Mono',monospace;
   font-weight:700;
-  font-size:0.58rem;
-  letter-spacing:0.2em;
+  font-size:0.6rem;
+  letter-spacing:0.22em;
   text-transform:uppercase;
-  color:rgba(12,16,32,0.74);
+  color:rgba(240,242,248,0.60);
   line-height:1;
+  transition:color .35s cubic-bezier(.16,1,.3,1);
 }
 .lw-arrow{
   display:inline-block;
-  font-family:'Space Mono',monospace;
-  font-size:0.62rem;
-  color:var(--saffron-deep,#B88414);
-  line-height:1;
+  margin-left:0.9em;
+  color:var(--saffron,#E8AF38);
   transition:transform .35s cubic-bezier(.16,1,.3,1);
 }
 
-/* ── The door opens: hover lifts the window gently, nothing else ── */
+/* ── The door opens: the opening comes toward her, nothing else ── */
 @media(hover:hover){
-  .lw:hover .lw-frame{
-    transform:translateY(-4px);
+  /* The door swings toward her: the opening lifts off the page and the dusk
+     it holds blooms a little further onto the linen. */
+  .lw:hover .lw-cut{
+    transform:translateY(-3px);
     box-shadow:
-      inset 0 2px 0 rgba(255,255,255,0.96),
-      inset 2px 0 0 rgba(255,255,255,0.54),
-      inset -2px 0 0 rgba(12,16,32,0.10),
-      inset 0 -2px 0 rgba(12,16,32,0.15),
-      0 1px 1px rgba(12,16,32,0.06),
-      0 4px 8px rgba(12,16,32,0.07),
-      0 20px 34px -8px rgba(12,16,32,0.26),
-      0 46px 76px -26px rgba(12,16,32,0.34),
-      0 76px 110px -54px rgba(12,16,32,0.32);
+      0 0 0 1px rgba(28,40,70,0.11),
+      0 4px 10px -2px rgba(24,36,68,0.16),
+      0 20px 44px -16px rgba(24,36,68,0.28),
+      inset 0 -2px 0 rgba(250,246,234,0.40),
+      inset -2px 0 0 rgba(250,246,234,0.22),
+      inset 0 2px 0 rgba(4,8,18,0.88),
+      inset 2px 0 0 rgba(4,8,18,0.52),
+      inset 0 11px 24px -4px rgba(0,0,0,0.58),
+      inset 8px 0 20px -7px rgba(0,0,0,0.42),
+      inset 0 -9px 22px -9px rgba(0,0,0,0.20);
   }
-  .lw:hover .lw-arrow{transform:translateX(3px)}
-  .lw:hover .lw-handle{color:rgba(12,16,32,0.92)}
+  .lw:hover .lw-handle{color:rgba(240,242,248,0.92)}
+  .lw:hover .lw-arrow{transform:translateX(4px)}
 }
 .lw:focus-visible{outline:none}
-.lw:focus-visible .lw-frame{outline:2px solid var(--saffron-deep,#B88414);outline-offset:6px}
+.lw:focus-visible .lw-cut{outline:2px solid var(--saffron,#E8AF38);outline-offset:5px}
 
 /* ── Reduced motion: the settled state, no cycle, no lift ── */
 @media(prefers-reduced-motion:reduce){
-  .lw-frame,.lw-arrow{transition:none!important}
-  .lw-theme{opacity:1!important;transform:none!important;transition:none!important}
-  .lw:hover .lw-frame{transform:none}
+  .lw-cut,.lw-arrow,.lw-handle{transition:none!important}
+  .lw-theme{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+  .lw:hover .lw-cut{transform:none}
 }
 
-/* ── Mobile ── */
+/* ── Mobile: the opening runs the full measure of the phone ── */
 @media(max-width:767px){
   .lw{max-width:none}
-  .lw-frame{padding:14px 14px 0}
-  .lw-pane{padding:30px 22px}
-  .lw-sentence{font-size:1.02rem;line-height:1.76}
-  .lw-handle{font-size:0.55rem;letter-spacing:0.18em}
+  .lw-cut{padding:38px 24px 66px}
+  .lw-sentence{font-size:1.16rem;line-height:1.66}
+  .lw-ln{display:inline}          /* let it flow; two lines is a desktop staging */
+  .lw-handle{left:24px;bottom:26px;font-size:0.57rem;letter-spacing:0.2em}
+}
+
+/* ── Short desktop viewports: the opening keeps its sentence legible and
+   gives back the interior air instead ── */
+@media(max-height:700px) and (min-width:768px){
+  .lw-cut{padding:30px clamp(24px,2.6vw,36px) 52px}
+  .lw-handle{bottom:20px}
+}
+@media(max-height:440px) and (min-width:768px){
+  .lw-cut{padding:22px 24px 44px}
+  .lw-handle{bottom:16px;left:24px}
 }

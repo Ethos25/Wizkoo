@@ -942,45 +942,110 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .desk-foot .left-sig{color:#0C1020;font-weight:700}
 .desk-foot em{font-style:normal;color:var(--ink-45)}
 
-/* -- Stage -- */
+/* -- Stage --
+   Four elements, one arc: her doubt, the promise, the proof alive, the door.
+   The type is given the full measure so it can reach poster scale. The
+   photograph holds the right column from the promise line down, bleeding off
+   the right edge of the viewport. The window sits at the bottom left and laps
+   onto the photograph's edge: the night material against the lit one, the two
+   brand materials touching inside one frame.
+
+   --hh-bleed is the exact distance from the content column's right edge to the
+   right edge of the viewport, so the photograph lands flush without magic
+   numbers at any width. */
 .hero{padding:0;position:relative;background:radial-gradient(ellipse 60% 80% at 50% 25%,transparent 90%,rgba(200,140,15,0.06) 100%)}
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 56px;box-sizing:border-box}
 .hero-stage{
+  --hh-bleed:calc(56px + max(0px,(100vw - 1200px) / 2));
+  /* The site header is sticky and sits in flow above this section. A raw
+     100svh here pushes the composition exactly its height below the fold,
+     which is what buried the window in the first build. */
+  --hh-chrome:82px;
   position:relative;z-index:1;
-  min-height:100vh;min-height:100svh;
+  min-height:calc(100vh - var(--hh-chrome));
+  min-height:calc(100svh - var(--hh-chrome));
   display:grid;
-  grid-template-columns:1fr minmax(340px,0.82fr);
-  gap:clamp(36px,5vw,88px);
-  align-items:center;
-  padding:clamp(88px,10vh,116px) 0 clamp(72px,12vh,148px);
+  grid-template-columns:minmax(0,1fr) 32%;
+  /* One row each. The vow and the window shared a cell in an earlier pass and
+     the window covered the support line at 1280x540: align-self is not a
+     substitute for structure. */
+  grid-template-rows:auto auto 1fr;
+  column-gap:clamp(32px,4vw,60px);
+  row-gap:clamp(20px,3.4vh,40px);
+  padding:clamp(52px,8vh,90px) 0 0;
 }
 
-/* -- The argument -- */
-.hero-argument{max-width:640px}
+/* -- 1. The arrest. The largest type on this site. -- */
+.hero-argument{grid-column:1;grid-row:1}
 .hero-arrest{
   font-family:'Fraunces',serif;font-weight:600;
-  font-size:clamp(2.45rem,5.3vw,4.6rem);
-  line-height:1.02;letter-spacing:-0.036em;
-  color:#0C1020;margin:0;text-wrap:balance;
+  font-size:clamp(2.6rem,min(7.05vw,11.7vh),7.5rem);
+  line-height:0.96;letter-spacing:-0.042em;
+  /* The ink family, softened off pure black so poster scale sits in linen
+     instead of punching a hole through it. */
+  color:#171E2F;margin:0;
 }
+/* Composed break after "actually". Never an orphan, never browser roulette.
+   brk-m is the phone's own second break; hidden here, the space before it
+   keeps the desktop line whole. */
+.hero-arrest .ln{display:block}
+.hero-arrest .brk-m{display:none}
+
+/* -- 2. The promise, and the quiet support beneath it -- */
+.hero-vow{grid-column:1;grid-row:2;align-self:start;position:relative;z-index:2}
 .hero-answer{
   font-family:'Fraunces',serif;font-weight:600;font-style:italic;
-  font-size:clamp(1.85rem,3.8vw,3.25rem);
-  line-height:1.06;letter-spacing:-0.03em;
+  font-size:clamp(1.6rem,min(3.95vw,6.5vh),3.85rem);
+  line-height:1.0;letter-spacing:-0.032em;
   color:var(--saffron-deep,#B88414);
-  margin:clamp(12px,1.8vh,22px) 0 0;
+  margin:0;
 }
 .hero-support{
   font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;
-  font-size:clamp(0.9rem,1.05vw,1rem);
-  line-height:1.7;letter-spacing:-0.01em;
-  color:rgba(12,16,32,0.58);
-  margin:clamp(20px,3vh,34px) 0 0;
-  max-width:38ch;text-wrap:pretty;
+  font-size:clamp(0.88rem,1.08vw,1.02rem);
+  line-height:1.66;letter-spacing:-0.01em;
+  color:rgba(12,16,32,0.56);
+  margin:clamp(14px,2.2vh,26px) 0 0;
+  max-width:34ch;text-wrap:pretty;
 }
 
-/* -- The proof -- */
-.hero-proof{display:flex;align-items:center;justify-content:flex-start}
+/* -- 3. The photograph. Daylight, full column, flush to the viewport edge. -- */
+.hero-photo{
+  grid-column:2;grid-row:1 / -1;
+  position:relative;z-index:0;
+  /* The top edge lands on the arrest's cap height, not on its line box. The
+     line box carries leading the eye cannot see; the capital A is the line the
+     eye actually reads the alignment against. */
+  margin:10px calc(-1 * var(--hh-bleed)) 0 0;
+  align-self:stretch;
+  overflow:hidden;
+  background:#EFE7D6;
+}
+.hero-photo img{
+  display:block;width:100%;height:100%;
+  /* A tall column crops a 3:2 frame hard. 31% holds the brush and the hand at
+     the left of the crop and the painted planets through the centre, which is
+     the whole subject; the far right of the model is what gets given up. */
+  object-fit:cover;object-position:31% 46%;
+  /* Graded to sit in the linen world: warmth kept, contrast eased. */
+  filter:saturate(0.94) contrast(0.965) brightness(1.025);
+}
+/* Warm scrim only. A dissolve at the bottom edge was tried and killed: it made
+   the column look like it was evaporating instead of running past the fold. */
+.hero-photo::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(203deg,rgba(248,244,233,0.20) 0%,rgba(232,175,56,0.07) 52%,rgba(248,244,233,0.13) 100%);
+  mix-blend-mode:soft-light;
+}
+
+/* -- 4. The door. The window laps onto the photograph. -- */
+.hero-proof{
+  grid-column:1;grid-row:3;
+  align-self:end;justify-self:stretch;
+  position:relative;z-index:3;
+  margin:0 0 clamp(52px,8vh,92px) 0;
+}
 
 /* -- Below the fold: the quiet aside -- */
 .hero-aside{
@@ -1005,29 +1070,30 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- Paper grain scoped to hero (Resolution A: position:absolute not fixed, avoids sky-system conflict) -- */
 section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.80 0 0 0 0 0.72 0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;mix-blend-mode:multiply}
 
-/* -- Short-height desktop (compressed laptop, e.g. 1280x540) -- */
+/* -- Short-height desktop (compressed laptop, e.g. 1280x540) --
+   The type already answers to height through min(vw,vh) in its clamp. What
+   these blocks do is buy back vertical air and let the composition run past
+   the fold rather than crushing four elements into a letterbox. */
 @media(max-height:700px) and (min-width:768px){
   body::after{width:40vmax;left:6%;top:-8%}
-  .hero-stage{padding:88px 0 40px;gap:clamp(28px,4vw,56px)}
-  .hero-arrest{font-size:clamp(1.85rem,3.5vw,2.7rem)}
-  .hero-answer{font-size:clamp(1.4rem,2.5vw,2rem)}
-  .hero-support{font-size:0.86rem;margin-top:16px}
-  .lw-pane{padding:22px 22px}
-  .lw-sentence{font-size:1rem;line-height:1.62}
+  /* min-height stays a floor here. Zeroing it let the desk card break the fold
+     at 1280x540, and the desk is below the fold by law. */
+  .hero-stage{padding:clamp(76px,11vh,96px) 0 0;row-gap:clamp(16px,2.6vh,26px)}
+  .hero-proof{margin-bottom:clamp(36px,6vh,56px)}
   .hero-aside{padding-bottom:56px}
 }
 
-/* -- 1440x396: Windows 200% scale + bookmarks bar + Chrome zoom (production viewport) -- */
+/* -- 1440x396: Windows 200% scale + bookmarks bar + Chrome zoom.
+   Amy's production viewport. Nothing composes into 396px of height, so the
+   hero stops pretending: it stacks in arc order and runs long. -- */
 @media(max-height:540px) and (min-width:768px){
-  .hero-stage{min-height:0;padding:66px 0 26px;gap:clamp(24px,3.4vw,44px);align-items:center}
-  .hero-arrest{font-size:clamp(1.5rem,2.7vw,2.05rem);line-height:1.05}
-  .hero-answer{font-size:clamp(1.15rem,2vw,1.55rem);margin-top:8px}
-  .hero-support{font-size:0.78rem;line-height:1.6;margin-top:12px;max-width:42ch}
-  .lw-frame{padding:9px 9px 0}
-  .lw-pane{padding:16px 18px}
-  .lw-sentence{font-size:0.88rem;line-height:1.56}
-  .lw-sill{padding:8px 4px 9px}
-  .lw-handle{font-size:0.52rem}
+  .hero-stage{
+    grid-template-columns:minmax(0,1fr) 38%;
+    padding:46px 0 0;row-gap:9px;
+  }
+  .hero-arrest{letter-spacing:-0.035em}
+  .hero-photo{min-height:190px}
+  .hero-proof{margin-bottom:30px;margin-right:0}
   .hero-aside{padding-bottom:40px}
   .desk{padding:14px 18px 12px}
   .desk-title{font-size:18px}
@@ -1035,30 +1101,53 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .desk-foot{margin-top:8px;padding-top:6px}
 }
 
+/* Below 440px of height nothing composes into one screen. What the fold must
+   still do is show the arc and let the window's top edge break it, so the door
+   is visibly there rather than rumoured. */
 @media(max-height:440px) and (min-width:768px){
-  .hero-stage{padding:56px 0 18px}
-  .hero-arrest{font-size:clamp(1.3rem,2.2vw,1.7rem)}
-  .hero-answer{font-size:clamp(1rem,1.7vw,1.3rem)}
-  .hero-support{font-size:0.74rem;margin-top:10px}
-  .lw-pane{padding:13px 16px}
-  .lw-sentence{font-size:0.82rem;line-height:1.5}
+  .hero-stage{padding-top:42px;row-gap:8px}
+  .hero-photo{min-height:150px}
+  .hero-proof{margin-bottom:22px}
+  .hero-support{margin-top:10px}
 }
 
-/* -- Mobile (375x667 iPhone SE baseline) -- */
+/* -- Mobile (375x667 iPhone SE baseline) --
+   Its own composition, not a squeezed desktop: arrest, promise, window,
+   photograph, straight down, each at full conviction. The photograph bleeds
+   the full width of the phone and closes the frame. -- */
 @media(max-width:767px){
   .wrap{padding:0 24px}
   .hero-stage{
+    --hh-bleed:24px;
     grid-template-columns:1fr;
-    gap:clamp(30px,5vh,44px);
-    min-height:100svh;
-    padding:88px 0 40px;
-    align-content:center;
+    grid-template-rows:auto auto auto auto;
+    row-gap:clamp(22px,3.4vh,34px);
+    min-height:calc(100svh - var(--hh-chrome));
+    padding:clamp(52px,9vh,92px) 0 0;
+    align-content:start;
   }
-  .hero-argument{max-width:none}
-  .hero-arrest{font-size:clamp(2rem,9.2vw,2.7rem);line-height:1.06;letter-spacing:-0.03em}
-  .hero-answer{font-size:clamp(1.5rem,6.6vw,2rem);margin-top:10px}
-  .hero-support{font-size:0.92rem;margin-top:16px;max-width:none}
-  .hero-proof{justify-content:stretch}
+  .hero-argument{grid-column:1;grid-row:1}
+  /* Three composed lines on the phone. The stack is the poster here. */
+  .hero-arrest{font-size:clamp(2.5rem,12.4vw,4rem);line-height:0.98;letter-spacing:-0.038em}
+  .hero-arrest .brk-m{display:inline}
+  .hero-vow{grid-row:2}
+  .hero-answer{font-size:clamp(1.65rem,7.4vw,2.4rem)}
+  .hero-support{font-size:0.94rem;max-width:none;margin-top:14px}
+  .hero-proof{
+    grid-row:3;margin:clamp(2px,1vh,10px) 0 0;
+    align-self:auto;
+  }
+  .hero-photo{
+    grid-column:1;grid-row:4;
+    /* The bottom margin is the desk card's clearance, owned here so that
+       everything below the hero stays untouched. */
+    margin:clamp(14px,2.2vh,26px) calc(-1 * var(--hh-bleed)) clamp(40px,7vh,64px);
+    /* Deeper than the source's own 3:2 so the frame is actually cropped rather
+       than shown whole, and the phone gets a composed image, not a snapshot. */
+    min-height:clamp(268px,42vh,340px);
+  }
+  .hero-photo img{object-position:60% 42%}
+  .hero-photo::before{height:64px}
   .hero-aside{flex-direction:column;align-items:flex-start;gap:26px;padding-bottom:64px}
   .hero-aside .desk{flex:none;width:100%;max-width:none}
   .hero-sample{margin-bottom:0}
@@ -1067,6 +1156,7 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
 /* -- iPhone Plus refinement (430x932) -- */
 @media(min-width:400px) and (max-width:767px){
   .wrap{padding:0 28px}
+  .hero-stage{--hh-bleed:28px}
 }
 </style>
 <!-- ═══ SKY SYSTEM STYLES ═══ -->
@@ -1342,25 +1432,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <div class="hero-argument">
         <!-- HERO_COPY_PENDING: ARREST. Placeholder, ruled string pending. Slot law: <=8 words, poster scale. -->
-        <h1 class="hero-arrest">Are they actually on track?</h1>
+        <h1 class="hero-arrest"><span class="ln">Are they <br class="brk-m">actually</span><span class="ln">on track?</span></h1>
+      </div>
+
+      <div class="hero-vow">
         <!-- HERO_COPY_PENDING: ANSWER. Placeholder, ruled string pending. Slot law: <=3 words, saffron confidence. -->
         <p class="hero-answer">You'll know.</p>
         <!-- HERO_COPY_PENDING: SUPPORT. Placeholder, ruled string pending. Slot law: one breath. -->
         <p class="hero-support">Every activity tracked to your state's standards. Automatically.</p>
       </div>
 
-      <!-- The living window. The answer beat is not a claim; this is the
-           product performing. Fragment files: css/hero-window.css + js/hero-window.js -->
+      <!-- The photograph. Her child's obsession in daylight, beside the
+           product's night window. Built by scripts/optimize-hero-image.js;
+           the 2400w and 1600w rungs appear when the source can carry them. -->
+      <!-- sizes describes the scaled width, not the column width. The column is
+           a tall crop, so object-fit:cover scales this 3:2 frame by its HEIGHT:
+           at 1440 a 524x736 column needs roughly 1100px of image, not 524. The
+           column width was declared here first and the browser correctly served
+           the 600w file and upscaled it into a soft hero. -->
+      <figure class="hero-photo">
+        <picture>
+          <source type="image/webp" sizes="(max-width:767px) 120vw, 78vw"
+                  srcset="images/hero-child-science-1200.webp 1200w, images/hero-child-science-1000.webp 1000w, images/hero-child-science-600.webp 600w">
+          <img src="images/hero-child-science-1200.jpg" sizes="(max-width:767px) 120vw, 78vw"
+               srcset="images/hero-child-science-1200.jpg 1200w, images/hero-child-science-1000.jpg 1000w, images/hero-child-science-600.jpg 600w"
+               width="1200" height="800" fetchpriority="high" decoding="async"
+               alt="A child painting the planets of a solar system model at a sunlit wooden table.">
+        </picture>
+      </figure>
+
+      <!-- The living window. Not a screen on the page: an aperture in it.
+           The answer beat is not a claim; this is the product performing.
+           Fragment files: css/hero-window.css + js/hero-window.js -->
       <div class="hero-proof">
         <a class="lw" href="https://app.wizkoo.com/start" data-wz-cta="hero-living-window" aria-label="Build our week">
-          <div class="lw-frame">
-            <div class="lw-pane">
-              <p class="lw-sentence">Build a week for <span class="lw-ghost">your kid</span>, <span class="lw-ghost">6</span>, in <span class="lw-ghost">your state</span> exploring <span class="lw-ghost lw-theme">their thing</span>.</p>
-            </div>
-            <div class="lw-sill">
-              <span class="lw-handle">Build Our Week</span>
-              <span class="lw-arrow" aria-hidden="true">&#x2192;</span>
-            </div>
+          <div class="lw-cut">
+            <p class="lw-sentence"><span class="lw-ln">Build a week for <span class="lw-ghost">your kid</span>, <span class="lw-ghost">6</span>,</span> <span class="lw-ln">in <span class="lw-ghost">your state</span> exploring <span class="lw-ghost lw-theme">their thing</span>.</span></p>
+            <span class="lw-handle">Build Our Week<span class="lw-arrow" aria-hidden="true">&#x2192;</span></span>
           </div>
         </a>
       </div>
