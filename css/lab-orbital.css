@@ -5,26 +5,44 @@
    driven at the lab FIELD by js/lab-orbital-sky.js). Everything below is the
    system that sits ON it.
 
-   LIGHT LAW
-     One source, upper left, at 38% 32% of every sphere's own box. That is not
-     an invention: it is the value the product already carries on this page
-     (.hero-cta-circle in index.html, radial-gradient at 38% 32%). The nucleus
-     and all six nodes take the same relative light, so a node reads as the same
-     material as the body it orbits, at a twentieth the scale.
+   LIGHT LAW — round 2
+     THE NUCLEUS IS SELF-LUMINOUS AND IS THE ONLY LIGHT IN THE FRAME. Nothing
+     here may imply another one. Round 1 lit the nucleus like a planet — a
+     diffuse falloff from upper left, a terminator opposite it, a rim light on
+     the far limb — and then wrapped it in a symmetrical corona. That is two
+     contradictory sources: the sphere said a lamp was over there, the corona
+     said a sun was behind. What a viewer feels, without having to name it, is
+     an object in front of a light rather than a light.
 
-     The SVG relief filter is lit at azimuth 225 / elevation 40 — the same
-     upper-left bearing expressed in the filter's own coordinates, so the
-     mottling's shadows fall the same way the gradient's terminator does.
+     So: limb darkening in every direction and NO TERMINATOR; a hot region
+     upper left that is purely additive, so it can brighten the surface but
+     never shade it; granulation driven by brightness rather than by
+     feDiffuseLighting, which had a light bearing baked into it; and a corona
+     anchored to the hot region rather than centred on the body.
+
+     And the demonstration: the nodes are lit BY the nucleus, brighter on their
+     nucleus-facing side, dimmer with distance. Once light is visibly travelling
+     outward from the middle of the frame, nobody asks where it comes from.
 
    MOTION LAW
-     One arrival beat on first sight, latched, then three ambient things and
-     nothing else: the nucleus breath, the certified star twinkle, and the rare
-     shooter. Orbits do not revolve.
+     One arrival beat on first sight, latched. Then: the nucleus breath, the
+     certified star twinkle, the rare shooter, and a drift so slow it is never
+     caught in the act — 0.24 to 0.27 px/s at its fastest, against a motion
+     detection floor around 0.6.
 
      THE BREATH IS NOT PERIODIC. A single 4s alternate cycle is exactly the kind
      of loop a viewer catches. Three glow layers run at 3.7s, 5.3s and 8.9s —
      mutually prime, so the summed luminosity has visible amplitude inside any
      3-5s window and a composite period no one will sit through. Opacity only.
+
+   LABEL LAW
+     Presence tracks orbital depth CONTINUOUSLY — opacity and scale, written
+     every frame from sin(t), never triggered. Distant labels are dim because
+     they are distant. Overlaps then resolve themselves: two labels can only
+     cross when one of them is already receded to background. There is no
+     collision detection anywhere in this build, and there must never be — a
+     reactive fade is a visible pop, and a pop reads as UI in a frame that has
+     to read as physics.
 
    OCCLUSION LAW
      Paint order is the whole three-dimensional read. Back arcs and back nodes
@@ -117,9 +135,12 @@
 
 /* ── The nucleus ──────────────────────────────────────────────────────── */
 
-/* The corona: three unequal falloffs rather than one, so the bleed into the sky
-   has a near ring that reads as atmosphere around a body and a far one that
-   reads as the body's own light in the field. Sized by variant. */
+/* The corona: three unequal falloffs, every one of them centred on the HOT
+   REGION rather than on the body, and every gradient peaking inside the body
+   where it cannot be seen. The visible bleed is therefore strong just outside
+   the hot limb and near nothing around the far one. A corona centred on the
+   body peaks in a ring all the way around the silhouette, and a bright ring
+   around a silhouette is a backlight. Scaled by variant, about the hot region. */
 .lo-corona { transform-box: fill-box; transform-origin: center; }
 
 /* Interior life. Three layers, three periods, no common beat. */
@@ -133,10 +154,13 @@
   to   { opacity: var(--lo-breath-hi, 0.62); }
 }
 
-/* Surface relief. Blended, not stamped — the blend mode is set per pass in JS
-   (overlay for the craters, soft-light for the grain) so the mottling stays
-   inside the body's own value range and reads as surface, never as a pattern.
-   The body group is isolated so the blend cannot reach down into the sky. */
+/* Granulation, not relief. The blend mode is set per pass in JS (overlay for
+   the cells, soft-light for the grain) so the variation stays inside the body's
+   own value range and reads as surface, never as a pattern. Round 2 replaced
+   feDiffuseLighting with contrast-stretched noise: the old version cast
+   micro-shadows from a distant light at azimuth 225, which is exactly the
+   second light source this round exists to remove. The body group is isolated
+   so the blend cannot reach down into the sky. */
 .lo-nuc-body { isolation: isolate; }
 .lo-nuc-relief { opacity: var(--lo-tex, 0.5); }
 
@@ -145,8 +169,28 @@
 .lo-node { opacity: 0; }
 .lo-node-inner { transform-box: fill-box; transform-origin: center; transform: scale(0.55); }
 
+/* Three nested groups, and the nesting is load-bearing:
+     .lo-label-depth   inline opacity + scale, written continuously from orbital
+                       depth by JS. Never animated.
+     .lo-label         the arrival's opacity animation.
+     .lo-label-inner   the arrival's translateY.
+   They multiply, so the beat and the depth never fight. Writing depth onto the
+   element the arrival animates would lose — animations out-rank inline styles. */
 .lo-label { opacity: 0; }
 .lo-label-inner { transform-box: fill-box; transform-origin: center; transform: translateY(7px); }
+
+/* The scrim. Same hue as the night ground, so on open sky it is not there;
+   over an orbit line, a bright star or a receding label it is the difference
+   between readable and not. It is always on — nothing switches it. */
+.lo-label-scrim { pointer-events: none; }
+
+/* The tether. Its length falls to zero on its own when a label sits on its
+   node; there is no state and nothing toggles. */
+.lo-leader {
+  stroke: #E8AF38;
+  stroke-width: 0.8;
+  stroke-dasharray: 3 5;
+}
 
 .lo-label-key {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;

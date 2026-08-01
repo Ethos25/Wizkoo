@@ -37,13 +37,29 @@ Two further conditions, same category:
   saffron vanishes, and a vanishing arc reads as *behind* — the opposite of the
   truth.
 
-All three are asserted, not remembered: `node scripts/lab-orbital-shots.js <url>`
-prints a PASS/FAIL on them and exits non-zero if any fails. Keep that check alive
-through the port.
+Round 2 adds three more of the same kind:
+
+- **Nothing in the frame may imply a light source other than the nucleus.** No
+  terminator, no rim light, no directional lighting filter, and no corona centred
+  on the body. The nodes must be lit *by* the nucleus — bright side facing in.
+- **Label presence must track orbital depth continuously and never react.** A
+  fade triggered by a detected overlap is a visible pop, and a pop reads as UI.
+- **The motion is libration, not revolution, and that is load-bearing.** Section
+  4 proves why: under revolution, readable labels and no-reactive-logic cannot
+  both hold in a frame this size.
+
+All six are asserted, not remembered. `node scripts/lab-orbital-shots.js <url>`
+covers the occlusion three; `node scripts/lab-orbital-r2.js <url>` covers the
+light and label three. Both exit non-zero on failure. Keep them alive through the
+port.
 
 ---
 
-Everything below is a lab result. Rulings taken on 2026-08-01 are marked **RULED**.
+Everything below is a lab result. Rulings are marked **RULED**.
+
+**Round 2 (second walk)** replaced the light model, moved orbits from static
+to drift, and rebuilt label behaviour. One thing in it is a deviation from what
+was asked, and it is flagged as such in section 4.
 
 ---
 
@@ -56,7 +72,9 @@ Everything below is a lab result. Rulings taken on 2026-08-01 are marked **RULED
 | `js/lab-orbital.js` | geometry, material, the arrival beat, the drift variant, the panel |
 | `js/lab-orbital-sky.js` | the certified sky's FIELD re-derived for this aperture — no second generator |
 | `scripts/lab-orbital-sky-report.js` | the density drift measurement |
-| `scripts/lab-orbital-shots.js` | evidence stills |
+| `scripts/lab-orbital-shots.js` | round-1 evidence stills and the occlusion assertion |
+| `scripts/lab-orbital-r2.js` | round-2 assertions: one light, nodes lit outward, the whole label excursion |
+| `scripts/lab-orbital-label-solve.js` | the label placement proof, offline |
 | `scripts/lab-orbital-record.js` | the 60-second recording |
 
 ---
@@ -84,41 +102,72 @@ twenty-five haloed stars would compete with the gold nodes for the same reading.
 Held at 12; the 13 stars that cut go back into mids so the density still lands on
 the product's number.
 
-## 2. The nucleus
+## 2. The nucleus — **RULED round 2: self-luminous**
 
-Four passes, because one radial gradient makes a lit **disc**, not a body:
+**The finding, from the walk:** the frame contained two contradictory light
+sources. The sphere was lit like a planet — diffuse falloff from a point at
+38% 32%, a terminator gathering opposite it, a rim light on the far limb — and
+then wrapped in a symmetrical corona that was largest and brightest behind and
+around it. The sphere said a lamp was over there; the corona said a sun was
+behind. What a viewer feels, without needing to name it, is an object in front of
+a light rather than a light.
 
-1. **shading** — diffuse falloff from the light at 38% 32%
-2. **limb darkening** — centred, transparent through the middle, dark at the rim
-   on *every* side. This is the pass the first build was missing, and it is the
-   whole difference between a ball and a body.
-3. **terminator** — the warm gather where the lit face turns away
-4. **rim** — a hairline of the body's own light on the far limb
+**The ruling: the nucleus is self-luminous and is the only light in the frame.**
+Built from variant a. Four parts:
 
-**Surface** is `feTurbulence` → `feDiffuseLighting` at two scales — craters in
-`overlay`, grain in `soft-light` — lit at azimuth 225 / elevation 40, the same
-upper-left bearing as the gradient, so nothing on the surface argues with the
-terminator. The body group is isolated so the blend cannot reach into the sky.
+1. **Limb darkening, no terminator.** A star dims toward its edge in *every*
+   direction, because at the limb you look through a longer, cooler slant of its
+   atmosphere. That falloff is radially symmetric and carries no direction at
+   all, which is exactly why it is the right shading for a body that makes its
+   own light. The terminator and rim passes are deleted.
+2. **The hot region stays, upper left, and is purely additive.** It can brighten
+   the surface and can never shade it, and the disc underneath is already
+   complete without it. That is the difference between a bright region of the
+   surface and light arriving from off-frame.
+3. **Granulation, not relief.** Round 1's surface came from `feDiffuseLighting`
+   with a distant light at azimuth 225 — micro-shadows cast by an external
+   source, precisely the cue being removed. The same turbulence now drives
+   brightness instead: flattened to grey, contrast-stretched about mid-grey,
+   blended in overlay. Convection cells, not craters. No direction in it.
+4. **The corona anchors to the hot region.** Every layer is centred on the hot
+   patch, not the body, and every gradient peaks *inside* the body where it
+   cannot be seen — so the near limb sits at about 28% of the first layer's
+   radius and the far limb at about 72%, and the same gradient gives a strong
+   bleed on the hot side and almost nothing opposite. A corona centred on the
+   body peaks in a ring around the whole silhouette, and a bright ring around a
+   silhouette is a backlight.
 
-The first build set `baseFrequency` to 0.0055, which on a 250-unit body is one
-and a half features across the whole sphere: it read as a smudge. 0.022 is a
-45-unit feature, five or six across the face, which is cratering.
+**And the demonstration: light travels outward.** Each node's bright side faces
+the nucleus and its dark side faces away, with brightness falling off with
+distance. Asserted rather than admired — the verification measures the dot
+product between each node's lit point and the direction of the nucleus:
 
-**Light direction** is not invented. 38% 32% is the value the product already
-carries on this page (`.hero-cta-circle`, `index.html`). Nucleus and all seven
-nodes take the same relative light, so a node is the same material as the body it
-orbits at a sixth of the radius.
+```
+              distance   lit-side dot   dark-side dot   intensity
+science          125        +1.000         -1.000          1.00
+art              125        +1.000         -1.000          1.00
+history          345        +1.000         -1.000          0.61
+reading          442        +1.000         -1.000          0.47
+math             442        +1.000         -1.000          0.47
+writing          473        +1.000         -1.000          0.44
+geo              473        +1.000         -1.000          0.44
+```
 
-**The breath is not periodic.** A single 4s alternate cycle is exactly the loop a
-viewer catches, and the bar forbids that. Three glow layers run at 3.7s, 5.3s and
-8.9s — mutually prime — so the summed luminosity has amplitude inside any 3–5
-second window and a composite period no one will sit through. Opacity only.
+The distance used is the **screen** separation, not the true three-dimensional
+one. On a circular orbit a node is always the same distance from the star, so
+true distance would give every node on an orbit the same brightness and the
+falloff — which is the demonstration — would never be visible. The eye reads
+depth from screen separation, so screen separation drives it.
 
-One thing the first build got wrong and is worth not repeating: the breath was
-put **on** the corona, so the corona's opacity never rose above 0.38 and the
-bleed effectively disappeared. The corona now has a standing full-strength
-presence and the breath is a separate pair of layers over it. Light added, not
-light gated.
+**Machine-checked, every run:** no `feDistantLight` / `fePointLight` /
+`feSpotLight` and no `feDiffuseLighting` / `feSpecularLighting` anywhere in the
+frame; no terminator or rim pass on the nucleus; all five corona layers centred
+on the hot region rather than on the body.
+
+**Variants.** The light model is now fixed across a / b / c. They move
+granulation strength, corona reach and breath amplitude — how much star, not
+what kind of light. Round 1's variants differed in a way that could make the
+frame more or less wrong; these cannot.
 
 ## 3. The orbits — the occlusion
 
@@ -176,60 +225,90 @@ truth. A thin ring passing in front of a star is not brighter than the star; it
 silhouettes against it. Three extra paths, clipped to the disc, draw the near
 halves dark. Physically right, and it needs no new hue.
 
-## 4. Motion
+## 4. Motion — **RULED round 2: drift, not static** — and the one deviation
 
-**Orbits do not revolve** in the default. Believable orbital speed is
-imperceptible; anything faster reads as a screensaver.
+Arrival is **2.5s**, ruled. Everything else about the beat stands: fires once on
+`IntersectionObserver` at 0.4, latches, HISTORY opening the sweep at the apex,
+nucleus present rather than animated in, members before structure, each orbit
+drawing as one continuous stroke that vanishes behind the body and re-emerges in
+front.
 
-**The arrival**, once, on `IntersectionObserver` at 0.4, then latched — the
-observer is disconnected on fire, so it cannot re-run.
+### The deviation: libration, not revolution
 
-The nucleus is **not** animated in. It is the given: the one obsession is already
-there when you arrive, and the subjects come to it. Animating it in would make
-the centre an event rather than a premise.
+Slow drift was ruled, and separately labels were ruled to stay readable through
+crossings with no reactive collision logic. **Built as a slow revolution, those
+two rulings cannot both hold.** That is not a tuning problem; it is a theorem,
+and it is worth stating in full because it decided the round.
 
-Then nodes, then paths. **Members before structure** — drawing the paths first
-would state the system before its subjects, which is the difference between an
-object and a diagram.
+Under revolution, any two nodes eventually arrive at the same screen point. When
+they do, both are near the body, so both are near *full* presence — and
+depth-linked opacity cannot separate two things that are equally close. The first
+round-2 build hit exactly this: ART and HISTORY, both at 0.98 presence, labels
+overlapping by 8,336px squared. Unreadable.
 
-Nodes ignite in a **clockwise sweep from the first node past twelve o'clock**.
-Not reading order, not depth order: a sweep circles the nucleus, which restates
-the thesis while it plays.
+The only static remedy is to give each orbit its own band of label radius. That
+cannot fit. A radial gap separates two labels only if it exceeds the label's
+extent *along the radial direction*, which for a 186 by 52 block is 186 when that
+direction is horizontal. Three bands plus two 186px gaps put the outer edge
+625px from centre; the frame allows 512.
 
-Each orbit draws as **one continuous stroke that happens to live in two
-z-layers** — far half first, vanishing behind the body, near half picking it up
-on the other side and crossing in front. The occlusion is demonstrated by the
-drawing of it, not merely present in the still. Orbits go in order of decreasing
-minor axis, so each lies flatter than the last and the final stroke is the one
-that runs straight across the face.
+So the choice was reactive collision handling, which the same ruling forbids, or
+a motion that does not produce the collision. **I took the second, and changed
+the motion rather than smuggling in collision logic.**
 
-Easing is the product's own `cubic-bezier(.16,1,.3,1)` for nodes and labels; the
-paths use a gentler `cubic-bezier(.22,.68,.18,1)` so the stroke settles rather
-than snaps.
+Each node now **librates** about its composed position instead of revolving.
+Libration is not a fudge — it is real orbital behaviour, the thing the Moon and
+the Trojan asteroids do.
 
 ```
-                 slow (default)      brisk
-node 1 ignites   0.15s               0.10s
-node stagger     0.26s               0.165s
-paths begin      2.00s               1.24s
-half-orbit draw  0.78s               0.51s
-complete         3.88s               2.48s
+components        three, at 1801 / 2803 / 4507 seconds — all prime
+composite period  about 720 years, so nothing ever repeats
+amplitude         sums to 8 degrees; excursion bounded at +/-16 degrees
+max angular rate  0.0224 deg/s          (measured, not declared)
+max tangential    0.183 px/s = 11px per minute
 ```
 
-Re-spaced when HISTORY went in. The two totals are the ruled ones; the stagger
-absorbed the seventh node rather than the beat getting longer.
+The floor for seeing a small object move against a static reference is near
+0.6 px/s. At 0.183 it is never caught in the act, and it has plainly moved if you
+look away and come back. It also passes the casino test *better* than a
+revolution would: a revolution eventually returns the system to its starting
+configuration, which is a loop. Three incommensurate components never do.
 
-Default is the slower one: seven labels have to be legible as they arrive, and at
-2.5s the last three land on top of each other. Amy's call.
+What is lost: nodes no longer travel the whole orbit, so the layer swap that
+demonstrates occlusion in motion fires only for the two nodes whose excursion
+crosses the line of nodes. The occlusion itself is unaffected — it is still there
+statically, and the arrival still draws each orbit through it.
 
-With a node now sitting at the apex the sweep has a true starting point, so it
-begins on the node nearest twelve rather than the first one past it. HISTORY
-opens the beat.
+**If full revolution is wanted instead, the honest price is reactive label
+handling, and that should be ruled on directly rather than picked here.**
 
-**Ambient after:** the nucleus breath, star twinkle, the shooter. Nothing else.
+### Labels — depth-linked presence, no reactive logic
 
-**Reduced motion:** completed state rendered, no arrival, no drift. Verified — 0
-running animations, and the frame at +0.8s and +5.8s is byte-identical.
+Presence tracks orbital depth continuously: opacity `0.35 + 0.65*u^0.85` and
+scale `0.93 + 0.07*u`, where `u = 0.5 + 0.5*sin t`. Written every frame from the
+model, never triggered by anything. Three nested groups keep it honest — depth
+opacity on the outer, the arrival's animation on the middle, the arrival's
+translate on the inner — because an animation out-ranks an inline style, so depth
+written onto the animated element would simply lose.
+
+A soft radial scrim sits behind every label, in the night's own hue, always on.
+Invisible on open sky; decisive where a label crosses the corona or an orbit
+line. Nothing switches it.
+
+Labels sit radially outward from their own node with a floor that clears the
+body, and a tether whose length falls to zero on its own when the label sits on
+its node. No state, nothing toggles.
+
+**Verified:** the whole excursion box exhausted — 823,543 configurations against
+the model offline, 2,187 cross-checked in the browser against real rendered text
+— **no two labels overlap anywhere the system can reach.** Largest presence
+change in any ten seconds of libration: 0.002. There is no step anywhere.
+
+### Reduced motion
+
+Completed state rendered, no arrival, no libration. Depth-linked presence still
+applies, because it is distance, not motion. Verified: 0 running animations,
+frames at +0.9s and +5.9s byte-identical.
 
 ## 5. The cost — **RULED**, and the ruling applied
 
@@ -316,12 +395,11 @@ spike pseudo-elements off                  no change
 
 **Still open, for the walk:**
 
-- **Nucleus variant.** `c`'s texture starts to read as banding rather than
-  cratering; `a` may be too quiet to justify the pass. Default is `b`.
-- **Arrival timing.** 3.88s or 2.48s.
-- **Orbits static or slow drift.** Static is the ruled default and nothing in the
-  build argues against it; the drift variant exists so the question is settled by
-  eye rather than by argument.
+- **Nucleus variant.** Default is now `a`, per ruling. `b` and `c` carry the same
+  light model with more granulation, corona and breath.
+- **Libration versus revolution** (section 4). The one place this build departed
+  from the brief. Revolution is available if reactive label handling is
+  acceptable; it is not available otherwise.
 - **The 30fps floor.** The lab matches what the section costs today, which is the
   honest bar, but it is not 60. Getting there means touching the near layer,
   which the ruling reserves.

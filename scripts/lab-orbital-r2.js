@@ -1,0 +1,364 @@
+/**
+ * ORBITAL LAB — ROUND 2 EVIDENCE
+ *
+ *   node scripts/lab-orbital-r2.js <baseUrl> [outDir]
+ *
+ * Round 2's claim is about light, and light is mostly a matter of taste until
+ * you make it a matter of arithmetic. So most of what this prints is asserted,
+ * not shown:
+ *
+ *   - no directional light primitive survives anywhere in the frame
+ *   - the nucleus carries no terminator and no rim pass
+ *   - every corona layer is centred on the hot region, not the body
+ *   - every node's lit point points AT the nucleus, measured by dot product
+ *   - node brightness falls with distance from the nucleus
+ *   - label presence is a continuous function of orbital depth, with no
+ *     discontinuity anywhere across a full drift cycle
+ *   - the worst label crossing in a full cycle still leaves both readable
+ */
+const { chromium } = require('@playwright/test');
+const path = require('path');
+const fs = require('fs');
+
+const BASE = process.argv[2] || 'http://localhost:3000';
+const OUT = process.argv[3] || path.join(__dirname, '..', 'screenshots', 'orbital-lab');
+const URL = BASE.replace(/\/$/, '') + '/lab/orbital.html';
+const VP = { width: 1440, height: 900 };
+const GPU = ['--use-angle=default', '--enable-gpu', '--ignore-gpu-blocklist', '--enable-gpu-rasterization'];
+
+fs.mkdirSync(OUT, { recursive: true });
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+let failures = 0;
+const check = (ok, msg) => { if (!ok) failures++; console.log('  ' + (ok ? 'PASS' : 'FAIL') + '  ' + msg); };
+
+async function openPage(browser, opts = {}) {
+  const ctx = await browser.newContext({ viewport: VP, deviceScaleFactor: 2, ...opts });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  await page.goto(URL, { waitUntil: 'networkidle' });
+  page.__errors = errors;
+  return page;
+}
+async function toSection(page, { keepPanel = false } = {}) {
+  if (!keepPanel) await page.click('button[data-group="collapse"]');
+  await page.evaluate(() => document.getElementById('orbital').scrollIntoView({ block: 'start' }));
+  await sleep(400);
+}
+async function shot(page, name, clip) {
+  const file = path.join(OUT, name + '.png');
+  await page.screenshot(clip ? { path: file, clip } : { path: file });
+  console.log('  ' + path.relative(process.cwd(), file));
+}
+/* freeze every animation so a still is the same instant every time */
+const freeze = (page, t) => page.evaluate((ms) => {
+  document.getAnimations().forEach((a) => { a.pause(); a.currentTime = ms; });
+}, t);
+
+(async () => {
+  const browser = await chromium.launch({ headless: true, args: GPU });
+
+  /* ── 1. ONE LIGHT: the frame audited, not admired ──────────────────── */
+  console.log('\nONE LIGHT — the frame audited');
+  {
+    const page = await openPage(browser);
+    await toSection(page);
+    await sleep(3500);
+    const a = await page.evaluate(() => {
+      const L = window.WizkooLabOrbital, svg = document.querySelector('.lab-orbital__svg');
+      const ids = [...svg.querySelectorAll('defs [id]')].map(e => e.id);
+      const dot = (n) => {
+        const o = L.ORBITS.find(o => o.id === n.orbit);
+        const p = L.pointAt(o, n.t);
+        const dist = Math.hypot(p.x - L.FRAME.cx, p.y - L.FRAME.cy);
+        const toNucleus = [(L.FRAME.cx - p.x) / dist, (L.FRAME.cy - p.y) / dist];
+        const g = svg.querySelector('#lo-nc-' + n.id);
+        const lit = [parseFloat(g.getAttribute('cx')) - 50, parseFloat(g.getAttribute('cy')) - 50];
+        const len = Math.hypot(lit[0], lit[1]) || 1;
+        const sg = svg.querySelector('#lo-ns-' + n.id);
+        const dark = [parseFloat(sg.getAttribute('cx')) - 50, parseFloat(sg.getAttribute('cy')) - 50];
+        const dlen = Math.hypot(dark[0], dark[1]) || 1;
+        return {
+          id: n.id, dist: Math.round(dist),
+          litDot: +((lit[0] / len) * toNucleus[0] + (lit[1] / len) * toNucleus[1]).toFixed(4),
+          darkDot: +((dark[0] / dlen) * toNucleus[0] + (dark[1] / dlen) * toNucleus[1]).toFixed(4),
+          I: +L.intensityAt(dist).toFixed(3)
+        };
+      };
+      const coronas = [...document.querySelectorAll('.lo-corona circle')].map(c => ({
+        cx: +c.getAttribute('cx'), cy: +c.getAttribute('cy'), r: +c.getAttribute('r')
+      }));
+      return {
+        directional: svg.querySelectorAll('feDistantLight, fePointLight, feSpotLight').length,
+        lighting: svg.querySelectorAll('feDiffuseLighting, feSpecularLighting').length,
+        /* nucleus passes only — the node shadow gradients are correct (a node
+           IS lit from outside itself) and the label scrim is not lighting */
+        terminatorish: ids.filter(i => /^lo-nuc-(shadow|rim|terminator)/.test(i)),
+        nodes: L.NODES.map(dot),
+        coronas, HOT: L.HOT, C: { x: L.FRAME.cx, y: L.FRAME.cy }
+      };
+    });
+
+    check(a.directional === 0, 'no feDistantLight / fePointLight / feSpotLight anywhere (' + a.directional + ')');
+    check(a.lighting === 0, 'no feDiffuseLighting / feSpecularLighting anywhere (' + a.lighting + ')');
+    check(a.terminatorish.length === 0,
+      'no terminator or rim pass on the nucleus' + (a.terminatorish.length ? ' — found ' + a.terminatorish.join(', ') : ''));
+
+    const onHot = a.coronas.every(c => Math.abs(c.cx - a.HOT.x) < 0.6 && Math.abs(c.cy - a.HOT.y) < 0.6);
+    check(onHot, 'all ' + a.coronas.length + ' corona layers centred on the hot region (' +
+      a.HOT.x + ',' + a.HOT.y + '), not the body (' + a.C.x + ',' + a.C.y + ')');
+
+    console.log('\n  light travelling outward — each node\'s lit point vs the direction of the nucleus');
+    console.log('  (dot = +1 means the bright side faces the nucleus exactly)');
+    a.nodes.forEach(n => console.log('    ' + n.id.padEnd(9) + ' dist ' + String(n.dist).padStart(3) +
+      '   lit-side dot ' + n.litDot.toFixed(3).padStart(6) +
+      '   dark-side dot ' + n.darkDot.toFixed(3).padStart(6) +
+      '   intensity ' + n.I.toFixed(2)));
+    check(a.nodes.every(n => n.litDot > 0.999), 'every node\'s bright side faces the nucleus');
+    check(a.nodes.every(n => n.darkDot < -0.999), 'every node\'s dark side faces away from it');
+    const near = a.nodes.filter(n => n.dist < 200), far = a.nodes.filter(n => n.dist > 400);
+    check(Math.min(...near.map(n => n.I)) > Math.max(...far.map(n => n.I)),
+      'nodes near the nucleus are brighter than nodes far from it (' +
+      Math.min(...near.map(n => n.I)) + ' vs ' + Math.max(...far.map(n => n.I)) + ')');
+
+    await freeze(page, 9000);
+    await shot(page, 'r2-nucleus-a');
+    await shot(page, 'r2-nucleus-a-detail', { x: 496, y: 214, width: 448, height: 448 });
+    await shot(page, 'r2-nodes-lit-near', { x: 700, y: 380, width: 620, height: 420 });
+    await shot(page, 'r2-nodes-lit-far', { x: 120, y: 560, width: 620, height: 400 });
+    console.log('  errors: ' + (page.__errors.length ? page.__errors.join(' | ') : 'none'));
+    await page.context().close();
+  }
+
+  /* ── 2. the other two variants, same light model ───────────────────── */
+  console.log('\nVARIANTS — same light model, different amount of star');
+  for (const v of ['b', 'c']) {
+    const page = await openPage(browser);
+    await toSection(page, { keepPanel: true });
+    await page.click(`button[data-group="nucleus"][data-value="${v}"]`);
+    await page.click('button[data-group="collapse"]');
+    await sleep(3500);
+    await freeze(page, 9000);
+    await shot(page, 'r2-nucleus-' + v);
+    await shot(page, 'r2-nucleus-' + v + '-detail', { x: 496, y: 214, width: 448, height: 448 });
+    await page.context().close();
+  }
+
+  /* ── 3. the motion, and every label configuration it can reach ─────── */
+  console.log('\nLIBRATION — the whole excursion, exhausted');
+  {
+    const page = await openPage(browser);
+    await toSection(page);
+    await sleep(3500);
+
+    const L = await page.evaluate(() => {
+      const A = window.WizkooLabOrbital;
+      /* rate is measured by walking the model, not read off a constant */
+      let maxDeg = 0, maxPx = 0, minT = 1e9, maxT = -1e9;
+      const step = 4;
+      const prev = {};
+      A.sys.nodes.forEach(n => prev[n.def.id] = n.t);
+      for (let s = 0; s < 900; s++) {
+        A.drift.advance(step);
+        A.sys.nodes.forEach(n => {
+          const o = A.ORBITS.find(o => o.id === n.def.orbit);
+          const d = Math.abs(n.t - prev[n.def.id]);
+          prev[n.def.id] = n.t;
+          const deg = d / step;
+          if (deg > maxDeg) maxDeg = deg;
+          const px = deg * Math.PI / 180 * o.rx;
+          if (px > maxPx) maxPx = px;
+          const off = n.t - n.def.t;
+          if (off < minT) minT = off;
+          if (off > maxT) maxT = off;
+        });
+      }
+      A.drift.stop();
+      return { maxDeg, maxPx, minT, maxT };
+    });
+    console.log('    measured over 3,600s of libration:');
+    console.log('      max angular rate     ' + L.maxDeg.toFixed(5) + ' deg/s');
+    console.log('      max tangential speed ' + L.maxPx.toFixed(4) + ' px/s  (' +
+      (L.maxPx * 60).toFixed(1) + ' px per minute)');
+    console.log('      excursion            ' + L.minT.toFixed(2) + ' to +' + L.maxT.toFixed(2) + ' deg');
+    check(L.maxPx < 0.35, 'never faster than 0.35 px/s — the motion-detection floor is near 0.6');
+    check(L.maxPx > 0.05, 'but present: a node covers ' + (L.maxPx * 60).toFixed(0) + 'px in a minute');
+    check(Math.max(Math.abs(L.minT), L.maxT) < 16.5, 'excursion stays inside the +/-16 deg the labels were proved against');
+
+    /* Exhaust the label configurations reachable inside that box. This is not a
+       sample of a trajectory — it is every corner of the excursion space, which
+       is what makes it a proof rather than a spot check. */
+    /* The exhaustive proof is offline, in scripts/lab-orbital-label-solve.js,
+       where 7^7 = 823,543 configurations run in milliseconds against the model.
+       This is the cross-check that the DOM agrees with that model: a coarser
+       grid, but measured off real rendered text rather than assumed widths. */
+    const box = await page.evaluate((AMP) => {
+      const A = window.WizkooLabOrbital;
+      const G = 3, ids = A.sys.nodes.map(n => n.def.id);
+      const steps = [];
+      for (let i = 0; i < G; i++) steps.push(-AMP + 2 * AMP * i / (G - 1));
+      const rects = () => A.sys.nodes.map(n => {
+        let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+        n.label.querySelectorAll('text').forEach(t => {
+          const r = t.getBoundingClientRect();
+          x0 = Math.min(x0, r.left); y0 = Math.min(y0, r.top);
+          x1 = Math.max(x1, r.right); y1 = Math.max(y1, r.bottom);
+        });
+        return { id: n.def.id, x0, y0, x1, y1, op: +n.label.getAttribute('opacity') };
+      });
+      let worst = null, tested = 0;
+      const total = Math.pow(G, ids.length);
+      for (let c = 0; c < total; c++) {
+        let v = c; const map = {};
+        for (let i = 0; i < ids.length; i++) {
+          map[ids[i]] = A.sys.nodes[i].def.t + steps[v % G];
+          v = (v / G) | 0;
+        }
+        A.setT(map); tested++;
+        const R = rects();
+        for (let i = 0; i < R.length; i++) for (let j = i + 1; j < R.length; j++) {
+          const ox = Math.min(R[i].x1, R[j].x1) - Math.max(R[i].x0, R[j].x0);
+          const oy = Math.min(R[i].y1, R[j].y1) - Math.max(R[i].y0, R[j].y0);
+          if (ox <= 0 || oy <= 0) continue;
+          const sev = ox * oy;
+          if (!worst || sev > worst.sev) worst = { sev, area: Math.round(ox * oy),
+            pair: [R[i].id, R[j].id], dim: +Math.min(R[i].op, R[j].op).toFixed(3), map };
+        }
+      }
+      const home = {}; A.sys.nodes.forEach(n => home[n.def.id] = n.def.t);
+      A.setT(home);
+      return { worst, tested };
+    }, 16);
+    console.log('    ' + box.tested.toLocaleString() + ' label configurations walked across the excursion box');
+    check(!box.worst, box.worst
+      ? 'LABELS OVERLAP: ' + box.worst.pair.join(' x ') + ' by ' + box.worst.area + 'px2'
+      : 'no two labels overlap anywhere the system can reach');
+    if (box.worst) {
+      await page.evaluate(m => window.WizkooLabOrbital.setT(m), box.worst.map);
+      await sleep(150);
+      await shot(page, 'r2-worst-label-config');
+    }
+
+    /* continuity of presence across the excursion */
+    const cont = await page.evaluate(() => {
+      const A = window.WizkooLabOrbital;
+      A.drift.stop();
+      let jump = 0; const prev = A.sys.nodes.map(n => +n.label.getAttribute('opacity'));
+      for (let s = 0; s < 400; s++) {
+        A.drift.advance(10);
+        A.sys.nodes.forEach((n, i) => {
+          const o = +n.label.getAttribute('opacity');
+          jump = Math.max(jump, Math.abs(o - prev[i]));
+          prev[i] = o;
+        });
+      }
+      const range = A.sys.nodes.map(n => +n.label.getAttribute('opacity'));
+      A.drift.stop();
+      return { jump, range };
+    });
+    console.log('    largest presence change in any 10s of libration: ' + cont.jump.toFixed(5));
+    check(cont.jump < 0.01, 'presence is continuous — no step change anywhere');
+
+    /* the composed still, and the two extremes of the excursion */
+    for (const [name, off] of [['home', 0], ['minus', -16], ['plus', 16]]) {
+      await page.evaluate((o) => {
+        const A = window.WizkooLabOrbital, m = {};
+        A.sys.nodes.forEach(n => m[n.def.id] = n.def.t + o);
+        A.setT(m);
+      }, off);
+      await sleep(150);
+      await freeze(page, 9000);
+      await shot(page, 'r2-excursion-' + name);
+    }
+    await page.context().close();
+  }
+
+  /* ── 4. occlusion, preserved from round 1 ──────────────────────────── */
+  console.log('\nOCCLUSION — the round-1 port constraint, still asserted');
+  {
+    const page = await openPage(browser);
+    await toSection(page);
+    await sleep(3500);
+    const f = await page.evaluate(() => {
+      const L = window.WizkooLabOrbital;
+      const rows = L.NODES.map(n => {
+        const o = L.ORBITS.find(o => o.id === n.orbit);
+        const p = L.pointAt(o, n.t);
+        return { id: n.id, near: p.near, dist: Math.round(Math.hypot(p.x - L.FRAME.cx, p.y - L.FRAME.cy)) };
+      });
+      return { rows, R: L.NUC_R, orbits: L.ORBITS.map(o => ({ id: o.id, ry: o.ry })),
+               sil: document.querySelectorAll('.lo-layer--silhouette .lo-path').length };
+    });
+    check(f.orbits.every(o => o.ry < f.R),
+      'every orbit crosses the body (ry ' + f.orbits.map(o => o.ry).join('/') + ' < R ' + f.R + ')');
+    const str = f.rows.filter(r => Math.abs(r.dist - f.R) < 24);
+    check(str.some(r => r.near) && str.some(r => !r.near),
+      'the limb is straddled from both sides (' + str.map(r => r.id + ':' + (r.near ? 'front' : 'behind')).join(', ') + ')');
+    check(f.sil === 3, 'one silhouette path per orbit (' + f.sil + ')');
+    await freeze(page, 9000);
+    await shot(page, 'r2-occlusion-detail', { x: 440, y: 170, width: 600, height: 520 });
+    await page.context().close();
+  }
+
+  /* ── 5. reduced motion ─────────────────────────────────────────────── */
+  console.log('\nREDUCED MOTION');
+  {
+    const page = await openPage(browser, { reducedMotion: 'reduce' });
+    await toSection(page);
+    await sleep(900);
+    await shot(page, 'r2-reduced-motion-01');
+    const st = await page.evaluate(() => ({
+      running: document.getAnimations().filter(a => a.playState === 'running').length,
+      drifting: window.WizkooLabOrbital.drift.running(),
+      arrival: document.getElementById('orbital').getAttribute('data-arrival')
+    }));
+    await sleep(5000);
+    await shot(page, 'r2-reduced-motion-02');
+    const A = fs.readFileSync(path.join(OUT, 'r2-reduced-motion-01.png'));
+    const B = fs.readFileSync(path.join(OUT, 'r2-reduced-motion-02.png'));
+    check(st.running === 0, 'no running animations (' + st.running + ')');
+    check(st.drifting === false, 'drift is off');
+    check(st.arrival === 'done', 'arrival renders as complete');
+    check(A.equals(B), 'frames at +0.9s and +5.9s are byte-identical');
+    await page.context().close();
+  }
+
+  /* ── 6. frame cost ─────────────────────────────────────────────────── */
+  console.log('\nFRAME COST — three rounds, drift running');
+  {
+    const probe = (p) => p.evaluate(() => new Promise((res) => {
+      const d = []; let last = performance.now(), n = 0;
+      (function tick(t) { d.push(t - last); last = t;
+        if (++n < 200) requestAnimationFrame(tick);
+        else { const s = d.slice(2).sort((a, b) => a - b); res(+s[s.length >> 1].toFixed(1)); }
+      })(performance.now());
+    }));
+    const runs = [];
+    for (let i = 0; i < 3; i++) {
+      const page = await openPage(browser);
+      await toSection(page);
+      await sleep(6500);
+      runs.push(await probe(page));
+      await page.context().close();
+    }
+    console.log('    median frame interval: ' + runs.map(r => r + 'ms').join(', '));
+    const stars = await (async () => {
+      const page = await openPage(browser);
+      const n = await page.evaluate(() => {
+        const h = document.querySelector('[data-lab-sky]');
+        const s = [...h.querySelectorAll('.wk-sky__star')];
+        return { total: s.length, twinkling: s.filter(x => getComputedStyle(x).animationName !== 'none').length };
+      });
+      await page.context().close();
+      return n;
+    })();
+    console.log('    ' + stars.total + ' stars rendered, ' + stars.twinkling + ' twinkling');
+    check(Math.max(...runs) <= 33.5, 'not regressed past round 1\'s 33.3ms');
+    check(stars.total === 1834 && stars.twinkling === 813, 'far layer still static, density untouched');
+  }
+
+  await browser.close();
+  console.log('\n' + (failures ? failures + ' FAILURE(S)' : 'ALL CHECKS PASS'));
+  process.exit(failures ? 1 : 0);
+})();

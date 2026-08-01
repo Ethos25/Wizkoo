@@ -60,8 +60,8 @@
   <div class="lab-panel__row">
     <span>Nucleus</span>
     <div class="lab-panel__seg">
-      <button type="button" data-group="nucleus" data-value="a" aria-pressed="false">a</button>
-      <button type="button" data-group="nucleus" data-value="b" aria-pressed="true">b</button>
+      <button type="button" data-group="nucleus" data-value="a" aria-pressed="true">a</button>
+      <button type="button" data-group="nucleus" data-value="b" aria-pressed="false">b</button>
       <button type="button" data-group="nucleus" data-value="c" aria-pressed="false">c</button>
     </div>
   </div>
@@ -69,16 +69,25 @@
   <div class="lab-panel__row">
     <span>Arrival</span>
     <div class="lab-panel__seg">
-      <button type="button" data-group="arrival" data-value="brisk" aria-pressed="false">2.5s</button>
-      <button type="button" data-group="arrival" data-value="slow" aria-pressed="true">4.0s</button>
+      <button type="button" data-group="arrival" data-value="brisk" aria-pressed="true">2.5s</button>
+      <button type="button" data-group="arrival" data-value="slow" aria-pressed="false">4.0s</button>
     </div>
   </div>
 
   <div class="lab-panel__row">
     <span>Orbits</span>
     <div class="lab-panel__seg">
-      <button type="button" data-group="orbits" data-value="static" aria-pressed="true">static</button>
-      <button type="button" data-group="orbits" data-value="drift" aria-pressed="false">slow drift</button>
+      <button type="button" data-group="orbits" data-value="drift" aria-pressed="true">slow drift</button>
+      <button type="button" data-group="orbits" data-value="static" aria-pressed="false">static</button>
+    </div>
+  </div>
+
+  <div class="lab-panel__row">
+    <span>Drift speed (lab only)</span>
+    <div class="lab-panel__seg">
+      <button type="button" data-group="speed" data-value="1" aria-pressed="true">1&times;</button>
+      <button type="button" data-group="speed" data-value="500" aria-pressed="false">500&times;</button>
+      <button type="button" data-group="speed" data-value="2000" aria-pressed="false">2000&times;</button>
     </div>
   </div>
 
@@ -94,8 +103,10 @@
   </div>
 
   <div class="lab-panel__note">
-    a / b / c move texture strength, corona size and breath amplitude together.
-    Static is the ruled default; drift is here so the motion question can be settled by eye.
+    The light model is fixed across a / b / c &mdash; they move granulation, corona reach and
+    breath amplitude only, never where the light comes from. Slow drift is the ruled default;
+    its real period is about three and a half hours, so the speed row exists to inspect label
+    crossings inside a working session. It changes nothing that ships.
   </div>
 </aside>
 

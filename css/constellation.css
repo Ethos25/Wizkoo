@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE CONSTELLATION — figure, scintillation, arrival
+
+   Three states, and the base rule is the LAST one, so that when the beat ends
+   its classes are simply removed and the figure falls into permanent stillness
+   with no animation, no fill-mode and no timer left behind:
+
+     .wkc-armed     before the beat. The figure exists in layout, unlit.
+     .wkc-running   the beat. Removed on settle.
+     (neither)      settled. Also what .wkc-static renders immediately.
+
+   Every value here that describes the figure at rest is the spec's
+   (docs/constellation-geometry.html). Every value that describes it arriving
+   is this session's, and is reasoned in js/constellation.js § BEAT.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.wkc-band{
+  position:absolute;
+  /* No `contain`, deliberately: the tether starts ABOVE the band, under the
+     word "space", and any paint containment would clip it (spec § 4). */
+}
+
+/* Spec § 8: the svg is pointer-events:none and overflow:visible; stars are
+   painted ON TOP of it, labels above both. */
+.wkc-svg{
+  position:absolute;inset:0;width:100%;height:100%;
+  overflow:visible;pointer-events:none;
+  z-index:1;
+}
+
+.wkc-star{
+  position:absolute;
+  display:block;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:2;
+  /* Scintillation lives on this element and runs from load, forever, at the
+     spec's own phase. Ignition lives on the child. Opacity multiplies down
+     the tree, so a star that lights mid-beat steps into an ambient cycle
+     already in progress — it joins the sky rather than starting a clock. */
+  animation:wkc-scintillate var(--period) ease-in-out var(--delay) infinite;
+  will-change:opacity;
+}
+.wkc-ign,.wkc-halo,.wkc-core{
+  position:absolute;inset:0;
+  display:block;
+  border-radius:50%;
+}
+
+/* Spec § 6, verbatim. */
+@keyframes wkc-scintillate{
+  0%,100%{opacity:1}
+  38%{opacity:var(--dim,0.85)}
+  62%{opacity:calc((1 + var(--dim,0.85)) / 2)}
+}
+
+.wkc-label{
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+  white-space:nowrap;
+  font-family:'Space Mono',monospace;font-weight:400;font-style:normal;
+  letter-spacing:0.19em;
+  text-transform:uppercase;
+  /* Stated, not inherited. The anchors translate by -50%/-100% of the label's
+     own box, so its height is geometry: any line-height the host happens to
+     set would move the label off its star. `normal` is what the spec's own
+     render resolves to, so this states that value and makes it inheritance-
+     proof at the same time. */
+  line-height:normal;
+  transform:var(--anchor);
+}
+
+/* ─────────────────────────── ARMED: unlit ─────────────────────────────── */
+.wkc-armed .wkc-ign{opacity:0}
+.wkc-armed .wkc-arm{opacity:0}
+.wkc-armed .wkc-label{opacity:0}
+.wkc-armed .wkc-tether{opacity:0}
+
+/* ─────────────────────────── RUNNING: the beat ────────────────────────── */
+
+/* The origin's own rise is longer and its bloom overshoots further than any
+   subject's: it is the cause of everything that follows, and the figure has
+   to read it as such before the first arm moves. */
+@keyframes wkc-ignite{from{opacity:0}to{opacity:1}}
+@keyframes wkc-halo-in{
+  0%{transform:scale(0.58)}
+  64%{transform:scale(1.19)}
+  100%{transform:scale(1)}
+}
+@keyframes wkc-halo-in-origin{
+  0%{transform:scale(0.50)}
+  62%{transform:scale(1.28)}
+  100%{transform:scale(1)}
+}
+@keyframes wkc-core-in{
+  0%{transform:scale(0.42)}
+  62%{transform:scale(1.05)}
+  100%{transform:scale(1)}
+}
+
+.wkc-running .wkc-ign{
+  animation:wkc-ignite var(--dur) cubic-bezier(.22,.68,.31,1) var(--at) both;
+}
+.wkc-running .wkc-halo{
+  animation:wkc-halo-in var(--dur) cubic-bezier(.24,.76,.32,1) var(--at) both;
+}
+.wkc-running .wkc-core{
+  animation:wkc-core-in var(--dur) cubic-bezier(.24,.76,.32,1) var(--at) both;
+}
+.wkc-running [data-star="space"] .wkc-halo{
+  animation-name:wkc-halo-in-origin;
+}
+
+/* THE TRAVEL. Both paths of an arm — the 3.4 glow and the hairline core —
+   draw as one filament, from the origin end toward the destination, stopping
+   at the trimmed endpoint. The easing leaves the source fast and settles into
+   the arrival; a linear draw reads as a stroke being painted, which is the
+   one thing this must not look like. */
+@keyframes wkc-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.wkc-arm path{stroke-dasharray:1;stroke-dashoffset:0}
+.wkc-running .wkc-svg{will-change:contents}
+.wkc-running .wkc-arm{
+  animation:wkc-ignite 1ms linear var(--at) both;   /* reveal on the frame it starts */
+}
+.wkc-running .wkc-arm path{
+  animation:wkc-draw var(--dur) cubic-bezier(.12,.62,.24,1) var(--at) both;
+}
+
+/* Labels: a beat behind their own star, never behind a global clock. */
+.wkc-running .wkc-label{
+  animation:wkc-ignite 420ms cubic-bezier(.33,.7,.4,1) var(--at) both;
+}
+
+/* The tether closes the loop, last. Its dasharray is spoken for by its dots,
+   so it is revealed by a clip scaling downward out of the word. */
+@keyframes wkc-tether-draw{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.wkc-tether-clip{transform-box:view-box}
+.wkc-running .wkc-tether-clip{
+  animation:wkc-tether-draw var(--dur) cubic-bezier(.2,.66,.28,1) var(--at) both;
+}
+.wkc-running .wkc-tether{
+  animation:wkc-ignite 1ms linear var(--at) both;
+}
+
+/* ─────────── REDUCED MOTION: the completed figure, statically ──────────
+   Full magnitude, no arrival, no scintillation, no timers created. */
+.wkc-static .wkc-star{animation:none}
+@media(prefers-reduced-motion:reduce){
+  .wkc-star,.wkc-ign,.wkc-halo,.wkc-core,.wkc-arm,.wkc-arm path,
+  .wkc-label,.wkc-tether,.wkc-tether-clip{
+    animation:none!important;
+    opacity:1!important;
+    transform:none!important;
+    stroke-dashoffset:0!important;
+  }
+  .wkc-label{transform:var(--anchor)!important}
+  .wkc-tether-clip{transform:scaleY(1)!important}
+}

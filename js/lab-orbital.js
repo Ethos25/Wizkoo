@@ -1,7 +1,7 @@
 /**
  * THE ORBITAL SYSTEM — geometry, light, and the arrival beat.
  *
- * THE STRUCTURAL CLAIM
+ * THE STRUCTURAL CLAIM (round 1, preserved)
  *   An orbit is a circle in three dimensions seen edge-on-ish. Projected, it is
  *   an ellipse, and the ellipse's MAJOR AXIS is the projection of the line of
  *   nodes — the line where the orbital plane crosses the plane of the sky. So
@@ -17,17 +17,53 @@
  *   For that split to be VISIBLE the orbit has to actually cross the body, which
  *   means every orbit's minor semi-axis must be smaller than the nucleus radius.
  *   All three are (115, 101, 82 against 125). This is the one number that decides
- *   whether the section reads as an object or as a diagram, and it is why the
- *   orbits here are far flatter than the ones on the homepage — those have
- *   ry 178/160/135 against a 42 nucleus, so nothing ever crosses anything and the
- *   depth cue is simply absent.
+ *   whether the section reads as an object or as a diagram.
  *
- * THE LIGHT
- *   One source, upper left, at 38% 32% of every sphere's own bounding box. The
- *   nucleus and all six nodes take the same relative light, so a node is the same
- *   material as the body it orbits at a sixth of its radius. The relief filter is
- *   lit at azimuth 225 / elevation 40, the same bearing in the filter's own
- *   coordinates, so the mottling's micro-shadows fall the way the terminator does.
+ * THE LIGHT MODEL — round 2, and the whole of this round
+ *   THE NUCLEUS IS SELF-LUMINOUS. It is the only light source in the frame, and
+ *   nothing else in the frame may imply another one.
+ *
+ *   What round 1 got wrong: it lit the nucleus like a planet — a diffuse falloff
+ *   from a point at 38% 32%, a terminator gathering on the opposite side, a rim
+ *   light on the far limb — and then wrapped it in a symmetrical corona. Those
+ *   are two contradictory sources in one frame. The sphere said "a lamp is over
+ *   there, upper left"; the corona said "a sun is behind me". A viewer does not
+ *   have to be able to name that to feel it, and what they feel is: an object in
+ *   front of a light, not a light.
+ *
+ *   What replaces it, in four parts:
+ *
+ *   1  LIMB DARKENING, and no terminator. A star dims toward its edge in EVERY
+ *      direction, because at the limb you look through a longer, cooler slant of
+ *      its atmosphere. That falloff is radially symmetric and carries no
+ *      direction at all, which is exactly why it is the right shading for a body
+ *      that makes its own light.
+ *
+ *   2  THE HOT REGION, upper left. A star is not a uniform disc; it has hotter
+ *      surface. This is that, and it is built as an ADDITIVE PATCH — it can only
+ *      brighten, never darken, and the disc underneath it is already complete
+ *      without it. That is the difference between "a bright region of the
+ *      surface" and "light arriving from off-frame", and it is the entire reason
+ *      the patch is smaller than the disc and has its own falloff.
+ *
+ *   3  GRANULATION, not relief. Round 1's surface came from feDiffuseLighting
+ *      with a distant light at azimuth 225 — micro-shadows cast by an external
+ *      source, which is precisely the cue being removed. Here the same turbulence
+ *      drives BRIGHTNESS variation instead: contrast-stretched noise blended in
+ *      overlay. Convection cells, not craters. No direction anywhere in it.
+ *
+ *   4  THE CORONA ANCHORS TO THE HOT REGION. Every corona layer is centred on the
+ *      hot patch rather than on the body, and every gradient peaks INSIDE the
+ *      body where it cannot be seen, so the visible bleed is bright just outside
+ *      the near limb and falls to nothing around the far one. A corona centred on
+ *      the body peaks in a ring around the whole silhouette, and a bright ring
+ *      around a silhouette is the definition of a backlight.
+ *
+ *   AND THE DEMONSTRATION: the nodes are lit BY the nucleus. Each node's bright
+ *   side faces the centre and its dark side faces out, with brightness falling
+ *   off with distance from the nucleus. This is what settles the question — once
+ *   light is visibly travelling outward from the middle of the frame, nobody
+ *   wonders where it comes from, because they can watch it arrive.
  */
 (function () {
   'use strict';
@@ -38,91 +74,154 @@
   /* ── The frame ──────────────────────────────────────────────────────────
      1440 x 984 so that at a 1440 viewport one SVG unit is one CSS pixel and
      the labels are literally the homepage's 14px/12px, not a scaled guess. */
-  var FRAME = { w: 1440, h: 984, cx: 720, cy: 460 };
+  var FRAME = { w: 1440, h: 984, cx: 720, cy: 472 };
   var NUC_R = 125;
 
+  /* The hot region, in absolute frame units. 38% 32% of the body's own box —
+     the only value in this file that carries a direction, and it is a property
+     of the surface, not of the lighting. Everything anchored to it (the corona)
+     is anchored to the surface with it. */
+  var HOT = { x: FRAME.cx + (0.38 - 0.5) * 2 * NUC_R, y: FRAME.cy + (0.32 - 0.5) * 2 * NUC_R };
+
   var ORBITS = [
-    /* id, semi-axes, rotation of the major axis in screen degrees, stroke.
-       Drawn in order of DECREASING minor axis: each orbit lies flatter than the
+    /* Drawn in order of DECREASING minor axis: each orbit lies flatter than the
        last, so the system's depth deepens as it completes and the final stroke
        is the one that runs straight across the nucleus's face.
 
-       No dashed orbit here. The homepage distinguishes its middle orbit with a
-       dash; a dash pattern and a dash-offset draw are the same property, and the
-       draw is the beat. The three are separated by colour and weight instead —
-       starlight, saffron, ocean — which is a stronger separation anyway at this
-       stroke width. */
-    { id: 'c', rx: 380, ry: 115, rot: 85,  stroke: 'rgba(240,242,248,0.20)', width: 1.2, driftS: 228 },
-    { id: 'a', rx: 480, ry: 101, rot: -22, stroke: 'rgba(232,175,56,0.26)',  width: 1.1, driftS: 300 },
-    { id: 'b', rx: 446, ry: 82,  rot: 31,  stroke: 'rgba(120,152,208,0.30)', width: 1.0, driftS: 264 }
+       No dashed orbit. A dash pattern and a dash-offset draw are the same
+       property, and the draw is the beat; the three separate by colour and
+       weight instead.
+
+       Round 1 drove these at 228/264/300s. Round 2's ruling was that the drift
+       be meaningfully slower and never caught in the act; what it actually
+       became is described under LIBRATION below. driftS is gone — motion is no
+       longer a revolution rate. */
+    { id: 'c', rx: 356, ry: 115, rot: 85,  stroke: 'rgba(240,242,248,0.20)', width: 1.2 },
+    { id: 'a', rx: 480, ry: 101, rot: -22, stroke: 'rgba(232,175,56,0.26)',  width: 1.1 },
+    { id: 'b', rx: 446, ry: 82,  rot: 31,  stroke: 'rgba(120,152,208,0.30)', width: 1.0 }
   ];
 
+  /* ── LIBRATION: the motion, and why it is not a revolution ──────────────
+     Round 2 ruled slow drift. Built as a slow REVOLUTION it fails the label
+     ruling in the same round, and the failure is not a tuning problem — it is
+     a theorem.
+
+     Under revolution any two nodes eventually arrive at the same screen point.
+     When they do, both are near the body, so both are near FULL presence, and
+     depth-linked opacity cannot separate them. The only static remedy is to
+     give each orbit its own band of label radius, and that cannot fit: a radial
+     gap separates two labels only if it exceeds the label's extent ALONG the
+     radial direction, which for a 186 x 52 block is 186 when that direction is
+     horizontal. Three bands plus two 186px gaps put the outer edge 625px from
+     centre; the frame allows 512. Proved in scripts/lab-orbital-label-solve.js.
+
+     So the choice was: reactive collision handling, which the same ruling
+     forbids, or a motion that does not produce the collision. This is the
+     second. Each node LIBRATES about its composed position rather than
+     revolving — which is not a fudge but a real orbital behaviour, the one the
+     Moon and the Trojan asteroids do.
+
+     Three incommensurate components, so nothing ever repeats: periods 1801,
+     2803 and 4507 seconds are all prime, giving a composite period of about
+     seven hundred years. Amplitude sums to 8 degrees, and because each node
+     starts at the sum's zero the total excursion is bounded by 16 degrees.
+     Every label placement inside that box was exhausted on a 7^7 grid — 823,543
+     configurations — with no overlap anywhere; the first overlap appears past
+     30 degrees.
+
+     Maximum tangential speed 0.188 px/s, about 11px in a minute. The floor for
+     seeing a small object move against a static reference is near 0.6 px/s, so
+     it is never caught in the act and has plainly moved if you look away and
+     come back. */
+  var LIBRATION = {
+    amp: 8,
+    w: [0.55, 0.30, 0.15],
+    P: [1801, 2803, 4507]
+  };
+
+
   /* ── The seven ──────────────────────────────────────────────────────────
-     Four sit out near the major-axis extremes, where there is label room.
-     Two sit ON the limb, at the parameter where |P - C| equals the nucleus
-     radius: SCIENCE straddling the near limb in front of the body, ART
-     straddling the far limb behind it. Those two are the occlusion proof —
-     same geometry, opposite z, and the sphere cuts one of them in half.
+     SCIENCE and ART sit at the parameter where |P - C| equals the nucleus
+     radius — straddling the near limb in front of the body and the far limb
+     behind it. Same geometry, opposite z; the sphere cuts one of them in half.
 
-     HISTORY is the seventh, and it goes on orbit C, which until it arrived
-     carried no subject at all — a third of the system's structure with nothing
-     to explain it. Top centre at t=195 is the only large empty label lane left,
-     it puts a centred apex against the four corner labels, and it matches the
-     homepage's own 6-o'clock-to-12 reading of HISTORY as the node opposite the
-     writing desk. It lands BEHIND, which is right: the past is the far side.
+     HISTORY is on orbit C, which carried no subject at all before it.
 
-     Copy is the homepage's, verbatim; this round is material, not words. */
+     Labels no longer carry hand-placed coordinates. Under drift a fixed offset
+     eventually walks its label across the nucleus or off the frame, so a label
+     now sits RADIALLY OUTWARD from its own node — always on the far side of the
+     node from the centre, never between the node and the star. That is
+     continuous by construction, which is what keeps it out of collision logic.
+
+     Copy is the homepage's, verbatim; this round is light, not words. */
   var NODES = [
     { id: 'reading', orbit: 'b', t: 188,   key: 'READING',
-      lines: ['The man who accidentally', "saw through his wife's hand."],
-      label: { anchor: 'end',   x: 322,  y: 214 } },
+      lines: ['The man who accidentally', "saw through his wife's hand."] },
     { id: 'writing', orbit: 'a', t: 350,   key: 'WRITING',
-      lines: ['A get-well letter to Granddad.', 'What would you say?'],
-      label: { anchor: 'start', x: 1178, y: 258 } },
+      lines: ['A get-well letter to Granddad.', 'What would you say?'] },
     { id: 'math',    orbit: 'b', t: 8,     key: 'MATH',
-      lines: ['Measuring bone lengths.', 'Which is longest?'],
-      label: { anchor: 'start', x: 1122, y: 690 } },
+      lines: ['Measuring bone lengths.', 'Which is longest?'] },
     { id: 'science', orbit: 'a', t: 81,    key: 'SCIENCE',
-      lines: ['How fractures heal.', 'Why does a cast work?'],
-      label: { anchor: 'start', x: 872,  y: 512 } },
+      lines: ['How fractures heal.', 'Why does a cast work?'] },
     { id: 'geo',     orbit: 'a', t: 170,   key: 'GEOGRAPHY',
-      lines: ['Visit Würzburg, Germany.', 'Where X-rays were born.'],
-      label: { anchor: 'end',   x: 262,  y: 646 } },
+      lines: ['Visit Würzburg, Germany.', 'Where X-rays were born.'] },
     { id: 'art',     orbit: 'b', t: 257.5, key: 'ART',
-      lines: ['Sketch the human skeleton.', 'Label every bone you can name.'],
-      label: { anchor: 'end',   x: 650,  y: 292 } },
+      lines: ['Sketch the human skeleton.', 'Label every bone you can name.'] },
     { id: 'history', orbit: 'c', t: 195,   key: 'HISTORY',
-      lines: ['1895. One accident changed', 'medicine forever.'],
-      label: { anchor: 'middle', x: 718, y: 128 } }
+      lines: ['1895. One accident changed', 'medicine forever.'] }
   ];
 
   var NODE_R = 20, HALO_R = 42;
 
-  /* ── Variants (lab only) ────────────────────────────────────────────── */
+  /* ── The light that reaches a node ──────────────────────────────────────
+     Intensity falls with distance from the nucleus. The distance used is the
+     SCREEN separation, not the true three-dimensional one. In 3D a circular
+     orbit holds its node at a constant distance from the star, so true distance
+     would give every node on an orbit the same brightness and the falloff would
+     never be visible — and the falloff is the demonstration. The eye reads
+     depth from screen separation, so screen separation is what has to drive it.
+     A node also brightens as it swings toward the near or far extreme and dims
+     as it comes around to the flanks, which is the light visibly travelling. */
+  function intensityAt(dist) {
+    var i = 210 / Math.max(dist, 120);
+    return Math.max(0.42, Math.min(1, i));
+  }
 
+  /* Lit and unlit ends of the node palette. Intensity interpolates between them,
+     so a far node is not merely more transparent — it is made of dimmer metal. */
+  var NODE_BRIGHT = ['#FFF7E0', '#FDE7A8', '#F2C25A', '#D19A34', '#7A5416'];
+  var NODE_DIM    = ['#C49845', '#B58A3E', '#93692D', '#6E4D20', '#3A2810'];
+  var NODE_STOPS  = ['0%', '24%', '50%', '76%', '100%'];
+
+  function mixHex(a, b, k) {
+    var pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+    var r = Math.round(((pa >> 16) & 255) * (1 - k) + ((pb >> 16) & 255) * k);
+    var g = Math.round(((pa >> 8) & 255) * (1 - k) + ((pb >> 8) & 255) * k);
+    var bl = Math.round((pa & 255) * (1 - k) + (pb & 255) * k);
+    return '#' + ((1 << 24) | (r << 16) | (g << 8) | bl).toString(16).slice(1);
+  }
+
+  /* ── Variants (lab only) ────────────────────────────────────────────────
+     The LIGHT MODEL is fixed across all three now. a/b/c move granulation
+     strength, corona reach and breath amplitude only — how much star, not what
+     kind of light. Round 1's variants differed in a way that could make the
+     frame more or less wrong; these cannot. */
   var NUCLEUS_VARIANTS = {
-    /* texture strength, corona scale, and the three breath layers' amplitudes.
-       Each layer runs on its own prime-ish period (3.7s / 5.3s / 8.9s in the
-       stylesheet) so the summed luminosity has amplitude inside any 3-5 second
-       window and no beat a viewer can catch repeating. */
-    a: { tex: 0.24, corona: 0.80, breath: [[0.06, 0.26], [0.06, 0.18], [0.05, 0.14]] },
-    b: { tex: 0.48, corona: 1.00, breath: [[0.12, 0.50], [0.10, 0.34], [0.08, 0.26]] },
-    c: { tex: 0.80, corona: 1.28, breath: [[0.18, 0.72], [0.16, 0.52], [0.12, 0.40]] }
+    a: { tex: 0.34, corona: 0.92, breath: [[0.08, 0.30], [0.07, 0.22], [0.06, 0.17]] },
+    b: { tex: 0.52, corona: 1.06, breath: [[0.12, 0.44], [0.10, 0.31], [0.08, 0.24]] },
+    c: { tex: 0.74, corona: 1.22, breath: [[0.17, 0.62], [0.14, 0.44], [0.11, 0.34]] }
   };
 
   var ARRIVAL_VARIANTS = {
-    /* Nodes first, then paths. Members before structure: drawing the paths first
-       would state the system before its subjects, which is the difference
-       between an object and a diagram. */
-    /* Re-spaced for seven. The two totals are the ruled ones; the stagger
-       absorbed the extra node rather than the beat getting longer. */
+    /* Nodes first, then paths. Members before structure. */
     brisk: { nodeStart: 0.10, nodeStagger: 0.165, nodeDur: 0.42, labelLag: 0.10, labelDur: 0.46,
              pathStart: 1.24, orbitStagger: 0.11, halfDur: 0.51 },
     slow:  { nodeStart: 0.15, nodeStagger: 0.26,  nodeDur: 0.52, labelLag: 0.14, labelDur: 0.56,
              pathStart: 2.00, orbitStagger: 0.16, halfDur: 0.78 }
   };
 
-  var DEFAULTS = { nucleus: 'b', arrival: 'slow', orbits: 'static' };
+  /* RULED round 2: variant a is the base, 2.5s arrival, orbits drift. */
+  var DEFAULTS = { nucleus: 'a', arrival: 'brisk', orbits: 'drift' };
 
   /* ── geometry ───────────────────────────────────────────────────────── */
 
@@ -137,7 +236,8 @@
     return {
       x: FRAME.cx + m * b.u[0] + n * b.v[0],
       y: FRAME.cy + m * b.u[1] + n * b.v[1],
-      near: Math.sin(t) >= 0
+      near: Math.sin(t) >= 0,
+      depth: Math.sin(t)                       /* -1 far, +1 near */
     };
   }
 
@@ -177,99 +277,102 @@
     clip.appendChild(svg('circle', { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R }));
     d.appendChild(clip);
 
-    /* THE BODY, in four passes. One radial gradient cannot make a sphere: it
-       makes a lit disc. What separates them is that a real sphere darkens at
-       EVERY limb, not only the one away from the light, because at the limb you
-       are looking through the body's edge. So:
-
-         1  shading   — the diffuse falloff from the light point
-         2  limb      — centred, transparent through the middle, dark at the rim,
-                        on all sides. This is the pass that was missing and it is
-                        the whole difference between a ball and a body.
-         3  terminator— the warm gather where the lit face turns away
-         4  rim       — a hairline of the body's own light on the far limb
-    */
-    d.appendChild(grad('lo-nuc-base', '38%', '32%', '74%', [
-      ['0%',   '#FFF8E2'], ['13%', '#FDECB6'], ['29%', '#F7D27E'],
-      ['48%',  '#EDBA46'], ['68%', '#DDA134'], ['86%', '#B37E24'], ['100%', '#8A5F19']
+    /* 1. THE DISC — limb darkening, and nothing else. Centred, so it carries no
+       direction whatever. The edge is dimmer but never dark: a real star's limb
+       runs at something like two thirds of centre brightness, and taking it to
+       black is what makes a self-luminous body read as a shaded planet. */
+    d.appendChild(grad('lo-nuc-disc', '50%', '50%', '50%', [
+      ['0%',   '#FFEEBE'], ['34%', '#FBE0A0'], ['58%', '#F3C86A'],
+      ['78%',  '#E8AF38'], ['91%', '#D2942E'], ['100%', '#B77D25']
     ]));
 
-    d.appendChild(grad('lo-nuc-limb', '50%', '50%', '50%', [
-      ['0%',   '#2A1A03', 0],    ['52%',  '#2A1A03', 0],
-      ['76%',  '#332004', 0.24], ['91%', '#241601', 0.52], ['100%', '#120A01', 0.76]
+    /* 2. THE HOT REGION — additive only. Note there is no companion gradient
+       darkening the opposite side; that absence is the ruling. */
+    d.appendChild(grad('lo-nuc-hot', '38%', '32%', '40%', [
+      ['0%',  '#FFFDF2', 0.92], ['22%', '#FFF3CE', 0.62],
+      ['52%', '#FFE29A', 0.26], ['80%', '#F8CE72', 0.07], ['100%', '#F0C050', 0]
     ]));
 
-    d.appendChild(grad('lo-nuc-shadow', '26%', '20%', '94%', [
-      ['28%',  '#5A3A08', 0],    ['50%',  '#503307', 0.20],
-      ['72%',  '#3E2705', 0.50], ['89%', '#2B1B03', 0.72], ['100%', '#160D02', 0.86]
+    /* Interior life, held inside the hot region so the breath reads as the hot
+       surface pulsing rather than as the whole disc flashing. */
+    d.appendChild(grad('lo-nuc-glow-1', '38%', '32%', '34%', [
+      ['0%', '#FFFEF8', 0.90], ['40%', '#FFF0C4', 0.32], ['100%', '#FFE29A', 0]
+    ]));
+    d.appendChild(grad('lo-nuc-glow-2', '38%', '32%', '54%', [
+      ['0%', '#FFF3CE', 0.42], ['52%', '#F6CB68', 0.14], ['100%', '#E8AF38', 0]
     ]));
 
-    d.appendChild(grad('lo-nuc-rim', '66%', '74%', '52%', [
-      ['74%', '#FFD98A', 0], ['92%', '#FFD07A', 0.16], ['100%', '#FFE6B4', 0.40]
-    ]));
-
-    /* Interior life. Held INSIDE the lit face — a glow spread over the whole
-       disc is what flattens a sphere, and flattening it is exactly what the
-       first pass of this build did. */
-    d.appendChild(grad('lo-nuc-glow-1', '38%', '32%', '46%', [
-      ['0%', '#FFFBEE', 0.85], ['38%', '#FDE9A0', 0.30], ['100%', '#F0C050', 0]
-    ]));
-    d.appendChild(grad('lo-nuc-glow-2', '42%', '36%', '62%', [
-      ['0%', '#FCE2A0', 0.42], ['54%', '#E8AF38', 0.14], ['100%', '#E8AF38', 0]
-    ]));
-
-    /* The corona, bleeding into the sky. Three unequal falloffs rather than one:
-       a tight ring that reads as atmosphere at the limb, a mid bloom, and a wide
-       one that is the body's light in the field rather than around it. */
+    /* 4. THE CORONA — every layer centred on the HOT REGION, not on the body,
+       and every gradient peaking inside the body where it cannot be seen. The
+       body's near limb sits at about 28% of the first layer's radius and its far
+       limb at about 72%, so the same gradient gives a strong bleed on the hot
+       side and almost nothing opposite. That asymmetry is the whole point: a
+       corona that is equally bright all the way around a silhouette is a
+       backlight, and this frame has no light behind it. */
     d.appendChild(grad('lo-corona-1', '50%', '50%', '50%', [
-      ['42%', '#FFE4A6', 0.62], ['52%', '#F6CB68', 0.34],
-      ['70%', '#E8AF38', 0.13], ['100%', '#E8AF38', 0]
+      ['24%', '#FFE9B8', 0.50], ['36%', '#F8CE72', 0.26],
+      ['58%', '#E8AF38', 0.09], ['100%', '#E8AF38', 0]
     ]));
     d.appendChild(grad('lo-corona-2', '50%', '50%', '50%', [
-      ['24%', '#F0C050', 0.13], ['52%', '#E8AF38', 0.045], ['100%', '#E8AF38', 0]
+      ['12%', '#F6CB68', 0.15], ['34%', '#E8AF38', 0.065],
+      ['68%', '#E8AF38', 0.018], ['100%', '#E8AF38', 0]
     ]));
     /* The widest falloff is deliberately faint. Pushed up it stops being the
        body's light in the field and becomes fog: the night desaturates and the
        stars behind it go grey. Corona has to bleed, not flood. */
     d.appendChild(grad('lo-corona-3', '50%', '50%', '50%', [
-      ['0%', '#E8AF38', 0.040], ['44%', '#C89030', 0.015], ['100%', '#A07020', 0]
+      ['0%', '#E8AF38', 0.042], ['42%', '#C89030', 0.016], ['100%', '#A07020', 0]
     ]));
 
-    /* Nodes: the same light at a sixth the radius. */
-    d.appendChild(grad('lo-node-core', '38%', '32%', '66%', [
-      ['0%', '#FFF4D6'], ['22%', '#FDE9A0'], ['46%', '#F3C862'],
-      ['70%', '#E8AF38'], ['88%', '#B47C22'], ['100%', '#7E5614']
+    /* 3. GRANULATION — the same turbulence round 1 used, but driving brightness
+       instead of relief. feColorMatrix flattens the noise to grey, the transfer
+       stretches its contrast about mid-grey, and the result is blended in
+       overlay, which leaves 0.5 untouched and pushes the rest either way. No
+       feDiffuseLighting, so no light direction exists anywhere in the surface.
+
+       baseFrequency is in filter user units and the body is 250 across, so
+       0.020 is a cell about 50 units wide, five across the face. */
+    [['lo-gran-coarse', 0.020, 3, 1.75, 13], ['lo-gran-fine', 0.075, 4, 1.45, 29]]
+      .forEach(function (r) {
+        var f = svg('filter', { id: r[0], x: '-4%', y: '-4%', width: '108%', height: '108%',
+                                'color-interpolation-filters': 'sRGB' });
+        f.appendChild(svg('feTurbulence', { type: 'fractalNoise', baseFrequency: r[1],
+                                            numOctaves: r[2], seed: r[4], result: 'n' }));
+        f.appendChild(svg('feColorMatrix', { in: 'n', type: 'matrix', result: 'g',
+          values: '0.34 0.34 0.34 0 0  0.34 0.34 0.34 0 0  0.34 0.34 0.34 0 0  0 0 0 0 1' }));
+        var ct = svg('feComponentTransfer', { in: 'g', result: 'c' });
+        ['feFuncR', 'feFuncG', 'feFuncB'].forEach(function (fn) {
+          ct.appendChild(svg(fn, { type: 'linear', slope: r[3],
+                                   intercept: (0.5 - 0.5 * r[3]).toFixed(4) }));
+        });
+        f.appendChild(ct);
+        f.appendChild(svg('feComposite', { in: 'c', in2: 'SourceGraphic', operator: 'in' }));
+        d.appendChild(f);
+      });
+
+    /* The label scrim. Same hue as the night ground, so on open sky it is not
+       there; over an orbit line or a bright star it is the difference between
+       readable and not. */
+    d.appendChild(grad('lo-label-scrim', '50%', '50%', '50%', [
+      ['0%', '#070C16', 0.58], ['42%', '#070C16', 0.38],
+      ['74%', '#070C16', 0.13], ['100%', '#070C16', 0]
     ]));
-    d.appendChild(grad('lo-node-shadow', '34%', '28%', '78%', [
-      ['46%', '#4A2F06', 0], ['78%', '#3E2705', 0.34], ['100%', '#241601', 0.62]
-    ]));
-    d.appendChild(grad('lo-node-rim', '64%', '72%', '56%', [
-      ['80%', '#FFD98A', 0], ['100%', '#FFE3AC', 0.42]
-    ]));
+
+    /* A node's bloom. Offset to the lit face when it is placed, never centred —
+       a bloom centred on a body that makes no light of its own is a lie. */
     d.appendChild(grad('lo-node-halo', '50%', '50%', '50%', [
-      ['30%', '#E8AF38', 0.42], ['58%', '#E8AF38', 0.14], ['100%', '#E8AF38', 0]
+      ['26%', '#F6CB68', 0.42], ['56%', '#E8AF38', 0.13], ['100%', '#E8AF38', 0]
     ]));
 
-    /* Surface relief. Two scales: a coarse one that gives the body craters and
-       mass, a fine one that gives it grain. Both lit from the same bearing as
-       the gradient, so nothing on the surface argues with the terminator.
-
-       baseFrequency is in the filter's user units, and the body is 250 units
-       across, so 0.022 is a feature about 45 units wide — five or six across the
-       face, which is cratering. The first pass of this build used 0.0055, one
-       and a half features across the whole sphere, which is why it read as a
-       faint smudge instead of a surface. */
-    [['lo-relief-coarse', 0.022, 3, 9, 13], ['lo-relief-fine', 0.085, 4, 3.5, 29]].forEach(function (r) {
-      var f = svg('filter', { id: r[0], x: '-6%', y: '-6%', width: '112%', height: '112%',
-                              'color-interpolation-filters': 'sRGB' });
-      f.appendChild(svg('feTurbulence', { type: 'fractalNoise', baseFrequency: r[1],
-                                          numOctaves: r[2], seed: r[4], result: 'n' }));
-      var l = svg('feDiffuseLighting', { in: 'n', surfaceScale: r[3], diffuseConstant: 1,
-                                         'lighting-color': '#E9C071', result: 'lit' });
-      l.appendChild(svg('feDistantLight', { azimuth: 225, elevation: 40 }));
-      f.appendChild(l);
-      f.appendChild(svg('feComposite', { in: 'lit', in2: 'SourceGraphic', operator: 'in' }));
-      d.appendChild(f);
+    /* One core gradient and one shadow gradient per node: both are re-aimed at
+       the nucleus every time the node moves, which is what makes the light
+       visibly come from the middle. */
+    NODES.forEach(function (n) {
+      d.appendChild(grad('lo-nc-' + n.id, '38%', '32%', '70%',
+        NODE_STOPS.map(function (o, i) { return [o, NODE_BRIGHT[i]]; })));
+      d.appendChild(grad('lo-ns-' + n.id, '62%', '68%', '78%', [
+        ['44%', '#3A2810', 0], ['78%', '#2A1C0A', 0.28], ['100%', '#160E04', 0.60]
+      ]));
     });
 
     return d;
@@ -277,15 +380,11 @@
 
   /* ── the nucleus ────────────────────────────────────────────────────── */
 
-  /* The corona is built in two parts, and that split matters. The first pass of
-     this build put the breath ON the corona itself, so the corona's opacity was
-     never above 0.38 and the bleed effectively disappeared. Here the corona has
-     a full-strength standing presence, and the breath is a SEPARATE pair of
-     layers laid over it — light added, not light gated. */
   function buildCorona() {
     var g = svg('g', { class: 'lo-corona', 'aria-hidden': 'true' });
     function ring(r, fill, cls, lo, hi) {
-      var c = svg('circle', { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R * r, fill: fill });
+      /* centred on the hot region, not the body */
+      var c = svg('circle', { cx: HOT.x, cy: HOT.y, r: NUC_R * r, fill: fill });
       if (cls) {
         c.setAttribute('class', cls);
         c.style.setProperty('--lo-breath-lo', lo);
@@ -294,11 +393,11 @@
       }
       g.appendChild(c);
     }
-    ring(5.2, 'url(#lo-corona-3)');       /* the body's light in the field */
-    ring(3.4, 'url(#lo-corona-2)');       /* the mid bloom */
-    ring(2.0, 'url(#lo-corona-1)');       /* atmosphere at the limb */
-    ring(2.5, 'url(#lo-corona-1)', 'lo-breath-b', 0.10, 0.34);
-    ring(3.9, 'url(#lo-corona-2)', 'lo-breath-c', 0.08, 0.26);
+    ring(5.4, 'url(#lo-corona-3)');
+    ring(3.6, 'url(#lo-corona-2)');
+    ring(2.0, 'url(#lo-corona-1)');
+    ring(2.5, 'url(#lo-corona-1)', 'lo-breath-b', 0.10, 0.31);
+    ring(4.0, 'url(#lo-corona-2)', 'lo-breath-c', 0.08, 0.24);
     return g;
   }
 
@@ -306,14 +405,12 @@
     var g = svg('g', { class: 'lo-nucleus', 'aria-hidden': 'true' });
     var at = { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R };
 
-    /* The surface, isolated: the relief blends with the body's own shading and
-       with nothing else. Without the isolation it would blend down into the sky
-       and the sphere would go translucent at the limb. */
+    /* Isolated: the granulation blends with the body's own value and with
+       nothing else. Without it the blend reaches down into the sky and the
+       sphere goes translucent at the limb. */
     var body = svg('g', { class: 'lo-nuc-body' });
-    body.appendChild(svg('circle', Object.assign({ fill: 'url(#lo-nuc-base)' }, at)));
-    /* coarse relief in overlay (it must both catch light and cast shadow, which
-       is what makes a crater), fine grain in soft-light so it stays grain */
-    [['lo-relief-coarse', 'overlay', 1], ['lo-relief-fine', 'soft-light', 0.7]]
+    body.appendChild(svg('circle', Object.assign({ fill: 'url(#lo-nuc-disc)' }, at)));
+    [['lo-gran-coarse', 'overlay', 1], ['lo-gran-fine', 'soft-light', 0.8]]
       .forEach(function (f) {
         var c = svg('circle', Object.assign({ fill: '#000', filter: 'url(#' + f[0] + ')',
                                               class: 'lo-nuc-relief' }, at));
@@ -321,18 +418,18 @@
         c.dataset.texScale = String(f[2]);
         body.appendChild(c);
       });
-    body.appendChild(svg('circle', Object.assign({ fill: 'url(#lo-nuc-shadow)' }, at)));
-    body.appendChild(svg('circle', Object.assign({ fill: 'url(#lo-nuc-limb)' }, at)));
-    body.appendChild(svg('circle', Object.assign({ fill: 'url(#lo-nuc-rim)' }, at)));
+    /* The hot region goes on LAST, over the granulation, because it is surface
+       that is hotter — not a light falling across the surface. There is no
+       terminator pass and no rim pass; both were removed by ruling. */
+    body.appendChild(svg('circle', Object.assign({ fill: 'url(#lo-nuc-hot)' }, at)));
     g.appendChild(body);
 
-    [['lo-nuc-glow-1', 'lo-breath-a', 0.12, 0.48], ['lo-nuc-glow-2', 'lo-breath-c', 0.08, 0.30]]
+    [['lo-nuc-glow-1', 'lo-breath-a', 0.08, 0.30], ['lo-nuc-glow-2', 'lo-breath-c', 0.06, 0.17]]
       .forEach(function (b) {
         var c = svg('circle', Object.assign({ fill: 'url(#' + b[0] + ')', class: b[1] }, at));
         c.style.setProperty('--lo-breath-lo', b[2]);
         c.style.setProperty('--lo-breath-hi', b[3]);
         c.style.setProperty('--lo-breath-still', ((b[2] + b[3]) / 2).toFixed(3));
-        c.dataset.breathBase = String(b[3]);
         g.appendChild(c);
       });
     return g;
@@ -340,34 +437,131 @@
 
   /* ── nodes and labels ───────────────────────────────────────────────── */
 
-  function buildNode(n, pos) {
+  function buildNode(n) {
     var outer = svg('g', { class: 'lo-node', 'data-node': n.id });
-    var place = svg('g', { transform: 'translate(' + pos.x.toFixed(2) + ',' + pos.y.toFixed(2) + ')' });
+    var place = svg('g');
     var inner = svg('g', { class: 'lo-node-inner' });
-    inner.appendChild(svg('circle', { r: HALO_R, fill: 'url(#lo-node-halo)' }));
-    inner.appendChild(svg('circle', { r: NODE_R, fill: 'url(#lo-node-core)' }));
-    inner.appendChild(svg('circle', { r: NODE_R, fill: 'url(#lo-node-shadow)' }));
-    inner.appendChild(svg('circle', { r: NODE_R, fill: 'url(#lo-node-rim)' }));
+    var halo = svg('circle', { r: HALO_R, fill: 'url(#lo-node-halo)' });
+    inner.appendChild(halo);
+    inner.appendChild(svg('circle', { r: NODE_R, fill: 'url(#lo-nc-' + n.id + ')' }));
+    inner.appendChild(svg('circle', { r: NODE_R, fill: 'url(#lo-ns-' + n.id + ')' }));
     place.appendChild(inner);
     outer.appendChild(place);
     outer.__place = place;
+    outer.__halo = halo;
     return outer;
   }
 
   function buildLabel(n) {
-    var outer = svg('g', { class: 'lo-label', 'data-label': n.id });
+    /* three nested groups, and the nesting is load-bearing:
+         depth  — inline opacity and scale, written continuously from orbital depth
+         label  — the arrival's opacity animation
+         inner  — the arrival's translateY
+       They multiply. If depth were written onto the same element the arrival
+       animates, the animation would win and depth would never be visible. */
+    var depth = svg('g', { class: 'lo-label-depth', 'data-label': n.id });
+    var outer = svg('g', { class: 'lo-label' });
     var inner = svg('g', { class: 'lo-label-inner' });
-    var key = svg('text', { class: 'lo-label-key', x: n.label.x, y: n.label.y, 'text-anchor': n.label.anchor });
+    var scrim = svg('ellipse', { class: 'lo-label-scrim', cx: 0, cy: 3, rx: 90, ry: 40,
+                                 fill: 'url(#lo-label-scrim)' });
+    inner.appendChild(scrim);
+    var key = svg('text', { class: 'lo-label-key', x: 0, y: -14, 'text-anchor': 'middle' });
     key.textContent = n.key;
     inner.appendChild(key);
     n.lines.forEach(function (line, i) {
-      var t = svg('text', { class: 'lo-label-line', x: n.label.x, y: n.label.y + 19 + i * 16,
-                            'text-anchor': n.label.anchor });
+      var t = svg('text', { class: 'lo-label-line', x: 0, y: 5 + i * 16, 'text-anchor': 'middle' });
       t.textContent = line;
       inner.appendChild(t);
     });
     outer.appendChild(inner);
-    return outer;
+    depth.appendChild(outer);
+    depth.__inner = inner;
+    depth.__scrim = scrim;
+    depth.__arrival = outer;
+    return depth;
+  }
+
+  /* ── the continuous state of one node ───────────────────────────────────
+     Position, layer, material, label placement and label presence all come out
+     of one number — the orbital parameter t — and are written together. There is
+     no branch anywhere in here that tests one element against another, which is
+     what keeps label behaviour physics rather than UI. */
+  function applyNodeState(sys, n, force) {
+    var p = pointAt(n.orbit, n.t);
+    var dist = Math.hypot(p.x - FRAME.cx, p.y - FRAME.cy);
+    n.g.__place.setAttribute('transform', 'translate(' + p.x.toFixed(2) + ',' + p.y.toFixed(2) + ')');
+
+    /* the moment a node crosses the line of nodes it changes side of the body,
+       so it changes layer. This is the occlusion, in motion. */
+    if (p.near !== n.near) {
+      n.near = p.near;
+      (p.near ? sys.front : sys.back).appendChild(n.g);
+    }
+
+    /* material: re-aim at the nucleus. Skipped when nothing has moved enough to
+       change a rounded value — at the ruled drift that is once every couple of
+       seconds, and under the lab's accelerator it is every frame. */
+    var moved = force || Math.abs(n.t - n.matT) > 0.05;
+    if (moved) {
+      n.matT = n.t;
+      var dx = (FRAME.cx - p.x) / (dist || 1), dy = (FRAME.cy - p.y) / (dist || 1);
+      var I = intensityAt(dist);
+      var k = (I - 0.42) / 0.58;
+      n.coreGrad.setAttribute('cx', (50 + dx * 30).toFixed(2) + '%');
+      n.coreGrad.setAttribute('cy', (50 + dy * 30).toFixed(2) + '%');
+      for (var i = 0; i < n.coreStops.length; i++) {
+        n.coreStops[i].setAttribute('stop-color', mixHex(NODE_DIM[i], NODE_BRIGHT[i], k));
+      }
+      n.shadowGrad.setAttribute('cx', (50 - dx * 26).toFixed(2) + '%');
+      n.shadowGrad.setAttribute('cy', (50 - dy * 26).toFixed(2) + '%');
+      n.g.__halo.setAttribute('cx', (dx * NODE_R * 0.35).toFixed(2));
+      n.g.__halo.setAttribute('cy', (dy * NODE_R * 0.35).toFixed(2));
+      n.g.__halo.setAttribute('r', (HALO_R * (0.70 + 0.45 * I)).toFixed(2));
+      n.g.__halo.setAttribute('opacity', (0.30 + 0.60 * k).toFixed(3));
+    }
+
+    /* label: radially outward from the node, never between it and the star.
+       The floor keeps a label clear of the body when its node is on the limb;
+       max() is continuous, and at 0.25px/s its corner is not a thing anyone
+       could resolve. */
+    var ox = dist ? (p.x - FRAME.cx) / dist : 0, oy = dist ? (p.y - FRAME.cy) / dist : -1;
+    var rOut = Math.max(dist + NODE_R + 34, 252);
+    var ax = FRAME.cx + ox * rOut, ay = FRAME.cy + oy * rOut;
+
+    /* presence tracks depth continuously. Distant things are dimmer; that is the
+       whole mechanism, and it is why two labels can only cross when one of them
+       has already receded to background. */
+    var u = 0.5 + 0.5 * p.depth;                 /* 0 at the far extreme, 1 at the near */
+    var op = 0.35 + 0.65 * Math.pow(u, 0.85);
+    var sc = 0.93 + 0.07 * u;
+
+    n.label.setAttribute('transform',
+      'translate(' + ax.toFixed(2) + ',' + ay.toFixed(2) + ') scale(' + sc.toFixed(4) + ')');
+    n.label.setAttribute('opacity', op.toFixed(3));
+
+    /* the tether, so a label pushed off its node by the floor still belongs to
+       it. Its length falls to zero on its own when the label sits on the node —
+       nothing switches it on or off. */
+    var reach = 1 / Math.hypot(ox / (n.halfW + 14), oy / 34);
+    var x1 = p.x + ox * (NODE_R + 5), y1 = p.y + oy * (NODE_R + 5);
+    var x2 = ax - ox * reach, y2 = ay - oy * reach;
+    if ((x2 - x1) * ox + (y2 - y1) * oy <= 0) { x2 = x1; y2 = y1; }
+    n.leader.setAttribute('x1', x1.toFixed(2)); n.leader.setAttribute('y1', y1.toFixed(2));
+    n.leader.setAttribute('x2', x2.toFixed(2)); n.leader.setAttribute('y2', y2.toFixed(2));
+    n.leader.setAttribute('stroke-opacity', (op * 0.30).toFixed(3));
+
+    n.depth = p.depth;
+  }
+
+  /* Near labels paint over far ones. The order can only change at the instant
+     two depths are equal, and at that instant the two are being drawn
+     identically, so the swap is not observable. */
+  function sortLabels(sys) {
+    var order = sys.nodes.slice().sort(function (a, b) { return a.depth - b.depth; });
+    var key = order.map(function (n) { return n.def.id; }).join(',');
+    if (key === sys.labelOrder) return;
+    sys.labelOrder = key;
+    order.forEach(function (n) { sys.labels.appendChild(n.label); });
   }
 
   /* ── build ──────────────────────────────────────────────────────────── */
@@ -380,29 +574,24 @@
       role: 'img',
       'aria-label': 'Orbital diagram: seven school subjects — reading, writing, math, science, history, geography and art — orbiting one central theme.'
     });
-    root.appendChild(buildDefs());
+    var defs = buildDefs();
+    root.appendChild(defs);
 
     var lBack = svg('g', { class: 'lo-layer lo-layer--back' });
     /* The near arcs where they cross the body. A thin ring passing in FRONT of a
-       star is not brighter than the star — it silhouettes against it. Painting
-       the front arcs in saffron over a saffron body made them vanish, which read
-       as the arc going behind. This layer is clipped to the disc and draws them
-       dark, so the same stroke reads as "in front" without any new hue. */
+       star is not brighter than the star — it silhouettes against it. */
     var lSil = svg('g', { class: 'lo-layer lo-layer--silhouette', 'clip-path': 'url(#lo-nuc-clip)' });
     var lFront = svg('g', { class: 'lo-layer lo-layer--front' });
+    var lLeaders = svg('g', { class: 'lo-layer lo-layer--leaders' });
     var lLabels = svg('g', { class: 'lo-layer lo-layer--labels' });
 
     var orbitById = {};
     ORBITS.forEach(function (o) { orbitById[o.id] = o; });
 
-    /* paths: far half into the back layer, near half into the front, so the
-       stroke vanishes behind the body and picks itself up on the other side */
     var paths = [];
     ORBITS.forEach(function (o, oi) {
       [['far', 180, 360, lBack], ['near', 0, 180, lFront]].forEach(function (h, hi) {
         var d = halfPath(o, h[1], h[2]);
-        /* The glow draws with its own line, a beat wider and slower, so the
-           stroke arrives with air around it rather than as a hairline. */
         var glow = svg('path', { class: 'lo-path lo-glow', d: d, fill: 'none', 'pathLength': 1,
                                  stroke: o.stroke, 'stroke-width': o.width * 3.4,
                                  'stroke-opacity': 0.18, 'stroke-linecap': 'round' });
@@ -424,36 +613,71 @@
     });
 
     lBack.appendChild(buildCorona());
-    /* the corona belongs behind the back arcs? no: it is the body's light, and
-       an arc passing behind the body still passes in FRONT of the far corona.
-       Move it to the very back of the back layer. */
     lBack.insertBefore(lBack.lastChild, lBack.firstChild);
 
     var nucleus = buildNucleus();
 
-    var nodes = [];
+    var sys = { root: root, back: lBack, front: lFront, labels: lLabels, nodes: [], paths: paths,
+                corona: lBack.firstChild, nucleus: nucleus, labelOrder: '' };
+
     NODES.forEach(function (n) {
       var o = orbitById[n.orbit];
       var pos = pointAt(o, n.t);
-      var g = buildNode(n, pos);
+      var g = buildNode(n);
       (pos.near ? lFront : lBack).appendChild(g);
+
       var label = buildLabel(n);
       lLabels.appendChild(label);
-      nodes.push({ def: n, orbit: o, t: n.t, home: pos, g: g, label: label,
-                   near: pos.near,
-                   /* screen bearing from the centre, clockwise from twelve */
-                   bearing: (Math.atan2(pos.y - FRAME.cy, pos.x - FRAME.cx) / D2R + 450) % 360 });
+
+      var wrap = svg('g', { class: 'lo-label lo-leader-wrap' });
+      var leader = svg('line', { class: 'lo-leader' });
+      wrap.appendChild(leader);
+      lLeaders.appendChild(wrap);
+
+      /* distinct phases per node and per component, so no two bodies move in
+         step and the field never reads as one thing being animated */
+      var idx = sys.nodes.length;
+      var phase = LIBRATION.P.map(function (_, i) {
+        return (idx * 2 * Math.PI / NODES.length) * (i + 1) + i * 1.13;
+      });
+
+      sys.nodes.push({
+        def: n, orbit: o, t: n.t, matT: -999, home: pos, g: g, label: label, phase: phase,
+        leader: leader, leaderWrap: wrap, near: pos.near, depth: pos.depth,
+        halfW: 90,
+        coreGrad: defs.querySelector('#lo-nc-' + n.id),
+        shadowGrad: defs.querySelector('#lo-ns-' + n.id),
+        coreStops: [].slice.call(defs.querySelectorAll('#lo-nc-' + n.id + ' stop')),
+        bearing: (Math.atan2(pos.y - FRAME.cy, pos.x - FRAME.cx) / D2R + 450) % 360
+      });
     });
 
     root.appendChild(lBack);
     root.appendChild(nucleus);
     root.appendChild(lSil);
     root.appendChild(lFront);
+    root.appendChild(lLeaders);
     root.appendChild(lLabels);
     host.appendChild(root);
 
-    return { root: root, back: lBack, front: lFront, nodes: nodes, paths: paths,
-             corona: lBack.firstChild, nucleus: nucleus };
+    return sys;
+  }
+
+  /* Measure each label once so the scrim fits its own text and the tether knows
+     where the block's edge is. Re-run when the webfont lands, because the
+     fallback's metrics are not Plus Jakarta Sans's. */
+  function measureLabels(sys) {
+    sys.nodes.forEach(function (n) {
+      var w = 0;
+      [].slice.call(n.label.querySelectorAll('text')).forEach(function (t) {
+        try { w = Math.max(w, t.getBBox().width); } catch (e) {}
+      });
+      if (!w) return;
+      n.halfW = w / 2;
+      n.label.__scrim.setAttribute('rx', (w / 2 + 34).toFixed(1));
+      n.label.__scrim.setAttribute('ry', 42);
+      applyNodeState(sys, n, true);
+    });
   }
 
   /* ── variants ───────────────────────────────────────────────────────── */
@@ -464,10 +688,9 @@
       c.style.setProperty('--lo-tex', (v.tex * Number(c.dataset.texScale)).toFixed(3));
     });
     var s = v.corona;
+    /* scaled about the hot region, because that is what it is anchored to */
     sys.corona.setAttribute('transform',
-      'translate(' + FRAME.cx + ',' + FRAME.cy + ') scale(' + s + ') translate(' + (-FRAME.cx) + ',' + (-FRAME.cy) + ')');
-    /* three breath layers, three amplitudes, in the order they were built:
-       glow-1 (fast), corona-1 (mid), then the two slow ones share the third */
+      'translate(' + HOT.x + ',' + HOT.y + ') scale(' + s + ') translate(' + (-HOT.x) + ',' + (-HOT.y) + ')');
     var layers = [
       sys.nucleus.querySelector('.lo-breath-a'),
       sys.corona.querySelector('.lo-breath-b'),
@@ -489,14 +712,9 @@
   function applyArrival(sys, key) {
     var v = ARRIVAL_VARIANTS[key];
 
-    /* Nodes ignite in a CLOCKWISE SWEEP STARTING AT TWELVE O'CLOCK. Not reading
-       order and not depth order: a sweep circles the nucleus, which restates the
-       thesis while it plays.
-
-       With HISTORY sitting at the apex the sweep now has a true starting point,
-       so it begins on the node nearest twelve rather than on the first one past
-       it — a hair's difference in the numbers, but it means the beat opens at
-       the top of the composition instead of just short of it. */
+    /* Nodes ignite in a CLOCKWISE SWEEP STARTING AT TWELVE O'CLOCK. A sweep
+       circles the nucleus, which restates the thesis while it plays. HISTORY
+       sits at the apex, so the beat opens there. */
     var order = sys.nodes.slice().sort(function (a, b) { return a.bearing - b.bearing; });
     var start = 0, best = Infinity;
     order.forEach(function (n, i) {
@@ -508,8 +726,10 @@
       var d = v.nodeStart + i * v.nodeStagger;
       n.g.style.setProperty('--lo-delay', d.toFixed(3) + 's');
       n.g.style.setProperty('--lo-node-dur', v.nodeDur + 's');
-      n.label.style.setProperty('--lo-delay', (d + v.labelLag).toFixed(3) + 's');
-      n.label.style.setProperty('--lo-label-dur', v.labelDur + 's');
+      [n.label.__arrival, n.leaderWrap].forEach(function (el) {
+        el.style.setProperty('--lo-delay', (d + v.labelLag).toFixed(3) + 's');
+        el.style.setProperty('--lo-label-dur', v.labelDur + 's');
+      });
     });
 
     sys.paths.forEach(function (p) {
@@ -520,32 +740,47 @@
       p.glow.style.setProperty('--lo-draw-dur', (v.halfDur * 1.18).toFixed(3) + 's');
     });
 
-    var last = v.pathStart + (ORBITS.length - 1) * v.orbitStagger + v.halfDur * 2;
-    return last;
+    return v.pathStart + (ORBITS.length - 1) * v.orbitStagger + v.halfDur * 2;
   }
 
-  /* ── orbit drift (variant only) ─────────────────────────────────────── */
+  /* ── orbit drift ────────────────────────────────────────────────────── */
 
   function makeDrift(sys) {
-    var raf = 0, prev = 0, on = false;
+    var raf = 0, prev = 0, on = false, scale = 1, tau = 0;
+
+    /* Each node starts at the sum's zero, so t equals its composed value at
+       tau = 0 and the excursion stays inside +/- 2 * amp. */
+    function librate(n, time) {
+      var L = LIBRATION, s = 0;
+      for (var i = 0; i < L.P.length; i++) {
+        var ph = n.phase[i];
+        s += L.w[i] * (Math.sin(2 * Math.PI * time / L.P[i] + ph) - Math.sin(ph));
+      }
+      return n.def.t + L.amp * s;
+    }
+
+    /* A node covers 0.02 degrees — under a fifth of a pixel at the widest orbit
+       — about once a second at the ruled rate, so writing the DOM every frame
+       is work done far below what anything can resolve. Round 2's first build
+       did exactly that and cost a whole frame step; this gate gave it back. The
+       gate is on distance moved, not on a clock, so the lab's accelerator still
+       gets every frame. */
+    function tick(dt) {
+      tau += dt * scale;
+      var changed = false;
+      for (var i = 0; i < sys.nodes.length; i++) {
+        var n = sys.nodes[i], t = librate(n, tau);
+        if (Math.abs(t - n.t) > 0.02) { n.t = t; applyNodeState(sys, n, false); changed = true; }
+      }
+      if (changed) sortLabels(sys);
+      return changed;
+    }
 
     function frame(now) {
       if (!on) return;
       var dt = prev ? Math.min((now - prev) / 1000, 0.1) : 0;
       prev = now;
-      sys.nodes.forEach(function (n) {
-        n.t = (n.t + (360 / n.orbit.driftS) * dt) % 360;
-        var p = pointAt(n.orbit, n.t);
-        n.g.__place.setAttribute('transform', 'translate(' + p.x.toFixed(2) + ',' + p.y.toFixed(2) + ')');
-        n.label.setAttribute('transform',
-          'translate(' + (p.x - n.home.x).toFixed(2) + ',' + (p.y - n.home.y).toFixed(2) + ')');
-        /* the moment a node crosses the line of nodes it changes side of the
-           body, so it changes layer. This is the occlusion, in motion. */
-        if (p.near !== n.near) {
-          n.near = p.near;
-          (p.near ? sys.front : sys.back).appendChild(n.g);
-        }
-      });
+      tick(dt);
       raf = requestAnimationFrame(frame);
     }
 
@@ -554,16 +789,26 @@
       stop: function () {
         on = false;
         if (raf) cancelAnimationFrame(raf);
-        raf = 0;
-        sys.nodes.forEach(function (n) {
-          n.t = n.def.t;
-          n.g.__place.setAttribute('transform',
-            'translate(' + n.home.x.toFixed(2) + ',' + n.home.y.toFixed(2) + ')');
-          n.label.removeAttribute('transform');
-          if (n.home.near !== n.near) {
-            n.near = n.home.near;
-            (n.home.near ? sys.front : sys.back).appendChild(n.g);
-          }
+        raf = 0; tau = 0;
+        sys.nodes.forEach(function (n) { n.t = n.def.t; applyNodeState(sys, n, true); });
+        sortLabels(sys);
+      },
+      /* lab only: the ruled rhythm is half-hourly, which is the point of it.
+         Nothing here changes what ships; it is how the excursion gets inspected
+         inside a working session. */
+      setScale: function (s) { scale = s; },
+      getScale: function () { return scale; },
+      running: function () { return on; },
+      time: function () { return tau; },
+      /* used by the verification script to walk the libration deterministically */
+      advance: function (seconds) {
+        tau += seconds;
+        sys.nodes.forEach(function (n) { n.t = librate(n, tau); applyNodeState(sys, n, true); });
+        sortLabels(sys);
+      },
+      excursion: function () {
+        return sys.nodes.map(function (n) {
+          return { id: n.def.id, delta: +(n.t - n.def.t).toFixed(3) };
         });
       }
     };
@@ -592,7 +837,6 @@
       latched = true;
       var total = applyArrival(sys, state.arrival);
       section.dataset.arrival = 'none';
-      /* reflow so a replay restarts the animations rather than continuing them */
       void section.offsetWidth;
       section.dataset.arrival = 'running';
       window.setTimeout(function () {
@@ -602,24 +846,33 @@
 
     applyNucleus(sys, state.nucleus);
     applyArrival(sys, state.arrival);
+    sys.nodes.forEach(function (n) { applyNodeState(sys, n, true); });
+    sortLabels(sys);
+    measureLabels(sys);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { measureLabels(sys); });
+    }
 
     if (reduced()) {
-      /* the completed state, rendered. No arrival, no drift; the certified
-         stylesheet already freezes the sky. */
+      /* the completed state, rendered. No arrival, no drift; depth-linked label
+         presence still applies, because it is distance, not motion. */
       section.dataset.arrival = 'done';
       latched = true;
-    } else if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting && e.intersectionRatio >= 0.4) {
-            io.disconnect();
-            playArrival(false);
-          }
-        });
-      }, { threshold: [0.4] });
-      io.observe(section);
     } else {
-      playArrival(false);
+      if (state.orbits === 'drift') drift.start();
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && e.intersectionRatio >= 0.4) {
+              io.disconnect();
+              playArrival(false);
+            }
+          });
+        }, { threshold: [0.4] });
+        io.observe(section);
+      } else {
+        playArrival(false);
+      }
     }
 
     /* ── lab panel. Never ships. ─────────────────────────────────────── */
@@ -666,11 +919,21 @@
         if (group === 'orbits') {
           if (value === 'drift' && !reduced()) drift.start(); else drift.stop();
         }
+        if (group === 'speed') drift.setScale(Number(value));
       });
     }
 
-    window.WizkooLabOrbital = { sys: sys, state: state, play: playArrival, FRAME: FRAME,
-                                NUC_R: NUC_R, ORBITS: ORBITS, NODES: NODES, pointAt: pointAt };
+    window.WizkooLabOrbital = {
+      sys: sys, state: state, play: playArrival, drift: drift,
+      FRAME: FRAME, NUC_R: NUC_R, HOT: HOT, ORBITS: ORBITS, NODES: NODES,
+      pointAt: pointAt, intensityAt: intensityAt,
+      /* used by the verification script to walk the drift deterministically */
+      setT: function (map) {
+        sys.nodes.forEach(function (n) { if (map[n.def.id] != null) n.t = map[n.def.id]; applyNodeState(sys, n, true); });
+        sortLabels(sys);
+      },
+      advance: function (seconds) { drift.advance(seconds); }
+    };
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
