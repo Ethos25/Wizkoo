@@ -154,15 +154,15 @@
   to   { opacity: var(--lo-breath-hi, 0.62); }
 }
 
-/* Granulation, not relief. The blend mode is set per pass in JS (overlay for
-   the cells, soft-light for the grain) so the variation stays inside the body's
-   own value range and reads as surface, never as a pattern. Round 2 replaced
-   feDiffuseLighting with contrast-stretched noise: the old version cast
-   micro-shadows from a distant light at azimuth 225, which is exactly the
-   second light source this round exists to remove. The body group is isolated
-   so the blend cannot reach down into the sky. */
-.lo-nuc-body { isolation: isolate; }
-.lo-nuc-relief { opacity: var(--lo-tex, 0.5); }
+/* The body is one raster now — a sphere map built in js/lab-orbital.js. Limb
+   darkening follows mu = sqrt(1 - r^2) exactly, granulation is sampled at the
+   surface point so it compresses toward the limb the way a real surface does,
+   the hot region is a cap on the sphere, and the bleed past the edge is part of
+   the same image. That last part is the point: a glow drawn inside the body's
+   own picture cannot read as a luminous object standing beside it, which is what
+   round 2's separate corona layers became. No SVG filters remain on the nucleus
+   at all. */
+.lo-nuc-body { image-rendering: auto; }
 
 /* ── Nodes ────────────────────────────────────────────────────────────── */
 

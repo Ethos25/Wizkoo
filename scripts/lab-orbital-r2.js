@@ -105,9 +105,16 @@ const freeze = (page, t) => page.evaluate((ms) => {
     check(a.terminatorish.length === 0,
       'no terminator or rim pass on the nucleus' + (a.terminatorish.length ? ' — found ' + a.terminatorish.join(', ') : ''));
 
-    const onHot = a.coronas.every(c => Math.abs(c.cx - a.HOT.x) < 0.6 && Math.abs(c.cy - a.HOT.y) < 0.6);
-    check(onHot, 'all ' + a.coronas.length + ' corona layers centred on the hot region (' +
-      a.HOT.x + ',' + a.HOT.y + '), not the body (' + a.C.x + ',' + a.C.y + ')');
+    /* Round 3: the bleed is drawn inside the body's own image, so there is no
+       corona element to be offset at all. What is left outside is one faint
+       symmetric tint, and it must be centred on the body and small — an offset
+       wide layer is exactly what became the pale halo off the shoulder. */
+    check(a.coronas.every(c => Math.abs(c.cx - a.C.x) < 0.6 && Math.abs(c.cy - a.C.y) < 0.6),
+      'nothing outside the body is offset from it — ' + a.coronas.length +
+      ' element(s), all centred on the body');
+    check(a.coronas.every(c => c.r <= 2.8 * 125),
+      'and nothing outside the body reaches beyond 2.8 body radii (max ' +
+      Math.max(...a.coronas.map(c => Math.round(c.r / 125) * 1)) + 'R)');
 
     console.log('\n  light travelling outward — each node\'s lit point vs the direction of the nucleus');
     console.log('  (dot = +1 means the bright side faces the nucleus exactly)');
@@ -121,6 +128,82 @@ const freeze = (page, t) => page.evaluate((ms) => {
     check(Math.min(...near.map(n => n.I)) > Math.max(...far.map(n => n.I)),
       'nodes near the nucleus are brighter than nodes far from it (' +
       Math.min(...near.map(n => n.I)) + ' vs ' + Math.max(...far.map(n => n.I)) + ')');
+
+    /* ── THE BODY, READ BACK PIXEL BY PIXEL ─────────────────────────────
+       Round 3's two findings were both about whether the sphere reads as a
+       sphere, and both are measurable. Limb darkening either takes the body
+       substantially down at its silhouette or it does not; texture either
+       compresses toward the limb or it is uniform, which is the flat-sphere
+       tell. Neither needs an opinion. */
+    const body = await page.evaluate(() => {
+      const A = window.WizkooLabOrbital;
+      const lum = (d, i) => 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
+
+      const full = A.readBody(320, false);
+      const N = full.px, half = N / 2, sc = A.EXTENT / half;
+      const at = (rr, th) => {
+        const x = Math.round(half + rr * Math.cos(th) / sc);
+        const y = Math.round(half + rr * Math.sin(th) / sc);
+        return lum(full.data, (y * N + x) * 4);
+      };
+      const BEAR = 32;
+      let centre = 0;
+      for (let k = 0; k < BEAR; k++) centre += at(0.04, 2 * Math.PI * k / BEAR);
+      centre /= BEAR;
+      const drops = [], limbs = [];
+      for (let k = 0; k < BEAR; k++) {
+        const L = at(0.955, 2 * Math.PI * k / BEAR);
+        limbs.push(L); drops.push(centre - L);
+      }
+      const maxDrop = Math.max(...drops), minDrop = Math.min(...drops);
+      const peak = Math.max(...(function () {
+        const a = []; for (let k = 0; k < BEAR; k++) a.push(at(0.30, 2 * Math.PI * k / BEAR)); return a;
+      })());
+
+      /* texture only: no limb law, no hot region, so what is left is the
+         granulation and nothing else. Mean absolute neighbour difference per
+         annulus measures how fine the pattern is there. */
+      const tex = A.readBody(320, true);
+      function roughness(r0, r1) {
+        let sum = 0, n = 0;
+        for (let y = 1; y < N - 1; y++) for (let x = 1; x < N - 1; x++) {
+          const nx = (x + 0.5 - half) * sc, ny = (y + 0.5 - half) * sc;
+          const r = Math.hypot(nx, ny);
+          if (r < r0 || r >= r1) continue;
+          const i = (y * N + x) * 4;
+          sum += Math.abs(lum(tex.data, i) - lum(tex.data, i + 4));
+          n++;
+        }
+        return n ? sum / n : 0;
+      }
+      return {
+        centre, meanLimb: limbs.reduce((a, b) => a + b, 0) / BEAR,
+        maxDrop, minDrop, peak,
+        inner: roughness(0.00, 0.30), mid: roughness(0.55, 0.75), outer: roughness(0.86, 0.96),
+        U: A.U_LIMB
+      };
+    });
+
+    console.log('\n  the body, measured off its own pixels');
+    console.log('    centre luminance          ' + body.centre.toFixed(1));
+    console.log('    mean limb luminance       ' + body.meanLimb.toFixed(1) +
+      '   (' + (100 * body.meanLimb / body.centre).toFixed(0) + '% of centre)');
+    check(body.meanLimb / body.centre < 0.45,
+      'limb darkening is substantial — the silhouette sits at ' +
+      (100 * body.meanLimb / body.centre).toFixed(0) + '% of centre');
+    console.log('    darkening by bearing      weakest ' + body.minDrop.toFixed(1) +
+      ', strongest ' + body.maxDrop.toFixed(1) +
+      '   (weakest is ' + (100 * body.minDrop / body.maxDrop).toFixed(0) + '% of strongest)');
+    check(body.minDrop / body.maxDrop > 0.5,
+      'the body darkens toward EVERY edge, not one — no terminator');
+
+    console.log('    texture roughness         centre ' + body.inner.toFixed(2) +
+      '  mid ' + body.mid.toFixed(2) + '  limb ' + body.outer.toFixed(2));
+    check(body.outer / body.inner > 1.5,
+      'granulation compresses toward the limb — ' +
+      (body.outer / body.inner).toFixed(2) + 'x finer at the edge than at the centre');
+    check(body.mid > body.inner && body.outer > body.mid,
+      'and it compresses monotonically, centre to mid to limb');
 
     await freeze(page, 9000);
     await shot(page, 'r2-nucleus-a');
@@ -155,36 +238,45 @@ const freeze = (page, t) => page.evaluate((ms) => {
     const L = await page.evaluate(() => {
       const A = window.WizkooLabOrbital;
       /* rate is measured by walking the model, not read off a constant */
-      let maxDeg = 0, maxPx = 0, minT = 1e9, maxT = -1e9;
+      let maxDeg = 0, maxPx = 0, maxT = 0;
       const step = 4;
       const prev = {};
       A.sys.nodes.forEach(n => prev[n.def.id] = n.t);
       for (let s = 0; s < 900; s++) {
         A.drift.advance(step);
         A.sys.nodes.forEach(n => {
-          const o = A.ORBITS.find(o => o.id === n.def.orbit);
           const d = Math.abs(n.t - prev[n.def.id]);
           prev[n.def.id] = n.t;
           const deg = d / step;
           if (deg > maxDeg) maxDeg = deg;
-          const px = deg * Math.PI / 180 * o.rx;
+          /* the body's own |dP/dtheta|, not the orbit's semi-major axis: on an
+             ellipse those differ by up to 4.7x and only the former is speed */
+          const px = deg * Math.PI / 180 * n.tangential;
           if (px > maxPx) maxPx = px;
-          const off = n.t - n.def.t;
-          if (off < minT) minT = off;
+          const off = Math.abs(n.t - n.def.t) / n.amp;
           if (off > maxT) maxT = off;
         });
       }
       A.drift.stop();
-      return { maxDeg, maxPx, minT, maxT };
+      return { maxDeg, maxPx, maxT, amps: A.drift.amplitudes() };
     });
     console.log('    measured over 3,600s of libration:');
     console.log('      max angular rate     ' + L.maxDeg.toFixed(5) + ' deg/s');
     console.log('      max tangential speed ' + L.maxPx.toFixed(4) + ' px/s  (' +
       (L.maxPx * 60).toFixed(1) + ' px per minute)');
-    console.log('      excursion            ' + L.minT.toFixed(2) + ' to +' + L.maxT.toFixed(2) + ' deg');
-    check(L.maxPx < 0.35, 'never faster than 0.35 px/s — the motion-detection floor is near 0.6');
-    check(L.maxPx > 0.05, 'but present: a node covers ' + (L.maxPx * 60).toFixed(0) + 'px in a minute');
-    check(Math.max(Math.abs(L.minT), L.maxT) < 16.5, 'excursion stays inside the +/-16 deg the labels were proved against');
+    console.log('      per-node amplitude and peak, set inversely to |dP/dtheta|');
+    L.amps.forEach(a => console.log('        ' + a.id.padEnd(9) + 'amp ' +
+      String(a.amp).padStart(5) + ' deg   |dP/dtheta| ' + String(a.tangential).padStart(3) +
+      '   peak ' + a.peakPxPerS + ' px/s'));
+    const spread = Math.max(...L.amps.map(a => a.peakPxPerS)) - Math.min(...L.amps.map(a => a.peakPxPerS));
+    check(spread < 0.01, 'every body peaks at the same screen speed (spread ' + spread.toFixed(4) + ' px/s)');
+    /* 1 to 2 arcmin/s is roughly 0.7 to 1.3 px/s at a normal viewing distance;
+       the rate is sinusoidal, so it sits near peak only briefly. */
+    check(L.maxPx < 1.0, 'peak ' + L.maxPx.toFixed(2) + ' px/s stays under the catchable band');
+    check(L.maxPx * (2 / Math.PI) * 30 > 12,
+      'and a body covers ' + Math.round(L.maxPx * (2 / Math.PI) * 30) + 'px in thirty seconds — visible on return');
+    check(L.maxT <= 1.001, 'every node stays inside its own amplitude (worst ' +
+      (100 * L.maxT).toFixed(1) + '% of it)');
 
     /* Exhaust the label configurations reachable inside that box. This is not a
        sample of a trajectory — it is every corner of the excursion space, which
@@ -245,20 +337,22 @@ const freeze = (page, t) => page.evaluate((ms) => {
       const A = window.WizkooLabOrbital;
       A.drift.stop();
       let jump = 0; const prev = A.sys.nodes.map(n => +n.label.getAttribute('opacity'));
-      for (let s = 0; s < 400; s++) {
-        A.drift.advance(10);
+      /* half-second samples: a reactive fade would land inside one of them as a
+         step, where a continuous function cannot */
+      for (let s = 0; s < 1600; s++) {
+        A.drift.advance(0.5);
         A.sys.nodes.forEach((n, i) => {
           const o = +n.label.getAttribute('opacity');
           jump = Math.max(jump, Math.abs(o - prev[i]));
           prev[i] = o;
         });
       }
-      const range = A.sys.nodes.map(n => +n.label.getAttribute('opacity'));
       A.drift.stop();
-      return { jump, range };
+      return { jump };
     });
-    console.log('    largest presence change in any 10s of libration: ' + cont.jump.toFixed(5));
-    check(cont.jump < 0.01, 'presence is continuous — no step change anywhere');
+    console.log('    largest presence change in any half second: ' + cont.jump.toFixed(5) +
+      '  (' + (cont.jump * 2).toFixed(4) + ' per second)');
+    check(cont.jump < 0.01, 'presence is continuous — nothing steps');
 
     /* the composed still, and the two extremes of the excursion */
     for (const [name, off] of [['home', 0], ['minus', -16], ['plus', 16]]) {

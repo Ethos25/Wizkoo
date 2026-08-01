@@ -61,6 +61,11 @@ Everything below is a lab result. Rulings are marked **RULED**.
 to drift, and rebuilt label behaviour. One thing in it is a deviation from what
 was asked, and it is flagged as such in section 4.
 
+**Round 3 (third walk)** found the nucleus still reading flat and the corona
+still reading detached, and the drift too slow to register. The body is now one
+raster sphere map rather than a stack of gradients and filters, and the
+libration is per-node. Sections 2 and 4.
+
 ---
 
 ## Files
@@ -136,6 +141,66 @@ Built from variant a. Four parts:
    bleed on the hot side and almost nothing opposite. A corona centred on the
    body peaks in a ring around the whole silhouette, and a bright ring around a
    silhouette is a backlight.
+
+### Round 3: what was still wrong, and what it took
+
+Two findings, and both were about whether the sphere reads as a sphere.
+
+**Limb darkening was too weak.** With the terminator gone, the falloff toward
+the edge is the only cue that this is a body, and it has to carry the whole job
+alone. It was not carrying it: the silhouette sat at 54% of centre luminance,
+which reads as a disc.
+
+**The texture did not follow the curve.** Granulation was drawn at uniform scale
+across the face. On a real body the pattern compresses hard toward the limb as
+the surface turns away, and uniform texture on a curved body is the flat-sphere
+tell. No SVG filter performs a spherical map.
+
+**Both are fixed by rendering the body as a sphere map** on a canvas, once, and
+placing it as a single `<image>`. For every pixel inside the disc:
+
+```
+mu  = sqrt(1 - r^2)                        the surface normal's z
+I   = (1 - u) + u * mu^p                   limb darkening, u = 0.86, p = 1.5
+I  *= 1 + tex * fbm(nx, ny, mu)            granulation sampled AT THE SURFACE
+I  += hot * cap(n . h)                     the hot region, a cap on the sphere
+```
+
+Sampling the noise at `(nx, ny, mu)` rather than at `(x, y)` is the whole fix for
+the second finding: near the limb `mu` changes fast for a small step in screen
+position, so the pattern runs through many periods in few pixels — exactly, and
+for free. The hot region as a cap on the sphere foreshortens near the limb for
+the same reason, like anything else on a surface.
+
+The limb law departs from physics twice, deliberately. The real profile is
+`u ~ 0.6` and `p = 1`, which puts almost all of its drop in the final one or two
+percent of the radius — right for a photograph of the Sun and useless on a body
+250px across. `u = 0.86` takes the true limb to 14% of centre instead of 40%, and
+`p = 1.5` starts the falloff early enough to be legible across the outer third.
+It cannot read as shadow, because it is identical in every direction.
+
+**Measured off the rendered pixels, every run:**
+
+```
+centre luminance        248.9
+mean limb luminance      84.8      34% of centre   (was 54%)
+darkening by bearing     weakest is 84% of strongest — every edge, not one
+texture roughness        centre 0.60  mid 0.70  limb 1.13
+                         1.89x finer at the edge, and monotonic
+```
+
+**The corona was still a separate light.** A pale halo floated off the upper-left
+shoulder — the backlight relocated rather than removed. It came from the wide
+layers being centred on the hot region: at five body radii, an offset that reads
+as anchoring at one radius reads as a second object at another.
+
+The bleed is now drawn **inside the body's own image**, past the limb, with an
+exponential falloff that is gone within a third of a radius — and coloured from
+the limb it leaves, so it is continuous with the surface rather than a bright
+line along the edge. A glow drawn inside the body's own picture cannot read as an
+object standing beside it. Outside the body there is now exactly one element: a
+faint symmetric tint centred on the body, asserted to be centred and asserted not
+to reach past 2.8 radii.
 
 **And the demonstration: light travels outward.** Each node's bright side faces
 the nucleus and its dark side faces away, with brightness falling off with
@@ -260,13 +325,8 @@ Each node now **librates** about its composed position instead of revolving.
 Libration is not a fudge — it is real orbital behaviour, the thing the Moon and
 the Trojan asteroids do.
 
-```
-components        three, at 1801 / 2803 / 4507 seconds — all prime
-composite period  about 720 years, so nothing ever repeats
-amplitude         sums to 8 degrees; excursion bounded at +/-16 degrees
-max angular rate  0.0224 deg/s          (measured, not declared)
-max tangential    0.183 px/s = 11px per minute
-```
+Round 2's settings were 1801 / 2803 / 4507 seconds and a 16 degree bound, at
+0.183 px/s. Round 3 raised both — see below.
 
 The floor for seeing a small object move against a static reference is near
 0.6 px/s. At 0.183 it is never caught in the act, and it has plainly moved if you
@@ -281,6 +341,51 @@ statically, and the arrival still draws each orbit through it.
 
 **If full revolution is wanted instead, the honest price is reactive label
 handling, and that should be ruled on directly rather than picked here.**
+
+### Round 3: the excursion, raised
+
+Eleven pixels a minute sat below the threshold of registering a change on
+return, which was the point of having motion at all. Two things moved.
+
+**Amplitude is now per node**, set inversely to `|dP/dtheta|` at each body's own
+position. On an ellipse that factor swings from `ry` at the major-axis extreme to
+`rx` at the minor — 101 against 480 on orbit a — so one uniform angular amplitude
+makes a body at its turning point crawl while a body crossing the face flies, at
+4.7x the difference. Setting amplitude inversely gives every body the **same peak
+screen speed**, which is what a viewer actually reads. Each body librating by its
+own angle is legitimate: amplitude belongs to the body's motion, not to the orbit
+under it.
+
+**The bodies are decorrelated by period, not by phase.** Node *i* runs the three
+components at `k_i` times their base periods and carries `k_i` on its amplitude
+to compensate, so peak speed is identical while each rhythm is its own. Every
+sine starts at zero, which means `librate(node, 0)` is exactly the composed
+position — and that matters more than it sounds, because the composed state is
+what the arrival lands on, what "static" shows, and what carries the ruled
+limb-straddling geometry. Round 3's first attempt used time offsets instead and
+broke exactly this: the system jumped the moment it started.
+
+```
+components          307 / 491 / 787 seconds, all prime, spread per node
+amplitude           27.0 / 21.9 / 28.6 / 6.3 / 23.9 / 7.3 / 22.6 degrees
+                    reading / writing / math / science / geo / art / history
+peak screen speed   0.85 px/s, identical on every body
+averaged            17px in thirty seconds
+```
+
+**0.85 px/s is deliberately at the perceptual boundary, and there is no setting
+comfortably clear of both sides of the ruling.** Detecting motion against a
+static reference takes roughly 1 to 2 arcmin per second, which at a normal
+viewing distance is about 0.7 to 1.3 px/s. The rate is sinusoidal, so a body is
+near peak only briefly and spends most of a swing well under it. Registering a
+change after half a minute away needs something in the tens of pixels. Those two
+requirements meet here and nowhere roomier.
+
+**Amplitude is capped by the labels, not by taste.** `K = 3000` is clean across
+the excursion box; `K = 3500` puts a 7px squared overlap into it and `K = 5000`
+puts 2,208. The rate is set by the periods and is independent of the cap, which
+is why the excursion could be raised from 16 degrees to 28 without touching the
+label guarantee.
 
 ### Labels — depth-linked presence, no reactive logic
 
@@ -395,8 +500,11 @@ spike pseudo-elements off                  no change
 
 **Still open, for the walk:**
 
-- **Nucleus variant.** Default is now `a`, per ruling. `b` and `c` carry the same
-  light model with more granulation, corona and breath.
+- **Nucleus variant.** Default is `a`, per ruling. `b` and `c` carry the same
+  light model with more granulation, more bleed and a hotter active region.
+- **The 0.85 px/s drift.** It sits on the perceptual boundary by construction.
+  If it turns out to be catchable on your display, the periods can be
+  lengthened without touching the excursion or the label proof.
 - **Libration versus revolution** (section 4). The one place this build departed
   from the brief. Revolution is available if reactive label handling is
   acceptable; it is not available otherwise.
