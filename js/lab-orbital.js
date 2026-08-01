@@ -59,22 +59,42 @@
      is anchored to the surface with it. */
   var HOT = { x: FRAME.cx + (0.38 - 0.5) * 2 * NUC_R, y: FRAME.cy + (0.32 - 0.5) * 2 * NUC_R };
 
+  /* ── ONE TREATMENT — RULED round 4 ──────────────────────────────────────
+     The three used to differ in colour and weight — chalk, saffron, ocean, at
+     1.2 / 1.1 / 1.0. That looked like an encoding and encoded nothing, and the
+     one thing it might have carried, depth, it did not carry: both halves of
+     every orbit were drawn at the same opacity, so front and back were told
+     apart only by what happened to be painted over them.
+
+     Now: one colour, one weight, and DEPTH IN OPACITY ALONE. The three are still
+     told apart, by the only thing that should tell them apart — their geometry.
+
+     The opacity is continuous along each arc rather than one value for the front
+     half and another for the back. Two flat halves meet at the major-axis
+     extremes, and a step there is a seam at exactly the place the eye is
+     tracking the line. Each orbit is cut into 15-degree segments and each takes
+     its opacity from the depth at its own midpoint, so the value slides through
+     the junction instead of jumping it. */
+  var ORBIT_STROKE = 'rgba(226,234,248,1)';
+  var ORBIT_WIDTH = 1.1;
+  var ORBIT_BASE = 0.26;
+  var SEG_DEG = 15;
+
+  /* depth -1 at the far extreme, +1 at the near */
+  function orbitAlpha(depth) {
+    return ORBIT_BASE * (0.40 + 0.60 * (0.5 + 0.5 * depth));
+  }
+
   var ORBITS = [
     /* Drawn in order of DECREASING minor axis: each orbit lies flatter than the
        last, so the system's depth deepens as it completes and the final stroke
        is the one that runs straight across the nucleus's face.
 
        No dashed orbit. A dash pattern and a dash-offset draw are the same
-       property, and the draw is the beat; the three separate by colour and
-       weight instead.
-
-       Round 1 drove these at 228/264/300s. Round 2's ruling was that the drift
-       be meaningfully slower and never caught in the act; what it actually
-       became is described under LIBRATION below. driftS is gone — motion is no
-       longer a revolution rate. */
-    { id: 'c', rx: 356, ry: 115, rot: 85,  stroke: 'rgba(240,242,248,0.20)', width: 1.2 },
-    { id: 'a', rx: 480, ry: 101, rot: -22, stroke: 'rgba(232,175,56,0.26)',  width: 1.1 },
-    { id: 'b', rx: 446, ry: 82,  rot: 31,  stroke: 'rgba(120,152,208,0.30)', width: 1.0 }
+       property, and the draw is the beat. */
+    { id: 'c', rx: 356, ry: 115, rot: 85 },
+    { id: 'a', rx: 480, ry: 101, rot: -22 },
+    { id: 'b', rx: 446, ry: 82,  rot: 31 }
   ];
 
   /* ── LIBRATION — RULED round 3: bigger, and faster within what is safe ──
@@ -168,12 +188,9 @@
     return Math.max(0.42, Math.min(1, i));
   }
 
-  /* Lit and unlit ends of the node palette. Intensity interpolates between them,
-     so a far node is not merely more transparent — it is made of dimmer metal. */
-  var NODE_BRIGHT = ['#FFF7E0', '#FDE7A8', '#F2C25A', '#D19A34', '#7A5416'];
-  var NODE_DIM    = ['#C49845', '#B58A3E', '#93692D', '#6E4D20', '#3A2810'];
-  var NODE_STOPS  = ['0%', '24%', '50%', '76%', '100%'];
-
+  /* mixHex is still here because the corona's colour cools outward. The node
+     palettes it used to serve are gone: a node's value now comes out of the
+     sphere renderer, which is the point of round 4's second finding. */
   function mixHex(a, b, k) {
     var pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
     var r = Math.round(((pa >> 16) & 255) * (1 - k) + ((pb >> 16) & 255) * k);
@@ -192,9 +209,17 @@
        edge. hot: the active region's added brightness. breath: the three
        amplitudes. The LIGHT MODEL is identical across all three — these move how
        much star there is, never where the light comes from. */
-    a: { tex: 0.16, bleed: 0.80, hot: 0.34, breath: [[0.08, 0.30], [0.05, 0.16], [0.05, 0.14]] },
-    b: { tex: 0.24, bleed: 1.00, hot: 0.44, breath: [[0.12, 0.44], [0.07, 0.22], [0.07, 0.20]] },
-    c: { tex: 0.34, bleed: 1.24, hot: 0.56, breath: [[0.17, 0.62], [0.10, 0.30], [0.09, 0.27]] }
+    /* breath slots, in build order: the hot region's glow, the OUTER CORONA,
+       and a disc-wide lift. The corona's pair sits near full because it is the
+       star's light in the field, not a veil over it — round 4's first wiring
+       handed it the old faint-field amplitudes and it rendered at a tenth of its
+       strength, which measured as no corona at all. */
+    a: { tex: 0.16, bleed: 0.80, hot: 0.34, corona: 0.86,
+         breath: [[0.08, 0.30], [0.82, 1.00], [0.05, 0.14]] },
+    b: { tex: 0.24, bleed: 1.00, hot: 0.44, corona: 1.00,
+         breath: [[0.12, 0.44], [0.80, 1.00], [0.07, 0.20]] },
+    c: { tex: 0.34, bleed: 1.24, hot: 0.56, corona: 1.18,
+         breath: [[0.17, 0.62], [0.78, 1.00], [0.09, 0.27]] }
   };
 
   var ARRIVAL_VARIANTS = {
@@ -274,13 +299,7 @@
       ['0%', '#FFF0C4', 0.55], ['58%', '#F6CB68', 0.20], ['88%', '#E8AF38', 0.04], ['100%', '#E8AF38', 0]
     ]));
 
-    /* The only thing left outside the body's own image: a very faint symmetric
-       tint, centred on the BODY so it can never read as an object standing
-       beside it. Round 2's wide layers were centred on the hot region, and at
-       five body radii that is what became the pale halo off the shoulder. */
-    d.appendChild(grad('lo-nuc-field', '50%', '50%', '50%', [
-      ['0%', '#E8AF38', 0.055], ['38%', '#D89B32', 0.022], ['100%', '#A07020', 0]
-    ]));
+    d.appendChild(grad('lo-corona', '50%', '50%', '50%', coronaStops(1)));
 
     /* The label scrim. Same hue as the night ground, so on open sky it is not
        there; over an orbit line or a bright star it is the difference between
@@ -299,15 +318,56 @@
     /* One core gradient and one shadow gradient per node: both are re-aimed at
        the nucleus every time the node moves, which is what makes the light
        visibly come from the middle. */
-    NODES.forEach(function (n) {
-      d.appendChild(grad('lo-nc-' + n.id, '38%', '32%', '70%',
-        NODE_STOPS.map(function (o, i) { return [o, NODE_BRIGHT[i]]; })));
-      d.appendChild(grad('lo-ns-' + n.id, '62%', '68%', '78%', [
-        ['44%', '#3A2810', 0], ['78%', '#2A1C0A', 0.28], ['100%', '#160E04', 0.60]
-      ]));
-    });
 
     return d;
+  }
+
+
+  /* ══ THE OUTER CORONA ══════════════════════════════════════════════════
+     Round 3 deleted the outer glow because round 2's version had become a pale
+     halo floating off the shoulder. That overcorrected: a body this bright has
+     to light the space around it, and without that it reads as pasted onto the
+     sky rather than sitting in it.
+
+     What made the ghost a ghost was that it was CENTRED ON THE HOT REGION. An
+     asymmetric glow at several body radii has a centre of its own, and anything
+     with a centre of its own is a second object. A symmetric one cannot be: it
+     has no position apart from the body's.
+
+     So this is centred on the body, radially symmetric, and monotonically
+     decreasing from the limb outward — no local maximum anywhere, which is what
+     would read as a ring. The profile is an inverse power law, r^-2.6, because a
+     power law has no characteristic scale and therefore no radius at which
+     anything appears to happen. The exponent is 2.2 rather than the 2.6 tried
+     first, because 2.6 put the glow under a luminance point by three and a half
+     body radii, which is a bloom rather than a presence in the field. It is
+     multiplied by a window that reaches zero
+     WITH ZERO SLOPE at the gradient's edge, so the element's own boundary is not
+     a boundary: the alpha there is not merely small, its derivative is zero too.
+
+     The hot region still biases the surface and the near bleed inside the body's
+     own image. It does not touch this. Past the limb the star is round. */
+  var CORONA = { A: 0.30, Rout: 6.9, p: 2.2 };
+
+  function coronaStops(scale) {
+    var out = [], A = CORONA.A * (scale == null ? 1 : scale);
+    /* Stops LOGARITHMICALLY spaced in radius, not evenly. A gradient
+       interpolates linearly between its stops, and this profile is far steeper
+       just outside the limb than it is anywhere else, so evenly-spaced stops put
+       a visible kink exactly where the eye is. Measured, that kink was a 1.48
+       rise in the falloff rate at r/R 1.34 — a boundary, which is the one thing
+       this may not have. Log spacing puts the stops where the curvature is. */
+    var n = 64, r0 = 1;
+    out.push(['0%', '#FFDFA0', A.toFixed(5)]);
+    out.push([(100 / CORONA.Rout * 0.98).toFixed(3) + '%', '#FFDFA0', A.toFixed(5)]);
+    for (var i = 0; i <= n; i++) {
+      var r = r0 * Math.pow(CORONA.Rout / r0, i / n);
+      var w = 1 - Math.pow((r - 1) / (CORONA.Rout - 1), 2);
+      var a = A * Math.pow(1 / r, CORONA.p) * w * w;
+      var t = Math.min(1, Math.max(0, (r - 1) / (CORONA.Rout - 1)));
+      out.push([(100 * r / CORONA.Rout).toFixed(3) + '%', mixHex('#FFDFA0', '#B8863A', t), a.toFixed(5)]);
+    }
+    return out;
   }
 
   /* ══ THE BODY, rendered as a sphere map ═══════════════════════════════
@@ -396,6 +456,29 @@
     [0.50, [214, 146, 50]], [0.40, [180, 114, 36]], [0.31, [142, 85, 25]],
     [0.23, [104, 60, 17]], [0.15, [70, 39, 11]], [0.00, [40, 22, 7]]
   ];
+  /* A node is gold, not star-stuff: its value never reaches the top of the
+     body's ramp and the body's ramp bottoms out in browns, so lit by it a node
+     comes out muddy. Its own ramp keeps it gold from the lit limb to the
+     shadow. */
+  var NODE_RAMP = [
+    [1.20, [255, 246, 220]], [1.00, [255, 232, 172]], [0.84, [250, 212, 124]],
+    [0.68, [240, 194, 78]],  [0.54, [214, 160, 52]],  [0.42, [176, 126, 40]],
+    [0.31, [132, 92, 33]],   [0.21, [92, 64, 27]],    [0.12, [58, 42, 22]],
+    [0.00, [34, 26, 16]]
+  ];
+  function rampWith(TBL, I, out) {
+    for (var i = 1; i < TBL.length; i++) {
+      if (I >= TBL[i][0] || i === TBL.length - 1) {
+        var hi = TBL[i - 1], lo = TBL[i];
+        var t = (I - lo[0]) / (hi[0] - lo[0]);
+        t = t < 0 ? 0 : t > 1 ? 1 : t;
+        out[0] = lo[1][0] + (hi[1][0] - lo[1][0]) * t;
+        out[1] = lo[1][1] + (hi[1][1] - lo[1][1]) * t;
+        out[2] = lo[1][2] + (hi[1][2] - lo[1][2]) * t;
+        return;
+      }
+    }
+  }
   function ramp(I, out) {
     for (var i = 1; i < RAMP.length; i++) {
       if (I >= RAMP[i][0] || i === RAMP.length - 1) {
@@ -482,16 +565,69 @@
     return cv;
   }
 
+
+  /* ══ NODES, at their own scale ════════════════════════════════════════
+     Asserted lit by the nucleus and still reading as plain gold discs beside a
+     body with real surface. The assertion was true and the picture was not: a
+     gradient offset toward the nucleus is a lit disc, which is exactly the
+     mistake round 1 made at the other scale.
+
+     So a node is a sphere too. Lambertian, lit from the side — the source is in
+     the plane of the sky, so the terminator runs through the middle and the
+     outward half is genuinely dark rather than merely dimmer. A limb-darkening
+     term takes every edge down as well, including the lit one, which is what
+     stops the bright side reading as a rim.
+
+     ONE canvas serves all seven. A sphere lit from a direction in the plane of
+     the sky is symmetric about that direction, so the same image rotated to
+     point at the nucleus is exact for any bearing — no per-frame re-render, and
+     the light visibly swings as a body librates. Only INTENSITY needs its own
+     render, and intensity changes slowly. */
+  function renderNodeSphere(px, I) {
+    var cv = document.createElement('canvas');
+    cv.width = cv.height = px;
+    var ctx = cv.getContext('2d');
+    var img = ctx.createImageData(px, px), d = img.data;
+    var half = px / 2, sc = 1 / half, edge = 1.5 * sc;
+    var col = [0, 0, 0];
+    /* The star is not a point at this distance — it subtends a wide angle from
+       a node, so the terminator WRAPS rather than cutting. That is why the
+       lambert term is offset before it is clamped: a hard vertical edge down the
+       middle of a small sphere reads as a cut-out, and it is also wrong. The
+       ambient is what the corona and the star field put back. */
+    var AMB = 0.20, WRAP = 0.45;
+    for (var y = 0; y < px; y++) {
+      var ny = (y + 0.5 - half) * sc;
+      for (var x = 0; x < px; x++) {
+        var nx = (x + 0.5 - half) * sc;
+        var r = Math.sqrt(nx * nx + ny * ny), o = (y * px + x) * 4;
+        if (r >= 1 + edge) { d[o + 3] = 0; continue; }
+        var rc = r > 1 ? 1 : r, mu = Math.sqrt(1 - rc * rc);
+        /* lit from +x, so n . L is simply nx; WRAP carries it past the
+           geometric terminator the way an extended source does */
+        var lam = (nx + WRAP) / (1 + WRAP);
+        lam = lam < 0 ? 0 : Math.pow(lam, 1.15);
+        var L = (AMB + (1 - AMB) * lam) * (0.40 + 0.60 * Math.pow(mu, 0.5));
+        rampWith(NODE_RAMP, L * (0.62 + 0.68 * I), col);
+        var a = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
+        d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2];
+        d[o + 3] = 255 * (a < 0 ? 0 : a > 1 ? 1 : a);
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    return cv.toDataURL('image/png');
+  }
+
   /* ── the nucleus ────────────────────────────────────────────────────── */
 
-  /* The faint symmetric field, and nothing else outside the body. */
+  /* The corona: one circle, centred on the body, carrying the profile above. */
   function buildCorona() {
     var g = svg('g', { class: 'lo-corona', 'aria-hidden': 'true' });
-    var c = svg('circle', { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R * 2.6,
-                            fill: 'url(#lo-nuc-field)', class: 'lo-breath-b' });
-    c.style.setProperty('--lo-breath-lo', 0.05);
-    c.style.setProperty('--lo-breath-hi', 0.16);
-    c.style.setProperty('--lo-breath-still', 0.105);
+    var c = svg('circle', { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R * CORONA.Rout,
+                            fill: 'url(#lo-corona)', class: 'lo-breath-b' });
+    c.style.setProperty('--lo-breath-lo', 0.78);
+    c.style.setProperty('--lo-breath-hi', 1);
+    c.style.setProperty('--lo-breath-still', 0.89);
     g.appendChild(c);
     return g;
   }
@@ -525,13 +661,15 @@
     var place = svg('g');
     var inner = svg('g', { class: 'lo-node-inner' });
     var halo = svg('circle', { r: HALO_R, fill: 'url(#lo-node-halo)' });
+    var body = svg('image', { x: -NODE_R, y: -NODE_R, width: 2 * NODE_R, height: 2 * NODE_R,
+                              class: 'lo-node-body' });
     inner.appendChild(halo);
-    inner.appendChild(svg('circle', { r: NODE_R, fill: 'url(#lo-nc-' + n.id + ')' }));
-    inner.appendChild(svg('circle', { r: NODE_R, fill: 'url(#lo-ns-' + n.id + ')' }));
+    inner.appendChild(body);
     place.appendChild(inner);
     outer.appendChild(place);
     outer.__place = place;
     outer.__halo = halo;
+    outer.__body = body;
     return outer;
   }
 
@@ -590,17 +728,18 @@
       var dx = (FRAME.cx - p.x) / (dist || 1), dy = (FRAME.cy - p.y) / (dist || 1);
       var I = intensityAt(dist);
       var k = (I - 0.42) / 0.58;
-      n.coreGrad.setAttribute('cx', (50 + dx * 30).toFixed(2) + '%');
-      n.coreGrad.setAttribute('cy', (50 + dy * 30).toFixed(2) + '%');
-      for (var i = 0; i < n.coreStops.length; i++) {
-        n.coreStops[i].setAttribute('stop-color', mixHex(NODE_DIM[i], NODE_BRIGHT[i], k));
+      /* the sphere is lit from +x in its own image, so pointing it at the
+         nucleus is one rotation — and the light swings as the body librates */
+      n.bearing2 = Math.atan2(dy, dx) / D2R;
+      n.g.__body.setAttribute('transform', 'rotate(' + n.bearing2.toFixed(2) + ')');
+      if (Math.abs(I - n.imgI) > 0.02) {
+        n.imgI = I;
+        n.g.__body.setAttribute('href', renderNodeSphere(96, I));
       }
-      n.shadowGrad.setAttribute('cx', (50 - dx * 26).toFixed(2) + '%');
-      n.shadowGrad.setAttribute('cy', (50 - dy * 26).toFixed(2) + '%');
       n.g.__halo.setAttribute('cx', (dx * NODE_R * 0.35).toFixed(2));
       n.g.__halo.setAttribute('cy', (dy * NODE_R * 0.35).toFixed(2));
       n.g.__halo.setAttribute('r', (HALO_R * (0.70 + 0.45 * I)).toFixed(2));
-      n.g.__halo.setAttribute('opacity', (0.30 + 0.60 * k).toFixed(3));
+      n.g.__halo.setAttribute('opacity', (0.22 + 0.48 * k).toFixed(3));
     }
 
     /* label: radially outward from the node, never between it and the star.
@@ -671,28 +810,47 @@
     var orbitById = {};
     ORBITS.forEach(function (o) { orbitById[o.id] = o; });
 
+    /* Each orbit is cut into SEG_DEG segments, ordered so the draw travels as
+       one continuous stroke: the far half first, from one major-axis extreme
+       through the back, then the near half picking it up on the other side and
+       crossing in front. Segments overlap by a hair so no hairline gap opens
+       between them, and each carries the opacity of its own midpoint depth. */
     var paths = [];
+    var perHalf = 180 / SEG_DEG;
     ORBITS.forEach(function (o, oi) {
-      [['far', 180, 360, lBack], ['near', 0, 180, lFront]].forEach(function (h, hi) {
-        var d = halfPath(o, h[1], h[2]);
+      var order = [];
+      for (var k = 0; k < perHalf; k++) order.push([180 + k * SEG_DEG, 'far']);
+      for (var k2 = 0; k2 < perHalf; k2++) order.push([k2 * SEG_DEG, 'near']);
+      order.forEach(function (seg, si) {
+        var t0 = seg[0], t1 = t0 + SEG_DEG;
+        var mid = (t0 + t1) / 2;
+        var a = orbitAlpha(Math.sin(mid * D2R));
+        var pad = si === 0 ? 0 : 0.4;
+        var d = halfPath(o, t0 - pad, t1 + 0.4);
+        var far = seg[1] === 'far';
+        var host = far ? lBack : lFront;
         var glow = svg('path', { class: 'lo-path lo-glow', d: d, fill: 'none', 'pathLength': 1,
-                                 stroke: o.stroke, 'stroke-width': o.width * 3.4,
-                                 'stroke-opacity': 0.18, 'stroke-linecap': 'round' });
+                                 stroke: ORBIT_STROKE, 'stroke-width': ORBIT_WIDTH * 3.4,
+                                 'stroke-opacity': (a * 0.55).toFixed(4), 'stroke-linecap': 'round' });
         var line = svg('path', { class: 'lo-path', d: d, fill: 'none', 'pathLength': 1,
-                                 stroke: o.stroke, 'stroke-width': o.width,
-                                 'stroke-linecap': 'round' });
-        h[3].appendChild(glow);
-        h[3].appendChild(line);
-        paths.push({ orbit: o, orbitIndex: oi, half: hi, line: line, glow: glow });
-
-        if (h[0] === 'near') {
-          var sil = svg('path', { class: 'lo-path', d: d, fill: 'none', 'pathLength': 1,
-                                  stroke: '#6B4712', 'stroke-opacity': 0.62,
-                                  'stroke-width': o.width + 0.5, 'stroke-linecap': 'round' });
-          lSil.appendChild(sil);
-          paths.push({ orbit: o, orbitIndex: oi, half: hi, line: sil, glow: sil });
-        }
+                                 stroke: ORBIT_STROKE, 'stroke-width': ORBIT_WIDTH,
+                                 'stroke-opacity': a.toFixed(4), 'stroke-linecap': 'round' });
+        host.appendChild(glow);
+        host.appendChild(line);
+        paths.push({ orbit: o, orbitIndex: oi, seg: si, segs: order.length,
+                     line: line, glow: glow });
       });
+
+      /* The near half where it crosses the body, in one piece and clipped to the
+         disc. A thin ring passing in FRONT of a star is not brighter than the
+         star — it silhouettes against it. Painting it in the orbit's own value
+         over a body this bright makes it vanish, which reads as behind. */
+      var sil = svg('path', { class: 'lo-path', d: halfPath(o, 0, 180), fill: 'none',
+                              'pathLength': 1, stroke: '#6B4712', 'stroke-opacity': 0.62,
+                              'stroke-width': ORBIT_WIDTH + 0.5, 'stroke-linecap': 'round' });
+      lSil.appendChild(sil);
+      paths.push({ orbit: o, orbitIndex: oi, seg: perHalf, segs: 2 * perHalf,
+                   line: sil, glow: sil });
     });
 
     lBack.appendChild(buildCorona());
@@ -730,10 +888,7 @@
         def: n, orbit: o, t: n.t, matT: -999, home: pos, g: g, label: label,
         amp: amp, tangential: tangential, k: k,
         leader: leader, leaderWrap: wrap, near: pos.near, depth: pos.depth,
-        halfW: 90,
-        coreGrad: defs.querySelector('#lo-nc-' + n.id),
-        shadowGrad: defs.querySelector('#lo-ns-' + n.id),
-        coreStops: [].slice.call(defs.querySelectorAll('#lo-nc-' + n.id + ' stop')),
+        halfW: 90, imgI: -1, bearing2: 0,
         bearing: (Math.atan2(pos.y - FRAME.cy, pos.x - FRAME.cx) / D2R + 450) % 360
       });
     });
@@ -777,6 +932,13 @@
     sys.nucleus.__image.setAttribute('href', cv.toDataURL('image/png'));
     sys.nucleusVariant = key;
 
+    /* the corona's reach moves with the variant, so its stops are rebuilt */
+    var cg = sys.root.querySelector('#lo-corona');
+    while (cg.firstChild) cg.removeChild(cg.firstChild);
+    coronaStops(v.corona).forEach(function (st) {
+      cg.appendChild(svg('stop', { offset: st[0], 'stop-color': st[1], 'stop-opacity': st[2] }));
+    });
+
     var layers = [
       sys.nucleus.querySelector('.lo-breath-a'),
       sys.corona.querySelector('.lo-breath-b'),
@@ -816,12 +978,17 @@
       });
     });
 
+    /* One continuous travel per orbit, handed from segment to segment. The
+       silhouette rides the near half's window so the stroke crossing the body
+       and the stroke crossing the sky are the same stroke. */
     sys.paths.forEach(function (p) {
-      var d = v.pathStart + p.orbitIndex * v.orbitStagger + p.half * v.halfDur;
+      var each = (v.halfDur * 2) / p.segs;
+      var d = v.pathStart + p.orbitIndex * v.orbitStagger + p.seg * each;
+      var dur = p.line === p.glow ? v.halfDur : each * 1.25;
       p.line.style.setProperty('--lo-delay', d.toFixed(3) + 's');
-      p.line.style.setProperty('--lo-draw-dur', v.halfDur + 's');
+      p.line.style.setProperty('--lo-draw-dur', dur.toFixed(3) + 's');
       p.glow.style.setProperty('--lo-delay', d.toFixed(3) + 's');
-      p.glow.style.setProperty('--lo-draw-dur', (v.halfDur * 1.18).toFixed(3) + 's');
+      p.glow.style.setProperty('--lo-draw-dur', (dur * 1.18).toFixed(3) + 's');
     });
 
     return v.pathStart + (ORBITS.length - 1) * v.orbitStagger + v.halfDur * 2;

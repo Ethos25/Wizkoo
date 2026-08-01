@@ -66,6 +66,10 @@ still reading detached, and the drift too slow to register. The body is now one
 raster sphere map rather than a stack of gradients and filters, and the
 libration is per-node. Sections 2 and 4.
 
+**Round 4 (correction)** put the outer glow back — round 3 had overcorrected and
+left the star pasted onto the sky — and gave the nodes and the orbit lines the
+same treatment the body got. Section 2a.
+
 ---
 
 ## Files
@@ -201,6 +205,84 @@ line along the edge. A glow drawn inside the body's own picture cannot read as a
 object standing beside it. Outside the body there is now exactly one element: a
 faint symmetric tint centred on the body, asserted to be centred and asserted not
 to reach past 2.8 radii.
+
+### Round 4: the glow back, under the constraint that killed the ghost
+
+Deleting the outer corona overcorrected. A body this bright has to light the
+space around it, and without that it reads as pasted onto the sky.
+
+What made round 2's version a ghost was that it was **centred on the hot
+region**. An asymmetric glow at several body radii has a centre of its own, and
+anything with a centre of its own is a second object. A symmetric one cannot be:
+it has no position apart from the body's.
+
+So the restored corona is centred on the body, radially symmetric, and
+monotonically decreasing from the limb outward on an inverse power law — `r^-2.2`
+— because a power law has no characteristic scale and therefore no radius at
+which anything appears to happen. It is multiplied by a window that reaches zero
+**with zero slope** at the gradient's edge, so the element's own boundary is not
+a boundary: the alpha there is not merely small, its derivative is zero too.
+
+Its stops are spaced **logarithmically in radius**. Evenly-spaced stops put a
+measurable kink at `r/R 1.34`, because a gradient interpolates linearly and this
+profile is far steeper just outside the limb than anywhere else. Log spacing puts
+the stops where the curvature is.
+
+**Measured off the rendered frame, differencing round 4 against round 3 — same
+page, same seed, same sky, so what is left is the glow and nothing else:**
+
+```
+  r/R    round 2   round 3   round 4    the glow alone     lopsidedness of the glow
+         (ghost)   (none)    (restored) r4-r3    r2-r3     round 4    round 2
+  1.1      78.9     53.3      83.0      +29.6    +25.6      15.2       22.5
+  1.4      68.2     49.8      69.6      +19.8    +18.4       1.2        9.6
+  1.8      55.9     47.0      56.5       +9.4     +8.9       1.9        8.4
+  2.3      49.3     44.3      49.5       +5.2     +5.1       1.1        2.0
+  2.9      45.0     42.7      45.0       +2.3     +2.4       0.4        1.8
+  3.6      41.3     40.4      41.7       +1.3     +0.9       0.7        1.2
+  4.4      38.3     38.2      39.1       +0.9     +0.1       0.1        1.1
+```
+
+- **The sky near it is measurably brighter**: +29.6 luminance at the limb, still
+  above a point at four body radii.
+- **Monotonically decreasing outward**, everywhere.
+- **No discernible boundary.** The largest rise in the falloff rate anywhere is
+  1.10 luminance units; the same statistic measured with *no corona present* is
+  1.06. The wiggle is the instrument — 8-bit quantisation, the section's film
+  grain, a median over a finite sector — not an edge.
+- **Symmetric where it has to be.** Inside 1.34 radii the near bleed is
+  hot-biased, which the ruling allows. Beyond it the worst lopsidedness is 1.9,
+  against the ghost's 9.6 over the same radii.
+- **Stars read through it**: at 1.5 radii the 90th percentile sits 4.4 above the
+  median, so the field is dimmed, not filled.
+
+### Round 4: the nodes, and the orbit lines
+
+**The nodes were asserted lit and read as plain gold discs.** The assertion was
+true and the picture was not — a gradient offset toward the nucleus is a lit
+disc, which is the mistake round 1 made at the other scale. A node is a rendered
+sphere now: Lambertian, lit from the side, with a limb term that takes every edge
+down including the lit one so the bright side does not become a rim.
+
+One canvas serves all seven. A sphere lit from a direction in the plane of the
+sky is symmetric about that direction, so the same image *rotated* to point at
+the nucleus is exact for any bearing — no per-frame re-render, and the light
+visibly swings as a body librates. Only intensity needs its own render, and
+intensity changes slowly.
+
+The terminator **wraps** rather than cutting. The star is not a point at that
+distance; it subtends a wide angle from a node, so light carries past the
+geometric terminator. A hard edge down the middle of a small sphere reads as a
+cut-out, and it is also wrong.
+
+**The orbit lines were three treatments encoding nothing.** Chalk, saffron and
+ocean at 1.2 / 1.1 / 1.0, and the one thing they might have carried — depth —
+they did not: both halves of every orbit were drawn at the same opacity. Now one
+colour, one weight, and depth in opacity alone, **continuous along each arc**.
+Two flat halves meet at the major-axis extremes and a step there is a seam
+exactly where the eye is tracking the line, so each orbit is cut into 15-degree
+segments taking their opacity from the depth at their own midpoint. The three are
+still told apart, by the only thing that should tell them apart — their geometry.
 
 **And the demonstration: light travels outward.** Each node's bright side faces
 the nucleus and its dark side faces away, with brightness falling off with

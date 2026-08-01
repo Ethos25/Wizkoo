@@ -73,16 +73,16 @@ const freeze = (page, t) => page.evaluate((ms) => {
         const p = L.pointAt(o, n.t);
         const dist = Math.hypot(p.x - L.FRAME.cx, p.y - L.FRAME.cy);
         const toNucleus = [(L.FRAME.cx - p.x) / dist, (L.FRAME.cy - p.y) / dist];
-        const g = svg.querySelector('#lo-nc-' + n.id);
-        const lit = [parseFloat(g.getAttribute('cx')) - 50, parseFloat(g.getAttribute('cy')) - 50];
-        const len = Math.hypot(lit[0], lit[1]) || 1;
-        const sg = svg.querySelector('#lo-ns-' + n.id);
-        const dark = [parseFloat(sg.getAttribute('cx')) - 50, parseFloat(sg.getAttribute('cy')) - 50];
-        const dlen = Math.hypot(dark[0], dark[1]) || 1;
+        /* Round 4: a node is a rendered sphere lit from +x in its own image, so
+           where its light comes from is the rotation it carries. */
+        const im = document.querySelector('[data-node="' + n.id + '"] image.lo-node-body');
+        const m = /rotate\(([-0-9.]+)\)/.exec(im.getAttribute('transform') || '');
+        const th = m ? parseFloat(m[1]) * Math.PI / 180 : NaN;
+        const lit = [Math.cos(th), Math.sin(th)];
         return {
           id: n.id, dist: Math.round(dist),
-          litDot: +((lit[0] / len) * toNucleus[0] + (lit[1] / len) * toNucleus[1]).toFixed(4),
-          darkDot: +((dark[0] / dlen) * toNucleus[0] + (dark[1] / dlen) * toNucleus[1]).toFixed(4),
+          litDot: +(lit[0] * toNucleus[0] + lit[1] * toNucleus[1]).toFixed(4),
+          darkDot: +(-lit[0] * toNucleus[0] - lit[1] * toNucleus[1]).toFixed(4),
           I: +L.intensityAt(dist).toFixed(3)
         };
       };
@@ -105,16 +105,14 @@ const freeze = (page, t) => page.evaluate((ms) => {
     check(a.terminatorish.length === 0,
       'no terminator or rim pass on the nucleus' + (a.terminatorish.length ? ' — found ' + a.terminatorish.join(', ') : ''));
 
-    /* Round 3: the bleed is drawn inside the body's own image, so there is no
-       corona element to be offset at all. What is left outside is one faint
-       symmetric tint, and it must be centred on the body and small — an offset
-       wide layer is exactly what became the pale halo off the shoulder. */
+    /* Round 4 restored the outer corona under the constraint that killed the
+       ghost: it must be CENTRED ON THE BODY. An asymmetric glow at several body
+       radii has a centre of its own, and anything with a centre of its own is a
+       second object. That it is also smooth and stepless is measured separately,
+       off the rendered pixels, by scripts/lab-orbital-corona.js. */
+    check(a.coronas.length === 1, 'exactly one element outside the body (' + a.coronas.length + ')');
     check(a.coronas.every(c => Math.abs(c.cx - a.C.x) < 0.6 && Math.abs(c.cy - a.C.y) < 0.6),
-      'nothing outside the body is offset from it — ' + a.coronas.length +
-      ' element(s), all centred on the body');
-    check(a.coronas.every(c => c.r <= 2.8 * 125),
-      'and nothing outside the body reaches beyond 2.8 body radii (max ' +
-      Math.max(...a.coronas.map(c => Math.round(c.r / 125) * 1)) + 'R)');
+      'and it is centred on the body, not on the hot region');
 
     console.log('\n  light travelling outward — each node\'s lit point vs the direction of the nucleus');
     console.log('  (dot = +1 means the bright side faces the nucleus exactly)');
@@ -418,37 +416,53 @@ const freeze = (page, t) => page.evaluate((ms) => {
     await page.context().close();
   }
 
-  /* ── 6. frame cost ─────────────────────────────────────────────────── */
-  console.log('\nFRAME COST — three rounds, drift running');
+  /* ── 6. frame cost, measured against the previous build, not a number ── */
+  console.log('\nFRAME COST — this build against the last one, alternating in one process');
   {
+    const { execFileSync } = require('child_process');
+    const PREV = '6b77133';                       /* round 3 */
     const probe = (p) => p.evaluate(() => new Promise((res) => {
       const d = []; let last = performance.now(), n = 0;
       (function tick(t) { d.push(t - last); last = t;
-        if (++n < 200) requestAnimationFrame(tick);
+        if (++n < 240) requestAnimationFrame(tick);
         else { const s = d.slice(2).sort((a, b) => a - b); res(+s[s.length >> 1].toFixed(1)); }
       })(performance.now());
     }));
-    const runs = [];
-    for (let i = 0; i < 3; i++) {
-      const page = await openPage(browser);
-      await toSection(page);
+    const one = async (rev) => {
+      const ctx = await browser.newContext({ viewport: VP });
+      const page = await ctx.newPage();
+      if (rev) {
+        const js = execFileSync('git', ['show', rev + ':js/lab-orbital.js'], { encoding: 'utf8', maxBuffer: 64e6 });
+        const css = execFileSync('git', ['show', rev + ':css/lab-orbital.css'], { encoding: 'utf8', maxBuffer: 64e6 });
+        await page.route('**/js/lab-orbital.js', (r) => r.fulfill({ contentType: 'application/javascript', body: js }));
+        await page.route('**/css/lab-orbital.css', (r) => r.fulfill({ contentType: 'text/css', body: css }));
+      }
+      await page.goto(URL, { waitUntil: 'networkidle' });
+      await page.evaluate(() => document.getElementById('orbital').scrollIntoView({ block: 'start' }));
       await sleep(6500);
-      runs.push(await probe(page));
-      await page.context().close();
-    }
-    console.log('    median frame interval: ' + runs.map(r => r + 'ms').join(', '));
-    const stars = await (async () => {
-      const page = await openPage(browser);
-      const n = await page.evaluate(() => {
-        const h = document.querySelector('[data-lab-sky]');
-        const s = [...h.querySelectorAll('.wk-sky__star')];
-        return { total: s.length, twinkling: s.filter(x => getComputedStyle(x).animationName !== 'none').length };
-      });
-      await page.context().close();
-      return n;
-    })();
+      const v = await probe(page);
+      await ctx.close();
+      return v;
+    };
+    /* An absolute threshold measures the machine, not the build. This one ran at
+       33ms earlier in the day and 50ms later with nothing changed but the load
+       on the box, so the previous build is re-measured alongside every time and
+       the comparison is between them. */
+    const prev = [], now = [];
+    for (let i = 0; i < 3; i++) { prev.push(await one(PREV)); now.push(await one(null)); }
+    const med = (a) => a.slice().sort((x, y) => x - y)[1];
+    console.log('    previous build (' + PREV + '):  ' + prev.map(v => v + 'ms').join(', '));
+    console.log('    this build:              ' + now.map(v => v + 'ms').join(', '));
+    check(med(now) <= med(prev) * 1.12,
+      'no regression against the previous build (' + med(now) + 'ms against ' + med(prev) + 'ms)');
+
+    const page = await openPage(browser);
+    const stars = await page.evaluate(() => {
+      const s = [...document.querySelectorAll('.wk-sky__star')];
+      return { total: s.length, twinkling: s.filter(x => getComputedStyle(x).animationName !== 'none').length };
+    });
+    await page.context().close();
     console.log('    ' + stars.total + ' stars rendered, ' + stars.twinkling + ' twinkling');
-    check(Math.max(...runs) <= 33.5, 'not regressed past round 1\'s 33.3ms');
     check(stars.total === 1834 && stars.twinkling === 813, 'far layer still static, density untouched');
   }
 
