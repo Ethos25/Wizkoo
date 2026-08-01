@@ -51,13 +51,13 @@
      1440 x 984 so that at a 1440 viewport one SVG unit is one CSS pixel and
      the labels are literally the homepage's 14px/12px, not a scaled guess. */
   var FRAME = { w: 1440, h: 984, cx: 720, cy: 472 };
-  var NUC_R = 125;
+  var NUC_R = 125;   /* replaced from the arrangement below */
 
   /* The hot region, in absolute frame units. 38% 32% of the body's own box —
      the only value in this file that carries a direction, and it is a property
      of the surface, not of the lighting. Everything anchored to it (the corona)
      is anchored to the surface with it. */
-  var HOT = { x: FRAME.cx + (0.38 - 0.5) * 2 * NUC_R, y: FRAME.cy + (0.32 - 0.5) * 2 * NUC_R };
+  var HOT = { x: 0, y: 0 };   /* set from the arrangement below */
 
   /* ── ONE TREATMENT — RULED round 4 ──────────────────────────────────────
      The three used to differ in colour and weight — chalk, saffron, ocean, at
@@ -103,38 +103,76 @@
   function orbitAlpha(zn) { return ORBIT_BASE * (0.34 + 0.66 * (0.5 + 0.5 * zn)); }
   function orbitWidth(zn) { return ORBIT_WIDTH * (0.86 + 0.28 * (0.5 + 0.5 * zn)); }
 
-  var ORBITS = [
-    /* Drawn in order of DECREASING minor axis: each orbit lies flatter than the
-       last, so the system's depth deepens as it completes and the final stroke
-       is the one that runs straight across the nucleus's face.
+  /* ══ ARRANGEMENTS — round 6 candidates ════════════════════════════════
+     Selected with ?arr= on the URL, or from the lab panel. None of these is an
+     answer; they are the corners of one trade.
 
-       No dashed orbit. A dash pattern and a dash-offset draw are the same
-       property, and the draw is the beat.
+     THE TRADE, stated once. An orbit reads as a PLANE rather than a line in
+     proportion to its openness O = ry/rx — at 0.12 it is a stroke, at 0.5 it is
+     a circle seen at an angle. The occlusion cue needs the arc to come inside
+     the body, which for an orbit centred on the nucleus is ry < R. With
+     E = rx/R for how far the orbits reach:
 
-       INCLINATIONS — RULED round 5. Round 4's three sat at 71 / 79 / 78 degrees:
-       spread in screen rotation but near-identical in tilt, which is why they
-       read as concentric rings on one plane rather than as three planes crossing
-       in space. What decides the tilt is ry/rx, not the rotation, and round 4's
-       were 0.323 / 0.184 / 0.210 — two of them the same ellipse turned.
+         ry < R   <=>   O * E < 1
 
-       Now 0.315 / 0.188 / 0.117, each about a third flatter than the last:
+     Openness and envelope are the same budget. The shipped homepage section
+     spends all of it on envelope — O 0.57, E 7.4, O*E 4.2 — and has no orbit
+     that comes within four body radii of the nucleus, which is exactly why it
+     reads flat. Round 5 spent it on the cue and had nothing left for openness.
 
-         c   rx 356  ry 112  rot  88    71.7 deg    z-reach 338  (0.71)
-         b   rx 446  ry  84  rot  32    79.1 deg    z-reach 438  (0.92)
-         a   rx 480  ry  56  rot -28    83.3 deg    z-reach 477  (1.00)
+     The last arrangement breaks the inequality rather than trading inside it,
+     by putting the nucleus off the orbit's CENTRE — which is where a star
+     actually sits on any orbit that is not a perfect circle. The nearest
+     approach becomes |ry - d| instead of ry, so openness can rise as long as
+     the offset rises with it. */
+  var ARRANGEMENTS = {
+    /* what round 5 shipped, kept for comparison */
+    '5': { R: 125, coronaRout: 6.9, label: 'round 5, as ruled',
+      orbits: [{ id: 'c', rx: 356, ry: 112, rot: 88, off: 0 },
+               { id: 'a', rx: 480, ry: 56,  rot: -28, off: 0 },
+               { id: 'b', rx: 446, ry: 84,  rot: 32, off: 0 }] },
 
-       ry is capped by the nucleus radius and not by taste: an orbit whose minor
-       semi-axis reaches 125 stops crossing the body, and the occlusion cue —
-       the whole three-dimensional read — goes with it. So the spread had to be
-       bought at the flat end rather than the open one. 112 is as open as the
-       system can go while still cutting a real chord across the disc.
+    /* A — the most open the cue allows with the nucleus untouched. The envelope
+       shrinks to buy it: O*E stays under 1 by pulling rx in, not by flattening. */
+    'A': { R: 125, coronaRout: 6.9, label: 'A — openness bought with envelope, nucleus unchanged',
+      orbits: [{ id: 'c', rx: 270, ry: 118, rot: 5,   off: 0 },
+               { id: 'a', rx: 250, ry: 112, rot: 58,  off: 0 },
+               { id: 'b', rx: 230, ry: 104, rot: 125, off: 0 }] },
 
-       Rotations 88 / 32 / -28 sit 56, 64 and 60 degrees apart, which is the
-       logo's own arrangement. */
-    { id: 'c', rx: 356, ry: 112, rot: 88 },
-    { id: 'a', rx: 480, ry: 56,  rot: -28 },
-    { id: 'b', rx: 446, ry: 84,  rot: 32 }
-  ];
+    /* B — the logo's proportions. Same openness as A, but the whole system is
+       scaled up around a nucleus that is now 400px across. The cue survives
+       because R grew with rx; the nucleus takes half the envelope, which is
+       what the logo does. */
+    'B': { R: 200, coronaRout: 4.3, label: 'B — logo proportions, nucleus enlarged to 200',
+      orbits: [{ id: 'c', rx: 390, ry: 180, rot: 5,   off: 0 },
+               { id: 'a', rx: 350, ry: 168, rot: 58,  off: 0 },
+               { id: 'b', rx: 310, ry: 155, rot: 125, off: 0 }] },
+
+    /* C — the shipped section's arrangement at the lab's material. Openness
+       0.57 and a small nucleus, which is the other pole: the cue is gone and
+       this candidate says so. */
+    'C': { R: 125, coronaRout: 6.9, label: 'C — the shipped arrangement, occlusion sacrificed',
+      orbits: [{ id: 'c', rx: 480, ry: 275, rot: 25,  off: 0 },
+               { id: 'a', rx: 434, ry: 248, rot: 148, off: 0 },
+               { id: 'b', rx: 372, ry: 209, rot: 172, off: 0 }] },
+
+    /* D — the nucleus off the orbit's centre, which is where a star sits on any
+       orbit that is not a perfect circle. Nearest approach is |ry - off|, so
+       openness of 0.5 and a crossing arc stop being alternatives. */
+    'D': { R: 125, coronaRout: 6.9, label: 'D — open rings, nucleus at the focus rather than the centre',
+      orbits: [{ id: 'c', rx: 400, ry: 200, rot: 5,   off: 110 },
+               { id: 'a', rx: 360, ry: 180, rot: 58,  off: -95 },
+               { id: 'b', rx: 320, ry: 160, rot: 125, off: 82 }] }
+  };
+
+  var ARR_KEY = (function () {
+    var m = /[?&]arr=([0-9A-Za-z]+)/.exec(typeof location !== 'undefined' ? location.search : '');
+    var k = m ? m[1].toUpperCase() : '5';
+    return ARRANGEMENTS[k] ? k : '5';
+  })();
+  var ARR = ARRANGEMENTS[ARR_KEY];
+
+  var ORBITS = ARR.orbits.map(function (o) { return { id: o.id, rx: o.rx, ry: o.ry, rot: o.rot, off: o.off || 0 }; });
 
   /* ── LIBRATION — RULED round 3: bigger, and faster within what is safe ──
      Round 2's setting, 11px a minute, sat below the threshold of registering a
@@ -179,6 +217,10 @@
      which is what turns an amplitude in degrees into a screen speed in px/s */
   var SIGMA = 0;
   LIBRATION.w.forEach(function (w, i) { SIGMA += w * 2 * Math.PI / LIBRATION.P[i]; });
+
+  NUC_R = ARR.R;
+  HOT.x = FRAME.cx + (0.38 - 0.5) * 2 * NUC_R;
+  HOT.y = FRAME.cy + (0.32 - 0.5) * 2 * NUC_R;
 
   ORBITS.forEach(function (o) { Z_MAX = Math.max(Z_MAX, Math.sqrt(o.rx * o.rx - o.ry * o.ry)); });
 
@@ -294,7 +336,11 @@
 
   function pointAt(o, tDeg) {
     var b = basis(o), t = tDeg * D2R;
-    var m = o.rx * Math.cos(t), n = o.ry * Math.sin(t);
+    /* off displaces the orbit's centre along its own minor axis, which is what
+       putting the nucleus at a focus rather than at the centre looks like once
+       it is projected. The near/far split is untouched by it: that depends on
+       the orbital plane, not on where in the plane the star sits. */
+    var m = o.rx * Math.cos(t), n = (o.off || 0) + o.ry * Math.sin(t);
     return {
       x: FRAME.cx + m * b.u[0] + n * b.v[0],
       y: FRAME.cy + m * b.u[1] + n * b.v[1],
@@ -398,7 +444,7 @@
 
      The hot region still biases the surface and the near bleed inside the body's
      own image. It does not touch this. Past the limb the star is round. */
-  var CORONA = { A: 0.30, Rout: 6.9, p: 2.2 };
+  var CORONA = { A: 0.30, Rout: ARR.coronaRout, p: 2.2 };
 
   function coronaStops(scale) {
     var out = [], A = CORONA.A * (scale == null ? 1 : scale);
@@ -919,7 +965,10 @@
        max() is continuous, and at 0.25px/s its corner is not a thing anyone
        could resolve. */
     var ox = dist ? (p.x - FRAME.cx) / dist : 0, oy = dist ? (p.y - FRAME.cy) / dist : -1;
-    var rOut = Math.max(dist + NODE_R + 34, 252);
+    /* The floor scales with the nucleus but never drops below round 5's 252 —
+       a smaller floor pulls every label inward and reopens collisions that the
+       exhaustion had already closed. */
+    var rOut = Math.max(dist + NODE_R + 34, NUC_R + 80, 252);
     var ax = FRAME.cx + ox * rOut, ay = FRAME.cy + oy * rOut;
 
     /* presence tracks depth continuously. Distant things are dimmer; that is the
@@ -956,6 +1005,20 @@
     if (key === sys.labelOrder) return;
     sys.labelOrder = key;
     order.forEach(function (n) { sys.labels.appendChild(n.label); });
+  }
+
+  /* The two limb-straddling nodes are solved, not written down: whichever
+     arrangement is loaded, SCIENCE and ART sit where |P - C| equals the nucleus
+     radius, one in front and one behind. With an offset centre there is no
+     closed form worth writing, so it is a scan. */
+  function solveLimb(o, fromDeg, toDeg) {
+    var best = null;
+    for (var t = fromDeg; t <= toDeg; t += 0.05) {
+      var p = pointAt(o, t);
+      var e = Math.abs(Math.hypot(p.x - FRAME.cx, p.y - FRAME.cy) - NUC_R);
+      if (!best || e < best.e) best = { t: t, e: e };
+    }
+    return best;
   }
 
   /* ── build ──────────────────────────────────────────────────────────── */
@@ -1034,6 +1097,18 @@
 
     var sys = { root: root, back: lBack, front: lFront, labels: lLabels, nodes: [], paths: paths,
                 corona: lBack.firstChild, nucleus: nucleus, labelOrder: '' };
+
+    /* re-seat the two limb nodes for whatever arrangement is loaded */
+    NODES.forEach(function (n) {
+      if (n.id !== 'science' && n.id !== 'art') return;
+      var o = orbitById[n.orbit];
+      var near = n.id === 'science';
+      /* searched around the node's own composed position, not across the whole
+         half — every orbit has two solutions and the far one puts the body on
+         the other side of the minor axis, which silently re-composes the frame */
+      var sol = solveLimb(o, n.t - 45, n.t + 45);
+      if (sol && sol.e < 6) n.t = sol.t;
+    });
 
     NODES.forEach(function (n) {
       var o = orbitById[n.orbit];
@@ -1362,6 +1437,12 @@
         if (!b) return;
         var group = b.dataset.group, value = b.dataset.value;
 
+        if (group === 'arr') {
+          /* a geometry change rebuilds everything, so it reloads — which also
+             replays the arrival, which is what you want when comparing */
+          location.search = '?arr=' + value;
+          return;
+        }
         if (group === 'collapse') {
           var open = !panel.hasAttribute('data-collapsed');
           if (open) panel.setAttribute('data-collapsed', '');
@@ -1413,6 +1494,7 @@
       },
       advance: function (seconds) { drift.advance(seconds); },
       EXTENT: EXTENT, U_LIMB: U_LIMB, LIMB_P: LIMB_P, LIBRATION: LIBRATION, SIGMA: SIGMA,
+      ARR: ARR, ARR_KEY: ARR_KEY, ARRANGEMENTS: ARRANGEMENTS,
       /* pixels back, so the light model can be asserted rather than admired */
       /* mode 0 full, 1 texture only, 2 the in-body star field alone */
       readBody: function (px, mode) {
