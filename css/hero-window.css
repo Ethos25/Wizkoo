@@ -206,19 +206,37 @@
   display:block;
 }
 
-/* -- The band the constellation lives in. Aligned to the type at 46u, exactly
-   as the spec aligns its own band to its own 44px padding. Its height is not a
-   number but a RATIO: aspect-ratio 532/178 is the spec's band, so whatever
-   width the window gives it, the figure inside is never stretched and never
-   refit. Its contents are built by js/constellation.js. -- */
+/* -- THE BAND IS THE RESERVED BOX; THE FIGURE IS CONTAINED IN IT.
+   These are two different things and conflating them was a bug. The band used
+   to BE the figure: left/right insets plus aspect-ratio, so its height came
+   from its width. That works while the window keeps a sane proportion and
+   breaks the moment it does not — at a 600px viewport .lw-mount is 553 wide by
+   226 tall, a 2.45 box, and a band derived from that width came out 159.9px
+   tall inside an 82px gap, hanging 31px past the window's own bottom edge.
+
+   So the band is now only the space held open between the sentence and the
+   handle rule: insets and top here, height measured and set by
+   js/hero-constellation.js from the foot's actual position, because the foot's
+   height mixes percentages with --u and cannot be restated as one percentage
+   that survives every window shape. The figure is a child sized to the largest
+   box of its own ratio that fits inside — contain, not cover — so it is never
+   stretched, never refit, and can never overflow. -- */
 .lw-band{
   position:absolute;
   left:8.318%;
   right:8.318%;
   top:40.280%;                      /* 135u of 335.15u */
-  aspect-ratio:532 / 178;           /* the spec's band. Never a stretch. */
   z-index:2;
   pointer-events:none;
+  display:flex;
+  justify-content:center;           /* the figure centres in the width it gets */
+  align-items:flex-start;           /* and hangs from the top, where the tether
+                                       lands. Spec § 8: do not centre it. */
+}
+.lw-figure{
+  position:relative;
+  display:block;
+  flex:none;                        /* sized by hero-constellation.js */
 }
 
 .lw-label{
@@ -359,7 +377,6 @@
   .lw-band{
     left:6.782%;right:6.782%;
     top:42.920%;                    /* 97u of 226u */
-    aspect-ratio:299 / 64;
   }
   .lw-label{font-size:calc(var(--u) * 8);letter-spacing:calc(var(--u) * 1.92)}
   .lw-label .rule{width:calc(var(--u) * 20);margin-right:calc(var(--u) * 10)}

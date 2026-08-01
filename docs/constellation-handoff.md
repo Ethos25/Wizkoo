@@ -1,8 +1,9 @@
 # Constellation — handoff
 
-**Round 2 status: both rulings applied and integrated. It works at 1440 and on
-phones. It fails at two viewports, for a reason the chrome ruling cannot
-reach — see § 0. That is the fallback condition, so it stops here.**
+**Round 3 status: complete. Every viewport in the matrix clears.**
+The two round-2 failures are resolved by routing to 7B on scale, as ruled;
+the tether ships as variant D, as ruled; the proportional chrome is ratified.
+See § 13. Sections 0–12 below are the round-1 and round-2 record.
 
 | viewport | window | band | lowest label → handle rule | verdict |
 |---|---|---|---|---|
@@ -399,3 +400,128 @@ trade; the rule changes themselves are ten lines.
 
 1. **The two failing viewports** (§ 0): enlarge the window, or route them to 7B.
 2. **The tether** (§ 9): keep the literal ruling, or take variant D.
+
+---
+
+# ROUND 3 — routing, the whisper, and the close
+
+## 13. THE THRESHOLD, AND WHY IT IS NOT A NUMBER ON THE VIEWPORT
+
+Two things were wrong with the obvious rules, and the matrix found both.
+
+**A viewport-width breakpoint misses 1440×396.** `--u` is clamped by the 396px
+height, so that wide viewport renders a 342.86px window — and a width query
+hands it 7A, which is the case that failed.
+
+**A band-width threshold misses 600×900.** There `.lw-mount` is 553 × 226, a
+2.45 box. The band is 478 wide, comfortably over any width threshold, but the
+gap between sentence and rule is only 82px tall. A width-only rule picked 7A
+and produced a 159.9px band inside an 82px gap — 31px past the window's own
+bottom edge. **Height has to bind too.**
+
+So the switch is neither. **Both figures are sized into the reserved box the
+way they will actually be drawn — contained, largest box of that ratio that
+fits — and the one whose contained width lands nearer its own reference band
+wins.** Nearness is measured in log space, because this is a question about
+scale: 1.3× and 0.77× are equally far from reference.
+
+```
+score(fig) = |ln( contained_width(fig) / reference_width(fig) )|
+             7A reference 532 × 178      7B reference 299 × 64
+score(7A) += 0.10        ← BIAS toward 7B on a close call
+score(...) += 0.05       ← HYST, to leave a state (no flicker on drag-resize)
+```
+
+**BIAS = 0.10 is deliberate and it is the judgement in this rule.** The two
+figures do not degrade alike. 7B was drawn for a band it can outgrow
+gracefully; 7A cannot shrink into one, because its labels are absolute px and
+begin colliding with the sentence above and the rule below once its band drops
+below about 0.8×. When the call is close, the figure that fails softly should
+win it. At 1280×720 the unbiased scores are 7A 0.273 / 7B 0.304 — 7A by a
+hair, and with 7A that viewport measured −1.02px into the sentence. The bias
+hands it to 7B, which measures +5.98.
+
+**Consequence, stated plainly: 7A now runs only where the window reaches its
+full 553u width** — roughly viewport ≥ 1440 with adequate height. Everything
+narrower gets 7B. That is not a demotion of 7A; it is the honest reading that
+the largest band this composition ever produces is 461px against 7A's 532
+reference, and everything else is nearer 7B's 299.
+
+### Structural change this required
+
+The band used to *be* the figure — insets plus `aspect-ratio`, height derived
+from width. That is what overflowed at 600×900. It is now two things:
+
+- `.lw-band` — the reserved box only. Insets and top in CSS; **height measured
+  and set in JS** from the foot's actual position, because the foot's height
+  mixes percentages with `--u` and no single percentage survives every window
+  shape.
+- `.lw-figure` — a contained child, sized to the largest box of the chosen
+  figure's ratio that fits. Never stretched, never refit, and it cannot
+  overflow. Centred horizontally, anchored to the top, per spec §8.
+
+### The matrix
+
+Figure size is the contained figure, not the reserved box; `×ref` is against
+that figure's own reference band.
+
+```
+viewport      window        figure       fig  ×ref   label→rule  fig→sentence
+1920x1080     553x335.1     461x154.2    7A   0.867       8.41         1.78
+1600x900      553x335.1     461x154.2    7A   0.867       8.41         1.78
+1440x900      552.7x334.9   460.7x154.1  7A   0.866       8.39         1.72
+1440x800      552.7x334.9   460.7x154.1  7A   0.866       8.39         1.72
+1440x396      342.9x207.8   286x61.2     7B   0.957      38.89         3.81
+1280x720      486x294.5     405x86.7     7B   1.355      58.14         5.98
+1200x900      452.7x274.3   377x80.7     7B   1.261      53.59         4.75
+1024x768      392.7x238     327x70       7B   1.094      45.70         4.81
+900x700       341x206.7     284x60.8     7B   0.950      38.58         2.91
+820x1180      307.7x186.5   257x55       7B   0.860      33.81         1.67
+768x1024      286x173.3     238x50.9     7B   0.796      31.02         0.91
+600x900       553x226       365.1x78.1   7B   1.221       7.30         0.72
+430x932       390x226       337x72.1     7B   1.127      17.61         5.05
+414x896       374x226       323x69.1     7B   1.080      20.73         5.16
+390x844       350x226       303x64.8     7B   1.013      25.22         5.36
+375x667       335x213.9     290x62.1     7B   0.970      22.75         4.80
+360x640       320x204       277x59.3     7B   0.926      21.28         4.42
+✓ every viewport clears
+```
+
+`1024×768`, previously marginal at +1.63, is now **+45.70**. Figure scale
+across the whole matrix runs 0.796×–1.355× of its own reference.
+Re-run with `node scripts/constellation-matrix.js http://localhost:3000`.
+
+## 14. THE TETHER — VARIANT D SHIPPED
+
+Launch x is read off `.lw-theme` at run time. The tether then travels the
+**spec's own horizontal run** — 16 units at 7A, 22 at 7B — leaning toward the
+figure, and fades out. Measured across the matrix: `16/42` wherever 7A runs,
+`22/18` wherever 7B runs. Exactly the spec's own scale at both.
+
+It never reached the star visually in the spec either; it fades to nothing at
+both ends. `screenshots/constellation/R3-tether-desktop.png`.
+
+## 15. ROUND 3 VERIFICATION
+
+- **Figure still matches the spec** — 7 stars, 6 labels, 15 paths, no
+  disagreement, both sizes. The routing changed nothing inside either figure.
+- **Beat fires once and latches** — 1 run, still 1 after scroll-away, return,
+  hover, focus, and a **7A → 7B → 7A** round trip. Each rebuild comes back
+  settled. Figure class at rest is `lw-figure`: no state, no fill-mode, no timer.
+- **Reduced motion** — `wkc-static`, `animationName: none`, ignition opacity 1,
+  dashoffset 0, labels 1. The completed figure, no arrival, no scintillation.
+- **No contrast regression** — sentence Δluminance −0.00003, eyebrow −0.00002,
+  handle +0.00003. Ratios 6.44:1 / 7.29:1 / 7.61:1, unchanged.
+- **Type sizes unchanged** at 1440×900: sentence 33px, cta 12.5px.
+- **`hero-sky.css`, `hero-sky.js`, `hero-window.js` byte-identical to HEAD** —
+  the sky's twinkle and the theme word's own beat are untouched.
+
+## 16. FINAL WEIGHT
+
+| | gzip |
+|---|---|
+| `css/constellation.css` | 2,307 B |
+| `js/constellation.js` | 8,573 B |
+| `js/hero-constellation.js` | 3,036 B |
+| `css/hero-window.css` (delta) | +388 B |
+| **total added to ship** | **≈14.0 KB** |

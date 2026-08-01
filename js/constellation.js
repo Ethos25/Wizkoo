@@ -240,8 +240,23 @@
        Negative y is intentional: it starts ABOVE the band, under the word
        "space" in the sentence, and the svg is overflow:visible. It fades to
        nothing at BOTH ends — a whisper, not a pointer. */
+    /* THE WHISPER, RE-AIMED (ruled).
+       opts.tetherX re-anchors the launch to where the word "space" actually
+       renders. The spec's constant assumed the theme star sits directly under
+       that word (§ 2); in the shipped hero the star is at 39.7% of the window
+       and the word at 65.1%, so honouring the launch AND the spec's endpoint
+       would stretch this from a 16-unit breath into a 162-unit leader — a
+       pointer, which § 4 says it must never be.
+       So the launch moves and the SCALE is the spec's: the tether travels the
+       spec's own horizontal run, leaning toward the figure, and fades out.
+       It never reached the star visually anyway — it fades to nothing at both
+       ends. The lab passes no tetherX and still renders the spec verbatim. */
     var th = cfg.tether;
-    if (opts.tetherX != null) th = [opts.tetherX, th[1], th[2], th[3]];
+    if (opts.tetherX != null) {
+      var run = Math.abs(cfg.tether[0] - cfg.tether[2]);
+      var dir = cfg.stars.space[0] >= opts.tetherX ? 1 : -1;   /* lean inward */
+      th = [opts.tetherX, th[1], opts.tetherX + dir * run, th[3]];
+    }
     var tid = 'wkct' + uid;
     var tg = document.createElementNS(NS, 'linearGradient');
     tg.setAttribute('id', tid);
