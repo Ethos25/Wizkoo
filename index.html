@@ -979,53 +979,57 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hh-photo{position:absolute;inset:0;z-index:0;overflow:hidden}
 .hh-photo img{
   position:absolute;
-  /* Shifted left and opened up so the child and the planets sit behind and
-     around the type block, not only in the right half. */
-  --hh-zoom:1.18;
-  --hh-shift:44%;
+  /* 4A's framing, with just enough zoom to keep the pink planet in frame. */
+  --hh-zoom:1.10;
+  --hh-shift:51%;
   top:50%;left:var(--hh-shift);
   width:calc(100% * var(--hh-zoom));
   height:calc(100% * var(--hh-zoom));
   transform:translate(-50%,-50%);
   object-fit:cover;object-position:50% 44%;
-  filter:saturate(0.74) brightness(1.02) contrast(1) blur(1.15px);
+  /* 4A's treatment, not 4A's numbers. Its filter was calibrated against a 350px
+     thumbnail upscaled 4x, which is inherently soft; the same 1.1px blur on a
+     sharp asset leaves the planets crisp enough to fight the arrest. Matching
+     the RESULT (subject legible in one second, clearly subordinate) needs more
+     defocus and less colour on this asset. */
+  filter:saturate(0.60) brightness(1.04) contrast(0.94) blur(3px);
 }
 .hh-veil{
   position:absolute;inset:0;z-index:1;pointer-events:none;
   /* Control values resampled through a monotone cubic: as plain stops the alpha
      slope steps at 34% and the eye reads a band straight across the hero. */
   background:linear-gradient(
-    rgba(248,244,233,0.88) 0%,
-    rgba(248,244,233,0.859) 5.7%,
-    rgba(248,244,233,0.831) 11.3%,
-    rgba(248,244,233,0.798) 17%,
-    rgba(248,244,233,0.76) 22.7%,
-    rgba(248,244,233,0.72) 28.3%,
-    rgba(248,244,233,0.68) 34%,
-    rgba(249,245,234,0.637) 37%,
-    rgba(250,246,235,0.59) 40%,
-    rgba(253,248,236,0.541) 43%,
-    rgba(254,249,237,0.492) 46%,
-    rgba(253,249,237,0.444) 49%,
-    rgba(248,244,233,0.4) 52%,
-    rgba(234,231,223,0.358) 55%,
-    rgba(207,207,206,0.318) 58%,
-    rgba(169,173,181,0.279) 61%,
-    rgba(122,130,149,0.242) 64%,
-    rgba(72,84,113,0.209) 67%,
-    rgba(30,44,80,0.18) 70%,
-    rgba(9,21,54,0.155) 72.7%,
-    rgba(15,19,36,0.133) 75.3%,
-    rgba(48,39,27,0.114) 78%,
-    rgba(105,79,28,0.099) 80.7%,
-    rgba(175,130,39,0.087) 83.3%,
-    rgba(232,175,56,0.08) 86%,
-    rgba(255,205,85,0.079) 88.3%,
-    rgba(255,225,127,0.084) 90.7%,
-    rgba(255,235,166,0.094) 93%,
-    rgba(255,239,198,0.104) 95.3%,
-    rgba(251,241,219,0.114) 97.7%,
-    rgba(248,244,233,0.12) 100%);
+    rgba(248,244,233,0.94) 0%,
+    rgba(248,244,233,0.916) 5.7%,
+    rgba(248,244,233,0.885) 11.3%,
+    rgba(248,244,233,0.848) 17%,
+    rgba(248,244,233,0.804) 22.7%,
+    rgba(248,244,233,0.754) 28.3%,
+    rgba(248,244,233,0.7) 34%,
+    rgba(249,244,233,0.635) 37%,
+    rgba(250,246,234,0.557) 40%,
+    rgba(252,247,236,0.473) 43%,
+    rgba(253,249,237,0.391) 46%,
+    rgba(253,249,237,0.318) 49%,
+    rgba(248,244,233,0.26) 52%,
+    rgba(231,229,222,0.22) 55%,
+    rgba(199,200,200,0.191) 58%,
+    rgba(156,160,172,0.172) 61%,
+    rgba(108,117,140,0.157) 64%,
+    rgba(65,77,108,0.145) 67%,
+    rgba(30,44,80,0.13) 70%,
+    rgba(13,25,57,0.114) 72.7%,
+    rgba(22,26,41,0.099) 75.3%,
+    rgba(56,46,33,0.086) 78%,
+    rgba(111,84,33,0.074) 80.7%,
+    rgba(177,133,42,0.066) 83.3%,
+    rgba(232,175,56,0.06) 86%,
+    rgba(255,203,82,0.058) 88.3%,
+    rgba(255,223,121,0.061) 90.7%,
+    rgba(255,233,161,0.066) 93%,
+    rgba(255,238,194,0.071) 95.3%,
+    rgba(251,241,218,0.077) 97.7%,
+    rgba(248,244,233,0.08) 100%);
 }
 .hh-grain{
   position:absolute;inset:0;z-index:2;pointer-events:none;
@@ -1044,15 +1048,33 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   position:relative;z-index:3;flex:1 1 auto;
   width:100%;
   height:100%;
-  --hh-rail:40px;                 /* the nav wordmark column, mirrored */
+  /* THE GRID. 12 columns across the stage, outer margin = the nav wordmark's
+     column (components/nav.js: 40px, 24 at 1100, 20 at 768), mirrored exactly
+     on the right.
+
+     Type block  columns 1-6   left edge on the left margin
+     Gutter      column 7      the composition's breathing space
+     Window      columns 8-12  right edge on the right margin
+
+     The gutter is column 7 rather than column 6 because five columns cannot
+     hold the arrest: at 1440 five columns are 552.7px and the arrest's first
+     line costs 631px at 100px (measured 6.305x its font size at opsz 100).
+     Five columns top out at 567px before gutters at any width, so cols 1-5 is
+     arithmetically impossible for poster-scale type. Six columns give 668px
+     and it fits at 1440, 1280 and 1024 alike. */
+  --hh-margin:40px;
+  --hh-gutter:24px;
+  --hh-col:calc((100% - 2 * var(--hh-margin) - 11 * var(--hh-gutter)) / 12);
+  --hh-span5:calc(5 * var(--hh-col) + 4 * var(--hh-gutter));
+  --hh-span6:calc(6 * var(--hh-col) + 5 * var(--hh-gutter));
 }
 
 /* -- The copy column -- */
 .hh-copy{
   position:absolute;
-  left:var(--hh-rail);
+  left:var(--hh-margin);
   top:calc(var(--u) * 68);
-  width:calc(var(--u) * 680);
+  width:var(--hh-span6);
 }
 .hh-eyebrow{
   display:flex;align-items:center;margin:0;
@@ -1101,9 +1123,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- The whisper and the window travel together -- */
 .hh-group{
   position:absolute;
-  right:var(--hh-rail);
+  right:var(--hh-margin);
   bottom:calc(var(--u) * 72);
-  width:calc(var(--u) * 620);
+  width:var(--hh-span5);
 }
 .hh-whisper{
   margin:0 0 calc(var(--u) * 11);
@@ -1114,18 +1136,34 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   line-height:1.45;text-align:right;color:rgba(12,16,32,0.6);
 }
 
-/* -- Below the fold: the quiet aside --
-   The desk note keeps its own rules untouched; the clearance that holds its
-   torn top edge below the fold lives on this wrapper, which the hero owns. */
-.wrap.hero-aside-wrap{padding-top:clamp(48px,7vh,88px)}   /* beats the mobile .wrap padding shorthand */
-.hero-aside{
-  display:flex;align-items:flex-end;
-  gap:clamp(32px,5vw,84px);
-  padding-bottom:clamp(56px,9vh,104px);
+/* -- Below the fold: the desk dispatch --
+   Rebuilt from a half-empty strip (card left, link floating right, dead middle)
+   into one composed object: the card enlarged and centred on linen with
+   deliberate air above and below, and the sample-week link directly beneath it
+   as the card's own footer rather than a sibling drifting at the far margin.
+   Designed emptiness, not leftover space.
+
+   The card's copy, signature, dateline and its em dash are untouched: only the
+   object's size, placement and the type scale that follows from the new width
+   change here, and the scale is scoped to this instance. */
+.wrap.hero-aside-wrap{
+  padding-top:clamp(88px,13vh,168px);
+  padding-bottom:clamp(88px,13vh,168px);
 }
-.hero-aside .desk{margin:0;flex:0 1 460px;max-width:460px}
+.hero-aside{
+  display:flex;flex-direction:column;align-items:center;
+  gap:clamp(24px,3vh,34px);
+}
+.hero-aside .desk{
+  margin:0;flex:none;
+  width:100%;max-width:640px;
+  padding:clamp(32px,3.8vw,48px) clamp(30px,4vw,54px) clamp(26px,3vw,38px);
+}
+.hero-aside .desk-title{font-size:clamp(24px,2vw,28px)}
+.hero-aside .desk-body{font-size:clamp(16px,1.25vw,17.5px);line-height:1.6}
+.hero-aside .desk-foot{margin-top:20px;padding-top:14px;font-size:9px}
 .hero-sample{
-  flex:0 0 auto;margin-bottom:10px;
+  flex:0 0 auto;margin:0;
   font-family:'Space Mono',monospace;font-weight:600;
   font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
   color:#0C1020;text-decoration:none;white-space:nowrap;
@@ -1142,21 +1180,18 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
 
 /* The rail follows the nav's own gutter (components/nav.js: 40px, 24 at
    1100, 20 at 768) so the hero block always starts on the wordmark column. */
-@media(max-width:1100px){ .hh-stage{--hh-rail:24px} }
+@media(max-width:1100px){ .hh-stage{--hh-margin:24px} }
 
 /* -- Short and narrow desktops both simply scale: --u already carries whichever
    of width or height binds, so the approved frame stays one object and there is
    nothing left here to special case except the desk card's own breathing. -- */
 @media(min-width:768px) and (max-height:700px){
   body::after{width:40vmax;left:6%;top:-8%}
-  .hero-aside{padding-bottom:56px}
+  .wrap.hero-aside-wrap{padding-top:clamp(64px,10vh,110px);padding-bottom:clamp(64px,10vh,110px)}
 }
 @media(min-width:768px) and (max-height:540px){
-  .hero-aside{padding-bottom:40px}
-  .desk{padding:14px 18px 12px}
-  .desk-title{font-size:18px}
-  .desk-body{font-size:12.5px;line-height:1.45}
-  .desk-foot{margin-top:8px;padding-top:6px}
+  .wrap.hero-aside-wrap{padding-top:56px;padding-bottom:56px}
+  .hero-aside .desk{max-width:560px}
 }
 
 /* -- Mobile, matched to the approved 375x700 reference frame. Its own unit,
@@ -1171,42 +1206,42 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .hh-photo img{--hh-zoom:1.06;--hh-shift:52%;object-position:54% 46%}
   .hh-veil{
     background:linear-gradient(
-      rgba(248,244,233,0.9) 0%,
-      rgba(248,244,233,0.882) 5.3%,
-      rgba(248,244,233,0.857) 10.7%,
-      rgba(248,244,233,0.827) 16%,
-      rgba(248,244,233,0.794) 21.3%,
-      rgba(248,244,233,0.758) 26.7%,
+      rgba(248,244,233,0.94) 0%,
+      rgba(248,244,233,0.919) 5.3%,
+      rgba(248,244,233,0.891) 10.7%,
+      rgba(248,244,233,0.858) 16%,
+      rgba(248,244,233,0.818) 21.3%,
+      rgba(248,244,233,0.772) 26.7%,
       rgba(248,244,233,0.72) 32%,
-      rgba(249,245,233,0.679) 35.3%,
-      rgba(250,246,235,0.633) 38.7%,
-      rgba(252,248,236,0.584) 42%,
-      rgba(254,249,237,0.535) 45.3%,
-      rgba(253,249,236,0.486) 48.7%,
-      rgba(248,244,233,0.44) 52%,
-      rgba(234,231,224,0.395) 55%,
-      rgba(209,208,207,0.349) 58%,
-      rgba(172,175,182,0.304) 61%,
-      rgba(125,133,151,0.262) 64%,
-      rgba(74,86,115,0.223) 67%,
-      rgba(30,44,80,0.19) 70%,
-      rgba(7,19,53,0.162) 72.7%,
-      rgba(10,16,34,0.137) 75.3%,
-      rgba(42,35,25,0.117) 78%,
-      rgba(101,75,27,0.1) 80.7%,
-      rgba(172,128,39,0.088) 83.3%,
-      rgba(232,175,56,0.08) 86%,
-      rgba(255,206,85,0.078) 88.3%,
-      rgba(255,226,127,0.084) 90.7%,
-      rgba(255,236,167,0.093) 93%,
-      rgba(255,240,198,0.104) 95.3%,
-      rgba(251,241,220,0.114) 97.7%,
-      rgba(248,244,233,0.12) 100%);
+      rgba(249,244,233,0.656) 35.3%,
+      rgba(250,246,234,0.579) 38.7%,
+      rgba(252,248,236,0.495) 42%,
+      rgba(253,249,237,0.413) 45.3%,
+      rgba(253,249,237,0.339) 48.7%,
+      rgba(248,244,233,0.28) 52%,
+      rgba(231,229,222,0.239) 55%,
+      rgba(199,200,201,0.209) 58%,
+      rgba(157,161,172,0.188) 61%,
+      rgba(110,119,140,0.171) 64%,
+      rgba(65,78,109,0.156) 67%,
+      rgba(30,44,80,0.14) 70%,
+      rgba(13,24,57,0.122) 72.7%,
+      rgba(19,24,41,0.105) 75.3%,
+      rgba(51,43,33,0.09) 78%,
+      rgba(106,81,33,0.077) 80.7%,
+      rgba(174,131,42,0.067) 83.3%,
+      rgba(232,175,56,0.06) 86%,
+      rgba(255,205,82,0.058) 88.3%,
+      rgba(255,225,122,0.06) 90.7%,
+      rgba(255,235,162,0.065) 93%,
+      rgba(255,239,194,0.071) 95.3%,
+      rgba(251,241,218,0.077) 97.7%,
+      rgba(248,244,233,0.08) 100%);
   }
-  .hh-stage{--hh-rail:20px}
+  .hh-stage{--hh-margin:20px;--hh-gutter:16px}
   .hh-copy{
-    left:var(--hh-rail);
-    right:var(--hh-rail);
+    left:var(--hh-margin);
+    right:var(--hh-margin);
     top:calc(var(--u) * 22);
     width:auto;
   }
@@ -1232,8 +1267,8 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
     line-height:1.55;
   }
   .hh-group{
-    left:var(--hh-rail);
-    right:var(--hh-rail);
+    left:var(--hh-margin);
+    right:var(--hh-margin);
     bottom:calc(var(--u) * 22);
     width:auto;
   }
@@ -1243,9 +1278,8 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
     font-size:calc(var(--u) * 16);
     text-align:left;
   }
-  .hero-aside{flex-direction:column;align-items:flex-start;gap:26px;padding-bottom:64px}
-  .hero-aside .desk{flex:none;width:100%;max-width:none}
-  .hero-sample{margin-bottom:0}
+  .hero-aside{gap:24px}
+  .hero-aside .desk{max-width:none}
 }
 
 /* -- iPhone Plus refinement (430x932) -- */
@@ -1567,7 +1601,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="lw-body">
               <span class="lw-label"><span class="rule" aria-hidden="true"></span><span class="t">This week&rsquo;s window</span></span>
               <span class="lw-sentence">Build a week for <span class="lw-ghost">Maya</span>, <span class="lw-ghost">6</span>, in <br class="lw-br"><span class="lw-ghost">Georgia</span> exploring <span class="lw-theme">space</span>.</span>
-              <span class="lw-cta">Build our week</span>
+              <!-- HERO_COPY_PENDING: HANDLE. Placeholder, ruled string pending. Slot law:
+                   a personal invitation, distinct from the nav CTA. -->
+              <span class="lw-cta">Build your own</span>
             </span>
           </a>
         </div>

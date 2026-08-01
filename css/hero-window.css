@@ -22,9 +22,13 @@
 
 .lw-mount{
   position:relative;
-  /* Shortened from 376: the interior block is 171 tall, and the extra height was
-     reading as a hollow band between the sentence and the handle. */
-  height:calc(var(--u) * 322);
+  /* Width comes from the grid, but the grid only knows width. On a short canvas
+     the height cap alone let the box letterbox to 3.48, so the width is capped
+     by the same unit and the 4A proportion holds at every size. Right aligned,
+     so a narrower window still sits on the right margin. */
+  width:min(100%, calc(var(--u) * 553));
+  margin-left:auto;
+  aspect-ratio:1.65;
 }
 
 /* The luminous bleed: outside the window, under it, blurred. */
