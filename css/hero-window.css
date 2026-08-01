@@ -333,22 +333,32 @@
    and the 1440x800 geometry lock passes unchanged, because a pseudo-element's
    width is not layout.
 
-   --lw-rule-end is the ONE number to change, expressed in the foot's own
-   width. The foot spans 8.318%..91.682% of the window, i.e. 83.364% of it, so:
+   IT DISSOLVES RATHER THAN STOPS (ruled). A hard-cut hairline would be the
+   only edge in this window that simply ends: the arms never touch their stars
+   (spec § 3, "it dissolves into the glow") and the tether fades to nothing at
+   both ends (§ 4). The rule now holds full strength to 60% of the window and
+   is gone by 86%, so it reads as one continuous object that gives out before
+   the void rather than a line someone cut.
 
-       window %  =  8.318 + (--lw-rule-end x 0.83364)
-       60% of the window = 62.00%     70% = 73.99%     80% = 85.98%
+   Stops are in the foot's own width. The foot spans 8.318%..91.682% of the
+   window, i.e. 83.364% of it, so:
 
-   The CTA's text ends at 35.9% of the window, so every value in that range
-   clears it comfortably. */
+       window %  =  8.318 + (foot % x 0.83364)
+       60% of the window = 62.00%     70% = 73.99%     86% = 93.18%
+
+   The CTA's text ends at 35.9% of the window, so the solid run clears it by
+   24 points. */
 .lw-foot::before{
   content:'';
   position:absolute;
   left:0;
   top:-1px;                         /* sits exactly where the border would */
   height:1px;
-  width:var(--lw-rule-end, 73.99%); /* 70% of the window's width */
-  background:rgba(232,175,56,0.26);
+  width:100%;
+  background:linear-gradient(90deg,
+    rgba(232,175,56,0.26) 0%,
+    rgba(232,175,56,0.26) 62.00%,   /* solid to 60% of the window */
+    rgba(232,175,56,0) 93.18%);     /* gone by 86% */
   pointer-events:none;
 }
 .lw-cta{
