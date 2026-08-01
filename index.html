@@ -961,8 +961,8 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 56px;box-sizing:border-box}
 
 .hh{
-  --u:min(1px,calc(100vw / 1440),calc((100vh - 82px) / 718));
-  --u:min(1px,calc(100vw / 1440),calc((100svh - 82px) / 718));
+  --u:min(1px,calc(100vw / 1440),max(0.62px,calc((100vh - 82px) / 718)));
+  --u:min(1px,calc(100vw / 1440),max(0.62px,calc((100svh - 82px) / 718)));
   position:relative;
   height:calc(100vh - 82px);
   height:calc(100svh - 82px);
@@ -1601,10 +1601,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="lw-body">
               <span class="lw-label"><span class="rule" aria-hidden="true"></span><span class="t">This week&rsquo;s window</span></span>
               <span class="lw-sentence">Build a week for <span class="lw-ghost">Maya</span>, <span class="lw-ghost">6</span>, in <br class="lw-br"><span class="lw-ghost">Georgia</span> exploring <span class="lw-theme">space</span>.</span>
-              <!-- HERO_COPY_PENDING: HANDLE. Placeholder, ruled string pending. Slot law:
-                   a personal invitation, distinct from the nav CTA. -->
-              <span class="lw-cta">Build your own</span>
             </span>
+            <!-- HERO_COPY_PENDING: HANDLE. Placeholder, ruled string pending. Slot law:
+                 a personal invitation, distinct from the nav CTA. -->
+            <span class="lw-foot"><span class="lw-cta">Build your own</span></span>
           </a>
         </div>
       </div>

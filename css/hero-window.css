@@ -100,14 +100,11 @@
   background:linear-gradient(rgba(232,175,56,0.07) 0%,rgba(232,175,56,0) 100%);
 }
 
-/* One block, optically centred in the aperture. The 52% lift is the usual
-   correction: a mass centred geometrically reads as sitting low. */
 .lw-body{
   position:absolute;
   left:calc(var(--u) * 46);
   right:calc(var(--u) * 46);
-  top:50%;
-  transform:translateY(-52%);
+  top:calc(var(--u) * 40);
   display:block;
 }
 
@@ -174,11 +171,20 @@
   to{opacity:1;transform:translateY(0);filter:blur(0)}
 }
 
-/* The handle, close beneath the sentence. The hairline that used to separate
-   them is removed: it existed to bridge an empty band that no longer exists. */
-.lw-cta{
+/* 4A's footer, restored: the saffron hairline with the handle sitting on it,
+   anchored to the window's lower edge. Removing it and pulling the handle up
+   under the sentence cost the object its polish. */
+.lw-foot{
+  position:absolute;
+  left:calc(var(--u) * 46);
+  right:calc(var(--u) * 46);
+  bottom:calc(var(--u) * 26);
+  padding-top:calc(var(--u) * 26);
+  border-top:1px solid rgba(232,175,56,0.26);
   display:block;
-  margin-top:calc(var(--u) * 26);                     /* its own line box, so the foot is exactly
+}
+.lw-cta{
+  display:block;                     /* its own line box, so the foot is exactly
                                         the reference's 25px + 17px tall */
   font-family:'Space Mono',monospace;font-weight:400;
   font-size:calc(var(--u) * 12.5);
@@ -220,7 +226,7 @@
 
 /* ── Mobile: the approved 375 frame ── */
 @media(max-width:767px){
-  .lw-mount{height:calc(var(--u) * 214)}
+  .lw-mount{height:calc(var(--u) * 226)}
   .lw-bleed{inset:calc(var(--u) * -40);filter:blur(calc(var(--u) * 20))}
   .lw-body{
     left:calc(var(--u) * 24);right:calc(var(--u) * 24);
