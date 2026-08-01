@@ -3,9 +3,9 @@
 **Written 2026-08-01, at the close of the hero build rounds, for the session that
 picks this up next.** Everything a fresh session needs is here. Re-derive nothing.
 
-The next round is **THE ATMOSPHERE PASS** (light, breath, and the seam). It was
-ruled but deliberately not started: it is a full build, not a pass, and every
-value in it is sub-perceptual by design, so it needs a fresh session.
+**Updated 2026-08-01, second pass:** the atmosphere pass is built and shipped to
+the branch. Its record, values and measurements are in section 6, and the
+photograph's measured light direction is now a ruling in section 3.
 
 ---
 
@@ -140,6 +140,32 @@ back, and it was restored. **Do not fill it, do not collapse it, do not remove
 the hairline.** If a future round wants the window shorter, that is a separate
 ruling, not a fix.
 
+### The photograph's light direction: RULED BY MEASUREMENT
+**The photograph is lit from the UPPER RIGHT**, and far more from the right than
+from above. Shadows in it fall down and to the LEFT. Do not re-flip this.
+
+Before the atmosphere pass, `css/hero-window.css` asserted light from the upper
+*left* and the window's shadow stack was built to match. That was asserted, never
+tested, and it was wrong. Five independent reads agree on upper right:
+
+| method | result |
+|---|---|
+| Sphere shading centroid, 8 planets, discs fitted by radial-gradient Hough | mean bearing **58.7deg**, 7 of 8 with positive dx |
+| Specular highlight position inside those fitted discs | mean bearing **70.4deg**, 7 of 8 right of centre |
+| Grey collars and posts of the stand | specular on the right face, shadow on the left |
+| Base cone, and its cast shadow on the table | lit right, shadowed left, shadow runs left |
+| Table plane luminance, left to right | 62 -> 150 and 96 -> 180 |
+
+Bearing is measured with 0deg directly overhead, positive clockwise, so 59-70deg
+is nearly side-on from the right. The warmest 5% of pixels centre at 71% x /
+34% y, which is the warm bokeh light source itself, in frame at upper right.
+
+**Method note.** The first pass at this used hand-placed disc centres and every
+sphere agreed, which is exactly what a systematic centring error looks like. The
+centres were re-solved by Hough fit before the result was trusted. Two of the
+cues above (the cast shadow and the table plane) need no centre at all, which is
+why they are in the table.
+
 ### The photograph's crop and veil treatment
 Crop `--hh-zoom: 1.10`, `--hh-shift: 51%`, `object-position: 50% 44%`. The zoom
 exists to keep the pink/red planet in frame; a ruling required it visible, and
@@ -242,32 +268,94 @@ standard here, not an exception.
 
 ---
 
-## 6. THE NEXT ROUND
+## 6. THE ATMOSPHERE PASS: SHIPPED
 
-**THE ATMOSPHERE PASS**, light, breath, and the seam. Ruled, not started.
-Three parts, all sub-perceptual by design:
+Light, breath, and the seam. Three new paint-only layers, no structural change:
+`.hh-breath` and `.hh-seam` in `index.html`, and two spill pseudo-elements plus a
+graded border ring in `css/hero-window.css`.
 
-1. **The photograph breathes.** A ~40s loop moving only the *veil's* warmth and
-   luminance, never the image: no zoom, no pan, no translation. Warm centre
-   drifts 4-6% of frame width, colour temperature shifts no more than 2-3%,
-   luminance varies no more than 1.5%. Stills at t=0 and t=20 must look
-   identical side by side while thirty seconds of live page feels like a warm
-   room.
-2. **Light crosses the seam.** Warm spill from photo onto the window's near
-   edge; cool starlight from window onto the photograph, 80-120px falloff;
-   asymmetric layered shadows agreeing with the light direction; the 1px inner
-   border catching marginally more light where it crosses a bright region. The
-   light direction must be **read from the image and reported**, not assumed.
-3. **The seam dissolves.** The photograph's lower boundary fades into linen over
-   100-140px with no discernible line, verified by sampling luminance at 10px
-   intervals. If banding appears, break it with a 1-2% dithered noise layer.
+### Initial and final values
 
-Required process: **build each effect at double strength, then reduce until it
-disappears from conscious notice.** Report initial and final values for every
-effect. Performance law: compositor-friendly properties only, 60fps measured
-under idle, under 4KB added. `prefers-reduced-motion` disables the breath (the
-photograph renders at the cycle midpoint) and the static light and seam
-treatments remain. No contrast ratio in the hero may drop; verify the arrest,
-answer, support and the window's sentence at both breath extremes.
+Every effect was built at double, measured, and reduced. Final values are below
+the ruled ranges, as expected.
 
-Nothing structural changes in that round.
+| effect | built at | shipped | why it came down |
+|---|---|---|---|
+| Breath, warm lobe peak alpha | 0.230 | **0.078**, under the veil | at 0.230 the frame moved 10/255 between extremes and the stills were plainly different |
+| Breath, drift (total travel) | 10% of frame width | **5%** (`2.5vw` each way) | ruled range is 4-6% |
+| Breath, opacity swing | 0.62 -> 1.0 | **0.64 -> 1.0** | |
+| Breath layer width | 132vw | **108vw** | every pixel is recomposited per frame |
+| Warm spill, photo onto window | 0.12 | **0.050** | |
+| Cool starlight, window onto photo | 0.10 | **0.042** | |
+| Seam band height | `264u` | **`128u`** | ruled range is 100-140 |
+| Inner border ring | flat 0.10 | **0.16 -> 0.045**, mean held at 0.10 | object weight unchanged, only its distribution moved |
+
+### Measured results
+
+- **Breath.** Frame luminance moves **0.057%** (ceiling 1.5%). Worst local colour
+  temperature moves **1.40%** (ceiling 2-3%). Worst pixel between the two
+  extremes: **3/255**. A filmstrip of eight phases across the cycle is
+  indistinguishable row to row.
+- **Seam.** Luminance runs 154.6 -> 243.7 across the band and holds flat past the
+  boundary. Max second difference inside the band **4.02** luminance units,
+  against the photograph's own 13-40 just above it, so the ramp is smoother than
+  the image it joins. No discernible line at any zoom.
+- **Banding.** Checked rather than assumed: longest flat run 4-7px, and ~1 unit
+  RMS of grain survives inside the band. **No dither layer was needed**; the
+  existing `.hh-grain` already carries it.
+- **Spills.** Isolated from the shadow change by measuring against the same build
+  with only the spills off. Lit corner **+2.6 R-B** warmer, falling off by
+  40-50px. Top and left **-1.0 to -1.9 R-B** cooler. The sign flip between the lit
+  side and the shaded side is the whole point.
+- **Layout.** 232 measurements across 8 viewports, **0 differences**. Nothing
+  moved by any amount.
+- **Fold gate.** All 12 viewports pass.
+- **Weight.** Raw **+7.5KB**, gzip +2.7KB, **brotli +2.2KB**. See the caveat below.
+
+### Contrast, against a like-for-like baseline
+
+Measured through the same harness with the round's layers reverted, at both
+breath extremes. Backdrop is the modal colour inside each element's own box,
+which works for light-on-dark and dark-on-light alike.
+
+| element | baseline | shipped |
+|---|---|---|
+| arrest | 12.833 | 12.823 - 12.826 |
+| answer | 1.331 | 1.329 - 1.330 |
+| support | 12.638 | 12.599 |
+| whisper | 6.605 | 6.615 - 6.624 |
+| window sentence | 16.013 | 16.013 |
+
+The support line's **-0.039 (-0.31%)** is **not** the effect. The same build with
+the breath layer present but painting nothing measures identically, so it is a
+1/255 rounding shift from promoting a compositor layer, and it is invariant to
+the effect's strength. It cannot be removed without removing the animation.
+
+A centred warm lobe *did* genuinely cost that line 1.5%, because the tint is
+darker than the pale shirt behind it. That is why the lobe now sits right of
+centre and falls to nothing by about x 510. The physics agreed with the
+measurement: the light is upper right, so that is where its warm point belongs.
+
+### Two things this round could not close
+
+1. **60fps was not verified on a real GPU.** Chromium in the build environment
+   falls back to SwiftShader software rasterisation and headed launch is
+   unavailable, so no frame-rate number from it represents a laptop. What *was*
+   established: the compositor promotes the layer (confirmed via `LayerTree`),
+   only `transform` and `opacity` animate, and per-frame layout and style-recalc
+   cost is **identical** before and after (1.02 layouts/frame both), so there is
+   no thrash and no added repaint. Under software rasterisation the page runs
+   ~15-17fps reverted and ~11fps shipped; the seam, spills, shadow and ring cost
+   nothing measurable, so all of it is the one full-frame composited layer.
+   **Confirm on Amy's machine** with DevTools rendering FPS meter on an idle page.
+2. **Raw weight is over the 4KB law**, at +7.5KB; served weight is +2.2KB brotli.
+   The overage is comment prose, kept because this codebase documents its
+   reasoning in place and the alternative is a future round re-deriving the light
+   direction. Strip the comments if the raw number must hold.
+
+### Left alone deliberately
+
+`wfTwinkle` keeps running under `prefers-reduced-motion`: roughly 280 star
+animations in the `.linen-hero` granddad section, not the hero, and pre-existing.
+The hero's own animations all stop correctly. Worth a future round; out of scope
+for this one.

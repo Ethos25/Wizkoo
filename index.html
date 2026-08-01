@@ -1031,6 +1031,87 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
     rgba(251,241,218,0.077) 97.7%,
     rgba(248,244,233,0.08) 100%);
 }
+/* -- THE BREATH. What moves is the warmth and luminance of the veil over the
+   photograph, never the photograph: no zoom, no pan, not one pixel of
+   translation on the image. Transform and opacity only, on its own layer, so
+   the photograph is never repainted. Method and measurements are recorded in
+   docs/hero-handoff.md; only the load-bearing whys are kept here. -- */
+.hh{
+  --hh-breath-drift:2.5vw;   /* half the travel: 5% of frame width, total */
+  --hh-breath-lo:0.64;
+  --hh-breath-hi:1;
+}
+.hh-breath{
+  /* UNDER the veil. Above it the warm tint is darker than the linen and cost
+     the copy about 1% of its contrast; underneath, the veil's own alpha (0.94
+     across the copy, 0.08 at the foot) shields the type for free and leaves the
+     effect where the photograph actually shows. */
+  position:absolute;z-index:0;pointer-events:none;
+  /* 4vw of overhang against 2.5vw of travel, so the gradient's own edge can
+     never enter frame. Kept tight: every pixel here is recomposited per frame. */
+  top:0;bottom:0;left:-4vw;right:-4vw;
+  will-change:transform,opacity;
+  /* The lobe sits right of centre and falls to nothing by about x 510, clearing
+     the answer and support line. Measured: a centred lobe cost the support line
+     1.5% of contrast. Physical: the photograph is lit from the upper right, so
+     that is where its warm point belongs. */
+  background:radial-gradient(35.44% 62% at 69.56% 38%,
+    rgba(255,209,138,0.115) 0%,
+    rgba(255,209,138,0.052) 42%,
+    rgba(255,209,138,0) 72%);
+  animation:hh-breathe 40s ease-in-out infinite;
+}
+/* A pendulum: 0% and 100% share both state and velocity (zero), so the loop has
+   no seam and no perceptible start. t=0 and t=20 are therefore the two extremes,
+   which makes the still-comparison test the harshest one available. */
+@keyframes hh-breathe{
+  0%,100%{
+    transform:translate3d(calc(var(--hh-breath-drift) * -1),-0.9vh,0);
+    opacity:var(--hh-breath-lo);
+  }
+  50%{
+    transform:translate3d(var(--hh-breath-drift),0.9vh,0);
+    opacity:var(--hh-breath-hi);
+  }
+}
+/* Reduced motion: the breath does not run and renders at the cycle's balanced
+   state, the arithmetic midpoint of the extremes rather than either end. The
+   seam and the light spills are static and stay. */
+@media(prefers-reduced-motion:reduce){
+  .hh-breath{
+    animation:none;
+    transform:translate3d(0,0,0);
+    opacity:calc((var(--hh-breath-lo) + var(--hh-breath-hi)) / 2);
+    will-change:auto;
+  }
+}
+
+/* -- THE SEAM. The photograph used to stop at a hard edge where flat linen
+   began, so the page read as two stacked surfaces. It now dissolves.
+   The ramp is a smoothstep, not a linear fade: a linear alpha ramp breaks its
+   first derivative at both ends and the eye reads that change of slope as a
+   line even though no value steps. smoothstep is flat at both ends. -- */
+.hh-seam{
+  position:absolute;left:0;right:0;bottom:0;z-index:1;pointer-events:none;
+  height:calc(var(--u) * 128);
+  background:linear-gradient(to bottom,
+    rgba(248,244,233,0) 0%,
+    rgba(248,244,233,0.0146) 7.1%,
+    rgba(248,244,233,0.0554) 14.3%,
+    rgba(248,244,233,0.1181) 21.4%,
+    rgba(248,244,233,0.1983) 28.6%,
+    rgba(248,244,233,0.2915) 35.7%,
+    rgba(248,244,233,0.3936) 42.9%,
+    rgba(248,244,233,0.5) 50%,
+    rgba(248,244,233,0.6064) 57.1%,
+    rgba(248,244,233,0.7085) 64.3%,
+    rgba(248,244,233,0.8017) 71.4%,
+    rgba(248,244,233,0.8819) 78.6%,
+    rgba(248,244,233,0.9446) 85.7%,
+    rgba(248,244,233,0.9854) 92.9%,
+    rgba(248,244,233,1) 100%);
+}
+
 .hh-grain{
   position:absolute;inset:0;z-index:2;pointer-events:none;
   opacity:0.035;mix-blend-mode:overlay;
@@ -1578,7 +1659,12 @@ document.addEventListener('DOMContentLoaded', function() {
              alt="A child painting the planets of a solar system model at a sunlit wooden table.">
       </picture>
     </figure>
+    <!-- The atmosphere pass. All three layers are paint only: none participates
+         in layout, and none touches the photograph's own pixels.
+         The breath sits UNDER the veil deliberately; see its rule. -->
+    <div class="hh-breath" aria-hidden="true"></div>
     <div class="hh-veil" aria-hidden="true"></div>
+    <div class="hh-seam" aria-hidden="true"></div>
     <div class="hh-grain" aria-hidden="true"></div>
 
     <div class="hh-stage">

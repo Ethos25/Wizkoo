@@ -1,12 +1,16 @@
 /* ═══════════════════════════════════════════════════════════════════════
    THE WINDOW: 4A, matched to the approved reference frame
 
-   Object treatment, all values measured off the approved frame: a 1px inner
-   border at 10% white, a ten-layer shadow stack (inner vignette, inner border,
+   Object treatment, all values measured off the approved frame: a graded 1px
+   inner border averaging 10% white, a nine-layer shadow stack (inner vignette,
    top inner highlight, outer gold hairline, gold glow, blue ambient, then four
-   overlapping casts down and to the right, consistent with the photograph's
-   light from upper left), and a soft luminous bleed outside the boundary so it
+   overlapping casts down and to the LEFT, away from the photograph's measured
+   light at upper right), and a soft luminous bleed outside the boundary so it
    reads as a light source rather than a shape.
+
+   The atmosphere pass added the two spills that put the window in the
+   photograph's light rather than on top of it, and made the border's ring
+   graded rather than flat. See the block on .lw-mount.
 
    The interior is NOT drawn here. It is the certified TwoLayerSky primitive,
    ported verbatim (css/hero-sky.css, js/hero-sky.js). The sky element is laid
@@ -15,7 +19,9 @@
 
    MOTION LAW: the certified sky's own drift, plus one demonstration beat (the
    theme word's ghost-to-gold arrival, once per first sight, latched), plus the
-   hover lift. Nothing else moves.
+   hover lift. Nothing else in the window moves. The photograph behind it now
+   breathes, but nothing in the window does, and the photograph itself never
+   translates: what moves there is the veil's warmth. See .hh-breath.
 
    Scale: reference value V is min(Vpx, (V/14.4)vw), exact at 1440.
    ═══════════════════════════════════════════════════════════════════════ */
@@ -29,6 +35,42 @@
   width:min(100%, calc(var(--u) * 553));
   margin-left:auto;
   aspect-ratio:1.65;
+
+  /* LIGHT DIRECTION, measured not assumed: the photograph is lit from the UPPER
+     RIGHT, far more from the right than from above (mean bearing 59deg by sphere
+     shading, 70deg by specular position, 0deg being overhead). Five independent
+     reads agree; method and numbers in docs/hero-handoff.md. This file used to
+     assert upper LEFT and the shadow stack was built to match. That was
+     asserted, not measured, and it was wrong. */
+  --lw-spill-warm:0.050;   /* photo -> window, on the edge facing the light */
+  --lw-spill-cool:0.042;   /* window -> photo, the starlight cast into the room */
+}
+
+/* -- (a) WARM SPILL, photograph onto the window: a bloom on the upper right,
+   the corner nearest the light, falling to nothing within about 50px. Absent on
+   the left, which the photograph's light never reaches. -- */
+.lw-mount::after{
+  content:'';position:absolute;z-index:0;pointer-events:none;
+  left:34%;right:calc(var(--u) * -54);
+  top:calc(var(--u) * -40);bottom:calc(var(--u) * -30);
+  background:radial-gradient(74% 66% at 100% 30%,
+    rgba(255,196,104,var(--lw-spill-warm)) 0%,
+    rgba(255,196,104,calc(var(--lw-spill-warm) * 0.38)) 44%,
+    rgba(255,196,104,0) 76%);
+  filter:blur(calc(var(--u) * 9));
+}
+
+/* -- (b) COOL STARLIGHT, window onto the photograph: immediately around the
+   window the photograph is slightly cooler and brighter, as if the night sky
+   cast into the room. Drawn as a shadow on a matching rectangle, not a radial
+   gradient: a radial on a 1.65 box gives an elliptical halo far wider at the
+   sides than the top, which reads as a glow behind the object rather than light
+   coming off its edge. A blurred shadow follows the rectangle instead, so the
+   falloff is equal on all four sides. -- */
+.lw-mount::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  border-radius:2px;
+  box-shadow:0 0 calc(var(--u) * 150) calc(var(--u) * 18) rgba(206,226,255,var(--lw-spill-cool));
 }
 
 /* The luminous bleed: outside the window, under it, blurred. */
@@ -55,18 +97,40 @@
   color:inherit;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
+  /* (c) The casts fall down and to the LEFT, away from the measured light: the
+     right edge faces the light so its shadow is occluded by the object itself
+     and stays a tight contact line, while the left is the far edge and runs
+     longer and softer. Real objects do not cast symmetrical shadows. The flat
+     white 1px inner ring that sat here is now graded, in .lw::after. */
   box-shadow:
     rgba(6,10,22,0.42) 0 0 120px 40px inset,
-    rgba(255,255,255,0.1) 0 0 0 1px inset,
     rgba(255,255,255,0.14) 0 1px 0 0 inset,
     rgba(232,175,56,0.1) 0 0 0 1px,
     rgba(232,175,56,0.18) 0 0 64px -6px,
     rgba(24,40,72,0.32) 0 0 130px 12px,
-    rgba(10,15,30,0.34) 6px 8px 16px -8px,
-    rgba(10,15,30,0.42) 14px 20px 40px -16px,
-    rgba(10,15,30,0.5) 26px 44px 80px -34px,
-    rgba(16,24,48,0.55) 40px 80px 130px -70px;
+    rgba(10,15,30,0.36) -5px 7px 13px -8px,
+    rgba(10,15,30,0.42) -13px 19px 38px -16px,
+    rgba(10,15,30,0.48) -25px 42px 78px -34px,
+    rgba(16,24,48,0.52) -40px 78px 132px -70px;
   transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s cubic-bezier(.16,1,.3,1);
+}
+
+/* -- (d) The inner border catches more light where it faces the light: one 1px
+   ring carrying a gradient, made by masking out the ring's interior. Its mean is
+   held at the 0.10 the flat value used to be, so the object's weight is
+   unchanged and only its distribution moved. 215deg runs from the lit upper
+   right to the shaded lower left. -- */
+.lw::after{
+  content:'';position:absolute;inset:0;z-index:6;pointer-events:none;
+  border-radius:2px;padding:1px;
+  background:linear-gradient(215deg,
+    rgba(255,255,255,0.16) 0%,
+    rgba(255,255,255,0.104) 46%,
+    rgba(255,255,255,0.045) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+          mask-composite:exclude;
 }
 
 /* The certified sky at the primitive's own frame proportion, centred and
@@ -198,17 +262,24 @@
 @media(hover:hover){
   .lw:hover{
     transform:translateY(-3px);
+    /* The lift blooms the same asymmetric stack; it does not move the sun. */
     box-shadow:
       rgba(6,10,22,0.42) 0 0 120px 40px inset,
-      rgba(255,255,255,0.14) 0 0 0 1px inset,
       rgba(255,255,255,0.18) 0 1px 0 0 inset,
       rgba(232,175,56,0.14) 0 0 0 1px,
       rgba(232,175,56,0.26) 0 0 78px -6px,
       rgba(24,40,72,0.38) 0 0 150px 14px,
-      rgba(10,15,30,0.34) 8px 11px 20px -8px,
-      rgba(10,15,30,0.42) 18px 26px 50px -16px,
-      rgba(10,15,30,0.5) 32px 56px 96px -34px,
-      rgba(16,24,48,0.55) 48px 96px 150px -70px;
+      rgba(10,15,30,0.36) -7px 10px 17px -8px,
+      rgba(10,15,30,0.42) -17px 25px 49px -16px,
+      rgba(10,15,30,0.48) -31px 55px 95px -34px,
+      rgba(16,24,48,0.52) -48px 95px 152px -70px;
+  }
+  /* The ring brightens with the lift, keeping its gradient. */
+  .lw:hover::after{
+    background:linear-gradient(215deg,
+      rgba(255,255,255,0.21) 0%,
+      rgba(255,255,255,0.145) 46%,
+      rgba(255,255,255,0.075) 100%);
   }
 }
 .lw:focus-visible{outline:2px solid #E8AF38;outline-offset:5px}
