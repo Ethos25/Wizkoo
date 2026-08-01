@@ -1059,10 +1059,16 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
     rgba(255,209,138,0.115) 0%,
     rgba(255,209,138,0.052) 42%,
     rgba(255,209,138,0) 72%);
-  animation:hh-breathe 40s ease-in-out infinite;
+  /* 11s, not the 40s this was built at. At 40s a visitor sees about a quarter of
+     one cycle, so the light never visibly moves during a real visit: desktop
+     above-the-fold dwell is around 11s, and the stay-or-go decision lands inside
+     10-20s. At 11s a typical visit contains one full out-and-back. Duration only;
+     amplitude, lobe position and every other value are unchanged, so the
+     still-comparison test is unaffected and only the rate moved. */
+  animation:hh-breathe 11s ease-in-out infinite;
 }
 /* A pendulum: 0% and 100% share both state and velocity (zero), so the loop has
-   no seam and no perceptible start. t=0 and t=20 are therefore the two extremes,
+   no seam and no perceptible start. 0% and 50% are therefore the two extremes,
    which makes the still-comparison test the harshest one available. */
 @keyframes hh-breathe{
   0%,100%{

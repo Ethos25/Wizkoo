@@ -281,6 +281,7 @@ the ruled ranges, as expected.
 
 | effect | built at | shipped | why it came down |
 |---|---|---|---|
+| Breath, cycle length | 40s | **11s** | ruled down after the fact, see below |
 | Breath, warm lobe peak alpha | 0.230 | **0.078**, under the veil | at 0.230 the frame moved 10/255 between extremes and the stills were plainly different |
 | Breath, drift (total travel) | 10% of frame width | **5%** (`2.5vw` each way) | ruled range is 4-6% |
 | Breath, opacity swing | 0.62 -> 1.0 | **0.64 -> 1.0** | |
@@ -335,6 +336,38 @@ A centred warm lobe *did* genuinely cost that line 1.5%, because the tint is
 darker than the pale shirt behind it. That is why the lobe now sits right of
 centre and falls to nothing by about x 510. The physics agreed with the
 measurement: the light is upper right, so that is where its warm point belongs.
+
+### The cycle length, and what it exposed
+
+Ruled from 40s to **11s** after the first deploy: at 40s a visitor sees about a
+quarter of one cycle, and desktop above-the-fold dwell is around 11s with the
+stay-or-go decision inside 10-20s, so the light never moved during a real visit.
+Duration only. Amplitude, lobe position, light direction and every other value
+are unchanged, and contrast at the extremes is bit-identical to the 40s build.
+
+Worst-channel change at 11s, window masked, /255:
+
+| from | window | mean | p99 | max |
+|---|---|---|---|---|
+| extreme | 1 frame @60fps | 0.026 | 1 | 2 |
+| extreme | 1s | 0.102 | 1 | 2 |
+| extreme | 3s | 0.174 | 2 | 3 |
+| extreme | half cycle, 5.5s | 0.203 | 2 | **4** |
+| mid-swing | 1 frame @60fps | 0.040 | 1 | 2 |
+
+**What this exposes: duration was never the binding constraint, amplitude is.**
+Compressing the cycle raises the rate but not the excursion. The full
+peak-to-peak swing is 4/255 at the worst pixel, 2/255 at the 99th percentile,
+and **0.203/255 on average**, which is to say that across most of the frame the
+effect does not move a single quantisation step. At 0.09Hz the eye integrates,
+so total excursion rather than rate decides whether anything reads.
+
+If it reads as nothing on the walk, that is the arithmetic, not the timing. The
+lever is alpha, and it has measured headroom: **0.115** was tested at the ruled
+2-3% colour-temperature ceiling (2.13%) and its stills still compared as
+identical by eye, at 7/255 worst pixel against the shipped 4/255. That is the
+one change that would make the breath legible without breaking a ruled limit.
+Otherwise cut the breath and keep the rest of the pass, which stands on its own.
 
 ### Two things this round could not close
 
