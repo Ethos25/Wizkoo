@@ -1086,6 +1086,9 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 .hh-eyebrow .rule{
   flex:0 0 auto;
+  /* Optically centred on the caps, not on the line box: Space Mono's ascent
+     puts the baseline low, so flex centring lands the rule 2.5px high. */
+  position:relative;top:calc(var(--u) * 2.5);
   width:calc(var(--u) * 32);height:calc(var(--u) * 1.5);
   margin-right:calc(var(--u) * 16);
   background:#E8AF38;
@@ -1096,7 +1099,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   margin:calc(var(--u) * 28) 0 0;
   font-family:'Fraunces',serif;font-weight:800;
   font-size:calc(var(--u) * 100);
-  line-height:0.92;letter-spacing:-0.04em;color:#0C1020;
+  /* Measured: at 100px Fraunces the descent is 25 and the next line's cap
+     ascent is 75, so a 92px step overlapped them by 8px. 107 opens a 7px
+     breather without letting the two lines stop being one utterance. */
+  line-height:1.07;letter-spacing:-0.04em;color:#0C1020;
   /* Fraunces is optically sized, so its letterforms widen as the rendered size
      drops, and the approved two-line break stopped fitting below about 1123px.
      Pinning opsz to the frame's own 100 holds the letterforms constant at every
@@ -1107,7 +1113,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hh-arrest .brk-m{display:none}
 
 .hh-answer{
-  margin:calc(var(--u) * 30) 0 0;
+  margin:calc(var(--u) * 8) 0 0;
   font-family:'Fraunces',serif;font-weight:400;font-style:italic;
   font-size:calc(var(--u) * 54);
   line-height:1;letter-spacing:-0.02em;color:#E8AF38;
@@ -1117,7 +1123,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   width:calc(var(--u) * 390);
   font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;
   font-size:calc(var(--u) * 17);
-  line-height:1.6;color:rgba(12,16,32,0.64);
+  line-height:1.72;color:rgba(12,16,32,0.64);
 }
 
 /* -- The whisper and the window travel together -- */
@@ -1128,7 +1134,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   width:var(--hh-span5);
 }
 .hh-whisper{
-  margin:0 0 calc(var(--u) * 11);
+  margin:0 0 calc(var(--u) * 3);
   width:calc(var(--u) * 470);
   margin-left:auto;
   font-family:'Fraunces',serif;font-weight:400;font-style:italic;
@@ -1255,7 +1261,7 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .hh-arrest{
     margin-top:calc(var(--u) * 18);
     font-size:calc(var(--u) * 46);
-    line-height:0.93;letter-spacing:-0.038em;
+    line-height:1.07;letter-spacing:-0.038em;
     font-variation-settings:'opsz' 46;
   }
   .hh-arrest .brk-m{display:inline}
