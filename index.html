@@ -171,7 +171,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size);line-height:1.6}
 @media(hover:hover){html,body,a,button,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
 /* ═══ CUSTOM CURSOR ═══ */
-.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0;mix-blend-mode:exclusion}
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0}   /* exclusion blend removed by ruling: over the linen hero it inverted the saffron dot to blue */
 .cursor.visible{opacity:1}
 .cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
 
@@ -544,7 +544,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .firefly{width:7px;height:7px;box-shadow:0 0 6px 3px rgba(255,248,224,0.35)}
 
   /* Tap ripple */
-  .tap-ripple{position:fixed;width:0;height:0;border-radius:50%;border:1.5px solid var(--saffron);pointer-events:none;z-index:9999;mix-blend-mode:exclusion;animation:tapRipple .35s var(--expo) forwards}
+  .tap-ripple{position:fixed;width:0;height:0;border-radius:50%;border:1.5px solid var(--saffron);pointer-events:none;z-index:9999;animation:tapRipple .35s var(--expo) forwards}
   @keyframes tapRipple{0%{width:0;height:0;opacity:0.7;margin:0}100%{width:44px;height:44px;opacity:0;margin:-22px 0 0 -22px}}
 
   /* Larger tap targets for FAQ */
@@ -942,47 +942,43 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .desk-foot .left-sig{color:#0C1020;font-weight:700}
 .desk-foot em{font-style:normal;color:var(--ink-45)}
 
-/* -- Stage: 4A "Day Into Dusk", matched to the approved frame --
-   Every number below is measured off the approved 1440x800 reference frame
-   (Wizkoo Hero Concepts, 4A) rather than chosen. The frame's chrome is 82px
-   (marquee 30 + nav 52), which is exactly this site's sticky header, so the
-   frame's canvas is 718px and its offsets carry over unchanged.
+/* -- Stage: 4A "Day Into Dusk", with the ruled composition correction --
+   Every number is measured off the approved 1440x800 and 375x700 frames. The
+   frames' chrome is 82px, exactly this site's sticky header, so their offsets
+   carry over unchanged.
 
-   Scaling: a reference value V is written min(Vpx, (V/14.4)vw), which equals
-   V exactly at 1440 and scales proportionally below it. The composition is
-   capped at 1440 and centred, so the approved frame is what ships at every
-   width at or above it; only the photograph keeps bleeding.
+   ONE UNIT. --u is a length: 1px at the approved frame, shrinking with whichever
+   of width or height binds first. Every value below is calc(var(--u) * V) where
+   V is the reference pixel. The whole frame is therefore one object that scales
+   and stays centred, which is what removes the void: widths used to key to the
+   viewport while type keyed to height, so the copy and the window drifted to
+   opposite margins and the middle opened up.
 
-   Anchors: the copy block hangs from the canvas top, the whisper-and-window
-   group from the canvas bottom (reference: 132px). At 1440x800 both land on
-   the frame; on taller viewports the group holds its distance from the fold
-   instead of floating up. */
+   RULED AMENDMENT to 4A: the window is larger (620x376 against 560x340) and sits
+   nearer centre-right (left edge 710 against 792, right margin 110 against 88),
+   so the frame reads as one composition rather than two elements at the margins. */
 .hero{padding:0;position:relative;background:var(--linen)}
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 56px;box-sizing:border-box}
 
 .hh{
+  --u:min(1px,calc(100vw / 1440),calc((100vh - 82px) / 718));
+  --u:min(1px,calc(100vw / 1440),calc((100svh - 82px) / 718));
   position:relative;
-  /* One canvas unit. The reference canvas is 718px tall, so --u is 1px at the
-     approved 1440x800 frame and shrinks in step with the real canvas. Content
-     scaled by --u therefore keeps its proportion of the fold at every height.
-     A fixed min-height here is what pushed the window off the fold at 617 and
-     396: it held the canvas at 520 on a 396px screen. */
-  --u:calc((100vh - 82px) / 718);
-  --u:calc((100svh - 82px) / 718);
   height:calc(100vh - 82px);
   height:calc(100svh - 82px);
   overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
   background-color:#F8F4E9;
   background-image:radial-gradient(66% 54% at 20% 16%,rgba(255,253,245,0.80) 0%,rgba(248,244,233,0) 72%);
 }
 
-/* -- The photograph: full bleed under the nav, edge to edge, no framing band -- */
+/* -- The photograph: full bleed under the nav, edge to edge, and subordinate.
+   Veiled harder than the mockup's own stops, because that mockup was veiling a
+   350px thumbnail; a real photograph at this size competes with the type unless
+   the wash and the defocus carry more of the work. -- */
 .hh-photo{position:absolute;inset:0;z-index:0;overflow:hidden}
 .hh-photo img{
   position:absolute;
-  /* The crop amendment: scaled past cover and pushed right so the pink planet
-     at the right of the model stays in frame instead of sitting behind the
-     window. Held in custom properties so the crop is one place to tune. */
   --hh-zoom:1.10;
   --hh-shift:51%;
   top:50%;left:var(--hh-shift);
@@ -990,51 +986,45 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   height:calc(100% * var(--hh-zoom));
   transform:translate(-50%,-50%);
   object-fit:cover;object-position:50% 44%;
-  filter:saturate(0.74) brightness(1.02) contrast(0.98) blur(1.1px);
+  filter:saturate(0.66) brightness(1.03) contrast(0.95) blur(1.8px);
 }
-/* Day into dusk: linen at the top, clearing through the middle, blue dusk and
-   then warm afternoon at the bottom. Reference stops, verbatim. */
 .hh-veil{
   position:absolute;inset:0;z-index:1;pointer-events:none;
-  /* The reference control values are unchanged at 0/34/52/70/86/100; the ramp
-     between them is resampled through a monotone cubic. As six plain stops the
-     alpha slope roughly triples at 34% and the eye reads a Mach band straight
-     across the hero. The mockup hid it behind a 350px thumbnail; our sharper
-     photograph does not. */
+  /* Control values resampled through a monotone cubic: as plain stops the alpha
+     slope steps at 34% and the eye reads a band straight across the hero. */
   background:linear-gradient(
-    rgba(248,244,233,0.94) 0%,
-    rgba(248,244,233,0.916) 5.7%,
-    rgba(248,244,233,0.885) 11.3%,
-    rgba(248,244,233,0.848) 17%,
-    rgba(248,244,233,0.804) 22.7%,
-    rgba(248,244,233,0.754) 28.3%,
-    rgba(248,244,233,0.7) 34%,
-    rgba(249,244,233,0.635) 37%,
-    rgba(250,246,234,0.557) 40%,
-    rgba(252,247,236,0.473) 43%,
-    rgba(253,249,237,0.391) 46%,
-    rgba(253,249,237,0.318) 49%,
-    rgba(248,244,233,0.26) 52%,
-    rgba(231,229,222,0.22) 55%,
-    rgba(199,200,200,0.191) 58%,
-    rgba(156,160,172,0.172) 61%,
-    rgba(108,117,140,0.157) 64%,
-    rgba(65,77,108,0.145) 67%,
-    rgba(30,44,80,0.13) 70%,
-    rgba(13,25,57,0.114) 72.7%,
-    rgba(22,26,41,0.099) 75.3%,
-    rgba(56,46,33,0.086) 78%,
-    rgba(111,84,33,0.074) 80.7%,
-    rgba(177,133,42,0.066) 83.3%,
-    rgba(232,175,56,0.06) 86%,
-    rgba(255,203,82,0.058) 88.3%,
-    rgba(255,223,121,0.061) 90.7%,
-    rgba(255,233,161,0.066) 93%,
-    rgba(255,238,194,0.071) 95.3%,
-    rgba(251,241,218,0.077) 97.7%,
-    rgba(248,244,233,0.08) 100%);
+    rgba(248,244,233,0.95) 0%,
+    rgba(248,244,233,0.936) 5.7%,
+    rgba(248,244,233,0.917) 11.3%,
+    rgba(248,244,233,0.895) 17%,
+    rgba(248,244,233,0.868) 22.7%,
+    rgba(248,244,233,0.837) 28.3%,
+    rgba(248,244,233,0.8) 34%,
+    rgba(249,245,233,0.756) 37%,
+    rgba(250,246,235,0.705) 40%,
+    rgba(252,248,236,0.649) 43%,
+    rgba(253,249,237,0.591) 46%,
+    rgba(252,248,236,0.534) 49%,
+    rgba(248,244,233,0.48) 52%,
+    rgba(235,232,224,0.428) 55%,
+    rgba(211,211,209,0.374) 58%,
+    rgba(176,179,185,0.322) 61%,
+    rgba(130,137,154,0.272) 64%,
+    rgba(78,89,117,0.228) 67%,
+    rgba(30,44,80,0.19) 70%,
+    rgba(4,16,50,0.16) 72.7%,
+    rgba(5,10,30,0.134) 75.3%,
+    rgba(38,30,20,0.114) 78%,
+    rgba(98,72,24,0.099) 80.7%,
+    rgba(172,128,38,0.088) 83.3%,
+    rgba(232,175,56,0.08) 86%,
+    rgba(255,206,85,0.078) 88.3%,
+    rgba(255,226,127,0.084) 90.7%,
+    rgba(255,236,167,0.093) 93%,
+    rgba(255,240,198,0.104) 95.3%,
+    rgba(251,241,220,0.114) 97.7%,
+    rgba(248,244,233,0.12) 100%);
 }
-/* Film grain: present, never an effect. 3.5% over the whole hero image. */
 .hh-grain{
   position:absolute;inset:0;z-index:2;pointer-events:none;
   opacity:0.035;mix-blend-mode:overlay;
@@ -1042,83 +1032,78 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
-/* -- The stage the approved composition is pinned to -- */
-.hh-stage{position:relative;z-index:3;width:100%;max-width:1440px;height:100%;margin:0 auto}
+/* -- The frame the approved composition is pinned to -- */
+.hh-stage{
+  position:relative;z-index:3;flex:0 0 auto;
+  width:calc(var(--u) * 1440);
+  height:calc(var(--u) * 718);
+}
 
 /* -- The copy column -- */
 .hh-copy{
   position:absolute;
-  left:min(96px,6.6667vw,calc(var(--u) * 96));
-  top:min(68px,4.7222vw,calc(var(--u) * 68));
-  width:min(680px,47.2222vw,calc(var(--u) * 680));
+  left:calc(var(--u) * 96);
+  top:calc(var(--u) * 68);
+  width:calc(var(--u) * 680);
 }
-
-/* Eyebrow: gold rule then the line, the rule optically centred on the caps. */
 .hh-eyebrow{
-  display:flex;align-items:center;
-  margin:0;
+  display:flex;align-items:center;margin:0;
   font-family:'Space Mono',monospace;font-weight:400;
-  font-size:min(11px,0.7639vw,calc(var(--u) * 11));
-  letter-spacing:min(2.2px,0.15278vw,calc(var(--u) * 2.2));
-  text-transform:uppercase;
-  color:rgba(12,16,32,0.5);
-  line-height:1.45;
-  white-space:nowrap;
+  font-size:calc(var(--u) * 11);
+  letter-spacing:calc(var(--u) * 2.2);
+  text-transform:uppercase;color:rgba(12,16,32,0.5);
+  line-height:1.45;white-space:nowrap;
 }
 .hh-eyebrow .rule{
   flex:0 0 auto;
-  width:min(32px,2.2222vw,calc(var(--u) * 32));height:1.5px;
-  margin-right:min(16px,1.1111vw,calc(var(--u) * 16));
+  width:calc(var(--u) * 32);height:calc(var(--u) * 1.5);
+  margin-right:calc(var(--u) * 16);
   background:#E8AF38;
 }
 .hh-eyebrow strong{font-weight:400;color:#0C1020}
 
 .hh-arrest{
-  margin:min(28px,1.9444vw,calc(var(--u) * 28)) 0 0;
+  margin:calc(var(--u) * 28) 0 0;
   font-family:'Fraunces',serif;font-weight:800;
-  font-size:min(100px,6.9444vw,calc(var(--u) * 100));
-  line-height:0.92;
-  letter-spacing:-0.04em;
-  color:#0C1020;
+  font-size:calc(var(--u) * 100);
+  line-height:0.92;letter-spacing:-0.04em;color:#0C1020;
+  /* Fraunces is optically sized, so its letterforms widen as the rendered size
+     drops, and the approved two-line break stopped fitting below about 1123px.
+     Pinning opsz to the frame's own 100 holds the letterforms constant at every
+     scale, so the composed break survives instead of wrapping. */
+  font-variation-settings:'opsz' 100;
 }
-/* Composed break after "actually". brk-m is the phone's third line. */
 .hh-arrest .ln{display:block}
 .hh-arrest .brk-m{display:none}
 
 .hh-answer{
-  margin:min(30px,2.0833vw,calc(var(--u) * 30)) 0 0;
+  margin:calc(var(--u) * 30) 0 0;
   font-family:'Fraunces',serif;font-weight:400;font-style:italic;
-  font-size:min(54px,3.75vw,calc(var(--u) * 54));
-  line-height:1;
-  letter-spacing:-0.02em;
-  color:#E8AF38;
+  font-size:calc(var(--u) * 54);
+  line-height:1;letter-spacing:-0.02em;color:#E8AF38;
 }
 .hh-support{
-  margin:min(18px,1.25vw,calc(var(--u) * 18)) 0 0;
-  width:min(390px,27.0833vw,calc(var(--u) * 390));
+  margin:calc(var(--u) * 18) 0 0;
+  width:calc(var(--u) * 390);
   font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;
-  font-size:min(17px,1.18056vw,calc(var(--u) * 17));
-  line-height:1.6;
-  color:rgba(12,16,32,0.64);
+  font-size:calc(var(--u) * 17);
+  line-height:1.6;color:rgba(12,16,32,0.64);
 }
 
-/* -- The whisper and the window travel together, anchored to the fold -- */
+/* -- The whisper and the window travel together -- */
 .hh-group{
   position:absolute;
-  right:min(88px,6.1111vw,calc(var(--u) * 88));
-  bottom:min(132px,9.1667vw,calc(var(--u) * 132));
-  width:min(560px,38.8889vw,calc(var(--u) * 560));
+  right:calc(var(--u) * 110);
+  bottom:calc(var(--u) * 72);
+  width:calc(var(--u) * 620);
 }
-/* The caption sits tight above the window and is allowed to run wider than it. */
 .hh-whisper{
-  margin:0 0 min(11px,0.7639vw,calc(var(--u) * 11));
-  width:min(470px,32.6389vw,calc(var(--u) * 470));
+  margin:0 0 calc(var(--u) * 11);
+  width:calc(var(--u) * 470);
   margin-left:auto;
   font-family:'Fraunces',serif;font-weight:400;font-style:italic;
-  font-size:min(20px,1.38889vw,calc(var(--u) * 20));
-  line-height:1.45;
-  text-align:right;
-  color:rgba(12,16,32,0.6);
+  font-size:calc(var(--u) * 20);
+  line-height:1.45;text-align:right;color:rgba(12,16,32,0.6);
 }
 
 /* -- Below the fold: the quiet aside --
@@ -1147,36 +1132,14 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- Paper grain scoped to hero (Resolution A: position:absolute not fixed, avoids sky-system conflict) -- */
 section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.80 0 0 0 0 0.72 0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;mix-blend-mode:multiply}
 
-/* -- Narrow desktop: hold a composed break, never a wrapped one.
-   Fraunces is optically sized, so its letterforms widen as the size drops: the
-   line 'Are they actually' costs 6.31x its font size at 100px but 7.2x at 65px.
-   Against a 47.2vw column the approved two-line break therefore stops fitting
-   below about 1123px and the line wraps on its own. Below 1200px the arrest
-   uses the phone frame's approved three-line staging instead, which is a
-   composed break rather than browser roulette. -- */
-@media(min-width:768px) and (max-width:1199px){
-  .hh-arrest .brk-m{display:inline}
-}
-
-/* -- Short desktop, including 1097x617 (BINDING, per the runbook's
-   above-the-fold matrix) and the 1440x396 production viewport.
-
-   These heights used to stack the composition, which pushed the window off the
-   fold on the one screen that matters most. They no longer do. Every value in
-   the base rules carries a third term keyed to height (V/8 vh equals V at the
-   reference 800px viewport), so the approved side-by-side composition simply
-   scales down and the whole arc stays above the fold. The copy column ends at
-   53.9vw and the window starts at 55vw, so they can never collide.
-
-   What remains here is only what height alone cannot solve. -- */
+/* -- Short and narrow desktops both simply scale: --u already carries whichever
+   of width or height binds, so the approved frame stays one object and there is
+   nothing left here to special case except the desk card's own breathing. -- */
 @media(min-width:768px) and (max-height:700px){
   body::after{width:40vmax;left:6%;top:-8%}
-  /* Reclaim the frame's generous bottom margin as composition space. */
-  .hh-group{bottom:min(132px,9.1667vw,calc(var(--u) * 88))}
   .hero-aside{padding-bottom:56px}
 }
 @media(min-width:768px) and (max-height:540px){
-  .hh-group{bottom:min(132px,9.1667vw,calc(var(--u) * 64))}
   .hero-aside{padding-bottom:40px}
   .desk{padding:14px 18px 12px}
   .desk-title{font-size:18px}
@@ -1184,95 +1147,91 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .desk-foot{margin-top:8px;padding-top:6px}
 }
 
-/* -- Mobile, matched to the approved 375x700 reference frame --
-   Its own composition: eyebrow, three lines of arrest, the answer, the support
-   line, the whisper, then the window sitting on the fold with the photograph
-   full bleed behind all of it. Values are the frame's, written in vw so they
-   are exact at 375 and scale up to the 768 break. */
+/* -- Mobile, matched to the approved 375x700 reference frame. Its own unit,
+   rebased on that frame's 375x618 canvas. -- */
 @media(max-width:767px){
   .wrap{padding:0 24px}
-  /* The phone frame's canvas is 618px, so the unit is rebased there. */
-  .hh{--u:calc((100svh - 82px) / 618);height:calc(100svh - 82px)}
+  .hh{
+    --u:min(1px,calc(100vw / 375),calc((100vh - 82px) / 618));
+    --u:min(1px,calc(100vw / 375),calc((100svh - 82px) / 618));
+  }
+  .hh-stage{width:calc(var(--u) * 375);height:calc(var(--u) * 618)}
   .hh-photo img{--hh-zoom:1.06;--hh-shift:52%;object-position:54% 46%}
   .hh-veil{
     background:linear-gradient(
-      rgba(248,244,233,0.94) 0%,
-      rgba(248,244,233,0.919) 5.3%,
-      rgba(248,244,233,0.891) 10.7%,
-      rgba(248,244,233,0.858) 16%,
-      rgba(248,244,233,0.818) 21.3%,
-      rgba(248,244,233,0.772) 26.7%,
-      rgba(248,244,233,0.72) 32%,
-      rgba(249,244,233,0.656) 35.3%,
-      rgba(250,246,234,0.579) 38.7%,
-      rgba(252,248,236,0.495) 42%,
-      rgba(253,249,237,0.413) 45.3%,
-      rgba(253,249,237,0.339) 48.7%,
-      rgba(248,244,233,0.28) 52%,
-      rgba(231,229,222,0.239) 55%,
-      rgba(199,200,201,0.209) 58%,
-      rgba(157,161,172,0.188) 61%,
-      rgba(110,119,140,0.171) 64%,
-      rgba(65,78,109,0.156) 67%,
-      rgba(30,44,80,0.14) 70%,
-      rgba(13,24,57,0.122) 72.7%,
-      rgba(19,24,41,0.105) 75.3%,
-      rgba(51,43,33,0.09) 78%,
-      rgba(106,81,33,0.077) 80.7%,
-      rgba(174,131,42,0.067) 83.3%,
-      rgba(232,175,56,0.06) 86%,
-      rgba(255,205,82,0.058) 88.3%,
-      rgba(255,225,122,0.06) 90.7%,
-      rgba(255,235,162,0.065) 93%,
-      rgba(255,239,194,0.071) 95.3%,
-      rgba(251,241,218,0.077) 97.7%,
-      rgba(248,244,233,0.08) 100%);
+      rgba(248,244,233,0.95) 0%,
+      rgba(248,244,233,0.938) 5.3%,
+      rgba(248,244,233,0.923) 10.7%,
+      rgba(248,244,233,0.905) 16%,
+      rgba(248,244,233,0.882) 21.3%,
+      rgba(248,244,233,0.854) 26.7%,
+      rgba(248,244,233,0.82) 32%,
+      rgba(249,245,233,0.777) 35.3%,
+      rgba(250,246,235,0.727) 38.7%,
+      rgba(252,248,236,0.671) 42%,
+      rgba(253,249,237,0.612) 45.3%,
+      rgba(253,248,236,0.554) 48.7%,
+      rgba(248,244,233,0.5) 52%,
+      rgba(235,232,224,0.447) 55%,
+      rgba(211,210,208,0.392) 58%,
+      rgba(176,178,185,0.338) 61%,
+      rgba(130,137,153,0.286) 64%,
+      rgba(78,89,117,0.239) 67%,
+      rgba(30,44,80,0.2) 70%,
+      rgba(3,16,51,0.168) 72.7%,
+      rgba(4,10,30,0.141) 75.3%,
+      rgba(35,28,21,0.119) 78%,
+      rgba(95,70,24,0.101) 80.7%,
+      rgba(170,126,38,0.089) 83.3%,
+      rgba(232,175,56,0.08) 86%,
+      rgba(255,207,85,0.078) 88.3%,
+      rgba(255,228,128,0.083) 90.7%,
+      rgba(255,237,168,0.092) 93%,
+      rgba(255,241,198,0.104) 95.3%,
+      rgba(251,242,220,0.114) 97.7%,
+      rgba(248,244,233,0.12) 100%);
   }
   .hh-copy{
-    left:min(6.9333vw,34px,calc(var(--u) * 26));
-    top:min(5.8667vw,30px,calc(var(--u) * 22));
-    width:min(86.1333vw,430px,calc(var(--u) * 323));
-  }
-  .hh-eyebrow{
-    font-size:min(2.4vw,12px,calc(var(--u) * 9));
-    letter-spacing:min(0.432vw,2.2px,calc(var(--u) * 1.62));
+    left:calc(var(--u) * 26);
+    top:calc(var(--u) * 22);
+    width:calc(var(--u) * 323);
   }
   /* On the phone the approved frame stacks the rule above the line. */
-  .hh-eyebrow{flex-direction:column;align-items:flex-start}
-  .hh-eyebrow .rule{width:min(7.4667vw,38px,calc(var(--u) * 28));margin:0 0 min(2.9333vw,15px,calc(var(--u) * 11))}
+  .hh-eyebrow{
+    flex-direction:column;align-items:flex-start;
+    font-size:calc(var(--u) * 9);
+    letter-spacing:calc(var(--u) * 1.62);
+  }
+  .hh-eyebrow .rule{width:calc(var(--u) * 28);margin:0 0 calc(var(--u) * 11)}
   .hh-arrest{
-    margin-top:min(4.8vw,24px,calc(var(--u) * 18));
-    font-size:min(12.2667vw,66px,calc(var(--u) * 46));
-    line-height:0.93;
-    letter-spacing:-0.038em;
+    margin-top:calc(var(--u) * 18);
+    font-size:calc(var(--u) * 46);
+    line-height:0.93;letter-spacing:-0.038em;
+    font-variation-settings:'opsz' 46;
   }
   .hh-arrest .brk-m{display:inline}
-  .hh-answer{margin-top:min(4.8vw,24px,calc(var(--u) * 18));font-size:min(8vw,42px,calc(var(--u) * 30))}
+  .hh-answer{margin-top:calc(var(--u) * 18);font-size:calc(var(--u) * 30)}
   .hh-support{
-    margin-top:min(2.6667vw,14px,calc(var(--u) * 10));
-    width:min(72vw,360px,calc(var(--u) * 270));
-    font-size:min(3.6vw,18px,calc(var(--u) * 13.5));
+    margin-top:calc(var(--u) * 10);
+    width:calc(var(--u) * 270);
+    font-size:calc(var(--u) * 13.5);
     line-height:1.55;
   }
   .hh-group{
-    right:min(6.9333vw,34px,calc(var(--u) * 26));
-    bottom:min(5.8667vw,30px,calc(var(--u) * 22));
-    width:min(86.1333vw,430px,calc(var(--u) * 323));
+    right:calc(var(--u) * 26);
+    bottom:calc(var(--u) * 22);
+    width:calc(var(--u) * 323);
   }
   .hh-whisper{
-    width:min(66.6667vw,330px,calc(var(--u) * 250));
-    margin:0 auto min(1.0667vw,6px) 0;
-    font-size:min(4.2667vw,22px,calc(var(--u) * 16));
+    width:calc(var(--u) * 250);
+    margin:0 auto calc(var(--u) * 4) 0;
+    font-size:calc(var(--u) * 16);
     text-align:left;
   }
   .hero-aside{flex-direction:column;align-items:flex-start;gap:26px;padding-bottom:64px}
   .hero-aside .desk{flex:none;width:100%;max-width:none}
   .hero-sample{margin-bottom:0}
 }
-
-/* -- Short phones and the 756x396 production width both fall here. They used
-   to stack and run past the fold; the canvas unit now scales them instead, so
-   the window and its call stay on screen. -- */
 
 /* -- iPhone Plus refinement (430x932) -- */
 @media(min-width:400px) and (max-width:767px){
@@ -1588,10 +1547,11 @@ document.addEventListener('DOMContentLoaded', function() {
           <span class="lw-bleed" aria-hidden="true"></span>
           <a class="lw" href="https://app.wizkoo.com/start" data-wz-cta="hero-living-window" aria-label="Build our week">
             <span class="lw-sky" data-wk-sky data-wk-sky-seed="20260728" aria-hidden="true"></span>
+            <span class="lw-typewash" aria-hidden="true"></span>
             <span class="lw-sheen" aria-hidden="true"></span>
             <span class="lw-body">
               <span class="lw-label"><span class="rule" aria-hidden="true"></span><span class="t">This week&rsquo;s window</span></span>
-              <span class="lw-sentence">Build a week for <span class="lw-ghost">Maya</span>, <span class="lw-ghost">6</span>, in <span class="lw-ghost">Georgia</span> exploring <span class="lw-theme">space</span>.</span>
+              <span class="lw-sentence">Build a week for <span class="lw-ghost">Maya</span>, <span class="lw-ghost">6</span>, in <br class="lw-br"><span class="lw-ghost">Georgia</span> exploring <span class="lw-theme">space</span>.</span>
             </span>
             <span class="lw-foot"><span class="lw-cta">Build our week</span></span>
           </a>
