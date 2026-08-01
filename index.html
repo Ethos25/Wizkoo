@@ -1031,78 +1031,20 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
     rgba(251,241,218,0.077) 97.7%,
     rgba(248,244,233,0.08) 100%);
 }
-/* -- THE BREATH. What moves is the warmth and luminance of the veil over the
-   photograph, never the photograph: no zoom, no pan, not one pixel of
-   translation on the image. Transform and opacity only, on its own layer, so
-   the photograph is never repainted. Method and measurements are recorded in
-   docs/hero-handoff.md; only the load-bearing whys are kept here. -- */
-.hh{
-  --hh-breath-drift:2.5vw;   /* half the travel: 5% of frame width, total */
-  --hh-breath-lo:0.64;
-  --hh-breath-hi:1;
-}
-.hh-breath{
-  /* UNDER the veil. Above it the warm tint is darker than the linen and cost
-     the copy about 1% of its contrast; underneath, the veil's own alpha (0.94
-     across the copy, 0.08 at the foot) shields the type for free and leaves the
-     effect where the photograph actually shows. */
-  position:absolute;z-index:0;pointer-events:none;
-  /* 4vw of overhang against 2.5vw of travel, so the gradient's own edge can
-     never enter frame. Kept tight: every pixel here is recomposited per frame. */
-  top:0;bottom:0;left:-4vw;right:-4vw;
-  will-change:transform,opacity;
-  /* The lobe sits right of centre and falls to nothing by about x 510, clearing
-     the answer and support line. Measured: a centred lobe cost the support line
-     1.5% of contrast. Physical: the photograph is lit from the upper right, so
-     that is where its warm point belongs. */
-  /* 0.300. Amplitude was the binding constraint, not duration: at 0.115 the
-     full half-cycle swing moved 0.202/255 on average, under one quantisation
-     step across most of the frame, so compressing the cycle raised the rate
-     without making anything legible.
+/* THE BREATH WAS CUT. A drifting warm lobe over the photograph, ruled and built
+   as this round's centrepiece, then removed after it was walked. It read as
+   nothing, and the measurements said so before the walk did: at the largest
+   amplitude that still passed the still-comparison test, the whole half-cycle
+   swing moved 8/255 at its worst pixel and 0.445/255 averaged over the frame,
+   which is under one quantisation step across most of the picture. At 0.09Hz the
+   eye integrates, so excursion decides legibility, and the excursion available
+   between "invisible frame to frame" and "visible as an effect" was too narrow
+   to hold anything. Do not rebuild it without a way to widen that gap first.
+   Full record in docs/hero-handoff.md.
 
-     0.115 was itself far below the ceilings once the lobe moved off the copy and
-     under the veil, which is where the headroom came from. Measured at 0.300:
-     worst local colour temperature 1.46% against the ruled 2-3%, frame luminance
-     0.160% against 1.5%, no contrast ratio reduced anywhere, and the two
-     extremes still butt together as one continuous surface. 0.38 was tested and
-     rejected: the pair starts to read as different. The mid stop keeps the same
-     0.452 ratio, so only the lobe's strength moved, not its shape. */
-  background:radial-gradient(35.44% 62% at 69.56% 38%,
-    rgba(255,209,138,0.300) 0%,
-    rgba(255,209,138,0.136) 42%,
-    rgba(255,209,138,0) 72%);
-  /* 11s, not the 40s this was built at. At 40s a visitor sees about a quarter of
-     one cycle, so the light never visibly moves during a real visit: desktop
-     above-the-fold dwell is around 11s, and the stay-or-go decision lands inside
-     10-20s. At 11s a typical visit contains one full out-and-back. Duration only;
-     amplitude, lobe position and every other value are unchanged, so the
-     still-comparison test is unaffected and only the rate moved. */
-  animation:hh-breathe 11s ease-in-out infinite;
-}
-/* A pendulum: 0% and 100% share both state and velocity (zero), so the loop has
-   no seam and no perceptible start. 0% and 50% are therefore the two extremes,
-   which makes the still-comparison test the harshest one available. */
-@keyframes hh-breathe{
-  0%,100%{
-    transform:translate3d(calc(var(--hh-breath-drift) * -1),-0.9vh,0);
-    opacity:var(--hh-breath-lo);
-  }
-  50%{
-    transform:translate3d(var(--hh-breath-drift),0.9vh,0);
-    opacity:var(--hh-breath-hi);
-  }
-}
-/* Reduced motion: the breath does not run and renders at the cycle's balanced
-   state, the arithmetic midpoint of the extremes rather than either end. The
-   seam and the light spills are static and stay. */
-@media(prefers-reduced-motion:reduce){
-  .hh-breath{
-    animation:none;
-    transform:translate3d(0,0,0);
-    opacity:calc((var(--hh-breath-lo) + var(--hh-breath-hi)) / 2);
-    will-change:auto;
-  }
-}
+   The rest of the atmosphere pass does not depend on it and stays: the seam
+   below, and the two light spills, the corrected shadow and the graded border
+   ring in css/hero-window.css. */
 
 /* -- THE SEAM. The photograph used to stop at a hard edge where flat linen
    began, so the page read as two stacked surfaces. It now dissolves.
@@ -1677,10 +1619,8 @@ document.addEventListener('DOMContentLoaded', function() {
              alt="A child painting the planets of a solar system model at a sunlit wooden table.">
       </picture>
     </figure>
-    <!-- The atmosphere pass. All three layers are paint only: none participates
-         in layout, and none touches the photograph's own pixels.
-         The breath sits UNDER the veil deliberately; see its rule. -->
-    <div class="hh-breath" aria-hidden="true"></div>
+    <!-- The atmosphere pass. Paint only: neither layer participates in layout,
+         and neither touches the photograph's own pixels. -->
     <div class="hh-veil" aria-hidden="true"></div>
     <div class="hh-seam" aria-hidden="true"></div>
     <div class="hh-grain" aria-hidden="true"></div>

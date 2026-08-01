@@ -268,11 +268,16 @@ standard here, not an exception.
 
 ---
 
-## 6. THE ATMOSPHERE PASS: SHIPPED
+## 6. THE ATMOSPHERE PASS: SHIPPED, MINUS THE BREATH
 
-Light, breath, and the seam. Three new paint-only layers, no structural change:
-`.hh-breath` and `.hh-seam` in `index.html`, and two spill pseudo-elements plus a
-graded border ring in `css/hero-window.css`.
+Light and the seam. The breath was built, walked, and cut. What shipped is
+paint-only with no structural change: `.hh-seam` in `index.html`, and two spill
+pseudo-elements plus a graded border ring in `css/hero-window.css`.
+
+**The round's real value is the light-direction finding in section 3.** It
+corrected a wrong assertion that the window's whole shadow stack had been built
+on. The seam, the two spills and the corrected shadow all stand on their own and
+cost nothing: contrast is exactly baseline and no animation is added.
 
 ### Initial and final values
 
@@ -281,11 +286,7 @@ the ruled ranges, as expected.
 
 | effect | built at | shipped | why it came down |
 |---|---|---|---|
-| Breath, cycle length | 40s | **11s** | ruled down after the fact, see below |
-| Breath, warm lobe peak alpha | 0.230 | **0.078**, under the veil | at 0.230 the frame moved 10/255 between extremes and the stills were plainly different |
-| Breath, drift (total travel) | 10% of frame width | **5%** (`2.5vw` each way) | ruled range is 4-6% |
-| Breath, opacity swing | 0.62 -> 1.0 | **0.64 -> 1.0** | |
-| Breath layer width | 132vw | **108vw** | every pixel is recomposited per frame |
+| **The breath** | 0.230 alpha, 40s | **CUT**, see below | read as nothing at every value inside the ruled ceilings |
 | Warm spill, photo onto window | 0.12 | **0.050** | |
 | Cool starlight, window onto photo | 0.10 | **0.042** | |
 | Seam band height | `264u` | **`128u`** | ruled range is 100-140 |
@@ -293,10 +294,6 @@ the ruled ranges, as expected.
 
 ### Measured results
 
-- **Breath.** Frame luminance moves **0.057%** (ceiling 1.5%). Worst local colour
-  temperature moves **1.40%** (ceiling 2-3%). Worst pixel between the two
-  extremes: **3/255**. A filmstrip of eight phases across the cycle is
-  indistinguishable row to row.
 - **Seam.** Luminance runs 154.6 -> 243.7 across the band and holds flat past the
   boundary. Max second difference inside the band **4.02** luminance units,
   against the photograph's own 13-40 just above it, so the ramp is smoother than
@@ -311,80 +308,88 @@ the ruled ranges, as expected.
 - **Layout.** 232 measurements across 8 viewports, **0 differences**. Nothing
   moved by any amount.
 - **Fold gate.** All 12 viewports pass.
-- **Weight.** Raw **+7.5KB**, gzip +2.7KB, **brotli +2.2KB**. See the caveat below.
+- **Weight.** Against `b246e72`: raw **+5.9KB**, gzip +2.1KB, **brotli +1.8KB**.
+- **Compositor.** No animation is added by this round at all, so there is nothing
+  to hold at 60fps. Frame rate and per-frame layout cost are indistinguishable
+  from the pre-round build.
 
 ### Contrast, against a like-for-like baseline
 
-Measured through the same harness with the round's layers reverted, at both
-breath extremes. Backdrop is the modal colour inside each element's own box,
-which works for light-on-dark and dark-on-light alike.
+Measured through the same harness with the round's layers reverted. Backdrop is
+the modal colour inside each element's own box, which works for light-on-dark and
+dark-on-light alike.
 
 | element | baseline | shipped |
 |---|---|---|
-| arrest | 12.833 | 12.823 - 12.826 |
-| answer | 1.331 | 1.329 - 1.330 |
-| support | 12.638 | 12.599 |
-| whisper | 6.605 | 6.615 - 6.624 |
-| window sentence | 16.013 | 16.013 |
+| arrest | 12.833 | **12.833** |
+| answer | 1.331 | **1.331** |
+| support | 12.638 | **12.638** |
+| whisper | 6.605 | **6.608** |
+| window sentence | 16.013 | **16.013** |
 
-The support line's **-0.039 (-0.31%)** is **not** the effect. The same build with
-the breath layer present but painting nothing measures identically, so it is a
-1/255 rounding shift from promoting a compositor layer, and it is invariant to
-the effect's strength. It cannot be removed without removing the animation.
+Exactly baseline, to three decimals, on all four ruled elements. The seam, the
+spills, the shadow and the ring are all optically free where the type sits. The
+**-0.039** that the support line carried while the breath existed was never the
+effect: it was a 1/255 rounding shift from promoting a compositor layer, proven
+by an identical reading with the layer present but painting nothing. Removing the
+layer removed it.
 
-A centred warm lobe *did* genuinely cost that line 1.5%, because the tint is
-darker than the pale shirt behind it. That is why the lobe now sits right of
-centre and falls to nothing by about x 510. The physics agreed with the
-measurement: the light is upper right, so that is where its warm point belongs.
+### THE BREATH WAS CUT. Do not rebuild it without reading this.
 
-### The cycle length, and what it exposed
+Ruled out after being walked. It read as nothing. Three rounds of correction ran
+before the cut, and each one narrowed the diagnosis:
 
-Ruled from 40s to **11s** after the first deploy: at 40s a visitor sees about a
-quarter of one cycle, and desktop above-the-fold dwell is around 11s with the
-stay-or-go decision inside 10-20s, so the light never moved during a real visit.
-Duration only. Amplitude, lobe position, light direction and every other value
-are unchanged, and contrast at the extremes is bit-identical to the 40s build.
+1. **Duration.** 40s meant a visitor saw about a quarter of one cycle, against a
+   desktop above-the-fold dwell of ~11s. Compressed to 11s. No help, because
+   compressing a cycle raises the rate and not the excursion, and at 0.09Hz the
+   eye integrates, so excursion decides legibility.
+2. **Amplitude.** Swept at the shipped geometry against every ruled ceiling:
 
-Worst-channel change at 11s, window masked, /255:
+   | alpha | excursion, worst px | worst CCT % | frame lum % | contrast |
+   |---|---|---|---|---|
+   | 0.115 | 4/255 | 0.60 | 0.052 | none reduced |
+   | 0.230 | 6/255 | 1.15 | 0.112 | none reduced |
+   | 0.300 | 8/255 | 1.46 | 0.160 | none reduced |
+   | 0.380 | 10/255 | 1.84 | 0.213 | none reduced |
 
-| from | window | mean | p99 | max |
-|---|---|---|---|---|
-| extreme | 1 frame @60fps | 0.026 | 1 | 2 |
-| extreme | 1s | 0.102 | 1 | 2 |
-| extreme | 3s | 0.174 | 2 | 3 |
-| extreme | half cycle, 5.5s | 0.203 | 2 | **4** |
-| mid-swing | 1 frame @60fps | 0.040 | 1 | 2 |
+   Ceilings are 2-3% CCT and 1.5% luminance, so neither ever bound. **The binding
+   test was the stills.** Butting the two extremes together with no divider, the
+   pair reads as one surface through 0.300 and separates at 0.380.
+3. **The cut.** Shipped at 0.300, the largest value passing the still test. Still
+   read as nothing.
 
-**What this exposes: duration was never the binding constraint, amplitude is.**
-Compressing the cycle raises the rate but not the excursion. The full
-peak-to-peak swing is 4/255 at the worst pixel, 2/255 at the 99th percentile,
-and **0.203/255 on average**, which is to say that across most of the frame the
-effect does not move a single quantisation step. At 0.09Hz the eye integrates,
-so total excursion rather than rate decides whether anything reads.
+**The finding, for whoever tries this again.** The usable gap between "invisible
+frame to frame" and "visible as an effect" was too narrow to hold anything. At
+0.300 the entire half-cycle swing moved 8/255 at its worst pixel and
+**0.445/255 averaged over the frame**, which is under one quantisation step
+across most of the picture. The veil is the reason: it is 0.94 opaque over the
+copy and the lobe has to sit beneath it to protect contrast, so most of the
+effect is absorbed before it reaches the eye. Any rebuild needs a way to widen
+that gap first, not a new value inside it. Raising alpha further breaks the still
+test; moving the lobe above the veil breaks contrast on the support line.
 
-If it reads as nothing on the walk, that is the arithmetic, not the timing. The
-lever is alpha, and it has measured headroom: **0.115** was tested at the ruled
-2-3% colour-temperature ceiling (2.13%) and its stills still compared as
-identical by eye, at 7/255 worst pixel against the shipped 4/255. That is the
-one change that would make the breath legible without breaking a ruled limit.
-Otherwise cut the breath and keep the rest of the pass, which stands on its own.
+**A labelling failure worth recording.** For three commits the code, the commit
+messages and this document all said the shipped alpha was 0.078 when it was
+0.115. Moving the breath under the veil rewrote the whole rule and typed the
+pre-reduction numbers back in while the comment above still read "reduced". The
+measurements were taken against the running build and were correct throughout;
+only the label was wrong. It then produced a second, worse error: a claim that
+0.115 was available headroom, when 0.115 was already shipped and the comparison
+had been drawn against a different geometry entirely. **A value you did not read
+back out of the file is not a value you know.** Same shape as the four failures
+in section 5: a conclusion asserted without being tested.
 
-### Two things this round could not close
+### One thing left open
 
-1. **60fps was not verified on a real GPU.** Chromium in the build environment
-   falls back to SwiftShader software rasterisation and headed launch is
-   unavailable, so no frame-rate number from it represents a laptop. What *was*
-   established: the compositor promotes the layer (confirmed via `LayerTree`),
-   only `transform` and `opacity` animate, and per-frame layout and style-recalc
-   cost is **identical** before and after (1.02 layouts/frame both), so there is
-   no thrash and no added repaint. Under software rasterisation the page runs
-   ~15-17fps reverted and ~11fps shipped; the seam, spills, shadow and ring cost
-   nothing measurable, so all of it is the one full-frame composited layer.
-   **Confirm on Amy's machine** with DevTools rendering FPS meter on an idle page.
-2. **Raw weight is over the 4KB law**, at +7.5KB; served weight is +2.2KB brotli.
-   The overage is comment prose, kept because this codebase documents its
-   reasoning in place and the alternative is a future round re-deriving the light
-   direction. Strip the comments if the raw number must hold.
+**Raw weight is over the 4KB law**, at +5.9KB; served weight is +1.8KB brotli,
+and brotli is confirmed as what Netlify actually serves. The overage is comment
+prose, kept because this codebase documents its reasoning in place and the
+alternative is a future round re-deriving the light direction. Strip the comments
+if the raw number must hold.
+
+The 60fps question closed itself when the breath was cut: this round now adds no
+animation at all, so there is nothing to hold a frame rate. Frame rate and
+per-frame layout cost measure indistinguishable from the pre-round build.
 
 ### Left alone deliberately
 
