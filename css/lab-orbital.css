@@ -65,6 +65,28 @@
   pointer-events: none;
 }
 
+/* ── RULED 2026-08-01: the far layer holds its stars, not its twinkle ──────
+   The field keeps every one of its 1,834 stars, so the derived density is
+   untouched. What stops is the far layer's per-element opacity animation:
+   1,021 faints and dust whose twinkle swings inside a band the eye cannot
+   resolve, and which between them cost more frame time than everything else
+   on the page combined. Effort spent below perception is cost, not craft.
+
+   Twinkle stays where it reads — the near layer, which is anchors, brights,
+   mids and near faints.
+
+   The stars do not go blank. Each one keeps the inline mid-brightness the
+   generator wrote for it, which is the exact value the primitive's own
+   reduced-motion frozen frame holds them at. This is the primitive's designed
+   still, applied to one layer instead of all of them.
+
+   Selector specificity is 0,3,0 against the primitive's 0,1,0, so this wins
+   without !important and without touching css/hero-sky.css. */
+.lab-orbital__sky .wk-sky__layer--far .wk-sky__star {
+  animation: none;
+  will-change: auto;
+}
+
 /* The film grain, verbatim from .linen-hero::before. */
 .lab-orbital::before {
   content: '';

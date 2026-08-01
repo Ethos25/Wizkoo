@@ -57,12 +57,20 @@
     { id: 'b', rx: 446, ry: 82,  rot: 31,  stroke: 'rgba(120,152,208,0.30)', width: 1.0, driftS: 264 }
   ];
 
-  /* ── The six ────────────────────────────────────────────────────────────
+  /* ── The seven ──────────────────────────────────────────────────────────
      Four sit out near the major-axis extremes, where there is label room.
      Two sit ON the limb, at the parameter where |P - C| equals the nucleus
      radius: SCIENCE straddling the near limb in front of the body, ART
      straddling the far limb behind it. Those two are the occlusion proof —
      same geometry, opposite z, and the sphere cuts one of them in half.
+
+     HISTORY is the seventh, and it goes on orbit C, which until it arrived
+     carried no subject at all — a third of the system's structure with nothing
+     to explain it. Top centre at t=195 is the only large empty label lane left,
+     it puts a centred apex against the four corner labels, and it matches the
+     homepage's own 6-o'clock-to-12 reading of HISTORY as the node opposite the
+     writing desk. It lands BEHIND, which is right: the past is the far side.
+
      Copy is the homepage's, verbatim; this round is material, not words. */
   var NODES = [
     { id: 'reading', orbit: 'b', t: 188,   key: 'READING',
@@ -82,7 +90,10 @@
       label: { anchor: 'end',   x: 262,  y: 646 } },
     { id: 'art',     orbit: 'b', t: 257.5, key: 'ART',
       lines: ['Sketch the human skeleton.', 'Label every bone you can name.'],
-      label: { anchor: 'end',   x: 650,  y: 292 } }
+      label: { anchor: 'end',   x: 650,  y: 292 } },
+    { id: 'history', orbit: 'c', t: 195,   key: 'HISTORY',
+      lines: ['1895. One accident changed', 'medicine forever.'],
+      label: { anchor: 'middle', x: 718, y: 128 } }
   ];
 
   var NODE_R = 20, HALO_R = 42;
@@ -103,10 +114,12 @@
     /* Nodes first, then paths. Members before structure: drawing the paths first
        would state the system before its subjects, which is the difference
        between an object and a diagram. */
-    brisk: { nodeStart: 0.10, nodeStagger: 0.19, nodeDur: 0.42, labelLag: 0.10, labelDur: 0.46,
-             pathStart: 1.22, orbitStagger: 0.12, halfDur: 0.52 },
-    slow:  { nodeStart: 0.15, nodeStagger: 0.30, nodeDur: 0.52, labelLag: 0.14, labelDur: 0.56,
-             pathStart: 1.95, orbitStagger: 0.18, halfDur: 0.80 }
+    /* Re-spaced for seven. The two totals are the ruled ones; the stagger
+       absorbed the extra node rather than the beat getting longer. */
+    brisk: { nodeStart: 0.10, nodeStagger: 0.165, nodeDur: 0.42, labelLag: 0.10, labelDur: 0.46,
+             pathStart: 1.24, orbitStagger: 0.11, halfDur: 0.51 },
+    slow:  { nodeStart: 0.15, nodeStagger: 0.26,  nodeDur: 0.52, labelLag: 0.14, labelDur: 0.56,
+             pathStart: 2.00, orbitStagger: 0.16, halfDur: 0.78 }
   };
 
   var DEFAULTS = { nucleus: 'b', arrival: 'slow', orbits: 'static' };
@@ -365,7 +378,7 @@
       viewBox: '0 0 ' + FRAME.w + ' ' + FRAME.h,
       preserveAspectRatio: 'xMidYMid meet',
       role: 'img',
-      'aria-label': 'Orbital diagram: six school subjects — reading, writing, math, science, geography and art — orbiting one central theme.'
+      'aria-label': 'Orbital diagram: seven school subjects — reading, writing, math, science, history, geography and art — orbiting one central theme.'
     });
     root.appendChild(buildDefs());
 
@@ -476,10 +489,21 @@
   function applyArrival(sys, key) {
     var v = ARRIVAL_VARIANTS[key];
 
-    /* Nodes ignite in a clockwise sweep starting at the first node past twelve
-       o'clock. Not reading order and not depth order: a sweep circles the
-       nucleus, which restates the thesis while it plays. */
+    /* Nodes ignite in a CLOCKWISE SWEEP STARTING AT TWELVE O'CLOCK. Not reading
+       order and not depth order: a sweep circles the nucleus, which restates the
+       thesis while it plays.
+
+       With HISTORY sitting at the apex the sweep now has a true starting point,
+       so it begins on the node nearest twelve rather than on the first one past
+       it — a hair's difference in the numbers, but it means the beat opens at
+       the top of the composition instead of just short of it. */
     var order = sys.nodes.slice().sort(function (a, b) { return a.bearing - b.bearing; });
+    var start = 0, best = Infinity;
+    order.forEach(function (n, i) {
+      var d = Math.min(n.bearing, 360 - n.bearing);
+      if (d < best) { best = d; start = i; }
+    });
+    order = order.slice(start).concat(order.slice(0, start));
     order.forEach(function (n, i) {
       var d = v.nodeStart + i * v.nodeStagger;
       n.g.style.setProperty('--lo-delay', d.toFixed(3) + 's');

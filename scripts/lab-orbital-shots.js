@@ -154,6 +154,27 @@ async function replayAndScrub(page, t) {
     console.log('  back layer:  ' + facts.back.join(', '));
     console.log('  front layer: ' + facts.front.join(', '));
     console.log('  silhouette paths clipped to the disc: ' + facts.sil);
+
+    /* ── THE PORT CONSTRAINT, asserted rather than remembered ────────────
+       An orbit whose minor semi-axis is not smaller than the nucleus radius
+       never crosses the body, and the section silently degrades from an object
+       to a flat diagram with no error anywhere. The homepage's current geometry
+       fails this three times over (ry 178/160/135 against a 42 nucleus), which
+       is exactly how it lost the cue. Anything that ports this section has to
+       keep passing this check. */
+    const failing = facts.orbits.filter(o => o.ry >= facts.R);
+    const straddlers = facts.rows.filter(r => Math.abs(r.dist - facts.R) < 24);
+    const bothSides = straddlers.some(r => r.near) && straddlers.some(r => !r.near);
+    let ok = true;
+    if (failing.length) { ok = false;
+      console.log('  FAIL: orbits not crossing the body: ' + failing.map(o => o.id).join(', ')); }
+    if (!bothSides) { ok = false;
+      console.log('  FAIL: no node pair straddling the limb on both sides'); }
+    if (facts.sil !== facts.orbits.length) { ok = false;
+      console.log('  FAIL: expected one silhouette path per orbit'); }
+    console.log('  ' + (ok ? 'PASS' : 'FAIL') + ': every orbit crosses the body, and the limb is ' +
+      'straddled from both sides');
+    if (!ok) process.exitCode = 1;
     await page.context().close();
   }
 
