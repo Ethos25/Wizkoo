@@ -311,8 +311,45 @@
   right:8.318%;
   bottom:3.580%;                    /* 12u of 335.15u.  Was 26u. */
   padding-top:1.718%;               /*  9.5u of 553u.   Was 26u. */
-  border-top:1px solid rgba(232,175,56,0.26);
+  /* The 1px is kept for the box model and made invisible; the visible line is
+     drawn by ::before below, so it can end short WITHOUT moving anything. */
+  border-top:1px solid transparent;
   display:block;
+}
+
+/* -- THE RULE STOPS SHORT (ruled 2026-08-01) --
+   The constellation's void is DIAGONAL: the figure's right-hand stars sit high
+   (Geography y36, Science y66, Art y124 of 178), so nothing on the right half
+   falls below 70% of the band. Measured, the gap from each label down to this
+   rule runs 9.7px under Writing to 153.6px under Geography — a 16x spread.
+
+   A full-width rule underlines that diagonal void and turns it into a
+   horizontal empty band. That reading, not the void itself, was the problem:
+   the same void is present at 1440x800 in identical proportion (43.4% of the
+   window under Geography at both sizes) and was ruled good there.
+
+   So the rule now ends before the void instead of underlining it. This is a
+   chrome change and nothing else — no star moves, no depth spread is touched,
+   and the 1440x800 geometry lock passes unchanged, because a pseudo-element's
+   width is not layout.
+
+   --lw-rule-end is the ONE number to change, expressed in the foot's own
+   width. The foot spans 8.318%..91.682% of the window, i.e. 83.364% of it, so:
+
+       window %  =  8.318 + (--lw-rule-end x 0.83364)
+       60% of the window = 62.00%     70% = 73.99%     80% = 85.98%
+
+   The CTA's text ends at 35.9% of the window, so every value in that range
+   clears it comfortably. */
+.lw-foot::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:-1px;                         /* sits exactly where the border would */
+  height:1px;
+  width:var(--lw-rule-end, 73.99%); /* 70% of the window's width */
+  background:rgba(232,175,56,0.26);
+  pointer-events:none;
 }
 .lw-cta{
   display:block;                     /* its own line box, so the foot is exactly
