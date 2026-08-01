@@ -22,7 +22,9 @@
 
 .lw-mount{
   position:relative;
-  height:calc(var(--u) * 376);
+  /* Shortened from 376: the interior block is 171 tall, and the extra height was
+     reading as a hollow band between the sentence and the handle. */
+  height:calc(var(--u) * 322);
 }
 
 /* The luminous bleed: outside the window, under it, blurred. */
@@ -94,11 +96,14 @@
   background:linear-gradient(rgba(232,175,56,0.07) 0%,rgba(232,175,56,0) 100%);
 }
 
+/* One block, optically centred in the aperture. The 52% lift is the usual
+   correction: a mass centred geometrically reads as sitting low. */
 .lw-body{
   position:absolute;
   left:calc(var(--u) * 46);
   right:calc(var(--u) * 46);
-  top:calc(var(--u) * 40);
+  top:50%;
+  transform:translateY(-52%);
   display:block;
 }
 
@@ -165,17 +170,11 @@
   to{opacity:1;transform:translateY(0);filter:blur(0)}
 }
 
-.lw-foot{
-  position:absolute;
-  left:min(44px,3.0556vw,calc(var(--u) * 44));
-  right:min(44px,3.0556vw,calc(var(--u) * 44));
-  bottom:calc(var(--u) * 26);
-  padding-top:calc(var(--u) * 26);
-  border-top:1px solid rgba(232,175,56,0.26);
-  display:block;
-}
+/* The handle, close beneath the sentence. The hairline that used to separate
+   them is removed: it existed to bridge an empty band that no longer exists. */
 .lw-cta{
-  display:block;                     /* its own line box, so the foot is exactly
+  display:block;
+  margin-top:calc(var(--u) * 26);                     /* its own line box, so the foot is exactly
                                         the reference's 25px + 17px tall */
   font-family:'Space Mono',monospace;font-weight:400;
   font-size:calc(var(--u) * 12.5);
@@ -217,11 +216,10 @@
 
 /* ── Mobile: the approved 375 frame ── */
 @media(max-width:767px){
-  .lw-mount{height:calc(var(--u) * 226)}
+  .lw-mount{height:calc(var(--u) * 214)}
   .lw-bleed{inset:calc(var(--u) * -40);filter:blur(calc(var(--u) * 20))}
   .lw-body{
     left:calc(var(--u) * 24);right:calc(var(--u) * 24);
-    top:calc(var(--u) * 22);
   }
   .lw-label{font-size:calc(var(--u) * 8);letter-spacing:calc(var(--u) * 1.92)}
   .lw-label .rule{width:calc(var(--u) * 20);margin-right:calc(var(--u) * 10)}
@@ -229,11 +227,6 @@
     margin-top:calc(var(--u) * 16);
     font-size:calc(var(--u) * 20);
     line-height:1.36;
-  }
-  .lw-foot{
-    left:calc(var(--u) * 24);right:calc(var(--u) * 24);
-    bottom:calc(var(--u) * 18);
-    padding-top:calc(var(--u) * 20);
   }
   .lw-cta{font-size:calc(var(--u) * 10.5);letter-spacing:calc(var(--u) * 2.52)}
 }

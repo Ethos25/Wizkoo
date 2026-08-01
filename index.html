@@ -967,7 +967,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   height:calc(100vh - 82px);
   height:calc(100svh - 82px);
   overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:stretch;
   background-color:#F8F4E9;
   background-image:radial-gradient(66% 54% at 20% 16%,rgba(255,253,245,0.80) 0%,rgba(248,244,233,0) 72%);
 }
@@ -979,50 +979,52 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hh-photo{position:absolute;inset:0;z-index:0;overflow:hidden}
 .hh-photo img{
   position:absolute;
-  --hh-zoom:1.10;
-  --hh-shift:51%;
+  /* Shifted left and opened up so the child and the planets sit behind and
+     around the type block, not only in the right half. */
+  --hh-zoom:1.18;
+  --hh-shift:44%;
   top:50%;left:var(--hh-shift);
   width:calc(100% * var(--hh-zoom));
   height:calc(100% * var(--hh-zoom));
   transform:translate(-50%,-50%);
   object-fit:cover;object-position:50% 44%;
-  filter:saturate(0.66) brightness(1.03) contrast(0.95) blur(1.8px);
+  filter:saturate(0.74) brightness(1.02) contrast(1) blur(1.15px);
 }
 .hh-veil{
   position:absolute;inset:0;z-index:1;pointer-events:none;
   /* Control values resampled through a monotone cubic: as plain stops the alpha
      slope steps at 34% and the eye reads a band straight across the hero. */
   background:linear-gradient(
-    rgba(248,244,233,0.95) 0%,
-    rgba(248,244,233,0.936) 5.7%,
-    rgba(248,244,233,0.917) 11.3%,
-    rgba(248,244,233,0.895) 17%,
-    rgba(248,244,233,0.868) 22.7%,
-    rgba(248,244,233,0.837) 28.3%,
-    rgba(248,244,233,0.8) 34%,
-    rgba(249,245,233,0.756) 37%,
-    rgba(250,246,235,0.705) 40%,
-    rgba(252,248,236,0.649) 43%,
-    rgba(253,249,237,0.591) 46%,
-    rgba(252,248,236,0.534) 49%,
-    rgba(248,244,233,0.48) 52%,
-    rgba(235,232,224,0.428) 55%,
-    rgba(211,211,209,0.374) 58%,
-    rgba(176,179,185,0.322) 61%,
-    rgba(130,137,154,0.272) 64%,
-    rgba(78,89,117,0.228) 67%,
-    rgba(30,44,80,0.19) 70%,
-    rgba(4,16,50,0.16) 72.7%,
-    rgba(5,10,30,0.134) 75.3%,
-    rgba(38,30,20,0.114) 78%,
-    rgba(98,72,24,0.099) 80.7%,
-    rgba(172,128,38,0.088) 83.3%,
+    rgba(248,244,233,0.88) 0%,
+    rgba(248,244,233,0.859) 5.7%,
+    rgba(248,244,233,0.831) 11.3%,
+    rgba(248,244,233,0.798) 17%,
+    rgba(248,244,233,0.76) 22.7%,
+    rgba(248,244,233,0.72) 28.3%,
+    rgba(248,244,233,0.68) 34%,
+    rgba(249,245,234,0.637) 37%,
+    rgba(250,246,235,0.59) 40%,
+    rgba(253,248,236,0.541) 43%,
+    rgba(254,249,237,0.492) 46%,
+    rgba(253,249,237,0.444) 49%,
+    rgba(248,244,233,0.4) 52%,
+    rgba(234,231,223,0.358) 55%,
+    rgba(207,207,206,0.318) 58%,
+    rgba(169,173,181,0.279) 61%,
+    rgba(122,130,149,0.242) 64%,
+    rgba(72,84,113,0.209) 67%,
+    rgba(30,44,80,0.18) 70%,
+    rgba(9,21,54,0.155) 72.7%,
+    rgba(15,19,36,0.133) 75.3%,
+    rgba(48,39,27,0.114) 78%,
+    rgba(105,79,28,0.099) 80.7%,
+    rgba(175,130,39,0.087) 83.3%,
     rgba(232,175,56,0.08) 86%,
-    rgba(255,206,85,0.078) 88.3%,
-    rgba(255,226,127,0.084) 90.7%,
-    rgba(255,236,167,0.093) 93%,
-    rgba(255,240,198,0.104) 95.3%,
-    rgba(251,241,220,0.114) 97.7%,
+    rgba(255,205,85,0.079) 88.3%,
+    rgba(255,225,127,0.084) 90.7%,
+    rgba(255,235,166,0.094) 93%,
+    rgba(255,239,198,0.104) 95.3%,
+    rgba(251,241,219,0.114) 97.7%,
     rgba(248,244,233,0.12) 100%);
 }
 .hh-grain{
@@ -1033,16 +1035,22 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* -- The frame the approved composition is pinned to -- */
+/* The stage is the whole canvas. It used to be a scaled 1440 frame centred in
+   the canvas, which is what pulled the type block to mid-canvas and left a dead
+   left third: the frame shrank away from both margins at once. The block now
+   hangs off a real page rail and the window off the opposite one, so the frame
+   keeps its left-block against right-window tension at every size. */
 .hh-stage{
-  position:relative;z-index:3;flex:0 0 auto;
-  width:calc(var(--u) * 1440);
-  height:calc(var(--u) * 718);
+  position:relative;z-index:3;flex:1 1 auto;
+  width:100%;
+  height:100%;
+  --hh-rail:40px;                 /* the nav wordmark column, mirrored */
 }
 
 /* -- The copy column -- */
 .hh-copy{
   position:absolute;
-  left:calc(var(--u) * 96);
+  left:var(--hh-rail);
   top:calc(var(--u) * 68);
   width:calc(var(--u) * 680);
 }
@@ -1093,7 +1101,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- The whisper and the window travel together -- */
 .hh-group{
   position:absolute;
-  right:calc(var(--u) * 110);
+  right:var(--hh-rail);
   bottom:calc(var(--u) * 72);
   width:calc(var(--u) * 620);
 }
@@ -1132,6 +1140,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* -- Paper grain scoped to hero (Resolution A: position:absolute not fixed, avoids sky-system conflict) -- */
 section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.80 0 0 0 0 0.72 0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;mix-blend-mode:multiply}
 
+/* The rail follows the nav's own gutter (components/nav.js: 40px, 24 at
+   1100, 20 at 768) so the hero block always starts on the wordmark column. */
+@media(max-width:1100px){ .hh-stage{--hh-rail:24px} }
+
 /* -- Short and narrow desktops both simply scale: --u already carries whichever
    of width or height binds, so the approved frame stays one object and there is
    nothing left here to special case except the desk card's own breathing. -- */
@@ -1159,42 +1171,44 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .hh-photo img{--hh-zoom:1.06;--hh-shift:52%;object-position:54% 46%}
   .hh-veil{
     background:linear-gradient(
-      rgba(248,244,233,0.95) 0%,
-      rgba(248,244,233,0.938) 5.3%,
-      rgba(248,244,233,0.923) 10.7%,
-      rgba(248,244,233,0.905) 16%,
-      rgba(248,244,233,0.882) 21.3%,
-      rgba(248,244,233,0.854) 26.7%,
-      rgba(248,244,233,0.82) 32%,
-      rgba(249,245,233,0.777) 35.3%,
-      rgba(250,246,235,0.727) 38.7%,
-      rgba(252,248,236,0.671) 42%,
-      rgba(253,249,237,0.612) 45.3%,
-      rgba(253,248,236,0.554) 48.7%,
-      rgba(248,244,233,0.5) 52%,
-      rgba(235,232,224,0.447) 55%,
-      rgba(211,210,208,0.392) 58%,
-      rgba(176,178,185,0.338) 61%,
-      rgba(130,137,153,0.286) 64%,
-      rgba(78,89,117,0.239) 67%,
-      rgba(30,44,80,0.2) 70%,
-      rgba(3,16,51,0.168) 72.7%,
-      rgba(4,10,30,0.141) 75.3%,
-      rgba(35,28,21,0.119) 78%,
-      rgba(95,70,24,0.101) 80.7%,
-      rgba(170,126,38,0.089) 83.3%,
+      rgba(248,244,233,0.9) 0%,
+      rgba(248,244,233,0.882) 5.3%,
+      rgba(248,244,233,0.857) 10.7%,
+      rgba(248,244,233,0.827) 16%,
+      rgba(248,244,233,0.794) 21.3%,
+      rgba(248,244,233,0.758) 26.7%,
+      rgba(248,244,233,0.72) 32%,
+      rgba(249,245,233,0.679) 35.3%,
+      rgba(250,246,235,0.633) 38.7%,
+      rgba(252,248,236,0.584) 42%,
+      rgba(254,249,237,0.535) 45.3%,
+      rgba(253,249,236,0.486) 48.7%,
+      rgba(248,244,233,0.44) 52%,
+      rgba(234,231,224,0.395) 55%,
+      rgba(209,208,207,0.349) 58%,
+      rgba(172,175,182,0.304) 61%,
+      rgba(125,133,151,0.262) 64%,
+      rgba(74,86,115,0.223) 67%,
+      rgba(30,44,80,0.19) 70%,
+      rgba(7,19,53,0.162) 72.7%,
+      rgba(10,16,34,0.137) 75.3%,
+      rgba(42,35,25,0.117) 78%,
+      rgba(101,75,27,0.1) 80.7%,
+      rgba(172,128,39,0.088) 83.3%,
       rgba(232,175,56,0.08) 86%,
-      rgba(255,207,85,0.078) 88.3%,
-      rgba(255,228,128,0.083) 90.7%,
-      rgba(255,237,168,0.092) 93%,
-      rgba(255,241,198,0.104) 95.3%,
-      rgba(251,242,220,0.114) 97.7%,
+      rgba(255,206,85,0.078) 88.3%,
+      rgba(255,226,127,0.084) 90.7%,
+      rgba(255,236,167,0.093) 93%,
+      rgba(255,240,198,0.104) 95.3%,
+      rgba(251,241,220,0.114) 97.7%,
       rgba(248,244,233,0.12) 100%);
   }
+  .hh-stage{--hh-rail:20px}
   .hh-copy{
-    left:calc(var(--u) * 26);
+    left:var(--hh-rail);
+    right:var(--hh-rail);
     top:calc(var(--u) * 22);
-    width:calc(var(--u) * 323);
+    width:auto;
   }
   /* On the phone the approved frame stacks the rule above the line. */
   .hh-eyebrow{
@@ -1218,9 +1232,10 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
     line-height:1.55;
   }
   .hh-group{
-    right:calc(var(--u) * 26);
+    left:var(--hh-rail);
+    right:var(--hh-rail);
     bottom:calc(var(--u) * 22);
-    width:calc(var(--u) * 323);
+    width:auto;
   }
   .hh-whisper{
     width:calc(var(--u) * 250);
@@ -1552,8 +1567,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="lw-body">
               <span class="lw-label"><span class="rule" aria-hidden="true"></span><span class="t">This week&rsquo;s window</span></span>
               <span class="lw-sentence">Build a week for <span class="lw-ghost">Maya</span>, <span class="lw-ghost">6</span>, in <br class="lw-br"><span class="lw-ghost">Georgia</span> exploring <span class="lw-theme">space</span>.</span>
+              <span class="lw-cta">Build our week</span>
             </span>
-            <span class="lw-foot"><span class="lw-cta">Build our week</span></span>
           </a>
         </div>
       </div>
