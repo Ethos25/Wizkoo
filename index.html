@@ -961,8 +961,50 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 56px;box-sizing:border-box}
 
 .hh{
-  --u:min(1px,calc(100vw / 1440),max(0.62px,calc((100vh - 82px) / 718)));
-  --u:min(1px,calc(100vw / 1440),max(0.62px,calc((100svh - 82px) / 718)));
+  /* ═══ THE SCALING LAW ═══ ruled 2026-08-01. Read this before touching 485.
+
+     485 IS THE COMPOSITION'S ACTUAL NEED, NOT THE REFERENCE FRAME'S HEIGHT.
+     This distinction is the whole bug that was fixed here, and re-deriving the
+     divisor from the frame brings it straight back.
+
+     The divisor was 718, which is the approved frame's hero height (800 - 82).
+     That looks like the right number and is not, because this layout is NOT a
+     stack: .hh-copy is anchored to the TOP at 68u and .hh-group to the BOTTOM
+     at 72u, so what the composition needs is whichever COLUMN is taller, not
+     the frame it was drawn in. Measured at --u = 1:
+
+         copy column    396.4u + 68u offset  =  464.4u   <- binding
+         window group   367.1u + 72u offset  =  439.1u
+
+     So the composition needs 464.4u and the law was reserving 718u — over-
+     reserving by 54.6% at every viewport. Where height binds, that shrank the
+     whole hero by a third for no reason: at 1966x594 the window rendered
+     394x239 (20% of a 1966px monitor) with 181px of the hero box sitting
+     empty, and the constellation correctly refused 7A because the band it was
+     handed was phone-sized. The figure was never the problem.
+
+         485 = 464.4 (measured need) + 4.4% margin
+
+     The margin is not decoration. At 465 — the exact-fit divisor — the copy
+     column lands 1.2px off the hero's bottom edge, leaving no tolerance for a
+     font fallback, a copy edit, or a browser that rounds line-height
+     differently. If the copy block changes, RE-MEASURE the two column heights
+     and re-derive; do not scale 485 by eye and do not reach for 718 again.
+
+     THE CAP IS 1.10, NOT 1. It sets how far the composition may grow past the
+     approved frame, and it has to exceed 1 or the height term can never lift a
+     short viewport above frame size no matter what the divisor is. 1.10 lets
+     large displays render 10% larger than the 1440 frame, which is the point:
+     a 1080p monitor used to get exactly the same hero as a 1440 one.
+
+     1440x800 IS UNAFFECTED AND MUST STAY SO. There the width term is 1 and the
+     height term is 718/485 = 1.480, so the minimum is 1 exactly as before. That
+     composition is ruled, and tests/hero-1440x800.spec.js locks its geometry —
+     if you change this line and that test fails, you moved something ruled.
+
+     Full derivation and the 20-viewport matrix: docs/hero-u-law-proposal.md */
+  --u:min(1.10px,calc(100vw / 1440),max(0.62px,calc((100vh - 82px) / 485)));
+  --u:min(1.10px,calc(100vw / 1440),max(0.62px,calc((100svh - 82px) / 485)));
   position:relative;
   height:calc(100vh - 82px);
   height:calc(100svh - 82px);
