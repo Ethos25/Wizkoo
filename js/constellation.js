@@ -38,6 +38,8 @@
 
   var CHALK = [250, 247, 240];      /* spec § 8: NOT the surface token #F8F4E9 */
   var SAFFRON = [243, 199, 101];    /* spec § 8: NOT the accent token #E8AF38  */
+  var GOLD = [232, 175, 56];        /* the tether's #E8AF38 — spec § 4 uses the
+                                       accent token here, unlike the stars     */
 
   var HUE = {
     Reading:   [56, 72, 208],       /* #3848D0  Language Arts */
@@ -240,22 +242,20 @@
        Negative y is intentional: it starts ABOVE the band, under the word
        "space" in the sentence, and the svg is overflow:visible. It fades to
        nothing at BOTH ends — a whisper, not a pointer. */
-    /* THE WHISPER, RE-AIMED (ruled).
-       opts.tetherX re-anchors the launch to where the word "space" actually
-       renders. The spec's constant assumed the theme star sits directly under
-       that word (§ 2); in the shipped hero the star is at 39.7% of the window
-       and the word at 65.1%, so honouring the launch AND the spec's endpoint
-       would stretch this from a 16-unit breath into a 162-unit leader — a
-       pointer, which § 4 says it must never be.
-       So the launch moves and the SCALE is the spec's: the tether travels the
-       spec's own horizontal run, leaning toward the figure, and fades out.
-       It never reached the star visually anyway — it fades to nothing at both
-       ends. The lab passes no tetherX and still renders the spec verbatim. */
+    /* THE TETHER, CONNECTED (ruled, superseding variant D).
+       opts.tether = [x1,y1,x2,y2] in band units overrides the spec's constant
+       with both ends measured by the caller: launched under the word "space"
+       where it actually renders, terminating at the theme star's glow edge.
+       The stop profile then follows the ARMS' shape — zero at both ends, full
+       by ~11% in — because on a long run the whisper profile (44% peak, slow
+       82→100 fade) leaves the last stretch invisible and the line reads as
+       cut, not connected. Dash, stroke and both-end fades are the spec's.
+       The lab passes no override and still renders the spec verbatim. */
     var th = cfg.tether;
-    if (opts.tetherX != null) {
-      var run = Math.abs(cfg.tether[0] - cfg.tether[2]);
-      var dir = cfg.stars.space[0] >= opts.tetherX ? 1 : -1;   /* lean inward */
-      th = [opts.tetherX, th[1], opts.tetherX + dir * run, th[3]];
+    var stops = [['0%', 0], ['44%', 0.28], ['82%', 0.12], ['100%', 0]];
+    if (opts.tether) {
+      th = opts.tether;
+      stops = [['0%', 0], ['11%', 0.28], ['50%', 0.16], ['89%', 0.24], ['100%', 0]];
     }
     var tid = 'wkct' + uid;
     var tg = document.createElementNS(NS, 'linearGradient');
@@ -263,12 +263,10 @@
     tg.setAttribute('gradientUnits', 'userSpaceOnUse');
     tg.setAttribute('x1', th[0]); tg.setAttribute('y1', th[1]);
     tg.setAttribute('x2', th[2]); tg.setAttribute('y2', th[3]);
-    [['0%', 'rgba(232,175,56,0)'], ['44%', 'rgba(232,175,56,0.28)'],
-     ['82%', 'rgba(232,175,56,0.12)'], ['100%', 'rgba(232,175,56,0)']
-    ].forEach(function (st) {
+    stops.forEach(function (st) {
       var s = document.createElementNS(NS, 'stop');
       s.setAttribute('offset', st[0]);
-      s.setAttribute('stop-color', st[1]);
+      s.setAttribute('stop-color', rgba(GOLD, st[1]));
       tg.appendChild(s);
     });
     defs.appendChild(tg);

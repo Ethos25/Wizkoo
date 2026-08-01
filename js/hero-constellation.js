@@ -6,15 +6,14 @@
  * spec configurations applies, where the tether launches from, and when the
  * beat is allowed to fire.
  *
- * THE TETHER'S LAUNCH POINT IS MEASURED, NOT SPECIFIED (ruled).
- *   Spec § 4 puts 7A's tether at band x=216, which is 41.94% of the window
- *   width. That coordinate was drawn against a sentence that wraps differently:
- *   the shipped sentence carries a hard <br> after "in", so "space" is the last
- *   word of line 2 and sits at 65.14%. The spec's INTENT is that the tether
- *   descends out of the word; the constant is just that intent expressed in a
- *   frame that no longer applies. So the launch x is read off .lw-theme at run
- *   time and the rest of the tether — the dash, the width, the four-stop
- *   gradient fading to nothing at BOTH ends — is the spec's, unchanged.
+ * THE TETHER CONNECTS THE WORD TO THE STAR (ruled, superseding variant D).
+ *   Both ends are measured, neither is the spec's constant. The launch is the
+ *   centre of .lw-theme, just under the word "space"; the terminus is the theme
+ *   star itself, trimmed back by the arms' own formula (r * trim0 + trim1) so
+ *   the line dissolves into the star's glow exactly the way an arm does. The
+ *   treatment between the ends is the spec's — 0.5 stroke, the 0.8/4.6 dash,
+ *   a gradient fading to nothing at both ends. The tether is load-bearing:
+ *   it must exist and stay connected at every figure position.
  *
  * LAYOUT DEPENDENCE
  *   The measurement is only valid once the sentence has set, so the build waits
@@ -83,6 +82,17 @@
      width binds again and the old behaviour resumes. */
   var MIN_INSET = 0.055;
 
+  /* ── THE FIGURE IS DROPPED TO OPTICAL CENTRE (ruled) ─────────────────────
+     Anchored to the band's top, the figure's bright mass — the theme star and
+     the hop-1 stars all sit in the figure's upper half — crowded up under the
+     sentence while the faint lower labels left a band of empty sky above the
+     handle rule. The figure now gives up SHIFT_Q of the reserved gap as air
+     above itself and refits into the remainder, so the luminous mass sits in
+     the middle of the space between the sentence and the rule and nothing is
+     pushed into the rule below. A fraction, not a px, so it is one position at
+     every window size. __wkcFigShift is the render harness's override. */
+  var SHIFT_Q = (typeof window.__wkcFigShift === 'number') ? window.__wkcFigShift : 0.12;
+
   function fit(availH, winW, ar) {
     var w = Math.min(availH * ar, winW * (1 - 2 * MIN_INSET));
     return [w, w / ar];
@@ -122,30 +132,42 @@
     return [W.width, h];
   }
 
-  /* The launch x, in the FIGURE's own user-space units. Measured against the
-     figure, not the band: the two differ whenever height binds and the figure
-     is narrower than the space it sits in. */
-  function tetherX(cfg) {
+  /* Both tether endpoints, in the FIGURE's own user-space units. Measured
+     against the figure, not the band: the two differ whenever height binds and
+     the figure is narrower than the space it sits in. The launch sits 2 units
+     under the word; negative y is fine, the svg overflows upward by design.
+     The terminus is the theme star trimmed by the arms' own gap formula. */
+  function tetherEnds(cfg) {
     var B = fig.getBoundingClientRect();
     var T = theme.getBoundingClientRect();
-    if (!B.width) return cfg.tether[0];
-    var centre = T.left + T.width / 2 - B.left;      /* px from the figure's left */
-    return centre / B.width * cfg.band.w;            /* -> band user units */
+    if (!B.width) return null;
+    var s = B.width / cfg.band.w;                    /* px per band unit */
+    var x1 = (T.left + T.width / 2 - B.left) / s;
+    var y1 = (T.bottom - B.top) / s + 2;
+    var sp = cfg.stars.space;
+    var gap = sp[2] * cfg.trim[0] + cfg.trim[1];     /* dissolve into the glow */
+    var dx = sp[0] - x1, dy = sp[1] - y1;
+    var len = Math.hypot(dx, dy) || 1;
+    return [x1, y1, sp[0] - dx / len * gap, sp[1] - dy / len * gap];
   }
 
   function build() {
     var avail = reserve();                       /* [window width, band height] */
+    /* The variant is chosen from the FULL gap, before the drop is taken out,
+       so a placement decision can never flip which figure ships. */
     var key = pickSize(avail[0], avail[1]);
     var cfg = C.SPEC[key];
-    var box = fit(avail[1], avail[0], cfg.band.w / cfg.band.h);
+    var shift = avail[1] * SHIFT_Q;
+    var box = fit(avail[1] - shift, avail[0], cfg.band.w / cfg.band.h);
 
     fig.textContent = '';
     fig.className = 'lw-figure';
     fig.style.width = box[0] + 'px';
     fig.style.height = box[1] + 'px';
+    fig.style.marginTop = shift + 'px';
     band.setAttribute('data-size', key);
     sizeKey = key;
-    handle = C.build(fig, cfg, { uid: 'h', tetherX: tetherX(cfg), settled: played });
+    handle = C.build(fig, cfg, { uid: 'h', tether: tetherEnds(cfg), settled: played });
     if (!played && !handle.reduced) {
       C.observe(win, {
         reduced: handle.reduced,

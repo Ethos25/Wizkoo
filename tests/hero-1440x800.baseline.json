@@ -1,7 +1,7 @@
 {
   "note": "Ruled composition. See tests/hero-1440x800.spec.js before changing.",
   "viewport": "1440x800",
-  "source": "http://localhost:50880",
+  "source": "http://localhost:3000",
   "capturedAt": "2026-08-01",
   "geometry": {
     "u": 1,
@@ -133,10 +133,10 @@
         "fontSize": "13.6px"
       },
       ".lw-figure": {
-        "x": 888.48,
-        "y": 445.97,
-        "w": 470.38,
-        "h": 157.38,
+        "x": 916.7,
+        "y": 464.84,
+        "w": 413.92,
+        "h": 138.48,
         "fontSize": "13.6px"
       }
     },
@@ -152,13 +152,13 @@
         "d": 7.19
       },
       "Math": {
-        "xPct": 27.44,
+        "xPct": 27.45,
         "yPct": 85.39,
         "d": 5.39
       },
       "Science": {
         "xPct": 58.65,
-        "yPct": 37.07,
+        "yPct": 37.08,
         "d": 6.59
       },
       "Writing": {
@@ -168,7 +168,7 @@
       },
       "Art": {
         "xPct": 78.19,
-        "yPct": 69.66,
+        "yPct": 69.67,
         "d": 3.39
       },
       "Geography": {
@@ -179,6 +179,12 @@
     },
     "figure": {
       "size": "desktop"
+    },
+    "tether": {
+      "x1": 1207.29,
+      "y1": 447.53,
+      "x2": 1087.85,
+      "y2": 483.5
     }
   }
 }

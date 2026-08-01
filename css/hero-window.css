@@ -230,8 +230,11 @@
   pointer-events:none;
   display:flex;
   justify-content:center;           /* the figure centres in the width it gets */
-  align-items:flex-start;           /* and hangs from the top, where the tether
-                                       lands. Spec § 8: do not centre it. */
+  align-items:flex-start;           /* the figure's DROP inside the band is a
+                                       margin set by js/hero-constellation.js
+                                       (ruled: optical centre between sentence
+                                       and rule), so the box itself still hangs
+                                       from the top. */
 }
 .lw-figure{
   position:relative;

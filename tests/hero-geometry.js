@@ -46,6 +46,25 @@ const PROBE = (args) => {
   if (fig) {
     const f = fig.getBoundingClientRect();
     out.figure = { size: document.querySelector('.lw-band').getAttribute('data-size') };
+
+    /* The tether is load-bearing (ruled): it must launch under the word
+       "space" and terminate at the theme star's glow edge. Its endpoints are
+       part of the fingerprint — mapped from the svg's user units to page px so
+       they are compared in the same frame as everything else. */
+    const svg = fig.querySelector('.wkc-svg');
+    const tp = fig.querySelector('.wkc-tether path');
+    if (svg && tp) {
+      const vb = svg.getAttribute('viewBox').split(/\s+/).map(Number);
+      const m = tp.getAttribute('d')
+        .match(/M\s*(-?[\d.]+)[ ,]\s*(-?[\d.]+)\s*L\s*(-?[\d.]+)[ ,]\s*(-?[\d.]+)/);
+      if (m) {
+        const sx = f.width / vb[2], sy = f.height / vb[3];
+        out.tether = {
+          x1: round(f.left + m[1] * sx - hh.left), y1: round(f.top + m[2] * sy - hh.top),
+          x2: round(f.left + m[3] * sx - hh.left), y2: round(f.top + m[4] * sy - hh.top),
+        };
+      }
+    }
     STARS.forEach((k) => {
       const el = fig.querySelector(`[data-star="${k}"]`);
       if (!el) { out.stars[k] = null; return; }
@@ -91,6 +110,13 @@ function diff(expected, actual, tol = 0.5) {
 
   if (expected.figure && actual.figure && expected.figure.size !== actual.figure.size) {
     out.push(`figure variant: ${expected.figure.size} -> ${actual.figure.size}`);
+  }
+  if (expected.tether || actual.tether) {
+    const e = expected.tether, a = actual.tether;
+    if (!e || !a) out.push(`tether: ${e ? 'disappeared' : 'appeared'}`);
+    else for (const k of ['x1', 'y1', 'x2', 'y2']) {
+      if (!near(e[k], a[k])) out.push(`tether ${k}: ${e[k]} -> ${a[k]}`);
+    }
   }
   for (const k of Object.keys(expected.stars || {})) {
     const e = expected.stars[k], a = (actual.stars || {})[k];
