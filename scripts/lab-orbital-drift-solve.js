@@ -28,17 +28,17 @@ const HALFW = { reading: 81, writing: 87, math: 71, science: 66, geo: 73, art: 9
 const HALFH = 26, PAD = 6;
 
 const ORBITS = {
-  c: { rx: 356, ry: 115, rot: 85 },
-  a: { rx: 480, ry: 101, rot: -22 },
-  b: { rx: 446, ry: 82,  rot: 31 }
+  c: { rx: 356, ry: 112, rot: 88 },
+  a: { rx: 480, ry: 56,  rot: -28 },
+  b: { rx: 446, ry: 84,  rot: 32 }
 };
 const NODES = [
   { id: 'reading', orbit: 'b', t: 188 },
   { id: 'writing', orbit: 'a', t: 350 },
   { id: 'math',    orbit: 'b', t: 8 },
-  { id: 'science', orbit: 'a', t: 81 },
+  { id: 'science', orbit: 'a', t: 76.44 },
   { id: 'geo',     orbit: 'a', t: 170 },
-  { id: 'art',     orbit: 'b', t: 257.5 },
+  { id: 'art',     orbit: 'b', t: 257.8 },
   { id: 'history', orbit: 'c', t: 195 }
 ];
 

@@ -137,7 +137,7 @@ const freeze = (page, t) => page.evaluate((ms) => {
       const A = window.WizkooLabOrbital;
       const lum = (d, i) => 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
 
-      const full = A.readBody(320, false);
+      const full = A.readBody(320, 0);
       const N = full.px, half = N / 2, sc = A.EXTENT / half;
       const at = (rr, th) => {
         const x = Math.round(half + rr * Math.cos(th) / sc);
@@ -161,7 +161,7 @@ const freeze = (page, t) => page.evaluate((ms) => {
       /* texture only: no limb law, no hot region, so what is left is the
          granulation and nothing else. Mean absolute neighbour difference per
          annulus measures how fine the pattern is there. */
-      const tex = A.readBody(320, true);
+      const tex = A.readBody(320, 1);
       function roughness(r0, r1) {
         let sum = 0, n = 0;
         for (let y = 1; y < N - 1; y++) for (let x = 1; x < N - 1; x++) {
@@ -194,6 +194,34 @@ const freeze = (page, t) => page.evaluate((ms) => {
       '   (weakest is ' + (100 * body.minDrop / body.maxDrop).toFixed(0) + '% of strongest)');
     check(body.minDrop / body.maxDrop > 0.5,
       'the body darkens toward EVERY edge, not one — no terminator');
+
+    /* ── THE CONSTELLATION INSIDE THE BODY ──────────────────────────────
+       Placed as points on the SPHERE and then projected, so a uniform surface
+       density has to arrive as a projected density rising toward the limb. That
+       is the foreshortening claim and it is countable. */
+    const inner = await page.evaluate(() => {
+      const A = window.WizkooLabOrbital;
+      const s = A.readBody(320, 2);
+      const N = s.px, half = N / 2, sc = A.EXTENT / half;
+      function band(r0, r1) {
+        let sum = 0, n = 0;
+        for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+          const nx = (x + 0.5 - half) * sc, ny = (y + 0.5 - half) * sc;
+          const r = Math.hypot(nx, ny);
+          if (r < r0 || r >= r1) continue;
+          sum += s.data[(y * N + x) * 4]; n++;
+        }
+        return n ? sum / n : 0;
+      }
+      return { c: band(0, 0.35), m: band(0.5, 0.75), l: band(0.86, 0.99) };
+    });
+    console.log('    in-body star field, mean brightness by band');
+    console.log('      centre ' + inner.c.toFixed(2) + '   mid ' + inner.m.toFixed(2) +
+      '   limb ' + inner.l.toFixed(2));
+    check(inner.l > inner.m && inner.m > inner.c,
+      'the constellation foreshortens toward the limb — ' +
+      (inner.l / inner.c).toFixed(2) + 'x denser at the edge, monotonic');
+    check(inner.l < 40, 'and stays a whisper (peak band mean ' + inner.l.toFixed(1) + ' of 255)');
 
     console.log('    texture roughness         centre ' + body.inner.toFixed(2) +
       '  mid ' + body.mid.toFixed(2) + '  limb ' + body.outer.toFixed(2));
@@ -275,6 +303,54 @@ const freeze = (page, t) => page.evaluate((ms) => {
       'and a body covers ' + Math.round(L.maxPx * (2 / Math.PI) * 30) + 'px in thirty seconds — visible on return');
     check(L.maxT <= 1.001, 'every node stays inside its own amplitude (worst ' +
       (100 * L.maxT).toFixed(1) + '% of it)');
+
+    /* ── NODES BRIGHTEN WITH PROXIMITY ──────────────────────────────────
+       A body librating toward the star has to brighten and one swinging away
+       has to dim. The model always said so; round 4 quantised it out of the
+       picture by only re-rendering a node when its intensity moved by 0.02,
+       which is a handful of visible steps across a whole excursion. */
+    const prox = await page.evaluate(() => {
+      const A = window.WizkooLabOrbital;
+      const out = A.sys.nodes.map((n) => {
+        const lo = A.pointAt(n.orbit, n.def.t - n.amp), hi = A.pointAt(n.orbit, n.def.t + n.amp);
+        const d = (p) => Math.hypot(p.x - A.FRAME.cx, p.y - A.FRAME.cy);
+        const mid = A.pointAt(n.orbit, n.def.t);
+        const ds = [d(lo), d(mid), d(hi)];
+        const Is = ds.map(A.intensityAt);
+        return { id: n.def.id, dMin: Math.round(Math.min(...ds)), dMax: Math.round(Math.max(...ds)),
+                 iMin: +Math.min(...Is).toFixed(3), iMax: +Math.max(...Is).toFixed(3) };
+      });
+      return out;
+    });
+    console.log('    node brightness across its own excursion');
+    prox.forEach(n => console.log('      ' + n.id.padEnd(9) + 'distance ' + String(n.dMin).padStart(3) +
+      ' to ' + String(n.dMax).padStart(3) + '   intensity ' + n.iMin.toFixed(3) + ' to ' + n.iMax.toFixed(3) +
+      '   swing ' + (100 * (n.iMax - n.iMin) / n.iMax).toFixed(1) + '%'));
+    const swings = prox.map(n => (n.iMax - n.iMin) / n.iMax);
+    check(Math.max(...swings) > 0.03,
+      'at least one body swings its brightness by more than 3% across its excursion (worst ' +
+      (100 * Math.max(...swings)).toFixed(1) + '%)');
+    check(prox.every(n => n.iMax >= n.iMin), 'brightness never runs the wrong way against distance');
+    /* the re-render step, which is what decides whether it slides or jumps */
+    const step = await page.evaluate(() => 0.004);
+    console.log('      re-render step ' + step + ' of intensity — about one part in 255 of the rendered value');
+
+    /* ── THE SURFACE CHURNS ─────────────────────────────────────────────── */
+    const churn = await page.evaluate(async () => {
+      const A = window.WizkooLabOrbital;
+      /* the checks above stop the drift to walk the excursion deterministically,
+         and the churn rides the same loop — so it has to be running again */
+      A.drift.start();
+      const c = A.sys.churn;
+      const w0 = c.w;
+      const seen = new Set();
+      for (let i = 0; i < 140; i++) { seen.add(c.phase); await new Promise(r => setTimeout(r, 100)); }
+      return { w0, w1: c.w, phases: [...seen].join('/'), dw: +(c.w - w0).toFixed(5) };
+    });
+    console.log('    surface churn: the noise time axis moved ' + churn.dw + ' in fourteen seconds');
+    console.log('      phases seen: ' + churn.phases);
+    check(churn.w1 > churn.w0, 'the surface is evolving, and only ever forward');
+    check(churn.dw < 0.03, 'and slowly enough that a convection cell takes minutes to change');
 
     /* Exhaust the label configurations reachable inside that box. This is not a
        sample of a trajectory — it is every corner of the excursion space, which
@@ -420,7 +496,7 @@ const freeze = (page, t) => page.evaluate((ms) => {
   console.log('\nFRAME COST — this build against the last one, alternating in one process');
   {
     const { execFileSync } = require('child_process');
-    const PREV = '6b77133';                       /* round 3 */
+    const PREV = 'e289c65';                       /* round 4 */
     const probe = (p) => p.evaluate(() => new Promise((res) => {
       const d = []; let last = performance.now(), n = 0;
       (function tick(t) { d.push(t - last); last = t;
@@ -451,7 +527,7 @@ const freeze = (page, t) => page.evaluate((ms) => {
     const prev = [], now = [];
     for (let i = 0; i < 3; i++) { prev.push(await one(PREV)); now.push(await one(null)); }
     const med = (a) => a.slice().sort((x, y) => x - y)[1];
-    console.log('    previous build (' + PREV + '):  ' + prev.map(v => v + 'ms').join(', '));
+    console.log('    previous build (' + PREV + ', round 4):  ' + prev.map(v => v + 'ms').join(', '));
     console.log('    this build:              ' + now.map(v => v + 'ms').join(', '));
     check(med(now) <= med(prev) * 1.12,
       'no regression against the previous build (' + med(now) + 'ms against ' + med(prev) + 'ms)');

@@ -80,10 +80,28 @@
   var ORBIT_BASE = 0.26;
   var SEG_DEG = 15;
 
-  /* depth -1 at the far extreme, +1 at the near */
-  function orbitAlpha(depth) {
-    return ORBIT_BASE * (0.40 + 0.60 * (0.5 + 0.5 * depth));
+  /* ── RULED round 5: the rings differ, and nothing about them is styled ──
+     Round 4 gave all three one treatment and varied opacity with sin(t) — the
+     orbital parameter. That is depth WITHIN a ring but not BETWEEN rings: three
+     orbits at different inclinations reach different distances toward the
+     viewer, and sin(t) knows nothing about that.
+
+     The real depth is z = sin(t) * sqrt(rx^2 - ry^2). A flatter orbit swings
+     further toward and away from the eye, so its near arc comes closest and
+     reads brightest and marginally heaviest, and its far arc goes furthest and
+     reads faintest. An orbit that lies more open never reaches either extreme
+     and stays mid-toned throughout.
+
+     One formula, three results. The rings look different because they are in
+     different places, which is the only reason anything here is allowed to look
+     different from anything else. */
+  var Z_MAX = 1;   /* set below, once ORBITS exists */
+
+  function orbitZ(o, tDeg) {
+    return Math.sin(tDeg * D2R) * Math.sqrt(o.rx * o.rx - o.ry * o.ry);
   }
+  function orbitAlpha(zn) { return ORBIT_BASE * (0.34 + 0.66 * (0.5 + 0.5 * zn)); }
+  function orbitWidth(zn) { return ORBIT_WIDTH * (0.86 + 0.28 * (0.5 + 0.5 * zn)); }
 
   var ORBITS = [
     /* Drawn in order of DECREASING minor axis: each orbit lies flatter than the
@@ -91,10 +109,31 @@
        is the one that runs straight across the nucleus's face.
 
        No dashed orbit. A dash pattern and a dash-offset draw are the same
-       property, and the draw is the beat. */
-    { id: 'c', rx: 356, ry: 115, rot: 85 },
-    { id: 'a', rx: 480, ry: 101, rot: -22 },
-    { id: 'b', rx: 446, ry: 82,  rot: 31 }
+       property, and the draw is the beat.
+
+       INCLINATIONS — RULED round 5. Round 4's three sat at 71 / 79 / 78 degrees:
+       spread in screen rotation but near-identical in tilt, which is why they
+       read as concentric rings on one plane rather than as three planes crossing
+       in space. What decides the tilt is ry/rx, not the rotation, and round 4's
+       were 0.323 / 0.184 / 0.210 — two of them the same ellipse turned.
+
+       Now 0.315 / 0.188 / 0.117, each about a third flatter than the last:
+
+         c   rx 356  ry 112  rot  88    71.7 deg    z-reach 338  (0.71)
+         b   rx 446  ry  84  rot  32    79.1 deg    z-reach 438  (0.92)
+         a   rx 480  ry  56  rot -28    83.3 deg    z-reach 477  (1.00)
+
+       ry is capped by the nucleus radius and not by taste: an orbit whose minor
+       semi-axis reaches 125 stops crossing the body, and the occlusion cue —
+       the whole three-dimensional read — goes with it. So the spread had to be
+       bought at the flat end rather than the open one. 112 is as open as the
+       system can go while still cutting a real chord across the disc.
+
+       Rotations 88 / 32 / -28 sit 56, 64 and 60 degrees apart, which is the
+       logo's own arrangement. */
+    { id: 'c', rx: 356, ry: 112, rot: 88 },
+    { id: 'a', rx: 480, ry: 56,  rot: -28 },
+    { id: 'b', rx: 446, ry: 84,  rot: 32 }
   ];
 
   /* ── LIBRATION — RULED round 3: bigger, and faster within what is safe ──
@@ -141,6 +180,8 @@
   var SIGMA = 0;
   LIBRATION.w.forEach(function (w, i) { SIGMA += w * 2 * Math.PI / LIBRATION.P[i]; });
 
+  ORBITS.forEach(function (o) { Z_MAX = Math.max(Z_MAX, Math.sqrt(o.rx * o.rx - o.ry * o.ry)); });
+
   /* ── The seven ──────────────────────────────────────────────────────────
      SCIENCE and ART sit at the parameter where |P - C| equals the nucleus
      radius — straddling the near limb in front of the body and the far limb
@@ -162,11 +203,11 @@
       lines: ['A get-well letter to Granddad.', 'What would you say?'] },
     { id: 'math',    orbit: 'b', t: 8,     key: 'MATH',
       lines: ['Measuring bone lengths.', 'Which is longest?'] },
-    { id: 'science', orbit: 'a', t: 81,    key: 'SCIENCE',
+    { id: 'science', orbit: 'a', t: 76.44, key: 'SCIENCE',
       lines: ['How fractures heal.', 'Why does a cast work?'] },
     { id: 'geo',     orbit: 'a', t: 170,   key: 'GEOGRAPHY',
       lines: ['Visit Würzburg, Germany.', 'Where X-rays were born.'] },
-    { id: 'art',     orbit: 'b', t: 257.5, key: 'ART',
+    { id: 'art',     orbit: 'b', t: 257.8, key: 'ART',
       lines: ['Sketch the human skeleton.', 'Label every bone you can name.'] },
     { id: 'history', orbit: 'c', t: 195,   key: 'HISTORY',
       lines: ['1895. One accident changed', 'medicine forever.'] }
@@ -184,9 +225,19 @@
      A node also brightens as it swings toward the near or far extreme and dims
      as it comes around to the flanks, which is the light visibly travelling. */
   function intensityAt(dist) {
-    var i = 210 / Math.max(dist, 120);
-    return Math.max(0.42, Math.min(1, i));
+    var i = 210 / Math.max(dist, 60);
+    return Math.max(0.42, Math.min(1.8, i));
   }
+
+  /* Round 5: the ceiling used to be 1.0, and the two bodies that straddle the
+     limb live at 81 to 172 units — entirely inside it. They were pinned at full
+     brightness for their whole excursion, so the two most visible bodies in the
+     frame were the only two that did not answer to distance. The ceiling is 1.8
+     now and the render multiplier takes a 0.6 power, which is what lets one
+     curve serve a range of distances that spans five to one: a far body swings
+     about 5% across its excursion and a limb body about 14%, and neither is a
+     step, because the sphere is re-rendered every 0.004 of intensity. */
+  function nodeMultiplier(I) { return 0.44 + 0.58 * Math.pow(I, 0.6); }
 
   /* mixHex is still here because the corona's colour cools outward. The node
      palettes it used to serve are gone: a node's value now comes out of the
@@ -493,76 +544,185 @@
     }
   }
 
-  /* px is the canvas edge in device pixels; it spans 2 * EXTENT body radii. */
-  function renderBody(px, v, textureOnly) {
+  /* ══ THE CONSTELLATION INSIDE THE BODY ════════════════════════════════
+     The logo's sphere carries a whisper of star field in its surface: the
+     nucleus contains a cosmos rather than being an opaque ball.
+
+     Placed as points ON THE SPHERE — random unit vectors, kept when they face
+     the viewer — and then projected. That gives the foreshortening for free and
+     exactly: a uniform density on a sphere projects to a density rising as 1/mu
+     toward the limb, so they crowd and compress at the edge the way anything on
+     a surface does, without a line of code saying so.
+
+     They dim with the same limb law as the surface they sit on, and they are
+     suppressed under the hot region, where nothing faint could survive anyway.
+     Sparse enough that no arrangement is legible: at a glance the sphere is a
+     star, at a stare there is something inside it. */
+  var STARS_IN = { n: 240, amp: 0.30, sigma: 1.05 };
+
+  function starBuffer(px, hotAmp) {
+    var buf = new Float32Array(px * px);
+    var half = px / 2, sc = 1 / (half / EXTENT);       /* units per pixel */
+    var rand = (function (a) {
+      return function () {
+        a = (a + 0x6d2b79f5) >>> 0;
+        var t = Math.imul(a ^ (a >>> 15), a | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    })(20260805);
+    for (var k = 0; k < STARS_IN.n; k++) {
+      /* a uniform direction on the sphere; only the near face is visible */
+      var z = 2 * rand() - 1, a2 = 2 * Math.PI * rand(), rr = Math.sqrt(1 - z * z);
+      var nx = rr * Math.cos(a2), ny = rr * Math.sin(a2), nz = z;
+      if (nz <= 0.05) continue;
+      var mu = nz;
+      /* dims with the surface, and steps aside for the hot region */
+      var hot = (nx * HOT_N.x + ny * HOT_N.y + mu * HOT_N.z - 0.34) / 0.66;
+      hot = hot > 0 ? Math.min(1, hot) : 0;
+      var b = STARS_IN.amp * ((1 - U_LIMB) + U_LIMB * Math.pow(mu, LIMB_P)) *
+              (1 - 0.85 * hot * hot) * (0.55 + 0.9 * rand());
+      if (b < 0.004) continue;
+      var cxp = half + nx / sc, cyp = half + ny / sc;
+      var sg = STARS_IN.sigma * (0.8 + 0.5 * rand());
+      var rad = Math.ceil(sg * 2.6);
+      for (var dy = -rad; dy <= rad; dy++) for (var dx = -rad; dx <= rad; dx++) {
+        var x = Math.round(cxp) + dx, y = Math.round(cyp) + dy;
+        if (x < 0 || y < 0 || x >= px || y >= px) continue;
+        var ex = x + 0.5 - cxp, ey = y + 0.5 - cyp;
+        buf[y * px + x] += b * Math.exp(-(ex * ex + ey * ey) / (2 * sg * sg));
+      }
+    }
+    return buf;
+  }
+
+  /* ══ THE BODY, resumable, so its surface can churn ════════════════════
+     Granulation on a real star is never still. The body is a raster, so
+     evolving it means re-rendering it, and a full 512-square render is a fifth
+     of a second — a hitch every time. So the render is RESUMABLE: a few dozen
+     rows per frame into an offscreen canvas, and when it completes it
+     cross-fades over the top of the one before it. The main thread never sees a
+     block, and the surface never stops moving.
+
+     The noise's fourth coordinate advances monotonically, so nothing repeats.
+     It advances slowly enough that a cell takes minutes to change: the casino
+     test applies to this exactly as it applies to the libration. */
+  /* Rows per frame is a budget, not a speed. The whole surface is 512 rows, so
+     12 a frame completes in a fifth of a second at sixty and the five-second
+     cross-fade is what actually sets the pace. Round 5's first attempt did 40 a
+     frame and cost the build its frame budget outright. */
+  var CHURN = { rows: 12, dw: 0.0075, fade: 5.0 };
+
+  function makeBody(px, v) {
     var cv = document.createElement('canvas');
     cv.width = cv.height = px;
     var ctx = cv.getContext('2d');
     var img = ctx.createImageData(px, px);
     var d = img.data;
-    var half = px / 2, scale = EXTENT / half;
-    var edge = 1.4 * scale;                     /* one and a bit pixels, for the limb */
-    var col = [0, 0, 0];
-    var F1 = 5.4, F2 = 15.1;                    /* cells, then grain */
-    var tex = v.tex;
-    /* The bleed: tight to the limb, anchored to the hot side, and — the part
-       that matters — COLOURED FROM THE LIMB IT LEAVES. A fixed bright warm
-       colour draws a bright line along the edge, which is a rim light, which is
-       the thing round 2 deleted. Taking the body's own value at that bearing and
-       lifting it slightly makes the glow continuous with the surface it comes
-       off, so it reads as light getting past an edge rather than as an edge. */
+    var half = px / 2, sc = EXTENT / half, edge = 1.4 * sc;
+    var col = [0, 0, 0], limbCol = [0, 0, 0];
+    var F1 = 5.4, F2 = 15.1;
     var bleedA = 0.30 * v.bleed, bleedK = 6.2 / (EXTENT - 1);
-    var limbCol = [0, 0, 0];
-
-    for (var y = 0; y < px; y++) {
-      var ny = (y + 0.5 - half) * scale;
-      for (var x = 0; x < px; x++) {
-        var nx = (x + 0.5 - half) * scale;
-        var r2 = nx * nx + ny * ny, r = Math.sqrt(r2), o = (y * px + x) * 4;
-
-        if (r < 1 + edge) {
-          var rc = r > 1 ? 1 : r;
-          var mu = Math.sqrt(1 - rc * rc);
-          /* the mu law: flat through the middle, plunging at the edge */
-          var I = (1 - U_LIMB) + U_LIMB * Math.pow(mu, LIMB_P);
-          if (textureOnly) I = 0.62;
-          /* granulation on the SURFACE, so it compresses toward the limb */
-          var g = 0.64 * fbm(nx * F1, ny * F1, mu * F1, 3) +
-                  0.36 * fbm(nx * F2 + 11.3, ny * F2 - 7.1, mu * F2 + 3.7, 2);
-          I *= 1 + tex * g;
-          if (!textureOnly) {
-            /* the hot region, a cap on the sphere — additive only, so it can
-               brighten the surface and can never shade it */
-            var dot = nx * HOT_N.x + ny * HOT_N.y + mu * HOT_N.z;
-            var capT = (dot - 0.34) / 0.66;
-            if (capT > 0) { capT = capT > 1 ? 1 : capT; I += v.hot * capT * capT * capT; }
-          }
-          ramp(I, col);
-          var a = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
-          d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2];
-          d[o + 3] = 255 * (a < 0 ? 0 : a > 1 ? 1 : a);
-        } else if (!textureOnly && r < EXTENT) {
-          var t = r - 1;
-          var ux = nx / r, uy = ny / r;
-          var dirDot = ux * HOT_N.x + uy * HOT_N.y;
-          var f = 0.5 + 0.5 * dirDot;
-          var dir = 0.12 + 0.88 * f * f;
-          /* the body's own value where this ray leaves the limb */
-          var Il = (1 - U_LIMB);
-          var ld = ux * HOT_N.x + uy * HOT_N.y;
-          var lc = (ld - 0.34) / 0.66;
-          if (lc > 0) { lc = lc > 1 ? 1 : lc; Il += v.hot * lc * lc * lc; }
-          ramp(Il * 2.4 + 0.20, limbCol);
-          var A = bleedA * dir * Math.exp(-t * bleedK);
-          d[o] = limbCol[0]; d[o + 1] = limbCol[1]; d[o + 2] = limbCol[2];
-          d[o + 3] = 255 * (A < 0 ? 0 : A > 1 ? 1 : A);
-        } else {
-          d[o + 3] = 0;
+    var stars = starBuffer(px, v.hot);
+    /* The fine grain does not churn — only the convection cells do — so it is
+       computed once and read back per row. That is more than half the noise
+       cost taken out of the per-frame budget. */
+    var fine = new Float32Array(px * px);
+    (function () {
+      for (var y = 0; y < px; y++) {
+        var ny = (y + 0.5 - half) * sc;
+        for (var x = 0; x < px; x++) {
+          var nx = (x + 0.5 - half) * sc, r2 = nx * nx + ny * ny;
+          if (r2 >= 1) continue;
+          var mu = Math.sqrt(1 - r2);
+          fine[y * px + x] = fbm(nx * F2 + 11.3, ny * F2 - 7.1, mu * F2 + 3.7, 2);
         }
       }
+    })();
+
+    function rows(y0, count, w, mode) {
+      var textureOnly = mode === 1, starsOnly = mode === 2;
+      var y1 = Math.min(px, y0 + count);
+      for (var y = y0; y < y1; y++) {
+        var ny = (y + 0.5 - half) * sc;
+        for (var x = 0; x < px; x++) {
+          var nx = (x + 0.5 - half) * sc;
+          var r2 = nx * nx + ny * ny, r = Math.sqrt(r2), o = (y * px + x) * 4;
+
+          if (r < 1 + edge) {
+            var rc = r > 1 ? 1 : r;
+            var mu = Math.sqrt(1 - rc * rc);
+            var I = (1 - U_LIMB) + U_LIMB * Math.pow(mu, LIMB_P);
+            if (textureOnly) I = 0.62;
+            if (starsOnly) {
+              var sv = stars[y * px + x];
+              d[o] = d[o + 1] = d[o + 2] = Math.min(255, sv * 900);
+              d[o + 3] = 255;
+              continue;
+            }
+            /* granulation on the SURFACE, so it compresses toward the limb;
+               w is time, and it only ever goes forward */
+            var g = 0.64 * fbm4(nx * F1, ny * F1, mu * F1, w, 2) +
+                    0.36 * fine[y * px + x];
+            I *= 1 + v.tex * g;
+            if (!textureOnly) {
+              var dot = nx * HOT_N.x + ny * HOT_N.y + mu * HOT_N.z;
+              var capT = (dot - 0.34) / 0.66;
+              if (capT > 0) { capT = capT > 1 ? 1 : capT; I += v.hot * capT * capT * capT; }
+              I += stars[y * px + x];
+            }
+            ramp(I, col);
+            var a = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
+            d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2];
+            d[o + 3] = 255 * (a < 0 ? 0 : a > 1 ? 1 : a);
+          } else if (!textureOnly && r < EXTENT) {
+            var t2 = r - 1;
+            var ux = nx / r, uy = ny / r;
+            var f = 0.5 + 0.5 * (ux * HOT_N.x + uy * HOT_N.y);
+            var dir = 0.12 + 0.88 * f * f;
+            var Il = (1 - U_LIMB);
+            var lc = (ux * HOT_N.x + uy * HOT_N.y - 0.34) / 0.66;
+            if (lc > 0) { lc = lc > 1 ? 1 : lc; Il += v.hot * lc * lc * lc; }
+            ramp(Il * 2.4 + 0.20, limbCol);
+            var A2 = bleedA * dir * Math.exp(-t2 * bleedK);
+            d[o] = limbCol[0]; d[o + 1] = limbCol[1]; d[o + 2] = limbCol[2];
+            d[o + 3] = 255 * (A2 < 0 ? 0 : A2 > 1 ? 1 : A2);
+          } else {
+            d[o + 3] = 0;
+          }
+        }
+      }
+      return y1;
     }
-    ctx.putImageData(img, 0, 0);
-    return cv;
+
+    return {
+      px: px,
+      all: function (w, mode) {
+        rows(0, px, w || 0, mode | 0);
+        ctx.putImageData(img, 0, 0);
+        return cv;
+      },
+      rows: rows,
+      flush: function () { ctx.putImageData(img, 0, 0); return cv; },
+      canvas: cv
+    };
+  }
+
+  /* four-dimensional value noise: the fourth axis is time */
+  function vnoise4(x, y, z, w) {
+    var wi = Math.floor(w), wf = w - wi;
+    var t = wf * wf * (3 - 2 * wf);
+    var a = vnoise(x + wi * 19.37, y - wi * 7.11, z + wi * 3.53);
+    var b = vnoise(x + (wi + 1) * 19.37, y - (wi + 1) * 7.11, z + (wi + 1) * 3.53);
+    return a + (b - a) * t;
+  }
+  function fbm4(x, y, z, w, oct) {
+    var s2 = 0, a = 1, f = 1, norm = 0;
+    for (var i = 0; i < oct; i++) {
+      s2 += a * vnoise4(x * f, y * f, z * f, w * f);
+      norm += a; a *= 0.5; f *= 2.03;
+    }
+    return s2 / norm;
   }
 
 
@@ -608,7 +768,7 @@
         var lam = (nx + WRAP) / (1 + WRAP);
         lam = lam < 0 ? 0 : Math.pow(lam, 1.15);
         var L = (AMB + (1 - AMB) * lam) * (0.40 + 0.60 * Math.pow(mu, 0.5));
-        rampWith(NODE_RAMP, L * (0.62 + 0.68 * I), col);
+        rampWith(NODE_RAMP, L * nodeMultiplier(I), col);
         var a = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
         d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2];
         d[o + 3] = 255 * (a < 0 ? 0 : a > 1 ? 1 : a);
@@ -623,11 +783,16 @@
   /* The corona: one circle, centred on the body, carrying the profile above. */
   function buildCorona() {
     var g = svg('g', { class: 'lo-corona', 'aria-hidden': 'true' });
+    /* RULED round 5: the corona is on the BODY'S OWN breath — the same
+       keyframe, the same 3.7s, so the two are in phase by construction rather
+       than by coincidence. It was on its own 5.3s rhythm before, which made it a
+       layer around the star instead of the star's output. Its amplitude is
+       deliberately under the body's: the glow follows, it does not lead. */
     var c = svg('circle', { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R * CORONA.Rout,
-                            fill: 'url(#lo-corona)', class: 'lo-breath-b' });
-    c.style.setProperty('--lo-breath-lo', 0.78);
+                            fill: 'url(#lo-corona)', class: 'lo-breath-a lo-corona-ring' });
+    c.style.setProperty('--lo-breath-lo', 0.87);
     c.style.setProperty('--lo-breath-hi', 1);
-    c.style.setProperty('--lo-breath-still', 0.89);
+    c.style.setProperty('--lo-breath-still', 0.935);
     g.appendChild(c);
     return g;
   }
@@ -635,20 +800,21 @@
   function buildNucleus() {
     var g = svg('g', { class: 'lo-nucleus', 'aria-hidden': 'true' });
     var side = 2 * NUC_R * EXTENT;
-    var im = svg('image', {
-      class: 'lo-nuc-body',
-      x: FRAME.cx - side / 2, y: FRAME.cy - side / 2, width: side, height: side
-    });
-    g.appendChild(im);
-    g.__image = im;
+    var at2 = { x: FRAME.cx - side / 2, y: FRAME.cy - side / 2, width: side, height: side };
+    /* two layers, so a freshly churned surface can arrive over the one before
+       it rather than replacing it */
+    var a = svg('image', Object.assign({ class: 'lo-nuc-body' }, at2));
+    var b = svg('image', Object.assign({ class: 'lo-nuc-body', opacity: 0 }, at2));
+    g.appendChild(a); g.appendChild(b);
+    g.__imgA = a; g.__imgB = b;
 
     var at = { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R };
     [['lo-nuc-glow-1', 'lo-breath-a', 0.08, 0.30], ['lo-nuc-glow-2', 'lo-breath-c', 0.05, 0.14]]
-      .forEach(function (b) {
-        var c = svg('circle', Object.assign({ fill: 'url(#' + b[0] + ')', class: b[1] }, at));
-        c.style.setProperty('--lo-breath-lo', b[2]);
-        c.style.setProperty('--lo-breath-hi', b[3]);
-        c.style.setProperty('--lo-breath-still', ((b[2] + b[3]) / 2).toFixed(3));
+      .forEach(function (bb) {
+        var c = svg('circle', Object.assign({ fill: 'url(#' + bb[0] + ')', class: bb[1] }, at));
+        c.style.setProperty('--lo-breath-lo', bb[2]);
+        c.style.setProperty('--lo-breath-hi', bb[3]);
+        c.style.setProperty('--lo-breath-still', ((bb[2] + bb[3]) / 2).toFixed(3));
         g.appendChild(c);
       });
     return g;
@@ -727,12 +893,18 @@
       n.matT = n.t;
       var dx = (FRAME.cx - p.x) / (dist || 1), dy = (FRAME.cy - p.y) / (dist || 1);
       var I = intensityAt(dist);
-      var k = (I - 0.42) / 0.58;
+      var k = Math.min(1, (I - 0.42) / 0.58);
       /* the sphere is lit from +x in its own image, so pointing it at the
          nucleus is one rotation — and the light swings as the body librates */
       n.bearing2 = Math.atan2(dy, dx) / D2R;
       n.g.__body.setAttribute('transform', 'rotate(' + n.bearing2.toFixed(2) + ')');
-      if (Math.abs(I - n.imgI) > 0.02) {
+      /* RULED round 5: a body brightens as it librates toward the star and dims
+         as it swings away. That was already true of the model and quantised out
+         of the picture — the sphere was only re-rendered when intensity moved by
+         0.02, which is four steps across a whole excursion and every one of them
+         visible. 0.004 is under one part in 255 of the rendered value, so the
+         change slides. A 96px sphere costs a fraction of a millisecond. */
+      if (Math.abs(I - n.imgI) > 0.004) {
         n.imgI = I;
         n.g.__body.setAttribute('href', renderNodeSphere(96, I));
       }
@@ -824,16 +996,17 @@
       order.forEach(function (seg, si) {
         var t0 = seg[0], t1 = t0 + SEG_DEG;
         var mid = (t0 + t1) / 2;
-        var a = orbitAlpha(Math.sin(mid * D2R));
+        var zn = orbitZ(o, mid) / Z_MAX;
+        var a = orbitAlpha(zn), wdt = orbitWidth(zn);
         var pad = si === 0 ? 0 : 0.4;
         var d = halfPath(o, t0 - pad, t1 + 0.4);
         var far = seg[1] === 'far';
         var host = far ? lBack : lFront;
         var glow = svg('path', { class: 'lo-path lo-glow', d: d, fill: 'none', 'pathLength': 1,
-                                 stroke: ORBIT_STROKE, 'stroke-width': ORBIT_WIDTH * 3.4,
+                                 stroke: ORBIT_STROKE, 'stroke-width': (wdt * 3.4).toFixed(3),
                                  'stroke-opacity': (a * 0.55).toFixed(4), 'stroke-linecap': 'round' });
         var line = svg('path', { class: 'lo-path', d: d, fill: 'none', 'pathLength': 1,
-                                 stroke: ORBIT_STROKE, 'stroke-width': ORBIT_WIDTH,
+                                 stroke: ORBIT_STROKE, 'stroke-width': wdt.toFixed(3),
                                  'stroke-opacity': a.toFixed(4), 'stroke-linecap': 'round' });
         host.appendChild(glow);
         host.appendChild(line);
@@ -847,7 +1020,8 @@
          over a body this bright makes it vanish, which reads as behind. */
       var sil = svg('path', { class: 'lo-path', d: halfPath(o, 0, 180), fill: 'none',
                               'pathLength': 1, stroke: '#6B4712', 'stroke-opacity': 0.62,
-                              'stroke-width': ORBIT_WIDTH + 0.5, 'stroke-linecap': 'round' });
+                              'stroke-width': (orbitWidth(orbitZ(o, 90) / Z_MAX) + 0.5).toFixed(3),
+                              'stroke-linecap': 'round' });
       lSil.appendChild(sil);
       paths.push({ orbit: o, orbitIndex: oi, seg: perHalf, segs: 2 * perHalf,
                    line: sil, glow: sil });
@@ -927,9 +1101,17 @@
     var v = NUCLEUS_VARIANTS[key];
     /* 512 spans 2 * EXTENT * 125 = 335 frame units, so the body renders at
        better than 1.5 device pixels per texel at a 2x display. */
-    var cv = renderBody(512, v, false);
-    sys.nucleus.__image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', cv.toDataURL('image/png'));
-    sys.nucleus.__image.setAttribute('href', cv.toDataURL('image/png'));
+    /* One synchronous full render on mount or on a variant change — the only
+       place a block is acceptable, because nothing is moving yet. After that the
+       churn takes over and every render is spread across frames. */
+    sys.body = makeBody(512, v);
+    sys.churn = { w: 0, phase: 'idle', cursor: 0, fade: 0, url: null };
+    var url = sys.body.all(0, 0).toDataURL('image/png');
+    [sys.nucleus.__imgA, sys.nucleus.__imgB].forEach(function (im) {
+      im.setAttributeNS('http://www.w3.org/1999/xlink', 'href', url);
+      im.setAttribute('href', url);
+    });
+    sys.nucleus.__imgB.setAttribute('opacity', 0);
     sys.nucleusVariant = key;
 
     /* the corona's reach moves with the variant, so its stops are rebuilt */
@@ -1024,7 +1206,47 @@
        writing the DOM every frame is work done under the threshold. The gate is
        on distance moved, not on a clock, so the lab's accelerator still gets
        every frame. */
+    /* The surface churns. A few dozen rows a frame into the offscreen canvas,
+       and when it completes it arrives over the top of the one before it across
+       a five-second cross-fade. The noise's fourth axis only ever goes forward,
+       so no state is ever revisited. */
+    function churn(dt) {
+      var c = sys.churn, n = sys.nucleus;
+      if (!c || !sys.body) return;
+      if (c.phase === 'idle') { c.phase = 'render'; c.cursor = 0; c.w += CHURN.dw; }
+      if (c.phase === 'encode') return;
+      if (c.phase === 'render') {
+        c.cursor = sys.body.rows(c.cursor, CHURN.rows, c.w, 0);
+        if (c.cursor >= sys.body.px) {
+          /* toBlob, not toDataURL: encoding a 512-square PNG synchronously is a
+             hitch every cycle, and there is nothing to hitch for. */
+          c.phase = 'encode';
+          sys.body.flush().toBlob(function (blob) {
+            if (!blob) { c.phase = 'idle'; return; }
+            var next = URL.createObjectURL(blob);
+            if (c.url) URL.revokeObjectURL(c.url);
+            c.url = next;
+            n.__imgB.setAttributeNS('http://www.w3.org/1999/xlink', 'href', next);
+            n.__imgB.setAttribute('href', next);
+            c.phase = 'fade'; c.fade = 0;
+          }, 'image/png');
+        }
+        return;
+      }
+      c.fade += dt;
+      var o = c.fade / CHURN.fade;
+      if (o >= 1) {
+        n.__imgA.setAttributeNS('http://www.w3.org/1999/xlink', 'href', c.url);
+        n.__imgA.setAttribute('href', c.url);
+        n.__imgB.setAttribute('opacity', 0);
+        c.phase = 'idle';
+      } else {
+        n.__imgB.setAttribute('opacity', o.toFixed(4));
+      }
+    }
+
     function tick(dt) {
+      churn(dt);
       tau += dt * scale;
       var changed = false;
       for (var i = 0; i < sys.nodes.length; i++) {
@@ -1192,8 +1414,9 @@
       advance: function (seconds) { drift.advance(seconds); },
       EXTENT: EXTENT, U_LIMB: U_LIMB, LIMB_P: LIMB_P, LIBRATION: LIBRATION, SIGMA: SIGMA,
       /* pixels back, so the light model can be asserted rather than admired */
-      readBody: function (px, textureOnly) {
-        var cv = renderBody(px || 256, NUCLEUS_VARIANTS[state.nucleus], !!textureOnly);
+      /* mode 0 full, 1 texture only, 2 the in-body star field alone */
+      readBody: function (px, mode) {
+        var cv = makeBody(px || 256, NUCLEUS_VARIANTS[state.nucleus]).all(0, mode | 0);
         var g = cv.getContext('2d');
         return { px: cv.width, data: Array.prototype.slice.call(g.getImageData(0, 0, cv.width, cv.height).data) };
       }

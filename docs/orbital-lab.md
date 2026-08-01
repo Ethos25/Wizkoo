@@ -70,6 +70,10 @@ libration is per-node. Sections 2 and 4.
 left the star pasted onto the sky — and gave the nodes and the orbit lines the
 same treatment the body got. Section 2a.
 
+**Round 5** made the system the mark: three real orbital planes instead of
+near-parallel rings, a constellation inside the body, and three more places
+where the light does work. Section 2b.
+
 ---
 
 ## Files
@@ -283,6 +287,76 @@ Two flat halves meet at the major-axis extremes and a step there is a seam
 exactly where the eye is tracking the line, so each orbit is cut into 15-degree
 segments taking their opacity from the depth at their own midpoint. The three are
 still told apart, by the only thing that should tell them apart — their geometry.
+
+### Round 5: the system becomes the mark
+
+**The rings were near-parallel.** Round 4's three sat at 71 / 79 / 78 degrees of
+inclination — spread in screen rotation but near-identical in tilt, which is why
+they read as concentric rings on one plane. What decides tilt is `ry/rx`, and
+round 4's were 0.323 / 0.184 / 0.210: two of them the same ellipse turned.
+
+```
+        rx    ry   rot    ry/rx   inclination   z-reach
+  c    356   112    88    0.315      71.7 deg    338  (0.71)
+  b    446    84    32    0.188      79.1 deg    438  (0.92)
+  a    480    56   -28    0.117      83.3 deg    477  (1.00)
+```
+
+Each about a third flatter than the last. **`ry` is capped by the nucleus radius
+and not by taste**: an orbit whose minor semi-axis reaches 125 stops crossing the
+body, and the occlusion cue goes with it. So the spread had to be bought at the
+flat end. 112 is as open as the system can go while still cutting a real chord
+across the disc. Rotations sit 56, 64 and 60 degrees apart — the logo's own
+arrangement. The occlusion assertion still passes on all three.
+
+**The rings differ, and none of them is styled.** Round 4 varied opacity with
+`sin(t)` — depth *within* a ring but not *between* them. The real depth is
+`z = sin(t)·sqrt(rx² − ry²)`: a flatter orbit swings further toward and away from
+the eye, so its near arc comes closest and reads brightest and marginally
+heaviest, and an orbit lying more open never reaches either extreme. One formula,
+three results.
+
+**The constellation inside the body.** Points placed on the *sphere* — random
+unit vectors kept when they face the viewer — then projected. A uniform density
+on a sphere projects to a density rising as `1/mu` toward the limb, so they crowd
+and compress at the edge exactly, with no code saying so. They dim with the same
+limb law as the surface and step aside under the hot region.
+
+```
+in-body star field, mean brightness by band
+  centre 1.47   mid 2.00   limb 2.43      1.65x denser at the edge, monotonic
+  peak band mean 2.4 of 255 — a whisper
+```
+
+**The surface churns.** The body is a raster, so evolving it means re-rendering
+it, and a full 512-square render is a fifth of a second. So the render is
+**resumable**: twelve rows a frame, then a five-second cross-fade over the one
+before it. The noise's fourth axis only ever goes forward. Twelve rows and not
+forty — round 5's first attempt spent the whole frame budget on it.
+
+**The corona rides the body's own breath**, the same keyframe rather than its own
+rhythm, at an amplitude deliberately under the body's. The glow follows; it does
+not lead.
+
+**Nodes brighten with proximity.** This was already true of the model and
+quantised out of the picture: the sphere was only re-rendered when intensity
+moved by 0.02, four visible steps across an excursion. Two fixes — a 0.004 step,
+which is under one part in 255 of the rendered value, and an intensity ceiling
+raised from 1.0 to 1.8, because the two bodies that straddle the limb live
+entirely inside the old ceiling and were pinned at full brightness for their
+whole excursion. The two most visible bodies in the frame were the only two not
+answering to distance.
+
+```
+node brightness across its own excursion
+  reading    370-442    intensity 0.475-0.567    16.2%
+  writing    377-473              0.444-0.556    20.1%
+  math       363-442              0.475-0.578    17.8%
+  science     81-172              1.217-1.800    32.4%
+  geo        364-473              0.444-0.577    23.1%
+  art         92-169              1.246-1.800    30.8%
+  history    289-353              0.595-0.727    18.2%
+```
 
 **And the demonstration: light travels outward.** Each node's bright side faces
 the nucleus and its dark side faces away, with brightness falling off with
