@@ -1,10 +1,58 @@
 # Constellation — handoff
 
-**Status: the figure is built and verified. The hero integration is HELD.**
-Two spec values conflict with the shipped hero, and both are in the coordinate
-system, so nothing downstream of them is safe to reconcile by eye. The brief's
-own rule applies: *"If any spec value appears to conflict with a codebase
-convention, STOP and report rather than reconciling."*
+**Round 2 status: both rulings applied and integrated. It works at 1440 and on
+phones. It fails at two viewports, for a reason the chrome ruling cannot
+reach — see § 0. That is the fallback condition, so it stops here.**
+
+| viewport | window | band | lowest label → handle rule | verdict |
+|---|---|---|---|---|
+| 1440 × 900 / 800 | 552.66 × 334.94 | 460.72 × 154.14 | **+8.38px** | ✅ works |
+| 1024 × 768 | 392.66 × 237.97 | 327.34 × 109.52 | +1.63px | ⚠️ marginal |
+| **1440 × 396** (production) | 342.86 × 207.78 | 285.83 × 95.63 | **−0.47px** | ❌ touches |
+| **768 × 1024** | 286 × 173.33 | 238.44 × 79.77 | **−3.17px** | ❌ overlaps |
+| 390 × 844 | 350 × 226 | 302.53 × 64.75 | +25.30px | ✅ works |
+| 375 × 667 | 335 × 213.92 | 289.56 × 61.97 | +22.83px | ✅ works |
+
+## § 0 — WHY THE TWO FAILURES ARE NOT A CHROME PROBLEM
+
+The chrome ruling worked. After it, the remaining air is **uniformly 75% of the
+spec's own air** at *every* desktop viewport — bodyTop 75%, sentGap 75%,
+footPadTop 76%, footBottom 75%. Tight, even, never cramped in one place and
+loose in another. Mobile ends up at **98–118%**, i.e. more air than the spec's
+own frame. Band aspect is the spec's to within **0.02%** everywhere.
+
+What fails is a different thing. **The band scales with the window, but the
+spec fixes the labels and star radii in absolute px.** At 1440×900 the band is
+0.866× the spec's 532×178 and everything still clears. Below roughly 0.75× the
+fixed-px labels outgrow the shrinking band: Writing's label anchors at band
+y159/178 (89.3% down) and is ~14px tall regardless of band height, so once the
+band drops under ~99px tall the label runs past the band's bottom edge and into
+the handle rule.
+
+The threshold is a window **≥ ~355px wide**. Two targets deliver less:
+1440×396 gives 342.86 (because `--u` is clamped by the 396px height), and
+768×1024 gives 286.
+
+So this is not "reduce more chrome" — there is no chrome left to reduce that
+would help, because the deficit is in the band's *width*, which sets its height
+through the spec's aspect. It is your fallback condition:
+
+> *the fallback is enlarging the window itself in the hero composition, which
+> is my ruling to make, not yours.*
+
+**Two paths, both yours.** (a) Enlarge the window so it never falls below
+~355px. (b) Apply **7B** in the windows that are too small for 7A — which is
+what the spec itself does about small scales (§7a: *"at phone scale a 1.5px
+star with 7A's brightness falloff disappears"*). At 768×1024 the band is
+238×80 against 7B's 299×64, so 7B is already the closer figure there. Note (b)
+needs more than a width breakpoint: 1440×396 is a *wide* viewport with a short
+height, so it would need a container-size or aspect rule.
+
+---
+
+## Round 1 (superseded, kept for the record)
+
+The two conflicts below are what the rulings resolved.
 
 Spec: `docs/constellation-geometry.html` (committed verbatim, `f63033f`).
 Lab: `/lab/constellation.html` — both frames at the spec's own reference sizes.
@@ -245,11 +293,109 @@ is ruled and the integration lands.
 
 ---
 
-## 7. WHAT UNBLOCKS THIS
+---
 
-1. **The band.** Which of A/B/C/D above, or a fifth thing.
-2. **The tether origin.** Bind to `.lw-theme` at runtime, or restate the
-   constant, or change the sentence's break.
+# ROUND 2 — the rulings, applied
 
-Everything else is done and verified. Integration after the ruling is a band
-element plus one `build()` call.
+## 8. CHROME GIVEN BACK
+
+No type size changed. No element changed order. Four numbers of pure air shrank.
+
+**Desktop** (reference window 553 × 335.15u):
+
+| | was | now | given back |
+|---|---|---|---|
+| `.lw-body` top | 40u | 20u | 20 |
+| `.lw-sentence` margin-top | 28u | 12u | 16 |
+| `.lw-foot` padding-top | 26u | 9.5u | 16.5 |
+| `.lw-foot` bottom | 26u | 12u | 14 |
+| | **120u** | **53.5u** | **66.5u = 19.8% of the window's height** |
+
+**Mobile** (reference 353.9 × 226u): 40→19, 16→11, 26→11, 26→14.
+**108u → 55u = 53u given back, 23.5% of the height.**
+
+The remainder is distributed in the spec's own ratios (30 : 18 : 14 : 18), so
+the window is tighter than the reference by one factor everywhere rather than
+tight in one place and loose in another.
+
+**And the air is now proportional, not in `--u`.** This is the load-bearing
+half. The band's height cannot be a number — it has to be the spec's *ratio*,
+or the figure is stretched — so it derives from the band's width. The air
+around it was in `--u`. Those scale differently the moment `min(100%, 553u)`
+picks 100%: at 768 the window is 536.6u wide, the band grows from that width,
+the `--u` chrome does not shrink with it, and the band's bottom edge landed
+**0.28px** off the handle rule. Every chrome value is now a percentage of the
+window, so the composition scales as one object. At 1440 and 1440×396 the
+window is exactly 553u × 335u, so the percentages **are** the `--u` values they
+replace — nothing moved where it was already right, and 768 went from 0.28px to
+2.31px. (It still fails, for the § 0 reason, which is not this.)
+
+Before / after: `screenshots/constellation/BEFORE-*.png`, `AFTER-*.png`.
+
+## 9. THE TETHER — ruled, built, and it contradicts its own treatment
+
+Launch x is now read off `.lw-theme` at run time (`js/hero-constellation.js`),
+as ruled. Everything else is the spec's, untouched: 0.5 stroke, `0.8 4.6` dash,
+the four-stop gradient fading to nothing at both ends.
+
+**The result is a pointer, not a whisper.** The spec's 7A tether runs 16 units
+across and 42 down — a near-vertical breath out of the word into the star's
+glow. Re-anchored, it runs **162 across and 42 down**: a shallow dotted leader
+crossing a third of the window, and now the most graphic thing in the figure —
+the one element that looks drawn rather than lit. See
+`screenshots/constellation/tether-hero.png`.
+
+The cause is under the tether, not in it. **The spec's premise is that the
+theme star sits directly under the word** (§2: *"It sits directly under the
+word 'space' in the sentence above"*). In the shipped hero it does not: the
+star is at **39.7%** of the window width, the word at **65.1%**. Re-anchoring
+the launch point exposes that 25-point gap rather than closing it.
+
+The two halves of the ruling — *"re-anchor to the actual position of 'space'"*
+and *"keep its treatment exactly, the whisper"* — cannot both hold while the
+word and the star are 25 points apart.
+
+**Variant D**, rendered for comparison in
+`screenshots/constellation/tether-variantD.png`: launch under the word, descend
+at the spec's *own* 16-across/42-down, and fade out. It is a genuine whisper —
+a few dots under "sp" — and it satisfies both halves of the ruling. What it
+gives up is the literal link to the star, though the spec's own tether never
+visually connects either (*"fades to nothing at BOTH ends"*).
+
+**What ships right now is the literal ruling (a), not (d).** Yours to call.
+
+## 10. ROUND 2 VERIFICATION
+
+- **Figure still matches the spec.** `constellation-verify.js`: 7 stars, 6
+  labels, 15 paths, **no disagreement**, both sizes. The integration changed
+  nothing inside the figure.
+- **Beat fires once and latches in the hero.** 1 run on first sight, still 1
+  after scroll-away, return, hover, focus and two resizes (which rebuild the
+  figure — a rebuild after the beat comes back settled and can never replay
+  it). Band class at rest is `lw-band`: no state, no fill-mode, no timer.
+- **No contrast regression.** Sampling rendered pixels behind the type with the
+  figure and with it hidden: sentence Δluminance **−0.00003**, eyebrow
+  **−0.00001**, handle **+0.00005**. Ratios identical to two decimals —
+  sentence 6.44:1, eyebrow 7.29:1, handle 7.61:1.
+- **Type sizes unchanged** at 1440×900: sentence 33px, eyebrow 10px, cta 12.5px.
+- **Sky and the existing theme-word beat untouched** — `hero-sky.css/js` and
+  `hero-window.js` are byte-identical to `HEAD`.
+
+## 11. ROUND 2 WEIGHT
+
+| | raw | gzip |
+|---|---|---|
+| `css/constellation.css` | 6,433 B | 2,307 B |
+| `js/constellation.js` | 24,870 B | 8,179 B |
+| `js/hero-constellation.js` | 3,519 B | 1,664 B |
+| `css/hero-window.css` (delta) | +3,581 B | +1,458 B |
+| `index.html` (delta) | +7 lines | — |
+| **total added to ship** | **≈38.4 KB** | **≈13.6 KB** |
+
+Most of the `hero-window.css` growth is the comment block explaining the chrome
+trade; the rule changes themselves are ten lines.
+
+## 12. WHAT UNBLOCKS THIS
+
+1. **The two failing viewports** (§ 0): enlarge the window, or route them to 7B.
+2. **The tether** (§ 9): keep the literal ruling, or take variant D.

@@ -1452,6 +1452,7 @@ body.page-home{
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/hero-sky.css">
 <link rel="stylesheet" href="css/hero-window.css">
+<link rel="stylesheet" href="css/constellation.css">
 </head>
 <body class="page-home" data-footer-treatment="b">
 <!-- ═══ SKY SYSTEM: cream wash (fixed, behind all content) ═══ -->
@@ -1652,6 +1653,10 @@ document.addEventListener('DOMContentLoaded', function() {
               <span class="lw-label"><span class="rule" aria-hidden="true"></span><span class="t">This week&rsquo;s window</span></span>
               <span class="lw-sentence">Build a week for <span class="lw-ghost">Maya</span>, <span class="lw-ghost">6</span>, in <br class="lw-br"><span class="lw-ghost">Georgia</span> exploring <span class="lw-theme">space</span>.</span>
             </span>
+            <!-- The constellation's band. Held empty in markup; the figure is
+                 built into it by js/constellation.js, so with JS off the window
+                 is exactly what it was. -->
+            <span class="lw-band" aria-hidden="true"></span>
             <!-- HERO_COPY_PENDING: HANDLE. Placeholder, ruled string pending. Slot law:
                  a personal invitation, distinct from the nav CTA. -->
             <span class="lw-foot"><span class="lw-cta">Build your own</span></span>
@@ -2112,6 +2117,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="/js/wz-events.js" defer></script>
 <script src="/js/hero-sky.js" defer></script>
 <script src="/js/hero-window.js" defer></script>
+<script src="/js/constellation.js" defer></script>
+<script src="/js/hero-constellation.js" defer></script>
 
 <script>
 // ═══ CUSTOM CURSOR ═══

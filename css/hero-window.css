@@ -164,12 +164,61 @@
   background:linear-gradient(rgba(232,175,56,0.07) 0%,rgba(232,175,56,0) 100%);
 }
 
+/* -- CHROME GIVEN BACK TO THE BAND (ruled) --
+   The constellation's geometry spec was drawn against a 620x376 window; this
+   one ships 553x335 while carrying the chrome in the SAME absolute pixels, so
+   proportionally the chrome was 17-23% heavier and it ate the band. The ruling:
+   enlarge the band by reducing chrome, never by altering the figure.
+
+   Nothing here changes a type size or the order of the elements. Four numbers
+   of pure air shrink, and the band takes what they give up:
+
+     .lw-body    top           40 -> 20
+     .lw-sentence margin-top   28 -> 12
+     .lw-foot    padding-top   26 -> 9.5
+     .lw-foot    bottom        26 -> 12
+                               --------
+                               120 -> 53.5   (66.5u returned, 19.9% of the height)
+
+   The remaining air is 75% of what the spec's own frame carries in the same
+   four places, distributed in the spec's own ratios (30 : 18 : 14 : 18), so the
+   window is tighter than the reference everywhere by the same factor rather
+   than tight in one place and loose in another.
+
+   AND THE AIR IS NOW PROPORTIONAL, NOT IN --u. This is the load-bearing half.
+   The band's height cannot be a number — it has to be the spec's RATIO, or the
+   figure is stretched — so it is derived from the band's width. The air around
+   it was in --u. Those two scale differently the moment `min(100%, 553u)` picks
+   100%: at 768 the window is 536.6u wide, the band grows from that width, the
+   --u chrome does not shrink with it, and the band's bottom edge lands 0.28px
+   off the handle rule. Every value below is now a percentage of the window, so
+   the whole composition scales as one object and the fit is identical at every
+   size. At 1440 and at 1440x396 the window is exactly 553u x 335u, so these
+   percentages ARE the --u values they replace — nothing moves where it used to
+   be right, and 768 stops colliding. Percentage bases differ by property:
+   top/bottom resolve against the window's height, left/right and padding
+   against its width, and .lw-sentence's margin against .lw-body's width. */
 .lw-body{
   position:absolute;
-  left:calc(var(--u) * 46);
-  right:calc(var(--u) * 46);
-  top:calc(var(--u) * 40);
+  left:8.318%;                      /* 46u of 553u */
+  right:8.318%;
+  top:5.967%;                       /* 20u of 335.15u — was 40u */
   display:block;
+}
+
+/* -- The band the constellation lives in. Aligned to the type at 46u, exactly
+   as the spec aligns its own band to its own 44px padding. Its height is not a
+   number but a RATIO: aspect-ratio 532/178 is the spec's band, so whatever
+   width the window gives it, the figure inside is never stretched and never
+   refit. Its contents are built by js/constellation.js. -- */
+.lw-band{
+  position:absolute;
+  left:8.318%;
+  right:8.318%;
+  top:40.280%;                      /* 135u of 335.15u */
+  aspect-ratio:532 / 178;           /* the spec's band. Never a stretch. */
+  z-index:2;
+  pointer-events:none;
 }
 
 .lw-label{
@@ -191,7 +240,7 @@
 
 .lw-sentence{
   display:block;
-  margin-top:calc(var(--u) * 28);
+  margin-top:2.603%;                /* 12u of .lw-body's 461u. Was 28u. */
   font-family:'Fraunces',serif;font-weight:400;
   font-size:calc(var(--u) * 33);
   line-height:1.34;
@@ -240,10 +289,10 @@
    under the sentence cost the object its polish. */
 .lw-foot{
   position:absolute;
-  left:calc(var(--u) * 46);
-  right:calc(var(--u) * 46);
-  bottom:calc(var(--u) * 26);
-  padding-top:calc(var(--u) * 26);
+  left:8.318%;
+  right:8.318%;
+  bottom:3.580%;                    /* 12u of 335.15u.  Was 26u. */
+  padding-top:1.718%;               /*  9.5u of 553u.   Was 26u. */
   border-top:1px solid rgba(232,175,56,0.26);
   display:block;
 }
@@ -300,14 +349,29 @@
   .lw-mount{height:calc(var(--u) * 226)}
   .lw-bleed{inset:calc(var(--u) * -40);filter:blur(calc(var(--u) * 20))}
   .lw-body{
-    left:calc(var(--u) * 24);right:calc(var(--u) * 24);
+    left:6.782%;right:6.782%;       /* 24u of 353.9u */
+    top:8.407%;                     /* 19u of 226u — was 40u */
+  }
+  /* 7B's band is the one that nearly fits already: this window is 335 wide and
+     the spec's 7B frame is 335 wide too, so the band reaches its reference
+     width almost exactly. Only the vertical air has to give, and it gives less
+     than 7A's — the phone ends up with MORE air than the spec's own frame. */
+  .lw-band{
+    left:6.782%;right:6.782%;
+    top:42.920%;                    /* 97u of 226u */
+    aspect-ratio:299 / 64;
   }
   .lw-label{font-size:calc(var(--u) * 8);letter-spacing:calc(var(--u) * 1.92)}
   .lw-label .rule{width:calc(var(--u) * 20);margin-right:calc(var(--u) * 10)}
   .lw-sentence{
-    margin-top:calc(var(--u) * 16);
+    margin-top:3.596%;               /* 11u of .lw-body's 305.9u — was 16u */
     font-size:calc(var(--u) * 20);
     line-height:1.36;
+  }
+  .lw-foot{
+    left:6.782%;right:6.782%;
+    bottom:6.195%;                   /* 14u of 226u — was 26u */
+    padding-top:3.108%;              /* 11u of 353.9u — was 26u */
   }
   .lw-cta{font-size:calc(var(--u) * 10.5);letter-spacing:calc(var(--u) * 2.52)}
 }

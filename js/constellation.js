@@ -443,10 +443,15 @@
     });
 
     /* Reduced motion: the completed figure, statically, at full magnitude.
-       No arrival, no scintillation, no timers. */
-    band.classList.add(reduced ? 'wkc-static' : 'wkc-armed');
+       No arrival, no scintillation, no timers.
+       opts.settled: no class at all, so every element falls to its base rule —
+       the finished figure, scintillating. Used when the figure is rebuilt
+       after the beat has already played (a breakpoint change), so a rebuild
+       can never resurrect a latched beat. */
+    if (reduced) band.classList.add('wkc-static');
+    else if (!opts.settled) band.classList.add('wkc-armed');
 
-    var latched = false, settleTimer = null;
+    var latched = !!opts.settled, settleTimer = null;
     function play() {
       if (latched || reduced) return;
       latched = true;                      /* latch before the first frame */
