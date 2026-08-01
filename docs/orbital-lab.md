@@ -1,5 +1,9 @@
 # Orbital Lab — handoff
 
+> **CERTIFIED.** Arrangement **C** is ruled. The complete port handoff lives in
+> [orbital-port-handoff.md](orbital-port-handoff.md) — read that first if you are
+> porting. This file is the round-by-round record of how each ruling was reached.
+
 `/lab/orbital.html`. Standalone, `noindex`, linked from nowhere. Nothing outside
 this route was touched: `git diff --stat` against the branch point is empty, and
 `index.html`, `css/hero-sky.css`, `js/hero-sky.js` are byte-identical to HEAD.

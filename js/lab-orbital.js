@@ -127,14 +127,14 @@
      the offset rises with it. */
   var ARRANGEMENTS = {
     /* what round 5 shipped, kept for comparison */
-    '5': { R: 125, coronaRout: 6.9, label: 'round 5, as ruled',
+    '5': { R: 125, coronaRout: 6.9, occlusion: true, label: 'round 5, superseded',
       orbits: [{ id: 'c', rx: 356, ry: 112, rot: 88, off: 0 },
                { id: 'a', rx: 480, ry: 56,  rot: -28, off: 0 },
                { id: 'b', rx: 446, ry: 84,  rot: 32, off: 0 }] },
 
     /* A — the most open the cue allows with the nucleus untouched. The envelope
        shrinks to buy it: O*E stays under 1 by pulling rx in, not by flattening. */
-    'A': { R: 125, coronaRout: 6.9, label: 'A — openness bought with envelope, nucleus unchanged',
+    'A': { R: 125, coronaRout: 6.9, occlusion: true, label: 'A — openness bought with envelope (rejected: inverts the hierarchy)',
       orbits: [{ id: 'c', rx: 270, ry: 118, rot: 5,   off: 0 },
                { id: 'a', rx: 250, ry: 112, rot: 58,  off: 0 },
                { id: 'b', rx: 230, ry: 104, rot: 125, off: 0 }] },
@@ -143,7 +143,7 @@
        scaled up around a nucleus that is now 400px across. The cue survives
        because R grew with rx; the nucleus takes half the envelope, which is
        what the logo does. */
-    'B': { R: 200, coronaRout: 4.3, label: 'B — logo proportions, nucleus enlarged to 200',
+    'B': { R: 200, coronaRout: 4.3, occlusion: true, label: 'B — logo proportions (rejected: the star swallows the system)',
       orbits: [{ id: 'c', rx: 390, ry: 180, rot: 5,   off: 0 },
                { id: 'a', rx: 350, ry: 168, rot: 58,  off: 0 },
                { id: 'b', rx: 310, ry: 155, rot: 125, off: 0 }] },
@@ -151,7 +151,16 @@
     /* C — the shipped section's arrangement at the lab's material. Openness
        0.57 and a small nucleus, which is the other pole: the cue is gone and
        this candidate says so. */
-    'C': { R: 125, coronaRout: 6.9, label: 'C — the shipped arrangement, occlusion sacrificed',
+    /* ══ RULED — the certified arrangement ═════════════════════════════
+       The system is the subject, not the star. C spends the O*E budget on
+       openness: every ring reads as a circle seen at an angle, which is what
+       makes three of them read as a cage. The price is stated and accepted —
+       no orbit comes inside the body, so there is no occlusion cue. See the
+       PORT CONSTRAINT in docs/orbital-lab.md: the minor-semi-axis law is still
+       the law, and this arrangement knowingly declines it. A port must not
+       quietly "fix" that, and must not quietly keep the shipped homepage's
+       geometry either — C is not that geometry. */
+    'C': { R: 125, coronaRout: 6.9, occlusion: false, label: 'C — RULED: the cage, occlusion knowingly declined',
       orbits: [{ id: 'c', rx: 480, ry: 275, rot: 25,  off: 0 },
                { id: 'a', rx: 434, ry: 248, rot: 148, off: 0 },
                { id: 'b', rx: 372, ry: 209, rot: 172, off: 0 }] },
@@ -159,7 +168,7 @@
     /* D — the nucleus off the orbit's centre, which is where a star sits on any
        orbit that is not a perfect circle. Nearest approach is |ry - off|, so
        openness of 0.5 and a crossing arc stop being alternatives. */
-    'D': { R: 125, coronaRout: 6.9, label: 'D — open rings, nucleus at the focus rather than the centre',
+    'D': { R: 125, coronaRout: 6.9, occlusion: true, label: 'D — open rings, nucleus at the focus (not ruled; kept for the record)',
       orbits: [{ id: 'c', rx: 400, ry: 200, rot: 5,   off: 110 },
                { id: 'a', rx: 360, ry: 180, rot: 58,  off: -95 },
                { id: 'b', rx: 320, ry: 160, rot: 125, off: 82 }] }
@@ -167,7 +176,7 @@
 
   var ARR_KEY = (function () {
     var m = /[?&]arr=([0-9A-Za-z]+)/.exec(typeof location !== 'undefined' ? location.search : '');
-    var k = m ? m[1].toUpperCase() : '5';
+    var k = m ? m[1].toUpperCase() : 'C';   /* RULED */
     return ARRANGEMENTS[k] ? k : '5';
   })();
   var ARR = ARRANGEMENTS[ARR_KEY];

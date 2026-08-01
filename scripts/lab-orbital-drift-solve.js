@@ -28,9 +28,9 @@ const HALFW = { reading: 81, writing: 87, math: 71, science: 66, geo: 73, art: 9
 const HALFH = 26, PAD = 6;
 
 const ORBITS = {
-  c: { rx: 356, ry: 112, rot: 88 },
-  a: { rx: 480, ry: 56,  rot: -28 },
-  b: { rx: 446, ry: 84,  rot: 32 }
+  c: { rx: 480, ry: 275, rot: 25 },
+  a: { rx: 434, ry: 248, rot: 148 },
+  b: { rx: 372, ry: 209, rot: 172 }
 };
 const NODES = [
   { id: 'reading', orbit: 'b', t: 188 },

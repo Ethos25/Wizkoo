@@ -122,10 +122,16 @@ const freeze = (page, t) => page.evaluate((ms) => {
       '   intensity ' + n.I.toFixed(2)));
     check(a.nodes.every(n => n.litDot > 0.999), 'every node\'s bright side faces the nucleus');
     check(a.nodes.every(n => n.darkDot < -0.999), 'every node\'s dark side faces away from it');
-    const near = a.nodes.filter(n => n.dist < 200), far = a.nodes.filter(n => n.dist > 400);
-    check(Math.min(...near.map(n => n.I)) > Math.max(...far.map(n => n.I)),
-      'nodes near the nucleus are brighter than nodes far from it (' +
-      Math.min(...near.map(n => n.I)) + ' vs ' + Math.max(...far.map(n => n.I)) + ')');
+    /* Compared nearest-against-farthest rather than against fixed distance
+       bands: under arrangement C no node sits inside 200 units, so the banded
+       form had an empty set on one side and passed on Infinity. A check that
+       cannot fail is not a check. */
+    const byDist = a.nodes.slice().sort((x, y) => x.dist - y.dist);
+    const closest = byDist[0], furthest = byDist[byDist.length - 1];
+    check(closest.I > furthest.I,
+      'the nearest body is brighter than the furthest (' + closest.id + ' at ' + closest.dist +
+      ' -> ' + closest.I.toFixed(3) + '  against  ' + furthest.id + ' at ' + furthest.dist +
+      ' -> ' + furthest.I.toFixed(3) + ')');
 
     /* ── THE BODY, READ BACK PIXEL BY PIXEL ─────────────────────────────
        Round 3's two findings were both about whether the sphere reads as a
@@ -462,14 +468,30 @@ const freeze = (page, t) => page.evaluate((ms) => {
         return { id: n.id, near: p.near, dist: Math.round(Math.hypot(p.x - L.FRAME.cx, p.y - L.FRAME.cy)) };
       });
       return { rows, R: L.NUC_R, orbits: L.ORBITS.map(o => ({ id: o.id, ry: o.ry })),
+               expect: L.ARR.occlusion !== false,
                sil: document.querySelectorAll('.lo-layer--silhouette .lo-path').length };
     });
-    check(f.orbits.every(o => o.ry < f.R),
-      'every orbit crosses the body (ry ' + f.orbits.map(o => o.ry).join('/') + ' < R ' + f.R + ')');
+    /* The law does not change with the ruling. What changes is whether this
+       arrangement claims to obey it: C spends its budget on openness and
+       declines the cue on purpose, so the check verifies the geometry matches
+       what the arrangement declares rather than pretending the cue is there. */
+    const crosses = f.orbits.every(o => o.ry < f.R);
     const str = f.rows.filter(r => Math.abs(r.dist - f.R) < 24);
-    check(str.some(r => r.near) && str.some(r => !r.near),
-      'the limb is straddled from both sides (' + str.map(r => r.id + ':' + (r.near ? 'front' : 'behind')).join(', ') + ')');
-    check(f.sil === 3, 'one silhouette path per orbit (' + f.sil + ')');
+    const straddled = str.some(r => r.near) && str.some(r => !r.near);
+    console.log('    minor semi-axes ' + f.orbits.map(o => o.ry).join(' / ') +
+      ' against R ' + f.R + '   ->   ' + (crosses ? 'every orbit crosses the body' : 'no orbit crosses the body'));
+    if (f.expect) {
+      check(crosses, 'every orbit crosses the body, as this arrangement claims');
+      check(straddled, 'the limb is straddled from both sides (' +
+        str.map(r => r.id + ':' + (r.near ? 'front' : 'behind')).join(', ') + ')');
+      check(f.sil === 3, 'one silhouette path per orbit (' + f.sil + ')');
+    } else {
+      check(!crosses && !straddled,
+        'this arrangement declines the occlusion cue and the geometry agrees — ' +
+        'no orbit inside the body, no limb straddled. RULED, not a defect.');
+      console.log('    the minor-semi-axis law still stands and this geometry is outside it;');
+      console.log('    docs/orbital-lab.md records the law, the assertion, and the ruling.');
+    }
     await freeze(page, 9000);
     await shot(page, 'r2-occlusion-detail', { x: 440, y: 170, width: 600, height: 520 });
     await page.context().close();
