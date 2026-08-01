@@ -9,6 +9,17 @@ convention, STOP and report rather than reconciling."*
 Spec: `docs/constellation-geometry.html` (committed verbatim, `f63033f`).
 Lab: `/lab/constellation.html` — both frames at the spec's own reference sizes.
 
+Every `screenshots/constellation/*` path below is local: `screenshots/` is
+gitignored. Regenerate the whole set with the dev server running:
+
+```
+node scripts/constellation-band-overlay.js http://localhost:3000   # the conflict
+node scripts/constellation-verify.js       http://localhost:3000   # spec diff
+node scripts/constellation-record.js record  http://localhost:3000 # the beat
+node scripts/constellation-record.js ambient http://localhost:3000 # 60s
+node scripts/constellation-record.js reduced http://localhost:3000
+```
+
 ---
 
 ## 1. THE BLOCKER — the band does not fit
