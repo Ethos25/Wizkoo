@@ -1,0 +1,338 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   THE ORBITAL SYSTEM — lab build
+
+   The section's ground is the certified sky (css/hero-sky.css, untouched,
+   driven at the lab FIELD by js/lab-orbital-sky.js). Everything below is the
+   system that sits ON it.
+
+   LIGHT LAW
+     One source, upper left, at 38% 32% of every sphere's own box. That is not
+     an invention: it is the value the product already carries on this page
+     (.hero-cta-circle in index.html, radial-gradient at 38% 32%). The nucleus
+     and all six nodes take the same relative light, so a node reads as the same
+     material as the body it orbits, at a twentieth the scale.
+
+     The SVG relief filter is lit at azimuth 225 / elevation 40 — the same
+     upper-left bearing expressed in the filter's own coordinates, so the
+     mottling's shadows fall the same way the gradient's terminator does.
+
+   MOTION LAW
+     One arrival beat on first sight, latched, then three ambient things and
+     nothing else: the nucleus breath, the certified star twinkle, and the rare
+     shooter. Orbits do not revolve.
+
+     THE BREATH IS NOT PERIODIC. A single 4s alternate cycle is exactly the kind
+     of loop a viewer catches. Three glow layers run at 3.7s, 5.3s and 8.9s —
+     mutually prime, so the summed luminosity has visible amplitude inside any
+     3-5s window and a composite period no one will sit through. Opacity only.
+
+   OCCLUSION LAW
+     Paint order is the whole three-dimensional read. Back arcs and back nodes
+     are painted BEFORE the nucleus; front arcs and front nodes AFTER. Each
+     orbit is two half-ellipse paths split on its own major axis — the major
+     axis is the projection of the line of nodes, so the split is where the
+     orbit genuinely crosses the plane of the sky. Every orbit's minor semi-axis
+     is smaller than the nucleus radius, which is what makes both halves
+     actually cross the body rather than clear it.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.lab-orbital {
+  position: relative;
+  /* The linen-hero band. Floored so the system never scales below legibility on
+     a short canvas — the page scrolls instead of the object shrinking. */
+  min-height: max(calc(100dvh + 96px), 760px);
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* The linen-hero ground, verbatim from index.html so the sky sits in the same
+     ink it will sit in at port time. */
+  background:
+    radial-gradient(ellipse 55% 40% at 6% 18%, rgba(30, 80, 140, 0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 55% at 78% 20%, rgba(82, 38, 148, 0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 38% at 22% 72%, rgba(20, 50, 130, 0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 42% 85%, rgba(14, 44, 112, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 62% 52%, rgba(232, 175, 56, 0.06) 0%, rgba(232, 175, 56, 0.02) 45%, transparent 70%),
+    radial-gradient(ellipse 35% 28% at 28% 42%, rgba(160, 120, 60, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 45%, #1e3060 0%, #131e3a 60%, #0d1627 100%);
+}
+
+/* The certified sky, mounted at the section's full bleed. */
+.lab-orbital__sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* The film grain, verbatim from .linen-hero::before. */
+.lab-orbital::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  opacity: 0.038;
+  pointer-events: none;
+}
+
+.lab-orbital__stage {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.lab-orbital__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ── The nucleus ──────────────────────────────────────────────────────── */
+
+/* The corona: three unequal falloffs rather than one, so the bleed into the sky
+   has a near ring that reads as atmosphere around a body and a far one that
+   reads as the body's own light in the field. Sized by variant. */
+.lo-corona { transform-box: fill-box; transform-origin: center; }
+
+/* Interior life. Three layers, three periods, no common beat. */
+.lo-breath-a { animation: lo-breath 3.7s ease-in-out infinite alternate; }
+.lo-breath-b { animation: lo-breath 5.3s ease-in-out infinite alternate; }
+.lo-breath-c { animation: lo-breath 8.9s ease-in-out infinite alternate; }
+.lo-breath-a, .lo-breath-b, .lo-breath-c { will-change: opacity; }
+
+@keyframes lo-breath {
+  from { opacity: var(--lo-breath-lo, 0.16); }
+  to   { opacity: var(--lo-breath-hi, 0.62); }
+}
+
+/* Surface relief. Blended, not stamped — the blend mode is set per pass in JS
+   (overlay for the craters, soft-light for the grain) so the mottling stays
+   inside the body's own value range and reads as surface, never as a pattern.
+   The body group is isolated so the blend cannot reach down into the sky. */
+.lo-nuc-body { isolation: isolate; }
+.lo-nuc-relief { opacity: var(--lo-tex, 0.5); }
+
+/* ── Nodes ────────────────────────────────────────────────────────────── */
+
+.lo-node { opacity: 0; }
+.lo-node-inner { transform-box: fill-box; transform-origin: center; transform: scale(0.55); }
+
+.lo-label { opacity: 0; }
+.lo-label-inner { transform-box: fill-box; transform-origin: center; transform: translateY(7px); }
+
+.lo-label-key {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  fill: #E8AF38;
+  letter-spacing: 0.04em;
+}
+.lo-label-line {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  fill: #C8CDDA;
+  letter-spacing: 0.005em;
+}
+
+/* ── The arrival beat ─────────────────────────────────────────────────── */
+/*
+   The nucleus is NOT animated in. It is the given — the one obsession is already
+   there when you arrive, and the subjects come to it. Animating it in would
+   make the centre an event rather than a premise.
+
+   Then: nodes ignite in a clockwise sweep from the top, each label following its
+   own node by --lo-label-lag. Then the paths draw. Members before structure:
+   drawing the paths first would state the system before its subjects, which is
+   the difference between an object and a diagram.
+
+   Node and label use the product's own arrival easing, cubic-bezier(.16,1,.3,1),
+   the curve every other arrival on this site uses. The paths use a gentler
+   deceleration so the stroke settles into place instead of snapping shut.
+*/
+
+.lab-orbital[data-arrival='running'] .lo-node,
+.lab-orbital[data-arrival='done'] .lo-node {
+  animation: lo-node-in var(--lo-node-dur) cubic-bezier(.16, 1, .3, 1) var(--lo-delay) both;
+}
+.lab-orbital[data-arrival='running'] .lo-node-inner,
+.lab-orbital[data-arrival='done'] .lo-node-inner {
+  animation: lo-node-pop var(--lo-node-dur) cubic-bezier(.16, 1, .3, 1) var(--lo-delay) both;
+}
+@keyframes lo-node-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lo-node-pop { from { transform: scale(0.55); } to { transform: scale(1); } }
+
+.lab-orbital[data-arrival='running'] .lo-label,
+.lab-orbital[data-arrival='done'] .lo-label {
+  animation: lo-node-in var(--lo-label-dur) cubic-bezier(.16, 1, .3, 1) var(--lo-delay) both;
+}
+.lab-orbital[data-arrival='running'] .lo-label-inner,
+.lab-orbital[data-arrival='done'] .lo-label-inner {
+  animation: lo-label-rise var(--lo-label-dur) cubic-bezier(.16, 1, .3, 1) var(--lo-delay) both;
+}
+@keyframes lo-label-rise { from { transform: translateY(7px); } to { transform: translateY(0); } }
+
+/* The draw. Each orbit is one continuous stroke that happens to live in two
+   z-layers: the far half runs first and vanishes behind the nucleus, the near
+   half picks it up on the other side and crosses in front. The occlusion is
+   demonstrated by the drawing of it, not merely present in the still. */
+.lo-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.lab-orbital[data-arrival='running'] .lo-path,
+.lab-orbital[data-arrival='done'] .lo-path {
+  animation: lo-draw var(--lo-draw-dur) cubic-bezier(.22, .68, .18, 1) var(--lo-delay) both;
+}
+@keyframes lo-draw { to { stroke-dashoffset: 0; } }
+
+/* The glow is the same draw on a wider, softer line, running a beat longer so
+   the stroke arrives with air around it instead of as a bare hairline. */
+.lo-glow { filter: blur(1.6px); }
+
+/* ── Orbit drift (variant only; the ruled default is static) ──────────── */
+/* Positions are written by rAF in js/lab-orbital.js so a node can be re-parented
+   between the back and front layers the instant it crosses the line of nodes.
+   Nothing here animates; this class only marks the state for the panel. */
+
+/* ── Reduced motion: the completed state, rendered ────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .lo-node, .lo-label { opacity: 1 !important; animation: none !important; }
+  .lo-node-inner, .lo-label-inner { transform: none !important; animation: none !important; }
+  .lo-path { stroke-dashoffset: 0 !important; animation: none !important; }
+  .lo-breath-a, .lo-breath-b, .lo-breath-c {
+    animation: none !important;
+    opacity: var(--lo-breath-still, 0.42) !important;
+  }
+}
+
+[data-wk-motion='reduced'] .lo-node,
+[data-wk-motion='reduced'] .lo-label { opacity: 1 !important; animation: none !important; }
+[data-wk-motion='reduced'] .lo-node-inner,
+[data-wk-motion='reduced'] .lo-label-inner { transform: none !important; animation: none !important; }
+[data-wk-motion='reduced'] .lo-path { stroke-dashoffset: 0 !important; animation: none !important; }
+[data-wk-motion='reduced'] .lo-breath-a,
+[data-wk-motion='reduced'] .lo-breath-b,
+[data-wk-motion='reduced'] .lo-breath-c {
+  animation: none !important;
+  opacity: var(--lo-breath-still, 0.42) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LAB CHROME — never ships. Everything below this line is scaffolding for
+   Amy's walk and is deleted at port time.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.lab-runway {
+  position: relative;
+  min-height: 68vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 48px;
+  background: #0B111F;
+  color: #8C91A5;
+  font-family: 'Space Mono', monospace;
+}
+.lab-runway h1 {
+  margin: 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 34px;
+  color: #F8F4E9;
+  letter-spacing: -0.012em;
+}
+.lab-runway p { margin: 0; max-width: 62ch; font-size: 12px; line-height: 1.8; }
+.lab-runway .k { color: #E8AF38; }
+
+.lab-panel {
+  position: fixed;
+  right: 18px;
+  top: 18px;
+  z-index: 900;
+  width: 216px;
+  padding: 14px 16px 16px;
+  border-radius: 4px;
+  background: rgba(10, 15, 28, 0.9);
+  border: 1px solid rgba(232, 175, 56, 0.22);
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+  font-family: 'Space Mono', monospace;
+  color: #C8CDDA;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.lab-panel__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 0 12px;
+  border: 0;
+  background: transparent;
+  color: #E8AF38;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-size: 9px;
+  cursor: pointer;
+}
+/* Collapsed: the panel gets out of the way of the labels underneath it, which
+   is the only reason it exists. Lab-only, like the rest of this block. */
+.lab-panel[data-collapsed] { width: auto; padding-bottom: 12px; }
+.lab-panel[data-collapsed] .lab-panel__title { padding-bottom: 0; }
+.lab-panel[data-collapsed] .lab-panel__row,
+.lab-panel[data-collapsed] .lab-panel__note,
+.lab-panel[data-collapsed] > .lab-panel__seg { display: none; }
+.lab-panel__chev { margin-left: 14px; color: #6E7488; }
+.lab-panel__row { margin-bottom: 11px; }
+.lab-panel__row > span {
+  display: block;
+  color: #8C91A5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 8px;
+  margin-bottom: 5px;
+}
+.lab-panel__seg { display: flex; gap: 4px; }
+.lab-panel button {
+  flex: 1 1 auto;
+  padding: 5px 4px;
+  border-radius: 2px;
+  border: 1px solid rgba(200, 205, 218, 0.2);
+  background: transparent;
+  color: #C8CDDA;
+  font-family: inherit;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s;
+}
+.lab-panel button:hover { border-color: rgba(232, 175, 56, 0.5); }
+.lab-panel button[aria-pressed='true'] {
+  background: rgba(232, 175, 56, 0.16);
+  border-color: #E8AF38;
+  color: #F8F4E9;
+}
+.lab-panel__replay {
+  width: 100%;
+  margin-top: 2px;
+  border-color: rgba(232, 175, 56, 0.45) !important;
+  color: #E8AF38 !important;
+}
+.lab-panel__note {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(200, 205, 218, 0.12);
+  color: #6E7488;
+  font-size: 8px;
+  letter-spacing: 0.04em;
+}
