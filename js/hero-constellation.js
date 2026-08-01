@@ -60,24 +60,40 @@
 
      HYST guards the boundary so a drag-resize across it cannot flicker. */
   var REF = { desktop: [532, 178], mobile: [299, 64] };
-  var BIAS = 0.10;                 /* log-space handicap applied to 7A */
+  var BIAS = 0.15;                 /* log-space handicap applied to 7A. Raised from
+                                      0.10 when the figure became height-driven:
+                                      that enlarged both candidates and moved the
+                                      crossover, flipping 1280x720 to 7A at 0.78x
+                                      where its labels start touching. */
   var HYST = 0.05;                 /* extra handicap to leave a state */
 
   var mq = window.matchMedia('(max-width:767px)');   /* chrome branch only */
   var handle = null, played = false, sizeKey = null, raf = 0;
 
-  /* The largest box of ratio `ar` that fits in avail. Contain, never cover. */
-  function contain(availW, availH, ar) {
-    var w = Math.min(availW, availH * ar);
+  /* ── THE FIGURE IS SIZED BY THE BAND'S HEIGHT, NOT ITS WIDTH (ruled) ─────
+     It used to be contained inside the type's own column, which capped it at
+     the width the sentence happens to occupy. That left the band's height
+     unused at every desktop size and held the figure ~8% under its reference.
+
+     It now fills the height and takes whatever width its ratio needs, growing
+     PAST the type's inset and centring on the window. MIN_INSET is the floor:
+     the figure may reach 5.5% of the window's width from either edge and no
+     further, which is what keeps it inside the window's own border and stops
+     a short-and-wide band from producing an absurd figure. Below that floor
+     width binds again and the old behaviour resumes. */
+  var MIN_INSET = 0.055;
+
+  function fit(availH, winW, ar) {
+    var w = Math.min(availH * ar, winW * (1 - 2 * MIN_INSET));
     return [w, w / ar];
   }
 
-  function pickSize(availW, availH) {
-    if (!availW || !availH) return mq.matches ? 'mobile' : 'desktop';
+  function pickSize(winW, availH) {
+    if (!winW || !availH) return mq.matches ? 'mobile' : 'desktop';
     var score = {};
     ['desktop', 'mobile'].forEach(function (k) {
       var ref = REF[k];
-      var box = contain(availW, availH, ref[0] / ref[1]);
+      var box = fit(availH, winW, ref[0] / ref[1]);
       score[k] = Math.abs(Math.log(box[0] / ref[0]));
     });
     score.desktop += BIAS;
@@ -88,16 +104,22 @@
 
   /* The reserved box: from the band's top down to the handle rule, less a
      margin. Measured rather than declared, because the foot's height mixes
-     percentages with --u and no single percentage survives every window
-     shape. */
+     percentages with --u and no single percentage survives every window shape.
+
+     The margin is 0.8% of the window, not 1.77%. It guards ONE thing — Writing's
+     label, the only element that reaches the bottom of the figure's coordinate
+     space (it is anchored `b` and hangs below the spec's stated y159). The old
+     value was set before that was understood and was reserving room the figure
+     had no way to use; every pixel of it was height the figure could have been.
+     Verified across the matrix: Writing clears the rule at every viewport. */
   function reserve() {
     var W = win.getBoundingClientRect();
     var F = document.querySelector('.lw-foot').getBoundingClientRect();
     band.style.height = '';
     var top = band.getBoundingClientRect().top;
-    var h = Math.max(0, F.top - top - W.height * 0.0177);
+    var h = Math.max(0, F.top - top - W.height * 0.008);
     band.style.height = h + 'px';
-    return [band.clientWidth, h];
+    return [W.width, h];
   }
 
   /* The launch x, in the FIGURE's own user-space units. Measured against the
@@ -112,10 +134,10 @@
   }
 
   function build() {
-    var avail = reserve();
+    var avail = reserve();                       /* [window width, band height] */
     var key = pickSize(avail[0], avail[1]);
     var cfg = C.SPEC[key];
-    var box = contain(avail[0], avail[1], cfg.band.w / cfg.band.h);
+    var box = fit(avail[1], avail[0], cfg.band.w / cfg.band.h);
 
     fig.textContent = '';
     fig.className = 'lw-figure';
