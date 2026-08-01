@@ -175,8 +175,59 @@ evidence. Build at least one cue that cannot carry the bias.
 
 ## 4. THE MOTION LAWS
 
-Four laws, enforced in `js/hero-window.js` and quoted from it rather than
-paraphrased. They are the house rules for any beat the orbital round adds.
+### THE CASINO TEST: the governing law
+
+Ruled 2026-08-01. This sits above the four enforcement laws below; they are how
+it is implemented in the hero, and it is why they exist.
+
+**The block below is Amy's ruled text, recorded verbatim. Do not edit it, do not
+reflow it, and do not run a house-style pass over it. It contains em dashes by
+authorship and they are protected**, on the same footing as the desk card's
+`&mdash;` in `index.html`. This project has already had a byte-exact file broken
+once by an em-dash sweep reaching into a region it should not have touched (see
+section 2). If a sweep needs an exclusion list, this block goes on it.
+
+```text
+CASINO TEST: No motion may read as looping, cycling, or
+attention-seeking. A visitor must never be able to catch a
+repetition. Any animation that plays more than once must either
+be perceptually random (the shooting star's 60-120s randomized
+interval) or ambient and non-periodic (star twinkle, staggered
+per-star with random delay, never synchronized). Deliberate
+beats — arrivals, demonstrations — play ONCE per sight and latch
+permanently. The name comes from slot machines: motion designed
+to pull the eye back is the failure state. If a viewer notices
+something moving and looks at it because it moved, it fails.
+```
+
+**Provenance, corrected.** This law originated in command directives, not in this
+repository. An earlier draft of this handoff recorded it as unverifiable because
+`casino`, `slot machine` and `jackpot` returned zero matches across all source,
+docs and runbooks. That search was accurate and the conclusion drawn from it was
+wrong in scope: absence from the repo meant it was undocumented, not that it was
+unruled. It is now both ruled and documented, and this document is where it
+lives.
+
+**What already satisfies it, and where it is enforced.** The two mechanisms the
+law names are both live and both gated:
+
+- The shooter's randomised 60-120s interval, gated by
+  `scripts/sky-tuning-report.js`, which fails on more than one shooter or on any
+  period outside that window. Verified 2026-08-01: one shooter at 79s.
+- Per-star twinkle with random delay. `js/hero-sky.js` re-tuned this away from
+  the product's positional wave specifically because at the window's size a wave
+  reads as synchronized, which is the failure the law describes.
+
+**One known violation, already on the books.** `wfTwinkle` keeps running under
+`prefers-reduced-motion`: roughly 280 star animations in the `.linen-hero`
+granddad section of the homepage. It is pre-existing and out of scope for the
+orbital round, and the homepage is closed per section 0. Recorded here so the law
+and the exception are in the same place.
+
+### The four enforcement laws
+
+Enforced in `js/hero-window.js` and quoted from it rather than paraphrased. They
+are how the casino test is implemented for a deliberate beat.
 
 1. **ONCE PER SIGHT.** `IntersectionObserver` at threshold 0.5, so the beat plays
    when the element arrives before her eyes, not on mount.
@@ -187,31 +238,32 @@ paraphrased. They are the house rules for any beat the orbital round adds.
    no rAF loop, no timer left running.
 4. **REDUCED MOTION.** The settled state, no beat, no timers created.
 
-Two supporting rules that carry the same intent:
+One supporting rule that carries the same intent:
 
 - **The settled state is what ships in the markup.** With JS disabled or motion
   reduced, the content reads correctly and the component still works. The
   animation is an enhancement over a correct static state, never the thing that
   produces it.
-- **Nothing periodic may read as a loop.** The sky's single shooter is on a
-  randomised 60-120s period for exactly this reason, and it is gated: more than
-  one shooter, or a period outside that window, fails
-  `scripts/sky-tuning-report.js`.
 
-### One term I could not verify: the "casino test"
+### Applying the casino test to new motion
 
-Amy named the casino test as one of the motion laws to carry forward. **It does
-not appear anywhere in this repository.** `casino`, `slot machine` and `jackpot`
-return zero matches across all source, docs and runbooks.
+The test is stated as a viewer outcome, not a parameter, so it needs a check that
+can actually fail. What worked on the hero:
 
-I am not going to write a definition I inferred and leave it here to be quoted
-back as settled. What I can say is which existing rules appear to be pointing at
-it: law 3 (settled, not looping), and the shooter's randomised 60-120s period
-described in `js/hero-sky.js` as chosen "so it never reads as a loop". Both are
-about motion that must never acquire the rhythm of a machine cycling.
-
-**Action for the orbital session: get the wording from Amy and record it here.**
-Until then treat it as undefined rather than as the two rules above.
+- **Can a repetition be caught?** If the motion has a period, watch three full
+  periods. If the third is predictable from the first two, it fails. Randomising
+  the interval is the fix; shortening it is not.
+- **Does it pull the eye?** The failure state the law names is noticing something
+  because it moved. The adjacent-crop still test in section 5 is the quantitative
+  form of this: if two states of a continuous motion butt together with a visible
+  seam, it is loud enough to catch attention.
+- **Is it staggered or synchronized?** Anything applied to many elements at once
+  needs per-element random delay. A positional wave reads as synchronized at
+  small sizes even when the maths says it is not, which is exactly why
+  `js/hero-sky.js` abandoned the product's wave.
+- **Does it stop?** A deliberate beat must latch and leave no timer running. Grep
+  for `setInterval` and for any `requestAnimationFrame` that reschedules itself
+  unconditionally.
 
 ---
 
