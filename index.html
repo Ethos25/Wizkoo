@@ -1055,9 +1055,21 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
      the answer and support line. Measured: a centred lobe cost the support line
      1.5% of contrast. Physical: the photograph is lit from the upper right, so
      that is where its warm point belongs. */
+  /* 0.300. Amplitude was the binding constraint, not duration: at 0.115 the
+     full half-cycle swing moved 0.202/255 on average, under one quantisation
+     step across most of the frame, so compressing the cycle raised the rate
+     without making anything legible.
+
+     0.115 was itself far below the ceilings once the lobe moved off the copy and
+     under the veil, which is where the headroom came from. Measured at 0.300:
+     worst local colour temperature 1.46% against the ruled 2-3%, frame luminance
+     0.160% against 1.5%, no contrast ratio reduced anywhere, and the two
+     extremes still butt together as one continuous surface. 0.38 was tested and
+     rejected: the pair starts to read as different. The mid stop keeps the same
+     0.452 ratio, so only the lobe's strength moved, not its shape. */
   background:radial-gradient(35.44% 62% at 69.56% 38%,
-    rgba(255,209,138,0.115) 0%,
-    rgba(255,209,138,0.052) 42%,
+    rgba(255,209,138,0.300) 0%,
+    rgba(255,209,138,0.136) 42%,
     rgba(255,209,138,0) 72%);
   /* 11s, not the 40s this was built at. At 40s a visitor sees about a quarter of
      one cycle, so the light never visibly moves during a real visit: desktop
