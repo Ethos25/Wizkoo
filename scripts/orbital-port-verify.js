@@ -135,17 +135,24 @@ async function settle(page) {
        measured off the rendered sphere map exactly as the lab measured them. */
     const m = await page.evaluate(() => {
       const A = window.WizkooOrbital;
+      /* THE CANVAS IS NOT THE DISC. makeBody renders EXTENT (1.34) body radii of
+         canvas — the outer third is the bleed past the limb. Normalising to the
+         canvas edge puts the "limb" band entirely outside the body and measures
+         the bleed: it read the silhouette at 3.0% of centre against a certified
+         34%, texture at 7.63x against 1.87x, and produced a NaN on the bearing
+         spread. rr below is in BODY RADII, so rr = 1 is the limb. */
+      const EXT = A.EXTENT;
       function bands(mode) {
         const r = A.readBody(256, mode), px = r.px, d = r.data, c = (px - 1) / 2;
         const acc = [[], [], []], byBearing = {};
         for (let y = 0; y < px; y++) for (let x = 0; x < px; x++) {
-          const dx = (x - c) / c, dy = (y - c) / c, rr = Math.hypot(dx, dy);
-          if (rr > 0.995) continue;
+          const dx = (x - c) / c, dy = (y - c) / c, rr = Math.hypot(dx, dy) * EXT;
+          if (rr > 0.99) continue;
           const i = (y * px + x) * 4, a = d[i + 3] / 255;
           const lum = (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) * a;
           const band = rr < 0.34 ? 0 : rr < 0.72 ? 1 : 2;
           acc[band].push(lum);
-          if (rr > 0.93) {
+          if (rr > 0.90) {
             const b = Math.round(((Math.atan2(dy, dx) * 180 / Math.PI) + 360) % 360 / 45) % 8;
             (byBearing[b] = byBearing[b] || []).push(lum);
           }
@@ -159,8 +166,8 @@ async function settle(page) {
         const r = A.readBody(512, 1), px = r.px, d = r.data, c = (px - 1) / 2;
         const out = [0, 0, 0], n = [0, 0, 0];
         for (let y = 1; y < px - 1; y++) for (let x = 1; x < px - 1; x++) {
-          const dx = (x - c) / c, dy = (y - c) / c, rr = Math.hypot(dx, dy);
-          if (rr > 0.985) continue;
+          const dx = (x - c) / c, dy = (y - c) / c, rr = Math.hypot(dx, dy) * EXT;
+          if (rr > 0.97) continue;
           const L = (i) => { const j = i * 4; return 0.2126 * d[j] + 0.7152 * d[j + 1] + 0.0722 * d[j + 2]; };
           const v = Math.abs(L(y * px + x - 1) - 2 * L(y * px + x) + L(y * px + x + 1));
           const b = rr < 0.34 ? 0 : rr < 0.72 ? 1 : 2;
@@ -286,9 +293,32 @@ async function settle(page) {
     casino.kinds.forEach((k) => console.log('        ' + k.name.padEnd(24) + String(k.n).padStart(5) +
       String(k.durs).padStart(18) + String(k.delays).padStart(18) + (k.durList ? '   [' + k.durList + 's]' : '')));
     /* The two ruled mechanisms, each asserted on its own terms. */
+    /* THE CERTIFIED DESIGN IS NOT THREE PERIODS. Round 5 put the corona on the
+       body's own keyframe — "the glow follows; it does not lead" — so the ring
+       carries lo-breath-a, the same 3.7s the body's inner glow runs. Three
+       layers, two periods. Asserting three would fail a build that is correct. */
     const breath = casino.kinds.find((k) => k.name === 'lo-breath');
-    check('the body/corona breath runs on 3 distinct mutually-prime periods',
-      !!breath && breath.durs === 3, breath ? breath.n + ' layers, ' + breath.durs + ' periods [' + breath.durList + 's]' : 'MISSING');
+    check('three breath layers are live', !!breath && breath.n === 3,
+      breath ? breath.n + ' layers on ' + breath.durs + ' periods [' + breath.durList + 's]' : 'MISSING');
+    const bd = breath ? breath.durList.split('/').map(parseFloat) : [];
+    const coprime = bd.length === 2 && (() => {
+      const a = Math.round(bd[0] * 10), b = Math.round(bd[1] * 10);
+      const gcd = (x, y) => (y ? gcd(y, x % y) : x);
+      return gcd(a, b) === 1;
+    })();
+    check('the live periods are mutually prime, so the sum has no catchable beat',
+      coprime, bd.join(' and ') + 's  ->  alternate cycles ' + bd.map((x) => x * 2).join(' and ') +
+      's, beating out at about ' + (bd.length === 2 ? Math.round(bd[0] * 2 * bd[1] * 2 / 2 / 60) : '?') + ' minutes');
+    const coronaRidesBody = await page.evaluate(() => {
+      const ring = document.querySelector('#linen-hero .lo-corona-ring');
+      const glow = document.querySelector('#linen-hero .lo-nucleus .lo-breath-a');
+      if (!ring || !glow) return null;
+      const d = (e) => (getComputedStyle(e).animationDuration || '');
+      return { ring: d(ring), body: d(glow), same: d(ring) === d(glow) };
+    });
+    check('the corona rides the BODY\'s breath keyframe, not its own rhythm',
+      coronaRidesBody && coronaRidesBody.same === true,
+      coronaRidesBody ? 'ring ' + coronaRidesBody.ring + ', body glow ' + coronaRidesBody.body : 'MISSING');
     const twinkle = casino.kinds.find((k) => k.name === 'wk-sky-twinkle');
     check('star twinkle is STAGGERED per star, not synchronized',
       !!twinkle && twinkle.delays > 100, twinkle ? twinkle.n + ' stars across ' + twinkle.delays +

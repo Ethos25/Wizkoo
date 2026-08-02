@@ -66,9 +66,30 @@
      components are 307 / 491 / 787 seconds, all prime, spread per node.
 
      THE BREATH IS NOT PERIODIC. A single 4s alternate cycle is exactly the kind
-     of loop a viewer catches. Three glow layers run at 3.7s, 5.3s and 8.9s —
-     mutually prime, so the summed luminosity has visible amplitude inside any
-     3-5s window and a composite period no one will sit through. Opacity only.
+     of loop a viewer catches. The layers run on mutually prime periods, so the
+     summed luminosity has visible amplitude inside any 3-5s window and a
+     composite period no one will sit through. Opacity only.
+
+     MEASURED ON THE DEPLOYED PORT, and not what this paragraph used to claim.
+     It said "three glow layers run at 3.7s, 5.3s and 8.9s". TWO periods are
+     live, not three: 3.7s and 8.9s. .lo-breath-b at 5.3s is a rule that matches
+     nothing, because ROUND 5 MOVED THE CORONA ONTO THE BODY'S OWN KEYFRAME —
+     buildCorona gives the ring `lo-breath-a`, which is the point ("the glow
+     follows; it does not lead"), and that is the third layer this paragraph was
+     counting. 3.7 and 8.9 are still mutually prime; the alternate cycles are
+     7.4s and 17.8s and beat out at about eleven minutes, so nothing is
+     catchable. The rule is left in place: it is the vocabulary, and deleting it
+     would only hide the history.
+
+     ONE INHERITED INCONSISTENCY, REPORTED AND NOT FIXED. applyNucleus() reaches
+     for `.lo-breath-b` INSIDE the corona group to apply the variant's corona
+     breath pair. Nothing there carries that class, so the lookup returns null,
+     the variant's [0.82, 1.00] is never applied, and the corona keeps
+     buildCorona's hardcoded 0.87 -> 1.00: amplitude 0.13 where variant `a`
+     specifies 0.18. This is byte-identical to the lab — diffed, only line
+     numbers move — so 0.13 is what was walked and ruled good. Changing it would
+     change rendered output that has been certified, which is a ruling and not a
+     port decision.
 
    LABEL LAW
      Presence tracks orbital depth CONTINUOUSLY — opacity and scale, written
