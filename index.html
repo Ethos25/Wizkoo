@@ -1285,6 +1285,50 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
        470u wide and sets one line at every desktop width the law produces, so
        a copy edit is what would break it, not a viewport. */
     --hh-group-optical:calc(var(--u) * -16);
+
+    /* ═══ CHANGE 2: THE COLUMN GAP ═════════════════════════════════════════
+       The hero is full-bleed, so above the approved frame the two columns were
+       pushed apart by the viewport rather than by a decision. Two things did
+       it, and only the second one is visible in the markup:
+
+       1. THE WINDOW COLUMN INFLATES BUT THE WINDOW DOES NOT. --hh-span5 is
+          five twelfths of the viewport; the card is capped at 553u and sits
+          right-aligned inside that column, so every pixel of surplus column
+          landed in the gap. Measured at 1966x594: a 771.83px column holding a
+          583.78px card, so 188.05px of dead column sat exactly where the
+          composition needed air taken OUT. --hh-win makes the column honest.
+          It can never widen anything — min() picks the card where the column
+          has outgrown it and the column everywhere else, so at 1440 it
+          resolves to 552.66px, the span it already was, and the card's own
+          width, the band it hands the constellation, and SHIFT_Q are all
+          untouched at the approved frame.
+
+       2. THE GAP WAS NEVER A DECISION. It was grid column 7 plus its two
+          gutters, so it grew with the viewport: 139.34px at 1440, 183.17px at
+          1966, and it would keep going. --hh-gap replaces that arithmetic with
+          a stated interval.
+
+       THE GAP IS THE DESIGNED QUANTITY; THE FRAME IS ARITHMETIC. Do not reach
+       for a container width here and let the gap fall out of it — that is how
+       the composition ended up keyed to the viewport in the first place. Set
+       the gap; the frame is span6 + gap + window, centred in the stage. The
+       max() holds --hh-margin as the floor, so any viewport too narrow to seat
+       the frame behaves exactly as it did.
+
+       72u REUSES THE INTERVAL THAT GOVERNED THE VERTICAL: it is the bottom pin
+       Change 1 removed, and 68u is the top pin. Neither is a new number.
+
+       WHAT THIS COSTS AT 1440, STATED EXACTLY. At the approved frame the
+       content width is 1360px and the columns measure 668 + 552.66 =
+       1220.66px, so the gap that leaves the margins on 40px is 139.34px and no
+       other value does. Any gap below it pulls both columns inward by exactly
+       (139.34 - gap) / 2 per side: 33.67px at 72u, 35.67px at 68u. This change
+       is therefore NOT inert at 1440 and cannot be made inert at either
+       candidate value. That is arithmetic, not tuning. Amy rules the render. */
+    --hh-win:min(var(--hh-span5),calc(var(--u) * 553));
+    --hh-gap:calc(var(--u) * 72);
+    --hh-frame:calc(var(--hh-span6) + var(--hh-gap) + var(--hh-win));
+    --hh-inset:max(var(--hh-margin),calc((100% - var(--hh-frame)) / 2));
   }
   .hh-copy,.hh-group{
     top:0;bottom:0;
@@ -1292,6 +1336,11 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
     height:fit-content;
   }
   .hh-group{translate:0 var(--hh-group-optical)}
+
+  /* The frame, centred. Column widths are untouched: .hh-copy keeps --hh-span6
+     at every viewport, so the arrest's composed two-line break cannot reflow. */
+  .hh-copy{left:var(--hh-inset)}
+  .hh-group{right:var(--hh-inset);width:var(--hh-win)}
 }
 .hh-whisper{
   margin:0 0 calc(var(--u) * 3);
