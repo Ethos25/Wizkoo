@@ -658,7 +658,21 @@
       extent: 1.35, exposure: 2.05, u: 0.90, p: 2.0,
       sub: { dir: [0.38, 0.32], depth: 0.36, zc: 0.50, k: 3.0 },
       cells: [[2.6, 0.16], [6.2, 0.10], [13.0, 0.06]], spots: [], hot: 0,
-      halation: [[0.55, 0.045], [0.10, 0.15]],
+      /* v5 — Amy, with her screenshot: "the light seems concentrated very
+         very close to it and then it's just dark around it, but when you
+         go far the balls have the impact of light... light needs to be
+         handled differently so it looks more natural." The defect is the
+         MOAT: lever 4 tightened the visible glow to ~1.5 body radii, but
+         the lit nodes sit at 2.2-5R — so the frame showed source, dark
+         gap, then illuminated objects, which no real light does. Natural
+         light is CONTINUOUS: if the source lights the balls, the field
+         between them carries a smooth low gradient the whole way. v5
+         keeps the tight incandescent edge and bridges the moat — a mid
+         shell and a broad low field reaching past the inner nodes, each
+         still symmetric, monotone, zero-slope at its edge. The lever-4
+         "light leaves, not surrounds" ruling is superseded by this one:
+         light leaves AND travels. */
+      halation: [[0.55, 0.045], [0.14, 0.30]],
       chromo: { w: 0.013, A: 0.70, I: 1.34 },
       ramp: [
         [1.60, [255, 249, 225]], [1.38, [255, 241, 198]], [1.16, [252, 224, 152]],
@@ -667,8 +681,9 @@
         [0.13, [128, 80, 30]],   [0.06, [98, 62, 26]],    [0.00, [64, 42, 20]]
       ],
       corona: [
-        { Rout: 1.32, A: 0.34, p: 3.2, breath: 'a', lo: 0.90, hi: 1.00 },
-        { Rout: 3.1,  A: 0.08, p: 2.4, breath: 'c', lo: 0.86, hi: 1.00 }
+        { Rout: 1.35, A: 0.34, p: 3.2, breath: 'a', lo: 0.90, hi: 1.00 },
+        { Rout: 2.6,  A: 0.14, p: 2.0, breath: 'b', lo: 0.84, hi: 1.00 },
+        { Rout: 7.5,  A: 0.18, p: 1.5, breath: 'c', lo: 0.88, hi: 1.00 }
       ],
       glows: [
         /* the breath now lives AT the molten heart, not at dead centre */
