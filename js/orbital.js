@@ -492,29 +492,46 @@
      symmetric corona; the system is the subject (scale untouched); nodes lit
      by the nucleus; casino test on all motion.
 
-     THE THREE CANDIDATES — different approaches, not one at three volumes:
-       ignition — the EXPOSURE bet. The star is a light overloading the
-                  camera: white-clipped core, steep chromatic falloff to
-                  saturated orange, strong halation. Dimension is colour
-                  temperature, the way film photographs a bulb.
-       molten   — the MATERIAL bet. A body made of fire: convection cells at
-                  a scale LEGIBLE at 80px (~5 across the face), deep warm
-                  ember limb, the hot region kept as an active cap.
-       aura     — the ATMOSPHERE bet. A clean bright body wrapped in three
-                  corona shells breathing on unequal periods: dimension is
-                  the depth between surface and space.
+     ROUND 8 — Amy rejected all three round-7 candidates: "These are
+     terrible... It needs to literally look real. None of these look real —
+     they are flat relative to the dots on the subjects around them."
+     The r7 bets (ignition/molten/aura) stay on their nuc-r7-* branches as
+     the record; their table entries are replaced by this round's.
 
-     ALL THREE carry the emission system (the star's light landing on the
-     cage, warmth in the field) — emission is the diagnosed defect, not a
-     candidate axis. Amy rules by eye between the three bets. */
-  var CANDIDATE = 'ignition';   /* per-branch pin: ignition | molten | aura */
+     THE DIAGNOSTIC IN HER WORDS: the NODES read as spheres because they
+     carry strong modelled shading — a full value range across a small ball.
+     Every glow-led nucleus reads flat beside them, because glow COSTS
+     contrast. And the reference for "real" is a photograph of the Sun,
+     which has no terminator and still reads round: deep limb darkening,
+     REAL granulation at photographic contrast, a crisp edge, almost no
+     halo. That exact combination — punchy surface, deep chromatic falloff,
+     minimal glow — is the one thing no round has tried: the falloff rounds
+     had timid texture and muddy ramps, round 7 had glow instead of surface.
+
+     ignition read "a bright sun that is exploding" (glare-dominant) and
+     molten "a star that is dying" (ember-dark). So round 8: healthy
+     white-gold centre, no glare, and the value range of the body itself
+     doing the modelling, exactly like the dots do it.
+
+       photo-a — the quiet photosphere: two-scale granulation at
+                 photographic contrast, deep limb darkening, crisp limb.
+       photo-b — the active photosphere: stronger cells, two small spot
+                 groups, a touch more exposure.
+
+     Both keep the emission system (the scene receiving light was and
+     remains the belonging fix), turned down to photographic restraint. */
+  var CANDIDATE = 'photo-a';   /* per-branch pin: photo-a | photo-b */
 
   var CANDIDATES = {
     /* extent    canvas half-width in body radii; past 1.0 is halation
-       exposure  radiance at disc centre, in ramp units — above the ramp's
-                 white knee the core CLIPS, which is the luminous tell
+       exposure  radiance at disc centre, in ramp units
        u, p      the falloff: I = exposure * ((1-u) + u * mu^p)
-       cellAmp/cellFreq  convection cells sampled at the SURFACE point
+       cells     [[freq, amp], ...] granulation octave groups sampled at the
+                 SURFACE point (nx, ny, mu) — two scales, like the Sun:
+                 supergranulation you can count and granulation you can feel
+       spots     [{lon, lat, size, depth}] photospheric spot groups, radians;
+                 dark features ON the surface (they rotate with it in any
+                 future round), not shading — the falloff stays directionless
        hot       additive active-region cap (never shades — one-light law)
        halation  [[amp, scale-in-radii], ...] summed exponentials past the
                  limb, coloured from the limb they leave
@@ -522,72 +539,72 @@
        corona    symmetric shells centred on the body, each monotone outward
        glows     additive interior breath layers
        emit      the light landing on the cage: reach in body radii, peak A */
-    ignition: {
-      /* exposure 1.95 against a 1.60 white knee: the clip holds the inner
-         half of the face and the OUTER half carries the whole chromatic
-         story — white, cream, gold, orange, deep orange at the silhouette.
-         2.35 was tried first and whitewashed 75% of the disc: a flat white
-         plate with a yellow rim, the old failure inverted. */
-      extent: 2.1, exposure: 1.95, u: 0.75, p: 1.35,
-      cellAmp: 0, cellFreq: 0, hot: 0,
-      halation: [[0.85, 0.06], [0.30, 0.55]],
+    /* ══ THE PHOTOGRAPH — round 8's single premise ═══════════════════════
+       A telescope photograph of the Sun reads round with zero glare: the
+       value range ON the body does everything. Centre near-white gold,
+       limb at ~15% of centre and chromatically deep orange, granulation at
+       photographic contrast compressing toward the edge, and a crisp limb
+       with only a thin warm fringe past it. The corona is presence, not
+       spectacle. This is also exactly how the node dots earn their 3D —
+       full value range across a small ball — which answers "flat relative
+       to the dots" in the dots' own language. */
+    'photo-a': {
+      extent: 1.35, exposure: 1.24, u: 0.90, p: 1.9,
+      cells: [[3.4, 0.16], [8.5, 0.15]], spots: [], hot: 0,
+      halation: [[0.50, 0.035], [0.10, 0.20]],
       ramp: [
-        [2.40, [255, 255, 255]], [1.60, [255, 254, 250]], [1.32, [255, 244, 212]],
-        [1.10, [255, 227, 163]], [0.94, [251, 204, 115]], [0.79, [243, 174, 78]],
-        [0.64, [229, 140, 50]],  [0.50, [203, 106, 33]],  [0.00, [148, 68, 22]]
+        [1.40, [255, 250, 235]], [1.15, [255, 240, 205]], [0.98, [254, 226, 162]],
+        [0.82, [250, 205, 120]], [0.66, [243, 180, 85]],  [0.50, [228, 148, 58]],
+        [0.36, [205, 115, 40]],  [0.22, [172, 86, 30]],   [0.10, [145, 68, 25]],
+        [0.00, [122, 55, 22]]
       ],
       corona: [
-        { Rout: 2.3, A: 0.30, p: 2.1, breath: 'a', lo: 0.90, hi: 1.00 },
-        { Rout: 7.0, A: 0.15, p: 2.2, breath: 'c', lo: 0.86, hi: 1.00 }
+        { Rout: 1.35, A: 0.30, p: 3.0, breath: 'a', lo: 0.90, hi: 1.00 },
+        { Rout: 4.6,  A: 0.08, p: 2.2, breath: 'c', lo: 0.86, hi: 1.00 }
       ],
       glows: [
-        { at: [0.50, 0.50], span: 0.42, col: '#FFFFFF', a: 0.50, breath: 'a', lo: 0.08, hi: 0.22 },
-        { at: [0.50, 0.50], span: 0.55, col: '#FFE9B8', a: 0.40, breath: 'c', lo: 0.05, hi: 0.14 }
+        { at: [0.50, 0.50], span: 0.50, col: '#FFEFC0', a: 0.30, breath: 'a', lo: 0.04, hi: 0.12 }
       ],
-      emit: { reach: 5.4, A: 0.62 }
+      emit: { reach: 4.6, A: 0.30 }
     },
-    molten: {
-      extent: 1.7, exposure: 1.50, u: 0.85, p: 2.0,
-      cellAmp: 0.40, cellFreq: 2.6, hot: 0.55,
-      halation: [[0.60, 0.05], [0.20, 0.44]],
+    'photo-b': {
+      extent: 1.35, exposure: 1.28, u: 0.90, p: 1.9,
+      cells: [[3.4, 0.20], [8.5, 0.19]],
+      spots: [
+        { lon: 0.55, lat: 0.30, size: 0.115, depth: 0.55 },
+        { lon: -0.40, lat: -0.42, size: 0.080, depth: 0.45 }
+      ],
+      hot: 0,
+      halation: [[0.50, 0.035], [0.10, 0.20]],
       ramp: [
-        [2.00, [255, 255, 253]], [1.45, [255, 250, 232]], [1.20, [255, 238, 190]],
-        [1.00, [253, 216, 136]], [0.84, [247, 190, 94]],  [0.68, [235, 156, 60]],
-        [0.52, [214, 118, 38]],  [0.38, [186, 88, 27]],   [0.24, [152, 66, 21]],
-        [0.00, [108, 45, 16]]
+        [1.40, [255, 250, 235]], [1.15, [255, 240, 205]], [0.98, [254, 226, 162]],
+        [0.82, [250, 205, 120]], [0.66, [243, 180, 85]],  [0.50, [228, 148, 58]],
+        [0.36, [205, 115, 40]],  [0.22, [172, 86, 30]],   [0.10, [145, 68, 25]],
+        [0.00, [122, 55, 22]]
       ],
       corona: [
-        { Rout: 1.65, A: 0.30, p: 2.6, breath: 'a', lo: 0.88, hi: 1.00 },
-        { Rout: 5.6,  A: 0.12, p: 2.2, breath: 'c', lo: 0.84, hi: 1.00 }
+        { Rout: 1.35, A: 0.30, p: 3.0, breath: 'a', lo: 0.90, hi: 1.00 },
+        { Rout: 4.6,  A: 0.08, p: 2.2, breath: 'c', lo: 0.86, hi: 1.00 }
       ],
       glows: [
-        { at: [0.38, 0.32], span: 0.40, col: '#FFF4D0', a: 0.55, breath: 'a', lo: 0.10, hi: 0.30 },
-        { at: [0.50, 0.50], span: 0.52, col: '#FFE1A0', a: 0.40, breath: 'c', lo: 0.05, hi: 0.14 }
+        { at: [0.50, 0.50], span: 0.50, col: '#FFEFC0', a: 0.30, breath: 'a', lo: 0.04, hi: 0.12 }
       ],
-      emit: { reach: 5.0, A: 0.46 }
-    },
-    aura: {
-      extent: 1.5, exposure: 1.55, u: 0.80, p: 1.75,
-      cellAmp: 0.14, cellFreq: 3.2, hot: 0.30,
-      halation: [[0.45, 0.05], [0.12, 0.30]],
-      ramp: [
-        [2.00, [255, 255, 254]], [1.50, [255, 252, 240]], [1.25, [255, 241, 202]],
-        [1.05, [254, 224, 152]], [0.88, [249, 199, 106]], [0.72, [240, 168, 70]],
-        [0.56, [222, 132, 46]],  [0.42, [196, 100, 32]],  [0.00, [140, 62, 22]]
-      ],
-      corona: [
-        { Rout: 1.45, A: 0.72, p: 3.1, breath: 'a', lo: 0.90, hi: 1.00 },
-        { Rout: 3.0,  A: 0.30, p: 2.5, breath: 'b', lo: 0.74, hi: 1.00 },
-        { Rout: 7.4,  A: 0.13, p: 2.1, breath: 'c', lo: 0.84, hi: 1.00 }
-      ],
-      glows: [
-        { at: [0.50, 0.50], span: 0.46, col: '#FFFBEE', a: 0.45, breath: 'a', lo: 0.08, hi: 0.22 },
-        { at: [0.42, 0.38], span: 0.50, col: '#FFE8B4', a: 0.35, breath: 'c', lo: 0.05, hi: 0.13 }
-      ],
-      emit: { reach: 5.2, A: 0.44 }
+      emit: { reach: 4.6, A: 0.36 }
     }
   };
   var CFG = CANDIDATES[CANDIDATE];
+  /* spot directions precomputed as unit vectors on the visible hemisphere */
+  (function () {
+    Object.keys(CANDIDATES).forEach(function (k) {
+      (CANDIDATES[k].spots || []).forEach(function (s) {
+        var cl = Math.cos(s.lat);
+        s.nx = cl * Math.sin(s.lon);
+        s.ny = -Math.sin(s.lat);
+        s.nz = cl * Math.cos(s.lon);
+        s.cosSize = Math.cos(s.size);
+      });
+    });
+  })();
 
   var ARRIVAL_VARIANTS = {
     /* Nodes first, then paths. Members before structure. */
@@ -901,9 +918,10 @@
 
      The render itself: for every pixel inside the disc, radiance
        I = exposure * ((1-u) + u * mu^p)          the falloff, directionless
-         * (1 + cellAmp * cells(surface point))    molten only — cells sampled
+         * (1 + amp * cells(surface point))        per octave group — sampled
                                                    at (nx, ny, mu) so they
                                                    compress toward the limb
+         * (1 - depth * spot(surface point))       photospheric spot groups
          + hot * cap^3                             additive active region
      mapped through the candidate's ramp, whose top the exposure CLIPS — a
      core driven past the ramp's white knee is the overexposure that makes
@@ -959,13 +977,34 @@
           var rc = r > 1 ? 1 : r;
           var mu = Math.sqrt(1 - rc * rc);
           var I = v.exposure * ((1 - v.u) + v.u * Math.pow(mu, v.p));
-          if (v.cellAmp) {
-            /* cells on the SURFACE (nx, ny, mu), so they compress toward the
-               limb; contrast eases off with mu so the edge stays clean. The
-               frequency is chosen for the DEPLOYED size: ~5 cells across the
-               face at 80px, not a fine grain that vanishes. */
-            var g = fbm(nx * v.cellFreq, ny * v.cellFreq, mu * v.cellFreq + 7.7, 3);
-            I *= 1 + v.cellAmp * g * (0.35 + 0.65 * mu);
+          if (v.cells) {
+            /* granulation on the SURFACE (nx, ny, mu), so it compresses
+               toward the limb the way a photograph's does. Contrast keeps
+               most of its strength to the edge — (0.45 + 0.55*mu) — because
+               timid, hard-tapered texture is exactly what left six rounds
+               reading flat. Frequencies are chosen for the DEPLOYED size:
+               cells you can count at 80px, grain you can feel at 2x. */
+            var keep = 0.45 + 0.55 * mu;
+            for (var ci = 0; ci < v.cells.length; ci++) {
+              var cf = v.cells[ci][0];
+              I *= 1 + v.cells[ci][1] * keep *
+                   fbm(nx * cf, ny * cf, mu * cf + 7.7 + ci * 13.1, 3);
+            }
+          }
+          if (v.spots) {
+            /* spot groups: dark features ON the sphere, foreshortening at
+               the limb like everything on the surface. An umbra floor keeps
+               them photospheric-dark, never black. */
+            for (var si2 = 0; si2 < v.spots.length; si2++) {
+              var sp = v.spots[si2];
+              var cosA = nx * sp.nx + ny * sp.ny + mu * sp.nz;
+              if (cosA > sp.cosSize) {
+                var st = (cosA - sp.cosSize) / (1 - sp.cosSize);
+                st = st > 1 ? 1 : st;
+                st = st * st * (3 - 2 * st);
+                I *= 1 - sp.depth * Math.pow(st, 0.7);
+              }
+            }
           }
           if (v.hot) {
             var dot = nx * HOT_N.x + ny * HOT_N.y + mu * HOT_N.z;
