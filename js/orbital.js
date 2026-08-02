@@ -520,7 +520,35 @@
 
      Both keep the emission system (the scene receiving light was and
      remains the belonging fix), turned down to photographic restraint. */
-  var CANDIDATE = 'photo-a';   /* per-branch pin: photo-a | photo-b */
+  /* ══ ROUND 9 — ELEVATION. RULED BY AMY: photo-a is the base, "best yet,
+     elevate it, do not restart." Five levers, cumulative, each deployed as
+     its own step so she can rule where the object comes alive. Judged in
+     the SECTION, never in crops. Casino test and the self-luminous law
+     (no directional terminator) hold throughout.
+
+       1  TEMPERATURE GRADIENT  the heart reads HOTTER, not just brighter:
+          white-gold core cooling to deep amber at the limb. Energy inside,
+          not paint on top.
+       2  CONVECTION AT MIXED SCALES  three octave groups: large soft cells
+          dominating, fine grain beneath, all compressing toward the limb
+          per the certified radial law.
+       3  THE LIMB SEQUENCE  kill the rim-as-boundary: surface -> ONE thin
+          crisp bright warm edge-line (the chromosphere move) -> soft
+          corona -> space. The line is the highest-value row in the object.
+          NOTE: the round-3 "no bright ring at the silhouette" clause is
+          SUPERSEDED by this ruling for the chromosphere line specifically —
+          a thin line the surface hands off to, not a backlight halo.
+       4  GLOW REACH  measured, and pulled in: light LEAVES the surface, it
+          does not surround it. Numbers in the branch report.
+       5  LIVING SURFACE  built, measured, and CUT by its own law — the
+          measured keyframe delta saturates at ~4.5/255 mean, below
+          perception at page scale. See the LEVERS table for the numbers.
+
+     Branch pins: nuc-e1 .. nuc-e4 set ELEVATION 1..4; ELEVATION 5 exists
+     but renders identically to 4 (lever 5 cut). */
+  var ELEVATION = 1;   /* per-branch pin: 1..5, cumulative */
+
+  var CANDIDATE = 'photo-a';   /* the ruled base; kept for the instruments */
 
   var CANDIDATES = {
     /* extent    canvas half-width in body radii; past 1.0 is halation
@@ -573,50 +601,93 @@
       ],
       emit: { reach: 4.6, A: 0.30 }
     },
-    'photo-b': {
-      extent: 1.35, exposure: 1.28, u: 0.90, p: 1.9,
-      cells: [[3.4, 0.20], [8.5, 0.19]],
-      spots: [
-        { lon: 0.55, lat: 0.30, size: 0.115, depth: 0.55 },
-        { lon: -0.40, lat: -0.42, size: 0.080, depth: 0.45 }
-      ],
-      hot: 0,
-      halation: [[0.50, 0.035], [0.10, 0.20]],
-      /* RE-RAMPED ON AMY'S RULING (photo-a preferred, "not so orange...
-         it needs to kind of go with the saffron"): the dots' gold family
-         holds G/R near 0.7-0.8 (NODE_RAMP, #E8AF38, #F6CB68); the first
-         photo ramp fell to G/R ~0.5 at the limb, which is orange fighting
-         saffron. Every stop below the knee now stays on the saffron axis —
-         the limb is deep gold, not burnt orange. */
-      ramp: [
-        [1.40, [255, 251, 238]], [1.15, [255, 243, 210]], [0.98, [253, 229, 168]],
-        [0.82, [249, 211, 126]], [0.66, [242, 190, 92]],  [0.50, [228, 166, 64]],
-        [0.36, [204, 141, 48]],  [0.22, [172, 113, 38]],  [0.10, [142, 90, 32]],
-        [0.00, [116, 72, 28]]
-      ],
-      corona: [
-        { Rout: 1.35, A: 0.30, p: 3.0, breath: 'a', lo: 0.90, hi: 1.00 },
-        { Rout: 4.6,  A: 0.08, p: 2.2, breath: 'c', lo: 0.86, hi: 1.00 }
-      ],
-      glows: [
-        { at: [0.50, 0.50], span: 0.50, col: '#FFEFC0', a: 0.30, breath: 'a', lo: 0.04, hi: 0.12 }
-      ],
-      emit: { reach: 4.6, A: 0.36 }
-    }
+    /* photo-b (the spots variant) retired by the same ruling that made
+       photo-a the base; it lives on nuc-r8-photo-b as the record. */
   };
-  var CFG = CANDIDATES[CANDIDATE];
-  /* spot directions precomputed as unit vectors on the visible hemisphere */
-  (function () {
-    Object.keys(CANDIDATES).forEach(function (k) {
-      (CANDIDATES[k].spots || []).forEach(function (s) {
-        var cl = Math.cos(s.lat);
-        s.nx = cl * Math.sin(s.lon);
-        s.ny = -Math.sin(s.lat);
-        s.nz = cl * Math.cos(s.lon);
-        s.cosSize = Math.cos(s.size);
-      });
-    });
+
+  /* ══ THE LEVERS — cumulative overrides on the ruled base ═══════════════ */
+  var LEVERS = {
+    /* 1 — TEMPERATURE GRADIENT. Exposure and falloff both rise so the SPAN
+       widens at both ends: the ramp gains a white-hot knee the core now
+       reaches (1.62 against 1.85-top), and the bottom cools to deep amber.
+       The heart is a different TEMPERATURE than the limb, not a brighter
+       copy of it. The extreme limb dips below the saffron G/R band on
+       purpose — deep amber is Amy's word for the cold end of this lever —
+       and rejoins the saffron axis by mid-values. */
+    1: {
+      exposure: 1.62, u: 0.93, p: 2.05,
+      ramp: [
+        [1.85, [255, 255, 252]], [1.55, [255, 250, 230]], [1.28, [255, 240, 198]],
+        [1.06, [253, 227, 160]], [0.90, [249, 212, 124]], [0.74, [242, 192, 94]],
+        [0.58, [230, 168, 66]],  [0.44, [210, 140, 50]],  [0.30, [182, 111, 40]],
+        [0.16, [150, 86, 33]],   [0.00, [118, 66, 27]]
+      ]
+    },
+    /* 2 — CONVECTION AT MIXED SCALES. Three octave groups replacing two:
+       the large cells DOMINATE (0.22 at freq 2.6 — countable at 80px), the
+       mid granulation carries the photograph, the fine grain is felt at 2x.
+       Limb compression is free from surface sampling, as certified. */
+    2: {
+      cells: [[2.6, 0.22], [6.2, 0.12], [13.0, 0.07]]
+    },
+    /* 3 — THE LIMB SEQUENCE. The chromosphere line: one thin crisp bright
+       warm edge-line the surface hands off to, then the soft corona, then
+       space. w is its centre past the limb and its width scale, in body
+       radii — ~2.5 texels at the 512 render. I is its colour on the ramp:
+       ABOVE the surface's own limb values, so the line is the brightest
+       row in the object, which is the lever's requirement. */
+    3: {
+      chromo: { w: 0.013, A: 0.92, I: 1.42 }
+    },
+    /* 4 — GLOW REACH, measured and pulled in. The outer shell comes from
+       4.6R to 3.1R, the wide halation term shortens, the arc emission
+       reach follows. The measured visible-glow radius (2/255 over sky,
+       horizontal ray on the deploy) is in the branch report; light leaves
+       the surface. */
+    4: {
+      halation: [[0.50, 0.035], [0.10, 0.15]],
+      corona: [
+        { Rout: 1.30, A: 0.32, p: 3.4, breath: 'a', lo: 0.90, hi: 1.00 },
+        { Rout: 3.1,  A: 0.07, p: 2.4, breath: 'c', lo: 0.86, hi: 1.00 }
+      ],
+      emit: { reach: 4.0, A: 0.26 }
+    },
+    /* 5 — LIVING SURFACE: CUT, by the lever's own law, with the numbers.
+       Built in full (keyframe renderer, golden-ratio dwell, 7s cross-fade,
+       reduced-motion still — the machinery below this table stands and
+       works) and then MEASURED: mean |delta| between fully rendered
+       keyframes over the body is 4.16/255 at dT 0.42 and 4.50/255 at
+       dT 0.85 (max 23/255) — doubling the decorrelation saturated it,
+       because the texture amplitudes and the ramp's white knee bound the
+       ceiling. That is ~1.8% mean change at an 80px body: below perception
+       even on return. Amy's lever pre-ruled this exact case: "if amplitude
+       lands below perception at page scale, cut it and say so (effort
+       below perception is cost)." Cut. Raising texture amplitude to buy
+       perceptibility would trade lever 2's ruled surface for motion's
+       sake, which is backwards. The scheduler stays dormant — no config
+       carries `live`, so it never runs; a future round that wants a
+       legible living surface needs a bigger body, not a knob. */
+    5: {}
+  };
+
+  var CFG = (function () {
+    var c = {};
+    var base = CANDIDATES[CANDIDATE];
+    Object.keys(base).forEach(function (k) { c[k] = base[k]; });
+    for (var lv = 1; lv <= ELEVATION; lv++) {
+      var o = LEVERS[lv] || {};
+      Object.keys(o).forEach(function (k) { c[k] = o[k]; });
+    }
+    return c;
   })();
+  /* spot directions precomputed as unit vectors on the visible hemisphere */
+  (CFG.spots || []).forEach(function (s) {
+    var cl = Math.cos(s.lat);
+    s.nx = cl * Math.sin(s.lon);
+    s.ny = -Math.sin(s.lat);
+    s.nz = cl * Math.cos(s.lon);
+    s.cosSize = Math.cos(s.size);
+  });
 
   var ARRIVAL_VARIANTS = {
     /* Nodes first, then paths. Members before structure. */
@@ -921,38 +992,48 @@
      deployed ~80px it was nothing at all — texels below the threshold of
      existence, rendered every frame. Git history preserves it. */
 
-  /* ══ THE BODY — one still raster ══════════════════════════════════════
-     ROUND 7: the churn (12 rows/frame, 5s cross-fade, resumable render) is
-     deleted. At the deployed ~80px the evolving granulation moved texels no
-     eye could resolve — the casino test's definition of cost. The body is
-     rendered ONCE; the life of the star is carried by the breath layers and
-     by what its light does to the scene, both of which are legible.
+  /* ══ THE BODY ═════════════════════════════════════════════════════════
+     Round 7 rendered once and deleted the churn as sub-perceptual. Round 9
+     lever 5 brings a LIVING SURFACE back at a cadence that passes the
+     casino test where the churn failed it: keyframes tens of seconds
+     apart, decorrelated enough to register on RETURN, cross-faded slowly
+     enough to sit below conscious notice in the moment. The renderer is
+     therefore resumable again (rows-per-frame into an offscreen canvas),
+     and the cell field takes a TIME coordinate T — the noise is sampled
+     along a moving diagonal, so cells drift and evolve together.
 
      The render itself: for every pixel inside the disc, radiance
        I = exposure * ((1-u) + u * mu^p)          the falloff, directionless
-         * (1 + amp * cells(surface point))        per octave group — sampled
+         * (1 + amp * cells(surface point, T))     per octave group — sampled
                                                    at (nx, ny, mu) so they
                                                    compress toward the limb
          * (1 - depth * spot(surface point))       photospheric spot groups
          + hot * cap^3                             additive active region
-     mapped through the candidate's ramp, whose top the exposure CLIPS — a
-     core driven past the ramp's white knee is the overexposure that makes
-     film believe a light. Past the limb, halation: summed exponentials
-     coloured from the limb they leave, inside the body's own image. */
-  function makeBody(px, v) {
+     mapped through the candidate's ramp, whose top the exposure CLIPS.
+     Past the limb: the CHROMOSPHERE LINE when lever 3 is on (one thin
+     crisp bright row the surface hands off to), then halation — summed
+     exponentials coloured from the limb they leave, inside the body's own
+     image. */
+  function makeBodyRenderer(px, v) {
     var cv = document.createElement('canvas');
     cv.width = cv.height = px;
     var ctx = cv.getContext('2d');
     var img = ctx.createImageData(px, px);
     var d = img.data;
     var half = px / 2, sc = v.extent / half, edge = EDGE_FEATHER * sc;
-    var col = [0, 0, 0], limbCol = [0, 0, 0];
+    var col = [0, 0, 0], limbCol = [0, 0, 0], chromoCol = [0, 0, 0];
     /* the radiance the limb leaves at — what the halation is coloured from.
        Continuous with the limb itself: a fringe brighter than the edge it
        leaves is a rim, and a step darker is an outline. */
     var IL = v.exposure * (1 - v.u) * 1.05;
+    /* each octave group drifts at its own rate — fine grain churns faster
+       than the big cells, which is how convection actually layers */
+    var RATE = [1.0, 1.45, 2.1];
 
-    for (var y = 0; y < px; y++) {
+    function rows(y0, count, T) {
+    T = T || 0;
+    var y1 = Math.min(px, y0 + count);
+    for (var y = y0; y < y1; y++) {
       var ny = (y + 0.5 - half) * sc;
       for (var x = 0; x < px; x++) {
         var nx = (x + 0.5 - half) * sc;
@@ -983,6 +1064,27 @@
           /* coloured from the limb it leaves, cooling as it travels */
           var mixT = Math.min(1, (t2 > 0 ? t2 : 0) / (v.extent - 1));
           rampWith(v.ramp, IL * (1 - 0.45 * mixT), limbCol);
+
+          /* LEVER 3 — the chromosphere line: a thin gaussian ridge just
+             past the limb, brighter than any surface value (v.chromo.I sits
+             above the limb's radiance), composited OVER the halation so the
+             sequence reads surface -> line -> soft corona -> space. The
+             round-3 no-ring clause is superseded by Amy's ruling for this
+             line specifically. */
+          if (v.chromo) {
+            var q = (t2 - v.chromo.w) / (v.chromo.w * 0.62);
+            var cA = v.chromo.A * Math.exp(-q * q);
+            if (cA > 0.004) {
+              rampWith(v.ramp, v.chromo.I, chromoCol);
+              var aT = cA + A2 * (1 - cA);
+              if (aT > 0.002) {
+                limbCol[0] = (chromoCol[0] * cA + limbCol[0] * A2 * (1 - cA)) / aT;
+                limbCol[1] = (chromoCol[1] * cA + limbCol[1] * A2 * (1 - cA)) / aT;
+                limbCol[2] = (chromoCol[2] * cA + limbCol[2] * A2 * (1 - cA)) / aT;
+              }
+              A2 = aT > 1 ? 1 : aT;
+            }
+          }
         }
 
         if (r < 1 + edge) {
@@ -999,8 +1101,10 @@
             var keep = 0.45 + 0.55 * mu;
             for (var ci = 0; ci < v.cells.length; ci++) {
               var cf = v.cells[ci][0];
+              var Tg = T * (RATE[ci] || 1);
               I *= 1 + v.cells[ci][1] * keep *
-                   fbm(nx * cf, ny * cf, mu * cf + 7.7 + ci * 13.1, 3);
+                   fbm(nx * cf + 11.7 * Tg, ny * cf - 7.3 * Tg,
+                       mu * cf + 7.7 + ci * 13.1 + 5.1 * Tg, 3);
             }
           }
           if (v.spots) {
@@ -1041,9 +1145,19 @@
         }
       }
     }
-    ctx.putImageData(img, 0, 0);
-    return cv;
+    return y1;
+    }
+
+    return {
+      px: px,
+      rows: rows,
+      flush: function () { ctx.putImageData(img, 0, 0); return cv; },
+      all: function (T) { rows(0, px, T || 0); return this.flush(); }
+    };
   }
+
+  /* one still frame — the mount render and the instruments both use this */
+  function makeBody(px, v, T) { return makeBodyRenderer(px, v).all(T); }
 
 
   /* ══ NODES, at their own scale ════════════════════════════════════════
@@ -1122,11 +1236,17 @@
   function buildNucleus() {
     var g = svg('g', { class: 'lo-nucleus', 'aria-hidden': 'true' });
     var side = 2 * NUC_R * CFG.extent;
-    /* one still raster — the churn's second cross-fade layer went with it */
-    var img = svg('image', { class: 'lo-nuc-body', x: FRAME.cx - side / 2,
-                             y: FRAME.cy - side / 2, width: side, height: side });
+    var at2 = { class: 'lo-nuc-body', x: FRAME.cx - side / 2,
+                y: FRAME.cy - side / 2, width: side, height: side };
+    /* two layers again as of lever 5: a living surface needs a keyframe to
+       arrive OVER the one before it. At elevations below 5 the second image
+       simply never receives a href. */
+    var img = svg('image', at2);
+    var imgB = svg('image', Object.assign({ opacity: 0 }, at2));
     g.appendChild(img);
+    g.appendChild(imgB);
     g.__img = img;
+    g.__imgB = imgB;
 
     var at = { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R };
     CFG.glows.forEach(function (gl, i) {
@@ -1493,12 +1613,25 @@
        the block is free. 512 texels across 2 * extent body radii keeps the
        body above 1.5 device pixels per texel at a 2x display. The corona
        shells and breath amplitudes were built from CFG directly; there is no
-       variant to re-apply at runtime, which is the point — the candidate is
-       the branch. */
-    var url = makeBody(512, CFG).toDataURL('image/png');
+       variant to re-apply at runtime — the elevation is the branch. */
+    sys.bodyR = makeBodyRenderer(512, CFG);
+    var url = sys.bodyR.all(0).toDataURL('image/png');
     sys.nucleus.__img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', url);
     sys.nucleus.__img.setAttribute('href', url);
-    sys.nucleusVariant = CANDIDATE;
+    sys.nucleusVariant = CANDIDATE + '+e' + ELEVATION;
+    if (CFG.live) {
+      /* lever 5 state. nextAt is absolute on the live clock; the dwell
+         sequence is golden-ratio spaced — deterministic, non-periodic, no
+         common beat with the breath or the libration. */
+      sys.live = { clock: 0, T: 0, n: 0, phase: 'idle', f: 0, cursor: 0,
+                   url: null, nextAt: liveDwell(0) };
+    }
+  }
+
+  function liveDwell(n) {
+    var L = CFG.live;
+    var fr = (n + 1) * 0.6180339887;
+    return L.dwellA + L.dwellB * (fr - Math.floor(fr));
   }
 
   /* ── the arrival beat ───────────────────────────────────────────────── */
@@ -1572,11 +1705,58 @@
        writing the DOM every frame is work done under the threshold. The gate is
        on distance moved, not on a clock, so the lab's accelerator still gets
        every frame. */
-    /* ROUND 7: the churn ran here, every frame, forever — and at the deployed
-       size it moved nothing anyone could see. Deleted with the resumable
-       renderer. The drift loop now does exactly one job: the libration. */
+    /* ROUND 9, LEVER 5 — the living surface. NOT round 7's churn: that ran
+       continuously and moved nothing anyone could see. This renders a
+       KEYFRAME tens of seconds ahead of its cue (12 rows a frame — the
+       budget round 5 proved), then cross-fades it in over CFG.live.fade
+       seconds. Decorrelation dT is large enough that a viewer returning
+       after half a minute sees a different surface; the fade in the moment
+       sits below conscious notice. The scheduler lives inside the drift
+       loop, so reduced motion — which never starts the drift — keeps the
+       still frame without a line of special-casing. */
+    function live(dt) {
+      var L = CFG.live, s = sys.live, n = sys.nucleus;
+      if (!L || !s || !sys.bodyR) return;
+      s.clock += dt;
+      if (s.phase === 'idle' && s.clock >= s.nextAt - L.prep) {
+        s.phase = 'render'; s.cursor = 0; s.T += L.dT;
+      }
+      if (s.phase === 'render') {
+        s.cursor = sys.bodyR.rows(s.cursor, 12, s.T);
+        if (s.cursor >= sys.bodyR.px) {
+          s.phase = 'encode';
+          /* toBlob, not toDataURL — a synchronous 512-square PNG encode is
+             a hitch, and there is nothing to hitch for */
+          sys.bodyR.flush().toBlob(function (blob) {
+            if (!blob) { s.phase = 'idle'; s.nextAt = s.clock + liveDwell(++s.n); return; }
+            var next = URL.createObjectURL(blob);
+            if (s.url) URL.revokeObjectURL(s.url);
+            s.url = next;
+            n.__imgB.setAttributeNS('http://www.w3.org/1999/xlink', 'href', next);
+            n.__imgB.setAttribute('href', next);
+            s.phase = 'ready';
+          }, 'image/png');
+        }
+        return;
+      }
+      if (s.phase === 'ready' && s.clock >= s.nextAt) { s.phase = 'fade'; s.f = 0; }
+      if (s.phase === 'fade') {
+        s.f += dt;
+        var o = s.f / L.fade;
+        if (o >= 1) {
+          n.__img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', s.url);
+          n.__img.setAttribute('href', s.url);
+          n.__imgB.setAttribute('opacity', 0);
+          s.phase = 'idle';
+          s.nextAt = s.clock + liveDwell(++s.n);
+        } else {
+          n.__imgB.setAttribute('opacity', o.toFixed(4));
+        }
+      }
+    }
 
     function tick(dt) {
+      live(dt);
       tau += dt * scale;
       var changed = false;
       for (var i = 0; i < sys.nodes.length; i++) {
@@ -1787,14 +1967,15 @@
       /* round 7: the falloff belongs to the candidate; the old export names
          stay so the lab instruments still find A falloff to read */
       EXTENT: CFG.extent, U_LIMB: CFG.u, LIMB_P: CFG.p,
-      CANDIDATE: CANDIDATE, CFG: CFG, LIBRATION: LIBRATION, SIGMA: SIGMA,
+      CANDIDATE: CANDIDATE, CFG: CFG, ELEVATION: ELEVATION, LEVERS: LEVERS,
+      LIBRATION: LIBRATION, SIGMA: SIGMA,
       ARR: ARR, ARR_KEY: ARR_KEY, ARRANGEMENTS: ARRANGEMENTS,
       FIGURE: FIGURE, NUC_RATIO: NUC_R / MAX_RX, WINDOW: WINDOW,
       /* pixels back, so the light model can be asserted rather than admired.
          Round 7: the texture-only and stars-only modes went with the churn
          and the star field; mode is accepted and ignored. */
-      readBody: function (px, mode) {
-        var cv = makeBody(px || 256, CFG);
+      readBody: function (px, mode, T) {
+        var cv = makeBody(px || 256, CFG, T || 0);
         var g = cv.getContext('2d');
         return { px: cv.width, data: Array.prototype.slice.call(g.getImageData(0, 0, cv.width, cv.height).data) };
       }
