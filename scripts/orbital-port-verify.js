@@ -204,28 +204,47 @@ async function settle(page) {
         return { bands: acc.map(mean), counts: acc.map((a) => a.length),
                  bearings: Object.keys(byBearing).sort().map((k) => mean(byBearing[k])) };
       }
-      /* roughness: mean |second difference| along a horizontal run, per band */
-      function roughness() {
+      /* FALLOFF-INDEPENDENT texture measurement, rebuilt at the N2 ruling. The
+         old estimator took radial second differences of the FULL render, so the
+         deep falloff's own gradient swamped it — and it asserted roughness
+         RISES at the limb, which the ruling explicitly reversed ("limb: finer
+         and LOWER contrast"). Now: tangential rings on the texture-only render
+         (flat base, mode 1). Amplitude = mean |deviation from ring mean| (the
+         contrast); zero-crossings = how many times the mottle crosses its mean
+         in one lap (the fineness). No falloff in either. */
+      function tangential(rr) {
         const r = A.readBody(512, 1), px = r.px, d = r.data, c = (px - 1) / 2;
-        const out = [0, 0, 0], n = [0, 0, 0];
-        for (let y = 1; y < px - 1; y++) for (let x = 1; x < px - 1; x++) {
-          /* out to 0.99, not 0.97. The compression this is measuring is steepest
-             in the last few percent of the radius — mu changes fastest there —
-             so clipping at 0.97 cuts off most of the effect being measured. */
-          const dx = (x - c) / c, dy = (y - c) / c, rr = Math.hypot(dx, dy) * EXT;
-          if (rr > 0.99) continue;
-          const L = (i) => { const j = i * 4; return 0.2126 * d[j] + 0.7152 * d[j + 1] + 0.0722 * d[j + 2]; };
-          const v = Math.abs(L(y * px + x - 1) - 2 * L(y * px + x) + L(y * px + x + 1));
-          const b = rr < 0.34 ? 0 : rr < 0.72 ? 1 : 2;
-          out[b] += v; n[b]++;
+        const vals = [];
+        for (let a = 0; a < 360; a += 0.5) {
+          const th = a * Math.PI / 180;
+          const x = Math.round(c + (rr / EXT) * c * Math.cos(th)), y = Math.round(c + (rr / EXT) * c * Math.sin(th));
+          const i = (y * px + x) * 4, al = d[i + 3] / 255;
+          vals.push((0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) * al);
         }
-        return out.map((v, i) => v / (n[i] || 1));
+        const mean = vals.reduce((s, v) => s + v, 0) / vals.length;
+        const amp = vals.reduce((s, v) => s + Math.abs(v - mean), 0) / vals.length;
+        let zc = 0; for (let i = 1; i < vals.length; i++) if ((vals[i] - mean) * (vals[i - 1] - mean) < 0) zc++;
+        return { amp: +amp.toFixed(2), zc };
+      }
+      /* Star CROWDING is density, not brightness — the points dim with the limb
+         law (one light), so a brightness mean confuses dimming with absence. */
+      function starDensity(rr) {
+        const r = A.readBody(512, 2), px = r.px, d = r.data, c = (px - 1) / 2;
+        let hit = 0, n2 = 0;
+        for (let a = 0; a < 360; a += 0.25) for (let dr = -2; dr <= 2; dr++) {
+          const th = a * Math.PI / 180, rad = (rr / EXT) * c + dr;
+          const x = Math.round(c + rad * Math.cos(th)), y = Math.round(c + rad * Math.sin(th));
+          if (d[(y * px + x) * 4] > 2) hit++; n2++;
+        }
+        return +(hit / n2 * 100).toFixed(2);
       }
       const full = bands(0), stars = bands(2);
       /* centre luminance from the very middle */
       const r0 = A.readBody(256, 0), c0 = ((Math.floor(r0.px / 2) * r0.px + Math.floor(r0.px / 2)) * 4);
       const centre = 0.2126 * r0.data[c0] + 0.7152 * r0.data[c0 + 1] + 0.0722 * r0.data[c0 + 2];
-      return { full, stars, rough: roughness(), centre,
+      return { full, stars, centre,
+               tex: { c: tangential(0.2), m: tangential(0.55), l: tangential(0.9) },
+               starsD: { c: starDensity(0.25), m: starDensity(0.55), l: starDensity(0.9) },
                U_LIMB: A.U_LIMB, LIMB_P: A.LIMB_P };
     });
 
@@ -257,25 +276,26 @@ async function settle(page) {
       rClear, (v) => v > 0.80,
       'hot-excluded ' + (rClear * 100).toFixed(0) + '%, full circle ' + (rAll * 100).toFixed(0) +
       '% (hot region share rises as the falloff deepens)');
-    console.log('        texture roughness     centre ' + m.rough[0].toFixed(3) +
-      '   mid ' + m.rough[1].toFixed(3) + '   limb ' + m.rough[2].toFixed(3));
-    must('texture COMPRESSES toward the limb', m.rough[2] / m.rough[0], (v) => v > 1.25,
-      (m.rough[2] / m.rough[0]).toFixed(2) + 'x finer at the edge  (certified 1.87x)');
-    /* Monotonic to within the estimator's own noise. This is a second difference
-       on one axis over an 8-bit render, not the lab's measure, so centre and mid
-       land within a few thousandths of each other and their ORDER is not a
-       signal. What is a signal is that the limb band stands clear of both. */
-    const noise = 0.02 * m.rough[0];
-    check('and is monotonic outward to within the estimator\'s noise',
-      m.rough[1] >= m.rough[0] - noise && m.rough[2] > m.rough[1] + noise,
-      'centre ' + m.rough[0].toFixed(3) + ' -> mid ' + m.rough[1].toFixed(3) +
-      ' -> limb ' + m.rough[2].toFixed(3) + ' (noise band +/-' + noise.toFixed(3) + ')');
-    console.log('        in-body stars, mean   centre ' + m.stars.bands[0].toFixed(2) +
-      '   mid ' + m.stars.bands[1].toFixed(2) + '   limb ' + m.stars.bands[2].toFixed(2));
-    must('in-body constellation crowds toward the limb', m.stars.bands[2] / Math.max(m.stars.bands[0], 0.001),
-      (v) => v > 1.2, (m.stars.bands[2] / m.stars.bands[0]).toFixed(2) + 'x denser at the limb  (certified 1.65x)');
-    must('and stays a whisper', m.stars.bands[2], (v) => v < 6,
-      'peak band mean ' + m.stars.bands[2].toFixed(2) + ' of 255  (certified 2.4)');
+    /* THE N2 RULING'S OWN REGISTER, asserted on the texture-only render:
+       "the mottle must compress AND soften toward the limb — even sharpness
+       across the face is what reads flat. Center: current scale. Limb: visibly
+       finer and lower contrast." Finer = zero-crossings rise; lower contrast =
+       amplitude falls. Measured on N2's deploy at rings 0.2 / 0.55 / 0.9:
+       amp 5.21 -> 3.49 -> 2.82, zc 8 -> 24 -> 36. */
+    console.log('        texture (flat base)   amp ' + m.tex.c.amp + ' -> ' + m.tex.m.amp + ' -> ' + m.tex.l.amp +
+      '   zero-crossings ' + m.tex.c.zc + ' -> ' + m.tex.m.zc + ' -> ' + m.tex.l.zc + '   (centre -> mid -> limb)');
+    must('texture COMPRESSES toward the limb (finer)', m.tex.l.zc / Math.max(m.tex.c.zc, 1),
+      (v) => v > 2, (m.tex.l.zc / m.tex.c.zc).toFixed(1) + 'x more crossings per lap at the limb');
+    must('and SOFTENS toward the limb (lower contrast)', m.tex.l.amp / m.tex.c.amp,
+      (v) => v < 0.85, 'amplitude falls to ' + ((m.tex.l.amp / m.tex.c.amp) * 100).toFixed(0) + '% of centre');
+    /* Crowding is DENSITY, not brightness — the points dim with the limb law
+       (one light), so a brightness mean confuses dimming with absence. */
+    console.log('        in-body stars: density ' + m.starsD.c + ' / ' + m.starsD.m + ' / ' + m.starsD.l +
+      ' %   brightness ' + m.stars.bands[0].toFixed(2) + ' / ' + m.stars.bands[1].toFixed(2) + ' / ' + m.stars.bands[2].toFixed(2));
+    must('in-body constellation crowds toward the limb (density)', m.starsD.l / Math.max(m.starsD.c, 0.01),
+      (v) => v > 1.05, (m.starsD.l / m.starsD.c).toFixed(2) + 'x denser at the limb');
+    must('and stays a whisper', Math.max(...m.stars.bands), (v) => v < 6,
+      'peak band mean ' + Math.max(...m.stars.bands).toFixed(2) + ' of 255  (certified 2.4)');
   }
 
   /* ══ 4. THE NODES — the demonstration ═══════════════════════════════════ */
