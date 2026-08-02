@@ -183,6 +183,23 @@
   min-height: 0;
 }
 
+/* MOBILE HANDOFF, and why it lives HERE and not with the other mobile rules.
+   index.html's own @media(max-width:767px) block carries `.orb-stage{display:none}`
+   next to `.hz2-mob-fallback{display:flex}`, which is where it reads best — but
+   that block is in the inline <style> and this file is a <link> that comes after
+   it. Both selectors are specificity 0,1,0, so source order decides and
+   `.orb-stage{display:block}` above would win: measured on the deployed branch at
+   375x812, the system rendered at scale 0.331 with the certified 14px label at
+   4.6px. This rule is the one that actually holds.
+
+   The lab was 1440-first and MOBILE WAS NEVER COMPOSED (orbital-port-handoff.md
+   section 10). Below 768px the section hands off to the list fallback that
+   already ships, which is a composed state; the system does not shrink into
+   illegibility. */
+@media (max-width: 767px) {
+  .orb-stage { display: none; }
+}
+
 .orb-svg {
   display: block;
   width: 100%;
