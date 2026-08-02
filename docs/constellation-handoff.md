@@ -1,9 +1,13 @@
 # Constellation — handoff
 
-**Round 3 status: complete. Every viewport in the matrix clears.**
-The two round-2 failures are resolved by routing to 7B on scale, as ruled;
-the tether ships as variant D, as ruled; the proportional chrome is ratified.
-See § 13. Sections 0–12 below are the round-1 and round-2 record.
+**Round 4 status: CLOSED. Amy ruled the figure's position; the lane is done.**
+Position B — the figure gives up 12% of the sentence→rule gap as air above
+itself — is ruled, deployed, and locked. The tether connects both ends, word
+to star, superseding variant D. See § 17 for the close-out record.
+
+Round 3 resolved the two round-2 failures by routing to 7B on scale, as
+ruled, and ratified the proportional chrome. See § 13. Sections 0–12 below
+are the round-1 and round-2 record.
 
 | viewport | window | band | lowest label → handle rule | verdict |
 |---|---|---|---|---|
@@ -525,3 +529,70 @@ both ends. `screenshots/constellation/R3-tether-desktop.png`.
 | `js/hero-constellation.js` | 3,036 B |
 | `css/hero-window.css` (delta) | +388 B |
 | **total added to ship** | **≈14.0 KB** |
+
+---
+
+# ROUND 4 — optical centre, the connected tether, and the close
+
+## 17. CLOSE-OUT RECORD (August 1, 2026)
+
+**The ruling.** The figure sat too high in the window: its bright mass — the
+theme star and the hop-1 stars all live in the figure's upper half — crowded
+the sentence while dead sky sat above the handle rule. Three candidate drops
+were rendered at 1966×594 and 1440×800 (6% / 12% / 18% of the gap) and Amy
+ruled **position B: the figure gives up 12% of the sentence→rule gap as air
+above itself and refits into the remainder.**
+
+    SHIFT_Q = 0.12        js/hero-constellation.js:94
+
+A fraction of the gap, not a px, so it is one position at every window size.
+The variant router reads the FULL gap before the drop is taken out
+(`build()` in the same file), so the placement can never flip 7A/7B.
+
+**The tether, connected (supersedes § 14 / variant D).** Both ends are now
+measured at build time: launch under the centre of the word "space" where it
+actually renders, terminus at the theme star trimmed by the arms' own gap
+formula (r·trim₀ + trim₁), so it dissolves into the star's glow exactly the
+way an arm does. Dash (0.8/4.6), stroke (0.5) and both-end fades are the
+spec's; the stop profile follows the arms' shape because the whisper profile
+left the last stretch of a long run invisible. It re-anchors on every resize
+and at every figure position. Its four endpoints are part of the geometry
+lock (`tests/hero-geometry.js`), so it can never silently disconnect again.
+
+**The foot fade, verified live.** Ruled in a prior session, confirmed here
+against the DEPLOYED page (not local, not source), 1966×594:
+
+    .lw-foot::before  linear-gradient(90deg,
+        rgba(232,175,56,0.26) 0%,      →  8.32% of the window
+        rgba(232,175,56,0.26) 62%,     → 60.00% of the window  (solid to 60 ✓)
+        rgba(232,175,56,0)    93.18%)  → 86.00% of the window  (gone by 86 ✓)
+
+The foot's own border-top is rgba(0,0,0,0) at 1px — kept for the box model,
+invisible; the gradient is the visible rule. Exactly the ruling. No fix
+needed.
+
+**The lock.** Baseline re-captured after the ruling
+(`node scripts/hero-geometry-capture.js http://localhost:3000`) — identical
+to the previous capture, since B was already the shipped default. All three
+tests pass (`npx playwright test tests/hero-1440x800.spec.js`):
+
+    ✓ 1440x800 composition has not moved
+    ✓ --u is exactly 1 at the approved frame
+    ✓ the figure at the approved frame is 7A
+
+**What ships.** The ruled composition is commit **fbb0667**
+(`Hero: the figure drops to optical centre; the tether connects both ends.`),
+deployed and verified at
+https://excellence-round-1--wizkoo.netlify.app — probed live: figure top at
+band top + 20u, variant 7A, tether `M372.25 -22.33 L219.96 23.94` in band
+units, endpoints under the word and at the star's glow edge. This document
+is the only change after that commit; nothing in it touches code.
+
+**Sentence, eyebrow, handle rule and BUILD YOUR OWN never moved** — the
+baseline diff across the round shows only `.lw-figure` (position and refit
+size) and the tether's appearance.
+
+**Housekeeping note.** Netlify builds branch deploys from GitHub pushes but
+posts no statuses/checks/deployments back to the repo — every commit's
+combined status reads "pending" with zero statuses. Deploy state must be
+read from Netlify itself (`netlify api listSiteDeploys`).
