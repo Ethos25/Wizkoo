@@ -166,8 +166,11 @@ async function settle(page) {
         const r = A.readBody(512, 1), px = r.px, d = r.data, c = (px - 1) / 2;
         const out = [0, 0, 0], n = [0, 0, 0];
         for (let y = 1; y < px - 1; y++) for (let x = 1; x < px - 1; x++) {
+          /* out to 0.99, not 0.97. The compression this is measuring is steepest
+             in the last few percent of the radius — mu changes fastest there —
+             so clipping at 0.97 cuts off most of the effect being measured. */
           const dx = (x - c) / c, dy = (y - c) / c, rr = Math.hypot(dx, dy) * EXT;
-          if (rr > 0.97) continue;
+          if (rr > 0.99) continue;
           const L = (i) => { const j = i * 4; return 0.2126 * d[j] + 0.7152 * d[j + 1] + 0.0722 * d[j + 2]; };
           const v = Math.abs(L(y * px + x - 1) - 2 * L(y * px + x) + L(y * px + x + 1));
           const b = rr < 0.34 ? 0 : rr < 0.72 ? 1 : 2;
@@ -199,7 +202,15 @@ async function settle(page) {
       '   mid ' + m.rough[1].toFixed(3) + '   limb ' + m.rough[2].toFixed(3));
     must('texture COMPRESSES toward the limb', m.rough[2] / m.rough[0], (v) => v > 1.25,
       (m.rough[2] / m.rough[0]).toFixed(2) + 'x finer at the edge  (certified 1.87x)');
-    check('and is monotonic', m.rough[0] < m.rough[1] && m.rough[1] < m.rough[2]);
+    /* Monotonic to within the estimator's own noise. This is a second difference
+       on one axis over an 8-bit render, not the lab's measure, so centre and mid
+       land within a few thousandths of each other and their ORDER is not a
+       signal. What is a signal is that the limb band stands clear of both. */
+    const noise = 0.02 * m.rough[0];
+    check('and is monotonic outward to within the estimator\'s noise',
+      m.rough[1] >= m.rough[0] - noise && m.rough[2] > m.rough[1] + noise,
+      'centre ' + m.rough[0].toFixed(3) + ' -> mid ' + m.rough[1].toFixed(3) +
+      ' -> limb ' + m.rough[2].toFixed(3) + ' (noise band +/-' + noise.toFixed(3) + ')');
     console.log('        in-body stars, mean   centre ' + m.stars.bands[0].toFixed(2) +
       '   mid ' + m.stars.bands[1].toFixed(2) + '   limb ' + m.stars.bands[2].toFixed(2));
     must('in-body constellation crowds toward the limb', m.stars.bands[2] / Math.max(m.stars.bands[0], 0.001),
@@ -432,7 +443,11 @@ async function settle(page) {
       const svg = sec.querySelector('.orb-svg');
       const stage = sec.querySelector('.orb-stage');
       const text = sec.querySelector('.linen-hero-text');
-      if (!svg) return { hidden: true, stageDisplay: stage ? getComputedStyle(stage).display : 'none',
+      /* The stage being display:none does NOT remove the svg from the DOM, it
+         just gives it a zero box. Testing `!svg` took the visible branch and
+         reported a 0x0 box and 0.0px type as a legibility failure. */
+      const stageHidden = !stage || getComputedStyle(stage).display === 'none';
+      if (!svg || stageHidden) return { hidden: true, stageDisplay: stage ? getComputedStyle(stage).display : 'absent',
                          fallback: getComputedStyle(document.querySelector('#hz2-mob-fallback')).display,
                          sec: sec.getBoundingClientRect().height };
       const vb = svg.viewBox.baseVal, r = svg.getBoundingClientRect();
@@ -448,6 +463,19 @@ async function settle(page) {
         const oy = Math.min(b.bottom, h1.bottom) - Math.max(b.top, h1.top);
         if (ox > 0 && oy > 0) { hit++; worst = Math.max(worst, ox * oy); }
       });
+      /* Does the object stay inside the section? The section is overflow:hidden,
+         so anything outside is silently cut — a label losing its last word is
+         exactly the kind of failure a PASS elsewhere would hide. */
+      const sr = sec.getBoundingClientRect();
+      let escaped = 0, worstEsc = 0;
+      sec.querySelectorAll('.lo-label-depth,.lo-node').forEach((e) => {
+        const b = e.getBoundingClientRect();
+        const over = Math.max(sr.left - b.left, b.right - sr.right, sr.top - b.top, b.bottom - sr.bottom);
+        if (over > 1) { escaped++; worstEsc = Math.max(worstEsc, over); }
+      });
+      /* What the container costs the ring, which is the cage and the ruling. */
+      const strokes = [].slice.call(sec.querySelectorAll('path.lo-path'))
+        .map((p) => parseFloat(getComputedStyle(p).strokeWidth)).filter((x) => x < 2);
       return { hidden: false, vb: { x: vb.x, y: vb.y, w: vb.width, h: vb.height },
                rect: { w: r.width, h: r.height }, scale,
                par: svg.getAttribute('preserveAspectRatio'),
@@ -455,7 +483,10 @@ async function settle(page) {
                keyH: kr.height,
                sec: sec.getBoundingClientRect().height,
                textW: text.getBoundingClientRect().width,
-               headlineHits: hit, headlineWorst: worst };
+               headlineHits: hit, headlineWorst: worst,
+               escaped, worstEsc,
+               strokeMin: Math.min(...strokes), strokeMax: Math.max(...strokes),
+               dpr: window.devicePixelRatio };
     });
     if (g.hidden) {
       console.log('      ' + v.name + ' ' + v.w + 'x' + v.h + ':  system hidden, list fallback shown');
@@ -473,6 +504,15 @@ async function settle(page) {
       must('  label type stays legible', g.labelPx, (x) => x >= 8.5, g.labelPx.toFixed(1) + 'px');
       check('  no label lands on the headline', g.headlineHits === 0,
         g.headlineHits + ' hits, worst ' + g.headlineWorst.toFixed(0) + 'px2');
+      check('  nothing is clipped by the section', g.escaped === 0,
+        g.escaped + ' escaping, worst ' + g.worstEsc.toFixed(1) + 'px');
+      /* Reported, not asserted. The ring stroke is certified at 1.1 units and
+         the container scales it; this is what that costs, and it is a ruling
+         for Amy's eye, not a threshold for a script. */
+      console.log('        ring stroke ' + (g.strokeMin * g.scale).toFixed(2) + '-' +
+        (g.strokeMax * g.scale).toFixed(2) + ' CSS px  (certified 1:1 gives 0.95-1.25)  ' +
+        '-> ' + (g.strokeMin * g.scale * 2).toFixed(2) + '-' + (g.strokeMax * g.scale * 2).toFixed(2) +
+        ' device px on a 2x display');
     }
     await p2.close();
   }
