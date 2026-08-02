@@ -689,15 +689,17 @@ async function settle(page) {
     const on = await state('science');
     const sci = on.labels.find((l) => l.id === 'science');
     const others = on.labels.filter((l) => l.id !== 'science');
+    /* Softened by Amy's ruling 2026-08-02: acknowledgment, not spotlight —
+       a strong isolate promises a click these subjects do not have. */
     check('hovered subject reads at full presence', sci.op === 1, 'science ' + sci.op);
-    check('every other label recedes to 0.38', others.every((l) => Math.abs(l.op - 0.38) < 0.01),
+    check('every other label eases back to 0.75', others.every((l) => Math.abs(l.op - 0.75) < 0.01),
       others.map((l) => l.id + ' ' + l.op).join(', '));
-    check('every other node dims to 0.5', on.places.filter((p) => p.id !== 'science')
-      .every((p) => Math.abs(p.op - 0.5) < 0.01),
+    check('every other node eases back to 0.85', on.places.filter((p) => p.id !== 'science')
+      .every((p) => Math.abs(p.op - 0.85) < 0.01),
       on.places.map((p) => p.id + ' ' + p.op + ' [' + p.cls + ']').join(', '));
     check('the subject\'s OWN orbit holds', on.ownPaths.every((v) => v === 1),
       on.ownPaths.length + ' segments at 1');
-    check('other orbits recede to 0.45', on.otherPaths.every((v) => Math.abs(v - 0.45) < 0.01),
+    check('other orbits ease back to 0.85', on.otherPaths.every((v) => Math.abs(v - 0.85) < 0.01),
       on.otherPaths.length + ' segments: ' + [...new Set(on.otherPaths)].join('/'));
     check('the nucleus, corona and sky never dim',
       on.nucleus === before.nucleus && on.corona === before.corona && on.sky === before.sky,

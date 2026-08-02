@@ -417,10 +417,16 @@
 .lo-node-place.is-dim, .lo-label-depth.is-dim, .lo-leader.is-dim, .lo-path.is-dim {
   transition-duration: 0.26s;
 }
-.lo-node-place.is-dim { opacity: 0.5; }
-.lo-label-depth.is-dim { opacity: 0.38; }
-.lo-leader.is-dim { opacity: 0.3; }
-.lo-path.is-dim { opacity: 0.45; }
+/* SOFTENED BY AMY'S RULING, 2026-08-02 (was 0.5 / 0.38 / 0.3 / 0.45): a strong
+   isolate is the web's loudest "click me", and these subjects do not click.
+   The system now ACKNOWLEDGES attention rather than spotlighting it — others
+   ease back a breath, the hovered label comes to full presence so it reads
+   without competition. If subject clicks ever become real (a content round,
+   Amy's to author), the spotlight values are one ruling away. */
+.lo-node-place.is-dim { opacity: 0.85; }
+.lo-label-depth.is-dim { opacity: 0.75; }
+.lo-leader.is-dim { opacity: 0.6; }
+.lo-path.is-dim { opacity: 0.85; }
 /* Full presence on intent — this deliberately out-ranks the depth attribute
    (a CSS property beats a presentation attribute), and returns to it on
    release. Reading a far-side subject is exactly what the hover is FOR. */
