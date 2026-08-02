@@ -1699,14 +1699,20 @@
         }
         return null;
       }
-      var hoverRaf = 0;
+      /* Latest-wins throttling. The first version kept the FIRST position of
+         an event burst and dropped the rest — so a cursor sweeping onto a
+         label and stopping was judged by a point mid-flight, not by where it
+         came to rest. One rAF per frame, always evaluating the newest
+         position. */
+      var hoverPend = false, hoverX = 0, hoverY = 0;
       section.addEventListener('pointermove', function (e) {
         if (e.pointerType && e.pointerType !== 'mouse') return;
-        if (hoverRaf) return;
-        var x = e.clientX, y = e.clientY;
-        hoverRaf = requestAnimationFrame(function () {
-          hoverRaf = 0;
-          apply(subjectAt(x, y));
+        hoverX = e.clientX; hoverY = e.clientY;
+        if (hoverPend) return;
+        hoverPend = true;
+        requestAnimationFrame(function () {
+          hoverPend = false;
+          apply(subjectAt(hoverX, hoverY));
         });
       });
       section.addEventListener('pointerleave', function () { apply(null); });

@@ -697,8 +697,8 @@ async function settle(page) {
       on.nucleus === before.nucleus && on.corona === before.corona && on.sky === before.sky,
       'nucleus ' + on.nucleus + ', corona ' + on.corona + ', sky ' + on.sky);
     /* release: move the pointer off the figure entirely */
-    await page.mouse.move(200, 700);
-    await page.waitForTimeout(700);
+    await page.mouse.move(200, 700, { steps: 4 });
+    await page.waitForTimeout(900);
     const off = await state(null);
     const restored = off.labels.every((l) => Math.abs(l.op - l.attr) < 0.02);
     check('release restores every label to its own depth presence', restored,
