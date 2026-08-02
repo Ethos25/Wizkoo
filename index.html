@@ -721,7 +721,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hz2::before{content:'';position:absolute;top:0;left:0;right:0;height:20px;background:linear-gradient(to bottom,rgba(242,240,234,0.12),transparent);pointer-events:none;z-index:1}
 .hz2::after{content:'';position:absolute;bottom:0;left:0;right:0;height:16px;background:linear-gradient(to top,rgba(242,240,234,0.06),transparent);pointer-events:none;z-index:1}
 .hz2-inner{flex:1;max-width:960px;margin:0 auto;padding:0 32px;min-height:0;opacity:0;position:relative;overflow:visible;display:flex;flex-direction:column}
-#hz2-orbital-svg{flex:1;min-height:0;width:100%;height:100%;display:block;overflow:visible}
+/* #hz2-orbital-svg removed at the orbital port; .orb-stage takes its box. See css/orbital.css */
 .hz2-mob-fallback{display:none;flex-direction:column;align-items:center;gap:0;max-width:340px;width:100%;margin:0 auto;opacity:0}
 .hz2-mob-nucleus{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#FDE9A0 0%,#F0C050 30%,#E8AF38 55%,#C89030 80%,#A07020 100%);box-shadow:0 0 24px rgba(232,175,56,0.4),0 0 48px rgba(232,175,56,0.15);margin:0 auto 24px}
 .hz2-mob-list{width:100%;border-left:1.5px solid rgba(232,175,56,0.3);padding-left:16px;display:flex;flex-direction:column;gap:16px}
@@ -736,7 +736,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .hz1-inner{padding:0 20px 0 20px}
   .hz2{margin-top:16px;padding:28px 0 48px;height:auto}
   .hz2-inner{padding:0 16px}
-  #hz2-orbital-svg{display:none}
+  .orb-stage{display:none}
   .hz2-mob-fallback{display:flex!important}
 }
 @media(prefers-reduced-motion:reduce){
@@ -837,9 +837,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hero-orbital-zone::before{display:none}
 .hero-orbital-zone #hz2-inner{flex:1;max-width:none;margin:0;padding:12px;min-height:0}
 
-/* ═══ ORBITAL ZONE STAR FIELD ═══ */
-@keyframes wfTwinkle{0%,100%{opacity:var(--lo,0.12)}50%{opacity:var(--hi,0.55)}}
-.orb-stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+/* ═══ ORBITAL ZONE STAR FIELD — REMOVED AT THE ORBITAL PORT ═══
+   The wfTwinkle keyframe and .orb-stars are deleted with the generator that fed
+   them. Grepped first: nothing else in index.html, css/ or js/ used either.
+   The section's sky is the certified primitive now (css/hero-sky.css). */
 .hero-orbital-zone #hz2-inner{position:relative;z-index:1}
 
 /* ═══ HERO SETUP LINE ═══ */
@@ -1600,6 +1601,7 @@ body.page-home{
 <link rel="stylesheet" href="css/hero-sky.css">
 <link rel="stylesheet" href="css/hero-window.css">
 <link rel="stylesheet" href="css/constellation.css">
+<link rel="stylesheet" href="css/orbital.css">
 </head>
 <body class="page-home" data-footer-treatment="b">
 <!-- ═══ SKY SYSTEM: cream wash (fixed, behind all content) ═══ -->
@@ -1840,8 +1842,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 <!-- ═══ LINEN HERO (GRANDDAD SECTION) ═══ -->
-<section class="linen-hero" id="linen-hero">
-  <div class="orb-stars" aria-hidden="true"></div>
+<section class="linen-hero" id="linen-hero" data-orbital>
+  <!-- The certified TwoLayerSky primitive at the orbital FIELD (js/orbital-sky.js).
+       Replaces the hand-rolled .orb-stars generator that used to live here: 376
+       divs on wfTwinkle, which kept animating under prefers-reduced-motion. The
+       primitive carries its own designed frozen frame, so that violation goes
+       with it. -->
+  <div class="orb-sky" data-orb-sky data-orb-sky-seed="20260801" aria-hidden="true"></div>
   <div class="hero-body">
   <!-- Left text zone -->
   <div class="linen-hero-text">
@@ -1866,137 +1873,15 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- Right: Orbital diagram -->
   <div class="hero-orbital-zone">
     <div class="hz2-inner" id="hz2-inner">
-      <svg id="hz2-orbital-svg" viewBox="-61 4 1011 517" role="img"
-           aria-label="Orbital diagram showing seven school subjects (reading, writing, math, science, history, geography, and art) all connected to one central theme.">
-        <defs>
-          <radialGradient id="nucleusFire" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#FDE9A0"/>
-            <stop offset="30%"  stop-color="#F0C050"/>
-            <stop offset="55%"  stop-color="#E8AF38"/>
-            <stop offset="80%"  stop-color="#C89030"/>
-            <stop offset="100%" stop-color="#A07020"/>
-          </radialGradient>
-          <radialGradient id="haze1" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.12"/>
-            <stop offset="60%"  stop-color="#E8AF38" stop-opacity="0.04"/>
-            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="haze2" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.06"/>
-            <stop offset="50%"  stop-color="#E8AF38" stop-opacity="0.02"/>
-            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="hz-dot-halo" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#E8AF38" stop-opacity="0.5"/>
-            <stop offset="100%" stop-color="#E8AF38" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="hz-dot-core" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#FDE9A0"/>
-            <stop offset="40%"  stop-color="#F0C050"/>
-            <stop offset="100%" stop-color="#E8AF38"/>
-          </radialGradient>
-        </defs>
+      <!-- THE ORBITAL SYSTEM. Built by js/orbital.js into this stage.
+           The rejected geometry that stood here — three near-identical ellipses at
+           ry 178/160/135 against a 42-unit nucleus, plus its dots, connectors and
+           hand-placed callouts — is deleted, not restyled. Copy is unchanged and
+           now lives in the NODES table in js/orbital.js, verbatim.
 
-        <!-- ─── Orbital paths ─── -->
-        <!-- Orbit C (widest, rx=310): solid white — primary, most visible -->
-        <ellipse cx="450" cy="250" rx="310" ry="178" transform="rotate(-32 450 250)" stroke="rgba(240,242,248,0.18)" stroke-width="4" fill="none" opacity="0" class="orb-glow"/>
-        <ellipse cx="450" cy="250" rx="310" ry="178" transform="rotate(-32 450 250)" stroke="rgba(240,242,248,0.18)" stroke-width="1.2" fill="none" class="orb-draw" id="orb-c"/>
-        <!-- Orbit A (medium, rx=280): dashed, ocean blue — secondary depth -->
-        <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)" stroke="#7898D0" stroke-width="4" stroke-opacity="0.03" fill="none" opacity="0" class="orb-glow"/>
-        <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)" stroke="#7898D0" stroke-width="1.0" stroke-opacity="0.12" fill="none" stroke-dasharray="6 8" class="orb-draw" id="orb-a"/>
-        <ellipse cx="450" cy="250" rx="280" ry="160" transform="rotate(-8 450 250)" stroke="#E8AF38" stroke-width="1.0" stroke-opacity="0.2" fill="none" class="orb-draw" id="orb-a-saf"/>
-        <!-- Orbit B (narrowest, rx=240): ultra-faint — tertiary hint -->
-        <ellipse cx="450" cy="250" rx="240" ry="135" transform="rotate(25 450 250)" stroke="rgba(240,242,248,0.08)" stroke-width="4" fill="none" opacity="0" class="orb-glow"/>
-        <ellipse cx="450" cy="250" rx="240" ry="135" transform="rotate(25 450 250)" stroke="rgba(240,242,248,0.08)" stroke-width="0.8" fill="none" opacity="0" id="orb-b"/>
-
-        <!-- ─── Nucleus ─── -->
-        <circle id="hz2-nucl-haze" cx="450" cy="250" r="170" fill="url(#haze2)" opacity="0.5"/>
-        <circle cx="450" cy="250" r="120" fill="url(#haze1)"/>
-        <circle cx="450" cy="250" r="42"  fill="url(#nucleusFire)"/>
-
-        <!-- ─── Connector lines ─── -->
-        <line id="conn-reading" x1="333" y1="114" x2="333" y2="124" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
-        <line id="conn-writing" x1="500" y1="37" x2="510" y2="49" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
-        <line id="conn-math"    x1="728" y1="225" x2="740" y2="225" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
-        <line id="conn-science" x1="610" y1="399" x2="622" y2="399" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
-        <line id="conn-history" x1="424" y1="413" x2="424" y2="427" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
-        <line id="conn-geo"     x1="289" y1="396" x2="273" y2="392" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
-        <line id="conn-art"     x1="173" y1="289" x2="156" y2="285" stroke="#E8AF38" stroke-width="0.8" stroke-dasharray="3 5" stroke-opacity="0.25" opacity="0"/>
-
-        <!-- ─── Dots: dimensional ember, static on orbital paths ─── -->
-        <!-- READING: ~10 o'clock, upper-left -->
-        <g id="dot-reading" opacity="0" transform="translate(333,114)">
-          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
-        </g>
-        <!-- MATH: ~3 o'clock, right -->
-        <g id="dot-math" opacity="0" transform="translate(728,225)">
-          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
-        </g>
-        <!-- SCIENCE: ~5 o'clock, lower-right -->
-        <g id="dot-science" opacity="0" transform="translate(610,399)">
-          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
-        </g>
-        <!-- HISTORY: ~6 o'clock, bottom-center -->
-        <g id="dot-history" opacity="0" transform="translate(424,413)">
-          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
-        </g>
-        <!-- GEOGRAPHY: ~8 o'clock, lower-left -->
-        <g id="dot-geo" opacity="0" transform="translate(289,396)">
-          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
-        </g>
-        <!-- ART: ~9 o'clock, left -->
-        <g id="dot-art" opacity="0" transform="translate(173,289)">
-          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
-        </g>
-        <!-- WRITING: exactly on Orbit C at -60° (12:30 position), calculated: (499.76, 37.13) -->
-        <g id="dot-writing" opacity="0" transform="translate(499.76,37.13)">
-          <circle r="14" fill="url(#hz-dot-halo)"/><circle r="6" fill="url(#hz-dot-core)"/>
-        </g>
-
-        <!-- ─── Callout text groups ─── -->
-        <!-- READING: upper-left — text centered BELOW dot at (333,114) -->
-        <g id="callout-reading" opacity="0">
-          <text x="333" y="133" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">READING</text>
-          <text x="333" y="149" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">The man who accidentally</text>
-          <text x="333" y="163" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">saw through his wife's hand.</text>
-        </g>
-        <!-- MATH: right zone — text to the RIGHT of dot at (728,225) -->
-        <g id="callout-math" opacity="0">
-          <text x="742" y="221" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">MATH</text>
-          <text x="742" y="237" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Measuring bone lengths.</text>
-          <text x="742" y="252" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Which is longest?</text>
-        </g>
-        <!-- SCIENCE: lower-right zone — text to the RIGHT of dot at (610,399) -->
-        <g id="callout-science" opacity="0">
-          <text x="624" y="395" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">SCIENCE</text>
-          <text x="624" y="411" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">How fractures heal.</text>
-          <text x="624" y="426" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">Why does a cast work?</text>
-        </g>
-        <!-- HISTORY: bottom-center zone -->
-        <g id="callout-history" opacity="0">
-          <text x="424" y="439" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="middle">HISTORY</text>
-          <text x="424" y="456" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">1895. One accident changed</text>
-          <text x="424" y="471" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="middle">medicine forever.</text>
-        </g>
-        <!-- GEOGRAPHY: lower-left zone — text anchored adjacent to dot at (289,396) -->
-        <g id="callout-geo" opacity="0">
-          <text x="148" y="363" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em">GEOGRAPHY</text>
-          <text x="148" y="379" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Visit Würzburg, Germany.</text>
-          <text x="148" y="394" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em">Where X-rays were born.</text>
-        </g>
-        <!-- ART: left-center zone — text-anchor end, right edge 10 units left of dot at (173,289) -->
-        <g id="callout-art" opacity="0">
-          <text x="163" y="258" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="end">ART</text>
-          <text x="163" y="274" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Sketch the human skeleton.</text>
-          <text x="163" y="289" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="end">Label every bone you can name.</text>
-        </g>
-        <!-- WRITING: text below-right of dot at (499.76, 37.13) — dot_x+12, dot_y+16/30/43 -->
-        <g id="callout-writing" opacity="0">
-          <text x="512" y="53" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="14" fill="#E8AF38" letter-spacing="0.04em" text-anchor="start">WRITING</text>
-          <text x="512" y="69" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">A get-well letter to Granddad.</text>
-          <text x="512" y="83" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" fill="#C8CDDA" letter-spacing="0.005em" text-anchor="start">What would you say?</text>
-        </g>
-      </svg>
+           The settled state is what the beat enhances, not what it produces: with
+           JS off, the mobile list below is the content and it reads correctly. -->
+      <div class="orb-stage" data-orb-stage></div>
 
       <!-- Mobile fallback (shown below 768px) -->
       <div class="hz2-mob-fallback" id="hz2-mob-fallback">
@@ -2226,6 +2111,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="/components/footer.js"></script>
 <script src="/js/wz-events.js" defer></script>
 <script src="/js/hero-sky.js" defer></script>
+<!-- Both defer, both after hero-sky.js: deferred scripts run in document order,
+     so window.WizkooSky exists by the time orbital-sky.js drives it. -->
+<script src="/js/orbital-sky.js" defer></script>
+<script src="/js/orbital.js" defer></script>
 <script src="/js/hero-window.js" defer></script>
 <script src="/js/constellation.js" defer></script>
 <script src="/js/hero-constellation.js" defer></script>
@@ -2294,24 +2183,19 @@ function spawnConfetti(x,y){
 // ═══ HERO THREE-ZONE ANIMATION ═══
 (function(){
   var reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var SUBJECTS=['reading','math','science','history','geo','art','writing'];
   var EDI='cubic-bezier(0.16,1,0.3,1)';
 
+  /* ORBITAL PORT: this block used to drive BOTH the Granddad headline reveals and
+     the old orbital diagram. The diagram half is gone — the orbit draws, the dot
+     and callout stagger, the connector fades, the SUBJECTS table and the nucleus
+     haze pulse all addressed elements that no longer exist. The system now owns
+     its own beat, in js/orbital.js: IntersectionObserver at 0.4, once, latched.
+     The headline reveals below are untouched. */
   function showAll(){
     ['hz1-h1','hz1-sub'].forEach(function(id){
       var el=document.getElementById(id);if(el){el.style.opacity='1';el.style.transform='none';}
     });
     var hld=document.getElementById('hz-hl-dot');if(hld)hld.style.opacity='1';
-    var inn=document.getElementById('hz2-inner');if(inn)inn.style.opacity='1';
-    document.querySelectorAll('.orb-draw,.orb-glow').forEach(function(el){
-      el.setAttribute('opacity','1');el.style.strokeDashoffset='0';
-    });
-    var ob=document.getElementById('orb-b');if(ob)ob.setAttribute('opacity','1');
-    SUBJECTS.forEach(function(s){
-      ['dot-'+s,'callout-'+s,'conn-'+s].forEach(function(id){
-        var el=document.getElementById(id);if(el)el.setAttribute('opacity','1');
-      });
-    });
     var mob=document.getElementById('hz2-mob-fallback');if(mob)mob.style.opacity='1';
   }
 
@@ -2341,54 +2225,15 @@ function spawnConfetti(x,y){
   revO('hz-hl-dot',    500, 400);
   rev('hz1-sub',        700, 700);
 
-  // Zone 2: dark strip fades in
-  setTimeout(function(){
-    var inn=document.getElementById('hz2-inner');
-    if(inn){inn.style.willChange='opacity';inn.style.transition='opacity 800ms '+EDI;inn.style.opacity='1';setTimeout(function(){inn.style.willChange='auto';},860);}
-  },3200);
-
-  // Initialize stroke-dasharray early so paths start invisible
-  setTimeout(function(){
-    document.querySelectorAll('.orb-draw').forEach(function(el){
-      var len=el.getTotalLength?el.getTotalLength():1500;
-      el._hz_len=len;
-      el.setAttribute('stroke-dasharray',len+' '+len);
-      el.setAttribute('stroke-dashoffset',len);
-    });
-  },100);
-
-  // Glow layers + dashed orbit B fade in with the strip
-  setTimeout(function(){
-    if(typeof gsap!=='undefined'){
-      gsap.to('.orb-glow',{opacity:0.8,duration:1.2,ease:'power1.out',stagger:0.15});
-      gsap.to('#orb-b',{opacity:0.8,duration:1.2,ease:'power1.out'});
-    }
-  },3600);
-
-  // Path draw animation
-  setTimeout(function(){
-    document.querySelectorAll('.orb-draw').forEach(function(el,i){
-      var len=el._hz_len||(el.getTotalLength?el.getTotalLength():1500);
-      if(typeof gsap!=='undefined'){
-        gsap.fromTo(el,{strokeDashoffset:len},{strokeDashoffset:0,duration:3,ease:'power2.inOut',delay:i*0.18});
-      }
-    });
-  },3400);
-
-  // Dots + callouts + connectors stagger (220ms intervals from 3800ms)
-  var dotMs=3800;
-  SUBJECTS.forEach(function(s){
-    (function(t,subj){
-      setTimeout(function(){
-        if(typeof gsap!=='undefined'){
-          gsap.to('#dot-'+subj,    {opacity:1,duration:0.22,ease:'power1.out'});
-          gsap.to('#conn-'+subj,   {opacity:1,duration:0.3, ease:'power1.out',delay:0.03});
-          gsap.to('#callout-'+subj,{opacity:1,duration:0.3, ease:'power1.out',delay:0.05});
-        }
-      },t);
-    })(dotMs,s);
-    dotMs+=220;
-  });
+  /* ORBITAL PORT — five blocks removed here, all of them the old diagram's:
+       the 3.2s #hz2-inner fade      (superseded by the arrival beat; the stage
+                                      now ships visible, see css/orbital.css)
+       the stroke-dasharray priming  (.orb-draw is gone)
+       the .orb-glow / #orb-b fade   (both gone)
+       the 3s path draw              (gone; the certified draw is the beat)
+       the dot/callout/conn stagger  (gone; labels track depth continuously)
+     Every one of them addressed an id or class the port deleted, so each would
+     now be a live timer resolving to nothing. */
 
   // Mobile fallback
   setTimeout(function(){
@@ -2396,19 +2241,12 @@ function spawnConfetti(x,y){
     if(mob){mob.style.transition='opacity 600ms '+EDI;mob.style.opacity='1';}
   },3200);
 
-  // Nucleus haze pulse (GSAP)
-  setTimeout(function(){
-    var haze=document.getElementById('hz2-nucl-haze');
-    if(haze&&typeof gsap!=='undefined'){
-      var ht=gsap.fromTo(haze,{opacity:0.5},{opacity:0.85,duration:4.5,repeat:-1,yoyo:true,ease:'sine.inOut'});
-      var obs=document.getElementById('hz2-inner');
-      if(obs&&'IntersectionObserver'in window){
-        new IntersectionObserver(function(entries){
-          entries.forEach(function(e){e.isIntersecting?ht.resume():ht.pause();});
-        },{threshold:0.1}).observe(obs);
-      }
-    }
-  },3000);
+  /* ORBITAL PORT — the nucleus haze pulse is removed. #hz2-nucl-haze is gone
+     with the rejected geometry, but it would have had to go regardless: it was a
+     single 4.5s yoyo on repeat:-1, which is a fixed 9-second cycle a viewer can
+     sit and count. The casino test names exactly that as the failure state. The
+     certified body breathes on three mutually prime periods (3.7 / 5.3 / 8.9s)
+     so the summed luminosity has no beat to catch. */
 
   // Confetti easter egg on headline saffron dot
   setTimeout(function(){
@@ -2682,53 +2520,15 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   if(inst)inst.textContent='Tap each child';
 })();
 
-// ═══ ORBITAL ZONE STAR FIELD ═══
-(function(){
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  var container=document.querySelector('.linen-hero .orb-stars');
-  if(!container)return;
-  var html='';
+// ═══ ORBITAL ZONE STAR FIELD — REMOVED AT THE ORBITAL PORT ═══
+// 376 hand-rolled divs on the wfTwinkle keyframe. Replaced by the certified
+// TwoLayerSky primitive at the orbital FIELD (js/orbital-sky.js), which carries
+// the product's own twinkle curve, nebula breath, shooter and — the reason this
+// block could not simply be left alone — a designed reduced-motion frozen frame.
+// The generator here bailed out under reduced motion by rendering NOTHING, while
+// docs/orbital-handoff.md section 4 records the opposite failure for the same
+// section: animations left running under it. Neither is a state anyone chose.
 
-  // Tier 1 — deep background stars: tiny, faint, slow, cool blue-white
-  for(var i=0;i<120;i++){
-    var x=(Math.random()*100).toFixed(2);
-    var y=(Math.random()*100).toFixed(2);
-    var lo=(0.02+Math.random()*0.05).toFixed(2);
-    var hi=(0.07+Math.random()*0.09).toFixed(2);
-    var dur=(5+Math.random()*5).toFixed(1);
-    var del=(Math.random()*8).toFixed(1);
-    html+='<div style="position:absolute;border-radius:50%;background:#C8D8F0;left:'+x+'%;top:'+y+'%;width:0.5px;height:0.5px;animation:wfTwinkle '+dur+'s ease-in-out infinite '+del+'s;--lo:'+lo+';--hi:'+hi+';"></div>';
-  }
-
-  // Tier 2 — mid-distance stars: standard, white, varied sizes
-  for(var i=0;i<240;i++){
-    var x=(Math.random()*100).toFixed(2);
-    var y=(Math.random()*100).toFixed(2);
-    var r=Math.random();
-    var sz=r<0.65?1:r<0.88?1.5:2;
-    var lo=(0.05+Math.random()*0.12).toFixed(2);
-    var hi=(0.28+Math.random()*0.42).toFixed(2);
-    var dur=(2+Math.random()*4).toFixed(1);
-    var del=(Math.random()*6).toFixed(1);
-    html+='<div style="position:absolute;border-radius:50%;background:#F0F2F8;left:'+x+'%;top:'+y+'%;width:'+sz+'px;height:'+sz+'px;animation:wfTwinkle '+dur+'s ease-in-out infinite '+del+'s;--lo:'+lo+';--hi:'+hi+';"></div>';
-  }
-
-  // Tier 3 — foreground bright stars: larger, high opacity, warm/cool color variation
-  var brightColors=['#FFF8E8','#FFF0D0','#E8F2FF','#FFF4E0','#D8ECFF','#FFFAE8'];
-  for(var i=0;i<16;i++){
-    var x=(8+Math.random()*84).toFixed(2);
-    var y=(5+Math.random()*90).toFixed(2);
-    var sz=(2+Math.random()*1).toFixed(1);
-    var lo=(0.30+Math.random()*0.15).toFixed(2);
-    var hi=(0.65+Math.random()*0.25).toFixed(2);
-    var dur=(1.5+Math.random()*2.5).toFixed(1);
-    var del=(Math.random()*4).toFixed(1);
-    var col=brightColors[i%brightColors.length];
-    html+='<div style="position:absolute;border-radius:50%;background:'+col+';left:'+x+'%;top:'+y+'%;width:'+sz+'px;height:'+sz+'px;animation:wfTwinkle '+dur+'s ease-in-out infinite '+del+'s;--lo:'+lo+';--hi:'+hi+';"></div>';
-  }
-
-  container.innerHTML=html;
-})();
 </script>
 
 <script>
