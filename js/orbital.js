@@ -552,11 +552,17 @@
       extent: 1.35, exposure: 1.24, u: 0.90, p: 1.9,
       cells: [[3.4, 0.16], [8.5, 0.15]], spots: [], hot: 0,
       halation: [[0.50, 0.035], [0.10, 0.20]],
+      /* RE-RAMPED ON AMY'S RULING (photo-a preferred, "not so orange...
+         it needs to kind of go with the saffron"): the dots' gold family
+         holds G/R near 0.7-0.8 (NODE_RAMP, #E8AF38, #F6CB68); the first
+         photo ramp fell to G/R ~0.5 at the limb, which is orange fighting
+         saffron. Every stop below the knee now stays on the saffron axis —
+         the limb is deep gold, not burnt orange. */
       ramp: [
-        [1.40, [255, 250, 235]], [1.15, [255, 240, 205]], [0.98, [254, 226, 162]],
-        [0.82, [250, 205, 120]], [0.66, [243, 180, 85]],  [0.50, [228, 148, 58]],
-        [0.36, [205, 115, 40]],  [0.22, [172, 86, 30]],   [0.10, [145, 68, 25]],
-        [0.00, [122, 55, 22]]
+        [1.40, [255, 251, 238]], [1.15, [255, 243, 210]], [0.98, [253, 229, 168]],
+        [0.82, [249, 211, 126]], [0.66, [242, 190, 92]],  [0.50, [228, 166, 64]],
+        [0.36, [204, 141, 48]],  [0.22, [172, 113, 38]],  [0.10, [142, 90, 32]],
+        [0.00, [116, 72, 28]]
       ],
       corona: [
         { Rout: 1.35, A: 0.30, p: 3.0, breath: 'a', lo: 0.90, hi: 1.00 },
@@ -576,11 +582,17 @@
       ],
       hot: 0,
       halation: [[0.50, 0.035], [0.10, 0.20]],
+      /* RE-RAMPED ON AMY'S RULING (photo-a preferred, "not so orange...
+         it needs to kind of go with the saffron"): the dots' gold family
+         holds G/R near 0.7-0.8 (NODE_RAMP, #E8AF38, #F6CB68); the first
+         photo ramp fell to G/R ~0.5 at the limb, which is orange fighting
+         saffron. Every stop below the knee now stays on the saffron axis —
+         the limb is deep gold, not burnt orange. */
       ramp: [
-        [1.40, [255, 250, 235]], [1.15, [255, 240, 205]], [0.98, [254, 226, 162]],
-        [0.82, [250, 205, 120]], [0.66, [243, 180, 85]],  [0.50, [228, 148, 58]],
-        [0.36, [205, 115, 40]],  [0.22, [172, 86, 30]],   [0.10, [145, 68, 25]],
-        [0.00, [122, 55, 22]]
+        [1.40, [255, 251, 238]], [1.15, [255, 243, 210]], [0.98, [253, 229, 168]],
+        [0.82, [249, 211, 126]], [0.66, [242, 190, 92]],  [0.50, [228, 166, 64]],
+        [0.36, [204, 141, 48]],  [0.22, [172, 113, 38]],  [0.10, [142, 90, 32]],
+        [0.00, [116, 72, 28]]
       ],
       corona: [
         { Rout: 1.35, A: 0.30, p: 3.0, breath: 'a', lo: 0.90, hi: 1.00 },
