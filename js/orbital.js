@@ -253,8 +253,28 @@
      change. The label guarantee is re-confirmed by walking the excursion box on
      each render; the offline exhaustion was run at the full-size geometry and
      does not carry over. */
-  var FIGURE = 1;        /* 1 = the certified geometry, as walked */
-  var NUC_RATIO = null;  /* null = the certified 0.260 */
+  /* RULED BY AMY, 2026-08-02: render B. "I like the smaller nucleus. I think
+     that's B." Figure at half size, nucleus/envelope 0.200 — between the
+     certified 0.260 and the rejected pre-port 0.135. The lab's 0.260 is
+     superseded for this section by her walk. */
+  var FIGURE = 0.5;
+  var NUC_RATIO = 0.200;
+
+  /* Per-label extra radial clearance, frame units, along the label's own ray.
+     UNRULED except where a value is annotated with its ruling. Stays inside the
+     placement law — the label is still radially outward from its own node,
+     never between it and the star; the tether absorbs the distance by design.
+
+     history: Amy, 2026-08-02, on the round-2 walk: "history is still too close
+     to science... move it a little bit up and to the left." HISTORY's ray
+     points up-left, so outward IS up-and-left. 68 is twice the 34-unit
+     node-to-label clearance the file already uses. */
+  var LABEL_PUSH = { history: 68 };
+
+  /* The drift stays parked until the label ring is re-composed: at this FIGURE
+     the box guarantee has no clean amplitude (science x history composed gap
+     was 1.6px before the push; scripts/orbital-k-solve.js re-measures the
+     ceiling after it). The motion round follows. */
 
   var ORBITS = ARR.orbits.map(function (o) { return { id: o.id, rx: o.rx, ry: o.ry, rot: o.rot, off: o.off || 0 }; });
   ORBITS.forEach(function (o) { o.rx *= FIGURE; o.ry *= FIGURE; o.off *= FIGURE; });
@@ -419,7 +439,9 @@
   };
 
   /* RULED round 2: variant a is the base, 2.5s arrival, orbits drift. */
-  var DEFAULTS = { nucleus: 'a', arrival: 'brisk', orbits: 'drift' };
+  var DEFAULTS = { nucleus: 'a', arrival: 'brisk', orbits: 'static' };
+  /* orbits 'static' pending the label re-composition round — at this FIGURE no
+     libration amplitude clears the 0.45 label bar. See the note at FIGURE. */
 
 
   /* ── geometry ───────────────────────────────────────────────────────── */
@@ -1083,7 +1105,8 @@
        geometry; the +34 and +80 clearances are label-size terms and type does
        not scale, so they hold. At FIGURE 1 this line is identical to the
        certified one. */
-    var rOut = Math.max(dist + NODE_R + 34, NUC_R + 80, 252 * FIGURE);
+    var rOut = Math.max(dist + NODE_R + 34, NUC_R + 80, 252 * FIGURE) +
+               (LABEL_PUSH[n.def.id] || 0);
     var ax = FRAME.cx + ox * rOut, ay = FRAME.cy + oy * rOut;
 
     /* presence tracks depth continuously. Distant things are dimmer; that is the
