@@ -641,15 +641,30 @@
          heart, and the mixed-scale texture returns to carry foreshortening.
          The falloff stays directionless; nothing is ever darker than it —
          no terminator, the law stands. */
-      extent: 1.35, exposure: 1.30, u: 0.90, p: 2.0,
-      cells: [[2.6, 0.16], [6.2, 0.10], [13.0, 0.06]], spots: [], hot: 0.75,
+      /* v4 — Amy, with her own screenshot: "the nucleus looks like a
+         cartoon almost, and the balls look like they're 3D — I need to
+         close that gap." The gap, measured off her frame: the nodes run
+         bright-face-to-genuinely-dark; v3's ball never left mid-saffron.
+         The additive cap could not close it — additive only raises. v4 is
+         a true SUBSURFACE model: radiance falls with 3D DISTANCE FROM AN
+         INTERNAL CORE (upper-left, 42% deep, toward the viewer), so the
+         shell burns white-gold over the heart and the far side goes as
+         deep as a node's shadow side — but the gradient is anchored to a
+         point INSIDE the body, not to an outside lamp: the light is still
+         its own. The edge line and halation scale with how close the core
+         sits to each stretch of limb, so the light visibly leaves the
+         bright side hardest. exposure/k set the pole-to-far-limb ratio at
+         roughly the nodes' own. */
+      extent: 1.35, exposure: 2.05, u: 0.90, p: 2.0,
+      sub: { dir: [0.38, 0.32], depth: 0.36, zc: 0.50, k: 3.0 },
+      cells: [[2.6, 0.16], [6.2, 0.10], [13.0, 0.06]], spots: [], hot: 0,
       halation: [[0.55, 0.045], [0.10, 0.15]],
-      chromo: { w: 0.013, A: 0.65, I: 1.30 },
+      chromo: { w: 0.013, A: 0.70, I: 1.34 },
       ramp: [
-        [1.50, [255, 248, 222]], [1.32, [255, 240, 196]], [1.12, [251, 222, 148]],
-        [0.95, [244, 201, 104]], [0.80, [236, 184, 74]],  [0.65, [230, 170, 58]],
-        [0.50, [216, 152, 48]],  [0.35, [192, 128, 42]],  [0.20, [162, 104, 36]],
-        [0.00, [128, 80, 30]]
+        [1.60, [255, 249, 225]], [1.38, [255, 241, 198]], [1.16, [252, 224, 152]],
+        [0.98, [245, 203, 108]], [0.82, [237, 185, 76]],  [0.66, [229, 168, 58]],
+        [0.50, [214, 149, 48]],  [0.36, [190, 126, 42]],  [0.24, [160, 102, 36]],
+        [0.13, [128, 80, 30]],   [0.06, [98, 62, 26]],    [0.00, [64, 42, 20]]
       ],
       corona: [
         { Rout: 1.32, A: 0.34, p: 3.2, breath: 'a', lo: 0.90, hi: 1.00 },
@@ -1108,6 +1123,20 @@
     var RATE = [1.0, 1.45, 2.1];
     /* node-star: the light's screen direction, baked into the raster */
     var lb = (v.lightDeg || 0) * D2R, lbc = Math.cos(lb), lbs = Math.sin(lb);
+    /* SUBSURFACE: the internal core as a point inside the unit sphere.
+       d0 is the closest the shell ever gets to it — the radiance there is
+       exactly `exposure`. limbMax is the core's proximity factor at the
+       nearest stretch of limb, so the edge modulation normalises to 1. */
+    var SUB = null;
+    if (v.sub) {
+      var sx = 2 * v.sub.dir[0] - 1, sy = 2 * v.sub.dir[1] - 1;
+      var sl = Math.hypot(sx, sy) || 1;
+      SUB = { x: (sx / sl) * v.sub.depth, y: (sy / sl) * v.sub.depth,
+              z: v.sub.zc, k: v.sub.k };
+      SUB.d0 = 1 - Math.hypot(SUB.x, SUB.y, SUB.z);
+      var dnl = Math.hypot(sx / sl - SUB.x, sy / sl - SUB.y, SUB.z);
+      SUB.limbMax = Math.exp(-SUB.k * (dnl - SUB.d0));
+    }
 
     function rows(y0, count, T) {
     T = T || 0;
@@ -1161,9 +1190,20 @@
           var wnd = 1 - ((t2 > 0 ? t2 : 0) / (v.extent - 1)) * ((t2 > 0 ? t2 : 0) / (v.extent - 1));
           A2 *= wnd * wnd;
           A2 = A2 < 0 ? 0 : A2 > 1 ? 1 : A2;
-          /* coloured from the limb it leaves, cooling as it travels */
+          /* coloured from the limb it leaves, cooling as it travels.
+             SUBSURFACE: the light leaves hardest where the core sits
+             closest to the limb — halation, colour and the chromosphere
+             line all scale with that proximity, so the bright side of the
+             shell visibly sheds more light than the deep side. */
+          var sN = 1;
+          if (SUB) {
+            var lxu = r ? nx / r : 0, lyu = r ? ny / r : 1;
+            var dl = Math.hypot(lxu - SUB.x, lyu - SUB.y, SUB.z);
+            sN = Math.min(1, Math.exp(-SUB.k * (dl - SUB.d0)) / SUB.limbMax);
+            A2 *= 0.15 + 0.85 * sN;
+          }
           var mixT = Math.min(1, (t2 > 0 ? t2 : 0) / (v.extent - 1));
-          rampWith(v.ramp, IL * (1 - 0.45 * mixT), limbCol);
+          rampWith(v.ramp, IL * (SUB ? 0.35 + 0.65 * sN : 1) * (1 - 0.45 * mixT), limbCol);
 
           /* LEVER 3 — the chromosphere line: a thin gaussian ridge just
              past the limb, brighter than any surface value (v.chromo.I sits
@@ -1173,7 +1213,7 @@
              line specifically. */
           if (v.chromo) {
             var q = (t2 - v.chromo.w) / (v.chromo.w * 0.62);
-            var cA = v.chromo.A * Math.exp(-q * q);
+            var cA = v.chromo.A * Math.exp(-q * q) * (SUB ? 0.15 + 0.85 * sN : 1);
             if (cA > 0.004) {
               rampWith(v.ramp, v.chromo.I, chromoCol);
               var aT = cA + A2 * (1 - cA);
@@ -1190,7 +1230,20 @@
         if (r < 1 + edge) {
           var rc = r > 1 ? 1 : r;
           var mu = Math.sqrt(1 - rc * rc);
-          var I = v.exposure * ((1 - v.u) + v.u * Math.pow(mu, v.p));
+          var I;
+          if (SUB) {
+            /* radiance falls with 3D distance from the internal core; the
+               mild mu term keeps the silhouette curving even over the
+               bright pole. No external direction exists anywhere here. */
+            var dxs = nx - SUB.x, dys = ny - SUB.y, dzs = mu - SUB.z;
+            var sd = Math.sqrt(dxs * dxs + dys * dys + dzs * dzs);
+            /* the mu term is mild on purpose: the core distance carries the
+               form; mu only keeps the silhouette curving. 0.45+0.55mu was
+               tried first and crushed the pole below the white knee. */
+            I = v.exposure * Math.exp(-SUB.k * (sd - SUB.d0)) * (0.60 + 0.40 * mu);
+          } else {
+            I = v.exposure * ((1 - v.u) + v.u * Math.pow(mu, v.p));
+          }
           if (v.cells) {
             /* granulation on the SURFACE (nx, ny, mu), so it compresses
                toward the limb the way a photograph's does. Contrast keeps
