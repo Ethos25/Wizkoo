@@ -709,7 +709,15 @@
      instead of at the rim; raising u lowers the floor the limb lands on. The
      law itself — identical in every direction, no terminator — is untouched,
      and the verification still asserts it off the rendered pixels. */
-  var U_LIMB = 0.90, LIMB_P = 1.8;
+  var U_LIMB = 0.94, LIMB_P = 2.6;   /* N1 CONSERVATIVE */
+  /* NUCLEUS ROUND, 2026-08-02 — Amy: still a lit disc, not a lit ball.
+     TEX_TAPER: the mottle compresses for free (surface sampling) but kept
+     even CONTRAST to the limb, which is the flat tell. Contrast now tapers
+     to TEX_TAPER_FLOOR at the limb, and the fine grain fades harder than
+     the cells, so the edge is finer AND softer. EDGE_FEATHER: the boundary
+     is a 3px smoothstep arrived at by the falloff, not a drawn line. */
+  var TEX_TAPER_FLOOR = 0.32, TEX_TAPER_POW = 1.1;
+  var EDGE_FEATHER = 3.0;
   var EXTENT = 1.34;              /* canvas half-width in body radii; the rest is bleed */
 
   /* The hot region as a direction on the sphere. 38% 32% of the body's box is
@@ -867,7 +875,7 @@
     var ctx = cv.getContext('2d');
     var img = ctx.createImageData(px, px);
     var d = img.data;
-    var half = px / 2, sc = EXTENT / half, edge = 1.4 * sc;
+    var half = px / 2, sc = EXTENT / half, edge = EDGE_FEATHER * sc;
     var col = [0, 0, 0], limbCol = [0, 0, 0];
     var F1 = 5.4, F2 = 15.1;
     var bleedA = 0.30 * v.bleed, bleedK = 6.2 / (EXTENT - 1);
@@ -910,8 +918,9 @@
             }
             /* granulation on the SURFACE, so it compresses toward the limb;
                w is time, and it only ever goes forward */
-            var g = 0.64 * fbm4(nx * F1, ny * F1, mu * F1, w, 2) +
-                    0.36 * fine[y * px + x];
+            var tpr = TEX_TAPER_FLOOR + (1 - TEX_TAPER_FLOOR) * Math.pow(mu, TEX_TAPER_POW);
+            var g = (0.64 * fbm4(nx * F1, ny * F1, mu * F1, w, 2) +
+                    0.36 * fine[y * px + x] * (0.25 + 0.75 * mu)) * tpr;
             I *= 1 + v.tex * g;
             if (!textureOnly) {
               var dot = nx * HOT_N.x + ny * HOT_N.y + mu * HOT_N.z;
@@ -920,7 +929,9 @@
               I += stars[y * px + x];
             }
             ramp(I, col);
-            var a = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
+            var at = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
+            at = at < 0 ? 0 : at > 1 ? 1 : at;
+            var a = at * at * (3 - 2 * at);   /* smoothstep: no drawn line */
             d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2];
             d[o + 3] = 255 * (a < 0 ? 0 : a > 1 ? 1 : a);
           } else if (!textureOnly && r < EXTENT) {
@@ -931,7 +942,7 @@
             var Il = (1 - U_LIMB);
             var lc = (ux * HOT_N.x + uy * HOT_N.y - 0.34) / 0.66;
             if (lc > 0) { lc = lc > 1 ? 1 : lc; Il += v.hot * lc * lc * lc; }
-            ramp(Il * 2.4 + 0.20, limbCol);
+            ramp(Il * 2.4 + 0.08, limbCol);   /* follows the limb down: a bright fringe outside a dark limb is a rim */
             var A2 = bleedA * dir * Math.exp(-t2 * bleedK);
             d[o] = limbCol[0]; d[o + 1] = limbCol[1]; d[o + 2] = limbCol[2];
             d[o + 3] = 255 * (A2 < 0 ? 0 : A2 > 1 ? 1 : A2);
