@@ -627,12 +627,22 @@
        chromosphere line, tight corona at the lever-4 reach, arcs catching
        the glow, nodes lit from the centre again. */
     'saffron-lantern': {
-      /* v2: v1's face read creamy-yellow — the saturated saffron band sat
-         only at the limb. Exposure down and the falloff a touch deeper so
-         the white-gold heart is COMPACT and the outer half of the face
-         lives at #E8AF38's own saturation; the ramp mids deepen to match. */
-      extent: 1.35, exposure: 1.38, u: 0.90, p: 2.1,
-      cells: [[2.6, 0.09]], spots: [], hot: 0,
+      /* v3 — Amy: "something about making it luminous from the inside out
+         actually makes it flat... this doesn't look like it came out of a
+         Pixar studio." The diagnosis, optical: a PERFECTLY RADIAL glow
+         carries no shape-from-shading — it is geometrically identical to a
+         vignette on a flat disc, so the eye files it as a sticker. Pixar's
+         luminous objects read round because the ENERGY CORE IS DISPLACED:
+         subsurface light seen through a translucent shell, brightest
+         off-centre, asymmetric across the face, never shadowed. v2 had
+         turned off both symmetry-breakers at once (hot 0, cells 0.09).
+         v3 restores them: the certified additive hot cap (upper-left,
+         38/32 — always legal under the one-light law) becomes the molten
+         heart, and the mixed-scale texture returns to carry foreshortening.
+         The falloff stays directionless; nothing is ever darker than it —
+         no terminator, the law stands. */
+      extent: 1.35, exposure: 1.30, u: 0.90, p: 2.0,
+      cells: [[2.6, 0.16], [6.2, 0.10], [13.0, 0.06]], spots: [], hot: 0.75,
       halation: [[0.55, 0.045], [0.10, 0.15]],
       chromo: { w: 0.013, A: 0.65, I: 1.30 },
       ramp: [
@@ -646,8 +656,9 @@
         { Rout: 3.1,  A: 0.08, p: 2.4, breath: 'c', lo: 0.86, hi: 1.00 }
       ],
       glows: [
-        { at: [0.50, 0.50], span: 0.44, col: '#FFF3D2', a: 0.42, breath: 'a', lo: 0.06, hi: 0.16 },
-        { at: [0.50, 0.50], span: 0.60, col: '#F6CB68', a: 0.30, breath: 'c', lo: 0.04, hi: 0.11 }
+        /* the breath now lives AT the molten heart, not at dead centre */
+        { at: [0.38, 0.32], span: 0.46, col: '#FFF3D2', a: 0.45, breath: 'a', lo: 0.06, hi: 0.18 },
+        { at: [0.50, 0.50], span: 0.60, col: '#F6CB68', a: 0.28, breath: 'c', lo: 0.04, hi: 0.10 }
       ],
       emit: { reach: 4.0, A: 0.30 }
     },
