@@ -53,10 +53,22 @@
 
   var LAB_FIELD = {
     far:  { faints: 541, dust: 480, clusterCount: 10, clusterShare: 0.55, twinkleScale: 0.55 },
-    near: { anchors: 12, brights: 98, mids: 490, faints: 200, clusterCount: 8, clusterShare: 0.5, twinkleScale: 1 },
+    /* twinkleScale divides each star's twinkle duration in the certified
+       generator — it moves pace, never amplitude and never count. Raised from
+       1 on Amy's 2026-08-02 ruling ("so subtle that it feels alive but you're
+       not exactly certain why"): the near layer's certified pace read as
+       frozen to her on the walk. */
+    near: { anchors: 12, brights: 98, mids: 490, faints: 200, clusterCount: 8, clusterShare: 0.5, twinkleScale: 1.3 },
     filigree: { clusters: 1, starsMin: 11, starsMax: 14, maxDegree: 3, dropShare: 0.3, spread: 6.5, webOpacity: 0.05 },
     nebulaCount: 4,
-    shooter: { count: 1, periodMinS: 60, periodMaxS: 120 },
+    /* RE-RULED BY AMY, 2026-08-02: "I definitely want a shooting star to come
+       up" — and at one shooter on 60-120s she never saw one; the average gap
+       was ninety seconds. Two shooters now, each on its own 50-90s random
+       period and its own trajectory. Sightings average ~35s apart and
+       alternate paths on drifting relative phase, so there is still no cadence
+       to catch. The lab's caution that a second shooter "reads as a rate" was
+       given at 60-120s; her ruling supersedes it at this range. */
+    shooter: { count: 2, periodMinS: 50, periodMaxS: 90 },
     milkyDust: 480,
     atmosphere: { colorDrift: 60, nebulosity: 64, airglow: 56, milkyWay: 21, wisps: 32 }
   };

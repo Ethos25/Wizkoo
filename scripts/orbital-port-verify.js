@@ -276,8 +276,12 @@ async function settle(page) {
                amps: A.drift.amplitudes(), running: A.drift.running() };
     });
     console.log('        components ' + L.P.join(' / ') + ' seconds     K = ' + L.K);
-    check('periods are the certified primes 307/491/787', String(L.P) === '307,491,787');
-    check('K = 3000, a third under the C ceiling of 4000', L.K === 3000);
+    /* Amy re-ruled the motion on 2026-08-02: subjects move, visibly and subtly.
+       K is capped by the measured label ceiling (1662 after HISTORY's push);
+       the periods shrank so the smaller amplitude keeps the 0.85 px/s design
+       point. Still all prime. */
+    check('periods are primes 163/263/421 (Amy\'s ruling, 2026-08-02)', String(L.P) === '163,263,421');
+    check('K = 1600, inside the measured label ceiling of 1662', L.K === 1600);
     console.log('        node        amplitude   |dP/dtheta|   k       peak px/s');
     L.amps.forEach((a) => console.log('        ' + a.id.padEnd(10) + String(a.amp).padStart(8) + 'deg  ' +
       String(a.tangential).padStart(9) + '   ' + a.k.toFixed(3) + '   ' + a.peakPxPerS.toFixed(3)));
@@ -485,10 +489,14 @@ async function settle(page) {
     must('stars carry their halos, at the lab\'s own count', s.halos,
       (v) => Math.abs(v - 110) <= 4, s.halos + ' with box-shadow (lab renders 110 here)');
     check('anchors held at 12, ruled by eye not scaled by area', s.field.near.anchors === 12);
-    check('one shooter, on the ruled 60-120s random period',
-      s.field.shooter.count === 1 && s.field.shooter.periodMinS === 60 && s.field.shooter.periodMaxS === 120);
+    check('two shooters on 50-90s random periods (Amy\'s ruling, 2026-08-02)',
+      s.field.shooter.count === 2 && s.field.shooter.periodMinS === 50 && s.field.shooter.periodMaxS === 90);
     console.log('        far layer: ' + s.far + ' stars, ' + s.farAnimated + ' animated');
-    check('the far layer keeps its stars and loses its twinkle', s.farAnimated === 0, s.farAnimated + ' animated');
+    /* Amy's ruling: some background twinkle, not the full field. Every 8th far
+       star keeps the certified animation (~128 of 1,021); the rest hold the
+       frozen frame so the frame cost stays at the near layer's step. */
+    must('a small far subset twinkles (every 8th)', s.farAnimated,
+      (v) => v > 90 && v < 165, s.farAnimated + ' of ' + s.far + ' animated');
     must('twinkle survives where it reads (near layer)', s.nearAnimated, (v) => v > 400, s.nearAnimated + ' animated');
   }
 

@@ -206,7 +206,16 @@
 
    Selector specificity is 0,3,0 against the primitive's 0,1,0, so this wins
    without !important and without touching css/hero-sky.css. */
-.orb-sky .wk-sky__layer--far .wk-sky__star {
+/* RE-RULED BY AMY, 2026-08-02. The blanket freeze read as dead to her: "I want
+   some stars to twinkle in the background... I don't want 1,021 twinkling."
+   Every 8th far star keeps the certified twinkle — :not() excludes it from the
+   freeze, so those stars run the primitive's own animation with the inline
+   lo/hi/duration the generator wrote for them; nothing is re-declared. DOM
+   order is generation order and positions are random, so the every-8th subset
+   is spatially random. ~128 of 1,021, measured on the deploy. The other 893
+   hold the frozen-frame brightness exactly as before, so the frame cost stays
+   at the near layer's step, not the full field's. */
+.orb-sky .wk-sky__layer--far .wk-sky__star:not(:nth-child(8n)) {
   animation: none;
   will-change: auto;
 }

@@ -271,10 +271,10 @@
      node-to-label clearance the file already uses. */
   var LABEL_PUSH = { history: 68 };
 
-  /* The drift stays parked until the label ring is re-composed: at this FIGURE
-     the box guarantee has no clean amplitude (science x history composed gap
-     was 1.6px before the push; scripts/orbital-k-solve.js re-measures the
-     ceiling after it). The motion round follows. */
+  /* History of the park, kept for the record: before HISTORY's push the box
+     guarantee had NO clean amplitude (science x history composed gap 1.6px)
+     and drift was parked. The push bought the ceiling back — K_max 1662,
+     measured — and Amy ruled the motion on. See LIBRATION. */
 
   var ORBITS = ARR.orbits.map(function (o) { return { id: o.id, rx: o.rx, ry: o.ry, rot: o.rot, off: o.off || 0 }; });
   ORBITS.forEach(function (o) { o.rx *= FIGURE; o.ry *= FIGURE; o.off *= FIGURE; });
@@ -312,10 +312,25 @@
      near peak only briefly and spends most of a swing well under it. Registering
      a change after half a minute away needs something in the tens of pixels.
      Those two requirements meet here and nowhere roomier. */
+  /* ── RE-RULED BY AMY, 2026-08-02: the subjects move, visibly and subtly ──
+     "I definitely want the subjects to move... the whole thing about nothing
+     is ever seen moving, I don't want that. I just want it to be very subtle
+     so the screen feels alive."
+
+     K = 1600 is NOT taste: the label guarantee's measured ceiling at this
+     geometry is K = 1662 (scripts/orbital-k-solve.js, after HISTORY's push;
+     the bar: wherever two labels touch, the dimmer is at 0.45 or under).
+     1600 sits just inside it.
+
+     The PERIODS are shortened so the smaller amplitude still moves at the
+     lab's 0.85 px/s design point — the perceptual boundary, where motion is
+     occasionally caught and mostly felt. 163 / 263 / 421 are all prime, like
+     the 307 / 491 / 787 they replace; every sine still starts at zero, so the
+     composed state is still exactly where the system rests and arrives. */
   var LIBRATION = {
-    K: 3000,
+    K: 1600,
     w: [0.55, 0.30, 0.15],
-    P: [307, 491, 787]
+    P: [163, 263, 421]
   };
 
   /* sum of w_i * 2pi / P_i — the libration's angular rate per unit amplitude,
@@ -439,9 +454,9 @@
   };
 
   /* RULED round 2: variant a is the base, 2.5s arrival, orbits drift. */
-  var DEFAULTS = { nucleus: 'a', arrival: 'brisk', orbits: 'static' };
-  /* orbits 'static' pending the label re-composition round — at this FIGURE no
-     libration amplitude clears the 0.45 label bar. See the note at FIGURE. */
+  var DEFAULTS = { nucleus: 'a', arrival: 'brisk', orbits: 'drift' };
+  /* Drift returned 2026-08-02 on Amy's ruling, at the labels-capped K — see
+     the note above LIBRATION. The park is over. */
 
 
   /* ── geometry ───────────────────────────────────────────────────────── */
@@ -518,9 +533,13 @@
     /* The label scrim. Same hue as the night ground, so on open sky it is not
        there; over an orbit line or a bright star it is the difference between
        readable and not. */
+    /* Strengthened at the 2026-08-02 walk (was 0.58 / 0.38 / 0.13): at half
+       FIGURE the labels sit nearer the rings, and the scrim tuned for the
+       full-size geometry stopped being decisive over a stroke. Same hue, same
+       stops, same mechanism — always on, nothing switches it. */
     d.appendChild(grad('lo-label-scrim', '50%', '50%', '50%', [
-      ['0%', '#070C16', 0.58], ['42%', '#070C16', 0.38],
-      ['74%', '#070C16', 0.13], ['100%', '#070C16', 0]
+      ['0%', '#070C16', 0.72], ['42%', '#070C16', 0.50],
+      ['74%', '#070C16', 0.18], ['100%', '#070C16', 0]
     ]));
 
     /* A node's bloom. Offset to the lit face when it is placed, never centred —
