@@ -1180,7 +1180,6 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hh-copy{
   position:absolute;
   left:var(--hh-margin);
-  top:0;bottom:0;margin-block:auto;height:fit-content;
   width:var(--hh-span6);
 }
 .hh-eyebrow{
@@ -1239,8 +1238,60 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hh-group{
   position:absolute;
   right:var(--hh-margin);
-  top:0;bottom:0;margin-block:auto;height:fit-content;
   width:var(--hh-span5);
+}
+
+/* ═══ CHANGE 1: THE SINGLE ANCHOR ══════════════════════════════════════════
+   Scoped to the desktop composition on purpose. The phone frame is its own
+   hand-authored stack — .hh-copy pinned 22u from the top, .hh-group 22u from
+   the bottom — and it is out of this round. Declaring the centring unscoped
+   leaks: the mobile block overrides `top` only, so an unscoped `bottom:0` plus
+   auto margins survives into it and slides both columns ~152px down the phone
+   frame. Measured, not guessed. Scoping here keeps the mobile block untouched.
+
+   Auto block margins rather than translateY(-50%): auto margins resolve in
+   layout, so poster-scale type paints on the pixel grid. A -50% transform of a
+   fractional height lands the display face on half-pixels and softens it. */
+@media(min-width:768px){
+  .hh-stage{
+    /* ── THE OPTICAL CORRECTION ─────────────────────────────────────────────
+       .hh-group centres the whisper + window STACK, but the composition's mass
+       is the window; the whisper is one italic line that reads as a lead-in.
+       Centring the stack therefore drops the window's own centre below the
+       band's by half the whisper's height plus its gap:
+
+           whisper   font-size 20u x line-height 1.45  =  29u
+           gap       .hh-whisper margin-bottom         =   3u
+                                                          ---
+           stack sitting above the window                 32u   ->  half = 16u
+
+       MEASURED on the deployed hero after geometric centring, window centre
+       minus band centre: 16.87px at 1966x594 (u 1.05566, = 15.98u) and 16.00px
+       at 1440x900 (u 1.000, = 16.00u). Derivation and measurement agree.
+
+       Raising the group by 16u puts the window's centre on the band's centre,
+       which is where the copy column's INK centre already sits: pixel-scanned
+       at alpha >= 64 the copy's ink midpoint measures 337.50 against a band
+       centre of 338.00 at 1966x594, and 490.50 against 491.00 at 1440x900.
+       Half a pixel high at both, inside one device pixel, deliberately not
+       corrected — a correction below the measurement's own resolution is a
+       nudge wearing a token's name.
+
+       16 IS NOT A NEW INTERVAL: it is half of 32, and both already belong to
+       the hero's vocabulary.
+
+       RE-DERIVE IF THE WHISPER WRAPS. This is half a ONE-LINE stack. At two
+       lines the stack is 61u and this token is wrong by 14.5u. The whisper is
+       470u wide and sets one line at every desktop width the law produces, so
+       a copy edit is what would break it, not a viewport. */
+    --hh-group-optical:calc(var(--u) * -16);
+  }
+  .hh-copy,.hh-group{
+    top:0;bottom:0;
+    margin-block:auto;
+    height:fit-content;
+  }
+  .hh-group{translate:0 var(--hh-group-optical)}
 }
 .hh-whisper{
   margin:0 0 calc(var(--u) * 3);
