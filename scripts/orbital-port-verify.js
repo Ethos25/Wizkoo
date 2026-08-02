@@ -417,11 +417,28 @@ async function settle(page) {
       host.querySelectorAll('.wk-sky__layer--near .wk-sky__star').forEach((e) => {
         if (getComputedStyle(e).animationName !== 'none') nearAnimated++;
       });
+      /* A STAR THAT EXISTS IS NOT A STAR THAT RENDERS. The first version of this
+         check counted stars and read their animation state, and passed on a
+         section where every one of them computed to width 0px because --u was
+         out of scope. Count is not size. */
+      let sized = 0, halos = 0, wMin = Infinity, wMax = 0;
+      stars.forEach((e) => {
+        const cs = getComputedStyle(e), w = parseFloat(cs.width) || 0;
+        if (w > 0) { sized++; wMin = Math.min(wMin, w); wMax = Math.max(wMax, w); }
+        if (cs.boxShadow && cs.boxShadow !== 'none') halos++;
+      });
+      const u = getComputedStyle(document.querySelector('#linen-hero')).getPropertyValue('--u');
       return { reported: host.dataset.orbSkyStars, dom: stars.length, far: far.length,
-               farAnimated, nearAnimated, field: window.WizkooOrbitalSky.LAB_FIELD };
+               farAnimated, nearAnimated, field: window.WizkooOrbitalSky.LAB_FIELD,
+               sized, halos, wMin: wMin === Infinity ? 0 : wMin, wMax, u: u.trim() };
     });
     console.log('        stars rendered ' + s.dom + ' (generator reported ' + s.reported + ')');
     must('star count is the certified 1,834', Number(s.reported), (v) => Math.abs(v - 1834) <= 2, '');
+    console.log('        --u in the section: ' + (s.u || '(EMPTY -- every star will compute to 0px)'));
+    check('--u is in scope for the section', s.u !== '', s.u);
+    check('EVERY star has a non-zero box', s.sized === s.dom,
+      s.sized + ' of ' + s.dom + ' sized, ' + s.wMin.toFixed(2) + '-' + s.wMax.toFixed(2) + 'px');
+    must('stars carry their halos', s.halos, (v) => v > 400, s.halos + ' with box-shadow');
     check('anchors held at 12, ruled by eye not scaled by area', s.field.near.anchors === 12);
     check('one shooter, on the ruled 60-120s random period',
       s.field.shooter.count === 1 && s.field.shooter.periodMinS === 60 && s.field.shooter.periodMaxS === 120);

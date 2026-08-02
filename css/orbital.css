@@ -155,6 +155,28 @@
       available at the shortest target viewport), so the floor would be inert
       and would move the section's height for nothing. */
 
+/* ── THE SCALE UNIT. Without this the sky is invisible. ──────────────────
+   js/hero-sky.js sizes every star as `max(1px, calc(var(--u) * n))` (usz(),
+   line 274). In index.html `--u` is declared on the HERO BAND's wrapper, not on
+   :root — so outside the hero it is empty, calc(var(--u) * n) is invalid, the
+   whole width/height declaration is dropped, and the star renders at 0px with
+   no halo. Measured on the deployed branch before this rule: 1,834 stars in the
+   DOM at correct positions and opacities, computed width 0px, box-shadow none.
+   The section read as flat navy because only the 12 atmosphere washes had size.
+
+   The lab did not hit this because lab/orbital.html declares --u on :root.
+
+   THIS IS THE LAB'S DECLARATION, COPIED VERBATIM from lab/orbital.html lines
+   17-18, so a star in this section is the same physical size as the star the
+   lab was walked and certified with. It is scoped to .linen-hero and cannot
+   reach the hero: the hero's own --u at index.html line 1015 is a different
+   expression, is ruled, is locked by tests/hero-1440x800.spec.js, and is not
+   touched. */
+.linen-hero {
+  --u: min(1px, calc(100vw / 1440), max(0.62px, calc((100vh - 82px) / 718)));
+  --u: min(1px, calc(100vw / 1440), max(0.62px, calc((100svh - 82px) / 718)));
+}
+
 /* The certified sky, mounted at the section's full bleed. */
 .orb-sky {
   position: absolute;
