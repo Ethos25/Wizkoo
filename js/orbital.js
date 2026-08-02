@@ -1680,22 +1680,37 @@
           p.glow.classList.toggle('is-dim', dim);
         });
       }
-      sys.nodes.forEach(function (n) {
-        [n.g, n.label].forEach(function (el) {
-          el.addEventListener('pointerenter', function (e) {
-            if (e.pointerType && e.pointerType !== 'mouse') return;
-            apply(n.def.id);
-          });
-          el.addEventListener('pointerleave', function (e) {
-            if (e.pointerType && e.pointerType !== 'mouse') return;
-            if (focused === n.def.id) apply(null);
-          });
+      /* NOT boundary events. pointerenter/leave were tried first and Chromium
+         fires a spurious leave under a STATIONARY cursor the moment the
+         hovered element's transform is rewritten — which the drift does every
+         frame, forever. Measured on the deploy: enter then leave within one
+         frame, mouse never moving. So the hover is tracked geometrically: on
+         every (rAF-throttled) pointermove, the pointer is tested against each
+         subject's label box and node box, padded 8px for intent. Boundary
+         semantics come out cleaner too — focus changes only when the pointer
+         actually stands on a different subject or on none. */
+      function subjectAt(x, y) {
+        for (var i = 0; i < sys.nodes.length; i++) {
+          var n = sys.nodes[i], PAD = 8;
+          var lb = n.label.getBoundingClientRect();
+          if (x >= lb.left - PAD && x <= lb.right + PAD && y >= lb.top - PAD && y <= lb.bottom + PAD) return n.def.id;
+          var nb = n.g.__place.getBoundingClientRect();
+          if (x >= nb.left - PAD && x <= nb.right + PAD && y >= nb.top - PAD && y <= nb.bottom + PAD) return n.def.id;
+        }
+        return null;
+      }
+      var hoverRaf = 0;
+      section.addEventListener('pointermove', function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        if (hoverRaf) return;
+        var x = e.clientX, y = e.clientY;
+        hoverRaf = requestAnimationFrame(function () {
+          hoverRaf = 0;
+          apply(subjectAt(x, y));
         });
       });
-      /* the pointer leaving the whole section always releases — a belt for
-         the case where a leave event is swallowed mid-transition */
       section.addEventListener('pointerleave', function () { apply(null); });
-      window.__orbHoverApply = apply;   /* the verifier drives this directly */
+      window.__orbHoverApply = apply;   /* debug hook; the verifier uses real moves */
     })();
 
     /* PORT: the lab panel, the arrangement switcher and the drift-speed
