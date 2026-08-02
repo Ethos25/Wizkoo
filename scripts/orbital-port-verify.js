@@ -652,6 +652,54 @@ async function settle(page) {
     await p3.close();
   }
 
+  /* ══ 10. THE HOVER ROUND ════════════════════════════════════════════════ */
+  console.log('\n10. HOVER — the system recedes, the subject holds');
+  {
+    const state = (focus) => page.evaluate((f) => {
+      const A = window.WizkooOrbital;
+      const op = (el) => Number(getComputedStyle(el).opacity);
+      const focusNode = A.sys.nodes.find((n) => n.def.id === f);
+      const focusOrbit = focusNode ? focusNode.orbit.id : null;
+      return {
+        labels: A.sys.nodes.map((n) => ({ id: n.def.id, op: +op(n.label).toFixed(3),
+          attr: Number(n.label.getAttribute('opacity')) })),
+        places: A.sys.nodes.map((n) => ({ id: n.def.id, op: +op(n.g.__place).toFixed(3) })),
+        ownPaths: A.sys.paths.filter((p) => p.orbit.id === focusOrbit).map((p) => +op(p.line).toFixed(3)),
+        otherPaths: A.sys.paths.filter((p) => focusOrbit && p.orbit.id !== focusOrbit).map((p) => +op(p.line).toFixed(3)),
+        nucleus: +op(document.querySelector('#linen-hero .lo-nucleus')).toFixed(3),
+        corona: +op(document.querySelector('#linen-hero .lo-corona')).toFixed(3),
+        sky: +op(document.querySelector('#linen-hero .orb-sky')).toFixed(3)
+      };
+    }, focus);
+    const before = await state(null);
+    /* real mouse, real events — the wiring, not just the class machinery */
+    await page.hover('#linen-hero .lo-label-depth[data-label="science"]');
+    await page.waitForTimeout(600);
+    const on = await state('science');
+    const sci = on.labels.find((l) => l.id === 'science');
+    const others = on.labels.filter((l) => l.id !== 'science');
+    check('hovered subject reads at full presence', sci.op === 1, 'science ' + sci.op);
+    check('every other label recedes to 0.38', others.every((l) => Math.abs(l.op - 0.38) < 0.01),
+      others.map((l) => l.id + ' ' + l.op).join(', '));
+    check('every other node dims to 0.5', on.places.filter((p) => p.id !== 'science')
+      .every((p) => Math.abs(p.op - 0.5) < 0.01), '');
+    check('the subject\'s OWN orbit holds', on.ownPaths.every((v) => v === 1),
+      on.ownPaths.length + ' segments at 1');
+    check('other orbits recede to 0.45', on.otherPaths.every((v) => Math.abs(v - 0.45) < 0.01),
+      on.otherPaths.length + ' segments');
+    check('the nucleus, corona and sky never dim',
+      on.nucleus === before.nucleus && on.corona === before.corona && on.sky === before.sky,
+      'nucleus ' + on.nucleus + ', corona ' + on.corona + ', sky ' + on.sky);
+    /* release: move the pointer off the figure entirely */
+    await page.mouse.move(200, 700);
+    await page.waitForTimeout(700);
+    const off = await state(null);
+    const restored = off.labels.every((l) => Math.abs(l.op - l.attr) < 0.02);
+    check('release restores every label to its own depth presence', restored,
+      off.labels.map((l) => l.id + ' ' + l.op + '/' + l.attr).join(', '));
+    check('no node stays dimmed', off.places.every((p) => p.op === 1), '');
+  }
+
   await page.close();
   await browser.close();
   console.log('\n' + (failures ? 'FAILURES: ' + failures : 'ALL CHECKS PASS'));

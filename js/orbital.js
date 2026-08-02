@@ -1072,7 +1072,13 @@
 
   function buildNode(n) {
     var outer = svg('g', { class: 'lo-node', 'data-node': n.id });
-    var place = svg('g');
+    /* The place group carries NO animation — the arrival's opacity lives on
+       .lo-node and its pop on .lo-node-inner, both filling 'both' forever
+       after the beat. Hover dimming therefore lands HERE, for the same reason
+       label depth lives on its own outer group: an animation out-ranks
+       anything else, so state that must always win gets an element with no
+       animation to fight. */
+    var place = svg('g', { class: 'lo-node-place' });
     var inner = svg('g', { class: 'lo-node-inner' });
     var halo = svg('circle', { r: HALO_R, fill: 'url(#lo-node-halo)' });
     var body = svg('image', { x: -NODE_R, y: -NODE_R, width: 2 * NODE_R, height: 2 * NODE_R,
@@ -1638,6 +1644,59 @@
         playArrival(false);
       }
     }
+
+    /* ── THE HOVER ROUND — adopted by Amy 2026-08-02 ─────────────────────
+       Hover a subject and the system recedes; that subject and its own orbit
+       hold. A response to intent, so the casino test does not apply — nothing
+       here moves unprompted, and nothing loops.
+
+       Opacity only. No glow is added to the focused subject: full presence IS
+       the illumination, and a new glow would put a second light in the frame.
+       The nucleus and the sky never dim — the star is the premise, not a
+       participant.
+
+       Mouse pointers only. On touch there is no hover; a tap would latch a
+       state no gesture releases, so pointerType gates it and phones (which
+       get the list fallback anyway) never see a stuck focus. */
+    (function hover() {
+      var focused = null;
+      function apply(id) {
+        if (focused === id) return;
+        focused = id;
+        var orbitId = null;
+        sys.nodes.forEach(function (n) {
+          if (n.def.id === id) orbitId = n.orbit.id;
+        });
+        sys.nodes.forEach(function (n) {
+          var isF = n.def.id === id;
+          n.g.__place.classList.toggle('is-dim', id !== null && !isF);
+          n.label.classList.toggle('is-dim', id !== null && !isF);
+          n.label.classList.toggle('is-focus', isF && id !== null);
+          n.leader.classList.toggle('is-dim', id !== null && !isF);
+        });
+        sys.paths.forEach(function (p) {
+          var dim = id !== null && p.orbit.id !== orbitId;
+          p.line.classList.toggle('is-dim', dim);
+          p.glow.classList.toggle('is-dim', dim);
+        });
+      }
+      sys.nodes.forEach(function (n) {
+        [n.g, n.label].forEach(function (el) {
+          el.addEventListener('pointerenter', function (e) {
+            if (e.pointerType && e.pointerType !== 'mouse') return;
+            apply(n.def.id);
+          });
+          el.addEventListener('pointerleave', function (e) {
+            if (e.pointerType && e.pointerType !== 'mouse') return;
+            if (focused === n.def.id) apply(null);
+          });
+        });
+      });
+      /* the pointer leaving the whole section always releases — a belt for
+         the case where a leave event is swallowed mid-transition */
+      section.addEventListener('pointerleave', function () { apply(null); });
+      window.__orbHoverApply = apply;   /* the verifier drives this directly */
+    })();
 
     /* PORT: the lab panel, the arrangement switcher and the drift-speed
        accelerator lived here and are deleted. Nothing on this page can change
