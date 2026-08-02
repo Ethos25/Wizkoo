@@ -37,6 +37,17 @@ body{margin:0;background:#0C1020;color:#F2F0EA;font-family:'Plus Jakarta Sans',s
 .m-code{font-family:'Space Mono',monospace;font-size:11.5px;line-height:1.65;background:#070A14;border:1px solid rgba(255,255,255,.11);padding:22px 24px;overflow-x:auto;color:#C9CCD8;white-space:pre;margin:0 0 30px}
 .m-cap{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:#6E7288;margin:10px 0 34px}
 .m-foot{margin-top:72px;padding-top:26px;border-top:1px solid rgba(255,255,255,.09);font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:#6E7288}
+.m-note dd,.m-note dd code{overflow-wrap:anywhere}
+@media(max-width:640px){
+  .m-wrap{padding:44px 18px 88px}
+  .m-title{font-size:27px}
+  .m-note{padding:22px 18px}
+  .m-note dl{grid-template-columns:1fr;gap:3px 0}
+  .m-note dt{padding-top:15px}
+  .m-note dt:first-child{padding-top:0}
+  .m-code{font-size:10.5px;padding:16px 14px}
+  .m-h2{padding-top:40px}
+}
 
 /* ══════════════════════════════════════════════════════════════════════════
    FROZEN STYLES — copied verbatim from index.html at f7a55e9 (lines 569-671
