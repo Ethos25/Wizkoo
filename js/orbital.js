@@ -603,6 +603,27 @@
     },
     /* photo-b (the spots variant) retired by the same ruling that made
        photo-a the base; it lives on nuc-r8-photo-b as the record. */
+
+    /* ══ NODE-STAR — Amy's direct question, built literally ══════════════
+       "Are you able to make the nucleus just a bigger version of one of
+       those little nodes?" Yes: the body renders through the NODE shader —
+       the same wrap-Lambert light, the same NODE_RAMP golds, the same halo
+       bloom, at nucleus size. THE CONSEQUENCE, stated: a node has a lit
+       side and a dark side, so on this candidate the star is a LIT OBJECT,
+       not the light. For the frame to stay coherent, every node's bright
+       side aims at the shared off-frame light (upper-left) instead of at
+       the centre, and the arc emission is off — there is no central source
+       to cast it. The self-luminous law is knowingly suspended ON THIS
+       BRANCH ONLY, pending her ruling; everywhere else it stands. */
+    'node-star': {
+      nodeStyle: true, lightDeg: -135, mult: 1.22,
+      haloR: 2.1, haloA: 0.55,
+      extent: 1.06, exposure: 1, u: 0.9, p: 2,
+      cells: null, spots: [], hot: 0, halation: [],
+      ramp: [[1.0, [255, 255, 255]], [0.0, [0, 0, 0]]],
+      corona: [], glows: [],
+      emit: null
+    }
   };
 
   /* ══ THE LEVERS — cumulative overrides on the ruled base ═══════════════ */
@@ -1029,6 +1050,8 @@
     /* each octave group drifts at its own rate — fine grain churns faster
        than the big cells, which is how convection actually layers */
     var RATE = [1.0, 1.45, 2.1];
+    /* node-star: the light's screen direction, baked into the raster */
+    var lb = (v.lightDeg || 0) * D2R, lbc = Math.cos(lb), lbs = Math.sin(lb);
 
     function rows(y0, count, T) {
     T = T || 0;
@@ -1040,6 +1063,27 @@
         var r2 = nx * nx + ny * ny, r = Math.sqrt(r2), o = (y * px + x) * 4;
 
         if (r >= v.extent) { d[o + 3] = 0; continue; }
+
+        /* NODE-STAR: the node shader verbatim, at nucleus scale — the same
+           wrap-Lambert (AMB 0.20, WRAP 0.45), the same limb term, the same
+           NODE_RAMP golds renderNodeSphere uses at 96px. Nothing else in
+           this renderer runs for it: a node has no halation, no chromo, no
+           cells — its bloom is the SVG halo, exactly like a node's. */
+        if (v.nodeStyle) {
+          if (r >= 1 + edge) { d[o + 3] = 0; continue; }
+          var rcN = r > 1 ? 1 : r, muN = Math.sqrt(1 - rcN * rcN);
+          var nxr = nx * lbc + ny * lbs;
+          var lamN = (nxr + 0.45) / 1.45;
+          lamN = lamN < 0 ? 0 : Math.pow(lamN, 1.15);
+          var LN = (0.20 + 0.80 * lamN) * (0.40 + 0.60 * Math.pow(muN, 0.5));
+          rampWith(NODE_RAMP, LN * v.mult, col);
+          var atN = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
+          atN = atN < 0 ? 0 : atN > 1 ? 1 : atN;
+          var aN = atN * atN * (3 - 2 * atN);
+          d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2];
+          d[o + 3] = 255 * aN;
+          continue;
+        }
 
         /* HALATION — the body's light in the air just past its edge, drawn
            inside the body's own image so it can never read as a second
@@ -1238,6 +1282,18 @@
     var side = 2 * NUC_R * CFG.extent;
     var at2 = { class: 'lo-nuc-body', x: FRAME.cx - side / 2,
                 y: FRAME.cy - side / 2, width: side, height: side };
+    /* node-star: the node's own halo bloom, scaled with the body — offset
+       toward the lit face exactly as buildNode offsets it, drawn first so
+       it sits behind. Static, like a node's: nothing here breathes. */
+    if (CFG.nodeStyle) {
+      var lb2 = CFG.lightDeg * D2R;
+      g.appendChild(svg('circle', {
+        cx: (FRAME.cx + Math.cos(lb2) * NUC_R * 0.35).toFixed(2),
+        cy: (FRAME.cy + Math.sin(lb2) * NUC_R * 0.35).toFixed(2),
+        r: (NUC_R * CFG.haloR).toFixed(2),
+        fill: 'url(#lo-node-halo)', opacity: CFG.haloA
+      }));
+    }
     /* two layers again as of lever 5: a living surface needs a keyframe to
        arrive OVER the one before it. At elevations below 5 the second image
        simply never receives a href. */
@@ -1338,6 +1394,13 @@
     if (moved) {
       n.matT = n.t;
       var dx = (FRAME.cx - p.x) / (dist || 1), dy = (FRAME.cy - p.y) / (dist || 1);
+      /* node-star: the star is a lit body, not the light — every bright
+         side (and halo offset) aims at the shared off-frame light instead
+         of at the centre, or the frame contradicts itself */
+      if (CFG.nodeStyle) {
+        var lbN = CFG.lightDeg * D2R;
+        dx = Math.cos(lbN); dy = Math.sin(lbN);
+      }
       var I = intensityAt(dist);
       var k = Math.min(1, (I - 0.42) / 0.58);
       /* the sphere is lit from +x in its own image, so pointing it at the
@@ -1490,11 +1553,14 @@
            drawn the cage (CSS gates it on data-arrival), so light lands on
            arcs that exist. The depth term keeps a near arc catching more
            than a far one at the same radius. */
-        var pm = pointAt(o, mid);
-        var dm = Math.hypot(pm.x - FRAME.cx, pm.y - FRAME.cy);
-        var exx = (dm - NUC_R) / (CFG.emit.reach * NUC_R - NUC_R);
-        exx = exx < 0 ? 0 : exx > 1 ? 1 : exx;
-        var ea = CFG.emit.A * Math.pow(1 - exx, 2.2) * (0.55 + 0.45 * (0.5 + 0.5 * zn));
+        var ea = 0;
+        if (CFG.emit) {   /* node-star has no central source to cast this */
+          var pm = pointAt(o, mid);
+          var dm = Math.hypot(pm.x - FRAME.cx, pm.y - FRAME.cy);
+          var exx = (dm - NUC_R) / (CFG.emit.reach * NUC_R - NUC_R);
+          exx = exx < 0 ? 0 : exx > 1 ? 1 : exx;
+          ea = CFG.emit.A * Math.pow(1 - exx, 2.2) * (0.55 + 0.45 * (0.5 + 0.5 * zn));
+        }
         var emit = null, emitSoft = null;
         if (ea > 0.012) {
           /* two scales, like the halation: a wide soft under-glow (the arc
