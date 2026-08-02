@@ -85,7 +85,7 @@ async function settle(page) {
                ratio: A.NUC_RATIO,
                orbits: A.ORBITS.map((o) => ({ id: o.id, rx: o.rx, ry: o.ry, rot: o.rot })) };
     });
-    check("ARR_KEY === 'E' (Amy's braid, 2026-08-02)", g.key === 'E', 'got ' + g.key);
+    check("ARR_KEY === 'F' (the reinstated composition, Amy 2026-08-02)", g.key === 'F', 'got ' + g.key);
     console.log('        FIGURE ' + g.figure + '   nucleus R ' + g.R.toFixed(1) +
       '   nucleus/envelope ' + g.ratio.toFixed(3));
     must('nucleus radius R follows FIGURE', g.R, (v) => v > 0, 'R = ' + g.R.toFixed(1));
@@ -96,23 +96,21 @@ async function settle(page) {
         '     ' + (o.rx / g.R).toFixed(2) + '    ' + (o.ry / g.R).toFixed(2));
     });
     /* Compare RATIOS, not absolutes — FIGURE scales the object uniformly. The
-       reference is E's table: Amy's braid, ruled 2026-08-02. */
-    const cert = [[480, 137, 40], [384, 123, 160], [274, 82, 110]];
+       reference is F's table: the pre-port composition's semi-axes at its
+       original rotations, reinstated by Amy 2026-08-02 from the picture. */
+    const cert = [[480, 275, -32], [434, 248, -8], [372, 209, 25]];
     const shape = g.orbits.every((o, i) =>
       Math.abs(o.rx / (cert[i][0] * g.figure) - 1) < 0.001 &&
       Math.abs(o.ry / (cert[i][1] * g.figure) - 1) < 0.001 &&
       o.rot === cert[i][2]);
-    check('geometry is E, scaled uniformly by FIGURE', shape);
+    check('geometry is F, scaled uniformly by FIGURE', shape);
     const O = g.orbits.map((o) => o.ry / o.rx);
-    check('openness is the braid\'s 0.285 / 0.320 / 0.299',
+    check('openness is the photo\'s 0.573 / 0.571 / 0.562',
       O.every((v, i) => Math.abs(v - cert[i][1] / cert[i][0]) < 0.001),
       'O = ' + O.map((v) => v.toFixed(3)).join(' / '));
-    check('rotations spread 40 / 110 / 160 — a braid, not the killed cluster (-32/-8/25)',
-      String(g.orbits.map((o) => o.rot)) === '40,160,110');
-    check('declares occlusion:true', g.occl === true);
-    /* The declaration must agree with the geometry: measure each ring's real
-       minimum approach (off displaces the centre, so ry alone is not the
-       answer any more). */
+    check('rotations are the photo\'s -32 / -8 / 25',
+      String(g.orbits.map((o) => o.rot)) === '-32,-8,25');
+    check('declares occlusion:false (the picture declines the cue)', g.occl === false);
     const approach = await page.evaluate(() => {
       const A = window.WizkooOrbital, F = A.FRAME;
       return A.ORBITS.map((o) => {
@@ -126,15 +124,24 @@ async function settle(page) {
     });
     console.log('        minimum approach per ring: ' + approach.map((a) => a.id + ' ' + a.min).join('   ') +
       '   vs R ' + g.R.toFixed(1));
-    check('at least one arc crosses the body, so the declaration is TRUE',
-      approach.some((a) => a.min < g.R), '');
-    const art = await page.evaluate(() => {
-      const A = window.WizkooOrbital, F = A.FRAME;
-      const n = A.sys.nodes.find((x) => x.def.id === 'art');
-      const p = A.pointAt(n.orbit, n.def.t);
-      return Math.abs(Math.hypot(p.x - F.cx, p.y - F.cy) - A.NUC_R);
+    check('no arc crosses the body, so the declaration is TRUE',
+      approach.every((a) => a.min >= g.R), '');
+    /* The photo's positions: every node within 1.5 frame units of where the
+       old section's dot sat (0.774 x the old offsets from its centre). */
+    const seats = await page.evaluate(() => {
+      const A = window.WizkooOrbital, F = A.FRAME, S = 0.774;
+      const OLD = { reading: [-117, -136], writing: [49.76, -212.87], math: [278, -25],
+                    science: [160, 149], history: [-26, 163], geo: [-161, 146], art: [-277, 39] };
+      return A.sys.nodes.map((n) => {
+        const p = A.pointAt(n.orbit, n.def.t);
+        const t = OLD[n.def.id];
+        return { id: n.def.id,
+                 err: +Math.hypot(p.x - (F.cx + t[0] * S), p.y - (F.cy + t[1] * S)).toFixed(2) };
+      });
     });
-    must('ART re-seats on the limb (|dist - R| < 6)', art, (v) => v < 6, 'off by ' + art.toFixed(2));
+    console.log('        seat error vs the photo: ' + seats.map((s) => s.id + ' ' + s.err).join('  '));
+    check('every node sits on the photo\'s spot (max err < 1.5 units)',
+      seats.every((s) => s.err < 1.5), '');
     console.log('        nucleus/envelope ' + g.ratio.toFixed(3) +
       '   (Amy ruled 0.200; lab certified 0.260; lab rejected 0.46/0.51; pre-port 0.135)');
   }
