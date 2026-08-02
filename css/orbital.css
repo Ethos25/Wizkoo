@@ -394,6 +394,31 @@
    the stroke arrives with air around it instead of as a bare hairline. */
 .lo-glow { filter: blur(1.6px); }
 
+/* ── EMISSION — the star's light landing on the cage (round 7) ──────────
+   Warm overlays riding the arcs' own path data where they pass near the
+   body, built in js/orbital.js. They carry no draw animation — light is not
+   drawn, it arrives: the whole field fades up in one breath AFTER the
+   arrival has finished the cage, so light never lands on an arc that is not
+   there yet. Per-segment strength lives in stroke-opacity (set by JS from
+   the one distance law); this opacity is only the gate. */
+.lo-emit {
+  opacity: 0;
+  filter: blur(1.3px);
+  transition: opacity 0.42s cubic-bezier(.16, 1, .3, 1);
+}
+/* the wide under-glow: the arc sitting in the light, not just tinted by it */
+.lo-emit-soft { filter: blur(3.5px); }
+.linen-hero[data-arrival='done'] .lo-emit {
+  opacity: 1;
+  animation: lo-emit-in 2.4s ease;
+}
+@keyframes lo-emit-in { from { opacity: 0; } }
+/* the received light recedes with its arc on hover — same values, same beat */
+.linen-hero[data-arrival='done'] .lo-emit.is-dim {
+  opacity: 0.85;
+  transition-duration: 0.26s;
+}
+
 /* ── Orbit drift (variant only; the ruled default is static) ──────────── */
 /* Positions are written by rAF in js/orbital.js so a node can be re-parented
    between the back and front layers the instant it crosses the line of nodes.
@@ -437,7 +462,7 @@
    stroke as a hover target is a flicker machine. Cursor stays default: this
    responds to attention, it does not promise a click. */
 .lo-node, .lo-label-depth { pointer-events: auto; }
-.lo-path, .lo-glow, .lo-leader, .lo-corona, .lo-nucleus { pointer-events: none; }
+.lo-path, .lo-glow, .lo-leader, .lo-corona, .lo-nucleus, .lo-emit { pointer-events: none; }
 
 /* Under reduced motion the STATE still applies — dimming is a response, not
    motion — but it applies instantly. */
@@ -455,6 +480,7 @@
   .lo-node, .lo-label { opacity: 1 !important; animation: none !important; }
   .lo-node-inner, .lo-label-inner { transform: none !important; animation: none !important; }
   .lo-path { stroke-dashoffset: 0 !important; animation: none !important; }
+  .lo-emit { opacity: 1 !important; animation: none !important; transition: none !important; }
   .lo-breath-a, .lo-breath-b, .lo-breath-c {
     animation: none !important;
     opacity: var(--lo-breath-still, 0.42) !important;
@@ -466,6 +492,7 @@
 [data-wk-motion='reduced'] .lo-node-inner,
 [data-wk-motion='reduced'] .lo-label-inner { transform: none !important; animation: none !important; }
 [data-wk-motion='reduced'] .lo-path { stroke-dashoffset: 0 !important; animation: none !important; }
+[data-wk-motion='reduced'] .lo-emit { opacity: 1 !important; animation: none !important; transition: none !important; }
 [data-wk-motion='reduced'] .lo-breath-a,
 [data-wk-motion='reduced'] .lo-breath-b,
 [data-wk-motion='reduced'] .lo-breath-c {

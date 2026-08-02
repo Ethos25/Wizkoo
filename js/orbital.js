@@ -468,33 +468,333 @@
     return '#' + ((1 << 24) | (r << 16) | (g << 8) | bl).toString(16).slice(1);
   }
 
-  /* ── Variants (lab only) ────────────────────────────────────────────────
-     The LIGHT MODEL is fixed across all three now. a/b/c move granulation
-     strength, corona reach and breath amplitude only — how much star, not what
-     kind of light. Round 1's variants differed in a way that could make the
-     frame more or less wrong; these cannot. */
-  var NUCLEUS_VARIANTS = {
-    /* tex: granulation depth. bleed: how far the body's light gets past its own
-       edge. hot: the active region's added brightness. breath: the three
-       amplitudes. The LIGHT MODEL is identical across all three — these move how
-       much star there is, never where the light comes from. */
-    /* breath slots, in build order: the hot region's glow, the OUTER CORONA,
-       and a disc-wide lift. The corona's pair sits near full because it is the
-       star's light in the field, not a veil over it — round 4's first wiring
-       handed it the old faint-field amplitudes and it rendered at a tenth of its
-       strength, which measured as no corona at all. */
-    /* RE-TUNED ON AMY'S WALK, 2026-08-01: was tex 0.16, bleed 0.80, hot 0.34,
-       corona 0.86. Less light leaving the body (bleed, corona, hot region all
-       down), more surface on it (tex up) — the two halves of her note. These
-       move how much star there is, never where the light comes from; the one-
-       light law and the symmetric corona are untouched. */
-    a: { tex: 0.24, bleed: 0.55, hot: 0.26, corona: 0.62,
-         breath: [[0.08, 0.30], [0.82, 1.00], [0.05, 0.14]] },
-    b: { tex: 0.24, bleed: 1.00, hot: 0.44, corona: 1.00,
-         breath: [[0.12, 0.44], [0.80, 1.00], [0.07, 0.20]] },
-    c: { tex: 0.34, bleed: 1.24, hot: 0.56, corona: 1.18,
-         breath: [[0.17, 0.62], [0.78, 1.00], [0.09, 0.27]] }
+  /* ══ ROUND 7 — THE NUCLEUS, GROUND UP ═════════════════════════════════
+     Amy rejected six rounds of dimension-by-falloff: "looks terrible...
+     removed from everything else... we need a nucleus that looks 3D,
+     luminous, giving off light, like it came out of a Pixar studio."
+
+     THE DIAGNOSIS: the star emitted nothing the scene received. Every prior
+     round adjusted the body's own shading — deeper limb law, texture taper,
+     churn, an in-body star field — and every one read flat at the deployed
+     ~80px because the defect was never inside the body. A light source is
+     believed when the scene answers it.
+
+     WHAT THIS REBUILD DOES NOT CARRY FORWARD, deliberately:
+       - the churn (12 rows/frame, 5s cross-fade): sub-perceptual at 80px,
+         which the casino test names as cost, not craft. The surface is still.
+       - the in-body star field (240 points): invisible at page scale.
+       - the brown-black limb ramp (bottom [40,22,7]): at 80px it wrapped the
+         body in a dark ring against the navy sky — the "sticker" edge.
+       - dimension-by-falloff as the ONLY cue. The falloff stays, as one
+         component; it no longer carries the whole job alone.
+
+     WHAT SURVIVES (certified law): self-luminous, no directional terminator;
+     symmetric corona; the system is the subject (scale untouched); nodes lit
+     by the nucleus; casino test on all motion.
+
+     ROUND 8 — Amy rejected all three round-7 candidates: "These are
+     terrible... It needs to literally look real. None of these look real —
+     they are flat relative to the dots on the subjects around them."
+     The r7 bets (ignition/molten/aura) stay on their nuc-r7-* branches as
+     the record; their table entries are replaced by this round's.
+
+     THE DIAGNOSTIC IN HER WORDS: the NODES read as spheres because they
+     carry strong modelled shading — a full value range across a small ball.
+     Every glow-led nucleus reads flat beside them, because glow COSTS
+     contrast. And the reference for "real" is a photograph of the Sun,
+     which has no terminator and still reads round: deep limb darkening,
+     REAL granulation at photographic contrast, a crisp edge, almost no
+     halo. That exact combination — punchy surface, deep chromatic falloff,
+     minimal glow — is the one thing no round has tried: the falloff rounds
+     had timid texture and muddy ramps, round 7 had glow instead of surface.
+
+     ignition read "a bright sun that is exploding" (glare-dominant) and
+     molten "a star that is dying" (ember-dark). So round 8: healthy
+     white-gold centre, no glare, and the value range of the body itself
+     doing the modelling, exactly like the dots do it.
+
+       photo-a — the quiet photosphere: two-scale granulation at
+                 photographic contrast, deep limb darkening, crisp limb.
+       photo-b — the active photosphere: stronger cells, two small spot
+                 groups, a touch more exposure.
+
+     Both keep the emission system (the scene receiving light was and
+     remains the belonging fix), turned down to photographic restraint. */
+  /* ══ ROUND 9 — ELEVATION. RULED BY AMY: photo-a is the base, "best yet,
+     elevate it, do not restart." Five levers, cumulative, each deployed as
+     its own step so she can rule where the object comes alive. Judged in
+     the SECTION, never in crops. Casino test and the self-luminous law
+     (no directional terminator) hold throughout.
+
+       1  TEMPERATURE GRADIENT  the heart reads HOTTER, not just brighter:
+          white-gold core cooling to deep amber at the limb. Energy inside,
+          not paint on top.
+       2  CONVECTION AT MIXED SCALES  three octave groups: large soft cells
+          dominating, fine grain beneath, all compressing toward the limb
+          per the certified radial law.
+       3  THE LIMB SEQUENCE  kill the rim-as-boundary: surface -> ONE thin
+          crisp bright warm edge-line (the chromosphere move) -> soft
+          corona -> space. The line is the highest-value row in the object.
+          NOTE: the round-3 "no bright ring at the silhouette" clause is
+          SUPERSEDED by this ruling for the chromosphere line specifically —
+          a thin line the surface hands off to, not a backlight halo.
+       4  GLOW REACH  measured, and pulled in: light LEAVES the surface, it
+          does not surround it. Numbers in the branch report.
+       5  LIVING SURFACE  built, measured, and CUT by its own law — the
+          measured keyframe delta saturates at ~4.5/255 mean, below
+          perception at page scale. See the LEVERS table for the numbers.
+
+     Branch pins: nuc-e1 .. nuc-e4 set ELEVATION 1..4; ELEVATION 5 exists
+     but renders identically to 4 (lever 5 cut). */
+  var ELEVATION = 1;   /* per-branch pin: 1..5, cumulative */
+
+  var CANDIDATE = 'saffron-lantern';   /* RULED by Amy 2026-08-02: the close of the rebuild. photo-a was the r8 base; the lantern is where the lane ended. */
+
+  var CANDIDATES = {
+    /* extent    canvas half-width in body radii; past 1.0 is halation
+       exposure  radiance at disc centre, in ramp units
+       u, p      the falloff: I = exposure * ((1-u) + u * mu^p)
+       cells     [[freq, amp], ...] granulation octave groups sampled at the
+                 SURFACE point (nx, ny, mu) — two scales, like the Sun:
+                 supergranulation you can count and granulation you can feel
+       spots     [{lon, lat, size, depth}] photospheric spot groups, radians;
+                 dark features ON the surface (they rotate with it in any
+                 future round), not shading — the falloff stays directionless
+       hot       additive active-region cap (never shades — one-light law)
+       halation  [[amp, scale-in-radii], ...] summed exponentials past the
+                 limb, coloured from the limb they leave
+       ramp      radiance -> colour; bottoms WARM, never brown-black
+       corona    symmetric shells centred on the body, each monotone outward
+       glows     additive interior breath layers
+       emit      the light landing on the cage: reach in body radii, peak A */
+    /* ══ THE PHOTOGRAPH — round 8's single premise ═══════════════════════
+       A telescope photograph of the Sun reads round with zero glare: the
+       value range ON the body does everything. Centre near-white gold,
+       limb at ~15% of centre and chromatically deep orange, granulation at
+       photographic contrast compressing toward the edge, and a crisp limb
+       with only a thin warm fringe past it. The corona is presence, not
+       spectacle. This is also exactly how the node dots earn their 3D —
+       full value range across a small ball — which answers "flat relative
+       to the dots" in the dots' own language. */
+    'photo-a': {
+      extent: 1.35, exposure: 1.24, u: 0.90, p: 1.9,
+      cells: [[3.4, 0.16], [8.5, 0.15]], spots: [], hot: 0,
+      halation: [[0.50, 0.035], [0.10, 0.20]],
+      /* RE-RAMPED ON AMY'S RULING (photo-a preferred, "not so orange...
+         it needs to kind of go with the saffron"): the dots' gold family
+         holds G/R near 0.7-0.8 (NODE_RAMP, #E8AF38, #F6CB68); the first
+         photo ramp fell to G/R ~0.5 at the limb, which is orange fighting
+         saffron. Every stop below the knee now stays on the saffron axis —
+         the limb is deep gold, not burnt orange. */
+      ramp: [
+        [1.40, [255, 251, 238]], [1.15, [255, 243, 210]], [0.98, [253, 229, 168]],
+        [0.82, [249, 211, 126]], [0.66, [242, 190, 92]],  [0.50, [228, 166, 64]],
+        [0.36, [204, 141, 48]],  [0.22, [172, 113, 38]],  [0.10, [142, 90, 32]],
+        [0.00, [116, 72, 28]]
+      ],
+      corona: [
+        { Rout: 1.35, A: 0.30, p: 3.0, breath: 'a', lo: 0.90, hi: 1.00 },
+        { Rout: 4.6,  A: 0.08, p: 2.2, breath: 'c', lo: 0.86, hi: 1.00 }
+      ],
+      glows: [
+        { at: [0.50, 0.50], span: 0.50, col: '#FFEFC0', a: 0.30, breath: 'a', lo: 0.04, hi: 0.12 }
+      ],
+      emit: { reach: 4.6, A: 0.30 }
+    },
+    /* photo-b (the spots variant) retired by the same ruling that made
+       photo-a the base; it lives on nuc-r8-photo-b as the record. */
+
+    /* ══ NODE-STAR — Amy's direct question, built literally ══════════════
+       "Are you able to make the nucleus just a bigger version of one of
+       those little nodes?" Yes: the body renders through the NODE shader —
+       the same wrap-Lambert light, the same NODE_RAMP golds, the same halo
+       bloom, at nucleus size. THE CONSEQUENCE, stated: a node has a lit
+       side and a dark side, so on this candidate the star is a LIT OBJECT,
+       not the light. For the frame to stay coherent, every node's bright
+       side aims at the shared off-frame light (upper-left) instead of at
+       the centre, and the arc emission is off — there is no central source
+       to cast it. The self-luminous law is knowingly suspended ON THIS
+       BRANCH ONLY, pending her ruling; everywhere else it stands. */
+    /* ══ SAFFRON-LANTERN — Amy on node-star: "The color isn't quite the
+       saffron I want, it looks like some kind of a yellow. I really wanted
+       to lean into saffron, and I do want it to be somewhat luminous from
+       the inside out. I want it to also be giving off light."
+       The synthesis, then: the node's modelled-ball VALUE RANGE, arranged
+       RADIALLY (the self-luminous law returns — the light is inside),
+       the ramp locked onto saffron proper — a compact white-gold heart,
+       a wide band saturated at #E8AF38's own neighbourhood, a deep-saffron
+       limb that never drifts lemon — and the light given off restored:
+       chromosphere line, tight corona at the lever-4 reach, arcs catching
+       the glow, nodes lit from the centre again. */
+    'saffron-lantern': {
+      /* v3 — Amy: "something about making it luminous from the inside out
+         actually makes it flat... this doesn't look like it came out of a
+         Pixar studio." The diagnosis, optical: a PERFECTLY RADIAL glow
+         carries no shape-from-shading — it is geometrically identical to a
+         vignette on a flat disc, so the eye files it as a sticker. Pixar's
+         luminous objects read round because the ENERGY CORE IS DISPLACED:
+         subsurface light seen through a translucent shell, brightest
+         off-centre, asymmetric across the face, never shadowed. v2 had
+         turned off both symmetry-breakers at once (hot 0, cells 0.09).
+         v3 restores them: the certified additive hot cap (upper-left,
+         38/32 — always legal under the one-light law) becomes the molten
+         heart, and the mixed-scale texture returns to carry foreshortening.
+         The falloff stays directionless; nothing is ever darker than it —
+         no terminator, the law stands. */
+      /* v4 — Amy, with her own screenshot: "the nucleus looks like a
+         cartoon almost, and the balls look like they're 3D — I need to
+         close that gap." The gap, measured off her frame: the nodes run
+         bright-face-to-genuinely-dark; v3's ball never left mid-saffron.
+         The additive cap could not close it — additive only raises. v4 is
+         a true SUBSURFACE model: radiance falls with 3D DISTANCE FROM AN
+         INTERNAL CORE (upper-left, 42% deep, toward the viewer), so the
+         shell burns white-gold over the heart and the far side goes as
+         deep as a node's shadow side — but the gradient is anchored to a
+         point INSIDE the body, not to an outside lamp: the light is still
+         its own. The edge line and halation scale with how close the core
+         sits to each stretch of limb, so the light visibly leaves the
+         bright side hardest. exposure/k set the pole-to-far-limb ratio at
+         roughly the nodes' own. */
+      extent: 1.35, exposure: 2.05, u: 0.90, p: 2.0,
+      sub: { dir: [0.38, 0.32], depth: 0.36, zc: 0.50, k: 3.0 },
+      cells: [[2.6, 0.16], [6.2, 0.10], [13.0, 0.06]], spots: [], hot: 0,
+      /* v5 — Amy, with her screenshot: "the light seems concentrated very
+         very close to it and then it's just dark around it, but when you
+         go far the balls have the impact of light... light needs to be
+         handled differently so it looks more natural." The defect is the
+         MOAT: lever 4 tightened the visible glow to ~1.5 body radii, but
+         the lit nodes sit at 2.2-5R — so the frame showed source, dark
+         gap, then illuminated objects, which no real light does. Natural
+         light is CONTINUOUS: if the source lights the balls, the field
+         between them carries a smooth low gradient the whole way. v5
+         keeps the tight incandescent edge and bridges the moat — a mid
+         shell and a broad low field reaching past the inner nodes, each
+         still symmetric, monotone, zero-slope at its edge. The lever-4
+         "light leaves, not surrounds" ruling is superseded by this one:
+         light leaves AND travels. */
+      halation: [[0.55, 0.045], [0.14, 0.30]],
+      chromo: { w: 0.013, A: 0.70, I: 1.34 },
+      ramp: [
+        [1.60, [255, 249, 225]], [1.38, [255, 241, 198]], [1.16, [252, 224, 152]],
+        [0.98, [245, 203, 108]], [0.82, [237, 185, 76]],  [0.66, [229, 168, 58]],
+        [0.50, [214, 149, 48]],  [0.36, [190, 126, 42]],  [0.24, [160, 102, 36]],
+        [0.13, [128, 80, 30]],   [0.06, [98, 62, 26]],    [0.00, [64, 42, 20]]
+      ],
+      corona: [
+        { Rout: 1.35, A: 0.34, p: 3.2, breath: 'a', lo: 0.90, hi: 1.00 },
+        { Rout: 2.6,  A: 0.14, p: 2.0, breath: 'b', lo: 0.84, hi: 1.00 },
+        { Rout: 7.5,  A: 0.18, p: 1.5, breath: 'c', lo: 0.88, hi: 1.00 }
+      ],
+      glows: [
+        /* the breath now lives AT the molten heart, not at dead centre */
+        { at: [0.38, 0.32], span: 0.46, col: '#FFF3D2', a: 0.45, breath: 'a', lo: 0.06, hi: 0.18 },
+        { at: [0.50, 0.50], span: 0.60, col: '#F6CB68', a: 0.28, breath: 'c', lo: 0.04, hi: 0.10 }
+      ],
+      emit: { reach: 4.0, A: 0.30 }
+    },
+
+    'node-star': {
+      nodeStyle: true, lightDeg: -135, mult: 1.22,
+      haloR: 2.1, haloA: 0.55,
+      extent: 1.06, exposure: 1, u: 0.9, p: 2,
+      cells: null, spots: [], hot: 0, halation: [],
+      ramp: [[1.0, [255, 255, 255]], [0.0, [0, 0, 0]]],
+      corona: [], glows: [],
+      emit: null
+    }
   };
+
+  /* ══ THE LEVERS — cumulative overrides on the ruled base ═══════════════ */
+  var LEVERS = {
+    /* 1 — TEMPERATURE GRADIENT. Exposure and falloff both rise so the SPAN
+       widens at both ends: the ramp gains a white-hot knee the core now
+       reaches (1.62 against 1.85-top), and the bottom cools to deep amber.
+       The heart is a different TEMPERATURE than the limb, not a brighter
+       copy of it. The extreme limb dips below the saffron G/R band on
+       purpose — deep amber is Amy's word for the cold end of this lever —
+       and rejoins the saffron axis by mid-values. */
+    1: {
+      exposure: 1.62, u: 0.93, p: 2.05,
+      ramp: [
+        [1.85, [255, 255, 252]], [1.55, [255, 250, 230]], [1.28, [255, 240, 198]],
+        [1.06, [253, 227, 160]], [0.90, [249, 212, 124]], [0.74, [242, 192, 94]],
+        [0.58, [230, 168, 66]],  [0.44, [210, 140, 50]],  [0.30, [182, 111, 40]],
+        [0.16, [150, 86, 33]],   [0.00, [118, 66, 27]]
+      ]
+    },
+    /* 2 — CONVECTION AT MIXED SCALES. Three octave groups replacing two:
+       the large cells DOMINATE (0.22 at freq 2.6 — countable at 80px), the
+       mid granulation carries the photograph, the fine grain is felt at 2x.
+       Limb compression is free from surface sampling, as certified. */
+    2: {
+      cells: [[2.6, 0.22], [6.2, 0.12], [13.0, 0.07]]
+    },
+    /* 3 — THE LIMB SEQUENCE. The chromosphere line: one thin crisp bright
+       warm edge-line the surface hands off to, then the soft corona, then
+       space. w is its centre past the limb and its width scale, in body
+       radii — ~2.5 texels at the 512 render. I is its colour on the ramp:
+       ABOVE the surface's own limb values, so the line is the brightest
+       row in the object, which is the lever's requirement. */
+    3: {
+      chromo: { w: 0.013, A: 0.92, I: 1.42 }
+    },
+    /* 4 — GLOW REACH, measured and pulled in. The outer shell comes from
+       4.6R to 3.1R, the wide halation term shortens, the arc emission
+       reach follows. The measured visible-glow radius (2/255 over sky,
+       horizontal ray on the deploy) is in the branch report; light leaves
+       the surface. */
+    4: {
+      halation: [[0.50, 0.035], [0.10, 0.15]],
+      corona: [
+        { Rout: 1.30, A: 0.32, p: 3.4, breath: 'a', lo: 0.90, hi: 1.00 },
+        { Rout: 3.1,  A: 0.07, p: 2.4, breath: 'c', lo: 0.86, hi: 1.00 }
+      ],
+      emit: { reach: 4.0, A: 0.26 }
+    },
+    /* 5 — LIVING SURFACE: CUT, by the lever's own law, with the numbers.
+       Built in full (keyframe renderer, golden-ratio dwell, 7s cross-fade,
+       reduced-motion still — the machinery below this table stands and
+       works) and then MEASURED: mean |delta| between fully rendered
+       keyframes over the body is 4.16/255 at dT 0.42 and 4.50/255 at
+       dT 0.85 (max 23/255) — doubling the decorrelation saturated it,
+       because the texture amplitudes and the ramp's white knee bound the
+       ceiling. That is ~1.8% mean change at an 80px body: below perception
+       even on return. Amy's lever pre-ruled this exact case: "if amplitude
+       lands below perception at page scale, cut it and say so (effort
+       below perception is cost)." Cut. Raising texture amplitude to buy
+       perceptibility would trade lever 2's ruled surface for motion's
+       sake, which is backwards. The scheduler stays dormant — no config
+       carries `live`, so it never runs; a future round that wants a
+       legible living surface needs a bigger body, not a knob. */
+    5: {}
+  };
+
+  var CFG = (function () {
+    var c = {};
+    var base = CANDIDATES[CANDIDATE];
+    Object.keys(base).forEach(function (k) { c[k] = base[k]; });
+    /* the levers elevate the RULED BASE only. A self-contained candidate
+       (saffron-lantern, node-star) carries its whole design in its own
+       entry — measured on the page: with ELEVATION 1 the lever's exposure
+       1.62 and amber ramp silently masked saffron-lantern's 1.38/saffron
+       ramp, which is exactly the kind of quiet override this file exists
+       to forbid. */
+    if (CANDIDATE === 'photo-a') {
+      for (var lv = 1; lv <= ELEVATION; lv++) {
+        var o = LEVERS[lv] || {};
+        Object.keys(o).forEach(function (k) { c[k] = o[k]; });
+      }
+    }
+    return c;
+  })();
+  /* spot directions precomputed as unit vectors on the visible hemisphere */
+  (CFG.spots || []).forEach(function (s) {
+    var cl = Math.cos(s.lat);
+    s.nx = cl * Math.sin(s.lon);
+    s.ny = -Math.sin(s.lat);
+    s.nz = cl * Math.cos(s.lon);
+    s.cosSize = Math.cos(s.size);
+  });
 
   var ARRIVAL_VARIANTS = {
     /* Nodes first, then paths. Members before structure. */
@@ -504,8 +804,9 @@
              pathStart: 2.00, orbitStagger: 0.16, halfDur: 0.78 }
   };
 
-  /* RULED round 2: variant a is the base, 2.5s arrival, orbits drift. */
-  var DEFAULTS = { nucleus: 'a', arrival: 'brisk', orbits: 'drift' };
+  /* RULED round 2: 2.5s arrival, orbits drift. The nucleus is the branch's
+     pinned CANDIDATE — round 7 replaced the a/b/c volume variants. */
+  var DEFAULTS = { nucleus: CANDIDATE, arrival: 'brisk', orbits: 'drift' };
   /* Drift returned 2026-08-02 on Amy's ruling, at the labels-capped K — see
      the note above LIBRATION. The park is over. */
 
@@ -568,18 +869,23 @@
     clip.appendChild(svg('circle', { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R }));
     d.appendChild(clip);
 
-    /* Interior life. The body itself is a raster now, so the breath rides on
-       two additive overlays: one held inside the hot region, so it reads as the
-       active region pulsing, and one across the disc with the same falloff shape
-       as the limb law, so it lifts the whole body without flattening it. */
-    d.appendChild(grad('lo-nuc-glow-1', '38%', '32%', '30%', [
-      ['0%', '#FFFEF8', 0.92], ['42%', '#FFF0C4', 0.34], ['100%', '#FFE29A', 0]
-    ]));
-    d.appendChild(grad('lo-nuc-glow-2', '50%', '50%', '50%', [
-      ['0%', '#FFF0C4', 0.55], ['58%', '#F6CB68', 0.20], ['88%', '#E8AF38', 0.04], ['100%', '#E8AF38', 0]
-    ]));
+    /* Interior life. The body is a raster, so the breath rides on additive
+       overlays defined by the candidate — always additive (they brighten,
+       never shade: the one-light law), always with every stop fading to zero
+       before the limb so no overlay draws an edge of its own. */
+    CFG.glows.forEach(function (gl, i) {
+      d.appendChild(grad('lo-nuc-glow-' + i,
+        (gl.at[0] * 100) + '%', (gl.at[1] * 100) + '%', (gl.span * 100) + '%', [
+          ['0%', gl.col, gl.a], ['58%', gl.col, gl.a * 0.36], ['100%', gl.col, 0]
+        ]));
+    });
 
-    d.appendChild(grad('lo-corona', '50%', '50%', '50%', coronaStops(1)));
+    /* One gradient per corona shell. All centred on the body (symmetric-
+       corona law), all monotone outward — layering is what gives the
+       atmosphere depth without any shell reading as a ring. */
+    CFG.corona.forEach(function (L, i) {
+      d.appendChild(grad('lo-corona-' + i, '50%', '50%', '50%', coronaStops(L)));
+    });
 
     /* The label scrim. Same hue as the night ground, so on open sky it is not
        there; over an orbit line or a bright star it is the difference between
@@ -630,26 +936,30 @@
      a boundary: the alpha there is not merely small, its derivative is zero too.
 
      The hot region still biases the surface and the near bleed inside the body's
-     own image. It does not touch this. Past the limb the star is round. */
-  var CORONA = { A: 0.30, Rout: ARR.coronaRout, p: 2.2 };
+     own image. It does not touch this. Past the limb the star is round.
 
-  function coronaStops(scale) {
-    var out = [], A = CORONA.A * (scale == null ? 1 : scale);
+     ROUND 7: the corona is now LAYERED — the candidate declares one to three
+     shells, each symmetric, each monotone outward, each on its own breath
+     period. One power-law gradient was a coat of glow; unequal shells moving
+     on unequal rhythms are an atmosphere with depth in it. Every law above
+     still binds each shell individually. */
+  function coronaStops(L) {
+    var out = [];
     /* Stops LOGARITHMICALLY spaced in radius, not evenly. A gradient
        interpolates linearly between its stops, and this profile is far steeper
        just outside the limb than it is anywhere else, so evenly-spaced stops put
        a visible kink exactly where the eye is. Measured, that kink was a 1.48
        rise in the falloff rate at r/R 1.34 — a boundary, which is the one thing
        this may not have. Log spacing puts the stops where the curvature is. */
-    var n = 64, r0 = 1;
-    out.push(['0%', '#FFDFA0', A.toFixed(5)]);
-    out.push([(100 / CORONA.Rout * 0.98).toFixed(3) + '%', '#FFDFA0', A.toFixed(5)]);
+    var n = 48;
+    out.push(['0%', '#FFDFA0', L.A.toFixed(5)]);
+    out.push([(100 / L.Rout * 0.98).toFixed(3) + '%', '#FFDFA0', L.A.toFixed(5)]);
     for (var i = 0; i <= n; i++) {
-      var r = r0 * Math.pow(CORONA.Rout / r0, i / n);
-      var w = 1 - Math.pow((r - 1) / (CORONA.Rout - 1), 2);
-      var a = A * Math.pow(1 / r, CORONA.p) * w * w;
-      var t = Math.min(1, Math.max(0, (r - 1) / (CORONA.Rout - 1)));
-      out.push([(100 * r / CORONA.Rout).toFixed(3) + '%', mixHex('#FFDFA0', '#B8863A', t), a.toFixed(5)]);
+      var r = Math.pow(L.Rout, i / n);
+      var w = 1 - Math.pow((r - 1) / (L.Rout - 1), 2);
+      var a = L.A * Math.pow(1 / r, L.p) * w * w;
+      var t = Math.min(1, Math.max(0, (r - 1) / (L.Rout - 1)));
+      out.push([(100 * r / L.Rout).toFixed(3) + '%', mixHex('#FFDFA0', '#B8863A', t), a.toFixed(5)]);
     }
     return out;
   }
@@ -709,16 +1019,13 @@
      instead of at the rim; raising u lowers the floor the limb lands on. The
      law itself — identical in every direction, no terminator — is untouched,
      and the verification still asserts it off the rendered pixels. */
-  var U_LIMB = 0.96, LIMB_P = 3.2;   /* RULED BY AMY 2026-08-02: N2. "N2 is the one." N1/N3 stay on their branches as the record. */
-  /* NUCLEUS ROUND, 2026-08-02 — Amy: still a lit disc, not a lit ball.
-     TEX_TAPER: the mottle compresses for free (surface sampling) but kept
-     even CONTRAST to the limb, which is the flat tell. Contrast now tapers
-     to TEX_TAPER_FLOOR at the limb, and the fine grain fades harder than
-     the cells, so the edge is finer AND softer. EDGE_FEATHER: the boundary
-     is a 3px smoothstep arrived at by the falloff, not a drawn line. */
-  var TEX_TAPER_FLOOR = 0.32, TEX_TAPER_POW = 1.1;
+  /* ROUND 7: N2 (u 0.96, p 3.2) was the deepest the falloff bet ever went,
+     and Amy rejected the result on sight. The comment above stands as the
+     record of why this file no longer buys dimension from the falloff alone.
+     The falloff, texture and extent now belong to the CANDIDATE (table
+     above); EDGE_FEATHER survives — the boundary is still a smoothstep
+     arrived at by the light, not a drawn line. */
   var EDGE_FEATHER = 3.0;
-  var EXTENT = 1.34;              /* canvas half-width in body radii; the rest is bleed */
 
   /* The hot region as a direction on the sphere. 38% 32% of the body's box is
      the value the product already carries, expressed here as a unit vector so it
@@ -755,14 +1062,12 @@
     return s / norm;
   }
 
-  /* The value ramp. Deliberately shifts hue as well as level: a star's limb is
-     cooler and redder because you are looking through more of it. */
-  var RAMP = [
-    [1.34, [255, 253, 244]], [1.12, [255, 248, 224]], [0.98, [255, 240, 196]],
-    [0.86, [253, 226, 157]], [0.74, [246, 206, 114]], [0.62, [236, 178, 72]],
-    [0.50, [214, 146, 50]], [0.40, [180, 114, 36]], [0.31, [142, 85, 25]],
-    [0.23, [104, 60, 17]], [0.15, [70, 39, 11]], [0.00, [40, 22, 7]]
-  ];
+  /* The body's value ramp is the CANDIDATE's (CFG.ramp). The old shared ramp
+     bottomed at [40,22,7] — near-black brown — and at the deployed ~80px that
+     wrapped the body in a dark ring against the navy sky: the "sticker" edge
+     Amy named. Every round-7 ramp bottoms WARM: the coolest a luminous body
+     gets here is ember, never soil. Hue still shifts with level — a star's
+     limb is cooler and redder because you are looking through more of it. */
   /* A node is gold, not star-stuff: its value never reaches the top of the
      body's ramp and the body's ramp bottoms out in browns, so lit by it a node
      comes out muddy. Its own ramp keeps it gold from the lit limb to the
@@ -786,203 +1091,241 @@
       }
     }
   }
-  function ramp(I, out) {
-    for (var i = 1; i < RAMP.length; i++) {
-      if (I >= RAMP[i][0] || i === RAMP.length - 1) {
-        var hi = RAMP[i - 1], lo = RAMP[i];
-        var t = (I - lo[0]) / (hi[0] - lo[0]);
-        t = t < 0 ? 0 : t > 1 ? 1 : t;
-        out[0] = lo[1][0] + (hi[1][0] - lo[1][0]) * t;
-        out[1] = lo[1][1] + (hi[1][1] - lo[1][1]) * t;
-        out[2] = lo[1][2] + (hi[1][2] - lo[1][2]) * t;
-        return;
-      }
-    }
-  }
+  /* rampWith serves both the candidate's body ramp and NODE_RAMP; the old
+     dedicated ramp() went with the shared RAMP table. */
 
-  /* ══ THE CONSTELLATION INSIDE THE BODY ════════════════════════════════
-     The logo's sphere carries a whisper of star field in its surface: the
-     nucleus contains a cosmos rather than being an opaque ball.
+  /* ROUND 7: the in-body star field (240 projected points) is deleted. At the
+     lab's 1:1 it was "at a stare there is something inside it"; at the
+     deployed ~80px it was nothing at all — texels below the threshold of
+     existence, rendered every frame. Git history preserves it. */
 
-     Placed as points ON THE SPHERE — random unit vectors, kept when they face
-     the viewer — and then projected. That gives the foreshortening for free and
-     exactly: a uniform density on a sphere projects to a density rising as 1/mu
-     toward the limb, so they crowd and compress at the edge the way anything on
-     a surface does, without a line of code saying so.
+  /* ══ THE BODY ═════════════════════════════════════════════════════════
+     Round 7 rendered once and deleted the churn as sub-perceptual. Round 9
+     lever 5 brings a LIVING SURFACE back at a cadence that passes the
+     casino test where the churn failed it: keyframes tens of seconds
+     apart, decorrelated enough to register on RETURN, cross-faded slowly
+     enough to sit below conscious notice in the moment. The renderer is
+     therefore resumable again (rows-per-frame into an offscreen canvas),
+     and the cell field takes a TIME coordinate T — the noise is sampled
+     along a moving diagonal, so cells drift and evolve together.
 
-     They dim with the same limb law as the surface they sit on, and they are
-     suppressed under the hot region, where nothing faint could survive anyway.
-     Sparse enough that no arrangement is legible: at a glance the sphere is a
-     star, at a stare there is something inside it. */
-  var STARS_IN = { n: 240, amp: 0.30, sigma: 1.05 };
-
-  function starBuffer(px, hotAmp) {
-    var buf = new Float32Array(px * px);
-    var half = px / 2, sc = 1 / (half / EXTENT);       /* units per pixel */
-    var rand = (function (a) {
-      return function () {
-        a = (a + 0x6d2b79f5) >>> 0;
-        var t = Math.imul(a ^ (a >>> 15), a | 1);
-        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-      };
-    })(20260805);
-    for (var k = 0; k < STARS_IN.n; k++) {
-      /* a uniform direction on the sphere; only the near face is visible */
-      var z = 2 * rand() - 1, a2 = 2 * Math.PI * rand(), rr = Math.sqrt(1 - z * z);
-      var nx = rr * Math.cos(a2), ny = rr * Math.sin(a2), nz = z;
-      if (nz <= 0.05) continue;
-      var mu = nz;
-      /* dims with the surface, and steps aside for the hot region */
-      var hot = (nx * HOT_N.x + ny * HOT_N.y + mu * HOT_N.z - 0.34) / 0.66;
-      hot = hot > 0 ? Math.min(1, hot) : 0;
-      var b = STARS_IN.amp * ((1 - U_LIMB) + U_LIMB * Math.pow(mu, LIMB_P)) *
-              (1 - 0.85 * hot * hot) * (0.55 + 0.9 * rand());
-      if (b < 0.004) continue;
-      var cxp = half + nx / sc, cyp = half + ny / sc;
-      var sg = STARS_IN.sigma * (0.8 + 0.5 * rand());
-      var rad = Math.ceil(sg * 2.6);
-      for (var dy = -rad; dy <= rad; dy++) for (var dx = -rad; dx <= rad; dx++) {
-        var x = Math.round(cxp) + dx, y = Math.round(cyp) + dy;
-        if (x < 0 || y < 0 || x >= px || y >= px) continue;
-        var ex = x + 0.5 - cxp, ey = y + 0.5 - cyp;
-        buf[y * px + x] += b * Math.exp(-(ex * ex + ey * ey) / (2 * sg * sg));
-      }
-    }
-    return buf;
-  }
-
-  /* ══ THE BODY, resumable, so its surface can churn ════════════════════
-     Granulation on a real star is never still. The body is a raster, so
-     evolving it means re-rendering it, and a full 512-square render is a fifth
-     of a second — a hitch every time. So the render is RESUMABLE: a few dozen
-     rows per frame into an offscreen canvas, and when it completes it
-     cross-fades over the top of the one before it. The main thread never sees a
-     block, and the surface never stops moving.
-
-     The noise's fourth coordinate advances monotonically, so nothing repeats.
-     It advances slowly enough that a cell takes minutes to change: the casino
-     test applies to this exactly as it applies to the libration. */
-  /* Rows per frame is a budget, not a speed. The whole surface is 512 rows, so
-     12 a frame completes in a fifth of a second at sixty and the five-second
-     cross-fade is what actually sets the pace. Round 5's first attempt did 40 a
-     frame and cost the build its frame budget outright. */
-  var CHURN = { rows: 12, dw: 0.0075, fade: 5.0 };
-
-  function makeBody(px, v) {
+     The render itself: for every pixel inside the disc, radiance
+       I = exposure * ((1-u) + u * mu^p)          the falloff, directionless
+         * (1 + amp * cells(surface point, T))     per octave group — sampled
+                                                   at (nx, ny, mu) so they
+                                                   compress toward the limb
+         * (1 - depth * spot(surface point))       photospheric spot groups
+         + hot * cap^3                             additive active region
+     mapped through the candidate's ramp, whose top the exposure CLIPS.
+     Past the limb: the CHROMOSPHERE LINE when lever 3 is on (one thin
+     crisp bright row the surface hands off to), then halation — summed
+     exponentials coloured from the limb they leave, inside the body's own
+     image. */
+  function makeBodyRenderer(px, v) {
     var cv = document.createElement('canvas');
     cv.width = cv.height = px;
     var ctx = cv.getContext('2d');
     var img = ctx.createImageData(px, px);
     var d = img.data;
-    var half = px / 2, sc = EXTENT / half, edge = EDGE_FEATHER * sc;
-    var col = [0, 0, 0], limbCol = [0, 0, 0];
-    var F1 = 5.4, F2 = 15.1;
-    var bleedA = 0.30 * v.bleed, bleedK = 6.2 / (EXTENT - 1);
-    var stars = starBuffer(px, v.hot);
-    /* The fine grain does not churn — only the convection cells do — so it is
-       computed once and read back per row. That is more than half the noise
-       cost taken out of the per-frame budget. */
-    var fine = new Float32Array(px * px);
-    (function () {
-      for (var y = 0; y < px; y++) {
-        var ny = (y + 0.5 - half) * sc;
-        for (var x = 0; x < px; x++) {
-          var nx = (x + 0.5 - half) * sc, r2 = nx * nx + ny * ny;
-          if (r2 >= 1) continue;
-          var mu = Math.sqrt(1 - r2);
-          fine[y * px + x] = fbm(nx * F2 + 11.3, ny * F2 - 7.1, mu * F2 + 3.7, 2);
+    var half = px / 2, sc = v.extent / half, edge = EDGE_FEATHER * sc;
+    var col = [0, 0, 0], limbCol = [0, 0, 0], chromoCol = [0, 0, 0];
+    /* the radiance the limb leaves at — what the halation is coloured from.
+       Continuous with the limb itself: a fringe brighter than the edge it
+       leaves is a rim, and a step darker is an outline. */
+    var IL = v.exposure * (1 - v.u) * 1.05;
+    /* each octave group drifts at its own rate — fine grain churns faster
+       than the big cells, which is how convection actually layers */
+    var RATE = [1.0, 1.45, 2.1];
+    /* node-star: the light's screen direction, baked into the raster */
+    var lb = (v.lightDeg || 0) * D2R, lbc = Math.cos(lb), lbs = Math.sin(lb);
+    /* SUBSURFACE: the internal core as a point inside the unit sphere.
+       d0 is the closest the shell ever gets to it — the radiance there is
+       exactly `exposure`. limbMax is the core's proximity factor at the
+       nearest stretch of limb, so the edge modulation normalises to 1. */
+    var SUB = null;
+    if (v.sub) {
+      var sx = 2 * v.sub.dir[0] - 1, sy = 2 * v.sub.dir[1] - 1;
+      var sl = Math.hypot(sx, sy) || 1;
+      SUB = { x: (sx / sl) * v.sub.depth, y: (sy / sl) * v.sub.depth,
+              z: v.sub.zc, k: v.sub.k };
+      SUB.d0 = 1 - Math.hypot(SUB.x, SUB.y, SUB.z);
+      var dnl = Math.hypot(sx / sl - SUB.x, sy / sl - SUB.y, SUB.z);
+      SUB.limbMax = Math.exp(-SUB.k * (dnl - SUB.d0));
+    }
+
+    function rows(y0, count, T) {
+    T = T || 0;
+    var y1 = Math.min(px, y0 + count);
+    for (var y = y0; y < y1; y++) {
+      var ny = (y + 0.5 - half) * sc;
+      for (var x = 0; x < px; x++) {
+        var nx = (x + 0.5 - half) * sc;
+        var r2 = nx * nx + ny * ny, r = Math.sqrt(r2), o = (y * px + x) * 4;
+
+        if (r >= v.extent) { d[o + 3] = 0; continue; }
+
+        /* NODE-STAR: the node shader verbatim, at nucleus scale — the same
+           wrap-Lambert (AMB 0.20, WRAP 0.45), the same limb term, the same
+           NODE_RAMP golds renderNodeSphere uses at 96px. Nothing else in
+           this renderer runs for it: a node has no halation, no chromo, no
+           cells — its bloom is the SVG halo, exactly like a node's. */
+        if (v.nodeStyle) {
+          if (r >= 1 + edge) { d[o + 3] = 0; continue; }
+          var rcN = r > 1 ? 1 : r, muN = Math.sqrt(1 - rcN * rcN);
+          var nxr = nx * lbc + ny * lbs;
+          var lamN = (nxr + 0.45) / 1.45;
+          lamN = lamN < 0 ? 0 : Math.pow(lamN, 1.15);
+          var LN = (0.20 + 0.80 * lamN) * (0.40 + 0.60 * Math.pow(muN, 0.5));
+          rampWith(NODE_RAMP, LN * v.mult, col);
+          var atN = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
+          atN = atN < 0 ? 0 : atN > 1 ? 1 : atN;
+          var aN = atN * atN * (3 - 2 * atN);
+          d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2];
+          d[o + 3] = 255 * aN;
+          continue;
         }
-      }
-    })();
 
-    function rows(y0, count, w, mode) {
-      var textureOnly = mode === 1, starsOnly = mode === 2;
-      var y1 = Math.min(px, y0 + count);
-      for (var y = y0; y < y1; y++) {
-        var ny = (y + 0.5 - half) * sc;
-        for (var x = 0; x < px; x++) {
-          var nx = (x + 0.5 - half) * sc;
-          var r2 = nx * nx + ny * ny, r = Math.sqrt(r2), o = (y * px + x) * 4;
+        /* HALATION — the body's light in the air just past its edge, drawn
+           inside the body's own image so it can never read as a second
+           object. Radially symmetric (no directional bias: the one-light law
+           owns direction and this is the light itself). Two scales: a tight
+           incandescent fringe and a wide soft spill. Computed for the whole
+           feather band too, because the body is composited OVER it — the
+           first render feathered the limb straight onto the navy sky, and a
+           half-transparent orange over navy is a muddy outline. */
+        var t2 = r - 1, A2 = 0;
+        if (t2 > -edge) {   /* any point the feather can reach */
+          for (var h = 0; h < v.halation.length; h++) {
+            A2 += v.halation[h][0] * Math.exp(-(t2 > 0 ? t2 : 0) / v.halation[h][1]);
+          }
+          /* windowed to zero WITH ZERO SLOPE at the canvas edge — the same
+             law the corona obeys: the element's own boundary must not be a
+             boundary. Without this the wide term still carries ~3% alpha at
+             the edge and the raster's square prints as a ring. */
+          var wnd = 1 - ((t2 > 0 ? t2 : 0) / (v.extent - 1)) * ((t2 > 0 ? t2 : 0) / (v.extent - 1));
+          A2 *= wnd * wnd;
+          A2 = A2 < 0 ? 0 : A2 > 1 ? 1 : A2;
+          /* coloured from the limb it leaves, cooling as it travels.
+             SUBSURFACE: the light leaves hardest where the core sits
+             closest to the limb — halation, colour and the chromosphere
+             line all scale with that proximity, so the bright side of the
+             shell visibly sheds more light than the deep side. */
+          var sN = 1;
+          if (SUB) {
+            var lxu = r ? nx / r : 0, lyu = r ? ny / r : 1;
+            var dl = Math.hypot(lxu - SUB.x, lyu - SUB.y, SUB.z);
+            sN = Math.min(1, Math.exp(-SUB.k * (dl - SUB.d0)) / SUB.limbMax);
+            A2 *= 0.15 + 0.85 * sN;
+          }
+          var mixT = Math.min(1, (t2 > 0 ? t2 : 0) / (v.extent - 1));
+          rampWith(v.ramp, IL * (SUB ? 0.35 + 0.65 * sN : 1) * (1 - 0.45 * mixT), limbCol);
 
-          if (r < 1 + edge) {
-            var rc = r > 1 ? 1 : r;
-            var mu = Math.sqrt(1 - rc * rc);
-            var I = (1 - U_LIMB) + U_LIMB * Math.pow(mu, LIMB_P);
-            if (textureOnly) I = 0.62;
-            if (starsOnly) {
-              var sv = stars[y * px + x];
-              d[o] = d[o + 1] = d[o + 2] = Math.min(255, sv * 900);
-              d[o + 3] = 255;
-              continue;
+          /* LEVER 3 — the chromosphere line: a thin gaussian ridge just
+             past the limb, brighter than any surface value (v.chromo.I sits
+             above the limb's radiance), composited OVER the halation so the
+             sequence reads surface -> line -> soft corona -> space. The
+             round-3 no-ring clause is superseded by Amy's ruling for this
+             line specifically. */
+          if (v.chromo) {
+            var q = (t2 - v.chromo.w) / (v.chromo.w * 0.62);
+            var cA = v.chromo.A * Math.exp(-q * q) * (SUB ? 0.15 + 0.85 * sN : 1);
+            if (cA > 0.004) {
+              rampWith(v.ramp, v.chromo.I, chromoCol);
+              var aT = cA + A2 * (1 - cA);
+              if (aT > 0.002) {
+                limbCol[0] = (chromoCol[0] * cA + limbCol[0] * A2 * (1 - cA)) / aT;
+                limbCol[1] = (chromoCol[1] * cA + limbCol[1] * A2 * (1 - cA)) / aT;
+                limbCol[2] = (chromoCol[2] * cA + limbCol[2] * A2 * (1 - cA)) / aT;
+              }
+              A2 = aT > 1 ? 1 : aT;
             }
-            /* granulation on the SURFACE, so it compresses toward the limb;
-               w is time, and it only ever goes forward */
-            var tpr = TEX_TAPER_FLOOR + (1 - TEX_TAPER_FLOOR) * Math.pow(mu, TEX_TAPER_POW);
-            var g = (0.64 * fbm4(nx * F1, ny * F1, mu * F1, w, 2) +
-                    0.36 * fine[y * px + x] * (0.25 + 0.75 * mu)) * tpr;
-            I *= 1 + v.tex * g;
-            if (!textureOnly) {
-              var dot = nx * HOT_N.x + ny * HOT_N.y + mu * HOT_N.z;
-              var capT = (dot - 0.34) / 0.66;
-              if (capT > 0) { capT = capT > 1 ? 1 : capT; I += v.hot * capT * capT * capT; }
-              I += stars[y * px + x];
-            }
-            ramp(I, col);
-            var at = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
-            at = at < 0 ? 0 : at > 1 ? 1 : at;
-            var a = at * at * (3 - 2 * at);   /* smoothstep: no drawn line */
-            d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2];
-            d[o + 3] = 255 * (a < 0 ? 0 : a > 1 ? 1 : a);
-          } else if (!textureOnly && r < EXTENT) {
-            var t2 = r - 1;
-            var ux = nx / r, uy = ny / r;
-            var f = 0.5 + 0.5 * (ux * HOT_N.x + uy * HOT_N.y);
-            var dir = 0.12 + 0.88 * f * f;
-            var Il = (1 - U_LIMB);
-            var lc = (ux * HOT_N.x + uy * HOT_N.y - 0.34) / 0.66;
-            if (lc > 0) { lc = lc > 1 ? 1 : lc; Il += v.hot * lc * lc * lc; }
-            ramp(Il * 2.4 + 0.08, limbCol);   /* follows the limb down: a bright fringe outside a dark limb is a rim */
-            var A2 = bleedA * dir * Math.exp(-t2 * bleedK);
-            d[o] = limbCol[0]; d[o + 1] = limbCol[1]; d[o + 2] = limbCol[2];
-            d[o + 3] = 255 * (A2 < 0 ? 0 : A2 > 1 ? 1 : A2);
-          } else {
-            d[o + 3] = 0;
           }
         }
+
+        if (r < 1 + edge) {
+          var rc = r > 1 ? 1 : r;
+          var mu = Math.sqrt(1 - rc * rc);
+          var I;
+          if (SUB) {
+            /* radiance falls with 3D distance from the internal core; the
+               mild mu term keeps the silhouette curving even over the
+               bright pole. No external direction exists anywhere here. */
+            var dxs = nx - SUB.x, dys = ny - SUB.y, dzs = mu - SUB.z;
+            var sd = Math.sqrt(dxs * dxs + dys * dys + dzs * dzs);
+            /* the mu term is mild on purpose: the core distance carries the
+               form; mu only keeps the silhouette curving. 0.45+0.55mu was
+               tried first and crushed the pole below the white knee. */
+            I = v.exposure * Math.exp(-SUB.k * (sd - SUB.d0)) * (0.60 + 0.40 * mu);
+          } else {
+            I = v.exposure * ((1 - v.u) + v.u * Math.pow(mu, v.p));
+          }
+          if (v.cells) {
+            /* granulation on the SURFACE (nx, ny, mu), so it compresses
+               toward the limb the way a photograph's does. Contrast keeps
+               most of its strength to the edge — (0.45 + 0.55*mu) — because
+               timid, hard-tapered texture is exactly what left six rounds
+               reading flat. Frequencies are chosen for the DEPLOYED size:
+               cells you can count at 80px, grain you can feel at 2x. */
+            var keep = 0.45 + 0.55 * mu;
+            for (var ci = 0; ci < v.cells.length; ci++) {
+              var cf = v.cells[ci][0];
+              var Tg = T * (RATE[ci] || 1);
+              I *= 1 + v.cells[ci][1] * keep *
+                   fbm(nx * cf + 11.7 * Tg, ny * cf - 7.3 * Tg,
+                       mu * cf + 7.7 + ci * 13.1 + 5.1 * Tg, 3);
+            }
+          }
+          if (v.spots) {
+            /* spot groups: dark features ON the sphere, foreshortening at
+               the limb like everything on the surface. An umbra floor keeps
+               them photospheric-dark, never black. */
+            for (var si2 = 0; si2 < v.spots.length; si2++) {
+              var sp = v.spots[si2];
+              var cosA = nx * sp.nx + ny * sp.ny + mu * sp.nz;
+              if (cosA > sp.cosSize) {
+                var st = (cosA - sp.cosSize) / (1 - sp.cosSize);
+                st = st > 1 ? 1 : st;
+                st = st * st * (3 - 2 * st);
+                I *= 1 - sp.depth * Math.pow(st, 0.7);
+              }
+            }
+          }
+          if (v.hot) {
+            var dot = nx * HOT_N.x + ny * HOT_N.y + mu * HOT_N.z;
+            var capT = (dot - 0.34) / 0.66;
+            if (capT > 0) { capT = capT > 1 ? 1 : capT; I += v.hot * capT * capT * capT; }
+          }
+          rampWith(v.ramp, I, col);
+          var at = r <= 1 - edge ? 1 : (1 + edge - r) / (2 * edge);
+          at = at < 0 ? 0 : at > 1 ? 1 : at;
+          var a = at * at * (3 - 2 * at);   /* smoothstep: no drawn line */
+          /* body OVER halation: the sky never shows through the feather */
+          var aOut = a + A2 * (1 - a);
+          if (aOut > 0.002) {
+            d[o]     = (col[0] * a + limbCol[0] * A2 * (1 - a)) / aOut;
+            d[o + 1] = (col[1] * a + limbCol[1] * A2 * (1 - a)) / aOut;
+            d[o + 2] = (col[2] * a + limbCol[2] * A2 * (1 - a)) / aOut;
+          }
+          d[o + 3] = 255 * (aOut < 0 ? 0 : aOut > 1 ? 1 : aOut);
+        } else {
+          d[o] = limbCol[0]; d[o + 1] = limbCol[1]; d[o + 2] = limbCol[2];
+          d[o + 3] = 255 * A2;
+        }
       }
-      return y1;
+    }
+    return y1;
     }
 
     return {
       px: px,
-      all: function (w, mode) {
-        rows(0, px, w || 0, mode | 0);
-        ctx.putImageData(img, 0, 0);
-        return cv;
-      },
       rows: rows,
       flush: function () { ctx.putImageData(img, 0, 0); return cv; },
-      canvas: cv
+      all: function (T) { rows(0, px, T || 0); return this.flush(); }
     };
   }
 
-  /* four-dimensional value noise: the fourth axis is time */
-  function vnoise4(x, y, z, w) {
-    var wi = Math.floor(w), wf = w - wi;
-    var t = wf * wf * (3 - 2 * wf);
-    var a = vnoise(x + wi * 19.37, y - wi * 7.11, z + wi * 3.53);
-    var b = vnoise(x + (wi + 1) * 19.37, y - (wi + 1) * 7.11, z + (wi + 1) * 3.53);
-    return a + (b - a) * t;
-  }
-  function fbm4(x, y, z, w, oct) {
-    var s2 = 0, a = 1, f = 1, norm = 0;
-    for (var i = 0; i < oct; i++) {
-      s2 += a * vnoise4(x * f, y * f, z * f, w * f);
-      norm += a; a *= 0.5; f *= 2.03;
-    }
-    return s2 / norm;
-  }
+  /* one still frame — the mount render and the instruments both use this */
+  function makeBody(px, v, T) { return makeBodyRenderer(px, v).all(T); }
 
 
   /* ══ NODES, at their own scale ════════════════════════════════════════
@@ -1039,43 +1382,61 @@
 
   /* ── the nucleus ────────────────────────────────────────────────────── */
 
-  /* The corona: one circle, centred on the body, carrying the profile above. */
+  /* The corona: the candidate's shells, every one centred on the body,
+     every one monotone outward, each on its own breath period — unequal
+     rhythms are what make layered light read as depth rather than as one
+     glow at three sizes. Amplitudes sit near full: this is the star's light
+     in the field, not a veil over it. */
   function buildCorona() {
     var g = svg('g', { class: 'lo-corona', 'aria-hidden': 'true' });
-    /* RULED round 5: the corona is on the BODY'S OWN breath — the same
-       keyframe, the same 3.7s, so the two are in phase by construction rather
-       than by coincidence. It was on its own 5.3s rhythm before, which made it a
-       layer around the star instead of the star's output. Its amplitude is
-       deliberately under the body's: the glow follows, it does not lead. */
-    var c = svg('circle', { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R * CORONA.Rout,
-                            fill: 'url(#lo-corona)', class: 'lo-breath-a lo-corona-ring' });
-    c.style.setProperty('--lo-breath-lo', 0.87);
-    c.style.setProperty('--lo-breath-hi', 1);
-    c.style.setProperty('--lo-breath-still', 0.935);
-    g.appendChild(c);
+    CFG.corona.forEach(function (L, i) {
+      var c = svg('circle', { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R * L.Rout,
+                              fill: 'url(#lo-corona-' + i + ')',
+                              class: 'lo-breath-' + L.breath + ' lo-corona-ring' });
+      c.style.setProperty('--lo-breath-lo', L.lo);
+      c.style.setProperty('--lo-breath-hi', L.hi);
+      c.style.setProperty('--lo-breath-still', ((L.lo + L.hi) / 2).toFixed(3));
+      g.appendChild(c);
+    });
     return g;
   }
 
   function buildNucleus() {
     var g = svg('g', { class: 'lo-nucleus', 'aria-hidden': 'true' });
-    var side = 2 * NUC_R * EXTENT;
-    var at2 = { x: FRAME.cx - side / 2, y: FRAME.cy - side / 2, width: side, height: side };
-    /* two layers, so a freshly churned surface can arrive over the one before
-       it rather than replacing it */
-    var a = svg('image', Object.assign({ class: 'lo-nuc-body' }, at2));
-    var b = svg('image', Object.assign({ class: 'lo-nuc-body', opacity: 0 }, at2));
-    g.appendChild(a); g.appendChild(b);
-    g.__imgA = a; g.__imgB = b;
+    var side = 2 * NUC_R * CFG.extent;
+    var at2 = { class: 'lo-nuc-body', x: FRAME.cx - side / 2,
+                y: FRAME.cy - side / 2, width: side, height: side };
+    /* node-star: the node's own halo bloom, scaled with the body — offset
+       toward the lit face exactly as buildNode offsets it, drawn first so
+       it sits behind. Static, like a node's: nothing here breathes. */
+    if (CFG.nodeStyle) {
+      var lb2 = CFG.lightDeg * D2R;
+      g.appendChild(svg('circle', {
+        cx: (FRAME.cx + Math.cos(lb2) * NUC_R * 0.35).toFixed(2),
+        cy: (FRAME.cy + Math.sin(lb2) * NUC_R * 0.35).toFixed(2),
+        r: (NUC_R * CFG.haloR).toFixed(2),
+        fill: 'url(#lo-node-halo)', opacity: CFG.haloA
+      }));
+    }
+    /* two layers again as of lever 5: a living surface needs a keyframe to
+       arrive OVER the one before it. At elevations below 5 the second image
+       simply never receives a href. */
+    var img = svg('image', at2);
+    var imgB = svg('image', Object.assign({ opacity: 0 }, at2));
+    g.appendChild(img);
+    g.appendChild(imgB);
+    g.__img = img;
+    g.__imgB = imgB;
 
     var at = { cx: FRAME.cx, cy: FRAME.cy, r: NUC_R };
-    [['lo-nuc-glow-1', 'lo-breath-a', 0.08, 0.30], ['lo-nuc-glow-2', 'lo-breath-c', 0.05, 0.14]]
-      .forEach(function (bb) {
-        var c = svg('circle', Object.assign({ fill: 'url(#' + bb[0] + ')', class: bb[1] }, at));
-        c.style.setProperty('--lo-breath-lo', bb[2]);
-        c.style.setProperty('--lo-breath-hi', bb[3]);
-        c.style.setProperty('--lo-breath-still', ((bb[2] + bb[3]) / 2).toFixed(3));
-        g.appendChild(c);
-      });
+    CFG.glows.forEach(function (gl, i) {
+      var c = svg('circle', Object.assign({ fill: 'url(#lo-nuc-glow-' + i + ')',
+                                            class: 'lo-breath-' + gl.breath }, at));
+      c.style.setProperty('--lo-breath-lo', gl.lo);
+      c.style.setProperty('--lo-breath-hi', gl.hi);
+      c.style.setProperty('--lo-breath-still', ((gl.lo + gl.hi) / 2).toFixed(3));
+      g.appendChild(c);
+    });
     return g;
   }
 
@@ -1157,6 +1518,13 @@
     if (moved) {
       n.matT = n.t;
       var dx = (FRAME.cx - p.x) / (dist || 1), dy = (FRAME.cy - p.y) / (dist || 1);
+      /* node-star: the star is a lit body, not the light — every bright
+         side (and halo offset) aims at the shared off-frame light instead
+         of at the centre, or the frame contradicts itself */
+      if (CFG.nodeStyle) {
+        var lbN = CFG.lightDeg * D2R;
+        dx = Math.cos(lbN); dy = Math.sin(lbN);
+      }
       var I = intensityAt(dist);
       var k = Math.min(1, (I - 0.42) / 0.58);
       /* the sphere is lit from +x in its own image, so pointing it at the
@@ -1298,8 +1666,41 @@
                                  'stroke-opacity': a.toFixed(4), 'stroke-linecap': 'round' });
         host.appendChild(glow);
         host.appendChild(line);
+
+        /* ══ EMISSION — the star's light landing on the cage. ROUND 7. ════
+           The diagnosis this round inherits: the star emitted nothing the
+           scene received. This is the receipt — where an arc passes near the
+           body it warms, in the star's own colour, falling off with SCREEN
+           distance exactly as the node light does (one law, one light). The
+           overlay rides the arc's own path data, so it can never separate
+           from the stroke it lights; it fades up only after the arrival has
+           drawn the cage (CSS gates it on data-arrival), so light lands on
+           arcs that exist. The depth term keeps a near arc catching more
+           than a far one at the same radius. */
+        var ea = 0;
+        if (CFG.emit) {   /* node-star has no central source to cast this */
+          var pm = pointAt(o, mid);
+          var dm = Math.hypot(pm.x - FRAME.cx, pm.y - FRAME.cy);
+          var exx = (dm - NUC_R) / (CFG.emit.reach * NUC_R - NUC_R);
+          exx = exx < 0 ? 0 : exx > 1 ? 1 : exx;
+          ea = CFG.emit.A * Math.pow(1 - exx, 2.2) * (0.55 + 0.45 * (0.5 + 0.5 * zn));
+        }
+        var emit = null, emitSoft = null;
+        if (ea > 0.012) {
+          /* two scales, like the halation: a wide soft under-glow (the arc
+             sitting IN the star's light) and a tighter warm tint on the
+             stroke itself (the arc CATCHING it) */
+          emitSoft = svg('path', { class: 'lo-emit lo-emit-soft', d: d, fill: 'none',
+                                   stroke: '#F6B84E', 'stroke-width': (wdt * 8.5).toFixed(3),
+                                   'stroke-opacity': (ea * 0.42).toFixed(4), 'stroke-linecap': 'round' });
+          emit = svg('path', { class: 'lo-emit', d: d, fill: 'none',
+                               stroke: '#FFCF74', 'stroke-width': (wdt * 3.2).toFixed(3),
+                               'stroke-opacity': ea.toFixed(4), 'stroke-linecap': 'round' });
+          host.appendChild(emitSoft);
+          host.appendChild(emit);
+        }
         paths.push({ orbit: o, orbitIndex: oi, seg: si, segs: order.length,
-                     line: line, glow: glow });
+                     line: line, glow: glow, emit: emit, emitSoft: emitSoft });
       });
 
       /* The near half where it crosses the body, in one piece and clipped to the
@@ -1397,42 +1798,30 @@
 
   /* ── variants ───────────────────────────────────────────────────────── */
 
-  function applyNucleus(sys, key) {
-    var v = NUCLEUS_VARIANTS[key];
-    /* 512 spans 2 * EXTENT * 125 = 335 frame units, so the body renders at
-       better than 1.5 device pixels per texel at a 2x display. */
-    /* One synchronous full render on mount or on a variant change — the only
-       place a block is acceptable, because nothing is moving yet. After that the
-       churn takes over and every render is spread across frames. */
-    sys.body = makeBody(512, v);
-    sys.churn = { w: 0, phase: 'idle', cursor: 0, fade: 0, url: null };
-    var url = sys.body.all(0, 0).toDataURL('image/png');
-    [sys.nucleus.__imgA, sys.nucleus.__imgB].forEach(function (im) {
-      im.setAttributeNS('http://www.w3.org/1999/xlink', 'href', url);
-      im.setAttribute('href', url);
-    });
-    sys.nucleus.__imgB.setAttribute('opacity', 0);
-    sys.nucleusVariant = key;
+  function applyNucleus(sys) {
+    /* One synchronous full render, once, on mount — nothing is moving yet, so
+       the block is free. 512 texels across 2 * extent body radii keeps the
+       body above 1.5 device pixels per texel at a 2x display. The corona
+       shells and breath amplitudes were built from CFG directly; there is no
+       variant to re-apply at runtime — the elevation is the branch. */
+    sys.bodyR = makeBodyRenderer(512, CFG);
+    var url = sys.bodyR.all(0).toDataURL('image/png');
+    sys.nucleus.__img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', url);
+    sys.nucleus.__img.setAttribute('href', url);
+    sys.nucleusVariant = CANDIDATE + '+e' + ELEVATION;
+    if (CFG.live) {
+      /* lever 5 state. nextAt is absolute on the live clock; the dwell
+         sequence is golden-ratio spaced — deterministic, non-periodic, no
+         common beat with the breath or the libration. */
+      sys.live = { clock: 0, T: 0, n: 0, phase: 'idle', f: 0, cursor: 0,
+                   url: null, nextAt: liveDwell(0) };
+    }
+  }
 
-    /* the corona's reach moves with the variant, so its stops are rebuilt */
-    var cg = sys.root.querySelector('#lo-corona');
-    while (cg.firstChild) cg.removeChild(cg.firstChild);
-    coronaStops(v.corona).forEach(function (st) {
-      cg.appendChild(svg('stop', { offset: st[0], 'stop-color': st[1], 'stop-opacity': st[2] }));
-    });
-
-    var layers = [
-      sys.nucleus.querySelector('.lo-breath-a'),
-      sys.corona.querySelector('.lo-breath-b'),
-      sys.nucleus.querySelector('.lo-breath-c')
-    ];
-    layers.forEach(function (el, i) {
-      if (!el) return;
-      var a = v.breath[i];
-      el.style.setProperty('--lo-breath-lo', a[0]);
-      el.style.setProperty('--lo-breath-hi', a[1]);
-      el.style.setProperty('--lo-breath-still', ((a[0] + a[1]) / 2).toFixed(3));
-    });
+  function liveDwell(n) {
+    var L = CFG.live;
+    var fr = (n + 1) * 0.6180339887;
+    return L.dwellA + L.dwellB * (fr - Math.floor(fr));
   }
 
   /* ── the arrival beat ───────────────────────────────────────────────── */
@@ -1506,47 +1895,58 @@
        writing the DOM every frame is work done under the threshold. The gate is
        on distance moved, not on a clock, so the lab's accelerator still gets
        every frame. */
-    /* The surface churns. A few dozen rows a frame into the offscreen canvas,
-       and when it completes it arrives over the top of the one before it across
-       a five-second cross-fade. The noise's fourth axis only ever goes forward,
-       so no state is ever revisited. */
-    function churn(dt) {
-      var c = sys.churn, n = sys.nucleus;
-      if (!c || !sys.body) return;
-      if (c.phase === 'idle') { c.phase = 'render'; c.cursor = 0; c.w += CHURN.dw; }
-      if (c.phase === 'encode') return;
-      if (c.phase === 'render') {
-        c.cursor = sys.body.rows(c.cursor, CHURN.rows, c.w, 0);
-        if (c.cursor >= sys.body.px) {
-          /* toBlob, not toDataURL: encoding a 512-square PNG synchronously is a
-             hitch every cycle, and there is nothing to hitch for. */
-          c.phase = 'encode';
-          sys.body.flush().toBlob(function (blob) {
-            if (!blob) { c.phase = 'idle'; return; }
+    /* ROUND 9, LEVER 5 — the living surface. NOT round 7's churn: that ran
+       continuously and moved nothing anyone could see. This renders a
+       KEYFRAME tens of seconds ahead of its cue (12 rows a frame — the
+       budget round 5 proved), then cross-fades it in over CFG.live.fade
+       seconds. Decorrelation dT is large enough that a viewer returning
+       after half a minute sees a different surface; the fade in the moment
+       sits below conscious notice. The scheduler lives inside the drift
+       loop, so reduced motion — which never starts the drift — keeps the
+       still frame without a line of special-casing. */
+    function live(dt) {
+      var L = CFG.live, s = sys.live, n = sys.nucleus;
+      if (!L || !s || !sys.bodyR) return;
+      s.clock += dt;
+      if (s.phase === 'idle' && s.clock >= s.nextAt - L.prep) {
+        s.phase = 'render'; s.cursor = 0; s.T += L.dT;
+      }
+      if (s.phase === 'render') {
+        s.cursor = sys.bodyR.rows(s.cursor, 12, s.T);
+        if (s.cursor >= sys.bodyR.px) {
+          s.phase = 'encode';
+          /* toBlob, not toDataURL — a synchronous 512-square PNG encode is
+             a hitch, and there is nothing to hitch for */
+          sys.bodyR.flush().toBlob(function (blob) {
+            if (!blob) { s.phase = 'idle'; s.nextAt = s.clock + liveDwell(++s.n); return; }
             var next = URL.createObjectURL(blob);
-            if (c.url) URL.revokeObjectURL(c.url);
-            c.url = next;
+            if (s.url) URL.revokeObjectURL(s.url);
+            s.url = next;
             n.__imgB.setAttributeNS('http://www.w3.org/1999/xlink', 'href', next);
             n.__imgB.setAttribute('href', next);
-            c.phase = 'fade'; c.fade = 0;
+            s.phase = 'ready';
           }, 'image/png');
         }
         return;
       }
-      c.fade += dt;
-      var o = c.fade / CHURN.fade;
-      if (o >= 1) {
-        n.__imgA.setAttributeNS('http://www.w3.org/1999/xlink', 'href', c.url);
-        n.__imgA.setAttribute('href', c.url);
-        n.__imgB.setAttribute('opacity', 0);
-        c.phase = 'idle';
-      } else {
-        n.__imgB.setAttribute('opacity', o.toFixed(4));
+      if (s.phase === 'ready' && s.clock >= s.nextAt) { s.phase = 'fade'; s.f = 0; }
+      if (s.phase === 'fade') {
+        s.f += dt;
+        var o = s.f / L.fade;
+        if (o >= 1) {
+          n.__img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', s.url);
+          n.__img.setAttribute('href', s.url);
+          n.__imgB.setAttribute('opacity', 0);
+          s.phase = 'idle';
+          s.nextAt = s.clock + liveDwell(++s.n);
+        } else {
+          n.__imgB.setAttribute('opacity', o.toFixed(4));
+        }
       }
     }
 
     function tick(dt) {
-      churn(dt);
+      live(dt);
       tau += dt * scale;
       var changed = false;
       for (var i = 0; i < sys.nodes.length; i++) {
@@ -1625,7 +2025,7 @@
       }, (total + 0.25) * 1000);
     }
 
-    applyNucleus(sys, state.nucleus);
+    applyNucleus(sys);
     applyArrival(sys, state.arrival);
     sys.nodes.forEach(function (n) { applyNodeState(sys, n, true); });
     sortLabels(sys);
@@ -1689,6 +2089,11 @@
           var dim = id !== null && p.orbit.id !== orbitId;
           p.line.classList.toggle('is-dim', dim);
           p.glow.classList.toggle('is-dim', dim);
+          /* the light the nucleus lands on an arc recedes WITH that arc —
+             a dimmed stroke still carrying full glow would put the received
+             light out of agreement with its receiver (one-light law) */
+          if (p.emit) p.emit.classList.toggle('is-dim', dim);
+          if (p.emitSoft) p.emitSoft.classList.toggle('is-dim', dim);
         });
       }
       /* NOT boundary events. pointerenter/leave were tried first and Chromium
@@ -1749,13 +2154,18 @@
         sortLabels(sys);
       },
       advance: function (seconds) { drift.advance(seconds); },
-      EXTENT: EXTENT, U_LIMB: U_LIMB, LIMB_P: LIMB_P, LIBRATION: LIBRATION, SIGMA: SIGMA,
+      /* round 7: the falloff belongs to the candidate; the old export names
+         stay so the lab instruments still find A falloff to read */
+      EXTENT: CFG.extent, U_LIMB: CFG.u, LIMB_P: CFG.p,
+      CANDIDATE: CANDIDATE, CFG: CFG, ELEVATION: ELEVATION, LEVERS: LEVERS,
+      LIBRATION: LIBRATION, SIGMA: SIGMA,
       ARR: ARR, ARR_KEY: ARR_KEY, ARRANGEMENTS: ARRANGEMENTS,
       FIGURE: FIGURE, NUC_RATIO: NUC_R / MAX_RX, WINDOW: WINDOW,
-      /* pixels back, so the light model can be asserted rather than admired */
-      /* mode 0 full, 1 texture only, 2 the in-body star field alone */
-      readBody: function (px, mode) {
-        var cv = makeBody(px || 256, NUCLEUS_VARIANTS[state.nucleus]).all(0, mode | 0);
+      /* pixels back, so the light model can be asserted rather than admired.
+         Round 7: the texture-only and stars-only modes went with the churn
+         and the star field; mode is accepted and ignored. */
+      readBody: function (px, mode, T) {
+        var cv = makeBody(px || 256, CFG, T || 0);
         var g = cv.getContext('2d');
         return { px: cv.width, data: Array.prototype.slice.call(g.getImageData(0, 0, cv.width, cv.height).data) };
       }
