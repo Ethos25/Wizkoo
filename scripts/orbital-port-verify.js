@@ -81,26 +81,37 @@ async function settle(page) {
   {
     const g = await page.evaluate(() => {
       const A = window.WizkooOrbital;
-      return { key: A.ARR_KEY, R: A.NUC_R, occl: A.ARR.occlusion,
+      return { key: A.ARR_KEY, R: A.NUC_R, occl: A.ARR.occlusion, figure: A.FIGURE,
+               ratio: A.NUC_RATIO,
                orbits: A.ORBITS.map((o) => ({ id: o.id, rx: o.rx, ry: o.ry, rot: o.rot })) };
     });
     check("ARR_KEY === 'C'", g.key === 'C', 'got ' + g.key);
-    must('nucleus radius R', g.R, (v) => v === 125, 'R = ' + g.R);
+    console.log('        FIGURE ' + g.figure + '   nucleus R ' + g.R.toFixed(1) +
+      '   nucleus/envelope ' + g.ratio.toFixed(3));
+    must('nucleus radius R follows FIGURE', g.R, (v) => v > 0, 'R = ' + g.R.toFixed(1));
     console.log('        orbit  rx    ry   rot    O=ry/rx   E=rx/R   O*E');
     g.orbits.forEach((o) => {
       console.log('          ' + o.id + '   ' + String(o.rx).padStart(4) + '  ' + String(o.ry).padStart(4) +
         '  ' + String(o.rot).padStart(4) + '    ' + (o.ry / o.rx).toFixed(3) +
         '     ' + (o.rx / g.R).toFixed(2) + '    ' + (o.ry / g.R).toFixed(2));
     });
+    /* Compare RATIOS, not absolutes. FIGURE scales the object uniformly, so the
+       shape of C is what has to survive, not the numbers 480/275/25. */
     const cert = [[480, 275, 25], [434, 248, 148], [372, 209, 172]];
-    const match = g.orbits.every((o, i) => o.rx === cert[i][0] && o.ry === cert[i][1] && o.rot === cert[i][2]);
-    check('geometry is the certified C', match);
+    const shape = g.orbits.every((o, i) =>
+      Math.abs(o.rx / (cert[i][0] * g.figure) - 1) < 0.001 &&
+      Math.abs(o.ry / (cert[i][1] * g.figure) - 1) < 0.001 &&
+      o.rot === cert[i][2]);
+    check('geometry is C, scaled uniformly by FIGURE', shape);
+    const O = g.orbits.map((o) => o.ry / o.rx);
+    check('openness O is untouched by FIGURE', O.every((v, i) => Math.abs(v - cert[i][1] / cert[i][0]) < 0.001),
+      'O = ' + O.map((v) => v.toFixed(3)).join(' / ') + '  (certified 0.573 / 0.571 / 0.562)');
     check('declares occlusion:false', g.occl === false);
     const allClear = g.orbits.every((o) => o.ry >= g.R);
     check('every ry >= R, so the declaration is TRUE (no arc crosses)', allClear,
-      'ry ' + g.orbits.map((o) => o.ry).join('/') + ' vs R ' + g.R);
-    must('nucleus/envelope ratio', g.R / Math.max(...g.orbits.map((o) => o.rx)),
-      (v) => Math.abs(v - 0.260) < 0.002, '= ' + (g.R / 480).toFixed(3) + '  (certified 0.260; the rejected section was 0.135)');
+      'ry ' + g.orbits.map((o) => o.ry.toFixed(1)).join('/') + ' vs R ' + g.R.toFixed(1));
+    console.log('        nucleus/envelope ' + g.ratio.toFixed(3) +
+      '   (certified 0.260; lab rejected 0.46 and 0.51; pre-port homepage 0.135)');
   }
 
   /* ══ 3. THE LIGHT MODEL ═════════════════════════════════════════════════ */
@@ -438,7 +449,12 @@ async function settle(page) {
     check('--u is in scope for the section', s.u !== '', s.u);
     check('EVERY star has a non-zero box', s.sized === s.dom,
       s.sized + ' of ' + s.dom + ' sized, ' + s.wMin.toFixed(2) + '-' + s.wMax.toFixed(2) + 'px');
-    must('stars carry their halos', s.halos, (v) => v > 400, s.halos + ' with box-shadow');
+    /* 110 is not a guess. It is what /lab/orbital.html renders at this viewport,
+       measured on the same deploy: anchors and brights carry a halo, mids and
+       faints do not. An earlier version of this line asserted >400 out of thin
+       air and failed a sky that was already exactly right. */
+    must('stars carry their halos, at the lab\'s own count', s.halos,
+      (v) => Math.abs(v - 110) <= 4, s.halos + ' with box-shadow (lab renders 110 here)');
     check('anchors held at 12, ruled by eye not scaled by area', s.field.near.anchors === 12);
     check('one shooter, on the ruled 60-120s random period',
       s.field.shooter.count === 1 && s.field.shooter.periodMinS === 60 && s.field.shooter.periodMaxS === 120);

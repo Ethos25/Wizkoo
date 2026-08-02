@@ -227,7 +227,37 @@
   var ARR_KEY = 'C';   /* RULED round 6. Not configurable. */
   var ARR = ARRANGEMENTS[ARR_KEY];
 
+  /* ══ FIGURE SCALE — UNRULED, awaiting Amy's ruling ═════════════════════
+     Amy walked the port and did not certify it: the nucleus reads too big
+     relative to the rest, the figure oversized overall, and at 1966x594 the
+     bottom 44px of it sat below the fold (WRITING's label was cut).
+
+     FIGURE scales the OBJECT in frame units. It does NOT touch the viewBox
+     window, so the meet scale is unchanged and the label type and the ring
+     stroke keep the rendered size they already had. That is deliberate: the
+     labels are the homepage's literal 14px/12px by ruling, not a proportion of
+     the figure, and the ring at 1.1 units is already close to the visibility
+     floor — scaling either with the geometry would make the render unjudgeable
+     rather than smaller. So the orbits and the body shrink and the type and the
+     line hold.
+
+     NUC_RATIO overrides the nucleus/envelope ratio. null keeps the certified
+     0.260. The lab rejected 0.46 and 0.51 (the star swallows the system) and
+     the pre-port homepage sat at 0.135.
+
+     WHAT DOES NOT SCALE, and why: the label clearance floor
+     max(dist + NODE_R + 34, NUC_R + 80, 252). Those constants are set by LABEL
+     SIZE, not by the figure, and the code says so where it defines them — "a
+     smaller floor pulls every label inward and reopens collisions the
+     exhaustion had already closed." Type is not changing, so they do not
+     change. The label guarantee is re-confirmed by walking the excursion box on
+     each render; the offline exhaustion was run at the full-size geometry and
+     does not carry over. */
+  var FIGURE = 1;        /* 1 = the certified geometry, as walked */
+  var NUC_RATIO = null;  /* null = the certified 0.260 */
+
   var ORBITS = ARR.orbits.map(function (o) { return { id: o.id, rx: o.rx, ry: o.ry, rot: o.rot, off: o.off || 0 }; });
+  ORBITS.forEach(function (o) { o.rx *= FIGURE; o.ry *= FIGURE; o.off *= FIGURE; });
 
   /* ── LIBRATION — RULED round 3: bigger, and faster within what is safe ──
      Round 2's setting, 11px a minute, sat below the threshold of registering a
@@ -273,7 +303,8 @@
   var SIGMA = 0;
   LIBRATION.w.forEach(function (w, i) { SIGMA += w * 2 * Math.PI / LIBRATION.P[i]; });
 
-  NUC_R = ARR.R;
+  var MAX_RX = Math.max.apply(null, ORBITS.map(function (o) { return o.rx; }));
+  NUC_R = NUC_RATIO == null ? ARR.R * FIGURE : NUC_RATIO * MAX_RX;
   HOT.x = FRAME.cx + (0.38 - 0.5) * 2 * NUC_R;
   HOT.y = FRAME.cy + (0.32 - 0.5) * 2 * NUC_R;
 
@@ -310,7 +341,8 @@
       lines: ['1895. One accident changed', 'medicine forever.'] }
   ];
 
-  var NODE_R = 20, HALO_R = 42;
+  /* Node and halo are part of the object, so they scale with it. */
+  var NODE_R = 20 * FIGURE, HALO_R = 42 * FIGURE;
 
   /* ── The light that reaches a node ──────────────────────────────────────
      Intensity falls with distance from the nucleus. The distance used is the
@@ -321,8 +353,11 @@
      depth from screen separation, so screen separation is what has to drive it.
      A node also brightens as it swings toward the near or far extreme and dims
      as it comes around to the flanks, which is the light visibly travelling. */
+  /* 210 and 60 are DISTANCES, so they scale with the figure. Left unscaled, a
+     half-size figure halves every separation and every node pins at the 1.8
+     ceiling — the falloff is the demonstration, and it would go flat. */
   function intensityAt(dist) {
-    var i = 210 / Math.max(dist, 60);
+    var i = (210 * FIGURE) / Math.max(dist, 60 * FIGURE);
     return Math.max(0.42, Math.min(1.8, i));
   }
 
@@ -1507,6 +1542,7 @@
       advance: function (seconds) { drift.advance(seconds); },
       EXTENT: EXTENT, U_LIMB: U_LIMB, LIMB_P: LIMB_P, LIBRATION: LIBRATION, SIGMA: SIGMA,
       ARR: ARR, ARR_KEY: ARR_KEY, ARRANGEMENTS: ARRANGEMENTS,
+      FIGURE: FIGURE, NUC_RATIO: NUC_R / MAX_RX, WINDOW: WINDOW,
       /* pixels back, so the light model can be asserted rather than admired */
       /* mode 0 full, 1 texture only, 2 the in-body star field alone */
       readBody: function (px, mode) {
