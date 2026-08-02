@@ -17,13 +17,12 @@
  *   For that split to be VISIBLE the orbit has to actually cross the body, which
  *   means every orbit's minor semi-axis must be smaller than the nucleus radius.
  *
- *   UNDER THE RULED ARRANGEMENT IT IS NOT, AND THAT IS THE RULING. C runs
- *   ry 275 / 248 / 209 against R 125, so no orbit comes inside the body and the
- *   occlusion cue is absent. Round 6 ruled that the system, not the star, is the
- *   subject: openness O = ry/rx is what makes a ring read as a circle seen at an
- *   angle rather than as a stroke, and three open rings read as a cage. Openness
- *   and the crossing are one budget — ry < R is exactly O*E < 1 — and C spends it
- *   on openness at O*E of 2.20 / 1.98 / 1.67. The price is stated and accepted.
+ *   THE RULED ARRANGEMENT IS NOW E (Amy, 2026-08-02) AND IT SATISFIES THE LAW
+ *   ON TWO OF THREE RINGS: minor approaches 46.5 and 41 against R 48, so arcs
+ *   cross the body again and ART re-seats on the far limb. C (round 6) had
+ *   spent the whole O*E budget on openness and knowingly declined the cue;
+ *   Amy's braid — flatter rings at spread rotations — buys it back without
+ *   growing the star. C stays in the table as the record of that trade.
  *
  *   This comment said "all three are (115, 101, 82 against 125)" until the port.
  *   That was round 5's geometry and round 6 superseded it; the sentence survived
@@ -216,7 +215,29 @@
     'D': { R: 125, coronaRout: 6.9, occlusion: true, label: 'D — open rings, nucleus at the focus (not ruled; kept for the record)',
       orbits: [{ id: 'c', rx: 400, ry: 200, rot: 5,   off: 110 },
                { id: 'a', rx: 360, ry: 180, rot: 58,  off: -95 },
-               { id: 'b', rx: 320, ry: 160, rot: 125, off: 82 }] }
+               { id: 'b', rx: 320, ry: 160, rot: 125, off: 82 }] },
+
+    /* ══ E — AMY'S BRAID. RULED 2026-08-02, supersedes C's shapes. ═══════
+       Her inspiration image and the skeleton she brought with it: three
+       DIFFERENT-SIZED flat ellipses at widely spread rotations, interlocking
+       — a braid, not a stack. Proportions mapped from that skeleton
+       (350/100@40, 200/60@110, 280/90@-20 in its 1000-frame) into this one,
+       envelope held at C's 480 so the on-screen size she ruled as B holds.
+
+       This is NOT the killed geometry. The kill was for ry 178/160/135 at
+       R 42: three SAME-size ellipses at CLUSTERED rotations (-32/-8/25) with
+       openness 0.57. E is spread 40/110/160 (differences 70/50/60 — the
+       logo's own neighbourhood), openness 0.29-0.32, sizes 480/384/274.
+
+       And the braid buys back what C declined: with O near 0.3, two of the
+       three rings come inside the body (min approach 46.5 and 41 against
+       R 48), so THE OCCLUSION CUE LIVES AGAIN and ART re-seats itself on the
+       far limb. The silhouette layer, kept dormant through C exactly for
+       this moment, renders again. */
+    'E': { R: 125, coronaRout: 6.9, occlusion: true, label: 'E — Amy’s braid: interlocking flat ellipses, occlusion restored',
+      orbits: [{ id: 'c', rx: 480, ry: 137, rot: 40,  off: 0 },
+               { id: 'a', rx: 384, ry: 123, rot: 160, off: 30 },
+               { id: 'b', rx: 274, ry: 82,  rot: 110, off: 0 }] }
   };
 
   /* PORT: the ?arr= switch was lab chrome and is gone. C is the ruled
@@ -224,7 +245,7 @@
      table above because they are the record of what the trade cost — and because
      scripts/lab-orbital-arrangement.js reads them — but nothing can reach them
      from a URL any more. */
-  var ARR_KEY = 'C';   /* RULED round 6. Not configurable. */
+  var ARR_KEY = 'E';   /* RULED by Amy 2026-08-02 (was C, round 6). Not configurable. */
   var ARR = ARRANGEMENTS[ARR_KEY];
 
   /* ══ FIGURE SCALE — UNRULED, awaiting Amy's ruling ═════════════════════
@@ -265,11 +286,13 @@
      placement law — the label is still radially outward from its own node,
      never between it and the star; the tether absorbs the distance by design.
 
-     history: Amy, 2026-08-02, on the round-2 walk: "history is still too close
-     to science... move it a little bit up and to the left." HISTORY's ray
-     points up-left, so outward IS up-and-left. 68 is twice the 34-unit
-     node-to-label clearance the file already uses. */
-  var LABEL_PUSH = { history: 68 };
+     math: at the braid (E) the bottom sector holds three wide labels; MATH's
+     sits 9 units off ART's without it. 30 units, just under the 34-unit
+     node-to-label clearance, opens the pair to 37.
+
+     (history's 68-unit push from the round-2 walk retired with arrangement C:
+     under E, HISTORY's nearest neighbour clears by 56 units unpushed.) */
+  var LABEL_PUSH = { math: 30 };
 
   /* History of the park, kept for the record: before HISTORY's push the box
      guarantee had NO clean amplitude (science x history composed gap 1.6px)
@@ -368,7 +391,11 @@
       lines: ['Measuring bone lengths.', 'Which is longest?'] },
     { id: 'science', orbit: 'a', t: 76.44, key: 'SCIENCE',
       lines: ['How fractures heal.', 'Why does a cast work?'] },
-    { id: 'geo',     orbit: 'a', t: 170,   key: 'GEOGRAPHY',
+    /* t 170 -> 220 at the braid (E): under the new rotations its old parameter
+       put GEOGRAPHY's label two units off READING's. The east lane was empty;
+       re-seating the node is the READING precedent, applied again. Far side
+       now, presence ~0.50 — the label dims with distance, as everything does. */
+    { id: 'geo',     orbit: 'a', t: 220,   key: 'GEOGRAPHY',
       lines: ['Visit Würzburg, Germany.', 'Where X-rays were born.'] },
     { id: 'art',     orbit: 'b', t: 257.8, key: 'ART',
       lines: ['Sketch the human skeleton.', 'Label every bone you can name.'] },

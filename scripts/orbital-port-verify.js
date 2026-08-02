@@ -85,7 +85,7 @@ async function settle(page) {
                ratio: A.NUC_RATIO,
                orbits: A.ORBITS.map((o) => ({ id: o.id, rx: o.rx, ry: o.ry, rot: o.rot })) };
     });
-    check("ARR_KEY === 'C'", g.key === 'C', 'got ' + g.key);
+    check("ARR_KEY === 'E' (Amy's braid, 2026-08-02)", g.key === 'E', 'got ' + g.key);
     console.log('        FIGURE ' + g.figure + '   nucleus R ' + g.R.toFixed(1) +
       '   nucleus/envelope ' + g.ratio.toFixed(3));
     must('nucleus radius R follows FIGURE', g.R, (v) => v > 0, 'R = ' + g.R.toFixed(1));
@@ -95,23 +95,48 @@ async function settle(page) {
         '  ' + String(o.rot).padStart(4) + '    ' + (o.ry / o.rx).toFixed(3) +
         '     ' + (o.rx / g.R).toFixed(2) + '    ' + (o.ry / g.R).toFixed(2));
     });
-    /* Compare RATIOS, not absolutes. FIGURE scales the object uniformly, so the
-       shape of C is what has to survive, not the numbers 480/275/25. */
-    const cert = [[480, 275, 25], [434, 248, 148], [372, 209, 172]];
+    /* Compare RATIOS, not absolutes — FIGURE scales the object uniformly. The
+       reference is E's table: Amy's braid, ruled 2026-08-02. */
+    const cert = [[480, 137, 40], [384, 123, 160], [274, 82, 110]];
     const shape = g.orbits.every((o, i) =>
       Math.abs(o.rx / (cert[i][0] * g.figure) - 1) < 0.001 &&
       Math.abs(o.ry / (cert[i][1] * g.figure) - 1) < 0.001 &&
       o.rot === cert[i][2]);
-    check('geometry is C, scaled uniformly by FIGURE', shape);
+    check('geometry is E, scaled uniformly by FIGURE', shape);
     const O = g.orbits.map((o) => o.ry / o.rx);
-    check('openness O is untouched by FIGURE', O.every((v, i) => Math.abs(v - cert[i][1] / cert[i][0]) < 0.001),
-      'O = ' + O.map((v) => v.toFixed(3)).join(' / ') + '  (certified 0.573 / 0.571 / 0.562)');
-    check('declares occlusion:false', g.occl === false);
-    const allClear = g.orbits.every((o) => o.ry >= g.R);
-    check('every ry >= R, so the declaration is TRUE (no arc crosses)', allClear,
-      'ry ' + g.orbits.map((o) => o.ry.toFixed(1)).join('/') + ' vs R ' + g.R.toFixed(1));
+    check('openness is the braid\'s 0.285 / 0.320 / 0.299',
+      O.every((v, i) => Math.abs(v - cert[i][1] / cert[i][0]) < 0.001),
+      'O = ' + O.map((v) => v.toFixed(3)).join(' / '));
+    check('rotations spread 40 / 110 / 160 — a braid, not the killed cluster (-32/-8/25)',
+      String(g.orbits.map((o) => o.rot)) === '40,160,110');
+    check('declares occlusion:true', g.occl === true);
+    /* The declaration must agree with the geometry: measure each ring's real
+       minimum approach (off displaces the centre, so ry alone is not the
+       answer any more). */
+    const approach = await page.evaluate(() => {
+      const A = window.WizkooOrbital, F = A.FRAME;
+      return A.ORBITS.map((o) => {
+        let mn = 1e9;
+        for (let t = 0; t < 360; t += 0.25) {
+          const p = A.pointAt(o, t);
+          mn = Math.min(mn, Math.hypot(p.x - F.cx, p.y - F.cy));
+        }
+        return { id: o.id, min: +mn.toFixed(1) };
+      });
+    });
+    console.log('        minimum approach per ring: ' + approach.map((a) => a.id + ' ' + a.min).join('   ') +
+      '   vs R ' + g.R.toFixed(1));
+    check('at least one arc crosses the body, so the declaration is TRUE',
+      approach.some((a) => a.min < g.R), '');
+    const art = await page.evaluate(() => {
+      const A = window.WizkooOrbital, F = A.FRAME;
+      const n = A.sys.nodes.find((x) => x.def.id === 'art');
+      const p = A.pointAt(n.orbit, n.def.t);
+      return Math.abs(Math.hypot(p.x - F.cx, p.y - F.cy) - A.NUC_R);
+    });
+    must('ART re-seats on the limb (|dist - R| < 6)', art, (v) => v < 6, 'off by ' + art.toFixed(2));
     console.log('        nucleus/envelope ' + g.ratio.toFixed(3) +
-      '   (certified 0.260; lab rejected 0.46 and 0.51; pre-port homepage 0.135)');
+      '   (Amy ruled 0.200; lab certified 0.260; lab rejected 0.46/0.51; pre-port 0.135)');
   }
 
   /* ══ 3. THE LIGHT MODEL ═════════════════════════════════════════════════ */
