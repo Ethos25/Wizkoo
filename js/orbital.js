@@ -397,7 +397,12 @@
        star's light in the field, not a veil over it — round 4's first wiring
        handed it the old faint-field amplitudes and it rendered at a tenth of its
        strength, which measured as no corona at all. */
-    a: { tex: 0.16, bleed: 0.80, hot: 0.34, corona: 0.86,
+    /* RE-TUNED ON AMY'S WALK, 2026-08-01: was tex 0.16, bleed 0.80, hot 0.34,
+       corona 0.86. Less light leaving the body (bleed, corona, hot region all
+       down), more surface on it (tex up) — the two halves of her note. These
+       move how much star there is, never where the light comes from; the one-
+       light law and the symmetric corona are untouched. */
+    a: { tex: 0.24, bleed: 0.55, hot: 0.26, corona: 0.62,
          breath: [[0.08, 0.30], [0.82, 1.00], [0.05, 0.14]] },
     b: { tex: 0.24, bleed: 1.00, hot: 0.44, corona: 1.00,
          breath: [[0.12, 0.44], [0.80, 1.00], [0.07, 0.20]] },
@@ -597,7 +602,22 @@
      at its silhouette as at its centre, which was the finding. This is the
      exaggeration, stated rather than hidden. It cannot read as shadow, because
      it is identical in every direction. */
-  var U_LIMB = 0.86, LIMB_P = 1.5;
+  /* ── RE-TUNED ON AMY'S WALK, 2026-08-01. Was u 0.86, p 1.5. ─────────────
+     Her words: too much light coming from it, distracting, "feels like a flat
+     object still but with a lot of light in it."
+
+     The flat read is the mid-field, measured: with u 0.86 / p 1.5 the band from
+     0.34R to 0.72R held 92% of centre luminance — the inner two-thirds of the
+     disc was one bright plate, and at a 145px body the falloff that says
+     "sphere" lived in the last few pixels. This is the SAME recalibration the
+     lab already made once for the same reason: the physical profile (u 0.6,
+     p 1) was right for a photograph of the Sun and useless at 250px, so it was
+     deepened to be legible at 250px. 145px needs it deeper again. Raising p
+     starts the falloff earlier, so the curvature is carried across the face
+     instead of at the rim; raising u lowers the floor the limb lands on. The
+     law itself — identical in every direction, no terminator — is untouched,
+     and the verification still asserts it off the rendered pixels. */
+  var U_LIMB = 0.90, LIMB_P = 1.8;
   var EXTENT = 1.34;              /* canvas half-width in body radii; the rest is bleed */
 
   /* The hot region as a direction on the sphere. 38% 32% of the body's box is
@@ -1055,10 +1075,15 @@
        max() is continuous, and at 0.25px/s its corner is not a thing anyone
        could resolve. */
     var ox = dist ? (p.x - FRAME.cx) / dist : 0, oy = dist ? (p.y - FRAME.cy) / dist : -1;
-    /* The floor scales with the nucleus but never drops below round 5's 252 —
-       a smaller floor pulls every label inward and reopens collisions that the
-       exhaustion had already closed. */
-    var rOut = Math.max(dist + NODE_R + 34, NUC_R + 80, 252);
+    /* The 252 floor was round 5's, where limb nodes sat 81-172 units out. Under
+       C at FIGURE 1 it binds NOBODY — the nearest label wants 272 — so the
+       exhaustion never rode on it. At FIGURE 0.5 it bound four of seven labels
+       onto one 252-unit circle and produced the SCIENCE-on-HISTORY collision
+       Amy rejected on the walk. The floor is geometry, so it scales with the
+       geometry; the +34 and +80 clearances are label-size terms and type does
+       not scale, so they hold. At FIGURE 1 this line is identical to the
+       certified one. */
+    var rOut = Math.max(dist + NODE_R + 34, NUC_R + 80, 252 * FIGURE);
     var ax = FRAME.cx + ox * rOut, ay = FRAME.cy + oy * rOut;
 
     /* presence tracks depth continuously. Distant things are dimmer; that is the

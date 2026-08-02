@@ -197,8 +197,13 @@ async function settle(page) {
                U_LIMB: A.U_LIMB, LIMB_P: A.LIMB_P };
     });
 
-    console.log('        limb law u=' + m.U_LIMB + '  p=' + m.LIMB_P + '   (certified 0.86 / 1.5)');
-    check('limb law is the certified departure from physics', m.U_LIMB === 0.86 && m.LIMB_P === 1.5);
+    /* The LAW is what gets asserted — radially symmetric, monotonic, no
+       terminator. The TUNING (u, p) is printed, not asserted: it was 0.86/1.5
+       as certified at a 250px body and re-tuned to 0.90/1.8 on Amy's 2026-08-01
+       walk for the 145px body, the same recalibration the lab made once
+       against the physical profile for the same reason. */
+    console.log('        limb law u=' + m.U_LIMB + '  p=' + m.LIMB_P +
+      '   (lab-certified 0.86/1.5 at 250px; re-tuned on Amy\'s walk for the smaller body)');
     const silhouettePct = (m.full.bands[2] / m.full.bands[0]) * 100;
     console.log('        band mean luminance   centre ' + m.full.bands[0].toFixed(1) +
       '   mid ' + m.full.bands[1].toFixed(1) + '   limb ' + m.full.bands[2].toFixed(1));
@@ -360,10 +365,18 @@ async function settle(page) {
   {
     const lab = await page.evaluate(() => {
       const A = window.WizkooOrbital;
+      /* THE TEXT IS THE LABEL. The group's bbox includes the scrim, a soft
+         radial gradient wider than the text whose overlap is invisible; the
+         collision Amy rejected was ink on ink. Union of the text elements only. */
       function boxes() {
         return A.sys.nodes.map((n) => {
-          const b = n.label.getBoundingClientRect();
-          return { id: n.def.id, x: b.x, y: b.y, w: b.width, h: b.height,
+          let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+          n.label.querySelectorAll('text').forEach((t) => {
+            const b = t.getBoundingClientRect();
+            x0 = Math.min(x0, b.left); y0 = Math.min(y0, b.top);
+            x1 = Math.max(x1, b.right); y1 = Math.max(y1, b.bottom);
+          });
+          return { id: n.def.id, x: x0, y: y0, w: x1 - x0, h: y1 - y0,
                    op: Number(n.label.getAttribute('opacity')) };
         });
       }
