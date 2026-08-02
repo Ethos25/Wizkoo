@@ -17,9 +17,16 @@ from data.
 --u: min(1.10px, calc(100vw / 1440), max(0.62px, calc((100svh - 82px) / 485)));
 ```
 
+> **SUPERSEDED IN PART, 2026-08-01.** The two pins described below are gone.
+> Amy ruled a single centred anchor; both columns now centre in the `.hh` band
+> and the +68u / +72u offsets no longer apply. **485 itself is unchanged and
+> still ruled** — see `docs/hero-single-anchor-closeout.md` § 1 for the new
+> anchor and the reason 485 was retained rather than re-derived. The derivation
+> below is kept because the 718 trap it documents is still live.
+
 **485 is the composition's measured need, not the reference frame's height.**
-This layout is not a stack: `.hh-copy` is anchored to the TOP at 68u and
-`.hh-group` to the BOTTOM at 72u, so what it needs is whichever COLUMN is
+This layout is not a stack: `.hh-copy` was anchored to the TOP at 68u and
+`.hh-group` to the BOTTOM at 72u, so what it needed was whichever COLUMN is
 taller. At `--u = 1`: copy 396.4u + 68u = **464.4u** (binding), window group
 367.1u + 72u = 439.1u. 485 = 464.4 + 4.4% margin.
 
