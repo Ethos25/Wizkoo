@@ -969,9 +969,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
      The divisor was 718, which is the approved frame's hero height (800 - 82).
      That looks like the right number and is not, because this layout is NOT a
-     stack: .hh-copy is anchored to the TOP at 68u and .hh-group to the BOTTOM
-     at 72u, so what the composition needs is whichever COLUMN is taller, not
-     the frame it was drawn in. Measured at --u = 1:
+     stack. Until 2026-08-01 the two columns carried two different anchors —
+     .hh-copy pinned to the TOP at 68u, .hh-group to the BOTTOM at 72u — so
+     what the composition needed was whichever COLUMN is taller, not the frame
+     it was drawn in. Measured at --u = 1:
 
          copy column    396.4u + 68u offset  =  464.4u   <- binding
          window group   367.1u + 72u offset  =  439.1u
@@ -985,11 +986,18 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
          485 = 464.4 (measured need) + 4.4% margin
 
-     The margin is not decoration. At 465 — the exact-fit divisor — the copy
-     column lands 1.2px off the hero's bottom edge, leaving no tolerance for a
-     font fallback, a copy edit, or a browser that rounds line-height
-     differently. If the copy block changes, RE-MEASURE the two column heights
-     and re-derive; do not scale 485 by eye and do not reach for 718 again.
+     THE TWO PINS ARE GONE (ruled 2026-08-01, Change 1 — see .hh-copy). Both
+     columns now centre in the band, so the +68u and +72u offsets above no
+     longer apply and the binding need is simply the taller column: 396.4u.
+
+     485 IS RETAINED DELIBERATELY. It is not a leftover. Centred, it reserves
+     (485 - 396.4) / 2 = 44.3u of breathing above and below the copy column at
+     the approved frame, and re-deriving the divisor down toward 396.4 would
+     put poster-scale type hard against the band's edges wherever height binds.
+     Do not re-derive 485 from the centred layout without Amy ruling the render;
+     tests/hero-1440x800.spec.js locks what 485 produces at the frame. If the
+     copy block changes, RE-MEASURE the taller column and re-derive from it; do
+     not scale 485 by eye and do not reach for 718 again.
 
      THE CAP IS 1.10, NOT 1. It sets how far the composition may grow past the
      approved frame, and it has to exceed 1 or the height term can never lift a
@@ -1152,11 +1160,27 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   --hh-span6:calc(6 * var(--hh-col) + 5 * var(--hh-gutter));
 }
 
-/* -- The copy column -- */
+/* -- The copy column --
+   ═══ ONE ANCHOR (ruled 2026-08-01, Change 1) ═══════════════════════════════
+   This column was pinned to the band's TOP at 68u while .hh-group was pinned
+   to its BOTTOM at 72u. Two anchors is the defect: the two halves only meet at
+   one band height and separate at every other. Measured on the deployed hero
+   before this change:
+
+       1966x594   copy centre 363.00   card centre 341.10   apart by  21.90px
+       1440x900   copy centre 348.21   card centre 660.53   apart by 312.32px
+
+   At 1440x900 the copy's bottom edge fell 53.35px BELOW the card's top edge.
+   Two panels sharing a viewport, not one composition. Both columns now centre
+   in the .hh band, so the relationship holds at every height the law produces.
+
+   Centred by auto block margins, not translateY(-50%): auto margins resolve in
+   layout, so poster-scale type paints on the pixel grid. A -50% transform of a
+   fractional height lands the display face on half-pixels and softens it. -- */
 .hh-copy{
   position:absolute;
   left:var(--hh-margin);
-  top:calc(var(--u) * 68);
+  top:0;bottom:0;margin-block:auto;height:fit-content;
   width:var(--hh-span6);
 }
 .hh-eyebrow{
@@ -1210,10 +1234,12 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* -- The whisper and the window travel together -- */
+/* Centred on the same law as .hh-copy. The 72u bottom pin is gone with the
+   68u top pin; see .hh-copy for the ruling and the measured basis. */
 .hh-group{
   position:absolute;
   right:var(--hh-margin);
-  bottom:calc(var(--u) * 72);
+  top:0;bottom:0;margin-block:auto;height:fit-content;
   width:var(--hh-span5);
 }
 .hh-whisper{
