@@ -672,8 +672,14 @@ async function settle(page) {
       };
     }, focus);
     const before = await state(null);
-    /* real mouse, real events — the wiring, not just the class machinery */
-    await page.hover('#linen-hero .lo-label-depth[data-label="science"]');
+    /* real mouse, real events — but by COORDINATES: page.hover() waits for the
+       element to hold still and ours librates forever, by design. */
+    const target = await page.evaluate(() => {
+      const A = window.WizkooOrbital;
+      const b = A.sys.nodes.find((n) => n.def.id === 'science').label.getBoundingClientRect();
+      return { x: b.x + b.width / 2, y: b.y + b.height / 2 };
+    });
+    await page.mouse.move(target.x, target.y, { steps: 6 });
     await page.waitForTimeout(600);
     const on = await state('science');
     const sci = on.labels.find((l) => l.id === 'science');
