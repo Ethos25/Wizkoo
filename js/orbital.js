@@ -615,6 +615,43 @@
        the centre, and the arc emission is off — there is no central source
        to cast it. The self-luminous law is knowingly suspended ON THIS
        BRANCH ONLY, pending her ruling; everywhere else it stands. */
+    /* ══ SAFFRON-LANTERN — Amy on node-star: "The color isn't quite the
+       saffron I want, it looks like some kind of a yellow. I really wanted
+       to lean into saffron, and I do want it to be somewhat luminous from
+       the inside out. I want it to also be giving off light."
+       The synthesis, then: the node's modelled-ball VALUE RANGE, arranged
+       RADIALLY (the self-luminous law returns — the light is inside),
+       the ramp locked onto saffron proper — a compact white-gold heart,
+       a wide band saturated at #E8AF38's own neighbourhood, a deep-saffron
+       limb that never drifts lemon — and the light given off restored:
+       chromosphere line, tight corona at the lever-4 reach, arcs catching
+       the glow, nodes lit from the centre again. */
+    'saffron-lantern': {
+      /* v2: v1's face read creamy-yellow — the saturated saffron band sat
+         only at the limb. Exposure down and the falloff a touch deeper so
+         the white-gold heart is COMPACT and the outer half of the face
+         lives at #E8AF38's own saturation; the ramp mids deepen to match. */
+      extent: 1.35, exposure: 1.38, u: 0.90, p: 2.1,
+      cells: [[2.6, 0.09]], spots: [], hot: 0,
+      halation: [[0.55, 0.045], [0.10, 0.15]],
+      chromo: { w: 0.013, A: 0.65, I: 1.30 },
+      ramp: [
+        [1.50, [255, 248, 222]], [1.32, [255, 240, 196]], [1.12, [251, 222, 148]],
+        [0.95, [244, 201, 104]], [0.80, [236, 184, 74]],  [0.65, [230, 170, 58]],
+        [0.50, [216, 152, 48]],  [0.35, [192, 128, 42]],  [0.20, [162, 104, 36]],
+        [0.00, [128, 80, 30]]
+      ],
+      corona: [
+        { Rout: 1.32, A: 0.34, p: 3.2, breath: 'a', lo: 0.90, hi: 1.00 },
+        { Rout: 3.1,  A: 0.08, p: 2.4, breath: 'c', lo: 0.86, hi: 1.00 }
+      ],
+      glows: [
+        { at: [0.50, 0.50], span: 0.44, col: '#FFF3D2', a: 0.42, breath: 'a', lo: 0.06, hi: 0.16 },
+        { at: [0.50, 0.50], span: 0.60, col: '#F6CB68', a: 0.30, breath: 'c', lo: 0.04, hi: 0.11 }
+      ],
+      emit: { reach: 4.0, A: 0.30 }
+    },
+
     'node-star': {
       nodeStyle: true, lightDeg: -135, mult: 1.22,
       haloR: 2.1, haloA: 0.55,
@@ -695,9 +732,17 @@
     var c = {};
     var base = CANDIDATES[CANDIDATE];
     Object.keys(base).forEach(function (k) { c[k] = base[k]; });
-    for (var lv = 1; lv <= ELEVATION; lv++) {
-      var o = LEVERS[lv] || {};
-      Object.keys(o).forEach(function (k) { c[k] = o[k]; });
+    /* the levers elevate the RULED BASE only. A self-contained candidate
+       (saffron-lantern, node-star) carries its whole design in its own
+       entry — measured on the page: with ELEVATION 1 the lever's exposure
+       1.62 and amber ramp silently masked saffron-lantern's 1.38/saffron
+       ramp, which is exactly the kind of quiet override this file exists
+       to forbid. */
+    if (CANDIDATE === 'photo-a') {
+      for (var lv = 1; lv <= ELEVATION; lv++) {
+        var o = LEVERS[lv] || {};
+        Object.keys(o).forEach(function (k) { c[k] = o[k]; });
+      }
     }
     return c;
   })();
