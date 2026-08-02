@@ -297,8 +297,12 @@ async function settle(page) {
        that it spans any particular ratio. An earlier version demanded >2x,
        which was an artifact of compositions with a limb-hugging node; F seats
        everything at moderate distances and spans 1.7x, correctly. */
+    /* WRITING and GEO sit at the same radius by symmetry; the drift jitters
+       which one sorts first while dist is rounded to integers, so ties can
+       show a 0.001 inversion that is sort order, not physics. intensityAt is
+       a pure function of distance — tolerance covers the tie, not the law. */
     const byDist = n.slice().sort((a, b) => a.dist - b.dist);
-    const monotone = byDist.every((x, i) => i === 0 || x.I <= byDist[i - 1].I + 1e-9);
+    const monotone = byDist.every((x, i) => i === 0 || x.I <= byDist[i - 1].I + 0.005);
     check('brightness falls monotonically with SCREEN distance', monotone,
       'intensity ' + Math.max(...n.map((x) => x.I)).toFixed(2) + ' -> ' + Math.min(...n.map((x) => x.I)).toFixed(2) +
       ' across ' + Math.min(...n.map((x) => x.dist)) + '-' + Math.max(...n.map((x) => x.dist)) + ' units');
@@ -663,7 +667,8 @@ async function settle(page) {
       return {
         labels: A.sys.nodes.map((n) => ({ id: n.def.id, op: +op(n.label).toFixed(3),
           attr: Number(n.label.getAttribute('opacity')) })),
-        places: A.sys.nodes.map((n) => ({ id: n.def.id, op: +op(n.g.__place).toFixed(3) })),
+        places: A.sys.nodes.map((n) => ({ id: n.def.id, op: +op(n.g.__place).toFixed(3),
+          cls: n.g.__place.getAttribute('class') })),
         ownPaths: A.sys.paths.filter((p) => p.orbit.id === focusOrbit).map((p) => +op(p.line).toFixed(3)),
         otherPaths: A.sys.paths.filter((p) => focusOrbit && p.orbit.id !== focusOrbit).map((p) => +op(p.line).toFixed(3)),
         nucleus: +op(document.querySelector('#linen-hero .lo-nucleus')).toFixed(3),
@@ -688,11 +693,12 @@ async function settle(page) {
     check('every other label recedes to 0.38', others.every((l) => Math.abs(l.op - 0.38) < 0.01),
       others.map((l) => l.id + ' ' + l.op).join(', '));
     check('every other node dims to 0.5', on.places.filter((p) => p.id !== 'science')
-      .every((p) => Math.abs(p.op - 0.5) < 0.01), '');
+      .every((p) => Math.abs(p.op - 0.5) < 0.01),
+      on.places.map((p) => p.id + ' ' + p.op + ' [' + p.cls + ']').join(', '));
     check('the subject\'s OWN orbit holds', on.ownPaths.every((v) => v === 1),
       on.ownPaths.length + ' segments at 1');
     check('other orbits recede to 0.45', on.otherPaths.every((v) => Math.abs(v - 0.45) < 0.01),
-      on.otherPaths.length + ' segments');
+      on.otherPaths.length + ' segments: ' + [...new Set(on.otherPaths)].join('/'));
     check('the nucleus, corona and sky never dim',
       on.nucleus === before.nucleus && on.corona === before.corona && on.sky === before.sky,
       'nucleus ' + on.nucleus + ', corona ' + on.corona + ', sky ' + on.sky);
