@@ -7,6 +7,37 @@
 # so the digest would have emailed an empty report every Sunday forever.
 # Function file and its schedule both removed. Git history preserves both.
 
+# ── /morgue/ — branch previews only, never production (Aug 2, 2026) ─────────
+# The morgue archives certified surfaces after they are retired: each entry
+# embeds a full-size screenshot of the surface as deployed plus its frozen
+# markup and styles. It is an internal working record, not a public page.
+#
+# force = true is load-bearing. The morgue files are real files inside the
+# publish directory, and an unforced redirect never shadows a file that
+# exists — Netlify would serve the archive instead of the 404. Do not drop it.
+#
+# These live under context.production, so branch deploys and deploy previews
+# serve /morgue/ normally. They must NOT be duplicated into _redirects:
+# that file wins on conflicts and has no context support, so a rule there
+# would 404 the morgue on the previews it exists for.
+[[context.production.redirects]]
+  from   = "/morgue"
+  to     = "/404.html"
+  status = 404
+  force  = true
+
+[[context.production.redirects]]
+  from   = "/morgue/*"
+  to     = "/404.html"
+  status = 404
+  force  = true
+
+# Belt and braces: never indexable in any context, preview included.
+[[headers]]
+  for = "/morgue/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 # ── /plan cutover to app.wizkoo.com (WP-6 Stage 3, July 12, 2026) ───────────
 # 302 is deliberate and load-bearing: browsers cache 301s forever, which would
 # kill the Stage 3 rollback (flip back to proxy). The 301 upgrade belongs to
