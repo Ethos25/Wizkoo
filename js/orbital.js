@@ -548,7 +548,7 @@
      but renders identically to 4 (lever 5 cut). */
   var ELEVATION = 1;   /* per-branch pin: 1..5, cumulative */
 
-  var CANDIDATE = 'photo-a';   /* the ruled base; kept for the instruments */
+  var CANDIDATE = 'saffron-lantern';   /* RULED by Amy 2026-08-02: the close of the rebuild. photo-a was the r8 base; the lantern is where the lane ended. */
 
   var CANDIDATES = {
     /* extent    canvas half-width in body radii; past 1.0 is halation
