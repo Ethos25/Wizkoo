@@ -1315,8 +1315,10 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
        max() holds --hh-margin as the floor, so any viewport too narrow to seat
        the frame behaves exactly as it did.
 
-       72u REUSES THE INTERVAL THAT GOVERNED THE VERTICAL: it is the bottom pin
-       Change 1 removed, and 68u is the top pin. Neither is a new number.
+       68u REUSES THE INTERVAL THAT GOVERNED THE VERTICAL: it is the top pin
+       Change 1 removed, and 72u — rendered alongside it as candidate A — is
+       the bottom pin. Neither is a new number. The interval that ruled the
+       vertical now rules the horizontal.
 
        WHAT THIS COSTS AT 1440, STATED EXACTLY. At the approved frame the
        content width is 1360px and the columns measure 668 + 552.66 =
@@ -1326,7 +1328,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
        is therefore NOT inert at 1440 and cannot be made inert at either
        candidate value. That is arithmetic, not tuning. Amy rules the render. */
     --hh-win:min(var(--hh-span5),calc(var(--u) * 553));
-    --hh-gap:calc(var(--u) * 72);
+    --hh-gap:calc(var(--u) * 68);
     --hh-frame:calc(var(--hh-span6) + var(--hh-gap) + var(--hh-win));
     --hh-inset:max(var(--hh-margin),calc((100% - var(--hh-frame)) / 2));
   }
