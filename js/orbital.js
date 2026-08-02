@@ -709,7 +709,7 @@
      instead of at the rim; raising u lowers the floor the limb lands on. The
      law itself — identical in every direction, no terminator — is untouched,
      and the verification still asserts it off the rendered pixels. */
-  var U_LIMB = 0.94, LIMB_P = 2.6;   /* N1 CONSERVATIVE */
+  var U_LIMB = 0.96, LIMB_P = 3.2;   /* N2 RULED-TARGET */
   /* NUCLEUS ROUND, 2026-08-02 — Amy: still a lit disc, not a lit ball.
      TEX_TAPER: the mottle compresses for free (surface sampling) but kept
      even CONTRAST to the limb, which is the flat tell. Contrast now tapers
