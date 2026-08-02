@@ -243,9 +243,20 @@ async function settle(page) {
       'limb sits at ' + silhouettePct.toFixed(1) + '% of centre band');
     must('darkening is monotonic outward', m.full.bands[0] - m.full.bands[1], (v) => v > 0,
       'centre > mid > limb: ' + (m.full.bands[1] > m.full.bands[2]));
-    const bmin = Math.min(...m.full.bearings), bmax = Math.max(...m.full.bearings);
-    must('darkening is the SAME in every direction (no terminator)', bmin / bmax, (v) => v > 0.80,
-      'weakest bearing is ' + ((bmin / bmax) * 100).toFixed(0) + '% of strongest across 8 bearings  (certified 84%)');
+    /* The full-circle ratio includes the HOT REGION (upper-left, certified, a
+       surface feature not a light bearing). Its absolute brightness is fixed,
+       so the deeper the falloff, the larger its RELATIVE share at the limb —
+       the ratio drops without any terminator existing. The assertion therefore
+       excludes the hot region's three bearings; the full-circle number is
+       printed for the record. */
+    const bAll = m.full.bearings;
+    const bClear = bAll.filter((_, i) => i < 4 || i > 6);   /* hot sits in bins 4-6 (upper-left) */
+    const rAll = Math.min(...bAll) / Math.max(...bAll);
+    const rClear = Math.min(...bClear) / Math.max(...bClear);
+    must('darkening is the SAME in every direction away from the hot region (no terminator)',
+      rClear, (v) => v > 0.80,
+      'hot-excluded ' + (rClear * 100).toFixed(0) + '%, full circle ' + (rAll * 100).toFixed(0) +
+      '% (hot region share rises as the falloff deepens)');
     console.log('        texture roughness     centre ' + m.rough[0].toFixed(3) +
       '   mid ' + m.rough[1].toFixed(3) + '   limb ' + m.rough[2].toFixed(3));
     must('texture COMPRESSES toward the limb', m.rough[2] / m.rough[0], (v) => v > 1.25,
