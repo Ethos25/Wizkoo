@@ -19,3 +19,31 @@ patches/
 # categorical exclusion is to leave the tracked tree. Intact in history:
 #   git show 47cedd3:morgue/index.html
 morgue/
+
+# ── Publish-root exclusions, Aug 4 2026 ─────────────────────────────────────
+# publish = "." means the whole repository IS the website. Everything below is
+# an internal working record, not a page, and was fetchable on production until
+# now. All of it stays in git history; none of it ships.
+# INTERIM ONLY: this is a deny-list, and a deny-list is a list someone has to
+# remember. The ruled fix is to move the site into a publish directory so the
+# default is nothing-public-unless-included. Until then, these are explicit.
+
+# Killed-copy records. Same class as the morgue: copy and surfaces that were
+# decided against. History: git show 59ac112:docs/archive/homepage-2026-07-31/KILLED-COPY.md
+docs/archive/
+docs/copy-refile-son-space-panel.md
+
+# Internal lab and preview surfaces, never linked from the site.
+# History: git show 59ac112:lab/orbital.html
+lab/
+actual-size-preview.html
+library/actual-size.html
+
+# Shell-redirect artefacts: a Windows "C:" became C+U+F03A, so the whole path
+# became a filename at the repo root. Byte-duplicates of exports/sweep_ids.txt
+# and migrations/_tmp_all_ids.txt, which remain tracked.
+# Their names begin C + U+F03A (a colon-lookalike). A pattern containing that
+# character does NOT match reliably here, so the rule keys on the unmistakable
+# embedded path instead: ASCII-only, root-anchored, and impossible to confuse
+# with CLAUDE.md or any real page.
+/*UsersamyogDesktopWizkoo*
