@@ -1,3 +1,11 @@
 node_modules/
 screenshots/
 .claude/
+
+# Audit-salvage patch exports (bdb7eff). Netlify publishes from ".", so
+# anything tracked here is fetchable from the live site. These three files
+# are unreviewed local-work exports — bdb7eff's own message says "ruling
+# pending review" — and one is a 2,379-line stash export from the
+# initial-commit era. They stay in git history and are recoverable with
+# `git show bdb7eff:patches/<name>.patch`; they do not ship.
+patches/
