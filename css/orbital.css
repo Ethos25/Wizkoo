@@ -1,0 +1,501 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   THE ORBITAL SYSTEM — ported into the homepage's Granddad section
+
+   Ported from css/lab-orbital.css at the close of the orbital lab. The lab
+   chrome (.lab-runway, .lab-panel) is deleted; the wrapper block is deleted
+   because .linen-hero in index.html already carries a byte-identical ground and
+   grain — compared, not assumed. Everything else ships.
+
+   The section's ground is the certified sky (css/hero-sky.css, untouched,
+   driven at the lab FIELD by js/orbital-sky.js). Everything below is the
+   system that sits ON it.
+
+   THREE CLAIMS IN THIS HEADER WERE STALE AT PORT TIME and are corrected below
+   where they sit: the corona's anchor (round 2 -> round 4), the drift rate
+   (round 2 -> round 3), and the occlusion law (round 5 -> round 6). Each had
+   survived the round that superseded it. They are marked SUPERSEDED rather than
+   quietly deleted, because the wrong version is the one a reader recognises.
+
+   LIGHT LAW — round 2
+     THE NUCLEUS IS SELF-LUMINOUS AND IS THE ONLY LIGHT IN THE FRAME. Nothing
+     here may imply another one. Round 1 lit the nucleus like a planet — a
+     diffuse falloff from upper left, a terminator opposite it, a rim light on
+     the far limb — and then wrapped it in a symmetrical corona. That is two
+     contradictory sources: the sphere said a lamp was over there, the corona
+     said a sun was behind. What a viewer feels, without having to name it, is
+     an object in front of a light rather than a light.
+
+     So: limb darkening in every direction and NO TERMINATOR; a hot region
+     upper left that is purely additive, so it can brighten the surface but
+     never shade it; granulation driven by brightness rather than by
+     feDiffuseLighting, which had a light bearing baked into it.
+
+     SUPERSEDED (round 4). This paragraph used to end "and a corona anchored to
+     the hot region rather than centred on the body." That was round 2's answer
+     and round 4 reversed it. An asymmetric glow at several body radii has a
+     centre of its own, and anything with a centre of its own is a second
+     object — the hot-region-anchored corona measured 9.6 lopsided and read as
+     a pale halo off the shoulder. THE CORONA IS CENTRED ON THE BODY AND IS
+     RADIALLY SYMMETRIC, falling on r^-2.2 through a window that reaches zero
+     with zero slope. Worst lopsidedness beyond the near bleed: 1.9.
+
+     Do not re-anchor it. If the page's own light direction seems to argue for
+     an asymmetric corona, that is a report, not a fix.
+
+     And the demonstration: the nodes are lit BY the nucleus, brighter on their
+     nucleus-facing side, dimmer with distance. Once light is visibly travelling
+     outward from the middle of the frame, nobody asks where it comes from.
+
+   MOTION LAW
+     One arrival beat on first sight, latched. Then: the nucleus breath, the
+     certified star twinkle, the rare shooter, the surface churn on a
+     monotonically advancing noise axis, and libration.
+
+     SUPERSEDED (round 3). This used to read "a drift so slow it is never caught
+     in the act — 0.24 to 0.27 px/s at its fastest, against a motion detection
+     floor around 0.6." Round 3 raised it: eleven pixels a minute sat below the
+     threshold of registering a change on return, which was the point of having
+     motion at all. PEAK SCREEN SPEED IS 0.85 px/s, identical on every body, and
+     it is on the perceptual boundary by construction — catching motion against a
+     static reference takes roughly 0.7 to 1.3 px/s, and registering a change
+     after half a minute away needs tens of pixels. Those two requirements meet
+     here and nowhere roomier. The rate is sinusoidal, so a body is near peak
+     only briefly.
+
+     Nothing here has a period a viewer can sit through. The libration's three
+     components are 307 / 491 / 787 seconds, all prime, spread per node.
+
+     THE BREATH IS NOT PERIODIC. A single 4s alternate cycle is exactly the kind
+     of loop a viewer catches. The layers run on mutually prime periods, so the
+     summed luminosity has visible amplitude inside any 3-5s window and a
+     composite period no one will sit through. Opacity only.
+
+     MEASURED ON THE DEPLOYED PORT, and not what this paragraph used to claim.
+     It said "three glow layers run at 3.7s, 5.3s and 8.9s". TWO periods are
+     live, not three: 3.7s and 8.9s. .lo-breath-b at 5.3s is a rule that matches
+     nothing, because ROUND 5 MOVED THE CORONA ONTO THE BODY'S OWN KEYFRAME —
+     buildCorona gives the ring `lo-breath-a`, which is the point ("the glow
+     follows; it does not lead"), and that is the third layer this paragraph was
+     counting. 3.7 and 8.9 are still mutually prime; the alternate cycles are
+     7.4s and 17.8s and beat out at about eleven minutes, so nothing is
+     catchable. The rule is left in place: it is the vocabulary, and deleting it
+     would only hide the history.
+
+     ONE INHERITED INCONSISTENCY, REPORTED AND NOT FIXED. applyNucleus() reaches
+     for `.lo-breath-b` INSIDE the corona group to apply the variant's corona
+     breath pair. Nothing there carries that class, so the lookup returns null,
+     the variant's [0.82, 1.00] is never applied, and the corona keeps
+     buildCorona's hardcoded 0.87 -> 1.00: amplitude 0.13 where variant `a`
+     specifies 0.18. This is byte-identical to the lab — diffed, only line
+     numbers move — so 0.13 is what was walked and ruled good. Changing it would
+     change rendered output that has been certified, which is a ruling and not a
+     port decision.
+
+   LABEL LAW
+     Presence tracks orbital depth CONTINUOUSLY — opacity and scale, written
+     every frame from sin(t), never triggered. Distant labels are dim because
+     they are distant. Overlaps then resolve themselves: two labels can only
+     cross when one of them is already receded to background. There is no
+     collision detection anywhere in this build, and there must never be — a
+     reactive fade is a visible pop, and a pop reads as UI in a frame that has
+     to read as physics.
+
+   OCCLUSION LAW
+     Paint order is the whole three-dimensional read. Back arcs and back nodes
+     are painted BEFORE the nucleus; front arcs and front nodes AFTER. Each
+     orbit is two half-ellipse paths split on its own major axis — the major
+     axis is the projection of the line of nodes, so the split is where the
+     orbit genuinely crosses the plane of the sky.
+
+     SUPERSEDED (round 6). This used to end "Every orbit's minor semi-axis is
+     smaller than the nucleus radius, which is what makes both halves actually
+     cross the body rather than clear it." That was true of round 5 and is FALSE
+     of the ruled arrangement. C runs ry 275 / 248 / 209 against R 125, so no
+     arc comes inside the body and THERE IS NO OCCLUSION CUE IN THIS BUILD.
+
+     That is the ruling, not a defect. The system, not the star, is the subject;
+     openness is what makes three rings read as a cage, and openness and the
+     crossing are one budget (ry < R is exactly O*E < 1). The paint-order
+     machinery above and the silhouette layer stay in the code and render
+     nothing, because they are three lines and they are what makes the cue work
+     the moment an arrangement wants it back.
+
+     Do not "fix" the missing cue by flattening the rings.
+
+     SUPERSEDED AGAIN (2026-08-02, Amy): arrangement E — her braid of flat,
+     different-sized, spread-rotation ellipses — restores the crossing on two
+     rings (approaches 46.5 / 41 vs R 48). The cue is back BY HER RULING, not
+     by a port "fixing" anything; the paint-order machinery and silhouette
+     layer that waited through C now render. See js/orbital.js ARRANGEMENTS.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+
+/* ═══ PAGE INTEGRATION — the part the lab had no page to answer ═══════════
+   Four rules, and none of them touches type, colour or copy.
+
+   1. THE SKY sits at the section's full bleed, behind everything. Same as the
+      lab.
+
+   2. THE GRAIN goes to z-index 1. In the lab the film grain sat at z-index 1
+      over a sky at 0. On the homepage .linen-hero::before carries the identical
+      grain at z-index 0, and .orb-sky is a later sibling — at equal z-index the
+      later sibling wins, which would have put the stars OVER the grain and
+      inverted the lab's layering. Raising the grain to 1 restores the lab
+      order. The text column is already z-index 1 and is later in the DOM, so it
+      still paints above the grain: nothing about the copy moves.
+
+   3. #hz2-inner stops starting at opacity 0. The shipped section faded the
+      whole diagram in on a 3.2s timer. The certified arrival is an
+      IntersectionObserver at 0.4 that fires once and latches, and a timed fade
+      over the top of it would gate the beat on a clock instead of on arrival.
+      The settled state is what ships in the markup; the beat is the
+      enhancement.
+
+   4. THE ANCHOR. The figure is centred in the orbital zone on both axes by
+      preserveAspectRatio="xMidYMid meet" on a box that fills the zone. The
+      zone's height is the section's existing grid row and is NOT touched: no
+      new min-height, no floor, no hero anchoring pattern imported. The lab's
+      760px floor is deliberately NOT ported — on this page the figure is
+      width-bound, not height-bound (the 48% column gives it 691px against a
+      1060-unit window, while the height it needs is 441px against 690px
+      available at the shortest target viewport), so the floor would be inert
+      and would move the section's height for nothing. */
+
+/* ── THE SCALE UNIT. Without this the sky is invisible. ──────────────────
+   js/hero-sky.js sizes every star as `max(1px, calc(var(--u) * n))` (usz(),
+   line 274). In index.html `--u` is declared on the HERO BAND's wrapper, not on
+   :root — so outside the hero it is empty, calc(var(--u) * n) is invalid, the
+   whole width/height declaration is dropped, and the star renders at 0px with
+   no halo. Measured on the deployed branch before this rule: 1,834 stars in the
+   DOM at correct positions and opacities, computed width 0px, box-shadow none.
+   The section read as flat navy because only the 12 atmosphere washes had size.
+
+   The lab did not hit this because lab/orbital.html declares --u on :root.
+
+   THIS IS THE LAB'S DECLARATION, COPIED VERBATIM from lab/orbital.html lines
+   17-18, so a star in this section is the same physical size as the star the
+   lab was walked and certified with. It is scoped to .linen-hero and cannot
+   reach the hero: the hero's own --u at index.html line 1015 is a different
+   expression, is ruled, is locked by tests/hero-1440x800.spec.js, and is not
+   touched. */
+.linen-hero {
+  --u: min(1px, calc(100vw / 1440), max(0.62px, calc((100vh - 82px) / 718)));
+  --u: min(1px, calc(100vw / 1440), max(0.62px, calc((100svh - 82px) / 718)));
+}
+
+/* The certified sky, mounted at the section's full bleed. */
+.orb-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.linen-hero::before { z-index: 1; }
+
+.linen-hero #hz2-inner { opacity: 1; }
+
+/* ── RULED 2026-08-01: the far layer holds its stars, not its twinkle ──────
+   The field keeps every one of its 1,834 stars, so the derived density is
+   untouched. What stops is the far layer's per-element opacity animation:
+   1,021 faints and dust whose twinkle swings inside a band the eye cannot
+   resolve, and which between them cost more frame time than everything else
+   on the page combined. Effort spent below perception is cost, not craft.
+
+   Twinkle stays where it reads — the near layer, which is anchors, brights,
+   mids and near faints.
+
+   The stars do not go blank. Each one keeps the inline mid-brightness the
+   generator wrote for it, which is the exact value the primitive's own
+   reduced-motion frozen frame holds them at. This is the primitive's designed
+   still, applied to one layer instead of all of them.
+
+   Selector specificity is 0,3,0 against the primitive's 0,1,0, so this wins
+   without !important and without touching css/hero-sky.css. */
+/* RE-RULED BY AMY, 2026-08-02. The blanket freeze read as dead to her: "I want
+   some stars to twinkle in the background... I don't want 1,021 twinkling."
+   Every 8th far star keeps the certified twinkle — :not() excludes it from the
+   freeze, so those stars run the primitive's own animation with the inline
+   lo/hi/duration the generator wrote for them; nothing is re-declared. DOM
+   order is generation order and positions are random, so the every-8th subset
+   is spatially random. ~128 of 1,021, measured on the deploy. The other 893
+   hold the frozen-frame brightness exactly as before, so the frame cost stays
+   at the near layer's step, not the full field's. */
+.orb-sky .wk-sky__layer--far .wk-sky__star:not(:nth-child(8n)) {
+  animation: none;
+  will-change: auto;
+}
+
+
+/* The stage takes the box the deleted #hz2-orbital-svg had: `flex:1; min-height:0`
+   inside #hz2-inner, which is a flex column. The flex:1 is not decoration — in a
+   flex column an unflexed child's `height:100%` has no definite basis to resolve
+   against and the stage collapses. */
+.orb-stage {
+  position: relative;
+  z-index: 2;
+  display: block;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+/* MOBILE HANDOFF, and why it lives HERE and not with the other mobile rules.
+   index.html's own @media(max-width:767px) block carries `.orb-stage{display:none}`
+   next to `.hz2-mob-fallback{display:flex}`, which is where it reads best — but
+   that block is in the inline <style> and this file is a <link> that comes after
+   it. Both selectors are specificity 0,1,0, so source order decides and
+   `.orb-stage{display:block}` above would win: measured on the deployed branch at
+   375x812, the system rendered at scale 0.331 with the certified 14px label at
+   4.6px. This rule is the one that actually holds.
+
+   The lab was 1440-first and MOBILE WAS NEVER COMPOSED (orbital-port-handoff.md
+   section 10). Below 768px the section hands off to the list fallback that
+   already ships, which is a composed state; the system does not shrink into
+   illegibility. */
+@media (max-width: 767px) {
+  .orb-stage { display: none; }
+}
+
+.orb-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ── The nucleus ──────────────────────────────────────────────────────── */
+
+/* The corona: three unequal falloffs, every one of them centred on the HOT
+   REGION rather than on the body, and every gradient peaking inside the body
+   where it cannot be seen. The visible bleed is therefore strong just outside
+   the hot limb and near nothing around the far one. A corona centred on the
+   body peaks in a ring all the way around the silhouette, and a bright ring
+   around a silhouette is a backlight. Scaled by variant, about the hot region. */
+.lo-corona { transform-box: fill-box; transform-origin: center; }
+
+/* Interior life. Three layers, three periods, no common beat. */
+.lo-breath-a { animation: lo-breath 3.7s ease-in-out infinite alternate; }
+.lo-breath-b { animation: lo-breath 5.3s ease-in-out infinite alternate; }
+.lo-breath-c { animation: lo-breath 8.9s ease-in-out infinite alternate; }
+.lo-breath-a, .lo-breath-b, .lo-breath-c { will-change: opacity; }
+
+@keyframes lo-breath {
+  from { opacity: var(--lo-breath-lo, 0.16); }
+  to   { opacity: var(--lo-breath-hi, 0.62); }
+}
+
+/* The body is one raster now — a sphere map built in js/orbital.js. Limb
+   darkening follows mu = sqrt(1 - r^2) exactly, granulation is sampled at the
+   surface point so it compresses toward the limb the way a real surface does,
+   the hot region is a cap on the sphere, and the bleed past the edge is part of
+   the same image. That last part is the point: a glow drawn inside the body's
+   own picture cannot read as a luminous object standing beside it, which is what
+   round 2's separate corona layers became. No SVG filters remain on the nucleus
+   at all. */
+.lo-nuc-body { image-rendering: auto; }
+
+/* ── Nodes ────────────────────────────────────────────────────────────── */
+
+.lo-node { opacity: 0; }
+.lo-node-inner { transform-box: fill-box; transform-origin: center; transform: scale(0.55); }
+
+/* Three nested groups, and the nesting is load-bearing:
+     .lo-label-depth   inline opacity + scale, written continuously from orbital
+                       depth by JS. Never animated.
+     .lo-label         the arrival's opacity animation.
+     .lo-label-inner   the arrival's translateY.
+   They multiply, so the beat and the depth never fight. Writing depth onto the
+   element the arrival animates would lose — animations out-rank inline styles. */
+.lo-label { opacity: 0; }
+.lo-label-inner { transform-box: fill-box; transform-origin: center; transform: translateY(7px); }
+
+/* The scrim. Same hue as the night ground, so on open sky it is not there;
+   over an orbit line, a bright star or a receding label it is the difference
+   between readable and not. It is always on — nothing switches it. */
+.lo-label-scrim { pointer-events: none; }
+
+/* The tether. Its length falls to zero on its own when a label sits on its
+   node; there is no state and nothing toggles. */
+.lo-leader {
+  stroke: #E8AF38;
+  stroke-width: 0.8;
+  stroke-dasharray: 3 5;
+}
+
+.lo-label-key {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  fill: #E8AF38;
+  letter-spacing: 0.04em;
+}
+.lo-label-line {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  fill: #C8CDDA;
+  letter-spacing: 0.005em;
+}
+
+/* ── The arrival beat ─────────────────────────────────────────────────── */
+/*
+   The nucleus is NOT animated in. It is the given — the one obsession is already
+   there when you arrive, and the subjects come to it. Animating it in would
+   make the centre an event rather than a premise.
+
+   Then: nodes ignite in a clockwise sweep from the top, each label following its
+   own node by --lo-label-lag. Then the paths draw. Members before structure:
+   drawing the paths first would state the system before its subjects, which is
+   the difference between an object and a diagram.
+
+   Node and label use the product's own arrival easing, cubic-bezier(.16,1,.3,1),
+   the curve every other arrival on this site uses. The paths use a gentler
+   deceleration so the stroke settles into place instead of snapping shut.
+*/
+
+.linen-hero[data-arrival='running'] .lo-node,
+.linen-hero[data-arrival='done'] .lo-node {
+  animation: lo-node-in var(--lo-node-dur) cubic-bezier(.16, 1, .3, 1) var(--lo-delay) both;
+}
+.linen-hero[data-arrival='running'] .lo-node-inner,
+.linen-hero[data-arrival='done'] .lo-node-inner {
+  animation: lo-node-pop var(--lo-node-dur) cubic-bezier(.16, 1, .3, 1) var(--lo-delay) both;
+}
+@keyframes lo-node-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lo-node-pop { from { transform: scale(0.55); } to { transform: scale(1); } }
+
+.linen-hero[data-arrival='running'] .lo-label,
+.linen-hero[data-arrival='done'] .lo-label {
+  animation: lo-node-in var(--lo-label-dur) cubic-bezier(.16, 1, .3, 1) var(--lo-delay) both;
+}
+.linen-hero[data-arrival='running'] .lo-label-inner,
+.linen-hero[data-arrival='done'] .lo-label-inner {
+  animation: lo-label-rise var(--lo-label-dur) cubic-bezier(.16, 1, .3, 1) var(--lo-delay) both;
+}
+@keyframes lo-label-rise { from { transform: translateY(7px); } to { transform: translateY(0); } }
+
+/* The draw. Each orbit is one continuous stroke that happens to live in two
+   z-layers: the far half runs first and vanishes behind the nucleus, the near
+   half picks it up on the other side and crosses in front. The occlusion is
+   demonstrated by the drawing of it, not merely present in the still. */
+.lo-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.linen-hero[data-arrival='running'] .lo-path,
+.linen-hero[data-arrival='done'] .lo-path {
+  animation: lo-draw var(--lo-draw-dur) cubic-bezier(.22, .68, .18, 1) var(--lo-delay) both;
+}
+@keyframes lo-draw { to { stroke-dashoffset: 0; } }
+
+/* The glow is the same draw on a wider, softer line, running a beat longer so
+   the stroke arrives with air around it instead of as a bare hairline. */
+.lo-glow { filter: blur(1.6px); }
+
+/* ── EMISSION — the star's light landing on the cage (round 7) ──────────
+   Warm overlays riding the arcs' own path data where they pass near the
+   body, built in js/orbital.js. They carry no draw animation — light is not
+   drawn, it arrives: the whole field fades up in one breath AFTER the
+   arrival has finished the cage, so light never lands on an arc that is not
+   there yet. Per-segment strength lives in stroke-opacity (set by JS from
+   the one distance law); this opacity is only the gate. */
+.lo-emit {
+  opacity: 0;
+  filter: blur(1.3px);
+  transition: opacity 0.42s cubic-bezier(.16, 1, .3, 1);
+}
+/* the wide under-glow: the arc sitting in the light, not just tinted by it */
+.lo-emit-soft { filter: blur(3.5px); }
+.linen-hero[data-arrival='done'] .lo-emit {
+  opacity: 1;
+  animation: lo-emit-in 2.4s ease;
+}
+@keyframes lo-emit-in { from { opacity: 0; } }
+/* the received light recedes with its arc on hover — same values, same beat */
+.linen-hero[data-arrival='done'] .lo-emit.is-dim {
+  opacity: 0.85;
+  transition-duration: 0.26s;
+}
+
+/* ── Orbit drift (variant only; the ruled default is static) ──────────── */
+/* Positions are written by rAF in js/orbital.js so a node can be re-parented
+   between the back and front layers the instant it crosses the line of nodes.
+   Nothing here animates; this class only marks the state for the panel. */
+
+/* ── THE HOVER ROUND — adopted by Amy 2026-08-02 ──────────────────────────
+   Hover a subject: the system recedes, the subject and its own orbit hold.
+   Opacity only, on elements that carry NO animation (the arrival fills 'both'
+   forever and out-ranks any class): the node's place group, the label's depth
+   group, the leader line, the path elements. The nucleus, corona and sky are
+   never dimmed — the star is the premise.
+
+   Values: the system recedes to a band just above the label presence floor
+   (0.35), so "dimmed by intent" and "dim because distant" read as the same
+   language. Enter settles in 260ms on the product's own ease; release takes
+   420ms, because coming back should feel like the room re-lighting, not a
+   switch. */
+.lo-node-place, .lo-label-depth, .lo-leader, .lo-path {
+  transition: opacity 0.42s cubic-bezier(.16, 1, .3, 1);
+}
+.lo-node-place.is-dim, .lo-label-depth.is-dim, .lo-leader.is-dim, .lo-path.is-dim {
+  transition-duration: 0.26s;
+}
+/* SOFTENED BY AMY'S RULING, 2026-08-02 (was 0.5 / 0.38 / 0.3 / 0.45): a strong
+   isolate is the web's loudest "click me", and these subjects do not click.
+   The system now ACKNOWLEDGES attention rather than spotlighting it — others
+   ease back a breath, the hovered label comes to full presence so it reads
+   without competition. If subject clicks ever become real (a content round,
+   Amy's to author), the spotlight values are one ruling away. */
+.lo-node-place.is-dim { opacity: 0.85; }
+.lo-label-depth.is-dim { opacity: 0.75; }
+.lo-leader.is-dim { opacity: 0.6; }
+.lo-path.is-dim { opacity: 0.85; }
+/* Full presence on intent — this deliberately out-ranks the depth attribute
+   (a CSS property beats a presentation attribute), and returns to it on
+   release. Reading a far-side subject is exactly what the hover is FOR. */
+.lo-label-depth.is-focus { opacity: 1; }
+
+/* The hot surfaces are the subjects: node group and label group. The label's
+   always-on scrim doubles as its hit area. Orbit lines are never hot — a 1px
+   stroke as a hover target is a flicker machine. Cursor stays default: this
+   responds to attention, it does not promise a click. */
+.lo-node, .lo-label-depth { pointer-events: auto; }
+.lo-path, .lo-glow, .lo-leader, .lo-corona, .lo-nucleus, .lo-emit { pointer-events: none; }
+
+/* Under reduced motion the STATE still applies — dimming is a response, not
+   motion — but it applies instantly. */
+@media (prefers-reduced-motion: reduce) {
+  .lo-node-place, .lo-label-depth, .lo-leader, .lo-path { transition: none; }
+}
+[data-wk-motion='reduced'] .lo-node-place,
+[data-wk-motion='reduced'] .lo-label-depth,
+[data-wk-motion='reduced'] .lo-leader,
+[data-wk-motion='reduced'] .lo-path { transition: none; }
+
+/* ── Reduced motion: the completed state, rendered ────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .lo-node, .lo-label { opacity: 1 !important; animation: none !important; }
+  .lo-node-inner, .lo-label-inner { transform: none !important; animation: none !important; }
+  .lo-path { stroke-dashoffset: 0 !important; animation: none !important; }
+  .lo-emit { opacity: 1 !important; animation: none !important; transition: none !important; }
+  .lo-breath-a, .lo-breath-b, .lo-breath-c {
+    animation: none !important;
+    opacity: var(--lo-breath-still, 0.42) !important;
+  }
+}
+
+[data-wk-motion='reduced'] .lo-node,
+[data-wk-motion='reduced'] .lo-label { opacity: 1 !important; animation: none !important; }
+[data-wk-motion='reduced'] .lo-node-inner,
+[data-wk-motion='reduced'] .lo-label-inner { transform: none !important; animation: none !important; }
+[data-wk-motion='reduced'] .lo-path { stroke-dashoffset: 0 !important; animation: none !important; }
+[data-wk-motion='reduced'] .lo-emit { opacity: 1 !important; animation: none !important; transition: none !important; }
+[data-wk-motion='reduced'] .lo-breath-a,
+[data-wk-motion='reduced'] .lo-breath-b,
+[data-wk-motion='reduced'] .lo-breath-c {
+  animation: none !important;
+  opacity: var(--lo-breath-still, 0.42) !important;
+}

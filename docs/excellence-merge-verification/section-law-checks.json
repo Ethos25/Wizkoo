@@ -1,0 +1,196 @@
+{
+ "facts": {
+  "candidate": "saffron-lantern",
+  "nucRatio": 0.2,
+  "coronaShells": [
+   {
+    "cx": 720,
+    "cy": 472,
+    "r_bodyRadii": 1.35,
+    "breath": "lo-breath-a"
+   },
+   {
+    "cx": 720,
+    "cy": 472,
+    "r_bodyRadii": 2.6,
+    "breath": "lo-breath-b"
+   },
+   {
+    "cx": 720,
+    "cy": 472,
+    "r_bodyRadii": 7.5,
+    "breath": "lo-breath-c"
+   }
+  ],
+  "frameCentre": {
+   "cx": 720,
+   "cy": 472
+  },
+  "coronaIsFirstInBack": true,
+  "nodeAim": [
+   {
+    "id": "reading",
+    "errDeg": 0.07
+   },
+   {
+    "id": "writing",
+    "errDeg": 0.05
+   },
+   {
+    "id": "math",
+    "errDeg": 0.02
+   },
+   {
+    "id": "science",
+    "errDeg": 0.02
+   },
+   {
+    "id": "geo",
+    "errDeg": 0.03
+   },
+   {
+    "id": "art",
+    "errDeg": 0.02
+   },
+   {
+    "id": "history",
+    "errDeg": 0.07
+   }
+  ],
+  "motionInventory": {
+   "lo-breath@3.7s": 2,
+   "lo-breath@5.3s": 1,
+   "lo-breath@8.9s": 2,
+   "lo-draw@0.063s": 72,
+   "lo-draw@0.053s": 72,
+   "lo-emit-in@2.4s": 52,
+   "lo-node-in@0.42s": 7,
+   "lo-node-pop@0.42s": 7,
+   "lo-draw@0.602s": 3,
+   "lo-node-in@0.46s": 14,
+   "lo-label-rise@0.46s": 7
+  }
+ },
+ "measurement": {
+  "bodyR_css": 41.6,
+  "medianPer255": {
+   "r1.1": 80,
+   "r1.5": 27,
+   "r2": 12,
+   "r3": 4,
+   "r4": 1,
+   "r5": 1
+  },
+  "perRayPer255": {
+   "r1.1": [
+    71,
+    59,
+    76,
+    76,
+    76,
+    80,
+    79,
+    77,
+    86,
+    82,
+    87,
+    90,
+    83,
+    81,
+    81,
+    77
+   ],
+   "r1.5": [
+    27,
+    27,
+    26,
+    26,
+    27,
+    27,
+    28,
+    27,
+    28,
+    29,
+    28,
+    27,
+    28,
+    28,
+    28,
+    27
+   ],
+   "r2": [
+    11,
+    11,
+    11,
+    11,
+    12,
+    12,
+    11,
+    12,
+    11,
+    12,
+    12,
+    12,
+    13,
+    13,
+    11,
+    11
+   ],
+   "r3": [
+    4,
+    4,
+    4,
+    4,
+    3,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "r4": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "r5": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  "visibleGlowRadius_bodyRadii": 3.4
+ }
+}

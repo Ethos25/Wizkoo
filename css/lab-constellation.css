@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONSTELLATION LAB — scaffolding only. Deleted at port time.
+
+   The two frames are built at the geometry spec's OWN reference sizes
+   (7A 620x376, 7B 335x203) with the spec's own chrome, so that a diff against
+   the spec's render is a diff of the figure and nothing else.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0B0F1C;-webkit-font-smoothing:antialiased}
+
+.lc-runway{
+  min-height:88vh;
+  display:flex;flex-direction:column;justify-content:center;
+  max-width:640px;margin:0 auto;padding:64px 32px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:rgba(248,244,233,0.62);font-size:14px;line-height:1.7;
+}
+.lc-runway h1{
+  font-family:'Fraunces',serif;font-weight:400;font-size:30px;
+  color:#F8F4E9;margin:0 0 18px;letter-spacing:-0.012em;
+}
+.lc-runway p{margin:0 0 14px}
+.lc-runway .k{color:#E8AF38}
+.lc-runway code{font-family:'Space Mono',monospace;font-size:12.5px;color:#E8AF38}
+
+.lc-stage{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:72px;padding:96px 40px;
+}
+
+/* ── the window, at the spec's reference frame ── */
+.lc-win{position:relative;flex:none}
+.lc-win--a{width:620px;height:376px}
+.lc-win--b{width:335px;height:203px}
+
+.lc-bleed{
+  position:absolute;inset:-64px;pointer-events:none;
+  background:
+    radial-gradient(ellipse 58% 58% at 50% 48%,rgba(24,40,72,0.3) 0%,rgba(24,40,72,0) 72%),
+    radial-gradient(ellipse 44% 38% at 52% 22%,rgba(232,175,56,0.16) 0%,rgba(232,175,56,0) 74%);
+  filter:blur(28px);
+}
+.lc-wash{
+  position:absolute;left:0;right:0;top:0;height:46%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(232,175,56,0.07) 0%,rgba(232,175,56,0) 100%);
+}
+.lc-inner{
+  position:relative;height:100%;z-index:2;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.lc-win--a .lc-inner{padding:30px 44px 0}
+.lc-win--b .lc-inner{padding:16px 18px 0}
+
+.lc-head{display:flex;flex-direction:column}
+.lc-win--a .lc-head{gap:18px}
+.lc-win--b .lc-head{gap:10px}
+
+.lc-eyebrow{display:flex;align-items:center;gap:14px}
+.lc-eyebrow span:last-child{
+  font-family:'Space Mono',monospace;letter-spacing:0.26em;
+  text-transform:uppercase;color:rgba(232,175,56,0.9);white-space:nowrap;
+}
+.lc-eyebrow .rule{width:26px;height:1.5px;background:#E8AF38;display:block;flex:none}
+.lc-win--a .lc-eyebrow span:last-child{font-size:9.5px}
+.lc-win--b .lc-eyebrow span:last-child{font-size:7.5px}
+
+.lc-sentence{
+  font-family:'Fraunces',serif;font-weight:400;line-height:1.34;
+  letter-spacing:-0.012em;color:#F8F4E9;text-wrap:pretty;
+}
+.lc-win--a .lc-sentence{font-size:30px}
+.lc-win--b .lc-sentence{font-size:15px}
+.lc-sentence i{font-style:normal;color:#E8AF38}
+.lc-sentence i.theme{text-shadow:0 0 28px rgba(232,175,56,0.5)}
+
+.lc-foot{border-top:1px solid rgba(232,175,56,0.26)}
+.lc-win--a .lc-foot{padding:14px 0 18px}
+.lc-win--b .lc-foot{padding:10px 0 12px}
+.lc-foot a{
+  font-family:'Space Mono',monospace;letter-spacing:0.26em;
+  text-transform:uppercase;white-space:nowrap;color:#E8AF38;text-decoration:none;
+}
+.lc-win--a .lc-foot a{font-size:12px}
+.lc-win--b .lc-foot a{font-size:8.5px}
+
+/* ── the reserved band, at the spec's own coordinates ── */
+.lc-win--a .wkc-band{left:44px;right:44px;top:140px;height:178px}
+.lc-win--b .wkc-band{left:18px;right:18px;top:86px;height:64px}
+
+/* Lab-only: the band's own bounds, for the geometry check. */
+.lc-showband .wkc-band{outline:1px dashed rgba(232,175,56,0.35)}
+
+/* ── panel ── */
+.lc-panel{
+  position:fixed;top:16px;right:16px;z-index:9999;
+  width:266px;padding:14px 16px;border-radius:10px;
+  background:rgba(11,15,28,0.94);border:1px solid rgba(232,175,56,0.28);
+  backdrop-filter:blur(8px);
+  font-family:'Space Mono',monospace;font-size:11px;color:rgba(248,244,233,0.78);
+}
+.lc-panel h2{
+  margin:0 0 10px;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+  color:#E8AF38;font-weight:400;
+}
+.lc-panel button{
+  display:block;width:100%;margin:0 0 7px;padding:7px 10px;
+  background:rgba(232,175,56,0.1);border:1px solid rgba(232,175,56,0.34);
+  border-radius:5px;color:#E8AF38;font:inherit;cursor:pointer;text-align:left;
+}
+.lc-panel button:hover{background:rgba(232,175,56,0.2)}
+.lc-panel button[aria-pressed="true"]{background:#E8AF38;color:#0B0F1C}
+.lc-panel pre{
+  margin:10px 0 0;max-height:38vh;overflow:auto;
+  font-size:10px;line-height:1.55;color:rgba(248,244,233,0.6);white-space:pre;
+}

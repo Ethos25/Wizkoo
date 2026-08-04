@@ -1476,6 +1476,18 @@ touching homepage visual surface):
   compressed desktop and reachable within one scroll gesture on mobile. No section
   boundary bleed at any viewport. Report any viewport that fails."
 
+  WHICH LIST APPLIES (added 2026-07-31 after a hero round verified the wrong one):
+  These are TWO different matrices and they are not interchangeable.
+    - Use the FIVE-VIEWPORT VERIFICATION CLAUSE above for general visual work:
+      section bleed, responsive reflow, motion, spacing.
+    - Use the CANONICAL TEST VIEWPORTS matrix below whenever ANY content must
+      fit above the fold on initial load: heroes, above-the-fold CTAs, any
+      surface with a stated above-the-fold contract.
+  The clause above does NOT contain 1097x617. A hero validated only against the
+  clause can pass all five and still fail the binding constraint. When a surface
+  has an above-the-fold contract, the matrix below governs and the clause is the
+  secondary check. Prompts touching a hero must cite the matrix by name.
+
 CANONICAL TEST VIEWPORTS — ABOVE-THE-FOLD VALIDATION MATRIX
 
   Above-the-fold validation requires testing on a specific five-viewport
@@ -1493,6 +1505,15 @@ CANONICAL TEST VIEWPORTS — ABOVE-THE-FOLD VALIDATION MATRIX
 
   A surface that passes viewports 1, 2, 3, and 5 but fails at 1097×617
   has not passed validation. Always test all five.
+
+  This matrix is NOT the five-viewport verification clause above. That clause
+  omits 1097x617 entirely. For any above-the-fold surface, run this matrix
+  first, then the clause for bleed and reflow.
+
+  ALSO RUN, for an above-the-fold surface, per Viewport Reality Constraints:
+  756x396 and 1440x396 (the production pair, Chrome zoom inflation). A hero
+  should compose its whole arc, including its primary call, above the fold at
+  1097x617; at 396px of height it may scale down but must not stack or clip.
 
   PLAYWRIGHT SHORTHAND:
     const VIEWPORTS = [

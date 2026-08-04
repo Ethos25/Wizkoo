@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "playwright test",
+    "test:hero": "playwright test tests/hero-1440x800.spec.js",
+    "gate:hero": "node scripts/hero-fold-gate.js",
     "serve": "serve . -p 3000",
     "screenshot": "node scripts/screenshot.js"
   },

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Wizkoo Morgue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0C1020;color:#F2F0EA;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:88px 32px 120px}
+.tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#E8AF38;margin:0 0 14px}
+h1{font-family:'Fraunces',serif;font-weight:600;font-size:42px;line-height:1.05;letter-spacing:-.02em;margin:0 0 16px}
+.standfirst{font-size:15px;line-height:1.65;color:rgba(242,240,234,.6);margin:0 0 12px;max-width:600px}
+.rules{font-size:13px;line-height:1.7;color:rgba(242,240,234,.42);margin:0 0 64px;max-width:600px}
+.rules strong{color:rgba(242,240,234,.72);font-weight:500}
+ol{list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,.12)}
+li{border-bottom:1px solid rgba(255,255,255,.12)}
+a.entry{display:block;padding:28px 4px;text-decoration:none;color:inherit;transition:background .18s ease,padding .18s ease}
+a.entry:hover{background:rgba(232,175,56,.05);padding-left:14px}
+.row{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:7px}
+.name{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:21px;line-height:1.25;color:#F2F0EA}
+a.entry:hover .name{color:#E8AF38}
+.date{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.13em;color:#8C91A5;white-space:nowrap}
+.why{font-size:13.5px;line-height:1.55;color:rgba(242,240,234,.55);margin:0;max-width:600px}
+.foot{margin-top:28px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:#6E7288;line-height:1.9}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="tag">Wizkoo</p>
+  <h1>The morgue</h1>
+  <p class="standfirst">Surfaces that were certified, shipped, and then retired. Each entry holds the thing
+  as it actually looked in production, its own markup and styles, and the reason it was cut.</p>
+  <p class="rules"><strong>Standing practice:</strong> any surface Amy certified that gets retired is morgued
+  before it is removed. The entry is written to be read in a year by someone who was not there.
+  <strong>Branch previews only</strong> &mdash; this directory is excluded from production builds and can never ship.</p>
+
+  <ol>
+    <li>
+      <a class="entry" href="./2026-08-02-son-space-panel.html">
+        <div class="row">
+          <span class="name">&ldquo;Your son wouldn&rsquo;t stop talking about space.&rdquo;</span>
+          <span class="date">Cut 2026-08-02</span>
+        </div>
+        <p class="why">Homepage scenario panel. Space collision with the hero demo window &mdash; two space
+        beats in one scroll undermined the infinite-range argument the section exists to make.</p>
+      </a>
+    </li>
+  </ol>
+
+  <p class="foot">
+    Newest first &middot; one entry<br>
+    Excluded from production by netlify.toml context rules
+  </p>
+
+</div>
+</body>
+</html>

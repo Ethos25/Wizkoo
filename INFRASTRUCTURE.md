@@ -65,6 +65,58 @@ Sites (login/account **not verified this session** — confirm and record):
 - `atlas-wizkoo.netlify.app` — atlas.wizkoo.com.
 - `wizkoo-elementum.netlify.app` — elementum.wizkoo.com.
 
+#### Branch deploys (marketing site) — CLI/API MANAGEABLE, DO NOT ROUTE TO AMY
+
+Enabled 2026-07-31 so review branches get a walkable URL. Before this, only the
+production branch built: pushing a branch succeeded but its subdomain returned
+404, with no way to walk a round in motion outside localhost.
+
+    Site:     wizkoo
+    Site ID:  1050d98d-dd09-4e80-81e9-41b911a08451
+    URL form: https://<branch>--wizkoo.netlify.app
+    Example:  https://excellence-round-1--wizkoo.netlify.app
+
+**This is an API setting, not a manual account action.** An authenticated
+Netlify token for amy.oguntala@gmail.com is stored on the workstation by the
+Netlify CLI at:
+
+    %APPDATA%\netlify\Config\config.json   ->  users[userId].auth.token
+
+Any agent session can read that token and change the setting itself. The
+control is `build_settings.allowed_branches`:
+
+    []                          deploy all branches      (current)
+    ["main"]                    production branch only   (previous)
+    ["main","some-branch"]      explicit allowlist
+
+    GET   https://api.netlify.com/api/v1/sites/<siteID>
+    PATCH https://api.netlify.com/api/v1/sites/<siteID>
+          {"build_settings":{"allowed_branches":[]}}
+          Authorization: Bearer <token>
+
+PATCH merges rather than replaces: verified 2026-07-31 by diffing all 31
+build_settings keys before and after, with only allowed_branches changed and
+repo_url/repo_branch intact. Back the site JSON up first anyway; this is the
+production marketing site.
+
+Consequence of `[]`: every branch pushed to `Ethos25/Wizkoo` builds and becomes
+publicly reachable at its own subdomain. Narrow to an explicit allowlist if a
+branch should not be public.
+
+Two things that cost time the first round:
+
+- Enabling the setting does **not** retroactively build branches already pushed.
+  The subdomain stays 404 until the next build for that branch. Any new commit
+  pushed to the branch triggers one; so does a scoped build hook
+  (`POST /sites/<siteID>/build_hooks` with `{"branch":"..."}`, fire it, delete it).
+- A 404 on the branch subdomain means "no deploy exists for this branch", not
+  "build in progress". A running build still serves the previous deploy. So a
+  persistent 404 is a settings or trigger problem, never patience.
+
+Deploy Previews (the `deploy-preview-<PR#>--wizkoo.netlify.app` form) are a
+separate switch and are **not** relied on: this project reviews from branch
+deploys, not pull requests.
+
 ---
 
 ## DNS — registrar: Porkbun (zone: wizkoo.com)

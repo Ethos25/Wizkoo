@@ -1,0 +1,459 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   THE WINDOW: 4A, matched to the approved reference frame
+
+   Object treatment, all values measured off the approved frame: a graded 1px
+   inner border averaging 10% white, a nine-layer shadow stack (inner vignette,
+   top inner highlight, outer gold hairline, gold glow, blue ambient, then four
+   overlapping casts down and to the LEFT, away from the photograph's measured
+   light at upper right), and a soft luminous bleed outside the boundary so it
+   reads as a light source rather than a shape.
+
+   The atmosphere pass added the two spills that put the window in the
+   photograph's light rather than on top of it, and made the border's ring
+   graded rather than flat. See the block on .lw-mount.
+
+   The interior is NOT drawn here. It is the certified TwoLayerSky primitive,
+   ported verbatim (css/hero-sky.css, js/hero-sky.js). The sky element is laid
+   out at the primitive's own reference frame size and clipped by this window,
+   so what shows is a literal piece of the product's sky at certified density.
+
+   MOTION LAW: the certified sky's own drift, plus one demonstration beat (the
+   theme word's ghost-to-gold arrival, once per first sight, latched), plus the
+   hover lift. Nothing else moves. The atmosphere pass tried adding a slow breath
+   to the photograph behind this window; it read as nothing and was cut, so this
+   law is again the whole of the hero's motion.
+
+   Scale: reference value V is min(Vpx, (V/14.4)vw), exact at 1440.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.lw-mount{
+  position:relative;
+  /* Width comes from the grid, but the grid only knows width. On a short canvas
+     the height cap alone let the box letterbox to 3.48, so the width is capped
+     by the same unit and the 4A proportion holds at every size. Right aligned,
+     so a narrower window still sits on the right margin. */
+  width:min(100%, calc(var(--u) * 553));
+  margin-left:auto;
+  aspect-ratio:1.65;
+
+  /* LIGHT DIRECTION, measured not assumed: the photograph is lit from the UPPER
+     RIGHT, far more from the right than from above (mean bearing 59deg by sphere
+     shading, 70deg by specular position, 0deg being overhead). Five independent
+     reads agree; method and numbers in docs/hero-handoff.md. This file used to
+     assert upper LEFT and the shadow stack was built to match. That was
+     asserted, not measured, and it was wrong. */
+  --lw-spill-warm:0.050;   /* photo -> window, on the edge facing the light */
+  --lw-spill-cool:0.042;   /* window -> photo, the starlight cast into the room */
+}
+
+/* -- (a) WARM SPILL, photograph onto the window: a bloom on the upper right,
+   the corner nearest the light, falling to nothing within about 50px. Absent on
+   the left, which the photograph's light never reaches. -- */
+.lw-mount::after{
+  content:'';position:absolute;z-index:0;pointer-events:none;
+  left:34%;right:calc(var(--u) * -54);
+  top:calc(var(--u) * -40);bottom:calc(var(--u) * -30);
+  background:radial-gradient(74% 66% at 100% 30%,
+    rgba(255,196,104,var(--lw-spill-warm)) 0%,
+    rgba(255,196,104,calc(var(--lw-spill-warm) * 0.38)) 44%,
+    rgba(255,196,104,0) 76%);
+  filter:blur(calc(var(--u) * 9));
+}
+
+/* -- (b) COOL STARLIGHT, window onto the photograph: immediately around the
+   window the photograph is slightly cooler and brighter, as if the night sky
+   cast into the room. Drawn as a shadow on a matching rectangle, not a radial
+   gradient: a radial on a 1.65 box gives an elliptical halo far wider at the
+   sides than the top, which reads as a glow behind the object rather than light
+   coming off its edge. A blurred shadow follows the rectangle instead, so the
+   falloff is equal on all four sides. -- */
+.lw-mount::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  border-radius:2px;
+  box-shadow:0 0 calc(var(--u) * 150) calc(var(--u) * 18) rgba(206,226,255,var(--lw-spill-cool));
+}
+
+/* The luminous bleed: outside the window, under it, blurred. */
+.lw-bleed{
+  position:absolute;
+  inset:calc(var(--u) * -70);
+  z-index:0;
+  pointer-events:none;
+  filter:blur(calc(var(--u) * 30));
+  background:
+    radial-gradient(58% 58% at 50% 48%,rgba(24,40,72,0.30) 0%,rgba(24,40,72,0) 72%),
+    radial-gradient(44% 38% at 52% 22%,rgba(232,175,56,0.16) 0%,rgba(232,175,56,0) 74%);
+}
+
+.lw{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:block;
+  overflow:hidden;
+  border-radius:2px;
+  /* RULED BY AMY, 2026-08-02: "the box in the home page hero is rendering a
+     lot darker than the background of this night sky — can you make them
+     match?" Measured before the change: window centre lum 24.4 against the
+     Granddad ground's 49.1 — the box was half as bright. This is the
+     .linen-hero ground stack VERBATIM (index.html), so the window's night is
+     the same ink as the section's night; the percent geometry scales itself
+     to the box. Only this property changed — the shadow stack, the graded
+     ring and the light direction are untouched. */
+  background:
+    radial-gradient(ellipse 55% 40% at 6% 18%,rgba(30,80,140,0.18) 0%,transparent 65%),
+    radial-gradient(ellipse 45% 55% at 78% 20%,rgba(82,38,148,0.13) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 38% at 22% 72%,rgba(20,50,130,0.15) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 30% at 42% 85%,rgba(14,44,112,0.10) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 45% at 62% 52%,rgba(232,175,56,0.06) 0%,rgba(232,175,56,0.02) 45%,transparent 70%),
+    radial-gradient(ellipse 35% 28% at 28% 42%,rgba(160,120,60,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse at 50% 45%,#1e3060 0%,#131e3a 60%,#0d1627 100%);
+  text-decoration:none;
+  color:inherit;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  /* (c) The casts fall down and to the LEFT, away from the measured light: the
+     right edge faces the light so its shadow is occluded by the object itself
+     and stays a tight contact line, while the left is the far edge and runs
+     longer and softer. Real objects do not cast symmetrical shadows. The flat
+     white 1px inner ring that sat here is now graded, in .lw::after. */
+  box-shadow:
+    rgba(6,10,22,0.42) 0 0 120px 40px inset,
+    rgba(255,255,255,0.14) 0 1px 0 0 inset,
+    rgba(232,175,56,0.1) 0 0 0 1px,
+    rgba(232,175,56,0.18) 0 0 64px -6px,
+    rgba(24,40,72,0.32) 0 0 130px 12px,
+    rgba(10,15,30,0.36) -5px 7px 13px -8px,
+    rgba(10,15,30,0.42) -13px 19px 38px -16px,
+    rgba(10,15,30,0.48) -25px 42px 78px -34px,
+    rgba(16,24,48,0.52) -40px 78px 132px -70px;
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s cubic-bezier(.16,1,.3,1);
+}
+
+/* -- (d) The inner border catches more light where it faces the light: one 1px
+   ring carrying a gradient, made by masking out the ring's interior. Its mean is
+   held at the 0.10 the flat value used to be, so the object's weight is
+   unchanged and only its distribution moved. 215deg runs from the lit upper
+   right to the shaded lower left. -- */
+.lw::after{
+  content:'';position:absolute;inset:0;z-index:6;pointer-events:none;
+  border-radius:2px;padding:1px;
+  background:linear-gradient(215deg,
+    rgba(255,255,255,0.16) 0%,
+    rgba(255,255,255,0.104) 46%,
+    rgba(255,255,255,0.045) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+          mask-composite:exclude;
+}
+
+/* The certified sky at the primitive's own frame proportion, centred and
+   clipped, scaling with the window. Fixed at 1232x420 it looked right only at
+   the reference size: as the window shrank it ended up showing nothing but the
+   primitive's deliberately star-free content hole (at 1440x422, 0 of the 9
+   anchor stars fell inside it). Scaling by --u keeps the same region of sky in
+   view at every size, and is identical to the fixed box at the reference. */
+.lw-sky{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+/* The wash that carries the type. The primitive protects its sentence with a
+   star-free hole in the field; the ruling here is the opposite, stars behind the
+   sentence with contrast carried by atmosphere. This is that atmosphere: a deep
+   ink breath over the upper left, stars still reading through it. */
+.lw-typewash{
+  position:absolute;left:0;right:0;top:0;
+  height:60%;
+  pointer-events:none;
+  background:radial-gradient(125% 105% at 20% 30%,rgba(7,11,24,0.40) 0%,rgba(7,11,24,0.22) 44%,rgba(7,11,24,0) 78%);
+}
+
+/* The window's own top sheen, over the sky, under the copy. */
+.lw-sheen{
+  position:absolute;left:0;right:0;top:0;
+  height:46%;
+  pointer-events:none;
+  background:linear-gradient(rgba(232,175,56,0.07) 0%,rgba(232,175,56,0) 100%);
+}
+
+/* -- CHROME GIVEN BACK TO THE BAND (ruled) --
+   The constellation's geometry spec was drawn against a 620x376 window; this
+   one ships 553x335 while carrying the chrome in the SAME absolute pixels, so
+   proportionally the chrome was 17-23% heavier and it ate the band. The ruling:
+   enlarge the band by reducing chrome, never by altering the figure.
+
+   Nothing here changes a type size or the order of the elements. Four numbers
+   of pure air shrink, and the band takes what they give up:
+
+     .lw-body    top           40 -> 20
+     .lw-sentence margin-top   28 -> 12
+     .lw-foot    padding-top   26 -> 9.5
+     .lw-foot    bottom        26 -> 12
+                               --------
+                               120 -> 53.5   (66.5u returned, 19.9% of the height)
+
+   The remaining air is 75% of what the spec's own frame carries in the same
+   four places, distributed in the spec's own ratios (30 : 18 : 14 : 18), so the
+   window is tighter than the reference everywhere by the same factor rather
+   than tight in one place and loose in another.
+
+   AND THE AIR IS NOW PROPORTIONAL, NOT IN --u. This is the load-bearing half.
+   The band's height cannot be a number — it has to be the spec's RATIO, or the
+   figure is stretched — so it is derived from the band's width. The air around
+   it was in --u. Those two scale differently the moment `min(100%, 553u)` picks
+   100%: at 768 the window is 536.6u wide, the band grows from that width, the
+   --u chrome does not shrink with it, and the band's bottom edge lands 0.28px
+   off the handle rule. Every value below is now a percentage of the window, so
+   the whole composition scales as one object and the fit is identical at every
+   size. At 1440 and at 1440x396 the window is exactly 553u x 335u, so these
+   percentages ARE the --u values they replace — nothing moves where it used to
+   be right, and 768 stops colliding. Percentage bases differ by property:
+   top/bottom resolve against the window's height, left/right and padding
+   against its width, and .lw-sentence's margin against .lw-body's width. */
+.lw-body{
+  position:absolute;
+  left:8.318%;                      /* 46u of 553u */
+  right:8.318%;
+  top:5.967%;                       /* 20u of 335.15u — was 40u */
+  display:block;
+}
+
+/* -- THE BAND IS THE RESERVED BOX; THE FIGURE IS CONTAINED IN IT.
+   These are two different things and conflating them was a bug. The band used
+   to BE the figure: left/right insets plus aspect-ratio, so its height came
+   from its width. That works while the window keeps a sane proportion and
+   breaks the moment it does not — at a 600px viewport .lw-mount is 553 wide by
+   226 tall, a 2.45 box, and a band derived from that width came out 159.9px
+   tall inside an 82px gap, hanging 31px past the window's own bottom edge.
+
+   So the band is now only the space held open between the sentence and the
+   handle rule: insets and top here, height measured and set by
+   js/hero-constellation.js from the foot's actual position, because the foot's
+   height mixes percentages with --u and cannot be restated as one percentage
+   that survives every window shape. The figure is a child sized to the largest
+   box of its own ratio that fits inside — contain, not cover — so it is never
+   stretched, never refit, and can never overflow. -- */
+.lw-band{
+  position:absolute;
+  left:8.318%;
+  right:8.318%;
+  top:40.280%;                      /* 135u of 335.15u */
+  z-index:2;
+  pointer-events:none;
+  display:flex;
+  justify-content:center;           /* the figure centres in the width it gets */
+  align-items:flex-start;           /* the figure's DROP inside the band is a
+                                       margin set by js/hero-constellation.js
+                                       (ruled: optical centre between sentence
+                                       and rule), so the box itself still hangs
+                                       from the top. */
+}
+.lw-figure{
+  position:relative;
+  display:block;
+  flex:none;                        /* sized by hero-constellation.js */
+}
+
+.lw-label{
+  display:flex;align-items:center;
+  font-family:'Space Mono',monospace;font-weight:400;
+  font-size:calc(var(--u) * 10);
+  letter-spacing:calc(var(--u) * 2.6);
+  text-transform:uppercase;
+  color:rgba(232,175,56,0.9);
+  line-height:1.45;
+  white-space:nowrap;
+}
+.lw-label .rule{
+  flex:0 0 auto;
+  width:calc(var(--u) * 26);height:calc(var(--u) * 1.5);
+  margin-right:calc(var(--u) * 14);
+  background:#E8AF38;
+}
+
+.lw-sentence{
+  display:block;
+  margin-top:2.603%;                /* 12u of .lw-body's 461u. Was 28u. */
+  font-family:'Fraunces',serif;font-weight:400;
+  font-size:calc(var(--u) * 33);
+  line-height:1.34;
+  letter-spacing:-0.012em;
+  color:#F8F4E9;
+}
+
+/* The certified ghost register, verbatim from the product's sentence canvas
+   (start.css .cl-ghost @ HEAD): saffron at 0.55 with its two-part shadow. */
+.lw-ghost{
+  color:#E8AF38;
+  /* The product's shadow is stated in whole pixels against its own much larger
+     sentence. Ported literally it does not shrink with the type, so at 14.7px
+     (a 422px-tall viewport) a 1px offset plus 1px blur fringes the glyph feet
+     and the ghosts read as blurred. Scaling the shadow with the frame keeps it
+     proportional; at the reference size it is the certified value exactly. */
+  text-shadow:
+    0 calc(var(--u) * -1) 0 rgba(248,244,233,0.14),
+    0 calc(var(--u) * 1) calc(var(--u) * 1) rgba(12,16,32,0.35);
+}
+
+/* The theme word: full saffron, and the only element in the hero that moves. */
+.lw-theme{
+  display:inline-block;
+  color:#E8AF38;
+  text-shadow:
+    0 calc(var(--u) * -1) 0 rgba(248,244,233,0.14),
+    0 calc(var(--u) * 1) calc(var(--u) * 1) rgba(12,16,32,0.35);
+}
+/* The arrival, verbatim from the product's cl-demo-in / cl-ghost--leaving. */
+.lw-theme.lw-ghosted{color:rgba(232,175,56,0.55)}
+.lw-theme.lw-leaving{
+  opacity:0;
+  transform:translateY(-0.18em);
+  filter:blur(2px);
+  transition:opacity 240ms cubic-bezier(.16,1,.3,1),transform 240ms cubic-bezier(.16,1,.3,1),filter 240ms cubic-bezier(.16,1,.3,1);
+}
+.lw-theme.lw-arriving{animation:lw-demo-in 280ms cubic-bezier(.16,1,.3,1) both}
+@keyframes lw-demo-in{
+  from{opacity:0;transform:translateY(0.22em);filter:blur(2px)}
+  to{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+
+/* 4A's footer, restored: the saffron hairline with the handle sitting on it,
+   anchored to the window's lower edge. Removing it and pulling the handle up
+   under the sentence cost the object its polish. */
+.lw-foot{
+  position:absolute;
+  left:8.318%;
+  right:8.318%;
+  bottom:3.580%;                    /* 12u of 335.15u.  Was 26u. */
+  padding-top:1.718%;               /*  9.5u of 553u.   Was 26u. */
+  /* The 1px is kept for the box model and made invisible; the visible line is
+     drawn by ::before below, so it can end short WITHOUT moving anything. */
+  border-top:1px solid transparent;
+  display:block;
+}
+
+/* -- THE RULE STOPS SHORT (ruled 2026-08-01) --
+   The constellation's void is DIAGONAL: the figure's right-hand stars sit high
+   (Geography y36, Science y66, Art y124 of 178), so nothing on the right half
+   falls below 70% of the band. Measured, the gap from each label down to this
+   rule runs 9.7px under Writing to 153.6px under Geography — a 16x spread.
+
+   A full-width rule underlines that diagonal void and turns it into a
+   horizontal empty band. That reading, not the void itself, was the problem:
+   the same void is present at 1440x800 in identical proportion (43.4% of the
+   window under Geography at both sizes) and was ruled good there.
+
+   So the rule now ends before the void instead of underlining it. This is a
+   chrome change and nothing else — no star moves, no depth spread is touched,
+   and the 1440x800 geometry lock passes unchanged, because a pseudo-element's
+   width is not layout.
+
+   IT DISSOLVES RATHER THAN STOPS (ruled). A hard-cut hairline would be the
+   only edge in this window that simply ends: the arms never touch their stars
+   (spec § 3, "it dissolves into the glow") and the tether fades to nothing at
+   both ends (§ 4). The rule now holds full strength to 60% of the window and
+   is gone by 86%, so it reads as one continuous object that gives out before
+   the void rather than a line someone cut.
+
+   Stops are in the foot's own width. The foot spans 8.318%..91.682% of the
+   window, i.e. 83.364% of it, so:
+
+       window %  =  8.318 + (foot % x 0.83364)
+       60% of the window = 62.00%     70% = 73.99%     86% = 93.18%
+
+   The CTA's text ends at 35.9% of the window, so the solid run clears it by
+   24 points. */
+.lw-foot::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:-1px;                         /* sits exactly where the border would */
+  height:1px;
+  width:100%;
+  background:linear-gradient(90deg,
+    rgba(232,175,56,0.26) 0%,
+    rgba(232,175,56,0.26) 62.00%,   /* solid to 60% of the window */
+    rgba(232,175,56,0) 93.18%);     /* gone by 86% */
+  pointer-events:none;
+}
+.lw-cta{
+  display:block;                     /* its own line box, so the foot is exactly
+                                        the reference's 25px + 17px tall */
+  font-family:'Space Mono',monospace;font-weight:400;
+  font-size:calc(var(--u) * 12.5);
+  letter-spacing:calc(var(--u) * 3.25);
+  text-transform:uppercase;
+  color:#E8AF38;
+  line-height:1.4;
+}
+
+/* ── The door opens: a gentle lift with the shadow blooming ── */
+@media(hover:hover){
+  .lw:hover{
+    transform:translateY(-3px);
+    /* The lift blooms the same asymmetric stack; it does not move the sun. */
+    box-shadow:
+      rgba(6,10,22,0.42) 0 0 120px 40px inset,
+      rgba(255,255,255,0.18) 0 1px 0 0 inset,
+      rgba(232,175,56,0.14) 0 0 0 1px,
+      rgba(232,175,56,0.26) 0 0 78px -6px,
+      rgba(24,40,72,0.38) 0 0 150px 14px,
+      rgba(10,15,30,0.36) -7px 10px 17px -8px,
+      rgba(10,15,30,0.42) -17px 25px 49px -16px,
+      rgba(10,15,30,0.48) -31px 55px 95px -34px,
+      rgba(16,24,48,0.52) -48px 95px 152px -70px;
+  }
+  /* The ring brightens with the lift, keeping its gradient. */
+  .lw:hover::after{
+    background:linear-gradient(215deg,
+      rgba(255,255,255,0.21) 0%,
+      rgba(255,255,255,0.145) 46%,
+      rgba(255,255,255,0.075) 100%);
+  }
+}
+.lw:focus-visible{outline:2px solid #E8AF38;outline-offset:5px}
+
+/* ── Reduced motion: the settled state, no arrival, no lift ── */
+@media(prefers-reduced-motion:reduce){
+  .lw{transition:none!important}
+  .lw:hover{transform:none}
+  .lw-theme{
+    color:#E8AF38!important;
+    opacity:1!important;transform:none!important;filter:none!important;
+    animation:none!important;transition:none!important;
+  }
+}
+
+/* ── Mobile: the approved 375 frame ── */
+@media(max-width:767px){
+  .lw-mount{height:calc(var(--u) * 226)}
+  .lw-bleed{inset:calc(var(--u) * -40);filter:blur(calc(var(--u) * 20))}
+  .lw-body{
+    left:6.782%;right:6.782%;       /* 24u of 353.9u */
+    top:8.407%;                     /* 19u of 226u — was 40u */
+  }
+  /* 7B's band is the one that nearly fits already: this window is 335 wide and
+     the spec's 7B frame is 335 wide too, so the band reaches its reference
+     width almost exactly. Only the vertical air has to give, and it gives less
+     than 7A's — the phone ends up with MORE air than the spec's own frame. */
+  .lw-band{
+    left:6.782%;right:6.782%;
+    top:42.920%;                    /* 97u of 226u */
+  }
+  .lw-label{font-size:calc(var(--u) * 8);letter-spacing:calc(var(--u) * 1.92)}
+  .lw-label .rule{width:calc(var(--u) * 20);margin-right:calc(var(--u) * 10)}
+  .lw-sentence{
+    margin-top:3.596%;               /* 11u of .lw-body's 305.9u — was 16u */
+    font-size:calc(var(--u) * 20);
+    line-height:1.36;
+  }
+  .lw-foot{
+    left:6.782%;right:6.782%;
+    bottom:6.195%;                   /* 14u of 226u — was 26u */
+    padding-top:3.108%;              /* 11u of 353.9u — was 26u */
+  }
+  .lw-cta{font-size:calc(var(--u) * 10.5);letter-spacing:calc(var(--u) * 2.52)}
+}
