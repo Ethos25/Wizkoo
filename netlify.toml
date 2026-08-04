@@ -7,32 +7,46 @@
 # so the digest would have emailed an empty report every Sunday forever.
 # Function file and its schedule both removed. Git history preserves both.
 
-# ── /morgue/ — branch previews only, never production (Aug 2, 2026) ─────────
-# The morgue archives certified surfaces after they are retired: each entry
-# embeds a full-size screenshot of the surface as deployed plus its frozen
-# markup and styles. It is an internal working record, not a public page.
+# ── /morgue/ — REMOVED FROM THE PUBLISHED OUTPUT (Aug 4, 2026) ──────────────
+# The morgue archives certified surfaces after they are retired: screenshots
+# of the surface as deployed plus its frozen markup and styles. It is an
+# internal working record of KILLED work, not a public page.
 #
-# force = true is load-bearing. The morgue files are real files inside the
-# publish directory, and an unforced redirect never shadows a file that
-# exists — Netlify would serve the archive instead of the 404. Do not drop it.
+# WHAT WAS HERE, AND WHY IT DID NOT WORK. Two [[context.production.redirects]]
+# blocks stood here, forcing /morgue and /morgue/* to a 404 in production only,
+# so that previews kept serving it. They never fired. On Aug 4 the morgue was
+# fetchable on www.wizkoo.com: /morgue/ and /morgue/index.html both returned
+# 200 and served the real archive.
 #
-# These live under context.production, so branch deploys and deploy previews
-# serve /morgue/ normally. They must NOT be duplicated into _redirects:
-# that file wins on conflicts and has no context support, so a rule there
-# would 404 the morgue on the previews it exists for.
-[[context.production.redirects]]
-  from   = "/morgue"
-  to     = "/404.html"
-  status = 404
-  force  = true
+# CAUSE: deploy-context scoping is NOT SUPPORTED for redirects. Netlify's
+# file-based-configuration docs: "Certain keys, such as [build] and [[plugins]]
+# but not [[redirects]] or [[headers]], allow you to set [context] properties",
+# and "Redirects and headers are GLOBAL for all builds - they do not get scoped
+# to contexts no matter where you define them in the file. For context-specific
+# rules, use _headers or _redirects files, which are PER-DEPLOY."
+# A [[context.production.redirects]] block is accepted silently and ignored, so
+# the rules protected NOTHING in ANY context. The [[headers]] block below is a
+# plain top-level key, which is why IT fired (X-Robots-Tag was served) while the
+# redirects did not — the split that localised the fault.
+#
+# The old note here also warned against duplicating these into _redirects "for
+# context support". That was backwards: _redirects is the per-deploy file and is
+# exactly where a context-specific rule belongs. Do not act on that old advice.
+#
+# THE FIX IS CATEGORICAL, NOT ROUTED. publish = "." above means tracked and
+# published are the same set of files, so the morgue is out of the tracked tree
+# and .gitignored rather than routed around. A file that is not there cannot be
+# served by a rule that fails to fire. NOTHING IS LOST: the morgue is intact in
+# git history and recoverable —
+#   git show 47cedd3:morgue/index.html
+#   git show 47cedd3:morgue/2026-08-02-son-space-panel.html
+# TRADE, STATED: this also removes the morgue from branch previews, which the
+# broken rules were meant to preserve. Restoring preview-only access needs the
+# documented per-deploy mechanism (a _redirects entry emitted by a build command
+# that branches on $CONTEXT). Not built here — that is a separate ruling.
 
-[[context.production.redirects]]
-  from   = "/morgue/*"
-  to     = "/404.html"
-  status = 404
-  force  = true
-
-# Belt and braces: never indexable in any context, preview included.
+# Retained deliberately. Inert while the morgue is out of the publish root, and
+# defence in depth the moment anything under /morgue/ ever re-enters it.
 [[headers]]
   for = "/morgue/*"
   [headers.values]

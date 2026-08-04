@@ -9,3 +9,13 @@ screenshots/
 # initial-commit era. They stay in git history and are recoverable with
 # `git show bdb7eff:patches/<name>.patch`; they do not ship.
 patches/
+
+# The morgue (Aug 4, 2026). Internal record of KILLED work — retired surfaces,
+# their frozen markup, and screenshots of compositions that were decided
+# against. netlify.toml has always said "never production"; the rules meant to
+# enforce that were [[context.production.redirects]], which Netlify does not
+# support and silently ignores, so /morgue/ served 200 on www.wizkoo.com.
+# publish = "." makes tracked and published the same set, so the only
+# categorical exclusion is to leave the tracked tree. Intact in history:
+#   git show 47cedd3:morgue/index.html
+morgue/
