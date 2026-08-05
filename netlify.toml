@@ -1,5 +1,18 @@
+# ── What this site publishes ────────────────────────────────────────────────
+# publish was "." until Aug 4, 2026, which made the repository and the website
+# the same set of files: runbooks, audit reports, migration scripts and 68
+# internal design comps under assets/ were all fetchable on www.wizkoo.com.
+#
+# The command below assembles _site/ from the paths named in
+# publish-allowlist.txt, and Netlify serves _site/. Nothing reaches the website
+# except by being named in that file. To ship a new page, add one line to it.
+#
+# The build FAILS, and Netlify deploys nothing, if a root-level .html file in
+# the repo appears in neither section of publish-allowlist.txt. The failure
+# message names the file and the one-line edit that clears it.
 [build]
-  publish = "."
+  publish = "_site"
+  command = "node scripts/build-site.js"
   functions = "netlify/functions"
 
 # moderation-digest retired 2026-07-31 (Excellence Round 1 addendum, ruling 3).
@@ -33,11 +46,13 @@
 # context support". That was backwards: _redirects is the per-deploy file and is
 # exactly where a context-specific rule belongs. Do not act on that old advice.
 #
-# THE FIX IS CATEGORICAL, NOT ROUTED. publish = "." above means tracked and
-# published are the same set of files, so the morgue is out of the tracked tree
-# and .gitignored rather than routed around. A file that is not there cannot be
-# served by a rule that fails to fire. NOTHING IS LOST: the morgue is intact in
-# git history and recoverable —
+# THE FIX IS CATEGORICAL, NOT ROUTED. The morgue was taken out of the tracked
+# tree and .gitignored rather than routed around, because at the time publish
+# was "." and tracked meant published. A file that is not there cannot be
+# served by a rule that fails to fire. That still holds, and the allowlist now
+# holds it a second way: morgue/ is not named in publish-allowlist.txt, so it
+# would not be published even if it returned to the tree. NOTHING IS LOST: the
+# morgue is intact in git history and recoverable —
 #   git show 47cedd3:morgue/index.html
 #   git show 47cedd3:morgue/2026-08-02-son-space-panel.html
 # TRADE, STATED: this also removes the morgue from branch previews, which the
@@ -45,8 +60,8 @@
 # documented per-deploy mechanism (a _redirects entry emitted by a build command
 # that branches on $CONTEXT). Not built here — that is a separate ruling.
 
-# Retained deliberately. Inert while the morgue is out of the publish root, and
-# defence in depth the moment anything under /morgue/ ever re-enters it.
+# Retained deliberately. Inert while the morgue is out of the published output,
+# and defence in depth the moment anything under /morgue/ ever re-enters it.
 [[headers]]
   for = "/morgue/*"
   [headers.values]

@@ -1,0 +1,99 @@
+# ── wizkoo.com publish allowlist ────────────────────────────────────────────
+#
+# THIS FILE DECIDES WHAT WIZKOO.COM SERVES.
+#
+# `npm run build` copies exactly the paths named under `publish:` into _site/,
+# and Netlify serves _site/. A file that is not named here is not on the
+# website. The repository is no longer the website.
+#
+# TO SHIP A NEW PAGE: add one line under `publish:`. That is the whole edit.
+#
+# `declined:` IS AN ACKNOWLEDGEMENT REGISTER, NOT AN EXCLUSION MECHANISM.
+# A root-level .html file is already excluded by not appearing under
+# `publish:`; listing it under `declined:` only records that a human looked at
+# it and said "not a page", which stops the guard failing the build over it.
+# Deleting an entry from `declined:` does not publish anything. It fails the
+# build.
+#
+# THE GUARD (scripts/build-site.js). Every root-level .html file in the repo
+# must appear in exactly one of the two sections:
+#     in neither  -> build FAILS. A new page nobody accounted for.
+#     in both     -> build FAILS. The manifest contradicts itself.
+# Absence is never permission.
+#
+# SYNTAX
+#     A line starting with # is a comment. Blank lines are ignored.
+#     Section headers are `publish:` and `declined:` at column 0.
+#     Entries are indented, one path per line, repo-relative, forward slashes.
+#     A trailing `# ...` on an entry is its reason. Required under `declined:`.
+#     Globs: * matches within one path segment, ** matches across segments.
+# ────────────────────────────────────────────────────────────────────────────
+
+publish:
+
+  # ── Pages ─────────────────────────────────────────────────────────────────
+  # Named one by one, not globbed, so that adding a root-level .html file is a
+  # deliberate act rather than an accident of where it was saved.
+  index.html                    # /
+  about.html                    # /about
+  ages.html                     # /ages
+  contact.html                  # /contact      orphan: not in nav, footer or sitemap
+  esa.html                      # /esa          hub for the 50 state pages below
+  games.html                    # /games
+  library.html                  # /library
+  methodology.html              # /methodology
+  pricing.html                  # /pricing
+  privacy.html                  # /privacy
+  scope.html                    # /scope        orphan: not in nav, footer or sitemap
+  terms.html                    # /terms
+  themes.html                   # /themes
+  the-open-seat.html            # /the-open-seat
+  what-we-believe.html          # /what-we-believe
+  404.html                      # Netlify's not-found page. Serves every bad URL.
+
+  # ── ESA state pages ───────────────────────────────────────────────────────
+  # 50 states, one directory each. All 50 are in sitemap.xml.
+  esa/*/index.html              # /esa/alabama ... /esa/wyoming
+
+  # ── Game pages ────────────────────────────────────────────────────────────
+  games/*.html                  # /games/atlas, /games/elementum
+
+  # ── Library book detail ───────────────────────────────────────────────────
+  # One template behind a rewrite. netlify.toml and _redirects both send
+  # /library/:slug here with status 200, so every book URL is this file.
+  library/book.html             # /library/<any-slug>
+
+  # ── Stylesheets and scripts ───────────────────────────────────────────────
+  # Globbed on purpose. A stylesheet added later ships without a manifest edit;
+  # the alternative fails the wrong way, with a page live and unstyled.
+  css/*.css                     # 13 files
+  js/*.js                       # 13 files
+  components/*.js               # nav.js, footer.js — injected into every page
+
+  # ── Images ────────────────────────────────────────────────────────────────
+  images/*                      # the 3x2 responsive hero set (jpg + webp)
+
+  # assets/ is 422 files of internal design artefacts and is NEVER globbed.
+  # Only the two files a public page actually renders are named.
+  assets/turtle-girl.jpg        # index.html
+  assets/wizkoo-og.png          # og:image / twitter:image on about.html and others
+
+  # ── Root static files ─────────────────────────────────────────────────────
+  favicon.svg                   # linked by every page (68)
+  favicon.ico                   # linked by every page (68)
+  apple-touch-icon.png          # linked by every page (68)
+  wizkoo-og.png                 # absolute og:image target https://wizkoo.com/wizkoo-og.png
+
+  # ── Crawler and routing files ─────────────────────────────────────────────
+  # These are not pages, and the site is broken without them.
+  robots.txt                    # points crawlers at the sitemap
+  sitemap.xml                   # 65 URLs
+  _redirects                    # per-deploy routing. Wins over netlify.toml.
+
+
+declined:
+
+  # Root-level .html files that are NOT pages. Seen, and deliberately not
+  # shipped. Listing a file here does not exclude it — not being under
+  # `publish:` already did that. This only tells the guard a human decided.
+  lighthouse-report.html        # generated audit artefact, not a page

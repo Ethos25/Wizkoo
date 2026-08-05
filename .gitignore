@@ -2,6 +2,10 @@ node_modules/
 screenshots/
 .claude/
 
+# Build output. `npm run build` assembles _site/ from publish-allowlist.txt and
+# Netlify serves it. Generated on every deploy, never committed.
+_site/
+
 # Audit-salvage patch exports (bdb7eff). Netlify publishes from ".", so
 # anything tracked here is fetchable from the live site. These three files
 # are unreviewed local-work exports — bdb7eff's own message says "ruling

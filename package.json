@@ -6,6 +6,7 @@
   "scripts": {
     "test": "playwright test",
     "test:hero": "playwright test tests/hero-1440x800.spec.js",
+    "build": "node scripts/build-site.js",
     "gate:hero": "node scripts/hero-fold-gate.js",
     "serve": "serve . -p 3000",
     "screenshot": "node scripts/screenshot.js"
