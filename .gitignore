@@ -6,8 +6,8 @@ screenshots/
 # Netlify serves it. Generated on every deploy, never committed.
 _site/
 
-# Audit-salvage patch exports (bdb7eff). Netlify publishes from ".", so
-# anything tracked here is fetchable from the live site. These three files
+# Audit-salvage patch exports (bdb7eff). Netlify published from "." when this
+# rule was written, so anything tracked was fetchable live. These three files
 # are unreviewed local-work exports — bdb7eff's own message says "ruling
 # pending review" — and one is a 2,379-line stash export from the
 # initial-commit era. They stay in git history and are recoverable with
@@ -19,18 +19,24 @@ patches/
 # against. netlify.toml has always said "never production"; the rules meant to
 # enforce that were [[context.production.redirects]], which Netlify does not
 # support and silently ignores, so /morgue/ served 200 on www.wizkoo.com.
-# publish = "." makes tracked and published the same set, so the only
-# categorical exclusion is to leave the tracked tree. Intact in history:
+# publish = "." made tracked and published the same set, so the only
+# categorical exclusion available was to leave the tracked tree. Intact in
+# history:
 #   git show 47cedd3:morgue/index.html
 morgue/
 
-# ── Publish-root exclusions, Aug 4 2026 ─────────────────────────────────────
-# publish = "." means the whole repository IS the website. Everything below is
-# an internal working record, not a page, and was fetchable on production until
-# now. All of it stays in git history; none of it ships.
-# INTERIM ONLY: this is a deny-list, and a deny-list is a list someone has to
-# remember. The ruled fix is to move the site into a publish directory so the
-# default is nothing-public-unless-included. Until then, these are explicit.
+# ── Publish exclusions, Aug 4 2026 ──────────────────────────────────────────
+# wizkoo.com publishes _site/, which `npm run build` assembles from the paths
+# named in publish-allowlist.txt. THAT FILE DECIDES WHAT SHIPS. Read it to
+# find out whether a page is on the website; a file gets there by being named
+# in it and by no other route.
+#
+# These rules are therefore no longer what keeps anything off the site. Not
+# being named in the manifest is. They stay as a second layer beneath the
+# first, and because keeping local artefacts out of the tracked tree is worth
+# doing on its own. Everything below is an internal working record, not a
+# page, and was fetchable on production until 9115d7b. All of it stays in git
+# history.
 
 # Killed-copy records. Same class as the morgue: copy and surfaces that were
 # decided against. History: git show 59ac112:docs/archive/homepage-2026-07-31/KILLED-COPY.md
