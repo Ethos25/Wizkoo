@@ -31,6 +31,55 @@ Maintained by: Amy Oguntala
 
 ---
 
+## THE ENTRY FILE — READ README.md FIRST
+
+You were probably handed this file by name. It is not the entry to this
+repository. `README.md` is, and it is short.
+
+Read `README.md` completely before changing anything here. It carries how this
+site builds, what `publish-allowlist.txt` decides, what the build guard covers
+and — just as important — what it does not, and the rule for what counts as
+evidence in this repository. None of that is repeated below. A second copy would
+go stale, and this file would start winning arguments it should lose.
+
+`AGENTS.md` and `GEMINI.md` are the same door under other names, for tools that
+look for those filenames. Both send you to `README.md`, and neither documents
+anything that is not documented there.
+
+### A map of the documents in this repository
+
+Where things are stated, not what they state. Each line is that document's own
+account of its purpose. A line says what a document is for; it does not say the
+document is current.
+
+**Read first**
+- `README.md` — the entry file, above. `AGENTS.md` and `GEMINI.md` are the same door.
+
+**Standards**
+- `AMY_TECHNICAL_STANDARDS.md` — global engineering standards, project-agnostic, inherited by every project Technical Runbook. Its own guard says read it first.
+- `TECHNICAL_RUNBOOK.md` — this file: only what is specific to Wizkoo.
+- `CLAUDE.md` — Claude Code notes for this repository.
+- `TRANSFER_QUEUE.md` — changes already applied locally, still waiting to be synced to Notion.
+
+**The machine**
+- `publish-allowlist.txt` — its own opening line: this file decides what wizkoo.com serves.
+- `INFRASTRUCTURE.md` — the infrastructure map; by its own rule, env var names only, never values.
+
+**Records, not instructions**
+Each describes a moment. They do not govern, and nothing in them overrides the
+files above.
+- `EXTRACTION_REPORT.md` — how this runbook was split into itself and the Standards.
+- `RESPONSIVE_AUDIT_REPORT.md` — a breakpoint inventory of the marketing site.
+- `SECTION_3_BASELINE_2026-04-22.md` — a known-good baseline of Section 3.
+- `qa-checklist.md` — the manual device, browser and page pass.
+- `docs/` — per-lane handoffs, findings and closeouts.
+
+**This section carries no SHAs, no counts and no version numbers.** An address
+does not go stale; a number does. If you need a number, go and measure it, and
+name the run it came from.
+
+---
+
 ## TABLE OF CONTENTS
 
 LAYER 0 — IDENTITY: Governing documents, quality filter, hierarchy rule, maintenance rule
@@ -2469,3 +2518,4 @@ v4.2 — April 29, 2026: Phase 6C shipped to production. Band-Name Pairing Rule 
 v4.3 — May 2, 2026: D5 library book detail page Rounds 6.1–6.7 complete. Unified cream card architecture (hero + depth zone, 90%/1020px Linen surface). TALK ABOUT magazine row layout (Fraunces 300 numerals, saffron curly quotes, hairline rows). Read-aloud metric rewrite (20-min threshold, 150 min/week denominator). Theme pill fallback chain (domains → themes slugs → hide). Constellation capped at 3 books. Six new LOCKED DECISIONS. Open Items 13–16 added.
 v4.4 — May 4, 2026: Applied 1 Transfer Queue item. Pattern 11 (Playwright/Dev-Server/Live-Site Verification Gap) added to Layer 6. Notion STATUS updated for Pattern 11 (new) and FIX 2, Item 36, Item 31 retirement (already applied in prior sessions). Both local runbooks updated.
 v4.5 — August 5, 2026: Marketing deployment block corrected in Layer 3. It described the no-build architecture replaced on 2026-08-04 — a publish directory of "." (the repo root), "Build command: none", and the retired /plan 200-proxy to wizkoo-plan-generator.vercel.app — and closed with the deploy-checklist step "Verify at wizkoo.com — no build logs to check". Superseded by a dated CORRECTED 2026-08-05 record that quotes the old text rather than deleting it. README.md rewritten as the model-neutral entry file for executors that do not read CLAUDE.md; AGENTS.md added as a thin pointer to it. Branch docs/marketing-entry-path, correction commit 07815e9.
+v4.6 — August 5, 2026: Entry-file pointer added to this file, ahead of the Table of Contents. A session handed this runbook by name had no route to README.md; the new section sends it there, names AGENTS.md and GEMINI.md as the same door under other names, and maps the repository's governing documents by purpose without restating any of them. The section carries no SHAs, counts or version numbers by its own stated rule. GEMINI.md created at the root as a pointer to README.md; one line added to README.md recording that it exists. No other section of this file was touched. Branch docs/marketing-runbook-map.

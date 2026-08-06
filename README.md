@@ -65,3 +65,5 @@ TECHNICAL_RUNBOOK.md completely and confirmed the three
 startup items in its Session Startup Instruction.
 
 If you are a developer: same instruction.
+
+`GEMINI.md` exists at the root and points here, as `AGENTS.md` does.
