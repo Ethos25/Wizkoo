@@ -1004,24 +1004,76 @@ PLAN GENERATOR
 
 MARKETING SITE → Netlify (wizkoo.com)
   Config file: C:\Users\amyog\Desktop\wizkoo\netlify.toml
-  Publish directory: . (repo root — static files served directly)
-  Build command: none
+  Publish directory: _site               (netlify.toml line 14, publish = "_site")
+  Build command: node scripts/build-site.js
+                                         (netlify.toml line 15; the same command
+                                          as npm run build — package.json line 9)
   Deploy trigger: push to main branch on GitHub (Ethos25/Wizkoo)
 
-  Proxy rules (netlify.toml):
-    /plan      → https://wizkoo-plan-generator.vercel.app/plan (200 proxy)
-    /plan/*    → https://wizkoo-plan-generator.vercel.app/plan/:splat (200 proxy)
-  Legacy redirects (301):
-    /planner → /plan  |  /planner.html → /plan
-    /what-we-believe.html → /what-we-believe
-    /games.html → /games  |  /methodology.html → /methodology
-  Library book detail rewrite (200): /library/:slug → /library/book.html
+  CORRECTED 2026-08-05. SUPERSEDES the text that stood in this block until
+  this date, which read: Publish directory ". (repo root — static files served
+  directly)", "Build command: none", a /plan 200-proxy to
+  wizkoo-plan-generator.vercel.app, and the deploy-checklist step "Verify at
+  wizkoo.com — no build logs to check". All four described the arrangement
+  replaced on 2026-08-04. If you half-remember any of them, they changed.
+  The last one was the dangerous one: it told a reader that asserting a result
+  without checking it was the expected procedure here. A build runs now, and
+  its log is the thing to read.
+
+  A BUILD RUNS. BUILD LOGS EXIST AND MUST BE READ.
+  Netlify runs the build command on every deploy, so every deploy produces a
+  log in the Netlify deploy dashboard. Reading that log is not optional, and
+  loading wizkoo.com is not a substitute for it.
+    - On success the script prints "Built _site/ from publish-allowlist.txt",
+      a per-group file count, and a Guard summary line
+      (scripts/build-site.js lines 250–266).
+    - It prints "  WARNING  ..." lines for a manifest entry that matches no
+      file, and STILL EXITS 0 (scripts/build-site.js lines 201, 208–221). A
+      green deploy can carry warnings. Read them.
+    - On guard failure it writes a bordered "BUILD FAILED — ..." block to
+      stderr and exits 1 (scripts/build-site.js lines 130–139). Netlify treats
+      1 as a failed build and deploys nothing (scripts/build-site.js lines
+      21–22).
+
+  THE MANIFEST DECIDES WHAT SHIPS.
+  publish-allowlist.txt (scripts/build-site.js line 29). The build copies into
+  _site/ exactly the paths named under its `publish:` section and nothing else
+  (scripts/build-site.js lines 199–203, 227–231), and _site/ is deleted and
+  rebuilt from empty on every run (line 226). To ship a new page, add ONE line
+  under `publish:`. That is the whole edit.
+
+  THE GUARD, AND THE LIMIT OF THE GUARD.
+  Every root-level .html file in the repository MUST appear in exactly one
+  section of the manifest. In neither section, or in both, the build fails and
+  Netlify deploys nothing (scripts/build-site.js lines 149, 153–167, 169–194).
+  It covers root-level .html ONLY (scripts/build-site.js line 149). A page in
+  a subdirectory that the manifest does not name is silently absent from the
+  website, and no build failure will tell you.
+  DO NOT disable this check, and DO NOT remove the build command to get past
+  it.
+
+  Redirects. Both netlify.toml and _redirects carry the /plan and legacy
+  rules; _redirects wins where the two overlap (_redirects line 8).
+    /plan, /plan/*  → 302 to https://app.wizkoo.com/… (_redirects lines 10–25;
+      netlify.toml lines 76–170). Fifteen specific /plan/* rules run before
+      the /plan/* catch-all. The 200 proxy to wizkoo-plan-generator.vercel.app
+      was retired 2026-07-12 by WP-6 Stage 3 (_redirects lines 4–7).
+      The 302 is deliberate and load-bearing: a 301 caches in browsers forever
+      and would kill the Stage 3 rollback. DO NOT "correct" it to 301.
+    /account → https://app.wizkoo.com/sign-up (301) (_redirects line 2)
+    Legacy 301s: /planner → /plan  |  /planner.html → /plan
+      /what-we-believe.html → /what-we-believe
+      /games.html → /games  |  /methodology.html → /methodology
+      (_redirects lines 26–32; netlify.toml lines 173–196)
+    Library book detail rewrite (200): /library/:slug → /library/book.html
+      (_redirects line 36; netlify.toml lines 201–205)
 
   Deploy checklist:
     1. Ensure TECHNICAL_RUNBOOK.md changes are committed
     2. Push to main: git push
-    3. Netlify auto-deploys within ~60s
-    4. Verify at wizkoo.com — no build logs to check
+    3. Open the Netlify deploy log and read it to the end. Confirm the build
+       exited 0, and read every WARNING line — a warning does not fail a build
+    4. Verify at wizkoo.com. A page can be missing from a green build
 
 PLAN GENERATOR → Vercel (wizkoo.com/plan)
   Config file: C:\Users\amyog\Desktop\wizkoo-plan-generator\vercel.json
