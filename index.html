@@ -908,15 +908,16 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* -- Desk note: imported from reference verbatim (no tape, no rotation) -- */
-.desk{position:relative;background:#FBF7EB;padding:26px 30px 22px;box-shadow:0 1px 0 rgba(12,16,32,0.04),0 22px 48px -32px rgba(12,16,32,0.28),inset 0 0 0 0.5px rgba(184,132,20,0.08);margin-bottom:42px}
+.desk{position:relative;background:#FBF7EB;padding:26px 30px 22px;box-shadow:0 4px 6px -1px rgba(12,16,32,0.1),0 12px 24px -8px rgba(12,16,32,0.15),inset 0 1px 0 rgba(255,255,255,0.7);border:1px solid rgba(12,16,32,0.04);margin-bottom:42px}
 .desk::before{content:'';position:absolute;top:-8px;left:0;right:0;height:10px;background:radial-gradient(circle at 7px 10px,#FBF7EB 5px,transparent 5.6px),radial-gradient(circle at 22px 8px,#FBF7EB 4.2px,transparent 4.8px),radial-gradient(circle at 38px 10px,#FBF7EB 5px,transparent 5.6px),radial-gradient(circle at 53px 8px,#FBF7EB 4.2px,transparent 4.8px);background-size:60px 10px;background-repeat:repeat-x}
 .desk-head{margin-bottom:12px}
 .desk-title{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:22px;letter-spacing:-0.015em;color:#0C1020;line-height:1.15}
 .desk-title::first-letter{color:#E8AF38}
 .desk-body{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:15px;line-height:1.55;color:rgba(12,16,32,0.82);text-wrap:pretty}
 .desk-body strong{font-style:normal;font-weight:500;color:#0C1020}
-.desk-body .hl{font-style:normal;font-weight:500;color:var(--day-sky);border-bottom:1px solid rgba(40,104,204,0.38);padding-bottom:1px}
+.desk-body .hl{font-style:normal;font-weight:500;color:#0C1020;border-bottom:1.5px solid #E8AF38;padding-bottom:2px;transition:background-color .25s ease}
 .desk-body a.hl{text-decoration:none}
+.desk-body a.hl:hover{background-color:rgba(232,175,56,0.1)}
 .desk-foot{margin-top:14px;padding-top:10px;border-top:1px dashed rgba(12,16,32,0.15);display:flex;justify-content:space-between;align-items:baseline;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-45)}
 .desk-foot .left-sig{color:#0C1020;font-weight:700}
 .desk-foot em{font-style:normal;color:var(--ink-45)}
@@ -1829,7 +1830,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <p class="desk-body">
           What your child <strong>can't stop talking about.</strong>
-          <span class="hl">Dragons. Tornadoes. Volcanoes.</span>
+          <strong>Dragons. Tornadoes. Volcanoes.</strong>
           The week builds from there, and every standard still gets met.
           <a href="/methodology" class="hl">20-minute blocks</a>, the way kids actually work.
         </p>
