@@ -337,14 +337,13 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 
 /* --- SUBJECT LINE COLORS --- */
-.pc-bl { border-left: 2px solid var(--pc-color, var(--saffron)); }
-.pc-bl::before { background: var(--pc-bg, rgba(232,175,56,0.05)); }
-.bl-amethyst { --pc-color: #9B8AF4; --pc-bg: rgba(155,138,244,0.05); }
-.bl-citrine { --pc-color: var(--saffron); --pc-bg: rgba(232,175,56,0.05); }
-.bl-vermilion { --pc-color: #E06C53; --pc-bg: rgba(224,108,83,0.05); }
-.bl-malachite { --pc-color: #4A9E78; --pc-bg: rgba(74,158,120,0.05); }
-.bl-polar { --pc-color: #7CB4B8; --pc-bg: rgba(124,180,184,0.05); }
-.bl-peony { --pc-color: #E294A5; --pc-bg: rgba(226,148,165,0.05); }
+.pc-bl { border-left-color: var(--pc-color, var(--saffron)) !important; }
+.bl-amethyst { --pc-color: #9B8AF4; }
+.bl-citrine { --pc-color: var(--saffron); }
+.bl-vermilion { --pc-color: #E06C53; }
+.bl-malachite { --pc-color: #4A9E78; }
+.bl-polar { --pc-color: #7CB4B8; }
+.bl-peony { --pc-color: #E294A5; }
 
 .plan-card-entrance.visible .pc-bl::before{width:100%;transition-delay:calc(var(--bl-i,0)*.12s + .5s)}
 .pc-bl>*{position:relative;z-index:1}.pc-bl .tm{font-family:'Space Mono',monospace;font-size:0.48rem;color:#aaa;min-width:40px}
