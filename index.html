@@ -858,45 +858,158 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* ═══ A PLAN IS NOT A PROMPT ═══ */
-.nap-section{background:var(--warm-bg);padding:100px 48px clamp(20px,3vh,36px);position:relative;overflow:hidden}
-.nap-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(12,16,32,0.012) 59px,rgba(12,16,32,0.012) 60px);pointer-events:none}
-.nap-section>*{position:relative;z-index:1}
-.nap-center{max-width:640px;margin:0 auto}
-.nap-heading{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(22px,2.4vw,30px);color:#0C1020;letter-spacing:-0.03em;line-height:1.05;margin-bottom:clamp(12px,2vh,22px);text-align:center}
-.nap-lead{font-family:'Sora',sans-serif;font-weight:400;font-size:clamp(13px,1.1vw,15px);line-height:1.65;margin-bottom:4px}
-/* PRODUCTION TUNED: bumped from 0.45 to 0.50 for low-contrast screen readability */
-.nap-lead-dim{color:rgba(12,16,32,0.55)}
-.nap-lead-bright{color:#0C1020;margin-bottom:clamp(14px,2.2vh,26px)}
-.nap-cards{display:flex;gap:16px;align-items:stretch}
-.nap-closer-card{flex:0 0 152px;background:var(--ink);padding:clamp(16px,2.5vh,26px) 22px;display:flex;flex-direction:column;justify-content:center;box-shadow:6px 6px 0 var(--saffron)}
-.nap-closer-l1{font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:#F0F2F8;line-height:1.5;letter-spacing:-0.01em}
-.nap-closer-l2{font-family:'Sora',sans-serif;font-weight:600;font-size:20px;color:var(--saffron);line-height:1.4;letter-spacing:-0.01em}
-.nap-closer-l3{font-family:'Sora',sans-serif;font-weight:400;font-size:13px;color:rgba(240,242,248,0.45);line-height:1.45;margin-top:6px;letter-spacing:-0.005em}
-.nap-evidence{flex:1;background:#FFFCF5;border:1.5px solid #0C1020;border-left:3px solid var(--saffron);transition:transform .35s var(--expo),box-shadow .35s var(--expo)}
-.nap-evidence:hover{transform:translate(-2px,-3px);box-shadow:4px 4px 12px rgba(12,16,32,0.08)}
-.nap-ev-row{padding:clamp(8px,1.4vh,13px) 22px;border-bottom:1px solid var(--rule)}
-.nap-ev-row:last-child{border-bottom:none}
-.nap-ev-text{font-family:'Sora',sans-serif;font-size:0.86rem;color:#0C1020;line-height:1.75;opacity:0.78}
-.nap-ev-text strong{font-weight:600;color:#0C1020;opacity:1}
-/* PRODUCTION TUNED: bumped from 0.28 to 0.32 for low-contrast laptop readability */
-.nap-counterpoint{text-align:right;margin-top:clamp(10px,1.8vh,20px);font-family:'Sora',sans-serif;font-weight:400;font-size:13px;color:rgba(12,16,32,0.38);font-style:italic}
-@media(max-width:768px){
-  .nap-section{padding:48px 24px 52px}
-  .nap-heading{font-size:28px;margin-bottom:20px}
-  .nap-lead{font-size:15px}
-  .nap-lead-bright{margin-bottom:28px}
-  .nap-cards{flex-direction:column;gap:12px}
-  .nap-closer-card{flex:none;padding:14px 18px;flex-direction:row;align-items:center;gap:6px;flex-wrap:wrap;box-shadow:5px 5px 0 var(--saffron)}
-  .nap-closer-l1{font-size:14px}
-  .nap-closer-l2{font-size:14px}
-  .nap-closer-l3{font-size:13px;margin-top:0}
-  .nap-closer-l3 br{display:none}
-  .nap-ev-row{padding:14px 16px}
-  .nap-ev-text{font-size:0.82rem}
-  .nap-counterpoint{font-size:12px}
+.nap-section {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF8E7 15%, var(--linen) 50%);
+  padding: 120px 48px 120px 48px;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid #FFFFFF;
+  box-shadow: inset 0 60px 100px -20px rgba(255, 250, 230, 1), inset 0 10px 20px rgba(255, 255, 255, 1);
 }
-@media(hover:none),(pointer:coarse){
-  .nap-evidence:hover{transform:none;box-shadow:none}
+.nap-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,1), transparent);
+  box-shadow: 0 0 80px 40px rgba(255,255,255,0.9);
+  pointer-events: none;
+}
+.nap-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.nap-left { padding-right: 40px; }
+.nap-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ink-light);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+.nap-heading {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 24px 0;
+  color: var(--ink);
+}
+.nap-lead {
+  font-family: 'Sora', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: var(--ink-light);
+}
+.nap-closer {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--saffron);
+}
+.nap-right {
+  position: relative;
+  height: 400px;
+  perspective: 1000px;
+}
+.nap-card {
+  position: absolute;
+  background: #FBF7EB;
+  border: 1px solid rgba(12,16,32,0.06);
+  box-shadow: 0 8px 24px -8px rgba(12,16,32,0.15), inset 0 1px 0 rgba(255,255,255,0.7);
+  padding: 24px;
+  border-radius: 4px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.nap-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  z-index: 10 !important;
+  box-shadow: 0 16px 32px -12px rgba(12,16,32,0.2), inset 0 1px 0 rgba(255,255,255,0.7);
+}
+.nap-c1 {
+  width: 280px;
+  height: 160px;
+  top: 200px;
+  left: 80px;
+  transform: rotate(4deg);
+  z-index: 1;
+  background: var(--ink);
+  color: #F8F4E9;
+  border: none;
+  box-shadow: 0 8px 24px -8px rgba(12,16,32,0.2);
+}
+.nap-c1-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--saffron);
+  text-transform: uppercase;
+}
+.nap-c2 {
+  width: 320px;
+  top: 90px;
+  left: 20px;
+  transform: rotate(-3deg);
+  z-index: 2;
+}
+.nap-c2-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(12,16,32,0.2);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+}
+.nap-c3 {
+  width: 260px;
+  top: 0px;
+  left: 120px;
+  transform: rotate(1deg);
+  z-index: 3;
+}
+.nap-c3-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(12,16,32,0.06);
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+}
+.nap-c3-row:last-child { border-bottom: none; }
+.nap-c3-level {
+  font-family: 'Space Mono', monospace;
+  color: var(--saffron);
+}
+
+@media(max-width: 900px) {
+  .nap-container { grid-template-columns: 1fr; gap: 40px; }
+  .nap-left { padding-right: 0; }
+  .nap-right { height: 380px; }
+  .nap-c1 { left: 10px; }
+  .nap-c2 { left: 0px; }
+  .nap-c3 { left: 40px; }
+}
+@media(max-width: 480px) {
+  .nap-section { padding: 60px 24px; }
+  .nap-c2 { width: 100%; box-sizing: border-box; }
+}
+@media(hover:none),(pointer:coarse) {
+  .nap-card:hover { transform: none !important; box-shadow: 0 8px 24px -8px rgba(12,16,32,0.15), inset 0 1px 0 rgba(255,255,255,0.7) !important; }
+  .nap-c1:hover { transform: rotate(4deg) !important; box-shadow: 0 8px 24px -8px rgba(12,16,32,0.2) !important; }
+  .nap-c2:hover { transform: rotate(-3deg) !important; }
+  .nap-c3:hover { transform: rotate(1deg) !important; }
 }
 
 /* ═══ HERO — THE LIVING WINDOW ═══ */
@@ -1951,39 +2064,54 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <!-- ═══ A PLAN IS NOT A PROMPT ═══ -->
-<div class="saffron-rule"></div>
 <section class="nap-section reveal" id="not-a-prompt">
-  <div class="nap-center">
-
-    <h2 class="nap-heading">A plan is not a prompt.</h2>
-
-    <p class="nap-lead nap-lead-dim">A prompt gives you a lesson. Once.</p>
-    <p class="nap-lead nap-lead-bright">We built something that doesn't forget.</p>
-
-    <div class="nap-cards">
-
-      <div class="nap-closer-card">
-        <div class="nap-closer-l1">One topic.</div>
-        <div class="nap-closer-l2">Two minutes.</div>
-        <div class="nap-closer-l3">A whole week<br>planned.</div>
-      </div>
-
-      <div class="nap-evidence">
-        <div class="nap-ev-row">
-          <div class="nap-ev-text">We know <strong>your kids aren't in the same place.</strong></div>
-        </div>
-        <div class="nap-ev-row">
-          <div class="nap-ev-text">We remember <strong>what you covered three weeks ago.</strong></div>
-        </div>
-        <div class="nap-ev-row">
-          <div class="nap-ev-text">Real-world science, world literacy, and a built-in resource library. <strong>All built in.</strong></div>
-        </div>
-      </div>
-
+  <div class="nap-container">
+    
+    <div class="nap-left">
+      <div class="nap-tag">The Wizkoo Engine</div>
+      <h2 class="nap-heading">A plan is not a prompt.</h2>
+      <p class="nap-lead">A prompt gives you a lesson. Once.</p>
+      <p class="nap-lead" style="color:var(--ink);">We built an engine that remembers what you covered three weeks ago. We know your 6-year-old and 9-year-old aren't in the same place. And we built real-world science and literacy tools directly into the foundation.</p>
+      <div class="nap-closer">One topic. Two minutes.<br>A whole week planned.</div>
     </div>
-
-    <div class="nap-counterpoint">A prompt starts over every single time.</div>
-
+    
+    <div class="nap-right">
+      
+      <!-- Card 1: Atlas -->
+      <div class="nap-card nap-c1">
+        <div class="nap-c1-tag">Atlas Module</div>
+        <p style="font-family:'Fraunces', serif; font-size:18px; line-height:1.3; margin:12px 0 0 0; color:rgba(255,255,255,0.9);">Connecting backyard turtles to the Galápagos Islands.</p>
+      </div>
+      
+      <!-- Card 2: Spiral Memory -->
+      <div class="nap-card nap-c2">
+        <div class="nap-c2-header">
+          <span>Wk 3: Tectonic Plates</span>
+          <span>&#8594;</span>
+          <span>Wk 8: Volcanoes</span>
+        </div>
+        <p style="font-family:'Fraunces', serif; font-size:15px; font-style:italic; line-height:1.5; margin:0; color:var(--ink-light);">"Remember when we learned how plates crash together? That's what pushes the magma up."</p>
+      </div>
+      
+      <!-- Card 3: Differentiation -->
+      <div class="nap-card nap-c3">
+        <div style="font-family:'Space Mono', monospace; font-size:10px; letter-spacing:0.1em; margin-bottom:12px; color:var(--ink-light);">FAMILY PROFILE</div>
+        <div class="nap-c3-row">
+          <strong>Mia</strong>
+          <span class="nap-c3-level">Level: Pre-K</span>
+        </div>
+        <div class="nap-c3-row">
+          <strong>Noah</strong>
+          <span class="nap-c3-level">Level: Grade 3</span>
+        </div>
+        <div class="nap-c3-row">
+          <strong>Ava</strong>
+          <span class="nap-c3-level">Level: Grade 5</span>
+        </div>
+      </div>
+      
+    </div>
+    
   </div>
 </section>
 
