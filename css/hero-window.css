@@ -325,14 +325,22 @@
    under the sentence cost the object its polish. */
 .lw-foot{
   position:absolute;
-  left:8.318%;
-  right:8.318%;
-  bottom:3.580%;                    /* 12u of 335.15u.  Was 26u. */
-  padding-top:1.718%;               /*  9.5u of 553u.   Was 26u. */
-  /* The 1px is kept for the box model and made invisible; the visible line is
-     drawn by ::before below, so it can end short WITHOUT moving anything. */
-  border-top:1px solid transparent;
-  display:block;
+  right:calc(var(--u) * 40);
+  bottom:calc(var(--u) * -20);
+  background:#E8AF38;
+  color:#0C1020;
+  padding:calc(var(--u) * 16) calc(var(--u) * 24);
+  display:flex;
+  align-items:center;
+  gap:calc(var(--u) * 12);
+  box-shadow:0 calc(var(--u) * 10) calc(var(--u) * 20) rgba(0,0,0,0.5);
+  transition:transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),box-shadow 0.4s ease;
+  z-index:10;
+  text-decoration:none;
+}
+.lw-foot:hover{
+  transform:translateY(calc(var(--u) * -5));
+  box-shadow:0 calc(var(--u) * 15) calc(var(--u) * 30) rgba(232, 175, 56, 0.2);
 }
 
 /* -- THE RULE STOPS SHORT (ruled 2026-08-01) --
@@ -367,26 +375,17 @@
    The CTA's text ends at 35.9% of the window, so the solid run clears it by
    24 points. */
 .lw-foot::before{
-  content:'';
-  position:absolute;
-  left:0;
-  top:-1px;                         /* sits exactly where the border would */
-  height:1px;
-  width:100%;
-  background:linear-gradient(90deg,
-    rgba(232,175,56,0.26) 0%,
-    rgba(232,175,56,0.26) 62.00%,   /* solid to 60% of the window */
-    rgba(232,175,56,0) 93.18%);     /* gone by 86% */
-  pointer-events:none;
+  display:none;
 }
 .lw-cta{
-  display:block;                     /* its own line box, so the foot is exactly
-                                        the reference's 25px + 17px tall */
-  font-family:'Space Mono',monospace;font-weight:400;
-  font-size:calc(var(--u) * 12.5);
-  letter-spacing:calc(var(--u) * 3.25);
+  display:flex;
+  align-items:center;
+  gap:calc(var(--u) * 12);
+  font-family:'Space Mono',monospace;font-weight:700;
+  font-size:calc(var(--u) * 11);
+  letter-spacing:calc(var(--u) * 1.5);
   text-transform:uppercase;
-  color:#E8AF38;
+  color:#0C1020;
   line-height:1.4;
 }
 
@@ -451,9 +450,10 @@
     line-height:1.36;
   }
   .lw-foot{
-    left:6.782%;right:6.782%;
-    bottom:6.195%;                   /* 14u of 226u — was 26u */
-    padding-top:3.108%;              /* 11u of 353.9u — was 26u */
+    right:calc(var(--u) * 20);
+    bottom:calc(var(--u) * -15);
+    padding:calc(var(--u) * 12) calc(var(--u) * 20);
+    left:auto;
   }
   .lw-cta{font-size:calc(var(--u) * 10.5);letter-spacing:calc(var(--u) * 2.52)}
 }
