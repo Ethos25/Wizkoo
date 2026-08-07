@@ -313,12 +313,12 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .plan-eyebrow{text-align:center;padding-top:48px;margin-bottom:32px}
 .plan-eyebrow-text{font-family:'Space Mono',monospace;font-size:0.48rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--saffron);display:inline-flex;align-items:center;gap:12px}
 .plan-eyebrow-text::before,.plan-eyebrow-text::after{content:'';width:20px;height:1px;background:var(--saffron);opacity:0.4}
-.plan-card{background:#fff;border:1.5px solid var(--ink);box-shadow:0 2px 4px rgba(12,16,32,0.04),0 8px 24px rgba(12,16,32,0.06),8px 8px 0 var(--saffron);transition:transform .35s var(--expo),box-shadow .35s var(--expo)}
-.plan-card:hover{transform:translate(-2px,-4px);box-shadow:0 4px 8px rgba(12,16,32,0.06),0 16px 40px rgba(12,16,32,0.1),12px 12px 0 var(--saffron)}
+.plan-card{background:#fff;border-radius:12px;box-shadow:0 16px 40px rgba(12,16,32,0.06),0 4px 12px rgba(12,16,32,0.04),inset 0 1px 1px rgba(255,255,255,1);transition:transform .35s var(--expo),box-shadow .35s var(--expo)}
+.plan-card:hover{transform:translateY(-4px);box-shadow:0 24px 56px rgba(12,16,32,0.08),0 8px 16px rgba(12,16,32,0.05),inset 0 1px 1px rgba(255,255,255,1)}
 .plan-card-entrance{opacity:0;transform:translateY(30px) rotate(0.5deg);transition:opacity .9s var(--expo),transform .9s var(--expo)}
 .plan-card-entrance.visible{opacity:1;transform:translateY(0) rotate(0deg)}
 .pc-h{padding:16px 20px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:flex-start}
-.pc-fam{font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem}
+.pc-fam{font-family:'Fraunces',serif;font-weight:600;font-size:1.4rem;letter-spacing:-0.02em}
 .pc-wk{font-family:'Space Mono',monospace;font-size:0.5rem;color:#8C91A5}
 .pc-spiral-top{padding:12px 20px;background:var(--warm-bg);border-bottom:1px solid var(--rule);font-size:0.72rem;line-height:1.6;color:#7A7F93;position:relative}
 .pc-spiral-top strong{font-weight:600;color:var(--ink)}
@@ -327,7 +327,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 @keyframes spiralPulse{0%{opacity:0}30%{opacity:1}100%{opacity:0.3}}
 .pc-theme{padding:8px 20px;border-bottom:1px solid var(--rule)}
 .pc-theme-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--saffron)}
-.pc-theme-name{font-family:'Sora',sans-serif;font-weight:200;font-size:0.92rem;margin-top:2px}
+.pc-theme-name{font-family:'Fraunces',serif;font-weight:400;font-size:1.6rem;margin-top:4px;letter-spacing:-0.01em}
 .pc-day{padding:12px 20px;border-bottom:1px solid var(--rule)}.pc-day:last-child{border-bottom:none}
 .pc-day-label{font-family:'Sora',sans-serif;font-weight:500;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;margin-bottom:5px}
 .pc-bl{display:flex;align-items:flex-start;gap:8px;padding:4px 8px;margin-bottom:2px;font-size:0.68rem;line-height:1.5;background:rgba(12,16,32,0.02);border-left:2px solid var(--saffron);position:relative;overflow:hidden}
@@ -2154,9 +2154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- THE PLAN CARD -->
 <section class="plan-section" id="sample-week">
-  <div class="plan-orb plan-orb-1"></div>
-  <div class="plan-orb plan-orb-2"></div>
-  <div class="plan-eyebrow"><span class="plan-eyebrow-text">Monday inside the connected system</span></div>
+      <div class="plan-eyebrow"><span class="plan-eyebrow-text">Monday inside the connected system</span></div>
   <div class="plan-center">
     <div class="plan-card-entrance"><div class="plan-card">
       <div class="pc-h"><div class="pc-fam">The Rivera Family</div><div class="pc-wk">WK 8 · MAR 17</div></div>
