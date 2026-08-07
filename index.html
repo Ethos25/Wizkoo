@@ -171,7 +171,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size);line-height:1.6}
 @media(hover:hover){html,body,a,button,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
 /* ═══ CUSTOM CURSOR ═══ */
-.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s,background-color .25s,border-color .25s;opacity:0}   /* exclusion blend removed by ruling: over the linen hero it inverted the saffron dot to blue */
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;mix-blend-mode:exclusion;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s,background-color .25s,border-color .25s;opacity:0}
 .cursor.visible{opacity:1}
 .cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
 .cursor.on-saffron{background:rgba(12,16,32,0.15);border-color:#0C1020}
