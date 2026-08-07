@@ -333,14 +333,18 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .pc-bl{display:flex;align-items:flex-start;gap:8px;padding:4px 8px;margin-bottom:2px;font-size:0.68rem;line-height:1.5;background:rgba(12,16,32,0.02);border-left:2px solid var(--saffron);position:relative;overflow:hidden}
 .pc-bl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(232,175,56,0.05);transition:width .6s var(--expo)}
 
-/* --- SUBJECT COLOR TAGS --- */
-.subj-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: middle; transform: translateY(-1px); box-shadow: inset 0 1px 1px rgba(12,16,32,0.1); }
-.dot-amethyst { background: #9B8AF4; }
-.dot-citrine { background: var(--saffron); }
-.dot-vermilion { background: #E06C53; }
-.dot-malachite { background: #4A9E78; }
-.dot-polar { background: #7CB4B8; }
-.dot-peony { background: #E294A5; }
+
+
+
+/* --- SUBJECT LINE COLORS --- */
+.pc-bl { border-left: 2px solid var(--pc-color, var(--saffron)); }
+.pc-bl::before { background: var(--pc-bg, rgba(232,175,56,0.05)); }
+.bl-amethyst { --pc-color: #9B8AF4; --pc-bg: rgba(155,138,244,0.05); }
+.bl-citrine { --pc-color: var(--saffron); --pc-bg: rgba(232,175,56,0.05); }
+.bl-vermilion { --pc-color: #E06C53; --pc-bg: rgba(224,108,83,0.05); }
+.bl-malachite { --pc-color: #4A9E78; --pc-bg: rgba(74,158,120,0.05); }
+.bl-polar { --pc-color: #7CB4B8; --pc-bg: rgba(124,180,184,0.05); }
+.bl-peony { --pc-color: #E294A5; --pc-bg: rgba(226,148,165,0.05); }
 
 .plan-card-entrance.visible .pc-bl::before{width:100%;transition-delay:calc(var(--bl-i,0)*.12s + .5s)}
 .pc-bl>*{position:relative;z-index:1}.pc-bl .tm{font-family:'Space Mono',monospace;font-size:0.48rem;color:#aaa;min-width:40px}
@@ -2177,27 +2181,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <div class="pc-context" style="padding:8px 20px;font-family:'Space Mono',monospace;font-size:0.42rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--rule)">Sample: 4-hour morning session · Your times adjust</div>
       <div class="pc-wave"><div class="pc-wave-label">Wave 1 · Morning</div></div>
-      <div class="pc-bl" style="--bl-i:0"><span class="tm">20 min</span><span><span class="subj-dot dot-amethyst" title="Amethyst (Language Arts)"></span><strong>Reading</strong>: Mia reads about Pompeii. Noah matches volcano vocab cards.</span></div>
-      <div class="pc-bl" style="--bl-i:1"><span class="tm">20 min</span><span><span class="subj-dot dot-amethyst" title="Amethyst (Language Arts)"></span><strong>Writing</strong>: Mia writes three sentences using vocab words. Noah traces letters.</span></div>
-      <div class="pc-bl" style="--bl-i:2"><span class="tm">20 min</span><span><span class="subj-dot dot-citrine" title="Citrine (World/History)"></span><strong>Atlas</strong>: Visit Iceland. Find the geysers. Map the Ring of Fire.</span></div>
-      <div class="pc-bl" style="--bl-i:3"><span class="tm">20 min</span><span><span class="subj-dot dot-vermilion" title="Vermilion (Math/Logic)"></span><strong>Math</strong>: Measure the doorway. Mount Fuji is 233 doorways tall. Draw a volcano to scale.</span></div>
+      <div class="pc-bl bl-amethyst" style="--bl-i:0"><span class="tm">20 min</span><span><strong>Reading</strong>: Mia reads about Pompeii. Noah matches volcano vocab cards.</span></div>
+      <div class="pc-bl bl-amethyst" style="--bl-i:1"><span class="tm">20 min</span><span><strong>Writing</strong>: Mia writes three sentences using vocab words. Noah traces letters.</span></div>
+      <div class="pc-bl bl-citrine" style="--bl-i:2"><span class="tm">20 min</span><span><strong>Atlas</strong>: Visit Iceland. Find the geysers. Map the Ring of Fire.</span></div>
+      <div class="pc-bl bl-vermilion" style="--bl-i:3"><span class="tm">20 min</span><span><strong>Math</strong>: Measure the doorway. Mount Fuji is 233 doorways tall. Draw a volcano to scale.</span></div>
 
       <div class="pc-break"><span class="pc-break-icon">☕</span><span class="pc-break-text">Snack break · 20 min</span></div>
 
       <div class="pc-collapsed" onclick="toggleWave(this)" style="cursor:pointer"><span class="pc-collapsed-wave">Wave 2</span><span class="pc-collapsed-range">60 min</span><span class="pc-collapsed-subj">Science + Elementum</span><span class="pc-collapsed-count">3 blocks</span><span class="pc-chevron">+</span></div>
       <div class="pc-expanded" id="wave2-detail">
-        <div class="pc-bl" style="--bl-i:0"><span class="tm">20 min</span><span><span class="subj-dot dot-malachite" title="Malachite (Natural Science)"></span><strong>Science</strong>: How do volcanoes form? Draw the layers: crust, mantle, magma chamber.</span></div>
-        <div class="pc-bl" style="--bl-i:1"><span class="tm">20 min</span><span><span class="subj-dot dot-polar" title="Polar (Physical Science)"></span><strong>Elementum</strong>: Sulfur: the grumpy element. Why do volcanoes smell? Combo: Sulfur + Oxygen.</span></div>
-        <div class="pc-bl" style="--bl-i:2"><span class="tm">20 min</span><span><span class="subj-dot dot-malachite" title="Malachite (Natural Science)"></span><strong>Experiment</strong>: Baking soda + vinegar eruption. Measure how high. Record in journal.</span></div>
+        <div class="pc-bl bl-malachite" style="--bl-i:0"><span class="tm">20 min</span><span><strong>Science</strong>: How do volcanoes form? Draw the layers: crust, mantle, magma chamber.</span></div>
+        <div class="pc-bl bl-polar" style="--bl-i:1"><span class="tm">20 min</span><span><strong>Elementum</strong>: Sulfur: the grumpy element. Why do volcanoes smell? Combo: Sulfur + Oxygen.</span></div>
+        <div class="pc-bl bl-malachite" style="--bl-i:2"><span class="tm">20 min</span><span><strong>Experiment</strong>: Baking soda + vinegar eruption. Measure how high. Record in journal.</span></div>
       </div>
 
       <div class="pc-break"><span class="pc-break-icon">🏃</span><span class="pc-break-text">Movement reset · 10 min</span></div>
 
       <div class="pc-collapsed" onclick="toggleWave(this)" style="cursor:pointer"><span class="pc-collapsed-wave">Wave 3</span><span class="pc-collapsed-range">60 min</span><span class="pc-collapsed-subj">Hands-on + Exploration</span><span class="pc-collapsed-count">3 blocks</span><span class="pc-chevron">+</span></div>
       <div class="pc-expanded" id="wave3-detail">
-        <div class="pc-bl" style="--bl-i:0"><span class="tm">20 min</span><span><span class="subj-dot dot-peony" title="Peony (Creative Arts)"></span><strong>Art</strong>: Build a clay volcano cross-section. Paint the magma chamber red.</span></div>
-        <div class="pc-bl" style="--bl-i:1"><span class="tm">20 min</span><span><strong>Atlas</strong>: Fly to Pompeii. What happened in 79 AD? Find Vesuvius on the map.</span></div>
-        <div class="pc-bl" style="--bl-i:2"><span class="tm">20 min</span><span><span class="subj-dot dot-amethyst" title="Amethyst (Language Arts)"></span><strong>Journal</strong>: Draw your favorite thing from today. Write one sentence about it.</span></div>
+        <div class="pc-bl bl-peony" style="--bl-i:0"><span class="tm">20 min</span><span><strong>Art</strong>: Build a clay volcano cross-section. Paint the magma chamber red.</span></div>
+        <div class="pc-bl bl-citrine" style="--bl-i:1"><span class="tm">20 min</span><span><strong>Atlas</strong>: Fly to Pompeii. What happened in 79 AD? Find Vesuvius on the map.</span></div>
+        <div class="pc-bl bl-amethyst" style="--bl-i:2"><span class="tm">20 min</span><span><strong>Journal</strong>: Draw your favorite thing from today. Write one sentence about it.</span></div>
       </div>
 
       <div class="pc-more">+ Tuesday through Friday</div>
