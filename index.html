@@ -384,24 +384,39 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .sr-card.active .sr-activity{color:rgba(250,250,250,0.85);transform:translateY(0);opacity:1}
 .sr-beam{display:none}
 
-.games-band{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.game-panel{padding:56px 48px;background:var(--linen)}.game-panel:first-child{border-right:1px solid var(--rule)}.game-panel.gp-elem{background:var(--warm-bg)}
-.game-panel .moment{font-family:'Sora',sans-serif;font-weight:200;font-size:1.1rem;line-height:1.4;margin-bottom:16px}.game-panel .moment strong{font-weight:700;color:var(--saffron)}
-.game-panel h3{font-family:'Sora',sans-serif;font-weight:700;font-size:2rem;letter-spacing:-0.04em;margin-bottom:8px;line-height:1}
-.game-panel .gd{font-size:0.72rem;color:var(--mid);line-height:1.7;margin-bottom:16px}
-.g-stats{display:flex;gap:16px}.g-st .v{font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;line-height:1;letter-spacing:-0.02em}.g-st .l{font-family:'Space Mono',monospace;font-size:0.45rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--faint)}
-.elem-chips{display:flex;gap:8px;margin:20px 0 16px;position:relative}
-.ech{width:56px;border:1.5px solid var(--ink);padding:8px 4px 6px;text-align:center;background:#fff;box-shadow:inset 1px 1px 3px rgba(12,16,32,0.12),inset -1px -1px 2px rgba(255,255,255,0.6);transition:transform .3s var(--expo),box-shadow .3s var(--expo),background .8s}
-.ech:hover{box-shadow:0 2px 8px rgba(12,16,32,0.1),0 0 0 1px var(--saffron);transform:translateY(-3px) rotate(-3deg)}.ech.glow{background:rgba(232,175,56,0.08)}
-.ech .s{font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;line-height:1.2}.ech .n{font-family:'Space Mono',monospace;font-size:0.4rem;letter-spacing:0.05em;text-transform:uppercase;color:#8C91A5;margin-top:2px}
-.atlas-chips{display:flex;gap:8px;margin:20px 0 16px;flex-wrap:wrap}.ach{width:56px;text-align:center;padding:8px 4px 6px;border:1.5px solid var(--ink);transition:transform 0.25s var(--expo),box-shadow 0.25s var(--expo);cursor:default}.ach:hover{transform:translateY(-2px);box-shadow:3px 3px 0 var(--saffron)}.ach .s{font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;line-height:1.2;color:var(--ink)}.ach .n{font-family:'Space Mono',monospace;font-size:0.4rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--mid);margin-top:2px}
-.reaction-spark{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--saffron);opacity:0;pointer-events:none}
-.reaction-spark.active{animation:sparkPop .5s var(--expo) forwards}
-@keyframes sparkPop{0%{opacity:1;transform:scale(0)}40%{transform:scale(2.5)}100%{opacity:0;transform:scale(0)}}
-.panel-link{display:inline-block;margin-top:20px;font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--faint);padding-bottom:2px;transition:border-color .2s,color .2s}.panel-link:hover{border-color:var(--saffron);color:var(--saffron)}.panel-heading-link{color:inherit;text-decoration:none;transition:color 0.25s var(--expo)}.panel-heading-link:hover{color:var(--saffron)}
 
+  /* --- THE LAYERS (SPECIMEN TRAYS) --- */
+  .c1-wrapper { padding: 80px 48px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; }
+  .c1-header { max-width: 900px; margin: 0 auto 32px; text-align: center; }
+  .c1-eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(12,16,32,0.6); margin-bottom: 20px; font-weight: 700; }
+  .c1-h2 { font-family: 'Fraunces', serif; font-size: 42px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
+  .c1-h2 em { font-style: italic; color: var(--saffron); }
+  .c1-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto; width: 100%; }
+  .c1-tray { background: #F4EEDF; border-radius: 16px; padding: 40px 40px; box-shadow: inset 0 12px 32px rgba(12,16,32,0.06), inset 0 2px 4px rgba(12,16,32,0.04), 0 2px 0 rgba(255,255,255,0.8); display: flex; flex-direction: column; }
+  .c1-tray-content { flex-grow: 1; margin-bottom: 32px; }
+  .c1-tray-title { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 600; margin: 0 0 12px 0; }
+  .c1-tray-quote { font-family: 'Sora', sans-serif; font-weight: 200; font-size: 15px; line-height: 1.6; color: var(--ink-light); margin: 0; }
+  .c1-tray-quote strong { font-weight: 600; color: var(--saffron); }
+  .c1-chips { display: flex; gap: 12px; flex-wrap: wrap; }
+  .c1-chip { width: 56px; height: 64px; background: #FFFDF8; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 16px -4px rgba(12,16,32,0.1), inset 0 2px 2px rgba(255,255,255,1); transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), border-color 0.4s; cursor: pointer; border: 1px solid transparent; }
+  .c1-chip:hover { transform: translateY(-8px) rotate(2deg); box-shadow: 0 16px 24px -6px rgba(232,175,56,0.25), 0 8px 12px rgba(12,16,32,0.05), inset 0 2px 2px rgba(255,255,255,1); border-color: rgba(232,175,56,0.3); }
+  .c1-chip-sym { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 18px; color: var(--ink); transition: color 0.3s; }
+  .c1-chip-name { font-family: 'Space Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-light); margin-top: 4px; transition: color 0.3s; }
+  .c1-tray-elem { background: #EAE6D8; }
+  .c1-tray-elem .c1-chip { background: linear-gradient(135deg, #2A2F45, var(--ink)); color: white; box-shadow: 0 8px 16px -4px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.15); border: 1px solid transparent; }
+  .c1-tray-elem .c1-chip-sym { color: white; }
+  .c1-tray-elem .c1-chip-name { color: rgba(255,255,255,0.5); }
+  .c1-tray-elem .c1-chip:hover { box-shadow: 0 16px 24px -6px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.2); border-color: rgba(232,175,56,0.2); }
+  .c1-tray-elem .c1-chip:hover .c1-chip-sym { color: var(--saffron); }
+  .c1-tray-elem .c1-chip:hover .c1-chip-name { color: rgba(232,175,56,0.7); }
 
-.faq-section{padding:100px 48px;max-width:var(--max-width);margin:0 auto}.faq-inner{max-width:680px}
+  @media (max-width: 767px) {
+    .c1-wrapper { padding: 60px 24px; }
+    .c1-h2 { font-size: 32px; }
+    .c1-grid { grid-template-columns: 1fr; gap: 24px; }
+    .c1-tray { padding: 32px 24px; }
+    .c1-tray-title { font-size: 28px; }
+  }
 
 /* ═══ THE JOURNEYS — the roads in, unranked. A held breath before the CTA. ═══ */
 .journeys{padding:clamp(78px,13vh,148px) 48px;background:transparent;position:relative}
@@ -2104,15 +2119,38 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <!-- THE LAYERS -->
-<div class="saffron-rule"></div>
-
-<div class="layers-intro reveal">
-  <p class="layers-intro-text">The plan is how you move through the week. <strong>These are the worlds you move through.</strong></p>
-</div>
-
-<section class="games-band reveal" id="layers"><div class="game-panel"><div class="tag-light">The world layer</div><p class="moment">"Open Atlas. Visit Iceland. <strong>What country has the most volcanoes?</strong>"</p><h3><a href="https://atlas.wizkoo.com" target="_blank" class="panel-heading-link">Atlas</a></h3><p class="gd">227 countries. Heritage, politics, history, geography. Every theme passes through the world. Explore the world that made you.</p><div class="atlas-chips" id="atlas-chips"><div class="ach" data-loc="IS"><div class="s">IS</div><div class="n">Iceland</div></div><div class="ach" data-loc="IT"><div class="s">IT</div><div class="n">Italy</div></div><div class="ach" data-loc="EC"><div class="s">EC</div><div class="n">Ecuador</div></div><div class="ach" data-loc="JP"><div class="s">JP</div><div class="n">Japan</div></div></div><a href="https://atlas.wizkoo.com" class="panel-link" target="_blank">Explore Atlas →</a></div><div class="game-panel gp-elem"><div class="tag-light">The matter layer</div><p class="moment">"Sulfur is grumpy. But without him, <strong>no volcanoes.</strong>"</p><h3><a href="https://elementum.wizkoo.com" target="_blank" class="panel-heading-link">Elementum</a></h3><p class="gd">118 elements. Each one has a story, a personality, and a connection to real life. Guided by Ferro, a dragon forged of iron, who knows every element by name. Every theme finds its element.</p><div class="elem-chips" id="elem-chips"><div class="ech" data-el="S"><div class="s">S</div><div class="n">Sulfur</div></div><div class="ech" data-el="Fe"><div class="s">Fe</div><div class="n">Iron</div></div><div class="ech" data-el="O"><div class="s">O</div><div class="n">Oxygen</div></div><div class="ech" data-el="Si"><div class="s">Si</div><div class="n">Silicon</div></div><div class="reaction-spark" id="spark"></div></div><a href="https://elementum.wizkoo.com" class="panel-link" target="_blank">Explore Elementum →</a></div></section>
-
-<div class="saffron-rule"></div>
+<section class="c1-wrapper reveal" id="layers">
+  <div class="c1-header">
+    <div class="c1-eyebrow">Included Mini-Games</div>
+    <h2 class="c1-h2">The plan is the engine.<br>These are the <em>worlds you explore.</em></h2>
+  </div>
+  <div class="c1-grid">
+    <div class="c1-tray">
+      <div class="c1-tray-content">
+        <h3 class="c1-tray-title"><a href="https://atlas.wizkoo.com" target="_blank" class="panel-heading-link" style="color:inherit;text-decoration:none;">Atlas</a></h3>
+        <p class="c1-tray-quote">"Open Atlas. Visit Iceland. <strong style="color:var(--ink);">What country has the most volcanoes?</strong>"</p>
+      </div>
+      <div class="c1-chips">
+        <div class="c1-chip"><div class="c1-chip-sym">IS</div><div class="c1-chip-name">Iceland</div></div>
+        <div class="c1-chip"><div class="c1-chip-sym">IT</div><div class="c1-chip-name">Italy</div></div>
+        <div class="c1-chip"><div class="c1-chip-sym">EC</div><div class="c1-chip-name">Ecuador</div></div>
+        <div class="c1-chip"><div class="c1-chip-sym">JP</div><div class="c1-chip-name">Japan</div></div>
+      </div>
+    </div>
+    <div class="c1-tray c1-tray-elem">
+      <div class="c1-tray-content">
+        <h3 class="c1-tray-title"><a href="https://elementum.wizkoo.com" target="_blank" class="panel-heading-link" style="color:inherit;text-decoration:none;">Elementum</a></h3>
+        <p class="c1-tray-quote">"Sulfur is grumpy. But without him, <strong style="color:var(--ink);">no volcanoes.</strong>"</p>
+      </div>
+      <div class="c1-chips">
+        <div class="c1-chip"><div class="c1-chip-sym">S</div><div class="c1-chip-name">Sulfur</div></div>
+        <div class="c1-chip"><div class="c1-chip-sym">Fe</div><div class="c1-chip-name">Iron</div></div>
+        <div class="c1-chip"><div class="c1-chip-sym">O</div><div class="c1-chip-name">Oxygen</div></div>
+        <div class="c1-chip"><div class="c1-chip-sym">Si</div><div class="c1-chip-name">Silicon</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- THE PLAN CARD -->
 <section class="plan-section" id="sample-week">
