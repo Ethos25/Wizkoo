@@ -860,7 +860,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 /* ═══ A PLAN IS NOT A PROMPT ═══ */
 .nap-section {
   background: linear-gradient(180deg, #FFFFFF 0%, #FFF8E7 15%, var(--linen) 50%);
-  padding: 120px 48px 120px 48px;
+  padding: clamp(60px, 8vh, 100px) 48px clamp(60px, 8vh, 100px) 48px;
   position: relative;
   overflow: hidden;
   border-top: 1px solid #FFFFFF;
@@ -891,7 +891,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   font-size: 10px;
   letter-spacing: 0.1em;
   color: var(--ink-light);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   text-transform: uppercase;
 }
 .nap-heading {
@@ -900,7 +900,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   font-size: clamp(32px, 4vw, 48px);
   letter-spacing: -0.02em;
   line-height: 1.1;
-  margin: 0 0 24px 0;
+  margin: 0 0 16px 0;
   color: var(--ink);
 }
 .nap-lead {
@@ -908,7 +908,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   font-weight: 400;
   font-size: 16px;
   line-height: 1.6;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   color: var(--ink-light);
 }
 .nap-closer {
@@ -920,7 +920,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 .nap-right {
   position: relative;
-  height: 400px;
+  height: 340px;
   perspective: 1000px;
 }
 .nap-card {
@@ -940,7 +940,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .nap-c1 {
   width: 280px;
   height: 160px;
-  top: 200px;
+  top: 170px;
   left: 80px;
   transform: rotate(4deg);
   z-index: 1;
@@ -958,7 +958,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 .nap-c2 {
   width: 320px;
-  top: 90px;
+  top: 70px;
   left: 20px;
   transform: rotate(-3deg);
   z-index: 2;
