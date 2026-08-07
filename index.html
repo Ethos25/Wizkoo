@@ -171,9 +171,10 @@ html{scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size);line-height:1.6}
 @media(hover:hover){html,body,a,button,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
 /* ═══ CUSTOM CURSOR ═══ */
-.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s;opacity:0}   /* exclusion blend removed by ruling: over the linen hero it inverted the saffron dot to blue */
+.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s,background-color .25s,border-color .25s;opacity:0}   /* exclusion blend removed by ruling: over the linen hero it inverted the saffron dot to blue */
 .cursor.visible{opacity:1}
 .cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
+.cursor.on-saffron{background:rgba(12,16,32,0.15);border-color:#0C1020}
 
 /* ═══ WORDMARK TERMINAL DOT ═══ */
 .wm-dot{display:inline-block;position:relative;margin-left:-0.08em}
@@ -2127,8 +2128,14 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
   // Hover detection - only interactive elements, NOT generic spans
   var hoverEls='a,button,.footer-social span,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.week-card,.plan-card,.sr-track,.planned-dot,.wm,.nav-wm';
-  document.addEventListener('mouseover',function(e){if(e.target.closest(hoverEls))c.classList.add('hover')});
-  document.addEventListener('mouseout',function(e){if(e.target.closest(hoverEls))c.classList.remove('hover')});
+  document.addEventListener('mouseover',function(e){
+    if(e.target.closest(hoverEls)) c.classList.add('hover');
+    if(e.target.closest('.lw-foot')) c.classList.add('on-saffron');
+  });
+  document.addEventListener('mouseout',function(e){
+    if(e.target.closest(hoverEls)) c.classList.remove('hover');
+    if(e.target.closest('.lw-foot')) c.classList.remove('on-saffron');
+  });
   // Smooth follow with lag
   (function tick(){cx+=(window.mx-cx)*0.15;cy+=(window.my-cy)*0.15;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(tick)})();
 })();
