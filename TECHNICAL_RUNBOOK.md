@@ -1541,6 +1541,59 @@ Before writing any Claude Code prompt, ask:
 The answer must be "yes, because every color traces to a token, every font has
 a specific weight, every animation has a named curve, and every pixel has a reason."
 
+### THE BAR (deposited 2026-08-05, authority Notion)
+
+Reproduced verbatim. **Authority is Notion**, per the system-of-record
+boundary at the top of this file; this is a carried copy for executors who
+arrive without an order in hand, NOT a second source of truth. If the two
+ever disagree, Notion governs and this copy is stale. **The composition
+template is governed by the Session Runbook in Notion** — this file carries
+the text so that an executor without an order in hand is not left with
+nothing.
+
+What we are building: a product that looks like it came out of a Pixar
+studio with a New York agency and a Copenhagen studio behind it. Not
+"clean." Not "modern." That.
+
+PIXAR. Every frame has emotional intent. The composition tells the eye
+where to go and the body how to feel before a word is read. Motion has
+weight and consequence: things arrive from somewhere, settle because
+something stopped them, and leave for a reason. Nothing eases in because
+easing is the default. If a movement cannot be explained as a physical
+event, it is wrong.
+
+NEW YORK. Editorial confidence. Hierarchy that commands rather than
+suggests. Type that is set, not styled. One thing is the loudest thing on
+the surface and it is loud on purpose. Nothing timid, nothing hedged,
+nothing centered because centering was easier than deciding.
+
+COPENHAGEN. Material honesty and restraint. Surfaces behave like substances
+with real properties. Silence is composed as deliberately as content. The
+confidence to leave a thing plain. No decoration that is not structural.
+
+THE TEST FOR EVERY VALUE. Is this value authored, or is it a default? Every
+number — spacing, duration, opacity, radius, weight — must be a chosen value
+on a known scale for a stated reason. Framework defaults, browser defaults,
+and round numbers that arrived by habit all fail. Does it survive close
+inspection at 200% zoom, at the edge of every surface, the terminal of every
+letterform, the moment a shadow resolves? Are the unglamorous states
+composed — focus, hover, disabled, empty, loading, error, longest string,
+shortest? A default focus ring is a confession. Does it look webby? Rounded
+corners plus a drop shadow plus a blue link is not design, it is the absence
+of design.
+
+WHAT IT IS FOR. A mother opens this at her kitchen table and decides in
+about four seconds whether the people who made it are serious. She will not
+articulate what she saw. She will just know.
+
+ONE PLASTIC CUP collapses the whole illusion, and the guest does not think
+the cup was cheap — they think the place is pretending.
+
+THE LIMIT. Some of this is gateable and some is not. "Every value authored"
+cannot be checked by a script. Those clauses are held by Amy's eye, which is
+why the walk exists and why painted pixels outrank a passing test. A green
+suite is never evidence this standard was met.
+
 ---
 
 ## VIEWPORT REALITY CONSTRAINTS
