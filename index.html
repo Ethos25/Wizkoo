@@ -364,12 +364,271 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .pc-collapsed-count{font-family:'Space Mono',monospace;font-size:0.42rem;color:var(--saffron);letter-spacing:0.08em;text-transform:uppercase}
 .pc-more{padding:14px 20px;text-align:center;font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--saffron);transition:background .2s;border-top:1px solid var(--rule)}
 .pc-more:hover{background:rgba(232,175,56,0.04)}
-.plan-founder{max-width:640px;margin:clamp(52px,8vh,88px) auto 0;text-align:center}
-/* The quiet center: the only place the brand explains itself. Runs unnamed. */
-.founder-beat{max-width:540px;margin:0 auto;text-align:left;font-size:clamp(0.95rem,1.12vw,1.05rem);line-height:1.85;letter-spacing:-0.012em;color:rgba(12,16,32,0.74);text-wrap:pretty}
-.founder-beat::before{content:'';display:block;width:28px;height:1px;background:#E8AF38;opacity:0.85;margin:0 0 clamp(20px,3vh,28px)}
-.founder-cta{padding-top:clamp(28px,4vh,40px);display:flex;flex-direction:column;align-items:center}
-.micro-copy{display:block;margin-top:10px;font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid)}
+.plan-founder-wrap {
+  padding: 100px 48px;
+  background: var(--linen);
+}
+
+.plan-founder {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: clamp(40px, 5vw, 80px);
+  justify-content: space-between;
+}
+
+.pf-left {
+  flex: 1;
+  position: relative;
+  padding-left: clamp(30px, 4vw, 50px);
+  justify-content: center;
+}
+
+.pf-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: rgba(12, 16, 32, 0.08);
+}
+
+.pf-villain-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  position: absolute;
+  left: -20px;
+  bottom: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgba(12, 16, 32, 0.4);
+  letter-spacing: 0.35em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pf-villain-vertical::before {
+  content: '';
+  display: block;
+  width: 1.5px;
+  height: 40px;
+  background: var(--saffron);
+}
+
+.pf-l1-large {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(40px, 4.5vw, 60px);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.0;
+  margin-bottom: clamp(24px, 3vw, 40px);
+  letter-spacing: -0.02em;
+}
+
+.pf-l2-italic {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: clamp(16px, 2vw, 28px);
+  letter-spacing: -0.01em;
+}
+
+.pf-l3-small {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 500;
+  color: var(--ink);
+  font-style: italic;
+}
+
+.pf-founder-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  color: rgba(12, 16, 32, 0.35);
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-transform: uppercase;
+}
+
+.pf-founder-note::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: rgba(12, 16, 32, 0.2);
+}
+
+/* Kinetic Breathe Animation */
+@keyframes breathe-and-shift {
+  0% { transform: scale(0.95); color: var(--ink); }
+  100% { transform: scale(1.05); color: var(--saffron); }
+}
+
+.pf-kinetic-breathe {
+  display: inline-flex;
+  white-space: pre;
+  position: relative;
+  animation: breathe-and-shift 2s infinite alternate ease-in-out;
+  margin-right: 12px;
+}
+.pf-kinetic-breathe::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 2px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.6;
+}
+.pf-kinetic-breathe span {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.pf-kinetic-breathe span.somersault {
+  animation: do-somersault 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes do-somersault {
+  0% { transform: translateY(0) rotate(0deg) scale(1.05); color: var(--saffron); }
+  50% { transform: translateY(-16px) rotate(180deg) scale(1.1); color: var(--saffron); }
+  100% { transform: translateY(0) rotate(360deg) scale(1.05); color: var(--saffron); }
+}
+
+.pf-right {
+  flex: 0 0 420px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.box-mockup {
+  background: var(--ink);
+  padding: 40px 48px;
+  border-radius: 4px;
+  width: 100%;
+  position: relative;
+  transform: rotate(2deg);
+  box-shadow: 
+    0 20px 40px rgba(12,16,32,0.2),
+    0 40px 80px rgba(12,16,32,0.15);
+}
+
+.box-mockup::before {
+  content: '';
+  position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%) rotate(-1deg);
+  width: 80px; height: 26px;
+  background: linear-gradient(180deg, rgba(245, 240, 230, 0.95) 0%, rgba(230, 225, 215, 0.85) 100%);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15), inset 0 1px 2px rgba(255,255,255,0.9);
+  z-index: 10;
+}
+
+.box-mockup .kicker {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.box-mockup .hook {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--saffron);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.box-mockup .desc-main {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+
+.box-mockup .desc-footer {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+@media(max-width: 1150px) {
+  .plan-founder {
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+  }
+  .pf-right {
+    justify-content: center;
+    width: 100%;
+  }
+  .pf-left {
+    padding-left: 40px;
+    width: 100%;
+    max-width: 600px;
+  }
+  .pf-l1-large {
+    font-size: 48px;
+  }
+  .pf-l2-italic {
+    font-size: 32px;
+  }
+}
+@media(max-width: 600px) {
+  .plan-founder-wrap {
+    padding: 60px 24px;
+  }
+  .pf-left {
+    padding-left: 36px;
+  }
+  .pf-villain-vertical {
+    font-size: 16px;
+  }
+  .pf-l1-large {
+    font-size: 40px;
+  }
+  .pf-l2-italic {
+    font-size: 26px;
+  }
+  .pf-founder-note {
+    margin-top: 32px;
+  }
+  .box-mockup {
+    padding: 40px 28px;
+  }
+  .box-mockup .hook {
+    font-size: 22px;
+  }
+  .box-mockup .desc-main {
+    font-size: 18px;
+  }
+}
 
 /* ═══ SAME ROOM — contained, sharp edges, high contrast ═══ */
 .same-room-wrap{padding:64px 48px;background:var(--linen)}
@@ -2205,12 +2464,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <div class="pc-more">+ Tuesday through Friday</div>
     </div></div>
-    <div class="plan-founder">
-      <p class="founder-beat">He was four. He was reading. He couldn't sit still for thirty minutes, and the school said the children they accept do. The research had already started a year before that room. Wizkoo is what four years of it built: a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</p>
-      <div class="founder-cta"><a href="https://app.wizkoo.com/start" class="btn-main">Build Our Week</a><span class="micro-copy">No credit card for first plan.</span></div>
-    </div>
   </div>
 </section>
+<div class="plan-founder-wrap">
+      <div class="plan-founder">
+        <div class="pf-left">
+          <div class="pf-villain-vertical">The Villain Story &nbsp;&nbsp;&nbsp; 01</div>
+          <div class="pf-l1-large">He was four.<br>He was reading.</div>
+          <div class="pf-l2-italic">But he couldn't <span class="pf-kinetic-breathe" aria-label="sit still"><span style="--i:1">s</span><span style="--i:2">i</span><span style="--i:3">t</span><span style="--i:4">&nbsp;</span><span style="--i:5">s</span><span style="--i:6">t</span><span style="--i:7">i</span><span style="--i:8">l</span><span style="--i:9">l</span></span> for<br>thirty minutes.</div>
+          <div class="pf-l3-small">And the school said the children they accept do.</div>
+          <div class="pf-founder-note">Founder Note &nbsp;&middot;&nbsp; 2022</div>
+        </div>
+        
+        <div class="pf-right">
+          <div class="box-mockup">
+            <div class="kicker">Four years of research</div>
+            <div class="hook">State standards mapped<br>to their obsessions.</div>
+            <div class="desc-main">20-minute blocks. On your schedule.</div>
+            <div class="desc-footer">Built with profound respect for wiggly kids.</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 <!-- SAME ROOM -->
 <div class="same-room-wrap">
@@ -2840,5 +3115,25 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
   sig.textContent = day.toLowerCase() + ', ' + tod.toLowerCase() + '.';
 })();
 </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const letters = document.querySelectorAll('.pf-kinetic-breathe span');
+      function triggerRandomSomersault() {
+        let validLetters = Array.from(letters).filter((_, index) => index !== 3);
+        if (validLetters.length === 0) return;
+        let randomLetter = validLetters[Math.floor(Math.random() * validLetters.length)];
+        if (!randomLetter.classList.contains('somersault')) {
+          randomLetter.classList.add('somersault');
+          setTimeout(() => {
+            randomLetter.classList.remove('somersault');
+          }, 850);
+        }
+        let nextJump = Math.random() * 2000 + 5000;
+        setTimeout(triggerRandomSomersault, nextJump);
+      }
+      setTimeout(triggerRandomSomersault, 3000);
+    });
+  </script>
 </body>
 </html>
+

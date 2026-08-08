@@ -2120,18 +2120,46 @@
          label and stopping was judged by a point mid-flight, not by where it
          came to rest. One rAF per frame, always evaluating the newest
          position. */
-      var hoverPend = false, hoverX = 0, hoverY = 0;
+      var hoverPend = false, hoveredTarget = null;
+      var clearHoverTimeout = null;
       section.addEventListener('pointermove', function (e) {
         if (e.pointerType && e.pointerType !== 'mouse') return;
-        hoverX = e.clientX; hoverY = e.clientY;
+        hoveredTarget = e.target;
         if (hoverPend) return;
         hoverPend = true;
         requestAnimationFrame(function () {
           hoverPend = false;
-          apply(subjectAt(hoverX, hoverY));
+          var subjectId = null;
+          if (hoveredTarget) {
+            // Find if we are hovering a node or label. 
+            var nodeEl = hoveredTarget.closest('.lo-node, .lo-label-depth');
+            if (nodeEl) {
+              sys.nodes.forEach(function(n) {
+                if (n.g.__place === nodeEl || n.label === nodeEl || nodeEl.contains(n.g.__place) || nodeEl.contains(n.label)) {
+                  subjectId = n.def.id;
+                }
+              });
+            }
+          }
+          if (subjectId !== null) {
+            clearTimeout(clearHoverTimeout);
+            apply(subjectId);
+          } else {
+            // Debounce the null application to prevent Chromium flicker on moving SVG nodes
+            if (!clearHoverTimeout) {
+              clearHoverTimeout = setTimeout(function() {
+                apply(null);
+                clearHoverTimeout = null;
+              }, 100);
+            }
+          }
         });
       });
-      section.addEventListener('pointerleave', function () { apply(null); });
+      section.addEventListener('pointerleave', function () { 
+         clearTimeout(clearHoverTimeout);
+         clearHoverTimeout = null;
+         apply(null); 
+      });
       window.__orbHoverApply = apply;   /* debug hook; the verifier uses real moves */
     })();
 
