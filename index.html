@@ -1875,6 +1875,62 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
 @media(min-width:400px) and (max-width:767px){
   .wrap{padding:0 28px}
 }
+
+/* ═══ PRICING MONUMENTAL (1A Layout) ═══ */
+.pricing-monumental { position: relative; background-color: #101830; background-image: radial-gradient(ellipse 70% 90% at 50% 0%, #182848 0%, #0C1020 72%); padding: 104px 0 92px; overflow: hidden; }
+.mo-pinstripes { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.014) 59px, rgba(255,255,255,0.014) 60px); pointer-events: none; }
+.mo-wrap { position: relative; max-width: 1040px; margin: 0 auto; padding: 0 48px; text-align: center; z-index: 2; }
+
+/* Eyebrow & Headline */
+.mo-eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #E8AF38; display: inline-flex; align-items: center; gap: 14px; }
+.mo-eyebrow .line { width: 26px; height: 1px; background: rgba(232,175,56,0.5); }
+.mo-headline { margin-top: 36px; font-family: 'Fraunces', serif; font-weight: 800; font-size: 74px; line-height: 1.06; letter-spacing: -0.03em; color: #FAFAFA; }
+.mo-headline i { font-style: italic; color: #E8AF38; }
+.mo-sub { margin: 20px auto 0; max-width: 620px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; font-size: 19px; line-height: 1.6; color: rgba(240,242,248,0.6); text-wrap: pretty; }
+
+/* Price Area */
+.mo-price-wrap { margin: 64px auto 0; display: flex; align-items: flex-end; justify-content: center; gap: 18px; }
+.mo-price { font-family: 'Fraunces', serif; font-weight: 800; font-size: 148px; line-height: 0.82; letter-spacing: -0.035em; color: #FAFAFA; }
+.mo-currency { font-size: 0.3em; color: rgba(250,250,250,0.55); vertical-align: 0.9em; letter-spacing: 0; }
+.mo-period { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,242,248,0.5); transform: translateY(-10px); display: inline-block; }
+.mo-price-desc { margin-top: 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: rgba(240,242,248,0.42); }
+
+/* Ledger Grid */
+.mo-ledger { margin-top: 64px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); text-align: left; }
+.mo-col { padding: 32px 36px 36px 24px; border-right: 1px solid rgba(255,255,255,0.09); }
+.mo-col.first { padding-left: 0; }
+.mo-col.last { padding-right: 0; border-right: none; }
+.mo-col-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #E8AF38; margin-bottom: 12px; }
+.mo-col-desc { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; font-size: 13.5px; line-height: 1.7; color: rgba(240,242,248,0.55); text-wrap: pretty; padding-right: 12px; }
+
+/* CTA Area */
+.mo-cta-area { margin-top: 56px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.btn-mo { background: #E8AF38; color: #0C1020; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; padding: 20px 54px; text-decoration: none; box-shadow: 0 8px 40px rgba(232,175,56,0.22); transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1); display: inline-block; }
+.btn-mo:hover { transform: translateY(-2px); box-shadow: 0 14px 52px rgba(232,175,56,0.34); background: #FAFAFA; color: #0C1020; }
+.mo-cta-note { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(240,242,248,0.35); }
+.mo-alt { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: rgba(240,242,248,0.45); }
+.mo-alt a { color: rgba(250,250,250,0.85); border-bottom: 1px solid rgba(232,175,56,0.55); text-decoration: none; transition: color 0.3s, border-color 0.3s; }
+.mo-alt a:hover { color: #E8AF38; border-color: #E8AF38; }
+
+/* Cinematic Staggered Reveal for Monumental */
+.pricing-monumental .mo-eyebrow, .pricing-monumental .mo-headline, .pricing-monumental .mo-sub, .pricing-monumental .mo-price-wrap, .pricing-monumental .mo-price-desc, .pricing-monumental .mo-ledger, .pricing-monumental .mo-cta-area { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.mo-wrap.visible .mo-eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+.mo-wrap.visible .mo-headline { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+.mo-wrap.visible .mo-sub { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+.mo-wrap.visible .mo-price-wrap { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
+.mo-wrap.visible .mo-price-desc { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+.mo-wrap.visible .mo-ledger { opacity: 1; transform: translateY(0); transition-delay: 1.0s; }
+.mo-wrap.visible .mo-cta-area { opacity: 1; transform: translateY(0); transition-delay: 1.2s; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .pricing-monumental { padding: 80px 0; }
+  .mo-headline { font-size: 48px; }
+  .mo-price { font-size: 100px; }
+  .mo-ledger { grid-template-columns: 1fr; border-bottom: none; border-top: none; gap: 24px; margin-top: 48px; }
+  .mo-col { border-right: none; padding: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.09); padding-bottom: 24px !important; }
+  .mo-col.last { border-bottom: none; }
+}
 </style>
 <!-- ═══ SKY SYSTEM STYLES ═══ -->
 <style id="hp-sky-system">
@@ -2540,13 +2596,52 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 </div>
 
+<!-- CTA: New York Editorial Layout -->
+<!-- CTA: Monumental Layout -->
+<section class="pricing-monumental" id="pricing">
+  <div class="mo-pinstripes"></div>
+  <div class="mo-wrap reveal">
+    <div class="mo-eyebrow">
+      <span class="line"></span>The Annual Membership<span class="line"></span>
+    </div>
+
+    <div class="mo-headline">One price.<i> Every child.</i></div>
+    <p class="mo-sub">Endless curiosity for them. Absolute academic certainty for you.</p>
+
+    <div class="mo-price-wrap">
+      <span class="mo-price"><span class="mo-currency">$</span>499</span>
+      <span class="mo-period">/ year</span>
+    </div>
+    <div class="mo-price-desc">Up to four children, ages three to twelve. Nothing sold separately.</div>
+
+    <div class="mo-ledger">
+      <div class="mo-col first">
+        <div class="mo-col-title">Plans</div>
+        <div class="mo-col-desc">Every child challenged at their own level. One shared topic for the whole house. Give them a reason to talk at dinner again.</div>
+      </div>
+      <div class="mo-col">
+        <div class="mo-col-title">Worlds</div>
+        <div class="mo-col-desc">Complete, unrestricted access to Atlas, Elementum, and The Library.</div>
+      </div>
+      <div class="mo-col">
+        <div class="mo-col-title">Proof</div>
+        <div class="mo-col-desc">Weekly Orbit Reports mapped to state standards. Absolute proof they are on track.</div>
+      </div>
+      <div class="mo-col last">
+        <div class="mo-col-title">The Open Seat</div>
+        <div class="mo-col-desc">A full year for another family. Built into the price.<br><br>Same table, one more seat.</div>
+      </div>
+    </div>
+
+    <div class="mo-cta-area">
+      <a href="https://app.wizkoo.com/sign-up" class="btn-mo">Build Our Family’s Week</a>
+      <div class="mo-alt">Prefer monthly? <a href="#">$50 a month</a>, cancel in one click.</div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq-section reveal" id="faq"><div class="faq-inner"><h2>Questions parents ask<span style="color:var(--saffron)">.</span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 3 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>A prompt gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>We keep two things about your child: a first name and an age. You enter them. They build their week. That is the entire file. No last name, no birthdate, no photos, no home address. Encrypted, never used for advertising, never sold, and yours to delete from inside your account, any time.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>$50/month or $499/year. Your first plan is free. No credit card required.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
-
-<!-- CTA -->
-
-
-<section class="cta-dark cta-reveal" id="pricing"><h2>One moment<span class="sp"></span><br><span style="white-space:nowrap">Every subject connected<span class="sp"></span></span></h2><p class="cta-status">Your first plan is free</p><p class="cta-sub">Your first plan is free. No credit card. Sign up and build your week.</p><a href="https://app.wizkoo.com/start" class="btn-main">Build Our Week</a><div style="margin:56px auto 0;padding-top:48px;border-top:1px solid rgba(255,255,255,0.07);max-width:520px"><p style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;margin:0 0 16px">When you&rsquo;re ready</p><p style="font-family:'Sora',sans-serif;font-weight:300;font-size:1.1rem;letter-spacing:-0.02em;color:rgba(250,250,250,0.5);margin:0 0 36px">One price. Every child in your family.</p><div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:0 auto 40px"><div style="border:1px solid rgba(232,175,56,0.25);padding:24px 40px;text-align:center;min-width:160px"><div style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:#8C91A5;margin-bottom:8px">Monthly</div><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:2.2rem;letter-spacing:-0.03em;color:#F2F0EA">$50<span style="font-size:0.9rem;font-weight:400;color:#8C91A5">&thinsp;/&nbsp;mo</span></div></div><div style="border:1px solid rgba(232,175,56,0.55);padding:24px 40px;text-align:center;min-width:160px;position:relative"><div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--saffron);color:var(--ink);font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 12px;white-space:nowrap">Best value</div><div style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:#8C91A5;margin-bottom:8px">Annual</div><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:2.2rem;letter-spacing:-0.03em;color:#F2F0EA">$499<span style="font-size:0.9rem;font-weight:400;color:#8C91A5">&thinsp;/&nbsp;yr</span></div></div></div><a href="https://app.wizkoo.com/sign-up" class="btn-main">Start My Subscription</a></div></section>
 </div>
 
 <div id="site-footer"></div>
