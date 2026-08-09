@@ -631,21 +631,21 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 }
 
 /* ═══ SAME ROOM — contained, sharp edges, high contrast ═══ */
-.same-room-wrap{padding:64px 48px;background:var(--linen)}
-.same-room{max-width:1100px;margin:0 auto;padding:56px 48px;background:#0C1020;color:var(--paper);position:relative;overflow:hidden;border:1.5px solid rgba(232,175,56,0.12);transition:background-color .8s var(--expo)}
-.same-room>*{position:relative;z-index:1}
-.sr-header{margin-bottom:12px}
-.same-room .tag{color:var(--saffron);margin-bottom:16px}
-.same-room h2{font-family:'Sora',sans-serif;font-weight:200;font-size:2.2rem;line-height:1.1;letter-spacing:-0.03em}.same-room h2 strong{font-weight:700;color:var(--saffron)}
-.sr-why{font-size:0.82rem;color:rgba(250,250,250,0.5);line-height:1.6;margin:12px 0 32px;max-width:500px}
-.sr-instruction{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(250,250,250,0.3);text-align:center;margin-bottom:16px;display:none}
-@media(hover:hover){.sr-instruction{display:block}}
-.sr-track{display:flex;gap:0;border-top:1px solid rgba(255,255,255,0.08);position:relative}
-.sr-card{flex:1;padding:28px 24px;border-right:1px solid rgba(255,255,255,0.06);transition:opacity .4s var(--expo),background .4s var(--expo),transform .3s var(--expo),border-color .3s;opacity:0.4;border-top:2px solid transparent}
-.sr-card:last-child{border-right:none}
-.sr-card.active{opacity:1;background:rgba(250,250,250,0.04);border-top:2px solid var(--saffron);transform:translateY(-2px)}
-.sr-name{font-family:'Sora',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:2px;transition:color .3s,transform .3s var(--expo);transform-origin:left center;color:rgba(250,250,250,0.7)}
-.sr-card.active .sr-name{color:#F0F2F8;transform:scale(1.04)}
+.same-room-wrap{position:relative;width:100%;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:var(--ink);overflow:hidden}
+.sr-bg-img{position:absolute;top:0;left:0;right:0;bottom:0;background-image:url('assets/volcano_discovery.jpg');background-size:cover;background-position:center bottom;animation:kb-zoom 15s ease-in-out infinite alternate;z-index:0}
+.sr-bg-gradient{position:absolute;top:0;left:0;right:0;height:60%;background:linear-gradient(to bottom,rgba(12,16,32,0.95) 0%,rgba(12,16,32,0.4) 50%,transparent 100%);z-index:1;pointer-events:none}
+.same-room{max-width:1400px;margin:0 auto;width:100%;display:flex;flex-direction:column;justify-content:space-between;flex:1;padding-top:80px;z-index:2;position:relative}
+.sr-header{margin-bottom:12px;padding:0 64px;max-width:800px}
+.same-room .tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--saffron);margin-bottom:24px}
+.same-room h2{font-family:'Fraunces',serif;font-size:4.5rem;font-weight:300;line-height:1.05;color:var(--paper);margin:0 0 24px 0}
+.same-room h2 strong{font-style:italic;color:var(--saffron);font-weight:500}
+.sr-why{font-size:1.15rem;color:rgba(255,255,255,0.7);line-height:1.6;margin:0;max-width:550px}
+.sr-instruction{display:none}
+.sr-track{display:flex;gap:24px;position:relative;padding:64px}
+.sr-card{flex:1;padding:32px 28px;background:rgba(20,24,44,0.95);border:1px solid rgba(255,255,255,0.05);transition:transform .3s var(--expo)}
+.sr-level-hero{font-family:'Fraunces',serif;font-style:italic;font-size:32px;color:var(--saffron);margin-bottom:12px;font-weight:500}
+.sr-meta{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:16px}
+.sr-card .sr-activity{color:rgba(255,255,255,0.9);opacity:1;transform:none;font-size:0.85rem;line-height:1.5}
 .sr-age{font-family:'Space Mono',monospace;font-size:0.48rem;color:rgba(250,250,250,0.3);margin-bottom:6px}
 .sr-level{font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--saffron);border:1px solid rgba(232,175,56,0.3);padding:2px 8px;display:inline-flex;align-items:center;gap:5px;margin-bottom:14px;transition:background .3s,color .3s,border-color .3s}
 .sr-card.active .sr-level{background:var(--saffron);color:#141310;border-color:var(--saffron)}
@@ -2507,38 +2507,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- SAME ROOM -->
 <div class="same-room-wrap">
+<div class="sr-bg-img"></div>
+<div class="sr-bg-gradient"></div>
 <section class="same-room reveal" id="same-room">
   <div class="sr-header">
     <div class="tag">Same table · Same thread</div>
-    <h2>Four children<span class="sp"></span><br><strong>One volcano<span class="sp"></span></strong></h2>
+    <h2>Four children.<br><strong>One volcano.</strong></h2>
     <p class="sr-why">Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different with the same idea.</p>
   </div>
-  <div class="sr-instruction">Hover across the cards</div>
   <div class="sr-track" id="sr-track">
-    <div class="sr-beam" id="sr-beam"></div>
-    <div class="sr-card active">
-      <div class="sr-name">Mia</div><div class="sr-age">Age 7</div>
-      <div class="sr-level"><span class="sr-level-dot full"></span> Reads Well</div>
+    <div class="sr-card">
+      <div class="sr-level-hero">Independent</div>
+      <div class="sr-meta">LEO • AGE 10</div>
+      <div class="sr-activity">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+    </div>
+    <div class="sr-card">
+      <div class="sr-level-hero">Reads Well</div>
+      <div class="sr-meta">MIA • AGE 7</div>
       <div class="sr-activity">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
-      <div class="sr-progress"></div>
     </div>
     <div class="sr-card">
-      <div class="sr-name">Noah</div><div class="sr-age">Age 5</div>
-      <div class="sr-level"><span class="sr-level-dot half"></span> Reads Some</div>
+      <div class="sr-level-hero">Reads Some</div>
+      <div class="sr-meta">NOAH • AGE 5</div>
       <div class="sr-activity">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
-      <div class="sr-progress"></div>
     </div>
     <div class="sr-card">
-      <div class="sr-name">Ava</div><div class="sr-age">Age 3</div>
-      <div class="sr-level"><span class="sr-level-dot"></span> Learning</div>
+      <div class="sr-level-hero">Pre-reader</div>
+      <div class="sr-meta">AVA • AGE 3</div>
       <div class="sr-activity">Red and orange finger painting: make your own lava flow on the big paper.</div>
-      <div class="sr-progress"></div>
-    </div>
-    <div class="sr-card">
-      <div class="sr-name">Liam</div><div class="sr-age">Age 3</div>
-      <div class="sr-level"><span class="sr-level-dot" style="width:4px;height:4px"></span> Explorer</div>
-      <div class="sr-activity">Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz.</div>
-      <div class="sr-progress"></div>
     </div>
   </div>
 </section>
@@ -2716,44 +2712,7 @@ function spawnConfetti(x,y){
 
 // nav is permanently visible — no scroll reveal needed
 
-// ═══ SAME ROOM — mouse + auto-rotate ═══
-(function(){
-  var t=document.getElementById('sr-track'),b=document.getElementById('sr-beam'),cards=t.querySelectorAll('.sr-card'),sec=document.getElementById('same-room');
-  var temps=['#0C1020','#0C1020','#0C1020','#0C1020'];
-  var currentIdx=0,autoTimer=null,isHovering=false;
-
-  function activate(idx){
-    currentIdx=idx;
-    // Reset all progress bars before switching
-    document.querySelectorAll('.sr-progress').forEach(function(p){p.style.animation='none';p.offsetHeight;p.style.animation=''});
-    cards.forEach(function(c,i){c.classList.toggle('active',i===idx)});
-    //beam hidden;
-    sec.style.background=temps[idx];
-  }
-
-  function startAuto(){
-    stopAuto();
-    autoTimer=setInterval(function(){
-      if(!isHovering) activate((currentIdx+1)%4);
-    },3500);
-  }
-
-  function stopAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null}}
-
-  t.addEventListener('mousemove',function(e){
-    isHovering=true;stopAuto();
-    var r=t.getBoundingClientRect(),idx=Math.min(3,Math.floor((e.clientX-r.left)/r.width*4));
-    activate(idx);
-  });
-
-  t.addEventListener('mouseleave',function(){
-    isHovering=false;
-    startAuto();
-  });
-
-  // Start auto-rotate by default
-  startAuto();
-})();
+// ═══ SAME ROOM — mouse + auto-rotate (Disabled for Cinematic Layout) ═══
 
 // ═══ COUNT UP ═══
 (function(){var counted=false;var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!counted){counted=true;document.querySelectorAll('[data-count]').forEach(function(el){var t=parseInt(el.dataset.count),st=null;function step(ts){if(!st)st=ts;var p=Math.min((ts-st)/1200,1);el.textContent=Math.round((1-Math.pow(1-p,3))*t);if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)})}})},{threshold:0.3});document.querySelectorAll('.games-band').forEach(function(el){obs.observe(el)})})();
@@ -2916,18 +2875,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
     setTimeout(function(){r.remove()},400);
   },{passive:true});
 
-  // ── Same Room: tap to activate cards ──
-  var srCards=document.querySelectorAll('.sr-card');
-  srCards.forEach(function(card,idx){
-    card.addEventListener('click',function(){
-      srCards.forEach(function(c){c.classList.remove('active')});
-      card.classList.add('active');
-      // Update background color
-      var temps=['#0C1020','#0C1020','#0C1020','#0C1020'];
-      var sec=document.getElementById('same-room');
-      if(sec)sec.style.background=temps[idx];
-    });
-  });
+  // ── Same Room: tap to activate cards (Disabled for Cinematic Layout) ──
 
   // ── Firefly: tap-to-catch ──
   document.addEventListener('touchend',function(e){
