@@ -1034,7 +1034,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   radial-gradient(ellipse 35% 28% at 28% 42%,rgba(160,120,60,0.04) 0%,transparent 60%),
   radial-gradient(ellipse at 50% 45%,#1e3060 0%,#131e3a 60%,#0d1627 100%);
   overflow:hidden;display:grid;grid-template-rows:1fr;box-sizing:border-box}
-.linen-hero::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;opacity:0.038;pointer-events:none;z-index:0}
+.linen-hero::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;opacity:0.038;pointer-events:none;z-index:0;will-change:transform;transform:translateZ(0)}
 .linen-hero::after{display:none}
 
 /* Left text zone */
@@ -1765,7 +1765,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hero-sample:focus-visible{outline:2px solid #E8AF38;outline-offset:6px}
 
 /* -- Paper grain scoped to hero (Resolution A: position:absolute not fixed, avoids sky-system conflict) -- */
-section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.80 0 0 0 0 0.72 0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;mix-blend-mode:multiply}
+section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.80 0 0 0 0 0.72 0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;mix-blend-mode:multiply;will-change:transform;transform:translateZ(0)}
 
 /* The rail follows the nav's own gutter (components/nav.js: 40px, 24 at
    1100, 20 at 768) so the hero block always starts on the wordmark column. */
@@ -1886,7 +1886,8 @@ body.page-home{
 #creamWash{
   position:fixed;inset:0;z-index:-3;
   background:#F8F4E9;
-  transition:background-color 120ms linear;
+  will-change: background-color;
+  transform: translateZ(0);
 }
 /* Linen sections: transparent so sky system shows through */
 .arrival,
@@ -2066,7 +2067,12 @@ body.page-home{
 /* Nav scrolled: cream frosted glass on light sections, dark frosted glass on dark sections */
 .page-home .nav{transition:background-color .25s cubic-bezier(.25,.1,.25,1)!important}
 .page-home .nav.nav--scrolled{background:rgba(248,244,233,0.55)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
-.page-home .nav.nav--scrolled.nav--surface-dark{background:rgba(12,16,32,0.25)!important;backdrop-filter:blur(4px)!important;-webkit-backdrop-filter:blur(4px)!important}
+.page-home .nav.nav--scrolled.nav--surface-dark{background:rgba(12,16,32,0.95)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+/* Disable hardware-acceleration layer explosion on thousands of stars in the Granddad section */
+.linen-hero .wk-star, .linen-hero .wk-sky-nebula-breathe, .linen-hero .wk-sky-shoot, .linen-hero .wk-sky-atmo-drift {
+  will-change: auto !important;
+  transform: none !important;
+}
 </style>
 <!-- ═══ NAV SURFACE DETECTION ═══ -->
 <script>
@@ -2085,10 +2091,16 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('pricing'),
     document.getElementById('site-footer')
   ];
+  var navRaf = false;
   function update(){
-    nav.classList.toggle('nav--scrolled',window.scrollY>20);
-    var overDark=darkSections.some(isUnder);
-    nav.classList.toggle('nav--surface-dark',overDark);
+    if (navRaf) return;
+    navRaf = true;
+    requestAnimationFrame(function() {
+      nav.classList.toggle('nav--scrolled',window.scrollY>20);
+      var overDark=darkSections.some(isUnder);
+      nav.classList.toggle('nav--surface-dark',overDark);
+      navRaf = false;
+    });
   }
   window.addEventListener('scroll',update,{passive:true});
   update();
@@ -2125,13 +2137,19 @@ document.addEventListener('DOMContentLoaded', function() {
     return CREAM[CREAM.length-1].c;
   }
 
+  var rafPending = false;
   function onScroll() {
-    var doc   = document.documentElement;
-    var total = doc.scrollHeight - window.innerHeight;
-    var p     = total > 0 ? clamp(window.scrollY / total, 0, 1) : 0;
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(function() {
+      var doc   = document.documentElement;
+      var total = doc.scrollHeight - window.innerHeight;
+      var p     = total > 0 ? clamp(window.scrollY / total, 0, 1) : 0;
 
-    var rgb = interpCream(p);
-    cream.style.backgroundColor = 'rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')';
+      var rgb = interpCream(p);
+      cream.style.backgroundColor = 'rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')';
+      rafPending = false;
+    });
   }
 
   window.addEventListener('scroll', onScroll, {passive:true});
@@ -2304,7 +2322,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div class="ec-scenario reveal ec-scenario--turtle">
       <div class="ec-col-photo">
-        <img class="ec-photo-img" src="assets/turtle-girl.jpg" alt="A young girl lies on a hardwood floor in warm afternoon light, one hand reaching toward a small turtle walking across the wood.">
+        <img class="ec-photo-img" src="assets/turtle_discovery.jpg" alt="A stark macro photograph of an 8-year-old child's hands resting on damp earth, gently touching a rough turtle shell.">
       </div>
       <div class="ec-col-copy">
         <div class="ec-eyebrow">Everything connects</div>
