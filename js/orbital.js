@@ -2040,7 +2040,17 @@
       section.dataset.arrival = 'done';
       latched = true;
     } else {
-      if (state.orbits === 'drift') drift.start();
+      if (state.orbits === 'drift') {
+        if ('IntersectionObserver' in window) {
+          var driftIo = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) drift.start();
+            else drift.stop();
+          }, { threshold: 0 });
+          driftIo.observe(section);
+        } else {
+          drift.start();
+        }
+      }
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) {
