@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -632,7 +632,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 
 /* ═══ SAME ROOM — contained, sharp edges, high contrast ═══ */
 .same-room-wrap{position:relative;width:100%;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:var(--ink);overflow:hidden}
-.sr-bg-img{position:absolute;top:0;left:0;right:0;bottom:0;background-image:url('assets/volcano_discovery.jpg');background-size:cover;background-position:center bottom;animation:kb-zoom 15s ease-in-out infinite alternate;z-index:0}
+.sr-bg-img{position:absolute;top:0;left:0;right:0;bottom:0;background-image:url('assets/volcano_discovery.jpg');background-image:image-set(url('assets/volcano_discovery.webp') type("image/webp"), url('assets/volcano_discovery.jpg') type("image/jpeg"));background-size:cover;background-position:center bottom;animation:kb-zoom 15s ease-in-out infinite alternate;z-index:0}
 .sr-bg-gradient{position:absolute;top:0;left:0;right:0;height:60%;background:linear-gradient(to bottom,rgba(12,16,32,0.95) 0%,rgba(12,16,32,0.4) 50%,transparent 100%);z-index:1;pointer-events:none}
 .same-room{max-width:1400px;margin:0 auto;width:100%;display:flex;flex-direction:column;justify-content:space-between;flex:1;padding-top:80px;z-index:2;position:relative}
 .sr-header{margin-bottom:12px;padding:0 64px;max-width:800px}
@@ -2413,7 +2413,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div class="ec-scenario reveal ec-scenario--turtle">
       <div class="ec-col-photo">
-        <img class="ec-photo-img" src="assets/turtle_discovery.jpg" alt="A stark macro photograph of an 8-year-old child's hands resting on damp earth, gently touching a rough turtle shell.">
+        <picture>
+          <source type="image/webp" srcset="assets/turtle_discovery.webp">
+          <img class="ec-photo-img" src="assets/turtle_discovery.jpg" alt="A stark macro photograph of an 8-year-old child's hands resting on damp earth, gently touching a rough turtle shell.">
+        </picture>
       </div>
       <div class="ec-col-copy">
         <div class="ec-eyebrow">Everything connects</div>

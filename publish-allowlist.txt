@@ -76,7 +76,9 @@ publish:
   # assets/ is 422 files of internal design artefacts and is NEVER globbed.
   # Only the files a public page actually renders are named.
   assets/turtle_discovery.jpg   # index.html  Everything Connects turtle scenario
+  assets/turtle_discovery.webp  # index.html  Everything Connects turtle scenario
   assets/volcano_discovery.jpg  # index.html  Same Room cinematic background
+  assets/volcano_discovery.webp # index.html  Same Room cinematic background
   assets/wizkoo-og.png          # og:image / twitter:image on about.html and others
 
   # ── Root static files ─────────────────────────────────────────────────────
