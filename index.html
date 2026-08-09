@@ -702,12 +702,39 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
   .journeys-litany-wrap{display:none}
   .journeys-hold{display:block;margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:1rem;line-height:1.95;letter-spacing:-0.011em;color:rgba(12,16,32,0.66);text-wrap:pretty}
 }
-.faq-section h2{font-family:'Sora',sans-serif;font-weight:200;font-size:1.8rem;line-height:1.15;letter-spacing:-0.025em;margin-bottom:36px}.faq-section h2 strong{font-weight:700}
-.faq-list{border-top:1px solid var(--rule)}.faq-item{border-bottom:1px solid var(--rule)}
-.faq-q{width:100%;text-align:left;background:transparent;border:none;padding:18px 0;font-family:'Sora',sans-serif;font-weight:600;font-size:0.82rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.4;transition:color .2s}.faq-q:hover{color:var(--saffron)}
-.faq-q::after{content:'+';font-size:1rem;font-weight:300;color:var(--saffron);flex-shrink:0;transition:transform .3s var(--expo)}.faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{padding:0 0 18px;font-size:var(--small-size);color:var(--mid);line-height:1.75;max-width:600px}.faq-a[hidden]{display:none}.faq-a:not([hidden]){display:block;animation:stepFade .3s var(--expo)}
-@keyframes stepFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+/* ═══ FAQ: THE SPLIT-PANE ENCYCLOPEDIA ═══ */
+.faq-editorial { background: #F8F4E9; padding: 120px 120px 140px; }
+.faq-wrap { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 350px 1fr; gap: 80px; align-items: start; }
+.faq-left { position: sticky; top: 120px; }
+.faq-left h2 { font-family: 'Fraunces', serif; font-size: 48px; font-weight: 300; line-height: 1.1; margin: 0 0 16px 0; color: #0C1020; }
+.faq-left h2 i { color: #E8AF38; font-style: italic; }
+.faq-left p { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: rgba(12,16,32,0.6); line-height: 1.6; max-width: 280px; }
+.faq-right { display: flex; flex-direction: column; gap: 64px; }
+.faq-q-block h3 { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 600; color: #0C1020; margin: 0 0 16px 0; letter-spacing: -0.01em; }
+.faq-q-block p { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 400; line-height: 1.7; color: rgba(12,16,32,0.7); margin: 0; max-width: 640px; text-wrap: pretty; }
+
+@media (max-width: 900px) {
+  .faq-editorial { padding: 80px 24px; }
+  .faq-wrap { grid-template-columns: 1fr; gap: 48px; }
+  .faq-left { position: relative; top: 0; }
+  .faq-left h2 { font-size: 36px; }
+  .faq-right { gap: 48px; }
+}
+
+/* Staggered Reveal */
+.faq-editorial .faq-left, .faq-editorial .faq-q-block { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.faq-wrap.visible .faq-left { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+.faq-wrap.visible .faq-q-block:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+.faq-wrap.visible .faq-q-block:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+.faq-wrap.visible .faq-q-block:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+.faq-wrap.visible .faq-q-block:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+.faq-wrap.visible .faq-q-block:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
+.faq-wrap.visible .faq-q-block:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
+.faq-wrap.visible .faq-q-block:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+.faq-wrap.visible .faq-q-block:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 0.9s; }
+.faq-wrap.visible .faq-q-block:nth-child(9) { opacity: 1; transform: translateY(0); transition-delay: 1.0s; }
+.faq-wrap.visible .faq-q-block:nth-child(10) { opacity: 1; transform: translateY(0); transition-delay: 1.1s; }
+.faq-wrap.visible .faq-q-block:nth-child(11) { opacity: 1; transform: translateY(0); transition-delay: 1.2s; }
 
 .cta-dark{background:var(--ink);padding:120px 48px;text-align:center;position:relative;overflow:hidden}
 .cta-dark::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}.cta-dark>*{position:relative;z-index:1}
@@ -1876,61 +1903,59 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
   .wrap{padding:0 28px}
 }
 
-/* ═══ PRICING MONUMENTAL (1A Layout) ═══ */
-.pricing-monumental { position: relative; background-color: #101830; background-image: radial-gradient(ellipse 70% 90% at 50% 0%, #182848 0%, #0C1020 72%); padding: 104px 0 92px; overflow: hidden; }
-.mo-pinstripes { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.014) 59px, rgba(255,255,255,0.014) 60px); pointer-events: none; }
-.mo-wrap { position: relative; max-width: 1040px; margin: 0 auto; padding: 0 48px; text-align: center; z-index: 2; }
+/* ═══ PRICING V2 (1C - Price Last) ═══ */
+.pricing-editorial-v2 { position: relative; background-color: #0C1020; background-image: radial-gradient(ellipse 60% 80% at 78% 20%, rgba(24,40,72,0.85) 0%, rgba(12,16,32,0) 70%); padding: 96px 120px 88px; }
+.pr2-wrap { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 110px; align-items: start; }
 
-/* Eyebrow & Headline */
-.mo-eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #E8AF38; display: inline-flex; align-items: center; gap: 14px; }
-.mo-eyebrow .line { width: 26px; height: 1px; background: rgba(232,175,56,0.5); }
-.mo-headline { margin-top: 36px; font-family: 'Fraunces', serif; font-weight: 800; font-size: 74px; line-height: 1.06; letter-spacing: -0.03em; color: #FAFAFA; }
-.mo-headline i { font-style: italic; color: #E8AF38; }
-.mo-sub { margin: 20px auto 0; max-width: 620px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; font-size: 19px; line-height: 1.6; color: rgba(240,242,248,0.6); text-wrap: pretty; }
+/* Left Column */
+.pr2-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(240,242,248,0.35); }
+.pr2-headline { margin-top: 34px; font-family: 'Fraunces', serif; font-weight: 800; font-size: 62px; line-height: 1.02; letter-spacing: -0.03em; color: #FAFAFA; }
+.pr2-headline i { font-style: italic; color: #E8AF38; }
+.pr2-sub-wrap { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; max-width: 440px; }
+.pr2-sub-primary { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 19px; line-height: 1.4; letter-spacing: -0.01em; color: rgba(240,242,248,0.85); margin: 0; text-wrap: balance; }
+.pr2-sub-secondary { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; font-size: 16px; line-height: 1.6; color: rgba(240,242,248,0.55); margin: 0; text-wrap: pretty; }
+.pr2-open-seat { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(232,175,56,0.35); max-width: 440px; }
+.pr2-os-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #E8AF38; margin-bottom: 10px; }
+.pr2-os-desc { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; line-height: 1.7; color: rgba(240,242,248,0.62); text-wrap: pretty; }
 
-/* Price Area */
-.mo-price-wrap { margin: 64px auto 0; display: flex; align-items: flex-end; justify-content: center; gap: 18px; }
-.mo-price { font-family: 'Fraunces', serif; font-weight: 800; font-size: 148px; line-height: 0.82; letter-spacing: -0.035em; color: #FAFAFA; }
-.mo-currency { font-size: 0.3em; color: rgba(250,250,250,0.55); vertical-align: 0.9em; letter-spacing: 0; }
-.mo-period { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,242,248,0.5); transform: translateY(-10px); display: inline-block; }
-.mo-price-desc { margin-top: 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: rgba(240,242,248,0.42); }
+/* Right Column (The Box) */
+.pr2-right { border: 1px solid rgba(232,175,56,0.28); padding: 0; }
+.pr2-receipt-top { padding: 34px 44px 0; }
+.pr2-receipt-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(240,242,248,0.45); }
+.pr2-ledger { padding: 26px 44px 6px; display: flex; flex-direction: column; }
+.pr2-row { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.pr2-row.last { border-bottom: none; }
+.pr2-feat { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; color: rgba(240,242,248,0.92); }
+.pr2-val { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(240,242,248,0.4); }
 
-/* Ledger Grid */
-.mo-ledger { margin-top: 64px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); text-align: left; }
-.mo-col { padding: 32px 36px 36px 24px; border-right: 1px solid rgba(255,255,255,0.09); }
-.mo-col.first { padding-left: 0; }
-.mo-col.last { padding-right: 0; border-right: none; }
-.mo-col-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #E8AF38; margin-bottom: 12px; }
-.mo-col-desc { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; font-size: 13.5px; line-height: 1.7; color: rgba(240,242,248,0.55); text-wrap: pretty; padding-right: 12px; }
+/* Checkout Zone */
+.pr2-checkout { margin-top: 14px; padding: 30px 44px 36px; background: rgba(232,175,56,0.05); border-top: 1px solid rgba(232,175,56,0.28); display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+.pr2-checkout-eyebrow { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #E8AF38; margin-bottom: 12px; }
+.pr2-price-wrap { display: flex; align-items: flex-end; gap: 8px; }
+.pr2-price { font-family: 'Fraunces', serif; font-weight: 800; font-size: 72px; line-height: 0.85; letter-spacing: -0.03em; color: #FAFAFA; }
+.pr2-period { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240,242,248,0.45); }
+.pr2-price-sub { margin-top: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: rgba(240,242,248,0.42); }
+.btn-pr2 { background: #E8AF38; color: #0C1020; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 18px 34px; white-space: nowrap; transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1); text-decoration: none; display: inline-block; }
+.btn-pr2:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(232,175,56,0.3); background: #FAFAFA; color: #0C1020; }
 
-/* CTA Area */
-.mo-cta-area { margin-top: 56px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.btn-mo { background: #E8AF38; color: #0C1020; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; padding: 20px 54px; text-decoration: none; box-shadow: 0 8px 40px rgba(232,175,56,0.22); transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1); display: inline-block; }
-.btn-mo:hover { transform: translateY(-2px); box-shadow: 0 14px 52px rgba(232,175,56,0.34); background: #FAFAFA; color: #0C1020; }
-.mo-cta-note { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(240,242,248,0.35); }
-.mo-alt { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: rgba(240,242,248,0.45); }
-.mo-alt a { color: rgba(250,250,250,0.85); border-bottom: 1px solid rgba(232,175,56,0.55); text-decoration: none; transition: color 0.3s, border-color 0.3s; }
-.mo-alt a:hover { color: #E8AF38; border-color: #E8AF38; }
-
-/* Cinematic Staggered Reveal for Monumental */
-.pricing-monumental .mo-eyebrow, .pricing-monumental .mo-headline, .pricing-monumental .mo-sub, .pricing-monumental .mo-price-wrap, .pricing-monumental .mo-price-desc, .pricing-monumental .mo-ledger, .pricing-monumental .mo-cta-area { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
-.mo-wrap.visible .mo-eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
-.mo-wrap.visible .mo-headline { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-.mo-wrap.visible .mo-sub { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
-.mo-wrap.visible .mo-price-wrap { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
-.mo-wrap.visible .mo-price-desc { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
-.mo-wrap.visible .mo-ledger { opacity: 1; transform: translateY(0); transition-delay: 1.0s; }
-.mo-wrap.visible .mo-cta-area { opacity: 1; transform: translateY(0); transition-delay: 1.2s; }
-
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 900px) {
-  .pricing-monumental { padding: 80px 0; }
-  .mo-headline { font-size: 48px; }
-  .mo-price { font-size: 100px; }
-  .mo-ledger { grid-template-columns: 1fr; border-bottom: none; border-top: none; gap: 24px; margin-top: 48px; }
-  .mo-col { border-right: none; padding: 0 !important; border-bottom: 1px solid rgba(255,255,255,0.09); padding-bottom: 24px !important; }
-  .mo-col.last { border-bottom: none; }
+  .pricing-editorial-v2 { padding: 80px 24px; }
+  .pr2-wrap { grid-template-columns: 1fr; gap: 64px; }
+  .pr2-headline { font-size: 48px; }
+  .pr2-checkout { flex-direction: column; align-items: flex-start; gap: 24px; padding: 24px; }
+  .pr2-receipt-top { padding: 24px 24px 0; }
+  .pr2-ledger { padding: 16px 24px 6px; }
+  .btn-pr2 { width: 100%; text-align: center; box-sizing: border-box; }
 }
+
+/* Staggered Reveal */
+.pricing-editorial-v2 .pr2-eyebrow, .pricing-editorial-v2 .pr2-headline, .pricing-editorial-v2 .pr2-sub-wrap, .pricing-editorial-v2 .pr2-open-seat, .pricing-editorial-v2 .pr2-right { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.pricing-editorial-v2.visible .pr2-eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+.pricing-editorial-v2.visible .pr2-headline { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+.pricing-editorial-v2.visible .pr2-sub-wrap { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+.pricing-editorial-v2.visible .pr2-open-seat { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
+.pricing-editorial-v2.visible .pr2-right { opacity: 1; transform: translateY(0); transition-delay: 0.9s; }
 </style>
 <!-- ═══ SKY SYSTEM STYLES ═══ -->
 <style id="hp-sky-system">
@@ -2124,10 +2149,20 @@ body.page-home{
 .page-home .nav{transition:background-color .25s cubic-bezier(.25,.1,.25,1)!important}
 .page-home .nav.nav--scrolled{background:rgba(248,244,233,0.55)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
 .page-home .nav.nav--scrolled.nav--surface-dark{background:rgba(12,16,32,0.95)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-/* Disable hardware-acceleration layer explosion on thousands of stars in the Granddad section */
-.linen-hero .wk-star, .linen-hero .wk-sky-nebula-breathe, .linen-hero .wk-sky-shoot, .linen-hero .wk-sky-atmo-drift {
+/* PERF, measured 2026-08-09: the certified sky at this aperture is 1,834 stars,
+   and hero-sky.css promotes every one to its own compositor layer
+   (will-change:opacity + infinite twinkle). ~2,300 layers held scroll through
+   this section at 12fps. Freezing the dim tiers — mid/faint/dust, whose twinkle
+   peaks below 0.35 opacity and is imperceptible star-by-star — halves frame
+   time (24fps measured, 36fps if every tier freezes). Anchors, brights and
+   filigree keep the certified twinkle, so the sky still reads alive per the
+   2026-08-02 ruling. Scoped to .linen-hero: the /start hero window runs the
+   same primitive at 376 stars and does not need this. */
+.linen-hero .wk-sky__star--mid,
+.linen-hero .wk-sky__star--faint,
+.linen-hero .wk-sky__star--dust {
+  animation: none !important;
   will-change: auto !important;
-  transform: none !important;
 }
 </style>
 <!-- ═══ NAV SURFACE DETECTION ═══ -->
@@ -2597,51 +2632,130 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <!-- CTA: New York Editorial Layout -->
-<!-- CTA: Monumental Layout -->
-<section class="pricing-monumental" id="pricing">
-  <div class="mo-pinstripes"></div>
-  <div class="mo-wrap reveal">
-    <div class="mo-eyebrow">
-      <span class="line"></span>The Annual Membership<span class="line"></span>
-    </div>
-
-    <div class="mo-headline">One price.<i> Every child.</i></div>
-    <p class="mo-sub">Endless curiosity for them. Absolute academic certainty for you.</p>
-
-    <div class="mo-price-wrap">
-      <span class="mo-price"><span class="mo-currency">$</span>499</span>
-      <span class="mo-period">/ year</span>
-    </div>
-    <div class="mo-price-desc">Up to four children, ages three to twelve. Nothing sold separately.</div>
-
-    <div class="mo-ledger">
-      <div class="mo-col first">
-        <div class="mo-col-title">Plans</div>
-        <div class="mo-col-desc">Every child challenged at their own level. One shared topic for the whole house. Give them a reason to talk at dinner again.</div>
+<!-- CTA: Editorial Receipt Layout (V2) -->
+<section class="pricing-editorial-v2 reveal" id="pricing">
+  <div class="pr2-wrap">
+    <div class="pr2-left">
+      <div class="pr2-eyebrow">Wizkoo / The System</div>
+      <div class="pr2-headline">What it costs to<br><i>stop guessing.</i></div>
+      <div class="pr2-sub-wrap">
+        <p class="pr2-sub-primary">One shared obsession for the whole house. The dinner table is back.</p>
+        <p class="pr2-sub-secondary">And because every week maps directly to state standards, you get absolute proof they are <strong style="color: #E8AF38; font-weight: 600;">on track</strong> for whatever comes next.</p>
       </div>
-      <div class="mo-col">
-        <div class="mo-col-title">Worlds</div>
-        <div class="mo-col-desc">Complete, unrestricted access to Atlas, Elementum, and The Library.</div>
-      </div>
-      <div class="mo-col">
-        <div class="mo-col-title">Proof</div>
-        <div class="mo-col-desc">Weekly Orbit Reports mapped to state standards. Absolute proof they are on track.</div>
-      </div>
-      <div class="mo-col last">
-        <div class="mo-col-title">The Open Seat</div>
-        <div class="mo-col-desc">A full year for another family. Built into the price.<br><br>Same table, one more seat.</div>
+      
+      <div class="pr2-open-seat">
+        <div class="pr2-os-eyebrow">The Open Seat</div>
+        <div class="pr2-os-desc">Every membership funds a full year of Wizkoo for a family who could not otherwise have it. It is not an add-on. It is part of what you are buying.</div>
       </div>
     </div>
 
-    <div class="mo-cta-area">
-      <a href="https://app.wizkoo.com/sign-up" class="btn-mo">Build Our Family’s Week</a>
-      <div class="mo-alt">Prefer monthly? <a href="#">$50 a month</a>, cancel in one click.</div>
+    <div class="pr2-right">
+      <div class="pr2-receipt-top">
+        <div class="pr2-receipt-eyebrow">What one membership holds</div>
+      </div>
+      <div class="pr2-ledger">
+        <div class="pr2-row">
+          <span class="pr2-feat">Every child in the house</span>
+          <span class="pr2-val">Ages 3–12</span>
+        </div>
+        <div class="pr2-row">
+          <span class="pr2-feat">Weekly plans, differentiated</span>
+          <span class="pr2-val">Unlimited</span>
+        </div>
+        <div class="pr2-row">
+          <span class="pr2-feat">Atlas, Elementum, The Games</span>
+          <span class="pr2-val">In full</span>
+        </div>
+        <div class="pr2-row">
+          <span class="pr2-feat">The Library</span>
+          <span class="pr2-val">Curated</span>
+        </div>
+        <div class="pr2-row last">
+          <span class="pr2-feat">Orbit Reports</span>
+          <span class="pr2-val">Every week</span>
+        </div>
+      </div>
+      <div class="pr2-checkout">
+        <div>
+          <div class="pr2-checkout-eyebrow">The Annual Membership</div>
+          <div class="pr2-price-wrap">
+            <span class="pr2-price">$499</span>
+            <span class="pr2-period">/ year</span>
+          </div>
+          <div class="pr2-price-sub">or $50 a month · cancel in one click</div>
+        </div>
+        <a href="https://app.wizkoo.com/sign-up" class="btn-pr2">BUILD OUR WEEK</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq-section reveal" id="faq"><div class="faq-inner"><h2>Questions parents ask<span style="color:var(--saffron)">.</span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 3 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>A prompt gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>We keep two things about your child: a first name and an age. You enter them. They build their week. That is the entire file. No last name, no birthdate, no photos, no home address. Encrypted, never used for advertising, never sold, and yours to delete from inside your account, any time.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>$50/month or $499/year. Your first plan is free. No credit card required.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
+<!-- FAQ: Split-Pane Encyclopedia (AEO Optimized) -->
+<section class="faq-editorial" id="faq">
+  <div class="faq-wrap reveal">
+    <div class="faq-left">
+      <h2>The <i>details.</i></h2>
+      <p>No hiding behind clicks. Just the answers.</p>
+    </div>
+    
+    <div class="faq-right">
+      <div class="faq-q-block">
+        <h3>What ages does this work for?</h3>
+        <p>Families with children ages 3 to 12. Activities are matched to each child's age, reading level, and stage.</p>
+      </div>
+      
+      <div class="faq-q-block">
+        <h3>Is Wizkoo secular or faith-based?</h3>
+        <p>Wizkoo is strictly secular. It is science-based, fact-based, and built for curious families.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>Do I need to be a teacher?</h3>
+        <p>No, you do not need to be a teacher. Every activity includes what to do, how long, and what done looks like.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>Can I use this for weekends or after school?</h3>
+        <p>Yes, you can use this for weekends, after school, or summer. It's the same engine, running on your schedule.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>What makes this a system and not just a curriculum?</h3>
+        <p>A curriculum only tells you what to teach; a system builds the entire week around your children. It adapts to their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>How is AI used?</h3>
+        <p>Wizkoo uses AI strictly for personalization, while educators design the core methodology. You review everything before your children see it.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>How do I know my child is actually learning?</h3>
+        <p>Every week you'll receive an Orbit Report showing exactly what your child learned. It does not track screen time logged; it tracks actual facts, vocabulary, and discoveries.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>Why not just use ChatGPT?</h3>
+        <p>A prompt gives you a single lesson; Wizkoo gives you an entire system. It includes multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. You type one theme, and your week is planned in two minutes.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>Is my children's data safe?</h3>
+        <p>Yes, your children's data is completely safe. We keep only two things about your child: a first name and an age. That is the entire file. No last name, no birthdate, no photos, no home address. It is encrypted, never used for advertising, never sold, and yours to delete from inside your account at any time.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>What does it cost?</h3>
+        <p>Wizkoo costs $50/month or $499/year. Your first plan is free, and no credit card is required to try it.</p>
+      </div>
+
+      <div class="faq-q-block">
+        <h3>How do I cancel?</h3>
+        <p>You can cancel in one click directly from your account settings. There is no phone call, no chat, and no questions asked. Your child's game progress stays on their device even after you cancel.</p>
+      </div>
+    </div>
+  </div>
+</section>
 </div>
 
 <div id="site-footer"></div>
