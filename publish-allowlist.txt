@@ -73,7 +73,9 @@ publish:
   # ── Images ────────────────────────────────────────────────────────────────
   images/*                      # the 3x2 responsive hero set (jpg + webp)
 
-  # assets/ is 422 files of internal design artefacts and is NEVER globbed.
+  # CORRECTED 2026-08-10. SUPERSEDES the text that stood in this block until
+  # this date, which read: "assets/ is 422 files of internal design artefacts and is NEVER globbed."
+  # The guard covers root-level .html only. A page in a subdirectory that the manifest does not name is silently absent from the website, and nothing fails.
   # Only the files a public page actually renders are named.
   assets/turtle_discovery.jpg   # index.html  Everything Connects turtle scenario
   assets/turtle_discovery.webp  # index.html  Everything Connects turtle scenario

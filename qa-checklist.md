@@ -13,7 +13,11 @@
 - [ ] Edge
 - [ ] Firefox
 
-## Per Page Checks (repeat for each of 7 pages + 404)
+  CORRECTED 2026-08-10. SUPERSEDES the text that stood in this block until
+  this date, which read: "## Per Page Checks (repeat for each of 7 pages + 404)"
+  The manifest ships 15 pages.
+
+## Per Page Checks (repeat for each of 15 pages + 404)
 - [ ] Page loads with all CSS applied
 - [ ] Nav renders correctly
 - [ ] Nav links all work

@@ -38,8 +38,13 @@ tip      (the commit carrying this document — stated in the close-out report
 base     57ece32 (excellence-round-1 at branch time, 2026-08-01)
 ```
 
-The `nucleus-rebuild` worktree cuts from this tip. Nothing from this lane has
-merged anywhere. The homepage reaches production through the merge-order law
+The `nucleus-rebuild` worktree cuts from this tip. 
+
+  CORRECTED 2026-08-10. SUPERSEDES the text that stood in this block until
+  this date, which read: "Nothing from this lane has merged anywhere."
+  Merges have landed.
+
+Merges have landed. The homepage reaches production through the merge-order law
 after the nucleus rebuild lands on top.
 
 One flagged cross-lane fact: this lane carries a ONE-PROPERTY diff to

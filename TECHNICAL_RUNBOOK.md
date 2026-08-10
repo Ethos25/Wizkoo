@@ -899,7 +899,11 @@ Other key source dirs:
 ## ENVIRONMENT VARIABLES
 
 MARKETING SITE (C:\Users\amyog\Desktop\wizkoo)
-  No .env files. No build step. No server-side secrets in the static site itself.
+  CORRECTED 2026-08-10. SUPERSEDES the text that stood in this block until
+  this date, which read: "No .env files. No build step. No server-side secrets in the static site itself."
+  False: a build step exists (build script → _site/, allowlist manifest).
+
+  No .env files. A build step exists (build script → _site/, allowlist manifest). No server-side secrets in the static site itself.
 
   Supabase credentials: window globals in C:\Users\amyog\Desktop\wizkoo\js\supabase-config.js
     WIZKOO_SUPABASE_URL      — Supabase project URL (intentionally public-facing)
@@ -1009,7 +1013,11 @@ MARKETING SITE
     @playwright/test  ^1.58.2   — Playwright test runner (screenshot automation)
     pg                ^8.20.0   — PostgreSQL client (library data import scripts)
     serve             ^14.2.6   — Local static dev server (npm run serve)
-  No runtime dependencies. Static site. No build step.
+  CORRECTED 2026-08-10. SUPERSEDES the text that stood in this block until
+  this date, which read: "No runtime dependencies. Static site. No build step."
+  False: a build step exists (build script → _site/, allowlist manifest).
+
+  No runtime dependencies. Static site. A build step exists (build script → _site/, allowlist manifest).
   Package manager: npm.
 
 PLAN GENERATOR

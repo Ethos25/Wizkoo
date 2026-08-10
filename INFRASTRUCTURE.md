@@ -60,8 +60,11 @@ the 14-day watch.
 ### Netlify
 
 Sites (login/account **not verified this session** — confirm and record):
-- `wizkoo.netlify.app` — marketing site from the `Wizkoo` repo; also proxies
-  `/plan` and `/plan/*` (200 rewrites) to `wizkoo-plan-generator.vercel.app`.
+  CORRECTED 2026-08-10. SUPERSEDES the text that stood in this block until
+  this date, which read: "- `wizkoo.netlify.app` — marketing site from the `Wizkoo` repo; also proxies `/plan` and `/plan/*` (200 rewrites) to `wizkoo-plan-generator.vercel.app`."
+  The /plan proxy has been retired.
+
+- `wizkoo.netlify.app` — marketing site from the `Wizkoo` repo. The /plan proxy has been retired.
 - `atlas-wizkoo.netlify.app` — atlas.wizkoo.com.
 - `wizkoo-elementum.netlify.app` — elementum.wizkoo.com.
 
