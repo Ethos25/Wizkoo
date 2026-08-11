@@ -239,12 +239,12 @@
     var hi  = (0.28 + Math.random() * 0.45).toFixed(2);
     var dur = (2 + Math.random() * 4).toFixed(1);
     var del = (Math.random() * 5).toFixed(1);
+    var anim = (i < 40) ? 'animation:libTwinkle '+dur+'s ease-in-out infinite '+del+'s;' : '';
     html += '<div style="position:absolute;border-radius:50%;'
           + 'background:#F0F2F8;'
           + 'left:'+x+'%;top:'+y+'%;'
           + 'width:'+sz+'px;height:'+sz+'px;'
-          + 'animation:libTwinkle '+dur+'s ease-in-out '
-          + 'infinite '+del+'s;'
+          + anim
           + '--lo:'+lo+';--hi:'+hi+';">'
           + '</div>';
   }
