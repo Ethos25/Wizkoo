@@ -1,5 +1,8 @@
 :root {
   /* ── Colors ── */
+  /* RULED 2026-08-11: Saffron on linen backgrounds is permitted for large/decorative elements only 
+     (display headings, buttons with dark text, ornaments). NEVER use for body text, captions, links, 
+     or any text a person must read to proceed. Readable text on linen uses the site's dark ink token. */
   --saffron: #E8AF38;
   --saffron-deep: #B88414;
   --saffron-pale: #FFF9EE;
