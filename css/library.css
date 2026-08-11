@@ -1102,7 +1102,7 @@ body {
 }
 .lib-mcta-secondary:hover {
   color: var(--lib-fg);
-  border-color: rgba(236,229,211,0.6);
+  border-color: var(--lib-dim);
 }
 
 /* ── ESA line ────────────────────────────────────────────────────────────── */
