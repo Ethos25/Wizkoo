@@ -226,9 +226,16 @@
 
 <script>
 /* ── Star Field Generator ── */
+/* The field is 160 stars and stays 160 stars — the density is the look.
+   Only the first ANIMATED_CAP of them twinkle; the rest are painted once at
+   the midpoint of the range they would have oscillated through, so the field
+   reads the same but the compositor only has ANIMATED_CAP layers to keep
+   alive. Freezing at the midpoint, not at full opacity, is what makes the
+   static majority indistinguishable from the animated minority. */
 (function(){
   var s = document.getElementById('lib-stars');
   if (!s) return;
+  var ANIMATED_CAP = 40;
   var html = '';
   for (var i = 0; i < 160; i++) {
     var x  = Math.random() * 100;
@@ -239,12 +246,14 @@
     var hi  = (0.28 + Math.random() * 0.45).toFixed(2);
     var dur = (2 + Math.random() * 4).toFixed(1);
     var del = (Math.random() * 5).toFixed(1);
+    var motion = (i < ANIMATED_CAP)
+          ? 'animation:libTwinkle '+dur+'s ease-in-out infinite '+del+'s;'
+          : 'opacity:'+((+lo + +hi) / 2).toFixed(2)+';';
     html += '<div style="position:absolute;border-radius:50%;'
           + 'background:#F0F2F8;'
           + 'left:'+x+'%;top:'+y+'%;'
           + 'width:'+sz+'px;height:'+sz+'px;'
-          + 'animation:libTwinkle '+dur+'s ease-in-out '
-          + 'infinite '+del+'s;'
+          + motion
           + '--lo:'+lo+';--hi:'+hi+';">'
           + '</div>';
   }
