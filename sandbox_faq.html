@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FAQ Sandbox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,800;1,9..144,300;1,9..144,800&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&family=Sora:wght@200;300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0C1020;
+      --paper: #FAFAFA;
+      --saffron: #E8AF38;
+    }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .sandbox-header {
+      background: #000;
+      padding: 40px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .sandbox-header h1 {
+      font-family: 'Space Mono', monospace;
+      color: var(--saffron);
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    
+    .concept {
+      padding: 120px 48px;
+      border-bottom: 1px dashed rgba(255,255,255,0.2);
+    }
+    .concept-title {
+      font-family: 'Space Mono', monospace;
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      display: inline-block;
+      margin-bottom: 64px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+    }
+
+    /* CONCEPT 1: SPLIT-PANE (COPENHAGEN) */
+    .c1-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .c1-left {
+      position: sticky;
+      top: 120px;
+    }
+    .c1-left h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 1.1;
+      margin: 0 0 16px 0;
+      color: var(--paper);
+    }
+    .c1-left h2 i {
+      color: var(--saffron);
+      font-style: italic;
+    }
+    .c1-left p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+    }
+    .c1-q-block {
+      margin-bottom: 56px;
+    }
+    .c1-q-block h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--saffron);
+      margin: 0 0 12px 0;
+      letter-spacing: -0.01em;
+    }
+    .c1-q-block p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.7);
+      margin: 0;
+      max-width: 600px;
+      text-wrap: pretty;
+    }
+
+    /* CONCEPT 2: THE OPEN GRID (NEW YORK) */
+    .c2-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .c2-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .c2-header h2 {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 64px;
+      color: var(--paper);
+      margin: 0;
+    }
+    .c2-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 64px 40px;
+    }
+    .c2-item {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+    }
+    .c2-item h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--paper);
+      margin: 0 0 16px 0;
+      line-height: 1.4;
+    }
+    .c2-item p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      margin: 0;
+      text-wrap: pretty;
+    }
+
+    /* CONCEPT 3: THE MONUMENTAL ACCORDION (PIXAR) */
+    .c3-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .c3-header {
+      margin-bottom: 64px;
+    }
+    .c3-header h2 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 200;
+      font-size: 32px;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+    .c3-list {
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .c3-item {
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .c3-item summary {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      padding: 32px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s;
+    }
+    .c3-item summary:hover {
+      color: var(--saffron);
+    }
+    .c3-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .c3-item summary::after {
+      content: '+';
+      font-family: 'Space Mono', monospace;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--saffron);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .c3-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+    .c3-item .answer {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      padding-bottom: 32px;
+      max-width: 600px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="sandbox-header">
+  <h1>FAQ Concepts — The Dark Phase</h1>
+</div>
+
+<!-- CONCEPT 1 -->
+<section class="concept">
+  <div class="concept-title">Concept 1: The Split-Pane (Copenhagen Restraint)</div>
+  <div class="c1-wrap">
+    <div class="c1-left">
+      <h2>The <i>details.</i></h2>
+      <p>No hiding behind clicks. Just the answers.</p>
+    </div>
+    <div class="c1-right">
+      <div class="c1-q-block">
+        <h3>What ages does this work for?</h3>
+        <p>Families with children ages 3 to 12. Activities matched to each child's age, reading level, and stage.</p>
+      </div>
+      <div class="c1-q-block">
+        <h3>What makes this a system and not just a curriculum?</h3>
+        <p>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</p>
+      </div>
+      <div class="c1-q-block">
+        <h3>How is AI used?</h3>
+        <p>AI personalizes. Educators designed the methodology. You review everything before your children see it.</p>
+      </div>
+      <div class="c1-q-block">
+        <h3>How do I know my child is actually learning?</h3>
+        <p>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT 2 -->
+<section class="concept">
+  <div class="concept-title">Concept 2: The Open Grid (New York Editorial)</div>
+  <div class="c2-wrap">
+    <div class="c2-header">
+      <h2>Questions parents ask.</h2>
+    </div>
+    <div class="c2-grid">
+      <div class="c2-item">
+        <h3>What ages does this work for?</h3>
+        <p>Families with children ages 3 to 12. Activities matched to each child's age, reading level, and stage.</p>
+      </div>
+      <div class="c2-item">
+        <h3>Is Wizkoo secular or faith-based?</h3>
+        <p>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</p>
+      </div>
+      <div class="c2-item">
+        <h3>Do I need to be a teacher?</h3>
+        <p>No. Every activity includes what to do, how long, and what done looks like.</p>
+      </div>
+      <div class="c2-item">
+        <h3>Can I use this for weekends or after school?</h3>
+        <p>Yes. Homeschool, after school, summer. Same engine, your schedule.</p>
+      </div>
+      <div class="c2-item">
+        <h3>Why not just use ChatGPT?</h3>
+        <p>A prompt gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month.</p>
+      </div>
+      <div class="c2-item">
+        <h3>Is my children's data safe?</h3>
+        <p>We keep two things about your child: a first name and an age. That is the entire file. No last name, no birthdate, no photos. Encrypted and yours to delete any time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT 3 -->
+<section class="concept">
+  <div class="concept-title">Concept 3: The Monumental Accordion (Pixar Cinematic)</div>
+  <div class="c3-wrap">
+    <div class="c3-header">
+      <h2>Questions parents ask.</h2>
+    </div>
+    <div class="c3-list">
+      <details class="c3-item">
+        <summary>What ages does this work for?</summary>
+        <div class="answer">Families with children ages 3 to 12. Activities matched to each child's age, reading level, and stage.</div>
+      </details>
+      <details class="c3-item">
+        <summary>What makes this a system and not a curriculum?</summary>
+        <div class="answer">A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div>
+      </details>
+      <details class="c3-item">
+        <summary>How do I know my child is actually learning?</summary>
+        <div class="answer">Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div>
+      </details>
+      <details class="c3-item">
+        <summary>Why not just use ChatGPT?</summary>
+        <div class="answer">A prompt gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

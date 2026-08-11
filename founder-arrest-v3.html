@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Psychological Arrest - Refined Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,600&family=Sora:wght@200;300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0C1020;
+    --linen: #FBF7EB;
+    --warm-bg: #F8F4E9;
+    --saffron: #E8AF38;
+    --expo: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  body { margin: 0; padding: 0; font-family: 'Sora', sans-serif; background: #fff; color: var(--ink); overflow-x: hidden; }
+  
+  .concept-divider { background: #eee; padding: 12px; text-align: center; font-family: 'Space Mono'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #666; position: relative; z-index: 100; }
+  
+  /* Generic Button */
+  .btn-main {
+    display: inline-block;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 4px;
+    transition: all 0.3s var(--expo);
+  }
+  .btn-main:hover { background: var(--ink); color: #fff; }
+
+  /* ---------------------------------------------------
+     REFINED CONCEPT 5: THE ARCHIVAL RECORD (Viewport Fit)
+     --------------------------------------------------- */
+  .c5-wrapper {
+    background: #E8E5DF; 
+    padding: 100px 40px; /* Reduced padding for viewport fit */
+    height: 80vh; /* Ensure it fits in viewport */
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .c5-massive-bg {
+    position: absolute;
+    font-family: 'Space Mono', monospace;
+    font-size: 25vw; /* Slightly smaller */
+    font-weight: 700;
+    color: rgba(12,16,32,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+  .c5-grid {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    gap: 60px;
+    position: relative;
+    z-index: 2;
+    align-items: flex-start;
+  }
+  .c5-meta {
+    flex: 0 0 180px; /* Constrain width, push text left */
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(12,16,32,0.5);
+    border-top: 1px solid rgba(12,16,32,0.1);
+    padding-top: 16px;
+    line-height: 1.6;
+  }
+  .c5-text-col {
+    flex: 1;
+    max-width: 760px;
+  }
+  .c5-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(24px, 3.5vw, 36px);
+    line-height: 1.5;
+    color: var(--ink);
+    border-left: 2px solid var(--saffron);
+    padding-left: 32px;
+  }
+  /* Emphasize the opening line */
+  .c5-text .c5-highlight {
+    font-style: italic;
+    font-weight: 600;
+    color: #9B8AF4; /* Amethyst for high impact, or Saffron */
+    display: block;
+    margin-bottom: 12px;
+    font-size: 1.15em;
+    letter-spacing: -0.02em;
+  }
+  .c5-text em {
+    font-style: italic;
+    color: rgba(12,16,32,0.6);
+  }
+  .c5-cta { margin-top: 48px; display: flex; align-items: center; gap: 24px; padding-left: 32px; }
+  .c5-cta-note { font-family: 'Fraunces', serif; font-style: italic; font-size: 16px; color: rgba(12,16,32,0.5); }
+
+
+  /* ---------------------------------------------------
+     REFINED CONCEPT 6: AUTONOMOUS SPOTLIGHT
+     --------------------------------------------------- */
+  .c6-wrapper {
+    background: var(--linen);
+    height: 80vh;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* The spotlight effect is now animated autonomously */
+  .c6-spotlight {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle 500px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(251,247,235,0.95) 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .c6-content {
+    max-width: 700px;
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+    text-align: justify;
+    text-align-last: center;
+  }
+  .c6-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 200;
+    font-size: clamp(24px, 3vw, 36px);
+    line-height: 1.8;
+    color: rgba(12,16,32,0.85);
+  }
+  .c6-text strong {
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .c6-cta {
+    margin-top: 60px;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="concept-divider">Refined Concept 5: The Archival Record (Viewport Optimized)</div>
+  
+  <div class="c5-wrapper">
+    <div class="c5-massive-bg">FOUR</div>
+    <div class="c5-grid">
+      <div class="c5-meta">
+        Case File No. 001<br>
+        Origin Story<br>
+        <br><br>
+        The Genesis of the<br>
+        Wizkoo Framework
+      </div>
+      <div class="c5-text-col">
+        <div class="c5-text">
+          <span class="c5-highlight">He was four. He was reading.</span>
+          He couldn't sit still for thirty minutes, and the school said the children they accept do.<br><br>
+          The research had already started a year before that room. <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+        </div>
+        <div class="c5-cta">
+          <a href="#" class="btn-main">Build Our Week</a>
+          <span class="c5-cta-note">No credit card required.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="concept-divider">Refined Concept 6: Autonomous Spotlight</div>
+  
+  <div class="c6-wrapper" id="c6-area">
+    <div class="c6-spotlight" id="c6-spotlight"></div>
+    <div style="display:flex; flex-direction:column; align-items:center;">
+        <div class="c6-content">
+        <div class="c6-text">
+            He was four. He was reading. He couldn't sit still for thirty minutes, and the school said the children they accept do. 
+            <br><br>
+            The research had already started a year before that room. <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+        </div>
+        </div>
+        <div class="c6-cta">
+        <a href="#" class="btn-main">Build Our Week</a>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // JS for Autonomous Spotlight (Concept 6)
+    const spot = document.getElementById('c6-spotlight');
+    let angle = 0;
+    function animateSpotlight() {
+      angle += 0.015; // Speed of the autonomous light
+      // Move in a lazy, elegant figure-8 or oval pattern
+      const x = 50 + Math.sin(angle) * 35; // Swings from 15% to 85% width
+      const y = 50 + Math.cos(angle * 0.7) * 25; // Swings from 25% to 75% height
+      
+      spot.style.setProperty('--x', x + '%');
+      spot.style.setProperty('--y', y + '%');
+      
+      requestAnimationFrame(animateSpotlight);
+    }
+    animateSpotlight();
+  </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8AF38;
+  --ink: #0C1020;
+  --paper: #FAFAFA;
+  --linen: #F8F4E9;
+  --rule: #E0DED6;
+  --mid: #4A4850;
+}
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--linen);
+  color: var(--ink);
+  margin: 0;
+  padding: 80px 48px;
+  background-image: radial-gradient(rgba(12,16,32,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.sandbox-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.sandbox-header h1 {
+  font-size: 2rem;
+  font-weight: 200;
+}
+.sandbox-header p {
+  color: var(--mid);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Base Layout */
+.plan-founder {
+  display: flex;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto 120px;
+  align-items: center;
+}
+.pf-left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+}
+.pf-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.pf-villain {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--saffron);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.pf-l2 {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.15;
+  border-left: 3px solid var(--saffron);
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+.pf-l3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.close-line {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  padding-top: 24px;
+  border-top: 1px solid rgba(12,16,32,0.1);
+}
+
+/* KINETIC SIT STILL */
+.pf-kinetic-tremor {
+  display: inline-flex;
+  white-space: pre;
+  color: var(--saffron);
+}
+.pf-kinetic-tremor span {
+  display: inline-block;
+  transform-origin: center center;
+  animation: tremor-x 0.13s infinite alternate, tremor-y 0.17s infinite alternate;
+  animation-delay: calc(var(--i) * 0.03s), calc(var(--i) * 0.05s);
+}
+@keyframes tremor-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(0.8px); }
+}
+@keyframes tremor-y {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(0.8px); }
+}
+.pf-kinetic-tremor span.somersault {
+  animation: do-somersault 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes do-somersault {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+/* THE BOX (Using the Light Archival design) */
+.box-v7 {
+  background: #FFFFFF;
+  padding: 48px 40px;
+  border-radius: 2px;
+  max-width: 360px;
+  position: relative;
+  transform: rotate(1deg);
+  box-shadow: 
+    0 10px 20px rgba(0,0,0,0.02),
+    0 30px 60px rgba(12,16,32,0.06),
+    inset 0 1px 0 rgba(255,255,255,1);
+}
+.box-v7::before {
+  content: '';
+  position: absolute;
+  top: -8px; left: -16px; width: 70px; height: 22px;
+  background: rgba(245, 240, 230, 0.9);
+  transform: rotate(-25deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08), inset 0 1px 1px rgba(255,255,255,0.6);
+  z-index: 10;
+}
+.box-v7 .hook {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.box-v7 .desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<div class="sandbox-header">
+  <h1>Maximum Impact</h1>
+  <p>The Final Editorial Cuts</p>
+</div>
+
+<!-- COPY 4 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">Draft 4: The Staccato</div>
+    <div class="pf-l2">He was almost four.<br>He was already reading.<br><br>One of the top schools in the state put him in a room with seventeen glowing monitors, and then failed him because he wanted to touch a keyboard.<br><br>He could do the work. He just wouldn't <span class="pf-kinetic-tremor" aria-label="sit still"><span style="--i:1">s</span><span style="--i:2">i</span><span style="--i:3">t</span><span style="--i:4">&nbsp;</span><span style="--i:5">s</span><span style="--i:6">t</span><span style="--i:7">i</span><span style="--i:8">l</span><span style="--i:9">l</span></span>.</div>
+    <div class="pf-l3">- And they said the children they accept do.</div>
+    <div class="close-line">The research for Wizkoo began two years before that room. But that was the day it stopped being research.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v7">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COPY 5 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">Draft 5: The Razor</div>
+    <div class="pf-l2">He was almost four. He was reading.<br><br>They put him in an admissions room with seventeen computers, and rejected him because he wanted to touch them.<br><br>He passed the assessment. He just failed to <span class="pf-kinetic-tremor" aria-label="sit still"><span style="--i:1">s</span><span style="--i:2">i</span><span style="--i:3">t</span><span style="--i:4">&nbsp;</span><span style="--i:5">s</span><span style="--i:6">t</span><span style="--i:7">i</span><span style="--i:8">l</span><span style="--i:9">l</span></span>.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+    <div class="close-line">The research had started two years prior. But that was the day it became a mandate.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v7">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COPY 6 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">Draft 6: The Verdict</div>
+    <div class="pf-l2">He was almost four, and he was reading.<br><br>He answered every question, but because he was placed in a room with seventeen glowing monitors, he wanted to explore.<br><br>They turned him away. He couldn't <span class="pf-kinetic-tremor" aria-label="sit still"><span style="--i:1">s</span><span style="--i:2">i</span><span style="--i:3">t</span><span style="--i:4">&nbsp;</span><span style="--i:5">s</span><span style="--i:6">t</span><span style="--i:7">i</span><span style="--i:8">l</span><span style="--i:9">l</span></span>.</div>
+    <div class="pf-l3">- They said he was too distracted.</div>
+    <div class="close-line">I had started the research two years earlier. But that rejection was the day I decided the system had to break.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v7">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const letters = document.querySelectorAll('.pf-kinetic-tremor span');
+    function triggerRandomSomersault() {
+      let validLetters = Array.from(letters).filter((_, index) => index !== 3);
+      if (validLetters.length === 0) return;
+      let randomLetter = validLetters[Math.floor(Math.random() * validLetters.length)];
+      if (!randomLetter.classList.contains('somersault')) {
+        randomLetter.classList.add('somersault');
+        setTimeout(() => {
+          randomLetter.classList.remove('somersault');
+        }, 850);
+      }
+      let nextJump = Math.random() * 2000 + 5000;
+      setTimeout(triggerRandomSomersault, nextJump);
+    }
+    setTimeout(triggerRandomSomersault, 3000);
+  });
+</script>
+</body>
+</html>

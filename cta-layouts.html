@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Architecture Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #E8AF38;
+    --navy-bg: #0C1020;
+    --navy-surface: #101830;
+    --text-primary: #F0F2F8;
+    --text-muted: rgba(240, 242, 248, 0.45);
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--navy-bg);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    background-image: 
+      radial-gradient(ellipse at 50% 45%, rgba(24,40,72,0.40) 0%, rgba(16,24,48,0.10) 70%);
+  }
+
+  .concept-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .concept-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--saffron);
+    text-transform: uppercase;
+  }
+
+  .concept-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 24px;
+    max-width: 500px;
+  }
+
+  /* Base Card Styling */
+  .card {
+    width: 100%;
+    max-width: 500px;
+    height: 320px;
+    background: linear-gradient(145deg, rgba(20, 28, 56, 0.9), rgba(12, 16, 32, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    position: relative;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--saffron);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .card-header::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background-color: var(--saffron);
+  }
+
+  .card-body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--text-primary);
+    font-weight: 300;
+  }
+
+  .card-body .highlight {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--saffron);
+  }
+
+  /* --------------------------------------------------------------------------
+     1. THE CORNER ANCHOR
+  -------------------------------------------------------------------------- */
+  .card-corner {
+    position: relative;
+  }
+  .corner-cta-text {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .corner-cta-icon {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    color: var(--saffron);
+    font-size: 24px;
+    text-decoration: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card-corner:hover .corner-cta-text {
+    color: var(--text-primary);
+  }
+  .card-corner:hover .corner-cta-icon {
+    transform: translateX(10px);
+  }
+
+  /* --------------------------------------------------------------------------
+     2. THE IMMERSIVE CURSOR
+  -------------------------------------------------------------------------- */
+  .card-cursor {
+    cursor: none; /* Hide default cursor */
+    position: relative;
+    overflow: hidden;
+  }
+  /* Fake custom cursor for demo purposes */
+  .custom-cursor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--saffron);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .card-cursor:hover .custom-cursor {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* --------------------------------------------------------------------------
+     3. THE GRID BREAKER (TAB)
+  -------------------------------------------------------------------------- */
+  .card-tab {
+    position: relative;
+    overflow: visible; /* Allow tab to hang out */
+  }
+  .tab-cta {
+    position: absolute;
+    bottom: -20px;
+    right: 40px;
+    background: var(--saffron);
+    color: var(--navy-bg);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    padding: 16px 24px;
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  }
+  .tab-cta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(232, 175, 56, 0.2);
+  }
+
+  /* --------------------------------------------------------------------------
+     4. THE ABSTRACT GLYPH
+  -------------------------------------------------------------------------- */
+  .card-glyph {
+    position: relative;
+  }
+  .glyph-cta {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+  }
+  .glyph-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glyph-symbol {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 64px;
+    color: var(--saffron);
+    line-height: 0.7;
+    font-weight: 300;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card-glyph:hover .glyph-text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .card-glyph:hover .glyph-symbol {
+    transform: scale(1.1);
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- 1. Corner Anchor -->
+  <div class="concept-container">
+    <div class="concept-title">1. The Editorial Corner Anchor</div>
+    <div class="concept-desc">Text pushed to the extreme left, icon pushed to the extreme right. Uses negative space to create tension and a premium feel.</div>
+    <div class="card card-corner">
+      <div class="card-header">This week's window</div>
+      <div class="card-body">
+        Build a week for <span class="highlight">Maya</span>, <span class="highlight">6</span>, in <span class="highlight">Georgia</span> exploring <span class="highlight">space</span>.
+      </div>
+      <a href="#" class="corner-cta-text">BUILD YOUR OWN</a>
+      <a href="#" class="corner-cta-icon">→</a>
+    </div>
+  </div>
+
+  <!-- 2. Immersive Cursor -->
+  <div class="concept-container">
+    <div class="concept-title">2. The Immersive Custom Cursor</div>
+    <div class="concept-desc">Hover over the card below. The entire card becomes the interactive element, and a physical glass cursor reveals the action.</div>
+    <div class="card card-cursor" id="cursor-card">
+      <div class="card-header">This week's window</div>
+      <div class="card-body">
+        Build a week for <span class="highlight">Maya</span>, <span class="highlight">6</span>, in <span class="highlight">Georgia</span> exploring <span class="highlight">space</span>.
+      </div>
+      <div class="custom-cursor" id="custom-cursor">BUILD<br>YOUR<br>OWN</div>
+    </div>
+  </div>
+
+  <!-- 3. Grid Breaker Tab -->
+  <div class="concept-container">
+    <div class="concept-title">3. The Grid Breaker (Physical Tab)</div>
+    <div class="concept-desc">Breaks out of the bounding box. The CTA becomes a physical bookmark hanging off the bottom of the glass card, creating structural depth.</div>
+    <div class="card card-tab">
+      <div class="card-header">This week's window</div>
+      <div class="card-body">
+        Build a week for <span class="highlight">Maya</span>, <span class="highlight">6</span>, in <span class="highlight">Georgia</span> exploring <span class="highlight">space</span>.
+      </div>
+      <a href="#" class="tab-cta">BUILD YOUR OWN <span>+</span></a>
+    </div>
+  </div>
+
+  <!-- 4. Abstract Glyph -->
+  <div class="concept-container">
+    <div class="concept-title">4. The Abstract Glyph</div>
+    <div class="concept-desc">A massive, beautiful italic Fraunces arrow dominates the space. The instructional text only slides into view when the user physically interacts with the space.</div>
+    <div class="card card-glyph">
+      <div class="card-header">This week's window</div>
+      <div class="card-body">
+        Build a week for <span class="highlight">Maya</span>, <span class="highlight">6</span>, in <span class="highlight">Georgia</span> exploring <span class="highlight">space</span>.
+      </div>
+      <a href="#" class="glyph-cta">
+        <span class="glyph-text">BUILD YOUR OWN</span>
+        <span class="glyph-symbol">→</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Simple script to make the custom cursor follow the mouse in card 2
+    const cursorCard = document.getElementById('cursor-card');
+    const customCursor = document.getElementById('custom-cursor');
+
+    cursorCard.addEventListener('mousemove', (e) => {
+      const rect = cursorCard.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      customCursor.style.left = `${x}px`;
+      customCursor.style.top = `${y}px`;
+    });
+  </script>
+
+</body>
+</html>

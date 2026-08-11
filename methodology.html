@@ -27,11 +27,11 @@
    TOKEN OVERRIDES — match index.html color values
 ══════════════════════════════════════════════ */
 :root {
-  --ink: #0C1020;
-  --linen: #F8F4E9;
-  --warm-bg: #F8F4E9;
-  --paper: #FAFAFA;
-  --saffron: #E8AF38;
+  --ink: var(--ink);
+  --linen: var(--linen);
+  --warm-bg: var(--linen);
+  --paper: var(--paper);
+  --saffron: var(--saffron);
   --expo: cubic-bezier(0.16, 1, 0.3, 1);
   --snap: cubic-bezier(0.22, 1, 0.36, 1);
   --m-col: 680px;
@@ -1116,7 +1116,7 @@ body {
   if (!btn) return;
 
   var ff = document.createElement('div');
-  ff.style.cssText = 'position:absolute;width:5px;height:5px;border-radius:50%;background:#E8AF38;pointer-events:none;z-index:10;opacity:0;transition:opacity 0.4s ease;box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15);';
+  ff.style.cssText = 'position:absolute;width:5px;height:5px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:10;opacity:0;transition:opacity 0.4s ease;box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15);';
   cta.appendChild(ff);
 
   var triggered = false;

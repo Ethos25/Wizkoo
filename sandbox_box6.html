@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8AF38;
+  --ink: #0C1020;
+  --paper: #FAFAFA;
+  --linen: #F5F2EA;
+  --rule: #E0DED6;
+  --mid: #4A4850;
+}
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--linen);
+  color: var(--ink);
+  margin: 0;
+  padding: 0; /* Removing padding to allow sections */
+}
+.sandbox-header {
+  text-align: center;
+  padding: 80px 48px 40px;
+  background: var(--linen);
+}
+.sandbox-header h1 {
+  font-size: 2rem;
+  font-weight: 200;
+  margin: 0 0 10px 0;
+}
+.sandbox-header p {
+  color: var(--mid);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+.section-divider {
+  text-align: center;
+  padding: 40px 0;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(12,16,32,0.3);
+  text-transform: uppercase;
+  background: var(--linen);
+  border-top: 1px solid rgba(12,16,32,0.05);
+  border-bottom: 1px solid rgba(12,16,32,0.05);
+  margin: 80px 0;
+}
+
+/* =========================================
+   OPTION A: The Baseline (from Sandbox 5)
+   ========================================= */
+.opt-a {
+  padding: 80px 48px;
+}
+.plan-founder-a {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  position: relative;
+}
+.pf-villain-vertical-a {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Space Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--saffron);
+  letter-spacing: 0.25em;
+  padding-right: 20px;
+  display: flex;
+  justify-content: flex-end; 
+}
+.pf-left-a {
+  flex: 1.3;
+  display: flex;
+  flex-direction: column;
+}
+.pf-l1-large-a {
+  font-family: 'Fraunces', serif;
+  font-size: 64px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+.pf-l2-block-a {
+  margin-bottom: 40px;
+}
+.pf-l2-italic-a {
+  font-family: 'Fraunces', serif;
+  font-size: 38px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+  border-left: 3px solid var(--saffron);
+  padding-left: 32px;
+}
+.pf-l3-a {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-left: 35px;
+}
+.pf-close-a {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #8C8A90;
+  margin-top: 20px;
+}
+
+.pf-kinetic-breathe-a {
+  display: inline-flex;
+  white-space: pre;
+  position: relative;
+  animation: breathe-and-shift-a 4s infinite alternate ease-in-out;
+}
+.pf-kinetic-breathe-a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--saffron);
+}
+.pf-kinetic-breathe-a span {
+  display: inline-block;
+  transform-origin: center center;
+}
+@keyframes breathe-and-shift-a {
+  0% { transform: scale(0.95); color: var(--ink); }
+  100% { transform: scale(1.05); color: var(--saffron); }
+}
+.pf-kinetic-breathe-a span.somersault {
+  animation: do-somersault-a 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes do-somersault-a {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+.pf-right-a {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-left: 40px;
+}
+.box-mockup-a {
+  background: var(--ink);
+  padding: 56px 48px;
+  border-radius: 4px;
+  max-width: 420px;
+  position: relative;
+  transform: rotate(2deg);
+  box-shadow: 0 20px 40px rgba(12,16,32,0.2), 0 40px 80px rgba(12,16,32,0.15);
+}
+.box-mockup-a::before {
+  content: '';
+  position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%) rotate(-1deg);
+  width: 80px; height: 26px;
+  background: rgba(245, 240, 230, 0.95);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px 2px rgba(255,255,255,0.7);
+  z-index: 10;
+}
+.box-mockup-a .hook {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--saffron);
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+.box-mockup-a .desc {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+/* =========================================
+   OPTION B: The Copenhagen Museum Draft
+   ========================================= */
+.opt-b {
+  padding: 80px 48px;
+  background: #FFFFFF; /* Stark white gallery space */
+  position: relative;
+  overflow: hidden;
+}
+.plan-founder-b {
+  display: flex;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+.pf-left-b {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+}
+.pf-villain-label-b {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(12,16,32,0.4);
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+.pf-villain-label-b::before {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  width: 30px;
+  height: 1px;
+  background: rgba(12,16,32,0.2);
+}
+.pf-l1-large-b {
+  font-family: 'Inter', sans-serif; /* stark brutalist sans */
+  font-size: 72px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 32px;
+}
+.pf-l2-italic-b {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+.pf-l3-b {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  color: rgba(12,16,32,0.6);
+  line-height: 1.6;
+  padding-left: 20px;
+  border-left: 1px solid rgba(12,16,32,0.2);
+}
+.pf-close-b {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--saffron);
+  margin-top: 60px;
+}
+
+/* Kinetic Spacing Animation (The Tension) */
+.pf-kinetic-tension-b {
+  display: inline-flex;
+  white-space: pre;
+  color: var(--saffron);
+  animation: tension-stretch 3s infinite alternate cubic-bezier(0.65, 0, 0.35, 1);
+  font-weight: 700;
+}
+@keyframes tension-stretch {
+  0% { letter-spacing: -0.05em; font-variation-settings: "wght" 700; }
+  100% { letter-spacing: 0.15em; font-variation-settings: "wght" 300; }
+}
+
+.pf-right-b {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.box-glass-b {
+  background: rgba(250, 250, 250, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(12,16,32,0.05);
+  padding: 64px 48px;
+  max-width: 420px;
+  position: relative;
+  box-shadow: 
+    -20px 40px 60px rgba(12,16,32,0.03),
+    0 1px 3px rgba(12,16,32,0.02);
+}
+.box-glass-b::before {
+  /* Minimalist steel pin instead of tape */
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eee, #999);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
+}
+.box-glass-b .hook {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 32px;
+}
+.box-glass-b .desc {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+
+/* =========================================
+   OPTION C: The NY Editorial Immersive
+   ========================================= */
+.opt-c {
+  padding: 120px 48px;
+  background: var(--ink); /* Inverted Dark Mode */
+  position: relative;
+  overflow: hidden;
+}
+.watermark-c {
+  position: absolute;
+  top: -50px;
+  left: -20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 240px;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.03);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+.plan-founder-c {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+.pf-left-c {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+.pf-l1-large-c {
+  font-family: 'Fraunces', serif;
+  font-size: 80px;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 40px;
+}
+.pf-l2-italic-c {
+  font-family: 'Sora', sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.4;
+  margin-bottom: 32px;
+}
+.pf-l3-c {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.pf-close-c {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 24px;
+  color: var(--saffron);
+  margin-top: 40px;
+  border-bottom: 2px solid var(--saffron);
+  align-self: flex-start;
+  padding-bottom: 8px;
+}
+
+/* Kinetic Mask (The Fire) */
+.pf-kinetic-mask-c {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  color: transparent;
+  background-image: linear-gradient(90deg, #E8AF38, #FF6B6B, #E8AF38);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: fire-mask 2s linear infinite;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+@keyframes fire-mask {
+  to { background-position: 200% center; }
+}
+
+.pf-right-c {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 100px;
+}
+.box-brutalist-c {
+  background: var(--saffron);
+  padding: 64px 48px;
+  max-width: 420px;
+  position: relative;
+  /* Brutalist hard shadow */
+  box-shadow: 16px 16px 0 rgba(255,255,255,0.1);
+}
+.box-brutalist-c .hook {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.box-brutalist-c .desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+</style>
+</head>
+<body>
+
+<div class="sandbox-header">
+  <h1>The Collaborative Boardroom</h1>
+  <p>Comparing Option A against Option B and C</p>
+</div>
+
+
+<div class="section-divider">Option A: The Baseline (Locked)</div>
+
+<!-- OPTION A -->
+<div class="opt-a">
+<div class="plan-founder-a">
+  <div class="pf-villain-vertical-a">THE VILLAIN STORY</div>
+  
+  <div class="pf-left-a">
+    <div class="pf-l1-large-a">
+      He was four.<br>
+      He was reading.
+    </div>
+    <div class="pf-l2-block-a">
+      <div class="pf-l2-italic-a">
+        But he couldn't <span class="pf-kinetic-breathe-a" aria-label="sit still"><span style="--i:1">s</span><span style="--i:2">i</span><span style="--i:3">t</span><span style="--i:4">&nbsp;</span><span style="--i:5">s</span><span style="--i:6">t</span><span style="--i:7">i</span><span style="--i:8">l</span><span style="--i:9">l</span></span> for<br>
+        thirty minutes.
+      </div>
+      <div class="pf-l3-a">— And the school said the children they accept do.</div>
+    </div>
+    <div class="pf-close-a">THAT SINGLE REJECTION LAUNCHED FOUR YEARS OF INTENSE RESEARCH.</div>
+  </div>
+  
+  <div class="pf-right-a">
+    <div class="box-mockup-a">
+      <div class="hook">Wizkoo is what four<br>years of it built.</div>
+      <div class="desc">A PreK-5 mastery<br>framework wrapped in a<br>week that moves the way<br>kids actually move.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div class="section-divider">Option B: The Copenhagen Museum</div>
+
+<!-- OPTION B -->
+<div class="opt-b">
+<div class="plan-founder-b">
+  <div class="pf-left-b">
+    <div class="pf-villain-label-b">The Villain Story</div>
+    
+    <div class="pf-l1-large-b">
+      He was four.<br>
+      He was reading.
+    </div>
+    
+    <div class="pf-l2-italic-b">
+      But he couldn't <span class="pf-kinetic-tension-b">sit still</span> for thirty minutes.
+    </div>
+    
+    <div class="pf-l3-b">
+      — And the school said the children they accept do.
+    </div>
+    
+    <div class="pf-close-b">That single rejection launched four years of intense research.</div>
+  </div>
+  
+  <div class="pf-right-b">
+    <div class="box-glass-b">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="section-divider">Option C: The NY Editorial Immersive</div>
+
+<!-- OPTION C -->
+<div class="opt-c">
+<div class="watermark-c">THE VILLAIN STORY</div>
+<div class="plan-founder-c">
+  
+  <div class="pf-left-c">
+    <div class="pf-l1-large-c">
+      He was four.<br>
+      He was reading.
+    </div>
+    
+    <div class="pf-l2-italic-c">
+      But he couldn't <span class="pf-kinetic-mask-c">sit still</span> for thirty minutes.
+    </div>
+    
+    <div class="pf-l3-c">
+      — And the school said the children they accept do.
+    </div>
+    
+    <div class="pf-close-c">
+      That single rejection launched four years of intense research.
+    </div>
+  </div>
+  
+  <div class="pf-right-c">
+    <div class="box-brutalist-c">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  // Animation for Option A
+  document.addEventListener('DOMContentLoaded', () => {
+    const letters = document.querySelectorAll('.pf-kinetic-breathe-a span');
+    function triggerRandomSomersault() {
+      let validLetters = Array.from(letters).filter((_, index) => index !== 3); // ignore space
+      if (validLetters.length === 0) return;
+      let randomLetter = validLetters[Math.floor(Math.random() * validLetters.length)];
+      if (!randomLetter.classList.contains('somersault')) {
+        randomLetter.classList.add('somersault');
+        setTimeout(() => {
+          randomLetter.classList.remove('somersault');
+        }, 850);
+      }
+      let nextJump = Math.random() * 2000 + 5000;
+      setTimeout(triggerRandomSomersault, nextJump);
+    }
+    setTimeout(triggerRandomSomersault, 3000);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1009 @@
+file:line | hard-coded value | token adopted | FINDING
+--------------------------------------------------------
+index.html:161 | #E8AF38 | var(--saffron) | 
+index.html:161 | #0C1020 | var(--ink) | 
+index.html:161 | #FAFAFA | var(--paper) | 
+index.html:161 | #F8F4E9 | var(--linen) | 
+index.html:161 | #F8F4E9 | var(--linen) | 
+index.html:162 | #E0DED6 | var(--rule) | 
+index.html:162 | #4A4850 | var(--mid) | 
+index.html:162 | #A8A6B0 | var(--faint) | 
+index.html:165 | #2868CC | var(--day-sky) | 
+index.html:211 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+index.html:213 | #0C1020 | var(--ink) | 
+index.html:300 | #4A4850 | var(--mid) | 
+index.html:302 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+index.html:316 | #fff | N/A | FINDING: #FFF has no token
+index.html:322 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+index.html:323 | #7A7F93 | N/A | FINDING: #7A7F93 has no token
+index.html:332 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+index.html:341 | #9B8AF4 | N/A | FINDING: #9B8AF4 has no token
+index.html:343 | #E06C53 | N/A | FINDING: #E06C53 has no token
+index.html:344 | #4A9E78 | N/A | FINDING: #4A9E78 has no token
+index.html:345 | #7CB4B8 | N/A | FINDING: #7CB4B8 has no token
+index.html:346 | #E294A5 | N/A | FINDING: #E294A5 has no token
+index.html:349 | #aaa | N/A | FINDING: #AAA has no token
+index.html:651 | #141310 | N/A | FINDING: #141310 has no token
+index.html:667 | #F4EEDF | N/A | FINDING: #F4EEDF has no token
+index.html:673 | #FFFDF8 | N/A | FINDING: #FFFDF8 has no token
+index.html:677 | #EAE6D8 | N/A | FINDING: #EAE6D8 has no token
+index.html:678 | #2A2F45 | N/A | FINDING: #2A2F45 has no token
+index.html:698 | #0C1020 | var(--ink) | 
+index.html:706 | #F8F4E9 | var(--linen) | 
+index.html:709 | #0C1020 | var(--ink) | 
+index.html:710 | #E8AF38 | var(--saffron) | 
+index.html:713 | #0C1020 | var(--ink) | 
+index.html:748 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+index.html:749 | #C8CDDA | N/A | FINDING: #C8CDDA has no token
+index.html:750 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+index.html:867 | #6BBF6B | N/A | FINDING: #6BBF6B has no token
+index.html:892 | #F2F0EA | var(--linen) | 
+index.html:894 | #E8AF38 | var(--saffron) | 
+index.html:900 | #3848D0 | N/A | FINDING: #3848D0 has no token
+index.html:901 | #E8D800 | N/A | FINDING: #E8D800 has no token
+index.html:902 | #38B060 | N/A | FINDING: #38B060 has no token
+index.html:903 | #C83030 | N/A | FINDING: #C83030 has no token
+index.html:904 | #8848E0 | N/A | FINDING: #8848E0 has no token
+index.html:905 | #F08A20 | N/A | FINDING: #F08A20 has no token
+index.html:906 | #3848D0 | N/A | FINDING: #3848D0 has no token
+index.html:907 | #E8D800 | N/A | FINDING: #E8D800 has no token
+index.html:908 | #38B060 | N/A | FINDING: #38B060 has no token
+index.html:909 | #C83030 | N/A | FINDING: #C83030 has no token
+index.html:910 | #8848E0 | N/A | FINDING: #8848E0 has no token
+index.html:911 | #F08A20 | N/A | FINDING: #F08A20 has no token
+index.html:1016 | #F8F4E9 | var(--linen) | 
+index.html:1018 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+index.html:1019 | #E8AF38 | var(--saffron) | 
+index.html:1020 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+index.html:1021 | #E8AF38 | var(--saffron) | 
+index.html:1024 | #E8AF38 | var(--saffron) | 
+index.html:1027 | #101830 | N/A | FINDING: Dark blue #101830 not in tokens
+index.html:1027 | #182848 | N/A | FINDING: Dark blue #182848 not in tokens
+index.html:1027 | #101830 | N/A | FINDING: Dark blue #101830 not in tokens
+index.html:1033 | #FDE9A0 | N/A | FINDING: #FDE9A0 has no token
+index.html:1033 | #F0C050 | N/A | FINDING: #F0C050 has no token
+index.html:1033 | #E8AF38 | var(--saffron) | 
+index.html:1033 | #C89030 | N/A | FINDING: #C89030 has no token
+index.html:1033 | #A07020 | N/A | FINDING: #A07020 has no token
+index.html:1036 | #E8AF38 | var(--saffron) | 
+index.html:1037 | #E8AF38 | var(--saffron) | 
+index.html:1038 | #C8CDDA | N/A | FINDING: #C8CDDA has no token
+index.html:1062 | #1e3060 | N/A | FINDING: #1E3060 has no token
+index.html:1062 | #131e3a | N/A | FINDING: #131E3A has no token
+index.html:1062 | #0d1627 | N/A | FINDING: #0D1627 has no token
+index.html:1078 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+index.html:1085 | #FDE9A0 | N/A | FINDING: #FDE9A0 has no token
+index.html:1085 | #F0C050 | N/A | FINDING: #F0C050 has no token
+index.html:1085 | #E8AF38 | var(--saffron) | 
+index.html:1085 | #C89030 | N/A | FINDING: #C89030 has no token
+index.html:1085 | #A07020 | N/A | FINDING: #A07020 has no token
+index.html:1120 | #A8A6B0 | var(--faint) | 
+index.html:1124 | #E8AF38 | var(--saffron) | 
+index.html:1160 | #E8AF38 | var(--saffron) | 
+index.html:1168 | #FFFFFF | N/A | FINDING: #FFFFFF has no token
+index.html:1168 | #FFF8E7 | N/A | FINDING: #FFF8E7 has no token
+index.html:1172 | #FFFFFF | N/A | FINDING: #FFFFFF has no token
+index.html:1234 | #FBF7EB | N/A | FINDING: #FBF7EB has no token
+index.html:1254 | #F8F4E9 | var(--linen) | 
+index.html:1330 | #FBF7EB | N/A | FINDING: #FBF7EB has no token
+index.html:1331 | #FBF7EB | N/A | FINDING: #FBF7EB has no token
+index.html:1331 | #FBF7EB | N/A | FINDING: #FBF7EB has no token
+index.html:1331 | #FBF7EB | N/A | FINDING: #FBF7EB has no token
+index.html:1331 | #FBF7EB | N/A | FINDING: #FBF7EB has no token
+index.html:1333 | #0C1020 | var(--ink) | 
+index.html:1334 | #E8AF38 | var(--saffron) | 
+index.html:1336 | #0C1020 | var(--ink) | 
+index.html:1337 | #0C1020 | var(--ink) | 
+index.html:1337 | #E8AF38 | var(--saffron) | 
+index.html:1341 | #0C1020 | var(--ink) | 
+index.html:1420 | #F8F4E9 | var(--linen) | 
+index.html:1599 | #E8AF38 | var(--saffron) | 
+index.html:1601 | #0C1020 | var(--ink) | 
+index.html:1610 | #0C1020 | var(--ink) | 
+index.html:1624 | #E8AF38 | var(--saffron) | 
+index.html:1785 | #0C1020 | var(--ink) | 
+index.html:1790 | #E8AF38 | var(--saffron) | 
+index.html:1792 | #E8AF38 | var(--saffron) | 
+index.html:1907 | #0C1020 | var(--ink) | 
+index.html:1912 | #FAFAFA | var(--paper) | 
+index.html:1913 | #E8AF38 | var(--saffron) | 
+index.html:1918 | #E8AF38 | var(--saffron) | 
+index.html:1933 | #E8AF38 | var(--saffron) | 
+index.html:1935 | #FAFAFA | var(--paper) | 
+index.html:1938 | #E8AF38 | var(--saffron) | 
+index.html:1938 | #0C1020 | var(--ink) | 
+index.html:1939 | #FAFAFA | var(--paper) | 
+index.html:1939 | #0C1020 | var(--ink) | 
+index.html:1969 | #F8F4E9 | var(--linen) | 
+index.html:2024 | #0C1020 | var(--ink) | 
+index.html:2030 | #E8AF38 | var(--saffron) | 
+index.html:2036 | #0C1020 | var(--ink) | 
+index.html:2043 | #E8AF38 | var(--saffron) | 
+index.html:2097 | #0C1020 | var(--ink) | 
+index.html:2105 | #0C1020 | var(--ink) | 
+index.html:2123 | #0C1020 | var(--ink) | 
+index.html:2126 | #0C1020 | var(--ink) | 
+index.html:2128 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+index.html:2131 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+index.html:2137 | #0C1020 | var(--ink) | 
+index.html:2138 | #E8AF38 | var(--saffron) | 
+index.html:2141 | #E8AF38 | var(--saffron) | 
+index.html:2142 | #0C1020 | var(--ink) | 
+index.html:2143 | #E8AF38 | var(--saffron) | 
+index.html:2147 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+index.html:2440 | #225 | N/A | FINDING: #225 has no token
+index.html:2646 | #E8AF38 | var(--saffron) | 
+index.html:2829 | #E8AF38 | var(--saffron) | 
+index.html:2829 | #D4A030 | N/A | FINDING: #D4A030 has no token
+index.html:2829 | #F0C45A | N/A | FINDING: #F0C45A has no token
+index.html:2829 | #C49028 | N/A | FINDING: #C49028 has no token
+index.html:2829 | #FFD770 | N/A | FINDING: #FFD770 has no token
+index.html:2829 | #B87D1A | N/A | FINDING: #B87D1A has no token
+index.html:3029 | #F0C050 | N/A | FINDING: #F0C050 has no token
+index.html:3228 | #E8AF38 | var(--saffron) | 
+about.html:30 | #E8AF38 | var(--saffron) | 
+about.html:30 | #0C1020 | var(--ink) | 
+about.html:30 | #FAFAFA | var(--paper) | 
+about.html:30 | #F8F4E9 | var(--linen) | 
+about.html:30 | #F8F4E9 | var(--linen) | 
+about.html:30 | #E0DED6 | var(--rule) | 
+about.html:30 | #4A4850 | var(--mid) | 
+about.html:30 | #A8A6B0 | var(--faint) | 
+ages.html:14 | #E8AF38 | var(--saffron) | 
+ages.html:14 | #0C1020 | var(--ink) | 
+ages.html:14 | #FAFAFA | var(--paper) | 
+ages.html:14 | #F8F4E9 | var(--linen) | 
+ages.html:14 | #F8F4E9 | var(--linen) | 
+ages.html:14 | #E0DED6 | var(--rule) | 
+ages.html:14 | #4A4850 | var(--mid) | 
+contact.html:16 | #E8AF38 | var(--saffron) | 
+contact.html:16 | #0C1020 | var(--ink) | 
+contact.html:16 | #F8F4E9 | var(--linen) | 
+contact.html:16 | #F8F4E9 | var(--linen) | 
+contact.html:17 | #E0DED6 | var(--rule) | 
+contact.html:17 | #4A4850 | var(--mid) | 
+esa.html:16 | #E8AF38 | var(--saffron) | 
+esa.html:16 | #0C1020 | var(--ink) | 
+esa.html:16 | #FAFAFA | var(--paper) | 
+esa.html:16 | #F8F4E9 | var(--linen) | 
+esa.html:16 | #F8F4E9 | var(--linen) | 
+esa.html:16 | #E0DED6 | var(--rule) | 
+esa.html:16 | #4A4850 | var(--mid) | 
+esa.html:99 | #FFFDF8 | N/A | FINDING: #FFFDF8 has no token
+games.html:107 | #E8AF38 | var(--saffron) | 
+library.html:244 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+methodology.html:30 | #0C1020 | var(--ink) | 
+methodology.html:31 | #F8F4E9 | var(--linen) | 
+methodology.html:32 | #F8F4E9 | var(--linen) | 
+methodology.html:33 | #FAFAFA | var(--paper) | 
+methodology.html:34 | #E8AF38 | var(--saffron) | 
+methodology.html:47 | #F3F1EB | N/A | FINDING: #F3F1EB has no token
+methodology.html:47 | #F0EDE6 | N/A | FINDING: #F0EDE6 has no token
+methodology.html:146 | #555 | N/A | FINDING: #555 has no token
+methodology.html:314 | #777 | N/A | FINDING: #777 has no token
+methodology.html:325 | #555 | N/A | FINDING: #555 has no token
+methodology.html:418 | #444 | N/A | FINDING: #444 has no token
+methodology.html:541 | #555 | N/A | FINDING: #555 has no token
+methodology.html:1119 | #E8AF38 | var(--saffron) | 
+pricing.html:15 | #E8AF38 | var(--saffron) | 
+pricing.html:15 | #0C1020 | var(--ink) | 
+pricing.html:15 | #FAFAFA | var(--paper) | 
+pricing.html:15 | #F8F4E9 | var(--linen) | 
+pricing.html:15 | #F8F4E9 | var(--linen) | 
+pricing.html:15 | #E0DED6 | var(--rule) | 
+pricing.html:15 | #4A4850 | var(--mid) | 
+privacy.html:17 | #E8AF38 | var(--saffron) | 
+privacy.html:17 | #0C1020 | var(--ink) | 
+privacy.html:17 | #F8F4E9 | var(--linen) | 
+privacy.html:18 | #E0DED6 | var(--rule) | 
+privacy.html:18 | #666 | N/A | FINDING: #666 has no token
+privacy.html:37 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+privacy.html:50 | #D4A030 | N/A | FINDING: #D4A030 has no token
+privacy.html:58 | #888 | N/A | FINDING: #888 has no token
+privacy.html:61 | #555 | N/A | FINDING: #555 has no token
+privacy.html:65 | #555 | N/A | FINDING: #555 has no token
+privacy.html:67 | #555 | N/A | FINDING: #555 has no token
+scope.html:30 | #777 | N/A | FINDING: #777 has no token
+terms.html:17 | #E8AF38 | var(--saffron) | 
+terms.html:17 | #0C1020 | var(--ink) | 
+terms.html:17 | #F8F4E9 | var(--linen) | 
+terms.html:18 | #E0DED6 | var(--rule) | 
+terms.html:18 | #666 | N/A | FINDING: #666 has no token
+terms.html:37 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+terms.html:50 | #D4A030 | N/A | FINDING: #D4A030 has no token
+terms.html:58 | #888 | N/A | FINDING: #888 has no token
+terms.html:61 | #555 | N/A | FINDING: #555 has no token
+terms.html:64 | #555 | N/A | FINDING: #555 has no token
+terms.html:66 | #555 | N/A | FINDING: #555 has no token
+terms.html:68 | #555 | N/A | FINDING: #555 has no token
+themes.html:27 | #F8F4E9 | var(--linen) | 
+themes.html:27 | #FAFAFA | var(--paper) | 
+themes.html:27 | #F8F4E9 | var(--linen) | 
+themes.html:27 | #E0DED6 | var(--rule) | 
+themes.html:28 | #0C1020 | var(--ink) | 
+themes.html:28 | #4A4850 | var(--mid) | 
+themes.html:28 | #E8AF38 | var(--saffron) | 
+themes.html:29 | #2030A0 | N/A | FINDING: #2030A0 has no token
+themes.html:29 | #9A8600 | N/A | FINDING: #9A8600 has no token
+themes.html:29 | #7A6800 | N/A | FINDING: #7A6800 has no token
+themes.html:30 | #247840 | N/A | FINDING: #247840 has no token
+themes.html:30 | #CC6000 | N/A | FINDING: #CC6000 has no token
+themes.html:30 | #6030B0 | N/A | FINDING: #6030B0 has no token
+the-open-seat.html:11 | #E8AF38 | var(--saffron) | 
+the-open-seat.html:11 | #0C1020 | var(--ink) | 
+the-open-seat.html:11 | #FAFAFA | var(--paper) | 
+the-open-seat.html:11 | #F2F0EA | var(--linen) | 
+the-open-seat.html:11 | #ECEAE3 | N/A | FINDING: #ECEAE3 has no token
+the-open-seat.html:11 | #E0DED6 | var(--rule) | 
+the-open-seat.html:11 | #4A4850 | var(--mid) | 
+the-open-seat.html:83 | #1A4EC2 | N/A | FINDING: #1A4EC2 has no token
+the-open-seat.html:83 | #1E54C6 | N/A | FINDING: #1E54C6 has no token
+the-open-seat.html:83 | #2260CC | N/A | FINDING: #2260CC has no token
+the-open-seat.html:84 | #2868CC | var(--day-sky) | 
+the-open-seat.html:84 | #2E6ECE | N/A | FINDING: #2E6ECE has no token
+the-open-seat.html:84 | #306CCC | N/A | FINDING: #306CCC has no token
+the-open-seat.html:85 | #2C68C6 | N/A | FINDING: #2C68C6 has no token
+the-open-seat.html:85 | #2860B8 | N/A | FINDING: #2860B8 has no token
+the-open-seat.html:85 | #2054A8 | N/A | FINDING: #2054A8 has no token
+the-open-seat.html:86 | #174496 | N/A | FINDING: #174496 has no token
+the-open-seat.html:86 | #123485 | N/A | FINDING: #123485 has no token
+the-open-seat.html:296 | #E8AF38 | var(--saffron) | 
+the-open-seat.html:305 | #EDBA45 | N/A | FINDING: #EDBA45 has no token
+what-we-believe.html:43 | #E8AF38 | var(--saffron) | 
+what-we-believe.html:43 | #0C1020 | var(--ink) | 
+what-we-believe.html:43 | #FAFAFA | var(--paper) | 
+what-we-believe.html:43 | #F8F4E9 | var(--linen) | 
+what-we-believe.html:43 | #F8F4E9 | var(--linen) | 
+what-we-believe.html:43 | #E0DED6 | var(--rule) | 
+what-we-believe.html:43 | #4A4850 | var(--mid) | 
+what-we-believe.html:43 | #A8A6B0 | var(--faint) | 
+404.html:60 | #555 | N/A | FINDING: #555 has no token
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:38 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+index.html:19 | #E8AF38 | var(--saffron) | 
+index.html:19 | #0C1020 | var(--ink) | 
+index.html:19 | #FAFAFA | var(--paper) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #F8F4E9 | var(--linen) | 
+index.html:19 | #E0DED6 | var(--rule) | 
+index.html:19 | #4A4850 | var(--mid) | 
+index.html:32 | #E8AF38 | var(--saffron) | 
+atlas.html:68 | #555 | N/A | FINDING: #555 has no token
+atlas.html:69 | #fff | N/A | FINDING: #FFF has no token
+atlas.html:69 | #7A7A72 | N/A | FINDING: #7A7A72 has no token
+atlas.html:97 | #fff | N/A | FINDING: #FFF has no token
+atlas.html:116 | #fff | N/A | FINDING: #FFF has no token
+atlas.html:118 | #555 | N/A | FINDING: #555 has no token
+atlas.html:120 | #fff | N/A | FINDING: #FFF has no token
+atlas.html:122 | #555 | N/A | FINDING: #555 has no token
+atlas.html:136 | #fff | N/A | FINDING: #FFF has no token
+atlas.html:140 | #fff | N/A | FINDING: #FFF has no token
+atlas.html:144 | #fff | N/A | FINDING: #FFF has no token
+elementum.html:69 | #555 | N/A | FINDING: #555 has no token
+elementum.html:70 | #555 | N/A | FINDING: #555 has no token
+elementum.html:71 | #fff | N/A | FINDING: #FFF has no token
+elementum.html:71 | #7A7A72 | N/A | FINDING: #7A7A72 has no token
+elementum.html:107 | #fff | N/A | FINDING: #FFF has no token
+elementum.html:112 | #999 | N/A | FINDING: #999 has no token
+elementum.html:117 | #999 | N/A | FINDING: #999 has no token
+elementum.html:125 | #555 | N/A | FINDING: #555 has no token
+elementum.html:137 | #fff | N/A | FINDING: #FFF has no token
+elementum.html:140 | #666 | N/A | FINDING: #666 has no token
+elementum.html:142 | #fff | N/A | FINDING: #FFF has no token
+elementum.html:145 | #666 | N/A | FINDING: #666 has no token
+elementum.html:150 | #666 | N/A | FINDING: #666 has no token
+elementum.html:152 | #fff | N/A | FINDING: #FFF has no token
+elementum.html:155 | #666 | N/A | FINDING: #666 has no token
+book.html:34 | #F2F0EA | var(--linen) | 
+book.html:45 | #182848 | N/A | FINDING: Dark blue #182848 not in tokens
+book.html:45 | #101830 | N/A | FINDING: Dark blue #101830 not in tokens
+book.html:46 | #101830 | N/A | FINDING: Dark blue #101830 not in tokens
+book.html:47 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+book.html:110 | #F2F0EA | var(--linen) | 
+book.html:142 | #F2F0EA | var(--linen) | 
+book.html:158 | #F2F0EA | var(--linen) | 
+book.html:169 | #C8852A | N/A | FINDING: Orange #C8852A not in tokens
+book.html:169 | #A86A1A | N/A | FINDING: Orange #A86A1A not in tokens
+book.html:183 | #E8AF38 | var(--saffron) | 
+book.html:200 | #5F5E5A | N/A | FINDING: Gray #5F5E5A not in tokens
+book.html:206 | #5F5E5A | N/A | FINDING: Gray #5F5E5A not in tokens
+book.html:211 | #5F5E5A | N/A | FINDING: Gray #5F5E5A not in tokens
+book.html:217 | #0C1020 | var(--ink) | 
+book.html:222 | #8C8A84 | N/A | FINDING: Gray #8C8A84 not in tokens
+book.html:252 | #E8AF38 | var(--saffron) | 
+book.html:263 | #E8AF38 | var(--saffron) | 
+book.html:272 | #0C1020 | var(--ink) | 
+book.html:278 | #E8AF38 | var(--saffron) | 
+book.html:297 | #5F5E5A | N/A | FINDING: Gray #5F5E5A not in tokens
+book.html:298 | #E0DED6 | var(--rule) | 
+book.html:306 | #FAFAFA | var(--paper) | 
+book.html:307 | #FAFAFA | var(--paper) | 
+book.html:307 | #E0DED6 | var(--rule) | 
+book.html:307 | #0C1020 | var(--ink) | 
+book.html:311 | #E0DED6 | var(--rule) | 
+book.html:312 | #E0DED6 | var(--rule) | 
+book.html:328 | #0C1020 | var(--ink) | 
+book.html:360 | #E8AF38 | var(--saffron) | 
+book.html:360 | #0C1020 | var(--ink) | 
+book.html:361 | #D49E2A | N/A | FINDING: Saffron hover #D49E2A not in tokens
+book.html:370 | #0C1020 | var(--ink) | 
+book.html:402 | #0C1020 | var(--ink) | 
+book.html:420 | #E8AF38 | var(--saffron) | 
+book.html:427 | #E8AF38 | var(--saffron) | 
+book.html:445 | #E8AF38 | var(--saffron) | 
+book.html:457 | #E8AF38 | var(--saffron) | 
+book.html:470 | #E0DED6 | var(--rule) | 
+book.html:482 | #E8AF38 | var(--saffron) | 
+book.html:498 | #0C1020 | var(--ink) | 
+book.html:520 | #0C1020 | var(--ink) | 
+book.html:530 | #0C1020 | var(--ink) | 
+book.html:537 | #FAFAFA | var(--paper) | 
+book.html:538 | #E0DED6 | var(--rule) | 
+book.html:559 | #0C1020 | var(--ink) | 
+book.html:584 | #0C1020 | var(--ink) | 
+book.html:603 | #E0DED6 | var(--rule) | 
+book.html:622 | #C8C5BC | N/A | FINDING: Gray #C8C5BC not in tokens
+book.html:639 | #0C1020 | var(--ink) | 
+book.html:642 | #E8AF38 | var(--saffron) | 
+book.html:650 | #5F5E5A | N/A | FINDING: Gray #5F5E5A not in tokens
+book.html:661 | #5F5E5A | N/A | FINDING: Gray #5F5E5A not in tokens
+book.html:672 | #0C1020 | var(--ink) | 
+book.html:694 | #0C1020 | var(--ink) | 
+book.html:707 | #5F5E5A | N/A | FINDING: Gray #5F5E5A not in tokens
+book.html:731 | #F2F0EA | var(--linen) | 
+book.html:743 | #C8852A | N/A | FINDING: Orange #C8852A not in tokens
+book.html:752 | #E8AF38 | var(--saffron) | 
+book.html:758 | #0C1020 | var(--ink) | 
+book.html:766 | #5F5E5A | N/A | FINDING: Gray #5F5E5A not in tokens
+book.html:775 | #8C8A84 | N/A | FINDING: Gray #8C8A84 not in tokens
+book.html:783 | #0C1020 | var(--ink) | 
+book.html:787 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+book.html:789 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+book.html:790 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+book.html:792 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+book.html:792 | #E8AF38 | var(--saffron) | 
+book.html:793 | #E8AF38 | var(--saffron) | 
+book.html:793 | #231a14 | var(--lib-ink) | 
+book.html:814 | #E8AF38 | var(--saffron) | 
+book.html:1094 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+lighthouse-report.html:20 | #5e6274 | N/A | FINDING: #5E6274 has no token
+lighthouse-report.html:20 | #181b2a | N/A | FINDING: #181B2A has no token
+lighthouse-report.html:20 | #5e6274 | N/A | FINDING: #5E6274 has no token
+lighthouse-report.html:20 | #181b2a | N/A | FINDING: #181B2A has no token
+lighthouse-report.html:80 | #595959 | N/A | FINDING: #595959 has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:119 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:132 | #47ebbc | N/A | FINDING: #47EBBC has no token
+lighthouse-report.html:132 | #eb47a4 | N/A | FINDING: #EB47A4 has no token
+lighthouse-report.html:132 | #7eeb47 | N/A | FINDING: #7EEB47 has no token
+lighthouse-report.html:132 | #eb47c5 | N/A | FINDING: #EB47C5 has no token
+lighthouse-report.html:132 | #7347eb | N/A | FINDING: #7347EB has no token
+lighthouse-report.html:132 | #ebd247 | N/A | FINDING: #EBD247 has no token
+lighthouse-report.html:132 | #eb47e0 | N/A | FINDING: #EB47E0 has no token
+lighthouse-report.html:132 | #b4eb47 | N/A | FINDING: #B4EB47 has no token
+lighthouse-report.html:132 | #479eeb | N/A | FINDING: #479EEB has no token
+lighthouse-report.html:132 | #ebcf47 | N/A | FINDING: #EBCF47 has no token
+lighthouse-report.html:132 | #d547eb | N/A | FINDING: #D547EB has no token
+lighthouse-report.html:132 | #47bfeb | N/A | FINDING: #47BFEB has no token
+lighthouse-report.html:132 | #47eb83 | N/A | FINDING: #47EB83 has no token
+lighthouse-report.html:132 | #eb47bf | N/A | FINDING: #EB47BF has no token
+lighthouse-report.html:132 | #91eb47 | N/A | FINDING: #91EB47 has no token
+lighthouse-report.html:132 | #86eb47 | N/A | FINDING: #86EB47 has no token
+lighthouse-report.html:132 | #83eb47 | N/A | FINDING: #83EB47 has no token
+lighthouse-report.html:132 | #eb47eb | N/A | FINDING: #EB47EB has no token
+lighthouse-report.html:132 | #47eb73 | N/A | FINDING: #47EB73 has no token
+lighthouse-report.html:132 | #47e8eb | N/A | FINDING: #47E8EB has no token
+lighthouse-report.html:132 | #ebe247 | N/A | FINDING: #EBE247 has no token
+lighthouse-report.html:132 | #eb5547 | N/A | FINDING: #EB5547 has no token
+lighthouse-report.html:132 | #7beb47 | N/A | FINDING: #7BEB47 has no token
+lighthouse-report.html:132 | #a147eb | N/A | FINDING: #A147EB has no token
+lighthouse-report.html:132 | #eb8347 | N/A | FINDING: #EB8347 has no token
+lighthouse-report.html:132 | #eb5547 | N/A | FINDING: #EB5547 has no token
+lighthouse-report.html:132 | #47eb81 | N/A | FINDING: #47EB81 has no token
+lighthouse-report.html:132 | #eb47ba | N/A | FINDING: #EB47BA has no token
+lighthouse-report.html:132 | #eb47bf | N/A | FINDING: #EB47BF has no token
+lighthouse-report.html:132 | #eb4783 | N/A | FINDING: #EB4783 has no token
+lighthouse-report.html:132 | #eba147 | N/A | FINDING: #EBA147 has no token
+lighthouse-report.html:132 | #ebe247 | N/A | FINDING: #EBE247 has no token
+lighthouse-report.html:132 | #47e2eb | N/A | FINDING: #47E2EB has no token
+lighthouse-report.html:132 | #ebe047 | N/A | FINDING: #EBE047 has no token
+lighthouse-report.html:132 | #4776eb | N/A | FINDING: #4776EB has no token
+lighthouse-report.html:132 | #eb5547 | N/A | FINDING: #EB5547 has no token
+lighthouse-report.html:132 | #47ebc7 | N/A | FINDING: #47EBC7 has no token
+lighthouse-report.html:132 | #eb47ac | N/A | FINDING: #EB47AC has no token
+lighthouse-report.html:132 | #4783eb | N/A | FINDING: #4783EB has no token
+lighthouse-report.html:132 | #47baeb | N/A | FINDING: #47BAEB has no token
+lighthouse-report.html:132 | #ba47eb | N/A | FINDING: #BA47EB has no token
+lighthouse-report.html:132 | #5247eb | N/A | FINDING: #5247EB has no token
+lighthouse-report.html:132 | #eb4791 | N/A | FINDING: #EB4791 has no token
+lighthouse-report.html:132 | #47eba7 | N/A | FINDING: #47EBA7 has no token
+lighthouse-report.html:132 | #eb478b | N/A | FINDING: #EB478B has no token
+lighthouse-report.html:132 | #eb5d47 | N/A | FINDING: #EB5D47 has no token
+lighthouse-report.html:132 | #eb6847 | N/A | FINDING: #EB6847 has no token
+lighthouse-report.html:132 | #ebe047 | N/A | FINDING: #EBE047 has no token
+lighthouse-report.html:132 | #47ebda | N/A | FINDING: #47EBDA has no token
+lighthouse-report.html:132 | #eb8147 | N/A | FINDING: #EB8147 has no token
+lighthouse-report.html:132 | #ebbc47 | N/A | FINDING: #EBBC47 has no token
+lighthouse-report.html:231 | #fbf1f2 | N/A | FINDING: #FBF1F2 has no token
+lighthouse-report.html:232 | #ffd6d8 | N/A | FINDING: #FFD6D8 has no token
+lighthouse-report.html:261 | #0c50c7 | N/A | FINDING: #0C50C7 has no token
+lighthouse-report.html:362 | #FFF8E1 | N/A | FINDING: #FFF8E1 has no token
+lighthouse-report.html:363 | #90CAF9 | N/A | FINDING: #90CAF9 has no token
+lighthouse-report.html:364 | #0D47A1 | N/A | FINDING: #0D47A1 has no token
+lighthouse-report.html:365 | #2962FF | N/A | FINDING: #2962FF has no token
+lighthouse-report.html:366 | #06f | N/A | FINDING: #06F has no token
+lighthouse-report.html:367 | #00BCD4 | N/A | FINDING: #00BCD4 has no token
+lighthouse-report.html:368 | #F5F5F5 | N/A | FINDING: #F5F5F5 has no token
+lighthouse-report.html:369 | #CFCFCF | N/A | FINDING: #CFCFCF has no token
+lighthouse-report.html:370 | #E0E0E0 | N/A | FINDING: #E0E0E0 has no token
+lighthouse-report.html:371 | #BDBDBD | N/A | FINDING: #BDBDBD has no token
+lighthouse-report.html:372 | #FAFAFA | var(--paper) | 
+lighthouse-report.html:373 | #9E9E9E | N/A | FINDING: #9E9E9E has no token
+lighthouse-report.html:374 | #757575 | N/A | FINDING: #757575 has no token
+lighthouse-report.html:375 | #616161 | N/A | FINDING: #616161 has no token
+lighthouse-report.html:376 | #424242 | N/A | FINDING: #424242 has no token
+lighthouse-report.html:377 | #212121 | N/A | FINDING: #212121 has no token
+lighthouse-report.html:378 | #000000 | N/A | FINDING: #000000 has no token
+lighthouse-report.html:379 | #080 | N/A | FINDING: #080 has no token
+lighthouse-report.html:380 | #0c6 | N/A | FINDING: #0C6 has no token
+lighthouse-report.html:381 | #D3E156 | N/A | FINDING: #D3E156 has no token
+lighthouse-report.html:382 | #FFF3E0 | N/A | FINDING: #FFF3E0 has no token
+lighthouse-report.html:383 | #C33300 | N/A | FINDING: #C33300 has no token
+lighthouse-report.html:384 | #fa3 | N/A | FINDING: #FA3 has no token
+lighthouse-report.html:385 | #c00 | N/A | FINDING: #C00 has no token
+lighthouse-report.html:386 | #f33 | N/A | FINDING: #F33 has no token
+lighthouse-report.html:387 | #00897B | N/A | FINDING: #00897B has no token
+lighthouse-report.html:388 | #FFFFFF | N/A | FINDING: #FFFFFF has no token
+lighthouse-report.html:435 | #7F7F7F | N/A | FINDING: #7F7F7F has no token
+lighthouse-report.html:442 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:443 | #ebebeb | N/A | FINDING: #EBEBEB has no token
+lighthouse-report.html:467 | #0938C2 | N/A | FINDING: #0938C2 has no token
+lighthouse-report.html:472 | #EEF1F4 | N/A | FINDING: #EEF1F4 has no token
+lighthouse-report.html:474 | #F5F7FA | N/A | FINDING: #F5F7FA has no token
+lighthouse-report.html:504 | #616161 | N/A | FINDING: #616161 has no token
+lighthouse-report.html:507 | #757575 | N/A | FINDING: #757575 has no token
+lighthouse-report.html:519 | #393535 | N/A | FINDING: #393535 has no token
+lighthouse-report.html:1461 | #A8C7FA | N/A | FINDING: #A8C7FA has no token
+lighthouse-report.html:2006 | #A8C7FA | N/A | FINDING: #A8C7FA has no token
+lighthouse-report.html:2125 | #999 | N/A | FINDING: #999 has no token
+lighthouse-report.html:2240 | #ffffff | N/A | FINDING: #FFFFFF has no token
+lighthouse-report.html:2287 | #fff | N/A | FINDING: #FFF has no token
+lighthouse-report.html:2299 | #aaa | N/A | FINDING: #AAA has no token
+lighthouse-report.html:2318 | #777 | N/A | FINDING: #777 has no token
+lighthouse-report.html:2324 | #555 | N/A | FINDING: #555 has no token
+lighthouse-report.html:2741 | #ccc | N/A | FINDING: #CCC has no token
+lighthouse-report.html:2822 | #F63 | N/A | FINDING: #F63 has no token
+lighthouse-report.html:2822 | #FFA385 | N/A | FINDING: #FFA385 has no token
+lighthouse-report.html:2822 | #FF3 | N/A | FINDING: #FF3 has no token
+lighthouse-report.html:2826 | #323232 | N/A | FINDING: #323232 has no token
+lighthouse-report.html:2827 | #fff | N/A | FINDING: #FFF has no token
+base.css:12 | #E8AF38 | var(--saffron) | 
+base.css:27 | #E8AF38 | var(--saffron) | 
+games.css:24 | #555 | N/A | FINDING: #555 has no token
+games.css:49 | #ede9e0 | N/A | FINDING: #EDE9E0 has no token
+games.css:71 | #555 | N/A | FINDING: #555 has no token
+games.css:190 | #555 | N/A | FINDING: #555 has no token
+games.css:203 | #fff | N/A | FINDING: #FFF has no token
+games.css:225 | #555 | N/A | FINDING: #555 has no token
+games.css:272 | #6B5B1E | N/A | FINDING: #6B5B1E has no token
+games.css:278 | #555 | N/A | FINDING: #555 has no token
+hero-sky.css:85 | #7288B4 | N/A | FINDING: #7288B4 has no token
+hero-sky.css:91 | #97ABD0 | N/A | FINDING: #97ABD0 has no token
+hero-sky.css:197 | #E8EEF8 | N/A | FINDING: #E8EEF8 has no token
+hero-window.css:110 | #1e3060 | N/A | FINDING: #1E3060 has no token
+hero-window.css:110 | #131e3a | N/A | FINDING: #131E3A has no token
+hero-window.css:110 | #0d1627 | N/A | FINDING: #0D1627 has no token
+hero-window.css:145 | #000 | N/A | FINDING: #000 has no token
+hero-window.css:145 | #000 | N/A | FINDING: #000 has no token
+hero-window.css:147 | #000 | N/A | FINDING: #000 has no token
+hero-window.css:147 | #000 | N/A | FINDING: #000 has no token
+hero-window.css:274 | #E8AF38 | var(--saffron) | 
+hero-window.css:284 | #F8F4E9 | var(--linen) | 
+hero-window.css:290 | #E8AF38 | var(--saffron) | 
+hero-window.css:304 | #E8AF38 | var(--saffron) | 
+hero-window.css:330 | #E8AF38 | var(--saffron) | 
+hero-window.css:331 | #0C1020 | var(--ink) | 
+hero-window.css:388 | #0C1020 | var(--ink) | 
+hero-window.css:416 | #E8AF38 | var(--saffron) | 
+hero-window.css:423 | #E8AF38 | var(--saffron) | 
+lab-constellation-sky.css:10 | #101830 | N/A | FINDING: Dark blue #101830 not in tokens
+lab-constellation-sky.css:11 | #1B2C50 | N/A | FINDING: #1B2C50 has no token
+lab-constellation-sky.css:11 | #131C38 | N/A | FINDING: #131C38 has no token
+lab-constellation-sky.css:11 | #080C1A | N/A | FINDING: #080C1A has no token
+lab-constellation.css:10 | #0B0F1C | N/A | FINDING: #0B0F1C has no token
+lab-constellation.css:21 | #F8F4E9 | var(--linen) | 
+lab-constellation.css:24 | #E8AF38 | var(--saffron) | 
+lab-constellation.css:25 | #E8AF38 | var(--saffron) | 
+lab-constellation.css:65 | #E8AF38 | var(--saffron) | 
+lab-constellation.css:71 | #F8F4E9 | var(--linen) | 
+lab-constellation.css:75 | #E8AF38 | var(--saffron) | 
+lab-constellation.css:83 | #E8AF38 | var(--saffron) | 
+lab-constellation.css:105 | #E8AF38 | var(--saffron) | 
+lab-constellation.css:110 | #E8AF38 | var(--saffron) | 
+lab-constellation.css:113 | #E8AF38 | var(--saffron) | 
+lab-constellation.css:113 | #0B0F1C | N/A | FINDING: #0B0F1C has no token
+lab-orbital.css:75 | #1e3060 | N/A | FINDING: #1E3060 has no token
+lab-orbital.css:75 | #131e3a | N/A | FINDING: #131E3A has no token
+lab-orbital.css:75 | #0d1627 | N/A | FINDING: #0D1627 has no token
+lab-orbital.css:190 | #E8AF38 | var(--saffron) | 
+lab-orbital.css:199 | #E8AF38 | var(--saffron) | 
+lab-orbital.css:206 | #C8CDDA | N/A | FINDING: #C8CDDA has no token
+lab-orbital.css:307 | #0B111F | N/A | FINDING: #0B111F has no token
+lab-orbital.css:308 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+lab-orbital.css:316 | #F8F4E9 | var(--linen) | 
+lab-orbital.css:320 | #E8AF38 | var(--saffron) | 
+lab-orbital.css:335 | #C8CDDA | N/A | FINDING: #C8CDDA has no token
+lab-orbital.css:347 | #E8AF38 | var(--saffron) | 
+lab-orbital.css:361 | #6E7488 | N/A | FINDING: #6E7488 has no token
+lab-orbital.css:365 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+lab-orbital.css:378 | #C8CDDA | N/A | FINDING: #C8CDDA has no token
+lab-orbital.css:388 | #E8AF38 | var(--saffron) | 
+lab-orbital.css:389 | #F8F4E9 | var(--linen) | 
+lab-orbital.css:395 | #E8AF38 | var(--saffron) | 
+lab-orbital.css:401 | #6E7488 | N/A | FINDING: #6E7488 has no token
+library.css:34 | #182848 | N/A | FINDING: Dark blue #182848 not in tokens
+library.css:34 | #101830 | N/A | FINDING: Dark blue #101830 not in tokens
+library.css:502 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+library.css:573 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+library.css:602 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+library.css:754 | #8C6B10 | N/A | FINDING: #8C6B10 has no token
+library.css:783 | #C8CDDA | N/A | FINDING: #C8CDDA has no token
+library.css:790 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+library.css:798 | #C8CDDA | N/A | FINDING: #C8CDDA has no token
+library.css:823 | #e8e6e0 | N/A | FINDING: #E8E6E0 has no token
+library.css:823 | #f0ede7 | N/A | FINDING: #F0EDE7 has no token
+library.css:823 | #e8e6e0 | N/A | FINDING: #E8E6E0 has no token
+library.css:830 | #e8e6e0 | N/A | FINDING: #E8E6E0 has no token
+library.css:830 | #f0ede7 | N/A | FINDING: #F0EDE7 has no token
+library.css:830 | #e8e6e0 | N/A | FINDING: #E8E6E0 has no token
+library.css:924 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+library.css:1090 | #d49b24 | N/A | FINDING: #D49B24 has no token
+library.css:1105 | rgba(236,229,211,0.6) | var(--lib-dim) | 
+library.css:1120 | #8C91A5 | N/A | FINDING: #8C91A5 has no token
+library.css:1168 | #1a1f30 | N/A | FINDING: #1A1F30 has no token
+library.css:1210 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+library.css:1414 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+library.css:1436 | #131825 | N/A | FINDING: #131825 has no token
+library.css:1449 | #F0F2F8 | N/A | FINDING: Off-white not in tokens
+orbital.css:322 | #E8AF38 | var(--saffron) | 
+orbital.css:331 | #E8AF38 | var(--saffron) | 
+orbital.css:338 | #C8CDDA | N/A | FINDING: #C8CDDA has no token

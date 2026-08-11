@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Blueprint - Masterpiece</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Sora:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #0C1020; --saffron: #E8AF38; --linen: #F8F4E9; }
+  
+  body { 
+    margin: 0; 
+    background: var(--linen); /* INVERTED to Cream */
+    color: var(--ink); /* INVERTED to Navy */
+    font-family: 'Sora', sans-serif; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 100vh; 
+    padding: 100px 60px; 
+    box-sizing: border-box; 
+  }
+  
+  .blueprint-wrap { 
+    max-width: 1400px; 
+    width: 100%; 
+    position: relative;
+  }
+  
+  /* Header Area */
+  .bp-header { 
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 80px;
+  }
+  .bp-title-wrap {
+    max-width: 600px;
+  }
+  .bp-tag { 
+    font-family: 'Space Mono', monospace; 
+    font-size: 0.65rem; 
+    letter-spacing: 0.15em; 
+    text-transform: uppercase; 
+    color: var(--saffron); 
+    margin-bottom: 24px; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+  }
+  .bp-tag::before { content: ''; height: 1px; width: 24px; background: var(--saffron); }
+  
+  .bp-title { 
+    font-family: 'Fraunces', serif; 
+    font-size: 4rem; 
+    font-weight: 300; 
+    margin: 0 0 24px; 
+    line-height: 1.05; 
+  }
+  .bp-title strong { font-weight: 600; font-style: italic; color: var(--saffron); }
+  
+  .bp-desc { 
+    font-size: 1.25rem; 
+    line-height: 1.6; 
+    color: rgba(12,16,32,0.7); 
+    max-width: 480px;
+  }
+
+  /* The Connecting Thread */
+  .bp-thread-line {
+    position: relative;
+    height: 1px;
+    background: rgba(12,16,32,0.1);
+    margin: 60px 0;
+    display: flex;
+    align-items: center;
+  }
+  .bp-thread-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--saffron);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    top: 50%;
+  }
+
+  /* The Spectrum (The children) */
+  .bp-spectrum {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+  }
+  
+  .bp-child {
+    flex: 1;
+    position: relative;
+    padding-top: 40px;
+    border-top: 2px solid transparent;
+    transition: all 0.4s ease;
+  }
+  
+  /* The elegant hover states */
+  .bp-spectrum:hover .bp-child { opacity: 0.2; }
+  .bp-spectrum .bp-child:hover { opacity: 1; border-top-color: var(--saffron); transform: translateY(-10px); }
+
+  /* Content */
+  .c-name { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 300; margin-bottom: 8px; color: var(--ink); }
+  .c-age { font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 0.15em; color: rgba(12,16,32,0.4); text-transform: uppercase; margin-bottom: 32px; }
+  
+  .c-level { 
+    font-family: 'Space Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; 
+    color: var(--ink); 
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px;
+    background: rgba(232,175,56,0.15); /* Saffron tint */
+    padding: 6px 14px;
+    border-radius: 4px;
+  }
+  
+  .c-task { 
+    font-size: 1.15rem; 
+    line-height: 1.6; 
+    color: rgba(12,16,32,0.8); 
+  }
+
+</style>
+</head>
+<body>
+<div class="blueprint-wrap">
+  
+  <div class="bp-header">
+    <div class="bp-title-wrap">
+      <div class="bp-tag">Same table · Same thread</div>
+      <h2 class="bp-title">Four children.<br><strong>One volcano.</strong></h2>
+    </div>
+    <div class="bp-desc">
+      Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different with the same idea.
+    </div>
+  </div>
+  
+  <!-- The thread tying them together -->
+  <div class="bp-thread-line"></div>
+  
+  <div class="bp-spectrum">
+    <div class="bp-child">
+      <div class="c-name">Leo</div><div class="c-age">Age 10</div>
+      <div class="c-level">Independent</div>
+      <div class="c-task">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+    </div>
+    <div class="bp-child">
+      <div class="c-name">Mia</div><div class="c-age">Age 7</div>
+      <div class="c-level">Reads Well</div>
+      <div class="c-task">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+    </div>
+    <div class="bp-child">
+      <div class="c-name">Noah</div><div class="c-age">Age 5</div>
+      <div class="c-level">Reads Some</div>
+      <div class="c-task">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
+    </div>
+    <div class="bp-child">
+      <div class="c-name">Ava</div><div class="c-age">Age 3</div>
+      <div class="c-level">Learning</div>
+      <div class="c-task">Red and orange finger painting: make your own lava flow on the big paper.</div>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

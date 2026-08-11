@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing: New York</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root { --ink: #0C1020; --saffron: #E8AF38; --linen: #F2F0EA; --paper: #FFFFFF; }
+body { margin: 0; background: var(--ink); color: var(--paper); font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 60px 40px; }
+
+.ny-wrap { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+.editorial-left h2 { font-family: 'Fraunces', serif; font-size: 5.5rem; font-weight: 300; line-height: 1; letter-spacing: -0.03em; margin: 0 0 32px 0; }
+.editorial-left h2 i { color: var(--saffron); }
+.editorial-left p { font-size: 1.3rem; color: rgba(255,255,255,0.6); line-height: 1.6; font-weight: 300; max-width: 450px; margin: 0 0 48px; }
+.free-cta { display: inline-flex; align-items: center; gap: 20px; font-family: 'Space Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--paper); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px; transition: border-color 0.3s; }
+.free-cta:hover { border-color: var(--saffron); color: var(--saffron); }
+.free-cta span { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; }
+
+.pricing-right { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 64px; }
+.pr-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.pr-title { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--saffron); margin-bottom: 12px; }
+.pr-desc { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+.pr-price { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 300; line-height: 1; }
+.pr-price span { font-size: 1rem; color: rgba(255,255,255,0.3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+.btn-ny { display: block; width: 100%; text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; background: var(--paper); color: var(--ink); text-decoration: none; padding: 24px; transition: background 0.3s; margin-bottom: 24px; }
+.btn-ny:hover { background: var(--saffron); }
+
+.pr-alt { text-align: center; font-size: 0.9rem; color: rgba(255,255,255,0.4); }
+.pr-alt a { color: var(--paper); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); transition: color 0.3s; }
+.pr-alt a:hover { color: var(--saffron); border-color: var(--saffron); }
+</style>
+</head>
+<body>
+
+<div class="ny-wrap">
+  <div class="editorial-left">
+    <h2>One price.<br><i>Every child.</i></h2>
+    <p>Stop managing four different curriculums. Build your first week entirely free. Upgrade only when you are ready.</p>
+    <a href="#" class="free-cta">Build Your Free Week <span>→</span></a>
+  </div>
+
+  <div class="pricing-right">
+    <div class="pr-title">The Annual Membership</div>
+    <div class="pr-header">
+      <div class="pr-desc">Everything included. For your whole family.</div>
+      <div class="pr-price">$499<span>/yr</span></div>
+    </div>
+    
+    <a href="#" class="btn-ny">Start Subscription</a>
+    <div class="pr-alt">Prefer to pay monthly? <a href="#">Subscribe for $50/mo.</a></div>
+  </div>
+</div>
+
+</body>
+</html>

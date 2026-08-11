@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option B - The Tactile Glass UI</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Sora:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #0C1020; --saffron: #E8AF38; --linen: #F8F4E9; }
+  body { margin: 0; background: var(--ink); color: var(--linen); font-family: 'Sora', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 60px; box-sizing: border-box; }
+  
+  .glass-wrap { max-width: 1400px; width: 100%; position: relative; }
+  
+  /* A massive glowing orb behind the grid to sell the glass effect */
+  .glow-orb { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 300px; background: var(--saffron); filter: blur(150px); opacity: 0.15; z-index: 0; pointer-events: none; }
+
+  /* Header */
+  .g-header { max-width: 600px; margin-bottom: 60px; position: relative; z-index: 1; }
+  .g-tag { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--saffron); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .g-title { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 300; margin: 0 0 24px; line-height: 1.1; }
+  .g-title strong { font-weight: 600; font-style: italic; color: var(--saffron); }
+  .g-desc { font-size: 1.15rem; line-height: 1.6; color: rgba(255,255,255,0.6); }
+
+  .g-instruction { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-align: center; margin-bottom: 24px; position: relative; z-index: 1;}
+
+  /* The Grid */
+  .g-track {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .g-card {
+    flex: 1;
+    background: rgba(20, 24, 40, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 24px;
+    padding: 40px;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* The Hover State - Accordion Flex Expand */
+  .g-track:hover .g-card { flex: 0.8; opacity: 0.6; filter: grayscale(50%); }
+  .g-track .g-card:hover { 
+    flex: 1.4; 
+    opacity: 1; 
+    filter: grayscale(0%);
+    background: rgba(30, 36, 56, 0.8);
+    border: 1px solid rgba(232,175,56,0.3);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(232,175,56,0.1);
+    transform: translateY(-10px);
+  }
+
+  /* Content */
+  .c-name { font-size: 1.8rem; font-weight: 600; margin-bottom: 4px; }
+  .c-age { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 32px; }
+  
+  .c-level { 
+    font-family: 'Space Mono', monospace; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.1em; 
+    background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 100px;
+    color: rgba(255,255,255,0.7); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px;
+    align-self: flex-start; transition: all 0.5s ease;
+  }
+  .g-card:hover .c-level { background: var(--saffron); color: var(--ink); font-weight: 700; }
+
+  .c-task { font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.7); transition: color 0.5s ease; }
+  .g-card:hover .c-task { color: #fff; }
+
+</style>
+</head>
+<body>
+<div class="glass-wrap">
+  <div class="glow-orb"></div>
+  <div class="g-header">
+    <div class="g-tag">Same table · Same thread</div>
+    <h2 class="g-title">Four children.<br><strong>One volcano.</strong></h2>
+    <p class="g-desc">Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different with the same idea.</p>
+  </div>
+  
+  <div class="g-instruction">Hover across the cards</div>
+  
+  <div class="g-track">
+    <div class="g-card">
+      <div class="c-name">Leo</div><div class="c-age">Age 10</div>
+      <div class="c-level">Independent</div>
+      <div class="c-task">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+    </div>
+    <div class="g-card">
+      <div class="c-name">Mia</div><div class="c-age">Age 7</div>
+      <div class="c-level">Reads Well</div>
+      <div class="c-task">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+    </div>
+    <div class="g-card">
+      <div class="c-name">Noah</div><div class="c-age">Age 5</div>
+      <div class="c-level">Reads Some</div>
+      <div class="c-task">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
+    </div>
+    <div class="g-card">
+      <div class="c-name">Ava</div><div class="c-age">Age 3</div>
+      <div class="c-level">Learning</div>
+      <div class="c-task">Red and orange finger painting: make your own lava flow on the big paper.</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

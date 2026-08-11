@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8AF38;
+  --ink: #0C1020;
+  --paper: #FAFAFA;
+  --linen: #F5F2EA; /* Matched to the image background */
+  --rule: #E0DED6;
+  --mid: #4A4850;
+}
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--linen);
+  color: var(--ink);
+  margin: 0;
+  padding: 120px 48px;
+}
+.sandbox-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.sandbox-header h1 {
+  font-size: 2rem;
+  font-weight: 200;
+}
+.sandbox-header p {
+  color: var(--mid);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Base Layout based on Mockup */
+.plan-founder {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  position: relative;
+}
+.pf-villain-vertical {
+  position: absolute;
+  left: -80px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--saffron);
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+
+.pf-left {
+  flex: 1.3;
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px; /* Space for the vertical text */
+}
+
+.pf-l1-large {
+  font-family: 'Fraunces', serif;
+  font-size: 64px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.pf-l2-block {
+  border-left: 3px solid var(--saffron);
+  padding-left: 32px;
+  margin-bottom: 40px;
+}
+
+.pf-l2-italic {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+
+.pf-l3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.pf-close {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #8C8A90;
+  margin-top: 10px;
+}
+
+/* KINETIC SIT STILL (Expanding/Contracting & Color Continuum) */
+.pf-kinetic-breathe {
+  display: inline-flex;
+  white-space: pre;
+  position: relative;
+}
+.pf-kinetic-breathe::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--saffron);
+}
+.pf-kinetic-breathe span {
+  display: inline-block;
+  transform-origin: center center;
+  /* Smooth scale and color shift */
+  animation: breathe-and-shift 4s infinite alternate ease-in-out;
+  animation-delay: calc(var(--i) * 0.1s); /* Slight wave effect across letters */
+}
+
+@keyframes breathe-and-shift {
+  0% {
+    transform: scale(0.95);
+    color: var(--ink);
+  }
+  100% {
+    transform: scale(1.05);
+    color: var(--saffron);
+  }
+}
+
+.pf-kinetic-breathe span.somersault {
+  animation: do-somersault 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes do-somersault {
+  0% { transform: translateY(0) rotate(0deg) scale(1.05); color: var(--saffron); }
+  50% { transform: translateY(-16px) rotate(180deg) scale(1.1); color: var(--saffron); }
+  100% { transform: translateY(0) rotate(360deg) scale(1.05); color: var(--saffron); }
+}
+
+/* THE RIGHT BOX (Exact Match to Mockup) */
+.pf-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-left: 40px;
+}
+
+.box-mockup {
+  background: var(--ink);
+  padding: 56px 48px;
+  border-radius: 4px;
+  max-width: 420px;
+  position: relative;
+  transform: rotate(2deg); /* Matching the slight tilt */
+  box-shadow: 
+    0 20px 40px rgba(12,16,32,0.2),
+    0 40px 80px rgba(12,16,32,0.15);
+}
+
+/* The Tape at top center */
+.box-mockup::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 80px;
+  height: 26px;
+  background: rgba(245, 240, 230, 0.95);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px 2px rgba(255,255,255,0.7);
+  z-index: 10;
+}
+
+.box-mockup .hook {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--saffron);
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.box-mockup .desc {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<div class="sandbox-header">
+  <h1>The Pixel-Perfect Mockup</h1>
+  <p>Expanding/Contracting continuum + The Dark Tape Box</p>
+</div>
+
+<div class="plan-founder">
+  <div class="pf-villain-vertical">THE VILLAIN STORY.</div>
+  
+  <div class="pf-left">
+    <div class="pf-l1-large">
+      He was four.<br>
+      He was reading.
+    </div>
+    
+    <div class="pf-l2-block">
+      <div class="pf-l2-italic">
+        But he couldn't <span class="pf-kinetic-breathe" aria-label="sit still"><span style="--i:1">s</span><span style="--i:2">i</span><span style="--i:3">t</span><span style="--i:4">&nbsp;</span><span style="--i:5">s</span><span style="--i:6">t</span><span style="--i:7">i</span><span style="--i:8">l</span><span style="--i:9">l</span></span> for<br>
+        thirty minutes.
+      </div>
+      <div class="pf-l3">— And the school said the children they accept do.</div>
+    </div>
+    
+    <div class="pf-close">THAT SINGLE REJECTION LAUNCHED FOUR YEARS OF INTENSE RESEARCH.</div>
+  </div>
+  
+  <div class="pf-right">
+    <div class="box-mockup">
+      <div class="hook">Wizkoo is what four<br>years of it built.</div>
+      <div class="desc">A PreK-5 mastery<br>framework wrapped in a<br>week that moves the way<br>kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const letters = document.querySelectorAll('.pf-kinetic-breathe span');
+    function triggerRandomSomersault() {
+      let validLetters = Array.from(letters).filter((_, index) => index !== 3);
+      if (validLetters.length === 0) return;
+      let randomLetter = validLetters[Math.floor(Math.random() * validLetters.length)];
+      if (!randomLetter.classList.contains('somersault')) {
+        randomLetter.classList.add('somersault');
+        setTimeout(() => {
+          randomLetter.classList.remove('somersault');
+        }, 850);
+      }
+      let nextJump = Math.random() * 2000 + 5000;
+      setTimeout(triggerRandomSomersault, nextJump);
+    }
+    setTimeout(triggerRandomSomersault, 3000);
+  });
+</script>
+</body>
+</html>

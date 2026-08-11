@@ -9,7 +9,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--saffron, #E8AF38);
+  background: var(--saffron, var(--saffron));
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
@@ -24,7 +24,7 @@
   width: 28px;
   height: 28px;
   background: rgba(232, 175, 56, 0.25);
-  border: 1.5px solid var(--saffron, #E8AF38);
+  border: 1.5px solid var(--saffron, var(--saffron));
 }
 @media (hover: none), (pointer: coarse) {
   .cursor { display: none !important; }

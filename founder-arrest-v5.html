@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Psychological Arrest - V5 (The Villain Story)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,600&family=Sora:wght@200;300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0C1020;
+    --linen: #FBF7EB;
+    --warm-bg: #F8F4E9;
+    --saffron: #E8AF38;
+    --expo: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  body { margin: 0; padding: 0; font-family: 'Sora', sans-serif; background: #fff; color: var(--ink); overflow-x: hidden; }
+  
+  .concept-divider { background: #eee; padding: 12px; text-align: center; font-family: 'Space Mono'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #666; position: relative; z-index: 100; }
+  
+  /* Generic Button */
+  .btn-main {
+    display: inline-block;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 4px;
+    transition: all 0.3s var(--expo);
+  }
+  .btn-main:hover { background: var(--ink); color: #fff; }
+
+  /* ---------------------------------------------------
+     CONCEPT 9: THE VERTICAL VILLAIN
+     --------------------------------------------------- */
+  .c9-wrapper {
+    background: var(--warm-bg); 
+    padding: 120px 40px; 
+    min-height: 80vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .c9-grid {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+  }
+  .c9-villain {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(24px, 3vw, 42px);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--saffron);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin: 0;
+  }
+  .c9-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .c9-l1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+  .c9-l2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 4vw, 56px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    border-left: 4px solid var(--saffron);
+    padding-left: 32px;
+  }
+  .c9-l3 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300;
+    color: rgba(12,16,32,0.7);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-top: 24px;
+  }
+  .c9-l3 strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .c9-cta-row {
+    margin-top: 40px;
+  }
+
+  /* ---------------------------------------------------
+     CONCEPT 10: THE CHAPTER HEADING
+     --------------------------------------------------- */
+  .c10-wrapper {
+    background: var(--ink); 
+    padding: 120px 40px; 
+    min-height: 80vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .c10-grid {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .c10-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--saffron);
+    border-bottom: 1px solid rgba(232,175,56,0.3);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+  .c10-l1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(42px, 6vw, 84px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--linen);
+    letter-spacing: -0.03em;
+  }
+  .c10-l2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--saffron);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .c10-l3 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 300;
+    color: rgba(251,247,235,0.7);
+    max-width: 700px;
+    line-height: 1.6;
+    margin-top: 40px;
+  }
+  .c10-l3 strong {
+    color: var(--linen);
+    font-weight: 600;
+  }
+  .c10-cta-row {
+    margin-top: 40px;
+  }
+  .c10-wrapper .btn-main { border-color: var(--saffron); color: var(--saffron); }
+  .c10-wrapper .btn-main:hover { background: var(--saffron); color: var(--ink); }
+
+</style>
+</head>
+<body>
+
+  <div class="concept-divider">Concept 9: The Vertical Villain (Warm Bg)</div>
+  
+  <div class="c9-wrapper">
+    <div class="c9-grid">
+      <h2 class="c9-villain">The Villain Story.</h2>
+      <div class="c9-content">
+        <div class="c9-l1">He was four.<br>He was reading.</div>
+        <div class="c9-l2">He couldn't sit still for thirty minutes.</div>
+        <div class="c9-l3">
+          And the school said the children they accept do. The research had already started a year before that room.<br><br>
+          <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+        </div>
+        <div class="c9-cta-row">
+          <a href="#" class="btn-main">Build Our Week</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="concept-divider">Concept 10: The Chapter Heading (Ink)</div>
+  
+  <div class="c10-wrapper">
+    <div class="c10-grid">
+      <div>
+        <span class="c10-eyebrow">The Origin Story</span>
+      </div>
+      <div class="c10-l1">He was four. He was reading.</div>
+      <div class="c10-l2">He couldn't sit still for thirty minutes.</div>
+      <div class="c10-l3">
+        And the school said the children they accept do. The research had already started a year before that room.<br><br>
+        <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+      </div>
+      <div class="c10-cta-row">
+        <a href="#" class="btn-main">Build Our Week</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

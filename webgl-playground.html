@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wizkoo | WebGL Prototype</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            background-color: #0C1020;
+            font-family: 'Space Mono', monospace;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none; /* Let scroll pass through */
+        }
+        .scroll-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 400vh; /* Make the page scrollable */
+        }
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #F0F2F8;
+            padding: 0 10vw;
+        }
+        .section h1 {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 5rem;
+            font-weight: 300;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .section p {
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #E8AF38;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+        }
+        .section.visible h1, .section.visible p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .noise {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+        
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #0C1020;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #E8AF38;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: opacity 1s ease;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loader">Initializing WebGL Engine...</div>
+    <div class="noise"></div>
+    <div id="canvas-container"></div>
+    
+    <div class="scroll-content">
+        <div class="section" id="sec1">
+            <div>
+                <h1>A new dimension.</h1>
+                <p>Scroll down to explore physical space</p>
+            </div>
+        </div>
+        <div class="section" id="sec2" style="justify-content: flex-start;">
+            <div>
+                <h1>Physical light.</h1>
+                <p>Real-time shaders and atmospheric bloom</p>
+            </div>
+        </div>
+        <div class="section" id="sec3" style="justify-content: flex-end; text-align: right;">
+            <div>
+                <h1>Cinematic motion.</h1>
+                <p>Camera velocity mapped directly to your scroll</p>
+            </div>
+        </div>
+        <div class="section" id="sec4">
+            <div>
+                <h1>The Elite Standard.</h1>
+                <p>No templates. No limits.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Remove loader when ready
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 1000);
+            }, 500);
+        });
+
+        // Setup Scene
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x0C1020, 0.01);
+
+        // Setup Camera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+
+        // Setup Renderer
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // optimize performance
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Add Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xE8AF38, 2, 100);
+        pointLight.position.set(15, 10, 15);
+        scene.add(pointLight);
+        
+        const blueLight = new THREE.PointLight(0x2a4b8d, 2, 100);
+        blueLight.position.set(-15, -15, 10);
+        scene.add(blueLight);
+
+        // Create Starfield (3D space dust)
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsCount = 2000;
+        const posArray = new Float32Array(starsCount * 3);
+        for(let i = 0; i < starsCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 150;
+        }
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        // Use ShaderMaterial to create perfectly round, antialiased stars instead of squares
+        const starsMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                color: { value: new THREE.Color(0xF0F2F8) }
+            },
+            vertexShader: `
+                void main() {
+                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                    // Increased base size significantly to fix them being too small
+                    gl_PointSize = (6.0 * 100.0) / -mvPosition.z;
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 color;
+                void main() {
+                    vec2 uv = gl_PointCoord - vec2(0.5);
+                    float dist = length(uv);
+                    if (dist > 0.5) discard;
+                    
+                    // A soft, organic star shape (glowing diamond)
+                    // instead of a harsh, rigid "disco" cross.
+                    float flare = max(0.0, 1.0 - (abs(uv.x) + abs(uv.y)) * 2.5);
+                    
+                    // Brilliant core
+                    float core = 0.05 / (dist + 0.02);
+                    
+                    // Smooth radial fade
+                    float fade = 1.0 - (dist * 2.0);
+                    
+                    float alpha = (flare * 0.6 + core) * fade;
+                    gl_FragColor = vec4(color, alpha * 0.8);
+                }
+            `,
+            transparent: true,
+            depthWrite: false
+        });
+        const starMesh = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(starMesh);
+
+        // Create Planet (High resolution sphere for a smooth solid nucleus)
+        const geometry = new THREE.IcosahedronGeometry(8, 12);
+        
+        // Custom GLSL Shader Material for atmospheric glow
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                c: { type: "f", value: 0.1 },
+                p: { type: "f", value: 4.5 },
+                glowColor: { type: "c", value: new THREE.Color(0xE8AF38) },
+                viewVector: { type: "v3", value: camera.position }
+            },
+            vertexShader: `
+                uniform vec3 viewVector;
+                uniform float c;
+                uniform float p;
+                varying float intensity;
+                void main() {
+                    vec3 vNormal = normalize( normalMatrix * normal );
+                    vec3 vNormel = normalize( normalMatrix * viewVector );
+                    intensity = pow( c - dot(vNormal, vNormel), p );
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 glowColor;
+                varying float intensity;
+                void main() {
+                    vec3 glow = glowColor * intensity;
+                    gl_FragColor = vec4( glow, 1.0 );
+                }
+            `,
+            side: THREE.FrontSide,
+            blending: THREE.AdditiveBlending,
+            transparent: true
+        });
+        
+        // Core planet - solid, glowing dark nucleus
+        const coreMaterial = new THREE.MeshStandardMaterial({
+            color: 0x070c20,
+            emissive: 0x020512,
+            roughness: 0.2,
+            metalness: 0.9,
+            wireframe: false
+        });
+        const planet = new THREE.Mesh(geometry, coreMaterial);
+        scene.add(planet);
+
+        // Glow shell (slightly larger)
+        const glowGeometry = new THREE.IcosahedronGeometry(8.5, 64);
+        const glowMesh = new THREE.Mesh(glowGeometry, material);
+        scene.add(glowMesh);
+
+        // Animation Loop variables
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+        
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX) * 0.001;
+            mouseY = (event.clientY - windowHalfY) * 0.001;
+        });
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = clock.getElapsedTime();
+
+            targetX = mouseX * 0.5;
+            targetY = mouseY * 0.5;
+
+            // Idle rotation
+            planet.rotation.y += 0.001;
+            planet.rotation.x += 0.0005;
+            
+            glowMesh.rotation.y += 0.001;
+            glowMesh.rotation.x += 0.0005;
+
+            starMesh.rotation.y = time * 0.01;
+            starMesh.rotation.x = time * 0.005;
+
+            // Parallax camera movement based on mouse
+            camera.position.x += (mouseX * 8 - camera.position.x) * 0.02;
+            camera.position.y += (-mouseY * 8 - camera.position.y) * 0.02;
+            camera.lookAt(scene.position);
+            
+            // Update glow shader view vector
+            material.uniforms.viewVector.value = new THREE.Vector3().subVectors(camera.position, glowMesh.position);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Scroll Logic (Cinematic Sequencing)
+        const sections = document.querySelectorAll('.section');
+        
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const scrollPercent = scrollY / (document.body.scrollHeight - window.innerHeight);
+            
+            // Move planet closer and rotate physically via scroll
+            planet.position.z = scrollPercent * 25; 
+            glowMesh.position.z = scrollPercent * 25;
+            
+            // Move it off to the side gracefully
+            planet.position.x = Math.sin(scrollPercent * Math.PI) * 10;
+            glowMesh.position.x = Math.sin(scrollPercent * Math.PI) * 10;
+
+            planet.rotation.z = scrollPercent * Math.PI;
+            glowMesh.rotation.z = scrollPercent * Math.PI;
+            
+            // Fade in textual sections based on intersection
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.65 && rect.bottom > 0) {
+                    sec.classList.add('visible');
+                } else {
+                    sec.classList.remove('visible');
+                }
+            });
+        });
+        
+        // Initial trigger
+        window.dispatchEvent(new Event('scroll'));
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

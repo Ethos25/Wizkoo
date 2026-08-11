@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option A - The Editorial Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Sora:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #0C1020; --saffron: #E8AF38; --linen: #F8F4E9; }
+  body { margin: 0; background: var(--ink); color: var(--linen); font-family: 'Sora', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 60px; box-sizing: border-box; }
+  
+  .gallery-wrap { max-width: 1400px; width: 100%; }
+  
+  /* Header */
+  .g-header { max-width: 600px; margin-bottom: 80px; }
+  .g-tag { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--saffron); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .g-tag::before { content: ''; height: 1px; width: 24px; background: var(--saffron); opacity: 0.5; }
+  .g-title { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 300; margin: 0 0 24px; line-height: 1.1; }
+  .g-title strong { font-weight: 600; font-style: italic; color: var(--saffron); }
+  .g-desc { font-size: 1.15rem; line-height: 1.6; color: rgba(255,255,255,0.6); }
+
+  /* Instruction */
+  .g-instruction { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-align: center; margin-bottom: 24px; }
+
+  /* The Grid */
+  .g-track {
+    display: flex;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .g-col {
+    flex: 1;
+    padding: 60px 40px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .g-col:last-child { border-right: none; }
+  
+  /* The Hover State */
+  .g-track:hover .g-col { opacity: 0.3; } /* Dim all */
+  .g-track .g-col:hover { 
+    opacity: 1; 
+    background: rgba(255,255,255,0.02);
+  }
+  .g-col::before {
+    content: ''; position: absolute; top: -1px; left: 0; width: 0%; height: 2px; background: var(--saffron); transition: width 0.4s ease;
+  }
+  .g-col:hover::before { width: 100%; }
+
+  /* Content */
+  .c-name { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 300; margin-bottom: 8px; }
+  .c-age { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 40px; }
+  .c-level { 
+    font-family: 'Space Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; 
+    color: var(--saffron); display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px;
+  }
+  .c-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--saffron); }
+  .c-task { font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.8); }
+
+</style>
+</head>
+<body>
+<div class="gallery-wrap">
+  <div class="g-header">
+    <div class="g-tag">Same table · Same thread</div>
+    <h2 class="g-title">Four children.<br><strong>One volcano.</strong></h2>
+    <p class="g-desc">Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different with the same idea.</p>
+  </div>
+  
+  <div class="g-instruction">Hover across the columns</div>
+  
+  <div class="g-track">
+    <div class="g-col">
+      <div class="c-name">Leo</div><div class="c-age">Age 10</div>
+      <div class="c-level"><span class="c-dot"></span> Independent</div>
+      <div class="c-task">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+    </div>
+    <div class="g-col">
+      <div class="c-name">Mia</div><div class="c-age">Age 7</div>
+      <div class="c-level"><span class="c-dot"></span> Reads Well</div>
+      <div class="c-task">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+    </div>
+    <div class="g-col">
+      <div class="c-name">Noah</div><div class="c-age">Age 5</div>
+      <div class="c-level"><span class="c-dot" style="background:transparent; border: 1px solid var(--saffron)"></span> Reads Some</div>
+      <div class="c-task">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
+    </div>
+    <div class="g-col">
+      <div class="c-name">Ava</div><div class="c-age">Age 3</div>
+      <div class="c-level"><span class="c-dot" style="background:transparent; border: 1px dashed var(--saffron)"></span> Learning</div>
+      <div class="c-task">Red and orange finger painting: make your own lava flow on the big paper.</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

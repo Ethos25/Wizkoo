@@ -271,7 +271,7 @@
   flex:0 0 auto;
   width:calc(var(--u) * 26);height:calc(var(--u) * 1.5);
   margin-right:calc(var(--u) * 14);
-  background:#E8AF38;
+  background:var(--saffron);
 }
 
 .lw-sentence{
@@ -281,13 +281,13 @@
   font-size:calc(var(--u) * 33);
   line-height:1.34;
   letter-spacing:-0.012em;
-  color:#F8F4E9;
+  color:var(--linen);
 }
 
 /* The certified ghost register, verbatim from the product's sentence canvas
    (start.css .cl-ghost @ HEAD): saffron at 0.55 with its two-part shadow. */
 .lw-ghost{
-  color:#E8AF38;
+  color:var(--saffron);
   /* The product's shadow is stated in whole pixels against its own much larger
      sentence. Ported literally it does not shrink with the type, so at 14.7px
      (a 422px-tall viewport) a 1px offset plus 1px blur fringes the glyph feet
@@ -301,7 +301,7 @@
 /* The theme word: full saffron, and the only element in the hero that moves. */
 .lw-theme{
   display:inline-block;
-  color:#E8AF38;
+  color:var(--saffron);
   text-shadow:
     0 calc(var(--u) * -1) 0 rgba(248,244,233,0.14),
     0 calc(var(--u) * 1) calc(var(--u) * 1) rgba(12,16,32,0.35);
@@ -327,8 +327,8 @@
   position:absolute;
   right:calc(var(--u) * 40);
   bottom:calc(var(--u) * -20);
-  background:#E8AF38;
-  color:#0C1020;
+  background:var(--saffron);
+  color:var(--ink);
   padding:calc(var(--u) * 16) calc(var(--u) * 24);
   display:flex;
   align-items:center;
@@ -385,7 +385,7 @@
   font-size:calc(var(--u) * 11);
   letter-spacing:calc(var(--u) * 1.5);
   text-transform:uppercase;
-  color:#0C1020;
+  color:var(--ink);
   line-height:1.4;
 }
 
@@ -413,14 +413,14 @@
       rgba(255,255,255,0.075) 100%);
   }
 }
-.lw:focus-visible{outline:2px solid #E8AF38;outline-offset:5px}
+.lw:focus-visible{outline:2px solid var(--saffron);outline-offset:5px}
 
 /* ── Reduced motion: the settled state, no arrival, no lift ── */
 @media(prefers-reduced-motion:reduce){
   .lw{transition:none!important}
   .lw:hover{transform:none}
   .lw-theme{
-    color:#E8AF38!important;
+    color:var(--saffron)!important;
     opacity:1!important;transform:none!important;filter:none!important;
     animation:none!important;transition:none!important;
   }

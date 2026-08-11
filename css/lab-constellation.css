@@ -18,11 +18,11 @@ html,body{margin:0;padding:0;background:#0B0F1C;-webkit-font-smoothing:antialias
 }
 .lc-runway h1{
   font-family:'Fraunces',serif;font-weight:400;font-size:30px;
-  color:#F8F4E9;margin:0 0 18px;letter-spacing:-0.012em;
+  color:var(--linen);margin:0 0 18px;letter-spacing:-0.012em;
 }
 .lc-runway p{margin:0 0 14px}
-.lc-runway .k{color:#E8AF38}
-.lc-runway code{font-family:'Space Mono',monospace;font-size:12.5px;color:#E8AF38}
+.lc-runway .k{color:var(--saffron)}
+.lc-runway code{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--saffron)}
 
 .lc-stage{
   min-height:100vh;
@@ -62,17 +62,17 @@ html,body{margin:0;padding:0;background:#0B0F1C;-webkit-font-smoothing:antialias
   font-family:'Space Mono',monospace;letter-spacing:0.26em;
   text-transform:uppercase;color:rgba(232,175,56,0.9);white-space:nowrap;
 }
-.lc-eyebrow .rule{width:26px;height:1.5px;background:#E8AF38;display:block;flex:none}
+.lc-eyebrow .rule{width:26px;height:1.5px;background:var(--saffron);display:block;flex:none}
 .lc-win--a .lc-eyebrow span:last-child{font-size:9.5px}
 .lc-win--b .lc-eyebrow span:last-child{font-size:7.5px}
 
 .lc-sentence{
   font-family:'Fraunces',serif;font-weight:400;line-height:1.34;
-  letter-spacing:-0.012em;color:#F8F4E9;text-wrap:pretty;
+  letter-spacing:-0.012em;color:var(--linen);text-wrap:pretty;
 }
 .lc-win--a .lc-sentence{font-size:30px}
 .lc-win--b .lc-sentence{font-size:15px}
-.lc-sentence i{font-style:normal;color:#E8AF38}
+.lc-sentence i{font-style:normal;color:var(--saffron)}
 .lc-sentence i.theme{text-shadow:0 0 28px rgba(232,175,56,0.5)}
 
 .lc-foot{border-top:1px solid rgba(232,175,56,0.26)}
@@ -80,7 +80,7 @@ html,body{margin:0;padding:0;background:#0B0F1C;-webkit-font-smoothing:antialias
 .lc-win--b .lc-foot{padding:10px 0 12px}
 .lc-foot a{
   font-family:'Space Mono',monospace;letter-spacing:0.26em;
-  text-transform:uppercase;white-space:nowrap;color:#E8AF38;text-decoration:none;
+  text-transform:uppercase;white-space:nowrap;color:var(--saffron);text-decoration:none;
 }
 .lc-win--a .lc-foot a{font-size:12px}
 .lc-win--b .lc-foot a{font-size:8.5px}
@@ -102,15 +102,15 @@ html,body{margin:0;padding:0;background:#0B0F1C;-webkit-font-smoothing:antialias
 }
 .lc-panel h2{
   margin:0 0 10px;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
-  color:#E8AF38;font-weight:400;
+  color:var(--saffron);font-weight:400;
 }
 .lc-panel button{
   display:block;width:100%;margin:0 0 7px;padding:7px 10px;
   background:rgba(232,175,56,0.1);border:1px solid rgba(232,175,56,0.34);
-  border-radius:5px;color:#E8AF38;font:inherit;cursor:pointer;text-align:left;
+  border-radius:5px;color:var(--saffron);font:inherit;cursor:pointer;text-align:left;
 }
 .lc-panel button:hover{background:rgba(232,175,56,0.2)}
-.lc-panel button[aria-pressed="true"]{background:#E8AF38;color:#0B0F1C}
+.lc-panel button[aria-pressed="true"]{background:var(--saffron);color:#0B0F1C}
 .lc-panel pre{
   margin:10px 0 0;max-height:38vh;overflow:auto;
   font-size:10px;line-height:1.55;color:rgba(248,244,233,0.6);white-space:pre;

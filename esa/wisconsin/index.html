@@ -16,7 +16,7 @@
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Wisconsin have an ESA program?", "acceptedAnswer": {"@type": "Answer", "text": "Wisconsin does not have an ESA program. Wisconsin has the nation's oldest private school voucher program (established 1990), serving 53,000+ students across three geographic programs. All require private school enrollment and are not available to homeschool families."}}, {"@type": "Question", "name": "How do homeschool families in Wisconsin pay for curriculum?", "acceptedAnswer": {"@type": "Answer", "text": "Most homeschool families in Wisconsin fund curriculum through personal budgets. Wisconsin does not offer tax credits or deductions specifically for homeschool curriculum expenses. Wizkoo is $50/month or $499/year for your whole family, no ESA required."}}]}
 </script>
 <style>
-:root{--saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F8F4E9;--warm:#F8F4E9;--rule:#E0DED6;--mid:#4A4850;--expo:cubic-bezier(0.16,1,0.3,1)}
+:root{--saffron:var(--saffron);--ink:var(--ink);--paper:var(--paper);--linen:var(--linen);--warm:var(--linen);--rule:var(--rule);--mid:var(--mid);--expo:cubic-bezier(0.16,1,0.3,1)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -29,7 +29,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .hero{background:var(--linen);padding:clamp(28px,4vh,44px) clamp(20px,4vw,48px) clamp(48px,8vh,80px)}
 .hero-inner{max-width:780px;margin:0 auto}
 .hero-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(12,16,32,0.45);margin-bottom:clamp(14px,2vh,20px);opacity:0;animation:fu .5s var(--expo) forwards .1s}
-.hero-ey::before{content:'';display:block;width:32px;height:1.5px;background:#E8AF38;margin-bottom:12px}
+.hero-ey::before{content:'';display:block;width:32px;height:1.5px;background:var(--saffron);margin-bottom:12px}
 .hero-h{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.7rem,3.2vw,2.6rem);line-height:1.15;letter-spacing:-.03em;color:var(--ink);margin-bottom:clamp(14px,2vh,20px);opacity:0;animation:fu .5s var(--expo) forwards .25s}
 .hero-sub{font-family:'Sora',sans-serif;font-size:clamp(.85rem,1vw,.92rem);line-height:1.7;color:rgba(12,16,32,.45);max-width:600px;opacity:0;animation:fu .5s var(--expo) forwards .4s}
 .date-stamp{font-family:'Space Mono',monospace;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(12,16,32,.28);margin-top:clamp(16px,2.5vh,24px);opacity:0;animation:fu .5s var(--expo) forwards .5s}

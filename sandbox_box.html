@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8AF38;
+  --ink: #0C1020;
+  --paper: #FAFAFA;
+  --linen: #F8F4E9;
+  --rule: #E0DED6;
+  --mid: #4A4850;
+}
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--linen);
+  color: var(--ink);
+  margin: 0;
+  padding: 80px 48px;
+}
+.sandbox-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.sandbox-header h1 {
+  font-size: 2rem;
+  font-weight: 200;
+}
+.sandbox-header p {
+  color: var(--mid);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Base Layout for all views */
+.plan-founder {
+  display: flex;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto 120px;
+  align-items: center;
+}
+.pf-left {
+  flex: 1.2;
+}
+.pf-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.pf-villain {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--saffron);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.pf-l2 {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.1;
+  border-left: 3px solid var(--saffron);
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+.pf-l3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* =========================================
+   VIEW 1: THE MONOLITH (New York Editorial)
+   ========================================= */
+.box-v1 {
+  background: var(--ink);
+  padding: 48px 40px;
+  border-radius: 0; /* Sharp, severe corners */
+  border-left: 4px solid var(--saffron);
+  max-width: 380px;
+  box-shadow: 20px 20px 0 rgba(12,16,32,0.05); /* Brutalist shadow */
+}
+.box-v1 .hook {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 24px;
+  color: var(--saffron);
+  margin-bottom: 16px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+.box-v1 .desc {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* =========================================
+   VIEW 2: THE ARTIFACT (Copenhagen Restraint)
+   ========================================= */
+.box-v2 {
+  background: #FFFFFF;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 360px;
+  border: 1px solid rgba(12,16,32,0.04);
+  box-shadow: 0 30px 60px rgba(12,16,32,0.06), 0 4px 12px rgba(12,16,32,0.02);
+  transform: rotate(-1.5deg); /* Slight, deliberate editorial angling */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+}
+.box-v2:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 40px 80px rgba(12,16,32,0.1), 0 8px 24px rgba(12,16,32,0.04);
+}
+.box-v2 .hook {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--saffron);
+  margin-bottom: 20px;
+  display: block;
+}
+.box-v2 .desc {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+}
+.box-v2 .desc strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* =========================================
+   VIEW 3: THE HIGH-OCTANE STAMP (Pixar/Bold)
+   ========================================= */
+.box-v3 {
+  background: var(--saffron);
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 360px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(232,175,56,0.3);
+}
+/* Shimmer effect on hover */
+.box-v3::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+}
+.box-v3:hover::after {
+  animation: shimmer 0.8s forwards;
+}
+@keyframes shimmer {
+  100% { left: 200%; }
+}
+.box-v3 .hook {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.box-v3 .desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(12,16,32,0.8);
+  line-height: 1.6;
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+
+<div class="sandbox-header">
+  <h1>The Resolution Box</h1>
+  <p>Three Elite Explorations</p>
+</div>
+
+<!-- VIEW 1 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 1: The Monolith</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v1">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 2 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 2: The Artifact</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v2">
+      <div class="hook">Wizkoo is what four years of it built</div>
+      <div class="desc">A <strong>PreK-5 mastery framework</strong> wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 3 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 3: The High-Octane Stamp</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v3">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

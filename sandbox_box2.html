@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8AF38;
+  --ink: #0C1020;
+  --paper: #FAFAFA;
+  --linen: #F8F4E9;
+  --rule: #E0DED6;
+  --mid: #4A4850;
+}
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--linen);
+  color: var(--ink);
+  margin: 0;
+  padding: 80px 48px;
+  background-image: radial-gradient(rgba(12,16,32,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.sandbox-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.sandbox-header h1 {
+  font-size: 2rem;
+  font-weight: 200;
+}
+.sandbox-header p {
+  color: var(--mid);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Base Layout for all views */
+.plan-founder {
+  display: flex;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto 120px;
+  align-items: center;
+}
+.pf-left {
+  flex: 1.2;
+}
+.pf-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.pf-villain {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--saffron);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.pf-l2 {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.1;
+  border-left: 3px solid var(--saffron);
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+.pf-l3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* =========================================
+   VIEW 4: THE PUSH-PIN SPECIMEN
+   ========================================= */
+.box-v4 {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%);
+  padding: 48px 40px 40px;
+  border-radius: 4px; /* Slight softening */
+  max-width: 360px;
+  position: relative;
+  transform: rotate(2deg);
+  /* Massive, realistic multi-layered shadow for immense depth */
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 16px rgba(0,0,0,0.04),
+    0 24px 32px rgba(0,0,0,0.08),
+    0 48px 64px rgba(0,0,0,0.06),
+    inset 0 1px 0 rgba(255,255,255,1); /* Top edge highlight */
+}
+/* The Push Pin */
+.box-v4::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #c92a2a);
+  border-radius: 50%;
+  box-shadow: 
+    -2px 4px 6px rgba(0,0,0,0.3),
+    inset -2px -2px 4px rgba(0,0,0,0.2),
+    inset 2px 2px 4px rgba(255,255,255,0.5);
+  z-index: 10;
+}
+/* Pin Needle Shadow */
+.box-v4::after {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: calc(50% - 2px);
+  width: 1px;
+  height: 8px;
+  background: rgba(0,0,0,0.15);
+  transform: rotate(25deg);
+  z-index: 9;
+}
+.box-v4 .hook {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+.box-v4 .desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* =========================================
+   VIEW 5: THE MASKING TAPE MOODBOARD
+   ========================================= */
+.box-v5 {
+  background: var(--ink);
+  padding: 40px;
+  border-radius: 2px;
+  max-width: 360px;
+  position: relative;
+  transform: rotate(-3deg);
+  /* Deep, tight shadow mimicking thick cardstock */
+  box-shadow: 
+    5px 10px 15px rgba(12,16,32,0.3),
+    15px 30px 40px rgba(12,16,32,0.15),
+    inset 0 1px 2px rgba(255,255,255,0.15);
+  /* A subtle grain/noise overlay could go here, simulating with a gradient wash */
+  background-image: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, transparent 40%);
+}
+/* Masking Tape 1 */
+.box-v5::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  width: 80px;
+  height: 24px;
+  background: rgba(245, 240, 230, 0.85); /* tape color */
+  transform: rotate(-15deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.5);
+  border: 1px solid rgba(0,0,0,0.05);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+}
+/* Masking Tape 2 */
+.box-v5::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: -10px;
+  width: 90px;
+  height: 28px;
+  background: rgba(245, 240, 230, 0.85);
+  transform: rotate(-10deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.5);
+  border: 1px solid rgba(0,0,0,0.05);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+}
+.box-v5 .hook {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--saffron);
+  margin-bottom: 20px;
+  display: block;
+}
+.box-v5 .desc {
+  font-family: 'Sora', sans-serif;
+  font-size: 17px;
+  color: #FFFFFF;
+  line-height: 1.6;
+  font-weight: 300;
+}
+.box-v5 .desc strong {
+  font-weight: 600;
+  color: var(--saffron);
+}
+
+/* =========================================
+   VIEW 6: THE HEAVY TILE & ARCHIVAL TAPE
+   ========================================= */
+.box-v6 {
+  background: var(--saffron);
+  padding: 48px 40px 40px;
+  border-radius: 8px;
+  max-width: 360px;
+  position: relative;
+  transform: rotate(1.5deg);
+  /* The "Heavy Tile" effect: thick bevels and massive ambient occlusion */
+  box-shadow: 
+    inset 0 2px 4px rgba(255,255,255,0.8),
+    inset 0 -2px 8px rgba(0,0,0,0.1),
+    0 10px 20px rgba(232,175,56,0.3),
+    0 30px 60px rgba(12,16,32,0.1);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 30%);
+}
+/* Archival Center Tape */
+.box-v6::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 120px;
+  height: 35px;
+  background: rgba(255,255,255,0.6);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08), inset 0 1px 2px rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.03);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 10;
+}
+.box-v6 .hook {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.box-v6 .desc {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(12,16,32,0.85);
+  line-height: 1.5;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<div class="sandbox-header">
+  <h1>The Resolution Box: Tactile & 3D</h1>
+  <p>Tape, Pins, and Extreme Depth</p>
+</div>
+
+<!-- VIEW 4 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 4: The Push-Pin Specimen</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v4">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 5 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 5: The Masking Tape Moodboard</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v5">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A <strong>PreK-5 mastery framework</strong> wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 6 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 6: The Heavy Tile & Archival Tape</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v6">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500&family=Sora:wght@200;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #E8AF38;
+  --ink: #0C1020;
+  --paper: #FAFAFA;
+  --linen: #F8F4E9;
+  --rule: #E0DED6;
+  --mid: #4A4850;
+}
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--linen);
+  color: var(--ink);
+  margin: 0;
+  padding: 80px 48px;
+  background-image: radial-gradient(rgba(12,16,32,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.sandbox-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.sandbox-header h1 {
+  font-size: 2rem;
+  font-weight: 200;
+}
+.sandbox-header p {
+  color: var(--mid);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Base Layout */
+.plan-founder {
+  display: flex;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto 120px;
+  align-items: center;
+}
+.pf-left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+}
+.pf-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.pf-villain {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--saffron);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.pf-l2 {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.1;
+  border-left: 3px solid var(--saffron);
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+.pf-l3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  line-height: 1.6;
+  margin-bottom: 24px; /* Space before the new close */
+}
+
+/* NEW CLOSING TREATMENTS */
+.close-v1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  padding-top: 24px;
+  border-top: 1px solid rgba(12,16,32,0.1);
+}
+.close-v2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.6;
+  background: rgba(232,175,56,0.1);
+  padding: 16px 20px;
+  border-radius: 4px;
+  border-left: 2px solid var(--saffron);
+}
+.close-v3 {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.close-v3 strong {
+  color: var(--saffron);
+}
+
+/* =========================================
+   TAPE AND LIGHT BOX TREATMENTS
+   ========================================= */
+
+/* VIEW 7: Crisp White + Corner Tape */
+.box-v7 {
+  background: #FFFFFF;
+  padding: 48px 40px;
+  border-radius: 2px;
+  max-width: 360px;
+  position: relative;
+  transform: rotate(1deg);
+  box-shadow: 
+    0 10px 20px rgba(0,0,0,0.02),
+    0 30px 60px rgba(12,16,32,0.06),
+    inset 0 1px 0 rgba(255,255,255,1);
+}
+.box-v7::before {
+  content: '';
+  position: absolute;
+  top: -8px; left: -16px; width: 70px; height: 22px;
+  background: rgba(245, 240, 230, 0.9);
+  transform: rotate(-25deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08), inset 0 1px 1px rgba(255,255,255,0.6);
+  z-index: 10;
+}
+.box-v7 .hook {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.box-v7 .desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* VIEW 8: Frosted Vellum + Top Tape */
+.box-v8 {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 48px 40px;
+  border-radius: 8px;
+  max-width: 360px;
+  position: relative;
+  transform: rotate(-1.5deg);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 40px rgba(12,16,32,0.04);
+}
+.box-v8::before {
+  content: '';
+  position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%) rotate(2deg);
+  width: 100px; height: 28px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05), inset 0 1px 2px rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.04);
+  z-index: 10;
+}
+.box-v8 .hook {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--saffron);
+  margin-bottom: 20px;
+  display: block;
+  font-weight: 700;
+}
+.box-v8 .desc {
+  font-family: 'Sora', sans-serif;
+  font-size: 17px;
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* VIEW 9: Saffron Trim + Heavy Tape */
+.box-v9 {
+  background: var(--paper);
+  padding: 40px;
+  border-radius: 4px;
+  max-width: 360px;
+  position: relative;
+  transform: rotate(2deg);
+  border-top: 6px solid var(--saffron);
+  box-shadow: 
+    0 15px 35px rgba(12,16,32,0.05),
+    inset 0 0 0 1px rgba(12,16,32,0.03);
+}
+.box-v9::before {
+  content: '';
+  position: absolute;
+  top: -14px; right: -15px; width: 80px; height: 26px;
+  background: rgba(250, 245, 235, 0.95);
+  transform: rotate(35deg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px 2px rgba(255,255,255,0.7);
+  z-index: 10;
+}
+.box-v9 .hook {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.box-v9 .desc {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--mid);
+  line-height: 1.5;
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+
+<div class="sandbox-header">
+  <h1>The Left Close & Light Tape Boxes</h1>
+</div>
+
+<!-- VIEW 7 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 7</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+    <div class="close-v1">That was the day we knew something had to be different.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v7">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 8 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 8</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+    <div class="close-v2">The research had already started a year before that. That was the day it was cemented.</div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v8">
+      <div class="hook">Wizkoo is what four years of it built</div>
+      <div class="desc">A <strong>PreK-5 mastery framework</strong> wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW 9 -->
+<div class="plan-founder">
+  <div class="pf-left">
+    <div class="pf-villain">View 9</div>
+    <div class="pf-l2">But he couldn't sit still for thirty minutes.</div>
+    <div class="pf-l3">- And the school said the children they accept do.</div>
+    <div class="close-v3">That was the day <strong>the research started.</strong></div>
+  </div>
+  <div class="pf-right">
+    <div class="box-v9">
+      <div class="hook">Wizkoo is what four years of it built.</div>
+      <div class="desc">A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

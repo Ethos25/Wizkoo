@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--saffron:#E8AF38;--ink:#0C1020;--paper:#FAFAFA;--linen:#F2F0EA;--warm:#ECEAE3;--rule:#E0DED6;--mid:#4A4850;--expo:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.22,1,0.36,1)}
+:root{--saffron:var(--saffron);--ink:var(--ink);--paper:var(--paper);--linen:var(--linen);--warm:#ECEAE3;--rule:var(--rule);--mid:var(--mid);--expo:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.22,1,0.36,1)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -81,7 +81,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
       rgba(255,255,255,0.012) 60px),
     linear-gradient(180deg,
       #1A4EC2 0%, #1E54C6 8%, #2260CC 18%,
-      #2868CC 30%, #2E6ECE 42%, #306CCC 54%,
+      var(--day-sky) 30%, #2E6ECE 42%, #306CCC 54%,
       #2C68C6 64%, #2860B8 74%, #2054A8 84%,
       #174496 92%, #123485 100%);
 }
@@ -293,7 +293,7 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
 .cta-ey{font-family:'Space Mono',monospace;font-weight:400;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,242,248,.5);margin-bottom:clamp(16px,2.5vh,28px)}
 .cta-btn{display:inline-block;background:var(--saffron);color:var(--ink);font-family:'Sora',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.06em;padding:14px 44px;border:none;text-decoration:none;box-shadow:6px 6px 0 rgba(232,175,56,.3);transition:transform .3s var(--expo),box-shadow .3s var(--expo)}.cta-btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 rgba(232,175,56,.4)}.cta-btn:focus-visible{outline:2px solid var(--saffron);outline-offset:4px}
 .cta-sub{font-family:'Sora',sans-serif;font-size:clamp(.72rem,.85vw,.8rem);color:rgba(240,242,248,.25);margin-top:clamp(12px,2vh,20px);letter-spacing:.02em}
-#cta-ff{position:absolute;width:5px;height:5px;border-radius:50%;background:#E8AF38;pointer-events:none;z-index:10;opacity:0;box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15)}
+#cta-ff{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:10;opacity:0;box-shadow:0 0 8px 3px rgba(232,175,56,.4),0 0 20px 6px rgba(232,175,56,.15)}
 
 /* ═══ NAV CTA — restore filled saffron on sky page ═══ */
 #wizkoo-nav .nav-cta {

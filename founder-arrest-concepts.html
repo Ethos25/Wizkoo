@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Founder Story - Psychological Arrest Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,200;1,9..144,400;1,9..144,600&family=Sora:wght@200;300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0C1020;
+    --linen: #FBF7EB;
+    --warm-bg: #F8F4E9;
+    --saffron: #E8AF38;
+  }
+  body { margin: 0; padding: 0; font-family: 'Sora', sans-serif; background: #fff; color: var(--ink); }
+  
+  .concept-divider { background: #eee; padding: 12px; text-align: center; font-family: 'Space Mono'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #666; margin: 100px 0; }
+  
+  /* ---------------------------------------------------
+     CONCEPT 1: THE VOID (Cinematic Contrast)
+     --------------------------------------------------- */
+  .c1-void {
+    background: var(--ink);
+    color: var(--linen);
+    padding: 150px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+  }
+  .c1-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 200;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.4;
+    text-align: center;
+    max-width: 900px;
+    letter-spacing: -0.02em;
+  }
+  .c1-text strong {
+    font-weight: 600;
+    color: var(--saffron);
+  }
+  .c1-cta-wrap {
+    margin-top: 80px;
+    text-align: center;
+  }
+  
+  /* ---------------------------------------------------
+     CONCEPT 2: THE EDITORIAL WHISPER (Scale & Fragility)
+     --------------------------------------------------- */
+  .c2-editorial {
+    background: var(--warm-bg);
+    padding: 150px 40px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .c2-text-wrap {
+    max-width: 1000px;
+  }
+  .c2-line {
+    font-family: 'Fraunces', serif;
+    font-weight: 200;
+    font-style: italic;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 24px;
+    opacity: 0.8;
+  }
+  .c2-line:nth-child(2) { padding-left: 10%; color: var(--saffron); font-weight: 400; }
+  .c2-line:nth-child(3) { padding-left: 20%; font-size: clamp(24px, 3vw, 36px); font-style: normal; font-family: 'Sora', sans-serif; max-width: 600px; }
+  .c2-line:nth-child(4) { padding-left: 5%; margin-top: 60px; font-weight: 600; font-style: normal; }
+  
+  /* ---------------------------------------------------
+     CONCEPT 3: THE PHYSICAL ARTIFACT (The Desk Letter)
+     --------------------------------------------------- */
+  .c3-desk {
+    background: var(--warm-bg);
+    padding: 150px 40px;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+  }
+  .c3-letter {
+    background: #FFFDF8;
+    padding: 80px 60px;
+    max-width: 600px;
+    border-radius: 4px;
+    box-shadow: 0 32px 64px -12px rgba(12,16,32,0.15), 0 2px 8px rgba(12,16,32,0.05), inset 0 0 0 1px rgba(12,16,32,0.03);
+    transform: rotate(-2deg) translateY(-10px);
+    position: relative;
+  }
+  .c3-letter::before {
+    content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 120px; height: 30px; background: rgba(255,255,255,0.8); box-shadow: 0 2px 4px rgba(0,0,0,0.05); transform: rotate(1deg); /* Masking tape */
+  }
+  .c3-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    line-height: 2.2;
+    color: rgba(12,16,32,0.8);
+  }
+  .c3-text strong {
+    background: rgba(232,175,56,0.2);
+    padding: 2px 4px;
+  }
+  
+  /* Generic Button for Prototypes */
+  .btn-main {
+    display: inline-block;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 4px;
+  }
+  .c1-void .btn-main { border-color: var(--saffron); color: var(--saffron); }
+
+</style>
+</head>
+<body>
+
+  <div class="concept-divider">Concept 1: The Void (Dark Mode Shift)</div>
+  
+  <div class="c1-void">
+    <div class="c1-text">
+      He was four. He was reading.<br>
+      He couldn't sit still for thirty minutes,<br>
+      and the school said the children they accept do.<br><br>
+      The research had already started a year before that room.<br>
+      <strong>Wizkoo is what four years of it built:</strong><br>
+      a PreK-5 mastery framework wrapped in a week<br>
+      that moves the way kids actually move.
+    </div>
+    <div class="c1-cta-wrap">
+      <a href="#" class="btn-main">Build Our Week</a>
+    </div>
+  </div>
+
+
+  <div class="concept-divider">Concept 2: The Editorial Whisper (Scale & Stagger)</div>
+  
+  <div class="c2-editorial">
+    <div class="c2-text-wrap">
+      <div class="c2-line">He was four. He was reading.</div>
+      <div class="c2-line">He couldn't sit still for thirty minutes.</div>
+      <div class="c2-line">And the school said the children they accept do. The research had already started a year before that room.</div>
+      <div class="c2-line">Wizkoo is what four years of it built.</div>
+    </div>
+    <div style="margin-top: 80px; padding-left: 5%;">
+      <a href="#" class="btn-main">Build Our Week</a>
+    </div>
+  </div>
+
+
+  <div class="concept-divider">Concept 3: The Physical Artifact (The Desk Letter)</div>
+  
+  <div class="c3-desk">
+    <div class="c3-letter">
+      <div class="c3-text">
+        He was four. He was reading. He couldn't sit still for thirty minutes, and the school said the children they accept do.<br><br>
+        The research had already started a year before that room.<br><br>
+        <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+      </div>
+      <div style="margin-top: 60px; text-align: center;">
+        <a href="#" class="btn-main">Build Our Week</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

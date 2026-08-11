@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandbox: Dark CTA Pacing (Current Screenshot Vibe)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500&family=Space+Mono:wght@400;700&family=Sora:wght@200;300;700&display=swap" rel="stylesheet">
+<style>
+:root { --ink: #0C1020; --saffron: #E8AF38; --linen: #F2F0EA; --paper: #FFFFFF; }
+body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--ink); }
+
+/* Mock Volcano Section (To show the transition) */
+.mock-volcano {
+  width: 100%; height: 100vh;
+  background-image: url('assets/volcano_discovery.jpg');
+  background-size: cover; background-position: center bottom;
+  position: relative;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  color: white; font-family: 'Fraunces', serif;
+}
+.mock-volcano::after { content: 'Scroll Down to see the transition ⬇'; position: absolute; bottom: 40px; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); }
+
+/* The Dark Pinstripe CTA Section */
+.cta-dark {
+  padding: 120px 20px;
+  background: var(--ink);
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 99px, rgba(255,255,255,0.03) 99px, rgba(255,255,255,0.03) 100px);
+  color: var(--paper);
+  text-align: center;
+}
+.cta-dark h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px 0;
+}
+.cta-dark h2 strong { font-weight: 600; }
+.cta-dark .dot { color: var(--saffron); }
+.cta-status {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 24px;
+}
+.cta-sub {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 500px;
+  margin: 0 auto 48px auto;
+  line-height: 1.6;
+}
+.btn-main {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: transparent;
+  color: var(--paper);
+  padding: 18px 36px;
+  border: 1px solid var(--saffron);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.btn-main:hover { background: var(--saffron); color: var(--ink); }
+
+/* Pricing Boxes */
+.pricing-grid {
+  display: flex; gap: 24px; justify-content: center; margin-top: 64px;
+  padding-top: 64px; border-top: 1px solid rgba(255,255,255,0.07);
+  max-width: 600px; margin-left: auto; margin-right: auto;
+}
+.price-box {
+  border: 1px solid rgba(232,175,56,0.25);
+  padding: 32px 48px;
+  text-align: center;
+  min-width: 180px;
+  background: transparent;
+}
+.price-box.best-value {
+  border-color: rgba(232,175,56,0.55);
+  position: relative;
+}
+.badge {
+  position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+  background: var(--saffron); color: var(--ink);
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 4px 16px; white-space: nowrap;
+}
+.price-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+.price-val { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 2.5rem; letter-spacing: -0.03em; color: var(--paper); }
+.price-val span { font-size: 1rem; font-weight: 400; color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+
+<div class="mock-volcano">
+  <h1 style="font-size:4rem; margin:0; text-align:center;">(Cinematic Volcano Section)</h1>
+</div>
+
+<section class="cta-dark" id="pricing">
+  <div class="cta-status">Your first plan is free</div>
+  <h2>One moment<span class="dot">.</span><br><strong>Every subject connected<span class="dot">.</span></strong></h2>
+  <p class="cta-sub">Your first plan is free. No credit card. Sign up and build your week.</p>
+  <a href="#" class="btn-main">Build Our Week</a>
+  
+  <div class="pricing-grid">
+    <div class="price-box">
+      <div class="price-label">Monthly</div>
+      <div class="price-val">$50<span> / mo</span></div>
+    </div>
+    <div class="price-box best-value">
+      <div class="badge">Best Value</div>
+      <div class="price-label">Annual</div>
+      <div class="price-val">$499<span> / yr</span></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing: Pixar</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root { --ink: #0C1020; --saffron: #E8AF38; --linen: #F2F0EA; --paper: #FFFFFF; }
+body { margin: 0; background: #FDF9F0; color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 20px; overflow-x: hidden; position: relative; }
+
+/* A soft, warm glow simulating the magic/emotion */
+body::before { content:''; position:absolute; top: -50%; left: -10%; width: 120%; height: 150%; background: radial-gradient(circle at center top, rgba(232,175,56,0.15) 0%, transparent 60%); pointer-events: none; }
+
+.pixar-wrap { max-width: 900px; width: 100%; position: relative; z-index: 1; text-align: center; }
+
+.pixar-header h2 { font-family: 'Fraunces', serif; font-size: 4.5rem; font-weight: 300; line-height: 1.1; margin: 0 0 24px; color: var(--ink); }
+.pixar-header h2 i { color: var(--saffron); font-weight: 600; }
+.pixar-header p { font-size: 1.25rem; color: rgba(12,16,32,0.7); max-width: 600px; margin: 0 auto 64px auto; line-height: 1.6; }
+
+.pricing-card { background: var(--paper); border-radius: 12px; padding: 12px; box-shadow: 0 40px 100px rgba(232,175,56,0.15), 0 10px 30px rgba(12,16,32,0.05); display: flex; align-items: stretch; text-align: left; max-width: 800px; margin: 0 auto; border: 1px solid rgba(232,175,56,0.2); }
+
+.card-left { padding: 48px; flex: 1.5; }
+.card-title { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--saffron); margin-bottom: 24px; }
+.card-price { font-family: 'Fraunces', serif; font-size: 4rem; line-height: 1; margin-bottom: 12px; }
+.card-price span { font-size: 1.2rem; font-family: 'Plus Jakarta Sans', sans-serif; color: rgba(12,16,32,0.4); }
+.card-desc { font-size: 1.05rem; color: rgba(12,16,32,0.6); line-height: 1.5; margin-bottom: 32px; }
+
+.card-right { background: var(--linen); border-radius: 8px; padding: 40px; flex: 1; display: flex; flex-direction: column; justify-content: center; border: 1px solid rgba(12,16,32,0.04); }
+.btn-pixar { display: block; text-align: center; background: var(--saffron); color: var(--ink); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; padding: 20px; border-radius: 6px; box-shadow: 0 10px 20px rgba(232,175,56,0.3); transition: all 0.3s; margin-bottom: 20px; font-weight: 700; }
+.btn-pixar:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(232,175,56,0.4); }
+
+.alt-option { text-align: center; font-size: 0.9rem; color: rgba(12,16,32,0.5); }
+.alt-option a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(12,16,32,0.2); transition: text-decoration-color 0.3s; }
+.alt-option a:hover { text-decoration-color: var(--saffron); }
+
+.free-guarantee { display: inline-flex; align-items: center; justify-content: center; gap: 12px; margin-top: 48px; background: rgba(255,255,255,0.7); padding: 12px 24px; border-radius: 40px; font-size: 0.95rem; color: rgba(12,16,32,0.6); border: 1px solid rgba(12,16,32,0.05); }
+.free-guarantee span { color: var(--saffron); font-size: 1.2rem; }
+</style>
+</head>
+<body>
+
+<div class="pixar-wrap">
+  <div class="pixar-header">
+    <h2>Bring them to the <i>same table.</i></h2>
+    <p>Your first week is completely on us. See what happens when every subject connects for every child in your home.</p>
+  </div>
+
+  <div class="pricing-card">
+    <div class="card-left">
+      <div class="card-title">Family Membership</div>
+      <div class="card-price">$499<span>/yr</span></div>
+      <div class="card-desc">One price covers every child in your home. No per-student fees. Full access to Atlas, Elementum, and infinite week plans.</div>
+    </div>
+    <div class="card-right">
+      <a href="#" class="btn-pixar">Start Our Journey</a>
+      <div class="alt-option">Or pay <a href="#">$50 monthly</a>.</div>
+    </div>
+  </div>
+
+  <div class="free-guarantee">
+    <span>✨</span> Your first plan is entirely free. No credit card required.
+  </div>
+</div>
+
+</body>
+</html>

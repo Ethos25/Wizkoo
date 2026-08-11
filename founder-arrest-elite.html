@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Elite Psychological Arrest Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,600&family=Sora:wght@200;300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0C1020;
+    --linen: #FBF7EB;
+    --warm-bg: #F8F4E9;
+    --saffron: #E8AF38;
+    --expo: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  body { margin: 0; padding: 0; font-family: 'Sora', sans-serif; background: #fff; color: var(--ink); overflow-x: hidden; }
+  
+  .concept-divider { background: #eee; padding: 12px; text-align: center; font-family: 'Space Mono'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #666; position: relative; z-index: 100; }
+  
+  /* Generic Button */
+  .btn-main {
+    display: inline-block;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 4px;
+    transition: all 0.3s var(--expo);
+  }
+  .btn-main:hover { background: var(--ink); color: #fff; }
+
+  /* ---------------------------------------------------
+     CONCEPT 4: THE CINEMATIC SCROLL (Pixar Pacing)
+     --------------------------------------------------- */
+  .c4-wrapper {
+    position: relative;
+    height: 300vh; /* creates scroll depth */
+    background: var(--ink);
+  }
+  .c4-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .c4-text-container {
+    position: relative;
+    max-width: 800px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .c4-line {
+    font-family: 'Fraunces', serif;
+    font-weight: 200;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.3;
+    color: var(--linen);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.1s; /* Controlled by JS scroll */
+  }
+  .c4-line-1 { font-style: italic; color: rgba(251,247,235,0.7); }
+  .c4-line-2 { font-weight: 400; color: var(--saffron); }
+  .c4-line-3 { font-family: 'Sora', sans-serif; font-weight: 300; font-size: clamp(24px, 3vw, 32px); line-height: 1.6; }
+  .c4-cta {
+    position: absolute;
+    bottom: 10vh;
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+  .c4-cta .btn-main { border-color: var(--saffron); color: var(--saffron); }
+  .c4-cta .btn-main:hover { background: var(--saffron); color: var(--ink); }
+  /* Noise overlay for cinematic texture */
+  .c4-noise {
+    position: absolute; inset: 0; opacity: 0.05; pointer-events: none;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+  }
+
+  /* ---------------------------------------------------
+     CONCEPT 5: THE ARCHIVAL RECORD (New York Editorial)
+     --------------------------------------------------- */
+  .c5-wrapper {
+    background: #E8E5DF; /* A slightly colder, grittier paper */
+    padding: 200px 40px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .c5-massive-bg {
+    position: absolute;
+    font-family: 'Space Mono', monospace;
+    font-size: 30vw;
+    font-weight: 700;
+    color: rgba(12,16,32,0.03);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+  .c5-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    max-width: 1200px;
+    gap: 80px;
+    position: relative;
+    z-index: 2;
+  }
+  .c5-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(12,16,32,0.4);
+    border-top: 1px solid rgba(12,16,32,0.1);
+    padding-top: 24px;
+  }
+  .c5-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(24px, 3.5vw, 42px);
+    line-height: 1.4;
+    color: var(--ink);
+    border-left: 2px solid var(--saffron);
+    padding-left: 40px;
+  }
+  .c5-text em {
+    font-style: italic;
+    color: rgba(12,16,32,0.6);
+  }
+  .c5-cta { margin-top: 80px; display: flex; align-items: center; gap: 24px; }
+  .c5-cta-note { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: rgba(12,16,32,0.5); }
+
+  /* ---------------------------------------------------
+     CONCEPT 6: THE FOCUSED SPOTLIGHT (Copenhagen Restraint)
+     --------------------------------------------------- */
+  .c6-wrapper {
+    background: var(--linen);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: crosshair;
+  }
+  /* The spotlight effect tracks mouse via JS */
+  .c6-spotlight {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(251,247,235,0.95) 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .c6-content {
+    max-width: 600px;
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+    text-align: justify;
+    text-align-last: center;
+  }
+  .c6-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 200;
+    font-size: 32px;
+    line-height: 1.8;
+    color: rgba(12,16,32,0.85);
+  }
+  .c6-text strong {
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .c6-cta {
+    margin-top: 80px;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="concept-divider">Concept 4: The Cinematic Scroll (Pixar Pacing) <br> <span style="text-transform:none;opacity:0.6;font-size:10px">Scroll down slowly to read</span></div>
+  
+  <div class="c4-wrapper" id="c4-scroll-area">
+    <div class="c4-sticky">
+      <div class="c4-noise"></div>
+      <div class="c4-text-container">
+        <div class="c4-line c4-line-1" id="c4-t1">He was four. He was reading.</div>
+        <div class="c4-line c4-line-2" id="c4-t2">He couldn't sit still for thirty minutes, and the school said the children they accept do.</div>
+        <div class="c4-line c4-line-3" id="c4-t3">The research had already started a year before that room.<br><br><span style="font-family:'Fraunces';font-weight:600;color:var(--saffron);font-size:1.2em">Wizkoo is what four years of it built.</span><br>A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</div>
+      </div>
+      <div class="c4-cta" id="c4-cta">
+        <a href="#" class="btn-main">Build Our Week</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="concept-divider">Concept 5: The Archival Record (New York Editorial)</div>
+  
+  <div class="c5-wrapper">
+    <div class="c5-massive-bg">FOUR</div>
+    <div class="c5-grid">
+      <div class="c5-meta">
+        Case File No. 001<br>
+        Origin Story<br>
+        <br><br><br>
+        The Genesis of the<br>
+        Wizkoo Framework
+      </div>
+      <div>
+        <div class="c5-text">
+          He was four. <em>He was reading.</em><br><br>
+          He couldn't sit still for thirty minutes, and the school said the children they accept do.<br><br>
+          The research had already started a year before that room. <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+        </div>
+        <div class="c5-cta">
+          <a href="#" class="btn-main">Build Our Week</a>
+          <span class="c5-cta-note">No credit card required.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="concept-divider">Concept 6: The Focused Spotlight (Copenhagen Restraint) <br> <span style="text-transform:none;opacity:0.6;font-size:10px">Move your mouse to read</span></div>
+  
+  <div class="c6-wrapper" id="c6-area">
+    <div class="c6-spotlight" id="c6-spotlight"></div>
+    <div style="display:flex; flex-direction:column; align-items:center;">
+        <div class="c6-content">
+        <div class="c6-text">
+            He was four. He was reading. He couldn't sit still for thirty minutes, and the school said the children they accept do. 
+            <br><br>
+            The research had already started a year before that room. <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+        </div>
+        </div>
+        <div class="c6-cta">
+        <a href="#" class="btn-main">Build Our Week</a>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // JS for Concept 4 (Scroll)
+    window.addEventListener('scroll', () => {
+      const wrapper = document.getElementById('c4-scroll-area');
+      const rect = wrapper.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
+      
+      const t1 = document.getElementById('c4-t1');
+      const t2 = document.getElementById('c4-t2');
+      const t3 = document.getElementById('c4-t3');
+      const cta = document.getElementById('c4-cta');
+
+      // T1 fades in 0-0.2, fades out 0.25-0.35
+      let op1 = 0;
+      if (progress < 0.25) op1 = progress / 0.2;
+      else op1 = 1 - ((progress - 0.25) / 0.1);
+      
+      // T2 fades in 0.35-0.55, fades out 0.6-0.7
+      let op2 = 0;
+      if (progress > 0.35 && progress < 0.6) op2 = (progress - 0.35) / 0.2;
+      else if (progress >= 0.6) op2 = 1 - ((progress - 0.6) / 0.1);
+
+      // T3 fades in 0.7-0.9
+      let op3 = 0;
+      if (progress > 0.7) op3 = (progress - 0.7) / 0.2;
+
+      // CTA fades in at 0.95
+      let opCta = 0;
+      if (progress > 0.9) opCta = (progress - 0.9) / 0.1;
+
+      t1.style.opacity = Math.max(0, Math.min(1, op1));
+      t2.style.opacity = Math.max(0, Math.min(1, op2));
+      t3.style.opacity = Math.max(0, Math.min(1, op3));
+      cta.style.opacity = Math.max(0, Math.min(1, opCta));
+      
+      // Slight vertical drift for elegance
+      t1.style.transform = `translate(-50%, ${-50 + (1-op1)*20}%)`;
+      t2.style.transform = `translate(-50%, ${-50 + (1-op2)*20}%)`;
+      t3.style.transform = `translate(-50%, ${-50 + (1-op3)*10}%)`;
+    });
+
+    // JS for Concept 6 (Spotlight)
+    const c6area = document.getElementById('c6-area');
+    const c6spot = document.getElementById('c6-spotlight');
+    c6area.addEventListener('mousemove', (e) => {
+      const rect = c6area.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      c6spot.style.setProperty('--x', x + 'px');
+      c6spot.style.setProperty('--y', y + 'px');
+    });
+    // Reset to center on leave
+    c6area.addEventListener('mouseleave', () => {
+      c6spot.style.setProperty('--x', '50%');
+      c6spot.style.setProperty('--y', '50%');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Psychological Arrest - V4 (High Impact Typography)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,600&family=Sora:wght@200;300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0C1020;
+    --linen: #FBF7EB;
+    --warm-bg: #F8F4E9;
+    --saffron: #E8AF38;
+    --expo: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  body { margin: 0; padding: 0; font-family: 'Sora', sans-serif; background: #fff; color: var(--ink); overflow-x: hidden; }
+  
+  .concept-divider { background: #eee; padding: 12px; text-align: center; font-family: 'Space Mono'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #666; position: relative; z-index: 100; }
+  
+  /* Generic Button */
+  .btn-main {
+    display: inline-block;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 4px;
+    transition: all 0.3s var(--expo);
+  }
+  .btn-main:hover { background: var(--ink); color: #fff; }
+
+  /* ---------------------------------------------------
+     CONCEPT 7: THE POSTER (Linen - Extreme Typographic Hierarchy)
+     --------------------------------------------------- */
+  .c7-wrapper {
+    background: var(--warm-bg); 
+    padding: 120px 40px; 
+    min-height: 80vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .c7-grid {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .c7-l1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+  .c7-l2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5.5vw, 72px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--saffron);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    padding-left: 10%;
+  }
+  .c7-l3 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 300;
+    color: rgba(12,16,32,0.7);
+    max-width: 700px;
+    margin-left: auto; /* Align to right */
+    line-height: 1.6;
+    margin-top: 40px;
+  }
+  .c7-l3 strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .c7-cta-row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* ---------------------------------------------------
+     CONCEPT 8: THE CINEMA CARD (Ink - Extreme Typographic Hierarchy)
+     --------------------------------------------------- */
+  .c8-wrapper {
+    background: var(--ink); 
+    padding: 120px 40px; 
+    min-height: 80vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .c8-grid {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .c8-l1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--linen);
+    letter-spacing: -0.03em;
+  }
+  .c8-l2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5.5vw, 72px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--saffron);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    padding-left: 10%;
+  }
+  .c8-l3 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 300;
+    color: rgba(251,247,235,0.7);
+    max-width: 700px;
+    margin-left: auto; /* Align to right */
+    line-height: 1.6;
+    margin-top: 40px;
+  }
+  .c8-l3 strong {
+    color: var(--linen);
+    font-weight: 600;
+  }
+  .c8-cta-row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .c8-wrapper .btn-main { border-color: var(--saffron); color: var(--saffron); }
+  .c8-wrapper .btn-main:hover { background: var(--saffron); color: var(--ink); }
+
+</style>
+</head>
+<body>
+
+  <div class="concept-divider">Concept 7: The Manifesto Poster (Extreme Scale)</div>
+  
+  <div class="c7-wrapper">
+    <div class="c7-grid">
+      <div class="c7-l1">He was four. He was reading.</div>
+      <div class="c7-l2">He couldn't sit still for thirty minutes.</div>
+      <div class="c7-l3">
+        And the school said the children they accept do. The research had already started a year before that room.<br><br>
+        <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+      </div>
+      <div class="c7-cta-row">
+        <a href="#" class="btn-main">Build Our Week</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="concept-divider">Concept 8: The Cinema Card (High Contrast)</div>
+  
+  <div class="c8-wrapper">
+    <div class="c8-grid">
+      <div class="c8-l1">He was four. He was reading.</div>
+      <div class="c8-l2">He couldn't sit still for thirty minutes.</div>
+      <div class="c8-l3">
+        And the school said the children they accept do. The research had already started a year before that room.<br><br>
+        <strong>Wizkoo is what four years of it built:</strong> a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+      </div>
+      <div class="c8-cta-row">
+        <a href="#" class="btn-main">Build Our Week</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

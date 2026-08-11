@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cinematic Table Concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Sora:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #0C1020; --saffron: #E8AF38; --linen: #F8F4E9; }
+  
+  body { 
+    margin: 0; 
+    background: var(--ink); 
+    color: var(--linen); 
+    font-family: 'Sora', sans-serif; 
+    min-height: 100vh;
+  }
+  
+  .photo-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px;
+    box-sizing: border-box;
+    /* The cinematic background image */
+    background-image: url('../images/same_table_volcano_concept.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* A dark gradient overlay to ensure text readability while keeping the photo moody */
+  .photo-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(12,16,32,0.8) 0%, rgba(12,16,32,0.2) 40%, rgba(12,16,32,0.9) 100%);
+    z-index: 1;
+  }
+
+  /* Content Container */
+  .photo-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  /* Header Area */
+  .ph-header { 
+    max-width: 600px;
+    align-self: flex-start;
+  }
+  .ph-tag { 
+    font-family: 'Space Mono', monospace; 
+    font-size: 0.75rem; 
+    letter-spacing: 0.15em; 
+    text-transform: uppercase; 
+    color: var(--saffron); 
+    margin-bottom: 24px; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+  }
+  .ph-tag::before { content: ''; height: 1px; width: 32px; background: var(--saffron); }
+  
+  .ph-title { 
+    font-family: 'Fraunces', serif; 
+    font-size: 4.5rem; 
+    font-weight: 300; 
+    margin: 0 0 24px; 
+    line-height: 1.05; 
+  }
+  .ph-title strong { font-weight: 600; font-style: italic; color: var(--saffron); }
+  
+  .ph-desc { 
+    font-size: 1.4rem; 
+    line-height: 1.6; 
+    color: rgba(255,255,255,0.8); 
+    font-weight: 300;
+  }
+
+  /* The Spectrum (The children) - Redesigned to emphasize READING LEVEL */
+  .ph-spectrum {
+    display: flex;
+    gap: 40px;
+    align-items: flex-end;
+  }
+  
+  .ph-child {
+    flex: 1;
+    position: relative;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+  }
+  
+  /* Hover effects to pull focus */
+  .ph-spectrum:hover .ph-child { opacity: 0.3; }
+  .ph-spectrum .ph-child:hover { opacity: 1; border-top-color: var(--saffron); }
+
+  /* Inverted Typography Hierarchy: Reading level is massive */
+  .c-level { 
+    font-family: 'Fraunces', serif; 
+    font-size: 2.2rem; 
+    font-weight: 600; 
+    font-style: italic;
+    color: var(--saffron); 
+    margin-bottom: 12px;
+  }
+  
+  .c-name-age { 
+    font-family: 'Space Mono', monospace; 
+    font-size: 0.7rem; 
+    letter-spacing: 0.15em; 
+    color: rgba(255,255,255,0.6); 
+    text-transform: uppercase; 
+    margin-bottom: 24px; 
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .c-task { 
+    font-size: 1.1rem; 
+    line-height: 1.6; 
+    color: rgba(255,255,255,0.9); 
+    font-weight: 300;
+  }
+
+</style>
+</head>
+<body>
+
+<section class="photo-section">
+  <div class="photo-overlay"></div>
+  
+  <div class="photo-content">
+    <div class="ph-header">
+      <div class="ph-tag">Same table · Same thread</div>
+      <h2 class="ph-title">Four children.<br><strong>One volcano.</strong></h2>
+      <p class="ph-desc">
+        Right now, at the same table, each child is doing something different with the same idea. 
+      </p>
+    </div>
+    
+    <div class="ph-spectrum">
+      <div class="ph-child">
+        <div class="c-level">Independent</div>
+        <div class="c-name-age">Leo &middot; Age 10</div>
+        <div class="c-task">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+      </div>
+      <div class="ph-child">
+        <div class="c-level">Reads Well</div>
+        <div class="c-name-age">Mia &middot; Age 7</div>
+        <div class="c-task">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+      </div>
+      <div class="ph-child">
+        <div class="c-level">Reads Some</div>
+        <div class="c-name-age">Noah &middot; Age 5</div>
+        <div class="c-task">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
+      </div>
+      <div class="ph-child">
+        <div class="c-level">Learning</div>
+        <div class="c-name-age">Ava &middot; Age 3</div>
+        <div class="c-task">Red and orange finger painting: make your own lava flow on the big paper.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

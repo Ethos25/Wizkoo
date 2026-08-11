@@ -1,0 +1,884 @@
+﻿diff --git a/index.html b/index.html
+index 4c5e072..a91db17 100644
+--- a/index.html
++++ b/index.html
+@@ -364,11 +364,122 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
+ .pc-collapsed-count{font-family:'Space Mono',monospace;font-size:0.42rem;color:var(--saffron);letter-spacing:0.08em;text-transform:uppercase}
+ .pc-more{padding:14px 20px;text-align:center;font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--saffron);transition:background .2s;border-top:1px solid var(--rule)}
+ .pc-more:hover{background:rgba(232,175,56,0.04)}
+-.plan-founder{max-width:640px;margin:clamp(52px,8vh,88px) auto 0;text-align:center}
+-/* The quiet center: the only place the brand explains itself. Runs unnamed. */
+-.founder-beat{max-width:540px;margin:0 auto;text-align:left;font-size:clamp(0.95rem,1.12vw,1.05rem);line-height:1.85;letter-spacing:-0.012em;color:rgba(12,16,32,0.74);text-wrap:pretty}
+-.founder-beat::before{content:'';display:block;width:28px;height:1px;background:#E8AF38;opacity:0.85;margin:0 0 clamp(20px,3vh,28px)}
+-.founder-cta{padding-top:clamp(28px,4vh,40px);display:flex;flex-direction:column;align-items:center}
++.plan-founder {
++  display: flex;
++  gap: clamp(24px, 4vw, 40px);
++  align-items: center;
++  max-width: 1100px;
++  width: 100%;
++  margin: clamp(120px, 15vh, 200px) auto 0;
++  box-sizing: border-box;
++}
++.pf-left {
++  display: flex;
++  gap: clamp(24px, 4vw, 40px);
++  flex: 1;
++  align-items: flex-end; /* Bottom justify the vertical text */
++}
++.pf-villain {
++  writing-mode: vertical-rl;
++  transform: rotate(180deg);
++  font-family: 'Space Mono', monospace;
++  font-size: clamp(14px, 1.8vw, 24px);
++  font-weight: 700;
++  text-transform: uppercase;
++  color: var(--saffron);
++  letter-spacing: -0.05em;
++  line-height: 1;
++  margin: 0;
++  white-space: nowrap;
++}
++.pf-content {
++  display: flex;
++  flex-direction: column;
++  gap: clamp(16px, 2vh, 24px);
++  max-width: 600px;
++}
++.pf-l1 {
++  font-family: 'Fraunces', serif;
++  font-size: clamp(32px, 4.5vw, 64px);
++  font-weight: 300;
++  line-height: 1.1;
++  color: var(--ink);
++  letter-spacing: -0.03em;
++}
++.pf-l2 {
++  font-family: 'Fraunces', serif;
++  font-size: clamp(24px, 3.5vw, 48px);
++  font-weight: 600;
++  font-style: italic;
++  color: var(--ink);
++  line-height: 1.1;
++  letter-spacing: -0.02em;
++  border-left: 3px solid var(--saffron);
++  padding-left: clamp(16px, 2vw, 20px);
++}
++@keyframes nervous {
++  0%, 100% { font-variation-settings: "wght" 600; transform: translateX(0); }
++  50% { font-variation-settings: "wght" 300; transform: translateX(2px); color: var(--saffron); }
++}
++.pf-kinetic {
++  display: inline-block;
++  animation: nervous 2s infinite ease-in-out;
++  border-bottom: 2px solid var(--saffron);
++}
++.pf-l3 {
++  font-family: 'Fraunces', serif;
++  font-size: clamp(16px, 2vw, 22px);
++  font-style: italic;
++  font-weight: 400;
++  color: rgba(12,16,32,0.9);
++  line-height: 1.5;
++  margin-left: 20px;
++}
++.pf-l5 {
++  font-family: 'Space Mono', monospace;
++  font-size: 11px;
++  font-weight: 700;
++  text-transform: uppercase;
++  letter-spacing: 0.1em;
++  color: rgba(12,16,32,0.5);
++  margin-top: 16px;
++}
++
++.pf-right {
++  flex: 0 0 clamp(240px, 25vw, 320px);
++  display: flex;
++  justify-content: center;
++}
++.pf-badge {
++  background: var(--ink);
++  color: var(--linen);
++  padding: clamp(24px, 3vw, 40px) clamp(24px, 2.5vw, 32px);
++  border-radius: 4px;
++  position: relative;
++  box-shadow: 0 32px 64px -16px rgba(12,16,32,0.3);
++  transform: rotate(2deg);
++  transition: transform 0.5s var(--expo);
++}
++.pf-badge:hover {
++  transform: rotate(0deg) scale(1.02);
++}
++.pf-badge::before {
++  content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
++  width: 60px; height: 24px; background: rgba(251,247,235,0.9); box-shadow: 0 2px 4px rgba(0,0,0,0.1);
++}
++.pf-l4 {
++  font-family: 'Fraunces', serif;
++  font-size: clamp(16px, 1.5vw, 20px);
++  line-height: 1.4;
++  font-style: italic;
++}
++.pf-l4 strong {
++  font-style: normal;
++  font-size: clamp(20px, 1.8vw, 24px);
++  color: var(--saffron);
++  display: block;
++  margin-bottom: 12px;
++}
+ .micro-copy{display:block;margin-top:10px;font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid)}
+ 
+ /* ΓòÉΓòÉΓòÉ SAME ROOM ΓÇö contained, sharp edges, high contrast ΓòÉΓòÉΓòÉ */
+@@ -443,78 +554,32 @@ body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);over
+   .journeys-litany-wrap{display:none}
+   .journeys-hold{display:block;margin:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:1rem;line-height:1.95;letter-spacing:-0.011em;color:rgba(12,16,32,0.66);text-wrap:pretty}
+ }
+-.faq-section h2{font-family:'Sora',sans-serif;font-weight:200;font-size:1.8rem;line-height:1.15;letter-spacing:-0.025em;margin-bottom:36px}.faq-section h2 strong{font-weight:700}
+-.faq-list{border-top:1px solid var(--rule)}.faq-item{border-bottom:1px solid var(--rule)}
+-.faq-q{width:100%;text-align:left;background:transparent;border:none;padding:18px 0;font-family:'Sora',sans-serif;font-weight:600;font-size:0.82rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.4;transition:color .2s}.faq-q:hover{color:var(--saffron)}
+-.faq-q::after{content:'+';font-size:1rem;font-weight:300;color:var(--saffron);flex-shrink:0;transition:transform .3s var(--expo)}.faq-item.open .faq-q::after{transform:rotate(45deg)}
+-.faq-a{padding:0 0 18px;font-size:var(--small-size);color:var(--mid);line-height:1.75;max-width:600px}.faq-a[hidden]{display:none}.faq-a:not([hidden]){display:block;animation:stepFade .3s var(--expo)}
+-@keyframes stepFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+ 
+-.cta-dark{background:var(--ink);padding:120px 48px;text-align:center;position:relative;overflow:hidden}
+-.cta-dark::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.012) 59px,rgba(255,255,255,0.012) 60px);pointer-events:none}.cta-dark>*{position:relative;z-index:1}
+-.cta-dark h2{font-family:'Sora',sans-serif;font-weight:200;font-size:3.8rem;line-height:1.06;letter-spacing:-0.04em;color:var(--paper);margin:0 auto 24px;max-width:700px}.cta-dark h2 strong{font-weight:700}
+-.cta-dark p{font-size:var(--small-size);color:rgba(250,250,250,0.3);margin-bottom:40px}
+-.cta-dark .btn-main{background:var(--saffron);color:var(--ink);box-shadow:0 4px 20px rgba(232,175,56,0.3)}.cta-dark .btn-main:hover{box-shadow:0 8px 30px rgba(232,175,56,0.4);transform:translateY(-2px)}
+-.cta-reveal{opacity:0;transition:opacity 1.4s var(--expo)}.cta-reveal.visible{opacity:1}
++.faq-section { position: relative; overflow: hidden; background: var(--midnight) !important; padding: 120px 60px; }
++.faq-glow-1 { position: absolute; top: -20%; left: 10%; width: 60vw; height: 60vw; background: rgba(242, 240, 234, 0.12); border-radius: 50%; filter: blur(120px); animation: faqPulse 12s infinite alternate; z-index: 0; pointer-events: none; }
++.faq-glow-2 { position: absolute; top: -10%; right: -10%; width: 50vw; height: 50vw; background: rgba(232, 175, 56, 0.12); border-radius: 50%; filter: blur(100px); animation: faqPulse 16s infinite alternate-reverse; z-index: 0; pointer-events: none; }
++@keyframes faqPulse { from { transform: scale(1); opacity: 0.8; } to { transform: scale(1.1); opacity: 1; } }
+ 
+-/* ΓòÉΓòÉΓòÉ FOOTER ΓÇö Blueprint-correct colors ΓòÉΓòÉΓòÉ */
++.faq-inner { position: relative; z-index: 10; max-width: 1200px; margin: 0 auto; }
++.faq-section h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 56px; color: var(--cream); margin-bottom: 60px; text-align: center; }
+ 
+-.footer-rae{margin-top:16px;font-size:0.72rem;color:#8C91A5;line-height:1.7;letter-spacing:0.005em}
+-.footer-rae-link{color:#C8CDDA;text-decoration:none;border-bottom:1px solid rgba(232,175,56,0.3);transition:color .25s,border-color .25s}
+-.footer-rae-link:hover{color:#F0F2F8;border-bottom-color:var(--saffron)}
++.faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 80px; }
++@media (max-width: 900px) { .faq-list { grid-template-columns: 1fr; gap: 20px; } }
+ 
+-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--expo),transform .7s var(--expo)}.reveal.visible{opacity:1;transform:translateY(0)}
++.faq-item { border-bottom: 1px solid rgba(242, 240, 234, 0.15); transition: border-color 0.3s; padding: 0 0 24px 0; }
++.faq-item:hover { border-bottom: 1px solid rgba(232, 175, 56, 0.5); }
++.faq-item.open { border-bottom: 1px solid var(--saffron); }
+ 
+-@media(max-width:1024px){
+-  .hero-wrapper{height:auto;min-height:auto}
+-  .hero-sticky{position:relative;height:auto;min-height:auto}
+-  .hero-sticky h1{font-size:inherit}
+-  .hero-brand span.wm{font-size:48px}
+-  .hero-content{padding-left:8vw}
+-  .hero-sub{grid-template-columns:1fr}
+-  .orientation{grid-template-columns:1fr}
+-  .games-band{grid-template-columns:1fr}
+-  .game-panel:first-child{border-right:none;border-bottom:1px solid var(--rule)}
+-  .week-compare{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+-  .sr-track{flex-wrap:wrap}
+-  .sr-card{flex:1 1 45%}
+-  .cta-dark h2{font-size:2.6rem}
+-  .ec-headline{font-size:2rem}
+-  
+-}
++.faq-q { width: 100%; text-align: left; background: transparent; border: none; padding: 12px 0 0 0; font-family: 'Fraunces', serif; font-weight: 400; font-size: 24px; color: rgba(242, 240, 234, 0.7); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; line-height: 1.3; transition: color 0.3s; cursor: pointer; }
++.faq-item:hover .faq-q { color: var(--cream); }
++.faq-item.open .faq-q { color: var(--saffron); }
++.faq-q::after { content: '+'; font-size: 28px; font-weight: 300; color: inherit; flex-shrink: 0; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); line-height: 1; }
++.faq-item.open .faq-q::after { transform: rotate(45deg); }
+ 
+-@media(max-width:768px){
+-  /* ΓöÇΓöÇ Hero ΓöÇΓöÇ */
+-  .hero-sticky h1{max-width:100%}
+-  .hero-brand span.wm{font-size:36px}
+-  .hero-l2{margin-bottom:48px}
+-  .hero-anchor{margin-top:28px;font-size:1rem}
+-  .hero-wrapper{height:auto;min-height:auto}
+-  .hero-sticky{position:relative;height:auto;min-height:auto}
+-  .hero-content{padding:10vh 20px 6vh 20px;padding:10svh 20px 6svh 20px}
+-  .hero-circle-wrap{margin-top:24px}
+-
+-  /* ΓöÇΓöÇ Nav ΓöÇΓöÇ */
+-        
+-  /* ΓöÇΓöÇ Content sections ΓöÇΓöÇ */
+-  .plan-section{padding:0 20px 40px}
+-  .same-room-wrap{padding:24px 16px}
+-  .same-room{padding:28px 16px}
+-  .same-room h2{font-size:1.6rem}
+-  .sr-track{flex-direction:column}
+-  .sr-card{flex:none;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+-  .sr-card:last-child{border-bottom:none}
+-  /* ΓöÇΓöÇ Orientation ΓöÇΓöÇ */
+-  .orientation{padding:40px 20px;gap:24px;grid-template-columns:1fr}
+-
+-  /* ΓöÇΓöÇ Games ΓöÇΓöÇ */
+-  .games-band{grid-template-columns:1fr}
+-  .game-panel{padding:32px 20px}
+-  .game-panel:first-child{border-right:none;border-bottom:1px solid var(--rule)}
+-  .game-panel h3{font-size:1.5rem}
+-
+-  /* ΓöÇΓöÇ FAQ ΓöÇΓöÇ */
+-  .faq-section{padding:48px 20px}
++.faq-a { max-height: 0; overflow: hidden; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; line-height: 1.6; color: rgba(242, 240, 234, 0.85); opacity: 0; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); margin-top: 0; }
++.faq-item.open .faq-a { max-height: 300px; opacity: 1; margin-top: 20px; }
++
++.faq-section{padding:48px 20px}
+   .faq-section h2{font-size:1.4rem}
+   .faq-q{padding:16px 0;font-size:0.78rem}
+ 
+@@ -1616,6 +1681,23 @@ section.hero::before{content:'';position:absolute;inset:0;z-index:0;pointer-even
+ @media(min-width:400px) and (max-width:767px){
+   .wrap{padding:0 28px}
+ }
++
++/* ΓÇö AEO (Answer Engine Optimization) Classes ΓÇö */
++.aeo-hidden {
++  position: absolute;
++  width: 1px;
++  height: 1px;
++  padding: 0;
++  margin: -1px;
++  overflow: hidden;
++  clip: rect(0, 0, 0, 0);
++  white-space: nowrap;
++  border: 0;
++}
++
++
++
++
+ </style>
+ <!-- ΓòÉΓòÉΓòÉ SKY SYSTEM STYLES ΓòÉΓòÉΓòÉ -->
+ <style id="hp-sky-system">
+@@ -1642,6 +1724,23 @@ body.page-home{
+ .philo-section{
+   background:transparent!important;
+ }
++
++/* ΓÇö AEO (Answer Engine Optimization) Classes ΓÇö */
++.aeo-hidden {
++  position: absolute;
++  width: 1px;
++  height: 1px;
++  padding: 0;
++  margin: -1px;
++  overflow: hidden;
++  clip: rect(0, 0, 0, 0);
++  white-space: nowrap;
++  border: 0;
++}
++
++
++
++
+ </style>
+ <!-- ΓòÉΓòÉΓòÉ v5 DESIGN SYSTEM OVERRIDES ΓòÉΓòÉΓòÉ -->
+ <style id="hp-v5-design">
+@@ -1715,6 +1814,23 @@ body.page-home{
+   font-weight:600;
+   font-style:italic;
+ }
++
++/* ΓÇö AEO (Answer Engine Optimization) Classes ΓÇö */
++.aeo-hidden {
++  position: absolute;
++  width: 1px;
++  height: 1px;
++  padding: 0;
++  margin: -1px;
++  overflow: hidden;
++  clip: rect(0, 0, 0, 0);
++  white-space: nowrap;
++  border: 0;
++}
++
++
++
++
+ </style>
+ <!-- Open Graph -->
+ <meta property="og:type" content="website">
+@@ -1808,6 +1924,366 @@ body.page-home{
+ .page-home .nav{transition:background-color .25s cubic-bezier(.25,.1,.25,1)!important}
+ .page-home .nav.nav--scrolled{background:rgba(248,244,233,0.55)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
+ .page-home .nav.nav--scrolled.nav--surface-dark{background:rgba(12,16,32,0.25)!important;backdrop-filter:blur(4px)!important;-webkit-backdrop-filter:blur(4px)!important}
++
++/* ΓÇö AEO (Answer Engine Optimization) Classes ΓÇö */
++.aeo-hidden {
++  position: absolute;
++  width: 1px;
++  height: 1px;
++  padding: 0;
++  margin: -1px;
++  overflow: hidden;
++  clip: rect(0, 0, 0, 0);
++  white-space: nowrap;
++  border: 0;
++}
++
++
++
++
++
++/* --- SPLIT EDITORIAL LAYOUT (SAME TABLE) --- */
++.split-section {
++  display: flex;
++  width: 100%;
++  min-height: 100vh;
++  background: var(--ink);
++  overflow: hidden;
++}
++
++/* LEFT SIDE: The Photographic Window */
++.split-left {
++  width: 50%;
++  position: relative;
++  overflow: hidden;
++}
++
++/* The Vignette Overlay */
++.split-vignette {
++  position: absolute;
++  top: 0; left: 0; right: 0; bottom: 0;
++  box-shadow: inset 0 0 150px rgba(12,16,32,0.9), inset 0 0 50px rgba(0,0,0,0.5);
++  z-index: 2;
++  pointer-events: none;
++}
++
++/* The Image with Cinematic Treatments */
++.split-image {
++  position: absolute;
++  top: 0; left: 0; right: 0; bottom: 0;
++  background-image: url('images/elite_table_v4.jpg');
++  background-size: cover;
++  background-position: center;
++  z-index: 1;
++  /* The Focus Pull (Starts blurred) */
++  filter: blur(15px) saturate(0.8);
++  transform: scale(1.1); /* Start slightly zoomed in */
++  transition: filter 2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 2s cubic-bezier(0.2, 0.8, 0.2, 1);
++}
++
++/* When the section scrolls into view (.reveal gets .active in wz-events.js) */
++.split-section.visible .split-image {
++  /* Snap to focus */
++  filter: blur(0px) saturate(1.1);
++  /* Trigger the infinite Ken Burns breath */
++  animation: kenBurnsBreath 60s alternate infinite linear forwards;
++}
++
++@keyframes kenBurnsBreath {
++  0% { transform: scale(1.0); }
++  100% { transform: scale(1.08); }
++}
++
++/* RIGHT SIDE: The Typography Canvas */
++.split-right {
++  width: 50%;
++  display: flex;
++  flex-direction: column;
++  justify-content: center;
++  padding: 80px;
++  box-sizing: border-box;
++  background: var(--ink);
++  position: relative;
++  z-index: 3;
++}
++
++.sp-header { margin-bottom: 60px; }
++
++.sp-tag { 
++  font-family: 'Space Mono', monospace; 
++  font-size: 0.75rem; 
++  letter-spacing: 0.15em; 
++  text-transform: uppercase; 
++  color: var(--saffron); 
++  margin-bottom: 24px; 
++  display: flex; 
++  align-items: center; 
++  gap: 12px; 
++}
++.sp-tag::before { content: ''; height: 1px; width: 32px; background: var(--saffron); }
++
++.sp-title { 
++  font-family: 'Fraunces', serif; 
++  font-size: clamp(3rem, 4vw, 4.5rem); 
++  font-weight: 300; 
++  margin: 0 0 24px; 
++  line-height: 1.05; 
++  color: var(--linen);
++}
++.sp-title strong { font-weight: 600; font-style: italic; color: var(--saffron); }
++
++.sp-desc { 
++  font-size: 1.25rem; 
++  line-height: 1.6; 
++  color: rgba(255,255,255,0.7); 
++  font-weight: 300;
++  max-width: 500px;
++}
++
++/* The Reading Levels List */
++.sp-list {
++  display: flex;
++  flex-direction: column;
++  gap: 40px;
++}
++.sp-item {
++  border-left: 2px solid rgba(255,255,255,0.1);
++  padding-left: 24px;
++  transition: border-color 0.4s ease;
++}
++.sp-item:hover { border-left-color: var(--saffron); }
++
++.c-level { 
++  font-family: 'Fraunces', serif; 
++  font-size: 2rem; 
++  font-weight: 600; 
++  font-style: italic;
++  color: var(--saffron); 
++  margin-bottom: 8px;
++}
++.c-name-age { 
++  font-family: 'Space Mono', monospace; 
++  font-size: 0.7rem; 
++  letter-spacing: 0.15em; 
++  color: rgba(255,255,255,0.5); 
++  text-transform: uppercase; 
++  margin-bottom: 16px; 
++}
++.c-task { 
++  font-size: 1.1rem; 
++  line-height: 1.6; 
++  color: rgba(255,255,255,0.9); 
++  font-weight: 300;
++  max-width: 480px;
++}
++
++/* Mobile Fallback: Stack them */
++@media (max-width: 1024px) {
++  .split-section { flex-direction: column; min-height: auto; }
++  .split-left { width: 100%; height: 50vh; }
++  .split-right { width: 100%; padding: 60px 40px; }
++}
++/* --- END SPLIT EDITORIAL LAYOUT --- */
++
++
++
++
++/* --- IMMERSIVE HORIZONTAL TILE LAYOUT --- */
++.immersive-section {
++  position: relative;
++  width: 100%;
++  display: flex;
++  flex-direction: column;
++  justify-content: space-between;
++  padding: 120px 60px 80px;
++  box-sizing: border-box;
++  background-color: var(--midnight);
++  overflow: hidden;
++}
++.imm-bg {
++  position: absolute;
++  top: 0; bottom: 0; left: 0; right: 0;
++  background-image: url('images/immersive_table_ind.jpg');
++  background-size: cover;
++  background-position: center bottom;
++  z-index: 0;
++  transform: scale(1.0);
++  transform-origin: center center;
++  transition: transform 24s cubic-bezier(0.2, 0.8, 0.2, 1);
++}
++.immersive-section.visible .imm-bg {
++  transform: scale(1.04);
++}
++
++.imm-overlay {
++  position: absolute;
++  top: 0; left: 0; right: 0;
++  height: 80%;
++  background: linear-gradient(to bottom, rgba(12,16,32,0.95) 0%, rgba(12,16,32,0.6) 40%, rgba(12,16,32,0) 100%);
++  pointer-events: none;
++  z-index: 1;
++}
++
++.imm-content {
++  position: relative;
++  z-index: 2;
++  display: flex;
++  flex-direction: column;
++  height: 100%;
++  flex-grow: 1;
++  justify-content: space-between;
++}
++
++.imm-header { max-width: 800px; }
++
++.imm-tag { 
++  font-family: 'Space Mono', monospace; 
++  font-size: 0.75rem; 
++  letter-spacing: 0.15em; 
++  text-transform: uppercase; 
++  color: var(--saffron); 
++  margin-bottom: 24px; 
++  display: flex; 
++  align-items: center; 
++  gap: 12px; 
++}
++.imm-tag::before { content: ''; height: 1px; width: 0px; background: var(--saffron); transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
++.immersive-section.visible .imm-tag::before { width: 32px; }
++
++.imm-title { 
++  overflow: hidden;
++  font-family: 'Fraunces', serif; 
++  font-size: clamp(3.5rem, 5vw, 5rem); 
++  font-weight: 300; 
++  margin: 0 0 24px; 
++  line-height: 1.05; 
++  color: var(--linen);
++}
++.imm-title strong { font-weight: 600; font-style: italic; color: var(--saffron); }
++
++.imm-desc { 
++  overflow: hidden;
++  font-size: 1.35rem; 
++  line-height: 1.6; 
++  color: rgba(255,255,255,0.9); 
++  font-weight: 300;
++  max-width: 600px;
++  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
++}
++
++/* Glassmorphism Tiles */
++.imm-tiles {
++  display: grid;
++  grid-template-columns: repeat(4, 1fr);
++  gap: 24px;
++  margin-top: 140px;
++}
++
++.imm-tile {
++  background: rgba(12,16,32,0.85);
++  backdrop-filter: blur(12px);
++  -webkit-backdrop-filter: blur(12px);
++  border-top: 2px solid rgba(255,255,255,0.1);
++  padding: 32px 24px;
++  opacity: 0; /* Hidden initially for cascade */
++  transition: transform 0.4s ease, border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
++}
++
++.imm-tile .c-level { 
++  font-family: 'Fraunces', serif; 
++  font-size: 1.8rem; 
++  font-weight: 600; 
++  font-style: italic;
++  color: var(--saffron); 
++  margin-bottom: 8px;
++}
++.imm-tile .c-name-age { 
++  font-family: 'Space Mono', monospace; 
++  font-size: 0.65rem; 
++  letter-spacing: 0.15em; 
++  color: rgba(255,255,255,0.5); 
++  text-transform: uppercase; 
++  margin-bottom: 20px; 
++}
++.imm-tile .c-task { 
++  font-size: 1.05rem; 
++  line-height: 1.6; 
++  color: rgba(255,255,255,0.9); 
++  font-weight: 300;
++}
++
++/* 1. Focus Mode & 2. Saffron Cast */
++.imm-tiles:hover .imm-tile {
++  opacity: 0.5;
++  filter: blur(2px);
++}
++.imm-tiles .imm-tile:hover {
++  opacity: 1;
++  filter: blur(0px);
++  transform: translateY(-12px);
++  border-top-color: var(--saffron);
++  background: rgba(12,16,32,0.98);
++  box-shadow: 0 16px 32px rgba(232, 175, 56, 0.15), 0 4px 12px rgba(0,0,0,0.6);
++}
++
++/* 3. The Staggered Cascade (Entrance) */
++@keyframes tileCascade {
++  0% { opacity: 0; transform: translateY(40px); }
++  100% { opacity: 1; transform: translateY(0); }
++}
++
++
++.immersive-section .imm-overlay {
++  opacity: 0;
++  transition: opacity 1.2s ease;
++}
++.immersive-section.visible .imm-overlay {
++  opacity: 1;
++}
++/* Mask inner animations */
++.immersive-section .mask-inner {
++  display: block;
++  transform: translateY(120%);
++  opacity: 0;
++  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1);
++}
++.immersive-section.visible .imm-title .mask-inner {
++  transform: translateY(0);
++  opacity: 1;
++  transition-delay: 0.1s;
++}
++.immersive-section.visible .imm-desc .mask-inner {
++  transform: translateY(0);
++  opacity: 1;
++  transition-delay: 0.25s;
++}
++
++
++.immersive-section.visible .imm-tile {
++  animation: tileCascade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
++}
++.immersive-section.visible .imm-tile:nth-child(1) { animation-delay: 0.1s; }
++.immersive-section.visible .imm-tile:nth-child(2) { animation-delay: 0.25s; }
++.immersive-section.visible .imm-tile:nth-child(3) { animation-delay: 0.4s; }
++.immersive-section.visible .imm-tile:nth-child(4) { animation-delay: 0.55s; }
++
++@media (max-width: 1024px) {
++  .imm-tiles { grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 80px; }
++  .immersive-section { padding: 80px 20px; }
++  .imm-header { margin-bottom: 40px; }
++  /* Disable focus mode on touch devices to prevent stuck hovers */
++  @media (hover: none) {
++    .imm-tiles:hover .imm-tile { opacity: 1; filter: none; }
++    .imm-tiles .imm-tile:hover { transform: none; box-shadow: none; border-top-color: rgba(255,255,255,0.1); background: rgba(12,16,32,0.85); }
++  }
++}
++@media (max-width: 600px) {
++  .imm-tiles { grid-template-columns: 1fr; }
++}
++/* --- END IMMERSIVE HORIZONTAL TILE LAYOUT --- */
++
++
++
+ </style>
+ <!-- ΓòÉΓòÉΓòÉ NAV SURFACE DETECTION ΓòÉΓòÉΓòÉ -->
+ <script>
+@@ -1906,6 +2382,7 @@ document.addEventListener('DOMContentLoaded', function() {
+     <div class="hh-grain" aria-hidden="true"></div>
+ 
+     <div class="hh-stage">
++      <h2 class="aeo-hidden">Wizkoo: The AI-Powered Homeschool Planning System for PreK-5</h2>
+ 
+       <!-- HERO_COPY_DISPLACED. The on-track pair is RE-FILED, not deleted
+            (standing ruling): it moves to anxious-arrival surfaces: ESA pages,
+@@ -2205,73 +2682,89 @@ document.addEventListener('DOMContentLoaded', function() {
+ 
+       <div class="pc-more">+ Tuesday through Friday</div>
+     </div></div>
++  </div>
+     <div class="plan-founder">
+-      <p class="founder-beat">He was four. He was reading. He couldn't sit still for thirty minutes, and the school said the children they accept do. The research had already started a year before that room. Wizkoo is what four years of it built: a PreK-5 mastery framework wrapped in a week that moves the way kids actually move.</p>
+-      <div class="founder-cta"><a href="https://app.wizkoo.com/start" class="btn-main">Build Our Week</a><span class="micro-copy">No credit card for first plan.</span></div>
++      <div class="pf-left">
++        <h2 class="pf-villain">The Villain Story.</h2>
++        <div class="pf-content">
++          <div class="pf-l1">He was four.<br>He was reading.</div>
++          <div class="pf-l2">But he couldn't <span class="pf-kinetic">sit still</span> for thirty minutes.</div>
++          <div class="pf-l3">ΓÇö And the school said the children they accept do.</div>
++          <div class="pf-l5">That single rejection launched four years of intense research.</div>
++
++        </div>
++      </div>
++      <div class="pf-right">
++        <div class="pf-badge">
++          <div class="pf-l4">
++            <strong>Wizkoo is what four years of it built.</strong>
++            A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
++          </div>
++        </div>
++      </div>
+     </div>
+-  </div>
+ </section>
+ 
+ <!-- SAME ROOM -->
+-<div class="same-room-wrap">
+-<section class="same-room reveal" id="same-room">
+-  <div class="sr-header">
+-    <div class="tag">Same table ┬╖ Same thread</div>
+-    <h2>Four children<span class="sp"></span><br><strong>One volcano<span class="sp"></span></strong></h2>
+-    <p class="sr-why">Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different with the same idea.</p>
+-  </div>
+-  <div class="sr-instruction">Hover across the cards</div>
+-  <div class="sr-track" id="sr-track">
+-    <div class="sr-beam" id="sr-beam"></div>
+-    <div class="sr-card active">
+-      <div class="sr-name">Mia</div><div class="sr-age">Age 7</div>
+-      <div class="sr-level"><span class="sr-level-dot full"></span> Reads Well</div>
+-      <div class="sr-activity">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+-      <div class="sr-progress"></div>
+-    </div>
+-    <div class="sr-card">
+-      <div class="sr-name">Noah</div><div class="sr-age">Age 5</div>
+-      <div class="sr-level"><span class="sr-level-dot half"></span> Reads Some</div>
+-      <div class="sr-activity">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
+-      <div class="sr-progress"></div>
++<!-- ΓòÉΓòÉΓòÉ SAME TABLE (IMMERSIVE HORIZONTAL) ΓòÉΓòÉΓòÉ -->
++<section class="immersive-section reveal" id="same-room">
++  <div class="imm-bg"></div>
++    <div class="imm-overlay"></div>
++  <div class="imm-content">
++    <div class="imm-header">
++      <div class="imm-tag">Same table ┬╖ Same thread</div>
++      <h2 class="imm-title"><span aria-hidden="true">Four children.<br><strong>One volcano.</strong></span></h2>
++      <h3 class="aeo-hidden">How to homeschool multiple children of different ages and reading levels at the same time using differentiated learning plans.</h3>
++      <p class="imm-desc"><span class="mask-inner">Right now, at the same table, each child is doing something different with the same idea.</span></p>
+     </div>
+-    <div class="sr-card">
+-      <div class="sr-name">Ava</div><div class="sr-age">Age 3</div>
+-      <div class="sr-level"><span class="sr-level-dot"></span> Learning</div>
+-      <div class="sr-activity">Red and orange finger painting: make your own lava flow on the big paper.</div>
+-      <div class="sr-progress"></div>
+-    </div>
+-    <div class="sr-card">
+-      <div class="sr-name">Liam</div><div class="sr-age">Age 3</div>
+-      <div class="sr-level"><span class="sr-level-dot" style="width:4px;height:4px"></span> Explorer</div>
+-      <div class="sr-activity">Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz.</div>
+-      <div class="sr-progress"></div>
++    
++    <div class="imm-tiles">
++      <div class="imm-tile">
++        <div class="c-level">Independent</div>
++        <div class="c-name-age">Leo &middot; Age 10</div>
++        <div class="c-task">
++          <span class="c-action">Research the Ring of Fire.</span><br>
++          <span class="c-detail">Compare composite and shield volcanoes in your journal.</span>
++        </div>
++      </div>
++      <div class="imm-tile">
++        <div class="c-level">Reads Well</div>
++        <div class="c-name-age">Mia &middot; Age 7</div>
++        <div class="c-task">
++          <span class="c-action">Write three sentences about tectonic plates.</span><br>
++          <span class="c-detail">Use your vocabulary words: magma, eruption, tectonic.</span>
++        </div>
++      </div>
++      <div class="imm-tile">
++        <div class="c-level">Reads Some</div>
++        <div class="c-name-age">Noah &middot; Age 5</div>
++        <div class="c-task">
++          <span class="c-action">Match the volcano words to the pictures.</span><br>
++          <span class="c-detail">Sound out each word with your finger.</span>
++        </div>
++      </div>
++      <div class="imm-tile">
++        <div class="c-level">Pre-Reader</div>
++        <div class="c-name-age">Ava &middot; Age 3</div>
++        <div class="c-task">
++          <span class="c-action">Yellow and green finger painting.</span><br>
++          <span class="c-detail">Color the grass at the base of the volcano.</span>
++        </div>
++      </div>
+     </div>
+   </div>
+ </section>
+-</div>
++
++
+ 
+ <!-- FAQ -->
+-<section class="faq-section reveal" id="faq"><div class="faq-inner"><h2>Questions parents ask<span style="color:var(--saffron)">.</span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a" hidden>Families with children ages 3 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a" hidden>Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a" hidden>No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a" hidden>Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a" hidden>A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a" hidden>AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a" hidden>Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a" hidden>A prompt gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a" hidden>We keep two things about your child: a first name and an age. You enter them. They build their week. That is the entire file. No last name, no birthdate, no photos, no home address. Encrypted, never used for advertising, never sold, and yours to delete from inside your account, any time.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a" hidden>$50/month or $499/year. Your first plan is free. No credit card required.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a" hidden>Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
++<section class="faq-section reveal" id="faq">
++  <div class="faq-glow-1"></div>
++  <div class="faq-glow-2"></div>
++  <div class="faq-inner"><h2>Questions parents ask<span style="color:var(--saffron)">.</span></h2><div class="faq-list"><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What ages does this work for?</button><div class="faq-a">Families with children ages 3 to 12. Activities matched to each child's age, reading level, and stage.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is Wizkoo secular or faith-based?</button><div class="faq-a">Wizkoo is secular. Science-based. Fact-based. Built for curious families.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Do I need to be a teacher?</button><div class="faq-a">No. Every activity includes what to do, how long, and what done looks like.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Can I use this for weekends or after school?</button><div class="faq-a">Yes. Homeschool, after school, summer. Same engine, your schedule.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes this a system and not just a curriculum?</button><div class="faq-a">A curriculum tells you what to teach. This builds the actual week around your children: their ages, reading levels, and the theme you chose. Week 8 references Week 3. Every subject connects through a single thread. Nothing is taught in isolation.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How is AI used?</button><div class="faq-a">AI personalizes. Educators designed the methodology. You review everything before your children see it.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I know my child is actually learning?</button><div class="faq-a">Every week you'll receive an Orbit Report showing exactly what your child learned. Not screen time logged. Actual facts, vocabulary, and discoveries.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Why not just use ChatGPT?</button><div class="faq-a">A prompt gives you a lesson. Wizkoo gives you a system: multi-age differentiation, spiral learning across weeks, Atlas and Elementum built in, and plans that remember last month. Type one theme. Two minutes.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my children's data safe?</button><div class="faq-a">We keep two things about your child: a first name and an age. You enter them. They build their week. That is the entire file. No last name, no birthdate, no photos, no home address. Encrypted, never used for advertising, never sold, and yours to delete from inside your account, any time.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What does it cost?</button><div class="faq-a">$50/month or $499/year. Your first plan is free. No credit card required.</div></div><div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How do I cancel?</button><div class="faq-a">Cancel in one click from your account settings. No phone call. No chat. No questions asked. Your child's game progress stays on their device even after you cancel.</div></div></div></div></section>
+ 
+-<!-- CTA -->
+-<!-- ΓòÉΓòÉΓòÉ THE JOURNEYS ΓòÉΓòÉΓòÉ -->
+-<section class="journeys reveal">
+-  <div class="journeys-inner">
+-    <div class="journeys-litany-wrap">
+-      <ul class="journeys-litany">
+-        <li>He was bullied.</li>
+-        <li>She was bored out of her mind.</li>
+-        <li>The crowd was wrong.</li>
+-        <li>Maybe you knew from the start.</li>
+-        <li>Maybe you pulled them out on Tuesday and you're still catching your breath.</li>
+-      </ul>
+-      <p class="journeys-resolve">It doesn't matter. The week starts the same.</p>
+-    </div>
+-    <p class="journeys-hold">Some families knew from birth. Some got here through bullying, or boredom, or a classroom that was never going to fit. Some pulled their kids out last week and are still catching their breath. However you got here, the week starts the same.</p>
+-  </div>
+-</section>
+ 
++<!-- CTA -->
+ <section class="cta-dark cta-reveal" id="pricing"><h2>One moment<span class="sp"></span><br><span style="white-space:nowrap">Every subject connected<span class="sp"></span></span></h2><p class="cta-status">Your first plan is free</p><p class="cta-sub">Your first plan is free. No credit card. Sign up and build your week.</p><a href="https://app.wizkoo.com/start" class="btn-main">Build Our Week</a><div style="margin:56px auto 0;padding-top:48px;border-top:1px solid rgba(255,255,255,0.07);max-width:520px"><p style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:#8C91A5;margin:0 0 16px">When you&rsquo;re ready</p><p style="font-family:'Sora',sans-serif;font-weight:300;font-size:1.1rem;letter-spacing:-0.02em;color:rgba(250,250,250,0.5);margin:0 0 36px">One price. Every child in your family.</p><div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:0 auto 40px"><div style="border:1px solid rgba(232,175,56,0.25);padding:24px 40px;text-align:center;min-width:160px"><div style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:#8C91A5;margin-bottom:8px">Monthly</div><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:2.2rem;letter-spacing:-0.03em;color:#F2F0EA">$50<span style="font-size:0.9rem;font-weight:400;color:#8C91A5">&thinsp;/&nbsp;mo</span></div></div><div style="border:1px solid rgba(232,175,56,0.55);padding:24px 40px;text-align:center;min-width:160px;position:relative"><div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--saffron);color:var(--ink);font-family:'Space Mono',monospace;font-size:0.45rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 12px;white-space:nowrap">Best value</div><div style="font-family:'Space Mono',monospace;font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;color:#8C91A5;margin-bottom:8px">Annual</div><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:2.2rem;letter-spacing:-0.03em;color:#F2F0EA">$499<span style="font-size:0.9rem;font-weight:400;color:#8C91A5">&thinsp;/&nbsp;yr</span></div></div></div><a href="https://app.wizkoo.com/sign-up" class="btn-main">Start My Subscription</a></div></section>
+ </div>
+ 
+@@ -2438,44 +2931,7 @@ function spawnConfetti(x,y){
+ 
+ // nav is permanently visible ΓÇö no scroll reveal needed
+ 
+-// ΓòÉΓòÉΓòÉ SAME ROOM ΓÇö mouse + auto-rotate ΓòÉΓòÉΓòÉ
+-(function(){
+-  var t=document.getElementById('sr-track'),b=document.getElementById('sr-beam'),cards=t.querySelectorAll('.sr-card'),sec=document.getElementById('same-room');
+-  var temps=['#0C1020','#0C1020','#0C1020','#0C1020'];
+-  var currentIdx=0,autoTimer=null,isHovering=false;
+-
+-  function activate(idx){
+-    currentIdx=idx;
+-    // Reset all progress bars before switching
+-    document.querySelectorAll('.sr-progress').forEach(function(p){p.style.animation='none';p.offsetHeight;p.style.animation=''});
+-    cards.forEach(function(c,i){c.classList.toggle('active',i===idx)});
+-    //beam hidden;
+-    sec.style.background=temps[idx];
+-  }
+ 
+-  function startAuto(){
+-    stopAuto();
+-    autoTimer=setInterval(function(){
+-      if(!isHovering) activate((currentIdx+1)%4);
+-    },3500);
+-  }
+-
+-  function stopAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null}}
+-
+-  t.addEventListener('mousemove',function(e){
+-    isHovering=true;stopAuto();
+-    var r=t.getBoundingClientRect(),idx=Math.min(3,Math.floor((e.clientX-r.left)/r.width*4));
+-    activate(idx);
+-  });
+-
+-  t.addEventListener('mouseleave',function(){
+-    isHovering=false;
+-    startAuto();
+-  });
+-
+-  // Start auto-rotate by default
+-  startAuto();
+-})();
+ 
+ // ΓòÉΓòÉΓòÉ COUNT UP ΓòÉΓòÉΓòÉ
+ (function(){var counted=false;var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!counted){counted=true;document.querySelectorAll('[data-count]').forEach(function(el){var t=parseInt(el.dataset.count),st=null;function step(ts){if(!st)st=ts;var p=Math.min((ts-st)/1200,1);el.textContent=Math.round((1-Math.pow(1-p,3))*t);if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)})}})},{threshold:0.3});document.querySelectorAll('.games-band').forEach(function(el){obs.observe(el)})})();
+@@ -2494,7 +2950,7 @@ function toggleWave(row){
+   if(!isOpen){row.classList.add('open');detail.classList.add('open')}
+ }
+ 
+-function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.hidden=true;b.parentElement.classList.remove('open')});if(!o){btn.setAttribute('aria-expanded','true');a.hidden=false;btn.parentElement.classList.add('open')}}
++function toggleFaq(btn){var a=btn.nextElementSibling,o=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.faq-q').forEach(function(b){b.setAttribute('aria-expanded','false');// b.nextElementSibling.hidden=true;b.parentElement.classList.remove('open')});if(!o){btn.setAttribute('aria-expanded','true');// a.hidden=false;btn.parentElement.classList.add('open')}}
+ 
+ // Global mouse tracking (guard in case cursor IIFE hasn't run)
+ if(typeof window.mx==='undefined'){window.mx=0;window.my=0;}
+@@ -2622,6 +3078,7 @@ document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=
+ 
+ // Patch cursor code to expose mx/my globally
+ 
++
+ // ΓòÉΓòÉΓòÉ TOUCH ADAPTATIONS ΓòÉΓòÉΓòÉ
+ (function(){
+   var isTouch='ontouchstart' in window||navigator.maxTouchPoints>0;

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandbox: Cinematic Treatment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0C1020;
+  --saffron: #E8AF38;
+  --linen: #F2F0EA;
+  --paper: #FFFFFF;
+}
+body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--ink); }
+
+.sandbox-cinematic {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('assets/volcano_discovery.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/* Rich gradient overlay for text readability */
+.sandbox-cinematic::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, rgba(12, 16, 32, 0.95) 0%, rgba(12, 16, 32, 0.5) 40%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Header */
+.sr-header {
+  position: relative;
+  z-index: 1;
+  padding: 80px 64px;
+  max-width: 800px;
+}
+.sr-header .tag { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--saffron); margin-bottom: 24px; }
+.sr-header h2 { font-family: 'Fraunces', serif; font-size: 4rem; font-weight: 300; line-height: 1.05; color: var(--paper); margin: 0 0 24px 0; }
+.sr-header h2 strong { font-style: italic; color: var(--saffron); font-weight: 500; }
+.sr-header p { font-size: 1.1rem; color: rgba(255,255,255,0.7); line-height: 1.6; max-width: 500px; margin: 0; }
+
+/* Cards */
+.sr-track {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 24px;
+  padding: 64px;
+}
+.sr-card{flex:1;padding:32px 28px;background:rgba(20,24,44,0.95);border:1px solid rgba(255,255,255,0.05);}
+.sr-level-hero{font-family:'Fraunces',serif;font-style:italic;font-size:32px;color:var(--saffron);margin-bottom:12px;font-weight:500}
+.sr-meta{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:16px}
+.sr-card .sr-activity{color:rgba(255,255,255,0.9); font-size:0.85rem; line-height:1.5}
+</style>
+</head>
+<body>
+
+<section class="sandbox-cinematic">
+  <div class="sr-header">
+    <div class="tag">Same Table · Same Thread</div>
+    <h2>Four children.<br><strong>One volcano.</strong></h2>
+    <p>Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different with the same idea.</p>
+  </div>
+
+  <div class="sr-track">
+    <div class="sr-card">
+      <div class="sr-level-hero">Independent</div>
+      <div class="sr-meta">LEO • AGE 10</div>
+      <div class="sr-activity">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+    </div>
+    <div class="sr-card">
+      <div class="sr-level-hero">Reads Well</div>
+      <div class="sr-meta">MIA • AGE 7</div>
+      <div class="sr-activity">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+    </div>
+    <div class="sr-card">
+      <div class="sr-level-hero">Reads Some</div>
+      <div class="sr-meta">NOAH • AGE 5</div>
+      <div class="sr-activity">Match the volcano words to the pictures. Sound out each word with your finger. Magma. Lava. Eruption.</div>
+    </div>
+    <div class="sr-card">
+      <div class="sr-level-hero">Learning</div>
+      <div class="sr-meta">AVA • AGE 3</div>
+      <div class="sr-activity">Red and orange finger painting: make your own lava flow on the big paper.</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

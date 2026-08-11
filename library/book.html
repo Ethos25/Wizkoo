@@ -31,7 +31,7 @@
 /* ═══════════════════════════════════════════════════════════
    WIZKOO LIBRARY ENTRY PAGE — Round 6.2
    Direction 3: Pull-Quote Spread.
-   Surface: single unified cream card (Linen #F2F0EA) on Night Sky.
+   Surface: single unified cream card (Linen var(--linen)) on Night Sky.
    Hero + full depth zone on one continuous cream surface.
    TALK ABOUT is the editorial centerpiece.
    Night Sky visible around the cream card. Footer on Night Sky.
@@ -107,7 +107,7 @@ body {
   width: 90%;
   max-width: 1020px;
   margin: 0 auto;
-  background: #F2F0EA;
+  background: var(--linen);
   padding: 48px 52px 52px;
 }
 .bk-loading-grid {
@@ -139,7 +139,7 @@ body {
   width: 90%;
   max-width: 1020px;
   margin: 0 auto;
-  background: #F2F0EA; /* Linen */
+  background: var(--linen); /* Linen */
   padding: 48px 52px 0; /* bottom padding via .bk-depth-inner */
 }
 
@@ -155,7 +155,7 @@ body {
 .bk-cover-frame {
   width: 100%;
   aspect-ratio: 2 / 3;
-  background: #F2F0EA; /* Linen letterbox — blends invisibly */
+  background: var(--linen); /* Linen letterbox — blends invisibly */
   overflow: hidden;
 }
 .bk-cover-frame img {
@@ -180,7 +180,7 @@ body {
   font-size: 1.7rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #E8AF38;
+  color: var(--saffron);
   line-height: 1.05;
   margin-bottom: 22px;
 }
@@ -214,7 +214,7 @@ body {
   text-underline-offset: 2px;
   transition: color 160ms, text-decoration-color 160ms;
 }
-.bk-credit-name-link:hover { color: #0C1020; text-decoration-color: rgba(232,175,56,0.5); }
+.bk-credit-name-link:hover { color: var(--ink); text-decoration-color: rgba(232,175,56,0.5); }
 .bk-credit-year {
   font-family: 'Inter', sans-serif;
   font-style: italic;
@@ -249,7 +249,7 @@ body {
   font-size: 0.625rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #E8AF38;
+  color: var(--saffron);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -260,7 +260,7 @@ body {
   display: block;
   width: 20px;
   height: 1px;
-  background: #E8AF38;
+  background: var(--saffron);
   flex-shrink: 0;
 }
 
@@ -269,13 +269,13 @@ body {
   font-weight: 600;
   font-size: clamp(3rem, 5.5vw, 4.5rem);
   line-height: 0.92;
-  color: #0C1020;
+  color: var(--ink);
   letter-spacing: -0.03em;
   margin-bottom: 22px;
   word-break: break-word;
 }
 .bk-title em { font-style: italic; font-weight: 400; }
-.bk-title-dot { color: #E8AF38; } /* saffron moment #2 of 3 */
+.bk-title-dot { color: var(--saffron); } /* saffron moment #2 of 3 */
 
 .bk-hook {
   font-family: 'Fraunces', serif;
@@ -295,7 +295,7 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #5F5E5A;
-  border: 1px solid #E0DED6;
+  border: 1px solid var(--rule);
   border-radius: 999px;
   padding: 6px 14px;
   background: transparent;
@@ -303,13 +303,13 @@ body {
   align-items: center;
 }
 
-/* Decision card — Paper #FAFAFA on Linen */
-.bk-decision-card { background: #FAFAFA; border: 1px solid #E0DED6; color: #0C1020; }
+/* Decision card — Paper var(--paper) on Linen */
+.bk-decision-card { background: var(--paper); border: 1px solid var(--rule); color: var(--ink); }
 .bk-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
 .bk-meta-cell {
   padding: 10px 16px 9px;
-  border-right: 1px solid #E0DED6;
-  border-bottom: 1px solid #E0DED6;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 .bk-meta-cell:last-child { border-right: none; }
 .bk-meta-label {
@@ -325,7 +325,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #0C1020;
+  color: var(--ink);
   line-height: 1.2;
   display: block;
   white-space: nowrap;
@@ -357,7 +357,7 @@ body {
   position: relative;
   transition: background 180ms cubic-bezier(0.16,1,0.3,1);
 }
-.bk-cta-primary { background: #E8AF38; color: #0C1020; border-right: 1px solid rgba(12,16,32,0.12); } /* saffron moment #3 of 3 */
+.bk-cta-primary { background: var(--saffron); color: var(--ink); border-right: 1px solid rgba(12,16,32,0.12); } /* saffron moment #3 of 3 */
 .bk-cta-primary:hover { background: #D49E2A; }
 .bk-cta-primary::before {
   content: '';
@@ -367,7 +367,7 @@ body {
   border-top: 1.5px solid rgba(12,16,32,0.28);
   border-left: 1.5px solid rgba(12,16,32,0.28);
 }
-.bk-cta-secondary { background: transparent; color: #0C1020; }
+.bk-cta-secondary { background: transparent; color: var(--ink); }
 .bk-cta-secondary:hover { background: rgba(12,16,32,0.04); }
 .bk-cta-secondary::after {
   content: '';
@@ -399,7 +399,7 @@ body {
   text-decoration: none;
   transition: color 160ms;
 }
-.bk-tertiary-link:hover { color: #0C1020; }
+.bk-tertiary-link:hover { color: var(--ink); }
 .bk-tertiary-link-icon { width: 13px; height: 13px; flex-shrink: 0; color: rgba(12,16,32,0.35); }
 
 /* ═══════════════════════════════════════════════════════════
@@ -417,14 +417,14 @@ body {
 .bk-section-break-rule {
   width: 32px;
   height: 1.5px;
-  background: #E8AF38;
+  background: var(--saffron);
 }
 .bk-section-break-label {
   font-family: 'Space Mono', monospace;
   font-size: 0.625rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #E8AF38;
+  color: var(--ink);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -442,7 +442,7 @@ body {
   font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #E8AF38;
+  color: var(--ink);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -454,7 +454,7 @@ body {
   display: block;
   width: 32px;
   height: 1.5px;
-  background: #E8AF38;
+  background: var(--saffron);
   flex-shrink: 0;
 }
 /* Centered eyebrow variant — used for TALK ABOUT header */
@@ -467,7 +467,7 @@ body {
 .bk-headsup {
   margin-bottom: 96px;
   padding: 32px 0;
-  border-top: 1px solid #E0DED6;
+  border-top: 1px solid var(--rule);
   display: grid;
   grid-template-columns: 160px 1fr 64px;
   gap: 0 44px;
@@ -479,7 +479,7 @@ body {
   font-size: 0.57rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #E8AF38;
+  color: var(--ink);
 }
 .bk-headsup-sub {
   font-family: 'Fraunces', serif;
@@ -495,7 +495,7 @@ body {
   font-weight: 400;
   font-size: 1.0rem;
   line-height: 1.72;
-  color: #0C1020;
+  color: var(--ink);
 }
 .bk-headsup-register {
   font-family: 'Space Mono', monospace;
@@ -517,7 +517,7 @@ body {
   font-weight: 500;
   font-size: 1.0625rem;
   line-height: 1.55;
-  color: #0C1020;
+  color: var(--ink);
 }
 
 /* ── The Orbital Description ── */
@@ -527,15 +527,15 @@ body {
   font-size: 1.0625rem;
   font-weight: 400;
   line-height: 1.6;
-  color: #0C1020;
+  color: var(--ink);
   max-width: 65ch;
 }
 
 /* ── On Reading ── */
 .bk-on-reading-wrap { margin-bottom: 96px; }
 .bk-on-reading-card {
-  background: #FAFAFA;
-  border: 1px solid #E0DED6;
+  background: var(--paper);
+  border: 1px solid var(--rule);
   padding: 28px 32px;
   max-width: 72%;
 }
@@ -556,7 +556,7 @@ body {
   font-weight: 400;
   font-size: 1.3125rem;
   line-height: 1.5;
-  color: #0C1020;
+  color: var(--ink);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -581,7 +581,7 @@ body {
   font-weight: 400;
   font-size: clamp(1.375rem, 2vw, 1.5625rem);
   line-height: 1.45;
-  color: #0C1020;
+  color: var(--ink);
   margin-top: 28px;
   max-width: 40ch;
 }
@@ -600,7 +600,7 @@ body {
   align-items: flex-start;
   gap: 48px;
   padding-bottom: 40px;
-  border-bottom: 1px solid #E0DED6;
+  border-bottom: 1px solid var(--rule);
   margin-bottom: 40px;
 }
 .bk-talk-row:last-child {
@@ -636,10 +636,10 @@ body {
   font-weight: 400;
   font-size: clamp(1.5rem, 2.25vw, 1.875rem);
   line-height: 1.4;
-  color: #0C1020;
+  color: var(--ink);
 }
 /* Saffron curly quotes — typographic ornaments hugging the question */
-.bk-talk-quote { color: #E8AF38; }
+.bk-talk-quote { color: var(--saffron); }
 
 /* Theme label — from talk_about_themes[] field when populated */
 .bk-talk-theme {
@@ -669,7 +669,7 @@ body {
   font-weight: 400;
   font-size: 1.0625rem;
   line-height: 1.7;
-  color: #0C1020;
+  color: var(--ink);
 }
 .bk-pairs-with-body em {
   font-family: 'Fraunces', serif;
@@ -691,7 +691,7 @@ body {
   font-weight: 600;
   font-size: clamp(2.25rem, 4vw, 3rem);
   line-height: 1.1;
-  color: #0C1020;
+  color: var(--ink);
   margin-top: 12px;
   margin-bottom: 12px;
   letter-spacing: -0.02em;
@@ -728,7 +728,7 @@ body {
   aspect-ratio: 2/3;
   overflow: hidden;
   margin-bottom: 18px;
-  background: #F2F0EA; /* Linen letterbox — contains blends invisibly */
+  background: var(--linen); /* Linen letterbox — contains blends invisibly */
 }
 .bk-rc-cover img {
   width: 100%;
@@ -749,13 +749,13 @@ body {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1.1;
-  color: #E8AF38;
+  color: var(--saffron);
 }
 .bk-rc-title {
   font-family: 'Fraunces', serif;
   font-weight: 600;
   font-size: 1.0625rem;
-  color: #0C1020;
+  color: var(--ink);
   line-height: 1.25;
   margin-bottom: 5px;
 }
@@ -780,7 +780,7 @@ body {
 /* ══════════════════════════════════════
    NAV — transparent dark treatment
 ══════════════════════════════════════ */
-.page-library .announce { background: #0C1020 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+.page-library .announce { background: var(--ink) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 .page-library .announce-text { color: rgba(232,175,56,0.75) !important; }
 .page-library .nav { background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-bottom: none !important; box-shadow: none !important; }
 .page-library .nav::before { display: none !important; }
@@ -789,8 +789,8 @@ body {
 .page-library .nav-link:hover { color: #F0F2F8 !important; }
 .page-library .nav-link.active { color: #F0F2F8 !important; }
 .page-library .nav-hamburger-line { background: rgba(240,242,248,0.7) !important; }
-.page-library .nav-cta { background: transparent !important; color: #F0F2F8 !important; border: 1.5px solid #E8AF38 !important; }
-.page-library .nav-cta:hover { background: #E8AF38 !important; color: #231a14 !important; box-shadow: none !important; }
+.page-library .nav-cta { background: transparent !important; color: #F0F2F8 !important; border: 1.5px solid var(--saffron) !important; }
+.page-library .nav-cta:hover { background: var(--saffron) !important; color: var(--lib-ink) !important; box-shadow: none !important; }
 .page-library .nav.nav--scrolled { background: rgba(12,20,48,0.88) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; }
 
 /* ══════════════════════════════════════
@@ -811,7 +811,7 @@ body {
   color: rgba(240,242,248,0.75); margin-bottom: 12px;
 }
 .bk-error-sub { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: rgba(140,145,165,0.8); }
-.bk-error-sub a { color: #E8AF38; }
+.bk-error-sub a { color: var(--saffron); }
 
 /* ══════════════════════════════════════
    RESPONSIVE — ≤900px

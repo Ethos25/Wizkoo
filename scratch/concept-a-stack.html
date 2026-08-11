@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option A - The Dynamic Sticky Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Sora:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0C1020;
+    --saffron: #E8AF38;
+    --linen: #F8F4E9;
+    --rule: rgba(255,255,255,0.1);
+  }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--linen);
+    font-family: 'Sora', sans-serif;
+    /* Extra space to allow scrolling */
+    padding-bottom: 100vh; 
+  }
+  /* The Container */
+  .stack-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  
+  /* Left Side: Sticky Anchor */
+  .stack-left {
+    flex: 1;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 80px;
+  }
+  .sl-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sl-tag::before, .sl-tag::after {
+    content: '';
+    height: 1px;
+    width: 24px;
+    background: var(--saffron);
+    opacity: 0.5;
+  }
+  .sl-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(48px, 5vw, 80px);
+    font-weight: 300;
+    line-height: 1.05;
+    margin: 0 0 32px 0;
+  }
+  .sl-title strong {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--saffron);
+  }
+  .sl-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+    max-width: 420px;
+  }
+
+  /* Right Side: The Stage */
+  .stack-right {
+    flex: 1;
+    padding-top: 50vh;
+    padding-bottom: 50vh;
+  }
+  
+  /* The Cards */
+  .card {
+    position: sticky;
+    background: #151A2E;
+    border: 1px solid var(--rule);
+    border-radius: 24px;
+    padding: 48px;
+    margin-bottom: 40px;
+    min-height: 400px;
+    box-shadow: 0 -20px 40px rgba(12,16,32,0.8);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  /* Offset each card's sticky top so they stack beautifully like a deck of cards */
+  .card:nth-child(1) { top: 10vh; }
+  .card:nth-child(2) { top: 14vh; }
+  .card:nth-child(3) { top: 18vh; }
+  .card:nth-child(4) { top: 22vh; }
+
+  /* Generic Card Elements */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: auto;
+  }
+  .c-name { font-size: 2rem; font-weight: 600; }
+  .c-age { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+  
+  /* --- MIA (Age 7) : Highly Structured, Editorial --- */
+  .card.mia {
+    background: #111526;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px; /* Sharp corners */
+  }
+  .mia .c-level {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-bottom: 1px solid var(--saffron);
+    padding-bottom: 4px;
+    color: var(--saffron);
+  }
+  .mia .c-task {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.4;
+    border-left: 2px solid rgba(255,255,255,0.2);
+    padding-left: 24px;
+    margin-top: 40px;
+  }
+
+  /* --- NOAH (Age 5) : Chunkier, Flashcard --- */
+  .card.noah {
+    background: #1A1F36;
+    border: 3px solid rgba(255,255,255,0.05);
+    border-radius: 32px;
+  }
+  .noah .c-level {
+    background: var(--saffron);
+    color: var(--ink);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+  .noah .c-task {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 40px;
+  }
+  .noah .c-words {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .noah-word {
+    background: rgba(255,255,255,0.05);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* --- AVA (Age 3) : Organic, Blobby --- */
+  .card.ava {
+    background: #111526;
+    border: none;
+    border-radius: 40px;
+    position: relative;
+  }
+  .ava::before {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background: var(--saffron);
+    filter: blur(80px);
+    opacity: 0.4;
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .ava > * { position: relative; z-index: 1; }
+  .ava .c-level {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--saffron);
+  }
+  .ava .c-task {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    margin-top: 40px;
+  }
+
+  /* --- LEO (Age 10) : Advanced, Thesis-driven --- */
+  .card.leo {
+    background: #0C1020;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 0px; /* Brutalist/Academic */
+  }
+  .leo .c-level {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: 1px solid var(--saffron);
+    padding: 4px 12px;
+    color: var(--saffron);
+  }
+  .leo .c-task {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: 40px;
+  }
+
+  /* Intro spacing */
+  .spacer { height: 100vh; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+
+<div class="spacer">Scroll down to see the Dynamic Sticky Stack</div>
+
+<section class="stack-container">
+  <div class="stack-left">
+    <div class="sl-tag">Same table · Same thread</div>
+    <h2 class="sl-title">Four children.<br><strong>One volcano.</strong></h2>
+    <p class="sl-desc">Same theme. Matched to each child's age and reading level. Right now, at the same table, each child is doing something different with the same idea.</p>
+  </div>
+  
+  <div class="stack-right">
+    
+    <!-- LEO -->
+    <div class="card leo">
+      <div class="card-header">
+        <div>
+          <div class="c-name">Leo</div>
+          <div class="c-age">Age 10</div>
+        </div>
+        <div class="c-level">Independent</div>
+      </div>
+      <div class="c-task">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+    </div>
+
+    <!-- LEO -->
+    <div class="card leo">
+      <div class="card-header">
+        <div>
+          <div class="c-name">Leo</div>
+          <div class="c-age">Age 10</div>
+        </div>
+        <div class="c-level">Independent</div>
+      </div>
+      <div class="c-task">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+    </div>
+
+    <!-- LEO -->
+    <div class="card leo">
+      <div class="card-header">
+        <div>
+          <div class="c-name">Leo</div>
+          <div class="c-age">Age 10</div>
+        </div>
+        <div class="c-level">Independent</div>
+      </div>
+      <div class="c-task">Research the Ring of Fire. Compare composite and shield volcanoes in your journal, citing two historical eruptions.</div>
+    </div>
+
+    <!-- MIA -->
+    <div class="card mia">
+      <div class="card-header">
+        <div>
+          <div class="c-name">Mia</div>
+          <div class="c-age">Age 7</div>
+        </div>
+        <div class="c-level">Reads Well</div>
+      </div>
+      <div class="c-task">Write three sentences about why volcanoes form near tectonic plates. Use your vocabulary words: magma, eruption, tectonic.</div>
+    </div>
+
+    <!-- NOAH -->
+    <div class="card noah">
+      <div class="card-header">
+        <div>
+          <div class="c-name">Noah</div>
+          <div class="c-age">Age 5</div>
+        </div>
+        <div class="c-level">Reads Some</div>
+      </div>
+      <div class="c-task">Match the volcano words to the pictures. Sound out each word with your finger.</div>
+      <div class="c-words">
+        <div class="noah-word">Magma</div>
+        <div class="noah-word">Lava</div>
+      </div>
+    </div>
+
+    <!-- AVA -->
+    <div class="card ava">
+      <div class="card-header">
+        <div>
+          <div class="c-name">Ava</div>
+          <div class="c-age">Age 3</div>
+        </div>
+        <div class="c-level">Learning</div>
+      </div>
+      <div class="c-task">Red and orange finger painting: make your own lava flow on the big paper.</div>
+    </div>
+
+    
+        <div class="c-level">Explorer</div>
+      </div>
+      <div class="c-task">Sensory bin: warm water, baking soda, red food coloring. Squeeze, pour, watch it fizz.</div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

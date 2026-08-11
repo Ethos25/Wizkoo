@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Psychological Arrest - V6 (High Polish, Movement & Shapes)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,600&family=Sora:wght@200;300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0C1020;
+    --linen: #FBF7EB;
+    --warm-bg: #F8F4E9;
+    --saffron: #E8AF38;
+    --expo: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  body { margin: 0; padding: 0; font-family: 'Sora', sans-serif; background: var(--linen); color: var(--ink); overflow-x: hidden; }
+  
+  .concept-divider { background: #eee; padding: 12px; text-align: center; font-family: 'Space Mono'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #666; position: relative; z-index: 100; }
+
+  /* ---------------------------------------------------
+     CONCEPT 11: THE STRUCTURAL BADGE (Shape & Layout)
+     --------------------------------------------------- */
+  .c11-wrapper {
+    background: var(--warm-bg); 
+    padding: 8vh 40px; 
+    min-height: 70vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .c11-grid {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  .c11-left {
+    display: flex;
+    gap: 40px;
+    flex: 1;
+  }
+  .c11-villain {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--saffron);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin: 0;
+  }
+  .c11-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 600px;
+  }
+  .c11-l1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+  .c11-l2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    border-left: 3px solid var(--saffron);
+    padding-left: 20px;
+  }
+  .c11-l3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(12,16,32,0.8);
+    line-height: 1.6;
+  }
+  
+  /* The Shape / Impact Statement */
+  .c11-right {
+    flex: 0 0 320px;
+    display: flex;
+    justify-content: center;
+  }
+  .c11-badge {
+    background: var(--ink);
+    color: var(--linen);
+    padding: 40px 32px;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 32px 64px -16px rgba(12,16,32,0.3);
+    transform: rotate(2deg);
+    transition: transform 0.5s var(--expo);
+  }
+  .c11-badge:hover {
+    transform: rotate(0deg) scale(1.02);
+  }
+  .c11-badge::before {
+    content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    width: 60px; height: 24px; background: rgba(251,247,235,0.9); box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  } /* Tape effect */
+  .c11-l4 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.4;
+    font-style: italic;
+  }
+  .c11-l4 strong {
+    font-style: normal;
+    font-size: 24px;
+    color: var(--saffron);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  /* ---------------------------------------------------
+     CONCEPT 12: KINETIC TENSION (Movement)
+     --------------------------------------------------- */
+  .c12-wrapper {
+    background: var(--linen); 
+    padding: 8vh 40px; 
+    min-height: 70vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .c12-grid {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+  }
+  .c12-left { flex: 1; position: relative; }
+  
+  .c12-l1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .c12-l2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  /* Kinetic Animation */
+  @keyframes nervous {
+    0%, 100% { font-variation-settings: "wght" 600; transform: translateX(0); }
+    50% { font-variation-settings: "wght" 300; transform: translateX(2px); color: var(--saffron); }
+  }
+  .c12-kinetic {
+    display: inline-block;
+    animation: nervous 2s infinite ease-in-out;
+    border-bottom: 3px solid var(--saffron);
+  }
+  .c12-l3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(12,16,32,0.8);
+    line-height: 1.6;
+    max-width: 500px;
+  }
+  
+  /* The Circular Shape */
+  .c12-right {
+    flex: 0 0 350px;
+    display: flex;
+    justify-content: center;
+  }
+  .c12-circle {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(12,16,32,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .c12-circle::after {
+    content: ''; position: absolute; inset: 0; background: var(--saffron); opacity: 0.03; z-index: 0;
+  }
+  .c12-circle-text {
+    position: relative; z-index: 1;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .c12-circle-text strong {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="concept-divider">Concept 11: The Structural Badge (Shape & Restored Layout)</div>
+  
+  <div class="c11-wrapper">
+    <div class="c11-grid">
+      
+      <!-- Restored original left-side layout -->
+      <div class="c11-left">
+        <h2 class="c11-villain">The Villain Story.</h2>
+        <div class="c11-content">
+          <div class="c11-l1">He was four.<br>He was reading.</div>
+          <div class="c11-l2">He couldn't sit still for thirty minutes.</div>
+          <div class="c11-l3">And the school said the children they accept do. The research had already started a year before that room.</div>
+        </div>
+      </div>
+
+      <!-- Impact statement pulled to the right into a sharp, physical shape -->
+      <div class="c11-right">
+        <div class="c11-badge">
+          <div class="c11-l4">
+            <strong>Wizkoo is what four years of it built.</strong>
+            A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="concept-divider">Concept 12: Kinetic Tension (Movement & Geometry)</div>
+  
+  <div class="c12-wrapper">
+    <div class="c12-grid">
+      
+      <div class="c12-left">
+        <div class="c12-l1">He was four.<br>He was reading.</div>
+        <!-- Movement applied to the villain constraint -->
+        <div class="c12-l2">He couldn't <span class="c12-kinetic">sit still</span> for thirty minutes.</div>
+        <div class="c12-l3">And the school said the children they accept do. The research had already started a year before that room.</div>
+      </div>
+
+      <!-- Impact statement pulled into a geometric shape (circle) -->
+      <div class="c12-right">
+        <div class="c12-circle">
+          <div class="c12-circle-text">
+            <strong>Wizkoo is what four years of it built.</strong>
+            A PreK-5 mastery framework wrapped in a week that moves the way kids actually move.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

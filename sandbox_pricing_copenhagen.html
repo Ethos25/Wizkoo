@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing: Copenhagen</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root { --ink: #0C1020; --saffron: #E8AF38; --linen: #F2F0EA; --paper: #FFFFFF; }
+body { margin: 0; background: var(--linen); color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; display: flex; justify-content: center; padding: 120px 20px; }
+
+.copenhagen-wrap { max-width: 1000px; width: 100%; }
+.header { text-align: center; margin-bottom: 80px; }
+.header h2 { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 300; letter-spacing: -0.02em; margin: 0 0 16px; }
+.header p { font-size: 1.1rem; color: rgba(12,16,32,0.6); max-width: 500px; margin: 0 auto; line-height: 1.6; font-weight: 300; }
+
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+
+.card { background: var(--paper); border: 1px solid rgba(12,16,32,0.08); padding: 56px 48px; border-radius: 4px; position: relative; }
+.card.premium { border-color: rgba(232,175,56,0.6); box-shadow: 0 24px 48px rgba(12,16,32,0.03); }
+
+.tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--saffron); margin-bottom: 32px; }
+.premium .tag { color: var(--ink); background: var(--saffron); display: inline-block; padding: 4px 12px; margin-left: -12px; border-radius: 2px; }
+
+.price-val { font-family: 'Fraunces', serif; font-size: 4rem; font-weight: 300; margin-bottom: 8px; line-height: 1; }
+.price-val span { font-size: 1.2rem; color: rgba(12,16,32,0.4); font-family: 'Plus Jakarta Sans', sans-serif; }
+.price-desc { font-size: 0.95rem; color: rgba(12,16,32,0.6); margin-bottom: 40px; line-height: 1.5; }
+
+.btn { display: block; width: 100%; text-align: center; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 20px; border: 1px solid var(--ink); color: var(--ink); transition: all 0.3s; box-sizing: border-box; }
+.btn:hover { background: rgba(12,16,32,0.03); }
+.premium .btn { background: var(--ink); color: var(--paper); border: none; }
+.premium .btn:hover { background: #1a1e30; }
+
+.includes { margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(12,16,32,0.06); }
+.includes-title { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(12,16,32,0.4); margin-bottom: 16px; }
+.includes ul { list-style: none; padding: 0; margin: 0; }
+.includes li { font-size: 0.9rem; color: rgba(12,16,32,0.7); margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+.includes li::before { content: ''; display: block; width: 4px; height: 4px; background: var(--saffron); border-radius: 50%; }
+
+.trust-mark { text-align: center; margin-top: 64px; font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(12,16,32,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+
+<div class="copenhagen-wrap">
+  <div class="header">
+    <h2>Clarity for your week.</h2>
+    <p>Your first plan is completely free. No credit card required. Upgrade only when you are ready to connect your whole family.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="card">
+      <div class="tag">Free Trial</div>
+      <div class="price-val">$0<span> / first plan</span></div>
+      <div class="price-desc">Experience the magic of a connected week before you commit.</div>
+      <a href="#" class="btn">Build Our Week</a>
+    </div>
+
+    <div class="card premium">
+      <div class="tag">The Family Membership</div>
+      <div class="price-val">$499<span> / yr</span></div>
+      <div class="price-desc">One price. Every child in your home. No per-student fees, ever.</div>
+      <a href="#" class="btn">Start Subscription</a>
+      
+      <div class="includes">
+        <div class="includes-title">Always Included</div>
+        <ul>
+          <li>Unlimited multi-age lesson generation</li>
+          <li>Full access to Atlas and Elementum frameworks</li>
+          <li>Weekly Orbit Reports for every child</li>
+          <li>Cancel anytime in one click</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="trust-mark">Or pay $50 monthly. Cancel anytime.</div>
+</div>
+
+</body>
+</html>
