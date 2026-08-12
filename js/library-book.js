@@ -91,7 +91,6 @@
         'library_age_bands(age_band)',
         'library_themes(theme)',
         'library_subjects(subject)',
-        'library_standards(standard_code, standard_type)',
         'library_diversity(tag)',
       ].join(', '))
       .eq('slug', s)
@@ -195,7 +194,6 @@
     b.age_bands = (b.library_age_bands || []).map(function (r) { return r.age_band; });
     b.themes    = (b.library_themes    || []).map(function (r) { return r.theme; });
     b.subjects  = (b.library_subjects  || []).map(function (r) { return r.subject; });
-    b.standards = (b.library_standards || []);
     b.diversity = (b.library_diversity || []).map(function (r) { return r.tag; });
     return b;
   }
@@ -445,18 +443,6 @@
       }
     }
 
-    /* ── Standards colophon ── */
-    var stdEl = document.getElementById('bk-standards');
-    if (stdEl) {
-      if (book.standards.length > 0) {
-        var stdCodes = book.standards.map(function (s) { return s.standard_code; }).join(' · ');
-        stdEl.textContent = 'Aligned to · ' + stdCodes;
-        stdEl.style.display = '';
-      } else {
-        stdEl.style.display = 'none';
-      }
-    }
-
     /* ── Tertiary links ── */
     var tertiaryEl = document.getElementById('bk-tertiary-links');
     if (tertiaryEl) {
@@ -698,23 +684,8 @@
       'wizkoo:orbitalScore':   book.orbital_score  || undefined,
       'wizkoo:band':           book.age_bands.length > 0 ? book.age_bands[0] : undefined,
       'wizkoo:domains':        domains.length > 0  ? domains : undefined,
-      'wizkoo:standardsCodes': book.standards.length > 0
-        ? book.standards.map(function (s) { return s.standard_code; })
-        : undefined,
     };
 
-    if (book.standards && book.standards.length > 0) {
-      schema.educationalAlignment = book.standards.map(function (s) {
-        return {
-          '@type':              'AlignmentObject',
-          'alignmentType':      'teaches',
-          'targetName':         s.standard_code,
-          'educationalFramework': s.standard_type === 'NGSS'
-            ? 'Next Generation Science Standards'
-            : 'Common Core State Standards',
-        };
-      });
-    }
     if (book.subjects   && book.subjects.length > 0)   schema.about       = book.subjects;
     if (book.illustrator)                               schema.illustrator = { '@type': 'Person', 'name': book.illustrator };
 

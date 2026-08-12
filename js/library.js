@@ -71,7 +71,6 @@
           'cover_image_url, cover_quality, book_format, reading_level',
           'library_age_bands(age_band)',
           'library_themes(theme)',
-          'library_standards(standard_code, standard_type)',
         ].join(', '))
         .eq('status', 'active')
         .eq('browse_visible', true)
@@ -103,7 +102,6 @@
   function normalizeBook(b) {
     b.age_bands = (b.library_age_bands  || []).map(function (r) { return r.age_band; });
     b.themes    = (b.library_themes     || []).map(function (r) { return r.theme; });
-    b.standards = (b.library_standards  || []);
     return b;
   }
 
@@ -604,7 +602,7 @@
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 110);
-    doc.text('wizkoo.com/library  ·  Standards codes serve as ESA documentation.', margin, y);
+    doc.text('wizkoo.com/library', margin, y);
     y += 10;
     doc.setDrawColor(224, 222, 214);
     doc.setLineWidth(0.3);
@@ -620,13 +618,6 @@
       var titleLines = doc.splitTextToSize(book.title + '  ·  ' + book.author, contentW - 60);
       doc.text(titleLines, margin, y);
 
-      if (book.standards && book.standards.length > 0) {
-        var stdText = book.standards.slice(0, 3).map(function (s) { return s.standard_code; }).join('  ');
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(6.5);
-        doc.setTextColor(160, 155, 165);
-        doc.text(stdText, pageW - margin, y, { align: 'right' });
-      }
       y += titleLines.length * 4.5;
 
       var meta = book.age_bands.map(function (ab) {
