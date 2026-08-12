@@ -112,14 +112,10 @@ function splitList(str) {
   return str.split(',').map(s => s.trim()).filter(Boolean);
 }
 
-function parseStandard(raw) {
-  const t = raw.trim();
-  if (t.startsWith('NGSS:')) return { code: t.slice(5).trim(), type: 'NGSS' };
-  if (t.startsWith('CCSS:')) return { code: t.slice(5).trim(), type: 'CCSS' };
-  if (t.startsWith('NGSS.')) return { code: t, type: 'NGSS' };
-  if (t.startsWith('CCSS.')) return { code: t, type: 'CCSS' };
-  return { code: t, type: 'CCSS' };
-}
+/* Standard code → framework. Prefix decides; nothing is assumed.
+ * See scripts/lib/standard-prefix.js — shared with import-library.js and the
+ * guard, so all three read a code's framework the same way. */
+const { parseStandard, preflightStandards } = require('./lib/standard-prefix');
 
 /* ── Column map (0-based) ────────────────────────────────────────────────── */
 const COL = {
@@ -191,6 +187,18 @@ async function main() {
   const rows = parseCSV(raw);
   const dataRows = rows.slice(1); // skip header
   console.log(`Found ${dataRows.length} data rows.\n`);
+
+  // ── Preflight: every standard must declare its own framework ─────────────
+  // Runs before any write, so an unreadable prefix stops the whole import
+  // rather than half-filling the database or silently defaulting to CCSS.
+  const badStandards = preflightStandards(dataRows, COL.standards, COL.title, splitList);
+  if (badStandards.length) {
+    console.error(`✗ Import stopped — ${badStandards.length} unrecognised standard prefix(es):`);
+    badStandards.forEach(m => console.error('  • ' + m));
+    console.error('\nNothing was written. Fix the CSV and re-run.\n');
+    await pool.end();
+    process.exit(1);
+  }
 
   const results = { imported: 0, skipped: 0, errors: [] };
 

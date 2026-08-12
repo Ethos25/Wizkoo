@@ -166,24 +166,11 @@ function splitList(str) {
 }
 
 /* ── Parse standard code ─────────────────────────────────────────────────────
- * Handles both colon and dot separators:
- *   "CCSS:ELA-LITERACY.RL.4.1"  → { code: "ELA-LITERACY.RL.4.1", type: "CCSS" }
- *   "CCSS.ELA-LITERACY.RL.K.2"  → { code: "CCSS.ELA-LITERACY.RL.K.2", type: "CCSS" }
- *   "NGSS:3-LS1-1"              → { code: "3-LS1-1", type: "NGSS" }
- *   "NGSS.3-LS4-3"              → { code: "NGSS.3-LS4-3", type: "NGSS" }
- * For dot-prefixed codes the full string is kept as the code (it IS the standard code).
+ * Colon, dot and hyphen separators are all recognised; the prefix decides the
+ * framework and an unrecognised prefix stops the import. Shared with
+ * import-library-pg.js and the guard: scripts/lib/standard-prefix.js
  */
-function parseStandard(raw) {
-  const trimmed = raw.trim();
-  // Colon separator: strip prefix, rest is the code
-  if (trimmed.startsWith('NGSS:')) return { code: trimmed.slice(5).trim(), type: 'NGSS' };
-  if (trimmed.startsWith('CCSS:')) return { code: trimmed.slice(5).trim(), type: 'CCSS' };
-  // Dot separator: determine type from prefix, keep full string as code
-  if (trimmed.startsWith('NGSS.')) return { code: trimmed, type: 'NGSS' };
-  if (trimmed.startsWith('CCSS.')) return { code: trimmed, type: 'CCSS' };
-  // No recognised prefix — default to CCSS
-  return { code: trimmed, type: 'CCSS' };
-}
+const { parseStandard, preflightStandards } = require('./lib/standard-prefix');
 
 /* ── Supabase REST helper ────────────────────────────────────────────────── */
 async function supabaseInsert(table, records) {
@@ -286,6 +273,17 @@ async function main() {
     cover_image_url:    27,
     amazon_link:        28,   // added by enrich-library.js; absent in original 28-col CSV
   };
+
+  // ── Preflight: every standard must declare its own framework ─────────────
+  // Runs before any write, so an unreadable prefix stops the whole import
+  // rather than half-filling the database or silently defaulting to CCSS.
+  const badStandards = preflightStandards(dataRows, COL.standards, COL.title, splitList);
+  if (badStandards.length > 0) {
+    console.error(`✗ Import stopped — ${badStandards.length} unrecognised standard prefix(es):`);
+    badStandards.forEach(m => console.error('  • ' + m));
+    console.error('\nNothing was written. Fix the CSV and re-run.\n');
+    process.exit(1);
+  }
 
   const results = { imported: 0, skipped: 0, errors: [] };
 
