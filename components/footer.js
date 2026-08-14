@@ -22,6 +22,88 @@
       '  50%{opacity:var(--hi,0.55);}',
       '}',
 
+      /* ═══ ATMOSPHERE ═══════════════════════════════════════════════════
+         The medium between the objects. Twelve blurred ellipses — 2 washes,
+         4 lobes, 4 nebulae, 2 wisps — behind the stars, at 0.45x the opacity
+         the homepage hero emits them at. Same gradients and same blur radii
+         as the hero primitive (css/hero-sky.css .wk-sky__atmo-wash /
+         __atmo-lobe / __nebula / __wisp); footer-scoped class names because
+         hero-sky.css is not loaded on these pages.
+
+         The hero's two breathe keyframes (wk-sky-atmo-breathe and
+         wk-sky-nebula-breathe) are identical in shape and differ only in
+         which custom property they read, so lobes and nebulae share one
+         keyframe here reading one property.
+
+         NOT mounted on the homepage: see the [data-orb-sky] gate in the
+         atmosphere builder below, and the measurement that justifies it. */
+      '#wizkoo-footer .wf-atmo{',
+      '  position:absolute;',
+      '  inset:0;',
+      '  overflow:hidden;',
+      '  pointer-events:none;',
+      '  z-index:0;',
+      '}',
+      /* DELIBERATE DEVIATION FROM THE HERO: no will-change.
+         hero-sky.css declares will-change:transform,opacity on these layers.
+         Measured here on the built esa/georgia at 1280x800, 7 interleaved
+         reps against a null control that came in at +0.12ms:
+             with will-change      55.17 ms/frame   (18.1 fps)
+             will-change:auto      27.89 ms/frame   (35.9 fps)
+         The hint costs 27.3 ms/frame and changes nothing visually, so it is
+         not taken. The hero can afford it on one page; this runs on 68. */
+      '#wizkoo-footer .wf-atmo-wash,',
+      '#wizkoo-footer .wf-atmo-lobe,',
+      '#wizkoo-footer .wf-atmo-nebula,',
+      '#wizkoo-footer .wf-atmo-wisp{',
+      '  position:absolute;',
+      '  animation-timing-function:ease-in-out;',
+      '  animation-iteration-count:infinite;',
+      '  animation-direction:alternate;',
+      '}',
+      '#wizkoo-footer .wf-atmo-wash{filter:blur(26px);animation-name:wfAtmoDrift;}',
+      '#wizkoo-footer .wf-atmo-lobe{filter:blur(16px);animation-name:wfAtmoBreathe;}',
+      '#wizkoo-footer .wf-atmo-nebula{filter:blur(18px);animation-name:wfAtmoBreathe;}',
+      /* The wisp's own gradient, which the hero takes from hero-sky.css's
+         .wk-sky__wisp rule. Restated here because that stylesheet is loaded
+         on the homepage only. */
+      '#wizkoo-footer .wf-atmo-wisp{',
+      '  filter:blur(11px);',
+      '  border-radius:50%;',
+      '  background:linear-gradient(90deg, transparent 0%, rgba(150,168,200,0.45) 30%, rgba(160,178,210,0.55) 55%, rgba(150,168,200,0.32) 75%, transparent 100%);',
+      '  animation-name:wfWispDrift;',
+      '}',
+      '@keyframes wfAtmoDrift{',
+      '  from{opacity:calc(var(--o,0.1) * 0.55);translate:0 0;}',
+      '  to{opacity:var(--o,0.1);translate:var(--dx,3%) -1.5%;}',
+      '}',
+      '@keyframes wfAtmoBreathe{',
+      '  from{opacity:calc(var(--o,0.1) * 0.6);}',
+      '  to{opacity:var(--o,0.1);}',
+      '}',
+      '@keyframes wfWispDrift{',
+      '  from{opacity:calc(var(--o,0.1) * 0.7);translate:0 0;}',
+      '  to{opacity:var(--o,0.1);translate:var(--dx,4%) 0.6%;}',
+      '}',
+
+      /* ═══ REDUCED MOTION: THE DESIGNED FROZEN FRAME ═══════════════════
+         Matches the hero primitive's approach (css/hero-sky.css, "Reduced
+         motion: the designed frozen frame"). Every star carries an inline
+         mid-brightness opacity emitted by the generator below, and every
+         atmosphere element carries its inline max opacity, so stopping the
+         animations lands on a composed frame rather than wherever a
+         keyframe happened to be. !important out-cascades the inline
+         animation shorthand on each star div.
+
+         Honors the media query and the [data-wk-motion='reduced'] harness
+         attribute, the same two switches the hero honors. */
+      '@media (prefers-reduced-motion: reduce){',
+      '  #wizkoo-footer .wf-stars > div,',
+      '  #wizkoo-footer .wf-atmo > span{animation:none!important;}',
+      '}',
+      '[data-wk-motion=\'reduced\'] #wizkoo-footer .wf-stars > div,',
+      '[data-wk-motion=\'reduced\'] #wizkoo-footer .wf-atmo > span{animation:none!important;}',
+
       /* ── Treatment A: Sunset-to-Night ── */
       '#wizkoo-footer[data-treatment="a"]{',
       '  background:linear-gradient(180deg,',
@@ -231,7 +313,10 @@
       '  font-size:14px;',
       '  color:rgba(240,242,248,0.85);',
       '  text-decoration:none;',
-      '  transition:color 0.25s ease;',
+      /* Easing matched to the cursor widen (.cursor, 250ms) and the nav's
+         saffron underline wipe (.nav-link::after, 250ms) so the three read as
+         one gesture. Duration and the colour-only treatment are unchanged. */
+      '  transition:color 0.25s cubic-bezier(0.16, 1, 0.3, 1);',
       '  line-height:1;',
       '}',
       '#wizkoo-footer .wf-nav a:hover,',
@@ -239,6 +324,36 @@
       '#wizkoo-footer .wf-social a:hover{',
       '  color:rgba(240,242,248,1);',
       '}',
+
+      /* ── Focus: the mark a mouse user gets from the cursor ──────────────
+         Every footer anchor, not just the three link columns. The nav marks
+         hover with a 1px saffron underline; keyboard focus here uses the same
+         mark plus the hover colour lift. :focus-visible only, so a mouse
+         click never draws it.
+
+         The mark is text-decoration, not a positioned ::after. The nav's
+         underline matches its text because a .nav-link box is its text; a
+         footer link in .wf-nav / .wf-learn is a stretch item in a column
+         flex container, so an inset-anchored bar would run the full column
+         width and read as a rule rather than an underline. text-decoration
+         tracks the glyphs at any box width and leaves the existing
+         full-column hit area alone.
+
+         !important because four anchors sit under later, heavier rules that
+         set text-decoration:none and their own colour — the brand wordmark
+         (#wizkoo-footer .wf-brand .footer-wm, 1-2-0), .wf-copy-legal a and
+         .wf-edu a (both 1-1-1 and declared after this block). Without it,
+         Privacy, Terms, Get in touch and the wordmark take focus with no
+         mark at all; measured, that was 4 of 20 anchors unmarked. */
+      '#wizkoo-footer a:focus-visible{',
+      '  outline:none;',
+      '  color:rgba(240,242,248,1)!important;',
+      '  text-decoration:underline!important;',
+      '  text-decoration-color:#E8AF38!important;',
+      '  text-decoration-thickness:1px!important;',
+      '  text-underline-offset:3px;',
+      '}',
+      '#wizkoo-footer .wf-edu a:focus-visible{color:#F0C45A!important;}',
 
       /* ── Social links: icon + text inline ── */
       '#wizkoo-footer .wf-social a.wf-social-link{',
@@ -335,7 +450,15 @@
   };
 
   /* ── Footer HTML ────────────────────────────────────────────────────── */
-  el.innerHTML = [
+  /* scripts/render-components.js inlines this same markup into the served HTML
+     at build time, so a crawler sees the links without running JavaScript. When
+     it is already there, DO NOT write it again — re-injecting would duplicate
+     every footer link in the DOM. The star field and sun parallax below still
+     run: both are decorative, and the stars are random, so they must stay out
+     of the built HTML or no two builds would match. */
+  var prerendered = !!el.querySelector('#wizkoo-footer');
+
+  if (!prerendered) el.innerHTML = [
     '<footer id="wizkoo-footer" data-treatment="' + treatment + '" role="contentinfo">',
 
     '  <!-- Sun disc layer (Treatment A only) -->',
@@ -406,8 +529,14 @@
     var isTreatmentA = treatment === 'a';
     /* Treatment A: stars in lower 45% of footer (container already starts at top:55%)
        Treatment B: stars throughout, higher density */
-    var count = isTreatmentA ? 52 : 289;
     var starHtml = '';
+
+    /* Every star carries its own mid-brightness as an inline opacity. While the
+       twinkle runs, the animation's opacity out-cascades this and nothing about
+       the shipped look changes; when reduced motion stops the animation, this is
+       the frame it holds. The hero primitive composes its frozen frame the same
+       way (js/hero-sky.js emits opacity:(lo+hi)/2 per star). */
+    var mid = function (lo, hi) { return ((+lo + +hi) / 2).toFixed(3); };
 
     /* Anchor stars (bright, 2-3px) */
     for (var i = 0; i < (isTreatmentA ? 6 : 24); i++) {
@@ -419,6 +548,7 @@
                + 'left:' + x + '%;top:' + y + '%;'
                + 'width:' + (2 + Math.random()).toFixed(1) + 'px;height:' + (2 + Math.random()).toFixed(1) + 'px;'
                + 'animation:wfTwinkle ' + dur + 's ease-in-out infinite ' + del + 's;'
+               + 'opacity:' + mid(0.55, 0.95) + ';'
                + '--lo:0.55;--hi:0.95;"></div>';
     }
 
@@ -427,6 +557,7 @@
              + 'left:38%;top:' + (isTreatmentA ? '30' : '20') + '%;'
              + 'width:2.5px;height:2.5px;'
              + 'animation:wfTwinkle 3.5s ease-in-out infinite 1.2s;'
+             + 'opacity:' + mid(0.45, 0.85) + ';'
              + '--lo:0.45;--hi:0.85;"></div>';
 
     /* Medium stars */
@@ -441,6 +572,7 @@
                + 'left:' + x2 + '%;top:' + y2 + '%;'
                + 'width:1.5px;height:1.5px;'
                + 'animation:wfTwinkle ' + dur2 + 's ease-in-out infinite ' + del2 + 's;'
+               + 'opacity:' + mid(lo2, hi2) + ';'
                + '--lo:' + lo2 + ';--hi:' + hi2 + ';"></div>';
     }
 
@@ -456,10 +588,90 @@
                + 'left:' + x3 + '%;top:' + y3 + '%;'
                + 'width:1px;height:1px;'
                + 'animation:wfTwinkle ' + dur3 + 's ease-in-out infinite ' + del3 + 's;'
+               + 'opacity:' + mid(lo3, hi3) + ';'
                + '--lo:' + lo3 + ';--hi:' + hi3 + ';"></div>';
     }
 
     starContainer.innerHTML = starHtml;
+  }
+
+  /* ── Atmosphere ─────────────────────────────────────────────────────────
+     The twelve blurred ellipses the hero sky has and this footer did not:
+     2 colour-drift washes, 4 nebular lobes, 4 nebulae, 2 wisps. Geometry and
+     opacity are the set that was measured in the SKY/FOOTER recon, at 0.45x
+     the hero's emitted opacity. Inserted as the footer's first child so it
+     paints beneath .wf-stars, which sits at the same z-index:0.
+
+     NOT ON THE HOMEPAGE. Measured: the homepage already carries 153 elements
+     with a computed CSS filter (the orbital illustration's 124 glow filters
+     plus the hero and window skies' own atmospheres); every other page
+     carries zero. The marginal blur is the cost, so the same twelve elements
+     that are free elsewhere cost the homepage tens of ms per frame. The gate
+     is [data-orb-sky], which index.html is the only page to mount, and which
+     is parsed well before this script runs (index.html:2353 against :2763).
+
+     Kept out of the built HTML the same way the star field is: the build's
+     DOM stub (scripts/render-components.js) returns null from querySelector,
+     so this block does not run at build time. It is decorative and
+     aria-hidden, so nothing a crawler needs is in here. */
+  var footerEl = el.querySelector('#wizkoo-footer');
+  var isHomepage = !!document.querySelector('[data-orb-sky]');
+  if (footerEl && !isHomepage) {
+    var A = 0.45;                                  /* ratified reduction */
+    var I = { colorDrift: 60, nebulosity: 64, wisps: 32 };   /* hero FIELD.atmosphere */
+    var atmo = document.createElement('div');
+    atmo.className = 'wf-atmo';
+    atmo.setAttribute('aria-hidden', 'true');
+
+    var puff = function (cls, css, o, durS, delS, driftX) {
+      var s = document.createElement('span');
+      s.className = cls;
+      s.setAttribute('style', css
+        + 'opacity:' + o.toFixed(4) + ';'
+        + '--o:' + o.toFixed(4) + ';'
+        + (driftX ? '--dx:' + driftX + '%;' : '')
+        + 'animation-duration:' + durS + 's;animation-delay:' + delS + 's;');
+      atmo.appendChild(s);
+    };
+    var box = function (l, t, w, h, rot) {
+      return 'left:' + l + '%;top:' + t + '%;width:' + w + '%;height:' + h + '%;'
+           + (rot === null ? '' : 'transform:rotate(' + rot + 'deg);');
+    };
+    var ell = function (color) {
+      return 'background:radial-gradient(ellipse at center, ' + color + ' 0%, transparent 70%);';
+    };
+
+    /* 2 colour-drift washes */
+    [[-10, 8, 62, 96, '#52304A', 0.36, 120, 0],
+     [ 62, 2, 58, 100, '#1E4A55', 0.30, 130, 30]].forEach(function (w) {
+      puff('wf-atmo-wash', box(w[0], w[1], w[2], w[3], null) + ell(w[4]),
+           (w[5] * I.colorDrift / 100) * A, w[6], w[7], 4);
+    });
+
+    /* 4 nebular lobes */
+    var LOBE = ['#4A2A4E', '#3A2E5E', '#1E4A55'];
+    for (var n = 0; n < 4; n++) {
+      puff('wf-atmo-lobe',
+           box(n % 2 ? 60 + n * 6 : 4 + n * 5, 6 + n * 20, 38 + n * 4, 24 + n * 3, (n - 2) * 12)
+             + ell(LOBE[n % 3]),
+           (0.34 * I.nebulosity / 100) * A, 26 + n * 4, n * 3, 0);
+    }
+
+    /* 4 nebulae */
+    var NEB = ['#1E3060', '#24406F', '#182F58'];
+    for (var b = 0; b < 4; b++) {
+      puff('wf-atmo-nebula',
+           box(b % 2 ? 60 : 2, 4 + b * 18, 46, 30, (b - 2) * 10) + ell(NEB[b % 3]),
+           0.12 * A, 20 + b * 4, b * 2, 0);
+    }
+
+    /* 2 wisps — background comes from the .wf-atmo-wisp rule */
+    for (var p = 0; p < 2; p++) {
+      puff('wf-atmo-wisp', box(p ? 50 : 6, p ? 70 : 16, 48, 8, p ? 8 : -8),
+           (0.21 * I.wisps / 100) * A, 140 + p * 20, p * 20, 4);
+    }
+
+    footerEl.insertBefore(atmo, footerEl.firstChild);
   }
 
   /* ── Sun parallax (Treatment A only) ───────────────────────────────── */

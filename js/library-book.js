@@ -635,7 +635,7 @@
     setMeta('twitter:title',        dt + ' | Wizkoo Library', true);
     setMeta('twitter:description',  book.hook, true);
     var canonicalEl = document.getElementById('bk-canonical');
-    if (canonicalEl) canonicalEl.setAttribute('href', 'https://wizkoo.com/library/' + book.slug);
+    if (canonicalEl) canonicalEl.setAttribute('href', 'https://www.wizkoo.com/library/' + book.slug);
     if (book.cover_image_url) {
       setMeta('og:image',      book.cover_image_url, true);
       setMeta('twitter:image', book.cover_image_url, true);

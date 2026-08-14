@@ -24,6 +24,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { inlineInto } = require('./render-components');
 
 const REPO = path.resolve(__dirname, '..');
 const MANIFEST = 'publish-allowlist.txt';
@@ -230,6 +231,16 @@ for (const rel of [...selected.keys()].sort()) {
   fs.copyFileSync(path.join(REPO, rel), dest);
 }
 
+// Inline the nav and footer into the copied HTML. This runs on _site/ and never
+// on the repository, so components/nav.js and components/footer.js stay the one
+// place the markup is authored and the working tree keeps its empty containers.
+// A component that stops producing markup throws here and fails the build,
+// which is the loud direction: the alternative is a silent deploy of pages with
+// no internal links, which is the condition this whole step exists to end.
+const inlined = inlineInto(outDir, [...selected.keys()]);
+const withNav = inlined.filter((r) => r.nav).length;
+const withFooter = inlined.filter((r) => r.footer).length;
+
 // ── Report ──────────────────────────────────────────────────────────────────
 
 const groups = [
@@ -256,7 +267,9 @@ for (const [label, test] of groups) {
 process.stdout.write(
   `    ───\n    ${String(built.length).padStart(3)}  files published` +
   `   (${files.length - built.length} of ${files.length} stay out)\n\n` +
-  `    ${rootHtmlSummary()}\n\n`
+  `    ${rootHtmlSummary()}\n` +
+  `    Nav and footer inlined into ${withNav} and ${withFooter} pages ` +
+  `from components/nav.js and components/footer.js.\n\n`
 );
 
 function rootHtmlSummary() {

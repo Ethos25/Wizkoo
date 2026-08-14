@@ -330,7 +330,6 @@
             '<div class="lib-mcta-primary-wrap">' +
               '<a href="/notify" class="lib-mcta-primary">GET NOTIFIED</a>' +
             '</div>' +
-            '<a href="/how-it-works" class="lib-mcta-secondary">WHAT GETS PICKED</a>' +
           '</div>' +
         '</div>';
       return;
