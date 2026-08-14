@@ -335,7 +335,15 @@
   };
 
   /* ── Footer HTML ────────────────────────────────────────────────────── */
-  el.innerHTML = [
+  /* scripts/render-components.js inlines this same markup into the served HTML
+     at build time, so a crawler sees the links without running JavaScript. When
+     it is already there, DO NOT write it again — re-injecting would duplicate
+     every footer link in the DOM. The star field and sun parallax below still
+     run: both are decorative, and the stars are random, so they must stay out
+     of the built HTML or no two builds would match. */
+  var prerendered = !!el.querySelector('#wizkoo-footer');
+
+  if (!prerendered) el.innerHTML = [
     '<footer id="wizkoo-footer" data-treatment="' + treatment + '" role="contentinfo">',
 
     '  <!-- Sun disc layer (Treatment A only) -->',
