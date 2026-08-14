@@ -292,7 +292,14 @@
   var _hp  = (path === '/');
 
   /* ── Nav HTML ───────────────────────────────────────────────────────── */
-  el.innerHTML = [
+  /* scripts/render-components.js inlines this same markup into the served HTML
+     at build time, so a crawler sees the links without running JavaScript. When
+     it is already there, DO NOT write it again — re-injecting would duplicate
+     every nav link in the DOM. Everything below the assignment still runs: the
+     active-link class and the hamburger are runtime behaviour either way. */
+  var prerendered = !!el.querySelector('#site-nav');
+
+  if (!prerendered) el.innerHTML = [
 
     /* 1. Announcement bar — sticky top:0, scrolls away on mobile */
     '<div class="announce" role="banner" aria-label="Site announcement">',
