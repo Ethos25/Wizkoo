@@ -427,7 +427,22 @@
       '    grid-template-columns:1fr;',
       '    gap:32px;',
       '  }',
-      '  #wizkoo-footer[data-treatment="a"] .wf-closing{font-size:20px;top:16%}',
+      /* Closing sits in the sky zone reserved by .wf-top\'s 220px padding-top.
+         Above 768px the four-column grid keeps the footer short enough that
+         the desktop rules (top:18% for A, top:22% for B) land the closing
+         well above the wordmark. Below 768px the grid stacks to one column
+         and the footer roughly doubles in height; the same percentages then
+         drift the closing down into the wordmark (measured 4–7 px overlap
+         across pages, worst on the longer builds). The wordmark, by contrast,
+         starts at a stable padding-top:220px offset that does not drift.
+         Anchor to a pixel inside that reserved zone so the pair sits at a
+         designed relationship at every page length rather than a coincidence
+         of content height. The [data-treatment] attribute selector matches
+         the specificity (1,1,1) of the two desktop rules it overrides —
+         addressing both treatments here so a future page can switch to A
+         without reintroducing the collision. Earlier this override targeted
+         only A, but every current page ships Treatment B. */
+      '  #wizkoo-footer[data-treatment] .wf-closing{font-size:20px;top:100px}',
       '  #wizkoo-footer .wf-divider{margin:0 24px;}',
       '  #wizkoo-footer .wf-bottom{',
       '    padding:20px 24px 36px;',
