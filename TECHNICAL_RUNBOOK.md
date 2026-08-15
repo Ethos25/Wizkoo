@@ -405,7 +405,8 @@ SCOPE: Marketing site repo only. In scope: files flagged for full
   unused token removals in css/tokens.css, inert JavaScript null-guards
   for removed elements (only if their sole purpose was handling now-
   removed elements). Out of scope: /games/ subdirectory, plan generator
-  repo, components/nav.js runtime injection, any form-related code.
+  repo, the shared navigation authored in components/nav.js, its build-time
+  inlining, its runtime behavior, or any form-related code.
 
 RECONCILIATION AUTHORIZED: Remove all HIGH-confidence findings per the
   audit report. Remove responsive override rules in media queries if
@@ -537,34 +538,24 @@ what is frozen, and what decisions are locked.
 
 ## KNOWN BUGS
 
-1. ANNOUNCEMENT BAR TEXT COLOR — NON-HOMEPAGE PAGES
-   What is broken: The announcement bar text on every page except the homepage is
-     dark ink (rgba(12,16,32,0.75)) on a semi-transparent dark bar. On linen pages
-     this text is barely visible. On night-sky pages it is nearly invisible. The Light
-     Standard spec and the homepage both use saffron rgba(232,175,56,0.60).
-   Origin: C:\Users\amyog\Desktop\wizkoo\components\nav.js line 84
-     Current value: color:rgba(12,16,32,0.75);
-     Correct value: color:rgba(232,175,56,0.60);
-   Root cause: The default .announce-text rule was written with dark ink. The homepage
-     is a special case that applies saffron via an inline override at nav.js lines
-     288–289 (the _hp branch). All other pages fall through to the default dark value.
-   The fix (exact):
-     In nav.js, change line 84 from:
-       '  color:rgba(12,16,32,0.75);',
-     to:
-       '  color:rgba(232,175,56,0.60);',
-   Verify in browser: Open ages.html (linen surface). Inspect announcement bar text.
-     Should be legible saffron against the dark bar. Check library.html (night sky) too.
+1. ANNOUNCEMENT BAR TEXT COLOR — RESOLVED
+   Current factual state: The shared .announce-text rule in components/nav.js uses
+     saffron rgba(232,175,56,0.75) on every marketing page. There is no homepage-only
+     announcement-text color override.
+   Resolution evidence: The current value entered components/nav.js in commit 36088c6
+     on June 11, 2026. Current source confirms the shared rule remains in force.
+   Status: Resolved. This is retained under Bug 1 so existing bug-number references
+     remain stable.
 
 2. NAV CTA STYLE — GHOST VS FILLED (REQUIRES AMY CONFIRMATION BEFORE FIXING)
    What is broken: Light Standard spec says Nav CTA must be saffron fill:
      background: #E8AF38, color: #0C1020 (dark text on saffron button).
-     Current implementation at nav.js lines 199–219 is ghost style.
+     Current .nav-cta implementation in components/nav.js is ghost style.
    DO NOT FIX without Amy confirming this is a bug and not an intentional design choice.
    Ask: "The nav CTA is currently ghost style (transparent, saffron border). The Light
    Standard says it should be saffron fill. Should I change it back to filled?"
    If Amy confirms it is a bug, the fix (exact):
-     In nav.js, change lines 206–214:
+     In the .nav-cta rule in components/nav.js, change:
        Current:
          '  background:transparent;',
          '  color:#E8AF38;',
@@ -826,9 +817,14 @@ CSS directory (C:\Users\amyog\Desktop\wizkoo\css\):
 
 Components (C:\Users\amyog\Desktop\wizkoo\components\):
   nav.js              SINGLE SOURCE OF TRUTH for site navigation.
-                      Injects canonical nav into #wizkoo-nav.
-                      Contains all nav CSS in injected <style id="wn-styles">.
-                      (~16.3 KB, 403 lines)
+                      Canonical authoring source for shared marketing-nav markup,
+                      scoped CSS, and runtime behavior. During npm run build,
+                      scripts/render-components.js executes this component and
+                      inlines its markup and #wn-styles into published HTML. In the
+                      browser, the component avoids duplicate markup when pre-rendered
+                      content is present, then wires active-link and mobile-menu
+                      behavior. It can render an empty source container in repository-
+                      root development contexts.
   footer.js           SINGLE SOURCE OF TRUTH for site footer.
                       Injects canonical footer into #site-footer.
                       Contains all footer CSS in injected <style id="wf-styles">.
@@ -1419,8 +1415,10 @@ Do not touch the nav in any session that does not explicitly state
 "this is the nav session."
 
 QUESTION 1 — SPEC VS IMPLEMENTATION
-Light Standard specifies frosted glass nav. Deployed code is solid rgba(12,16,32,0.96).
-Amy must decide which is correct.
+Light Standard specifies frosted glass nav. Current authored marketing-nav source uses
+solid rgba(12,16,32,0.96) with backdrop filtering disabled. Amy must decide which is
+correct. The NAV DELIBERATE HOLD remains in force; this documentation correction does
+not rule on or change that governance question.
 
 QUESTION 2 — MARKETING NAV ITEM INVENTORY
 The full item list has not been finalized. Do not add or remove items without explicit instruction.
@@ -1432,10 +1430,10 @@ QUESTION 4 — VISUAL RELATIONSHIP BETWEEN THE TWO NAVS
 Whether both navs share visual treatment has not been decided.
 
 Source files:
-  Marketing nav:       C:\Users\amyog\Desktop\wizkoo\components\nav.js (403 lines)
-  Plan generator nav:  C:\Users\amyog\Desktop\wizkoo-plan-generator\src\components\NavBar.tsx (128 lines)
+  Marketing nav:       C:\Users\amyog\Desktop\wizkoo\components\nav.js
+  Plan generator nav:  C:\Users\amyog\Desktop\wizkoo-plan-generator\src\components\NavBar.tsx
 
-Nav Bar CSS — ACTUAL CURRENT CODE (nav.js lines 90–105, .nav rule):
+Nav Bar CSS — .nav rule in components/nav.js:
   height: 52px; margin: 0; padding: 0 40px;
   position: relative; display: flex; align-items: center; justify-content: space-between;
   background: rgba(12,16,32,0.96); backdrop-filter: none; -webkit-backdrop-filter: none;
@@ -1443,15 +1441,18 @@ Nav Bar CSS — ACTUAL CURRENT CODE (nav.js lines 90–105, .nav rule):
   box-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 4px 24px rgba(12,16,32,0.08);
   isolation: isolate; pointer-events: auto;
 
-Container sticky behavior (nav.js lines 274–276):
+Sticky stack — inline #wizkoo-nav setup in components/nav.js:
   #wizkoo-nav: position:sticky; top:-30px; z-index:20;
+  Because the announcement bar is the first 30px of the container, it scrolls above
+  the viewport during the first 30px of page movement; the 52px main nav then remains
+  at the top. The .announce and .nav children themselves are position:relative.
 
-Nav links (.nav-link, lines 167–196):
+Nav links — .nav-link rule in components/nav.js:
   font-family: 'Space Mono', monospace; font-weight: 400; font-size: 7.5px;
   letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.65);
   ::after underline: height 1px, background #E8AF38, width:0 → 100% on hover
 
-Nav links are absolute-centered (.nav-center, lines 153–164):
+Nav links are absolute-centered — .nav-center rule in components/nav.js:
   position: absolute; left: 50%; transform: translateX(-50%); gap: 26px.
 
 Nav CTA — ACTUAL CURRENT CODE (ghost style, light Standard says filled — see Known Bug 2):
@@ -1459,17 +1460,23 @@ Nav CTA — ACTUAL CURRENT CODE (ghost style, light Standard says filled — see
   padding: 8px 18px; background: transparent; color: #E8AF38;
   border: 1px solid rgba(232,175,56,0.65);
 
-Announcement Bar — ACTUAL CURRENT CODE (nav.js lines 58–87):
-  height: 30px; background: rgba(12,16,32,0.44); backdrop-filter: blur(14px);
+Announcement Bar — .announce and .announce-text rules in components/nav.js:
+  height: 30px; background: rgba(12,16,32,0.96);
+  backdrop-filter: none; -webkit-backdrop-filter: none;
   Text: Space Mono, 7px, letter-spacing 0.28em, uppercase
-  Text color (non-homepage): rgba(12,16,32,0.75) ← DARK INK (see Known Bug 1)
-  Text color (homepage only): rgba(232,175,56,0.75) ← saffron via inline override
+  Text color on all marketing pages: rgba(232,175,56,0.75)
+  A low-opacity monochrome noise layer supplies texture.
 
-Nav Wordmark (nav.js lines 131–148):
+Backdrop-filter scope:
+  Filtering is disabled on the announcement bar, main nav, and Linen modifier.
+  Only the mobile-menu inner panel uses backdrop-filter: blur(20px).
+
+Nav Wordmark — .nav-wm rule in components/nav.js:
   font-family: 'Sora'; font-weight: 800; font-size: 17px; letter-spacing: -0.04em;
   'k': color: var(--saffron), rotate(8deg), transform-origin bottom center;
 
-Mobile (<768px): center nav hidden, hamburger shown.
+Mobile (768px and below): center nav and sign-in link hidden; hamburger and
+mobile-menu container shown.
 IMPLEMENTATION WARNING: Parent overflow:hidden clips position:sticky. Verify no parent
 above #wizkoo-nav has overflow:hidden. If nav disappears on scroll, that is the cause.
 
@@ -2341,7 +2348,7 @@ Texture:
   --grain-opacity:        0.03                   (line 60)
   --noise-url:            SVG data URL (fractalNoise baseFrequency 0.9, 4 octaves) (line 61)
 
-Additional tokens injected by nav.js into :root (lines 27–31):
+Additional fallback tokens in the scoped :root block in components/nav.js:
   --expo:    cubic-bezier(0.16,1,0.3,1)   (duplicate of --ease-out-expo)
   --saffron: #E8AF38                       (duplicate — nav ensures fallback)
   --ink:     #0C1020                       (duplicate — nav ensures fallback)
@@ -2583,3 +2590,4 @@ v4.4 — May 4, 2026: Applied 1 Transfer Queue item. Pattern 11 (Playwright/Dev-
 v4.5 — August 5, 2026: Marketing deployment block corrected in Layer 3. It described the no-build architecture replaced on 2026-08-04 — a publish directory of "." (the repo root), "Build command: none", and the retired /plan 200-proxy to wizkoo-plan-generator.vercel.app — and closed with the deploy-checklist step "Verify at wizkoo.com — no build logs to check". Superseded by a dated CORRECTED 2026-08-05 record that quotes the old text rather than deleting it. README.md rewritten as the model-neutral entry file for executors that do not read CLAUDE.md; AGENTS.md added as a thin pointer to it. Branch docs/marketing-entry-path, correction commit 07815e9.
 v4.6 — August 5, 2026: Entry-file pointer added to this file, ahead of the Table of Contents. A session handed this runbook by name had no route to README.md; the new section sends it there, names AGENTS.md and GEMINI.md as the same door under other names, and maps the repository's governing documents by purpose without restating any of them. The section carries no SHAs, counts or version numbers by its own stated rule. GEMINI.md created at the root as a pointer to README.md; one line added to README.md recording that it exists. No other section of this file was touched. Branch docs/marketing-runbook-map.
 v4.7 — August 15, 2026: Retired the marketing Library importer's historical --schema execution path. sql/library-schema.sql and sql/add-amazon-link.sql are historical evidence only; current database, RLS, and migration authority is wizkoo-app/apps/app/supabase/migrations/. No database operation, SQL execution, or migration was performed.
+v4.8 — August 15, 2026: Reconciled shared marketing-navigation documentation against components/nav.js and the build-time component renderer. Recorded announcement-text Bug 1 as resolved, corrected announcement surface/filter and mobile-boundary descriptions, documented build-time inlining versus runtime behavior, and replaced brittle nav line/count references with semantic component references. No navigation code or behavior changed.
