@@ -272,7 +272,7 @@
       '  font-size:13px;',
       '  color:rgba(240,242,248,0.65);',
       '  text-decoration:none;',
-      '  transition:color 0.25s ease;',
+      '  transition:color 0.25s cubic-bezier(0.16, 1, 0.3, 1);',
       '}',
       '#wizkoo-footer .wf-email a:hover{color:rgba(240,242,248,0.72);}',
 
@@ -376,7 +376,7 @@
       '  letter-spacing:0.1em;',
       '  color:rgba(240,242,248,0.25);',
       '  text-decoration:none;',
-      '  transition:color 0.25s ease;',
+      '  transition:color 0.25s cubic-bezier(0.16, 1, 0.3, 1);',
       '}',
       '#wizkoo-footer .wf-copy-legal a:hover{color:rgba(240,242,248,0.5);}',
 
@@ -416,7 +416,7 @@
       '#wizkoo-footer .wf-edu a{',
       '  color:#E8AF38;',
       '  text-decoration:none;',
-      '  transition:color 0.25s ease;',
+      '  transition:color 0.25s cubic-bezier(0.16, 1, 0.3, 1);',
       '}',
       '#wizkoo-footer .wf-edu a:hover{color:#F0C45A;}',
 
