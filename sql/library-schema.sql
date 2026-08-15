@@ -1,6 +1,13 @@
 -- ═══════════════════════════════════════════════════════════════════════════
--- Wizkoo Library — Supabase Schema
--- Run this in the Supabase SQL editor: https://app.supabase.com → SQL Editor
+-- HISTORICAL EVIDENCE ONLY — DO NOT EXECUTE
+--
+-- Wizkoo Library bootstrap snapshot, introduced April 11, 2026.
+-- This file predates the current Library schema and age-band constraint. It is
+-- not current schema authority and must not be used to create, update, repair,
+-- or reconcile any database.
+--
+-- Current database and migration authority lives in the Wizkoo application
+-- repository: wizkoo-app/apps/app/supabase/migrations/
 -- ═══════════════════════════════════════════════════════════════════════════
 
 -- ── Main table ──────────────────────────────────────────────────────────────

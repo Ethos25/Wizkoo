@@ -26,7 +26,7 @@ Read this file end to end. Confirm you have read it by stating the four items
 in the SESSION STARTUP INSTRUCTION. Then execute the startup sequence.
 ---
 
-Last updated: May 2, 2026
+Last updated: August 15, 2026
 Maintained by: Amy Oguntala
 
 ---
@@ -908,7 +908,9 @@ MARKETING SITE (C:\Users\amyog\Desktop\wizkoo)
   Supabase credentials: window globals in C:\Users\amyog\Desktop\wizkoo\js\supabase-config.js
     WIZKOO_SUPABASE_URL      — Supabase project URL (intentionally public-facing)
     WIZKOO_SUPABASE_ANON_KEY — Supabase anon/public key (intentionally public-facing)
-    Row Level Security (sql/library-schema.sql) controls data access.
+    Current Row Level Security and migration authority:
+      C:\Users\amyog\Desktop\wizkoo-app\apps\app\supabase\migrations\
+    sql/library-schema.sql in this marketing repository is historical evidence only.
 
   Netlify Functions (set in Netlify Dashboard — NOT committed to repo):
     OPENAI_API_KEY        — OpenAI Moderation API (Layer 3 theme content moderation).
@@ -2580,3 +2582,4 @@ v4.3 — May 2, 2026: D5 library book detail page Rounds 6.1–6.7 complete. Uni
 v4.4 — May 4, 2026: Applied 1 Transfer Queue item. Pattern 11 (Playwright/Dev-Server/Live-Site Verification Gap) added to Layer 6. Notion STATUS updated for Pattern 11 (new) and FIX 2, Item 36, Item 31 retirement (already applied in prior sessions). Both local runbooks updated.
 v4.5 — August 5, 2026: Marketing deployment block corrected in Layer 3. It described the no-build architecture replaced on 2026-08-04 — a publish directory of "." (the repo root), "Build command: none", and the retired /plan 200-proxy to wizkoo-plan-generator.vercel.app — and closed with the deploy-checklist step "Verify at wizkoo.com — no build logs to check". Superseded by a dated CORRECTED 2026-08-05 record that quotes the old text rather than deleting it. README.md rewritten as the model-neutral entry file for executors that do not read CLAUDE.md; AGENTS.md added as a thin pointer to it. Branch docs/marketing-entry-path, correction commit 07815e9.
 v4.6 — August 5, 2026: Entry-file pointer added to this file, ahead of the Table of Contents. A session handed this runbook by name had no route to README.md; the new section sends it there, names AGENTS.md and GEMINI.md as the same door under other names, and maps the repository's governing documents by purpose without restating any of them. The section carries no SHAs, counts or version numbers by its own stated rule. GEMINI.md created at the root as a pointer to README.md; one line added to README.md recording that it exists. No other section of this file was touched. Branch docs/marketing-runbook-map.
+v4.7 — August 15, 2026: Retired the marketing Library importer's historical --schema execution path. sql/library-schema.sql and sql/add-amazon-link.sql are historical evidence only; current database, RLS, and migration authority is wizkoo-app/apps/app/supabase/migrations/. No database operation, SQL execution, or migration was performed.

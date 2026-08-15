@@ -17,7 +17,6 @@
  * Options:
  *   --csv       Input CSV path (required)
  *   --dry-run   Validate and report without writing anything
- *   --schema    Run sql/library-schema.sql first (creates tables if not exist)
  * ────────────────────────────────────────────────────────────────────────────
  */
 
@@ -32,10 +31,18 @@ const args    = process.argv.slice(2);
 const getArg  = (flag) => { const i = args.indexOf(flag); return i !== -1 ? args[i + 1] : null; };
 const CSV_PATH  = getArg('--csv');
 const DRY_RUN   = args.includes('--dry-run');
-const RUN_SCHEMA = args.includes('--schema');
+
+if (args.includes('--schema')) {
+  console.error([
+    'Error: --schema has been retired and will not run.',
+    'sql/library-schema.sql is historical evidence, not current schema authority.',
+    'Current migrations are governed from wizkoo-app/apps/app/supabase/migrations/.',
+  ].join('\n'));
+  process.exit(1);
+}
 
 if (!CSV_PATH) {
-  console.error('Usage: node scripts/import-library-pg.js --csv path/to/enriched.csv [--dry-run] [--schema]');
+  console.error('Usage: node scripts/import-library-pg.js --csv path/to/enriched.csv [--dry-run]');
   process.exit(1);
 }
 
@@ -150,35 +157,12 @@ async function main() {
     process.exit(1);
   }
 
-  // Optionally run schema
-  if (RUN_SCHEMA) {
-    console.log('Running sql/library-schema.sql …');
-    const schemaPath = path.resolve(__dirname, '../sql/library-schema.sql');
-    const schema = fs.readFileSync(schemaPath, 'utf-8');
-    try {
-      await pool.query(schema);
-      console.log('✓ Schema applied\n');
-    } catch (e) {
-      // Ignore "already exists" errors — tables are probably already there
-      if (e.code === '42P07' || e.message.includes('already exists')) {
-        console.log('  Tables already exist — skipping schema, running migration only\n');
-        try {
-          await pool.query('ALTER TABLE library_books ADD COLUMN IF NOT EXISTS amazon_link TEXT');
-        } catch (_) {}
-      } else {
-        console.error('Schema error:', e.message);
-        await pool.end();
-        process.exit(1);
-      }
-    }
-  } else {
-    // Always ensure amazon_link column exists
-    try {
-      await pool.query('ALTER TABLE library_books ADD COLUMN IF NOT EXISTS amazon_link TEXT');
-    } catch (e) {
-      if (!e.message.includes('already exists') && !e.message.includes('duplicate')) {
-        console.warn('Note: could not add amazon_link column (may already exist):', e.message);
-      }
+  // Always ensure amazon_link column exists
+  try {
+    await pool.query('ALTER TABLE library_books ADD COLUMN IF NOT EXISTS amazon_link TEXT');
+  } catch (e) {
+    if (!e.message.includes('already exists') && !e.message.includes('duplicate')) {
+      console.warn('Note: could not add amazon_link column (may already exist):', e.message);
     }
   }
 
