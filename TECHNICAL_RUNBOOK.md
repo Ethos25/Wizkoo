@@ -2,7 +2,7 @@
 
 **Project:** Wizkoo.
 
-**Scope:** This document governs the Wizkoo codebase — BOTH the marketing site at wizkoo/ AND the plan generator at wizkoo-plan-generator/. Plan-generator folder contains a pointer file, not a duplicate runbook.
+**Scope:** This document governs the Wizkoo marketing site at wizkoo/. Current product work belongs to wizkoo-app/. The former plan generator at wizkoo-plan-generator/ is a legacy Stage 3 rollback system until its separately governed Stage 4 retirement; legacy implementation detail retained here does not make this Runbook its current product or release authority.
 
 **Do not apply updates from this document to any other project's Technical Runbook.** If you find yourself reading this while working on Learnkoo or any other project, stop — you have the wrong file open.
 
@@ -89,7 +89,7 @@ LAYER 3 — SYSTEM MAP: Codebase locations, file maps, environment variables, de
 LAYER 4 — DESIGN SYSTEM: Surfaces, color system, typography, motion, nav system, $200 standard
 LAYER 5 — COMPONENT SPECS: Generation spectacle, firefly, homepage hero, atlas continent palette, Section 3
 LAYER 6 — FAILURE PREVENTION: Wizkoo-specific failure patterns, preservation locks, open items
-LAYER 7 — DEEP REFERENCE: CSS custom properties (both codebases), API surface, prompt templates
+LAYER 7 — DEEP REFERENCE: marketing tokens and explicitly labeled legacy-generator references
 LAYER 8 — HISTORY: Version history
 
 ---
@@ -162,9 +162,10 @@ AMY_TECHNICAL_STANDARDS.md Section 1. Wizkoo-specific content follows.
 
 STEP 1 — CONFIRM YOU READ THIS FILE (Wizkoo specifics)
 State out loud:
-  1. Both local codebase paths:
+  1. All three local codebase paths and roles:
        Marketing site: C:\Users\amyog\Desktop\wizkoo
-       Plan generator: C:\Users\amyog\Desktop\wizkoo-plan-generator
+       Current product application: C:\Users\amyog\Desktop\wizkoo-app
+       Legacy generator / Stage 3 rollback: C:\Users\amyog\Desktop\wizkoo-plan-generator
   2. Canonical saffron hex value: #E8AF38
   3. Environment assigned to the page you will work on today (from ENVIRONMENT MAP in Layer 4)
   4. Confirm Operating Principles active by naming all seven by number:
@@ -183,7 +184,7 @@ Read the Pending Transfers section completely.
 
 If any items show STATUS: PENDING:
   Read each item fully.
-  Apply it to the correct section of this document (both local copies).
+  Apply it to the correct section of this local document.
   Also update the Notion mirror: fetch the corresponding layer child
   page under the Technical Runbook — Wizkoo parent
   (347335a8d332818bbd18d10b2a2170de) and apply the same change to
@@ -277,8 +278,7 @@ MANDATORY MIRROR SYNC (added to Step 6):
 For every layer modified this session, fetch the corresponding layer child page
 under the Technical Runbook — Wizkoo parent (347335a8d332818bbd18d10b2a2170de)
 and apply the same change to that page. Child page IDs are listed in the
-Session Startup Step 2. The Notion mirror sync is same-tier as copying between
-the two local repo folders: not optional, not deferrable.
+Session Startup Step 2. The Notion mirror sync is not optional or deferrable.
 
 WIZKOO VERIFICATION GATE (replaces global Step 7 ledger):
 Enforces Standards §1.2 Step 7 via Wizkoo-specific line-count checks and Notion mirror confirmation.
@@ -286,7 +286,6 @@ Enforces Standards §1.2 Step 7 via Wizkoo-specific line-count checks and Notion
   BUILD SESSION WRITE-BACK VERIFICATION
   ✓ UPDATED: [what] → TECHNICAL_RUNBOOK.md ([X] lines)
   ✓ COPIED: C:\Users\amyog\Desktop\wizkoo ([X] lines)
-  ✓ COPIED: C:\Users\amyog\Desktop\wizkoo-plan-generator ([X] lines)
   ✓ NOTION MIRROR SYNCED: [list of layer child pages updated] OR "no layers modified this session"
   ✓ TRANSFER QUEUE: [items deposited OR "nothing to deposit"]
   ✓ FAILURE PATTERNS: [captured OR "none this session"]
@@ -348,7 +347,8 @@ Full principle definitions: AMY_TECHNICAL_STANDARDS.md Section 2.
 WIZKOO GOVERNANCE:
   Additions require Amy's explicit decision.
   Removals are not permitted.
-  Applies to every Claude Code session on Wizkoo — wizkoo.com and the plan generator.
+  Applies to every Claude Code session governed by this marketing Runbook.
+  Current-product sessions in wizkoo-app follow that repository's own governing documents.
 
 SESSION-START INSTRUCTION (verbatim, every session):
   "This session operates under Claude Code Operating Principles
@@ -721,7 +721,7 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Footer link vocabulary: the /themes page link must read "Themes to Explore" — never the shorter "Themes". Locked April 26, 2026.
 - Footer column placement for "Themes to Explore": LEARN MORE column (wf-learn), not PRODUCT column (wf-nav). Locked April 26, 2026.
 - Footer column naming discrepancy: production footer uses Product / Learn More / Connect. Light Standard v5 spec calls them Learn / Join / Wizkoo. Known divergence. Do not rename without explicit instruction.
-- Canonical guard format — three-file architecture locked April 27, 2026: AMY_TECHNICAL_STANDARDS.md uses SCOPE GUARD (project-agnostic scope, Do NOT add project-specific content, Promotion rule). wizkoo/TECHNICAL_RUNBOOK.md uses PROJECT GUARD with explicit Scope (both codebases + pointer note), Do not apply cross-project warning, full Standards path. Learnkoo TECHNICAL_RUNBOOK.md uses PROJECT GUARD with Scope (Learnkoo only), Do not apply cross-project warning, full Standards path. Do not paraphrase or abbreviate guard text.
+- Canonical guard format — corrected August 15, 2026 after the product cutover: AMY_TECHNICAL_STANDARDS.md uses SCOPE GUARD (project-agnostic scope, Do NOT add project-specific content, Promotion rule). wizkoo/TECHNICAL_RUNBOOK.md uses PROJECT GUARD with explicit roles for the marketing repository, current wizkoo-app product authority, and legacy Stage 3 rollback generator. Learnkoo TECHNICAL_RUNBOOK.md uses PROJECT GUARD with Scope (Learnkoo only), Do not apply cross-project warning, full Standards path. Do not paraphrase or abbreviate guard text.
 - Standards path in guards: C:\Users\amyog\Desktop\wizkoo\AMY_TECHNICAL_STANDARDS.md — full absolute path used in both project guards. Do not shorten to filename-only.
 - Band-Name Pairing Rule (locked April 29, 2026): band name must always appear with age range on any public-facing surface. Format: Name · Ages X-Y (e.g. Wonderer · Ages 3-4, Apprentice · Ages 5-6, Artisan · Ages 7-9, Scholar · Ages 10-12). Reserved bands follow same pattern when shipped. The Luminary takes no age pairing. Architecture-level lock — not a copy preference. Do not render bare band names on any public surface.
 - cover_quality field (locked April 29, 2026): TEXT DEFAULT 'standard' CHECK (cover_quality IN ('featured','standard','hidden')). Featured cluster in renderFeaturedCluster() gates exclusively on cover_quality = 'featured'. If no featured book is available for a band slot, that slot is omitted entirely — never fall back to standard-quality books. Starter set: 9 books as of April 29, 2026. Any expansion requires a curator pass, not a code change.
@@ -747,13 +747,20 @@ Marketing Site
   Local path: C:\Users\amyog\Desktop\wizkoo
   Deploys to: wizkoo.com via Netlify
 
-Plan Generator
+Current Product Application
+  Local path: C:\Users\amyog\Desktop\wizkoo-app
+  Public product host: app.wizkoo.com
+  Marketing relationship: wizkoo.com/plan and selected /plan/* routes redirect
+  by reversible 302s to app.wizkoo.com destinations.
+
+Legacy Generator / Stage 3 Rollback System
   Local path: C:\Users\amyog\Desktop\wizkoo-plan-generator
-  Deploys to: wizkoo.com/plan via Vercel
+  Not the current /plan product authority. Retained until the separately
+  governed WP-6 Stage 4 retirement is approved and completed.
 
 Cross-Reference Rule:
-When a task requires a value from the other codebase, navigate to that
-local path, open the source file, read the value exactly as written,
+When a task requires a value from another codebase, navigate to the applicable
+current or explicitly legacy source, open the source file, read the value exactly as written,
 copy it exactly. Never approximate. Never guess. Always read from source.
 
 ---
@@ -796,7 +803,8 @@ Root-level pages (every HTML file is a self-contained page):
 Config and tooling:
   CLAUDE.md           Claude Code project instructions. Dev server and Playwright workflow.
   package.json        Node dependencies: serve, @playwright/test, pg.
-  netlify.toml        Netlify config: /plan proxy redirect to Vercel.
+  netlify.toml        Netlify build/configuration and duplicated /plan 302 redirect
+                      map to app.wizkoo.com; _redirects wins where they overlap.
   _redirects          Netlify redirect rules (clean URL rewrites, .html removal).
   serve.json          Local dev server config.
   robots.txt          SEO robots.
@@ -850,7 +858,16 @@ ESA pages (C:\Users\amyog\Desktop\wizkoo\esa\):
 
 ---
 
-## CRITICAL FILE MAP — PLAN GENERATOR
+## CRITICAL FILE MAP — LEGACY PLAN GENERATOR
+
+LEGACY GENERATOR REFERENCE — ROLLBACK ONLY
+
+The paths and implementation details below describe
+C:\Users\amyog\Desktop\wizkoo-plan-generator. They do not govern current
+product work reached through /plan. Current product work belongs to
+C:\Users\amyog\Desktop\wizkoo-app and follows that repository's own entry
+documents and release authority. Preserve this material until WP-6 Stage 4
+retirement is separately approved and completed.
 
 Root config:
   package.json        Next.js 16.2.2, React 19.2.4. Key deps: @anthropic-ai/sdk
@@ -922,7 +939,7 @@ MARKETING SITE (C:\Users\amyog\Desktop\wizkoo)
 
   Source commits: 857b057 (Layer 1 implementation), b042e35 (BLOCKLIST_EXACT dual-tier).
 
-PLAN GENERATOR (C:\Users\amyog\Desktop\wizkoo-plan-generator)
+LEGACY PLAN GENERATOR — ROLLBACK ONLY (C:\Users\amyog\Desktop\wizkoo-plan-generator)
   Source: .env.example (22 variables). All secrets in .env.local (never committed).
 
   Database:
@@ -1018,7 +1035,7 @@ MARKETING SITE
   No runtime dependencies. Static site. A build step exists (build script → _site/, allowlist manifest).
   Package manager: npm.
 
-PLAN GENERATOR
+LEGACY PLAN GENERATOR — ROLLBACK ONLY
   Package manager: pnpm ONLY. (preinstall script enforces this.)
   Node required: >=20.0.0
 
@@ -1130,24 +1147,23 @@ MARKETING SITE → Netlify (wizkoo.com)
        exited 0, and read every WARNING line — a warning does not fail a build
     4. Verify at wizkoo.com. A page can be missing from a green build
 
-PLAN GENERATOR → Vercel (wizkoo.com/plan)
-  Config file: C:\Users\amyog\Desktop\wizkoo-plan-generator\vercel.json
-  Build command: pnpm build (next build)
-  basePath: /plan (set in next.config.ts)
-  Deploy trigger: push to master branch
+CURRENT PRODUCT APPLICATION
+  Repository: C:\Users\amyog\Desktop\wizkoo-app
 
-  Cron jobs (vercel.json):
-    orbit-report        — 0 6 * * 0   (Sundays 6am UTC)
-    plan-lifecycle      — 0 3 * * *   (Daily 3am UTC)
-    auth-reconciliation — 0 7 * * 1   (Mondays 7am UTC)
-    re-engagement       — 0 14 * * *  (Daily 2pm UTC)
-  All cron routes validate CRON_SECRET bearer token before executing.
+  wizkoo.com/plan and selected /plan/* paths redirect by reversible 302s from
+  the marketing site to app.wizkoo.com destinations. Current application work,
+  release procedure, deployment verification, and rollback are governed in:
+    C:\Users\amyog\Desktop\wizkoo-app\docs\operations\RELEASE_STATE.md
 
-  Deploy checklist:
-    1. Ensure pnpm build passes locally: pnpm build
-    2. Push to master: git push
-    3. Monitor Vercel dashboard for build logs (~2-3 min)
-    4. Verify at wizkoo.com/plan after deploy completes
+  Follow that repository's entry documents and governing release procedure.
+  This marketing Runbook does not restate or override them.
+
+LEGACY GENERATOR — STAGE 3 ROLLBACK ONLY
+  C:\Users\amyog\Desktop\wizkoo-plan-generator remains the separately governed
+  Stage 3 rollback system until WP-6 Stage 4 is approved and completed. Do not
+  modify, deploy, pause, delete, or archive it as part of ordinary current-product
+  work. Its implementation detail remains documented in the explicitly labeled
+  legacy-reference sections of this Runbook.
 
 ---
 
@@ -1423,7 +1439,7 @@ not rule on or change that governance question.
 QUESTION 2 — MARKETING NAV ITEM INVENTORY
 The full item list has not been finalized. Do not add or remove items without explicit instruction.
 
-QUESTION 3 — PLAN GENERATOR NAV ITEM INVENTORY
+QUESTION 3 — LEGACY PLAN GENERATOR NAV ITEM INVENTORY
 Serves authenticated parents only. Item list not finalized.
 
 QUESTION 4 — VISUAL RELATIONSHIP BETWEEN THE TWO NAVS
@@ -1431,7 +1447,7 @@ Whether both navs share visual treatment has not been decided.
 
 Source files:
   Marketing nav:       C:\Users\amyog\Desktop\wizkoo\components\nav.js
-  Plan generator nav:  C:\Users\amyog\Desktop\wizkoo-plan-generator\src\components\NavBar.tsx
+  Legacy generator nav: C:\Users\amyog\Desktop\wizkoo-plan-generator\src\components\NavBar.tsx
 
 Nav Bar CSS — .nav rule in components/nav.js:
   height: 52px; margin: 0; padding: 0 40px;
@@ -1502,7 +1518,7 @@ Why #F0F2F8 not white: Pure white floats on ultramarine. Cool-tinted white sits.
 ## THE $200 STANDARD (Quality Floor Directive)
 
 Source document (Notion): 338335a8d33281f699d4d705f973d430
-Read the full document before any build session on the plan generator.
+Read the full document before any build session on the legacy plan generator.
 
 ### What $200 Feels Like
 
@@ -1785,7 +1801,10 @@ Read when working on animated or interactive components.
 Every spec here is locked — do not approximate from memory.
 ═══════════════════════════════════════
 
-## GENERATION SPECTACLE — PLAN GENERATOR
+## GENERATION SPECTACLE — LEGACY PLAN GENERATOR REFERENCE
+
+Legacy rollback implementation detail. This section does not govern the current
+product application in C:\Users\amyog\Desktop\wizkoo-app.
 
 Source files:
   Canvas animation component:
@@ -1883,9 +1902,15 @@ Right column (38%):
   Microcopy: "Have more kids? Add them on the next screen."
   Firefly: 3px, #E8AF38, breathing drift animation, 2s delay
 
-Handoff URL:
-  wizkoo.com/plan/onboarding?childName=[name]&childAge=[age]&theme=[theme]
-  Parameters read in onboarding/page.tsx lines 474–495.
+Current marketing handoff:
+  https://app.wizkoo.com/start
+  Current marketing links use this destination without query parameters.
+
+Stage 3 compatibility route (legacy):
+  wizkoo.com/plan/onboarding
+  The marketing redirect map sends this route by reversible 302 to
+  https://app.wizkoo.com/generate. Current handoff authority lives in wizkoo-app;
+  do not infer a current marketing query-string contract from this legacy route.
 
 ---
 
@@ -2145,7 +2170,7 @@ Item 36 — CTA + Sub-CTA Unit Integrity. Primary CTA and sub-CTA ("MORE KIDS? �
 ### ADDING NEW REGISTRIES
 
 Candidate surfaces for their own registries as they harden:
-Plan Generator onboarding form, webhook handlers (Stripe, Clerk), cron jobs,
+Legacy plan generator onboarding form, webhook handlers (Stripe, Clerk), cron jobs,
 Elementum game state management (game.js), Atlas geographic data, safety.ts.
 
 New registries are added via the Transfer Queue. Format: surface name, origin context,
@@ -2355,7 +2380,7 @@ Additional fallback tokens in the scoped :root block in components/nav.js:
 
 ---
 
-## CSS CUSTOM PROPERTIES — PLAN GENERATOR
+## CSS CUSTOM PROPERTIES — LEGACY PLAN GENERATOR REFERENCE
 
 Source: C:\Users\amyog\Desktop\wizkoo-plan-generator\src\app\globals.css
 
@@ -2466,7 +2491,10 @@ SPECTACLE TOKENS (lines 176–252) — all prefixed --spectacle-*
 
 ---
 
-## EXTERNAL API SURFACE
+## EXTERNAL API SURFACE — LEGACY PLAN GENERATOR REFERENCE
+
+The product details below describe the legacy rollback implementation, not the
+current application at C:\Users\amyog\Desktop\wizkoo-app.
 
 ANTHROPIC / CLAUDE
   Client: src\lib\ai\client.ts — lazy singleton.
@@ -2479,7 +2507,7 @@ ANTHROPIC / CLAUDE
 SUPABASE (Database)
   Marketing site: window globals in js/supabase-config.js (anon key, public)
     Used for: library book queries, reading progress data
-  Plan generator: @supabase/supabase-js via NEXT_PUBLIC_SUPABASE_* + Drizzle ORM
+  Legacy plan generator: @supabase/supabase-js via NEXT_PUBLIC_SUPABASE_* + Drizzle ORM
     Used for: user plans, family profiles, learning objectives, orbit reports
   Schema: drizzle/ directory (migration files)
 
@@ -2509,7 +2537,7 @@ UPSTASH REDIS (Rate Limiting)
 
 ---
 
-## PROMPT TEMPLATE SYSTEM
+## PROMPT TEMPLATE SYSTEM — LEGACY PLAN GENERATOR REFERENCE
 
 Source directory: C:\Users\amyog\Desktop\wizkoo-plan-generator\src\lib\ai\
 
