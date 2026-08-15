@@ -758,6 +758,16 @@ Legacy Generator / Stage 3 Rollback System
   Not the current /plan product authority. Retained until the separately
   governed WP-6 Stage 4 retirement is approved and completed.
 
+CURRENT DATABASE AND MIGRATION AUTHORITY
+  Repository: C:\Users\amyog\Desktop\wizkoo-app
+  Migration source: C:\Users\amyog\Desktop\wizkoo-app\apps\app\supabase\migrations\
+  Governing procedure: C:\Users\amyog\Desktop\wizkoo-app\docs\architecture\MIGRATIONS.md
+    section "THE MIGRATION PROCEDURE"
+
+  The marketing repository does not govern current database changes. Its SQL
+  files are historical evidence only. The legacy generator's Drizzle files are
+  retained for rollback reference and do not govern current migrations.
+
 Cross-Reference Rule:
 When a task requires a value from another codebase, navigate to the applicable
 current or explicitly legacy source, open the source file, read the value exactly as written,
@@ -875,7 +885,8 @@ Root config:
                       framer-motion 12.38.0. Package manager: pnpm only.
   next.config.ts      basePath: /plan. Exposes NEXT_PUBLIC_BASE_PATH=/plan.
   tsconfig.json       Path alias @/* → ./src/*. Target ES2017. Strict mode.
-  drizzle.config.ts   ORM migrations from /drizzle directory.
+  drizzle.config.ts   Legacy generator ORM configuration for its /drizzle
+                      directory; rollback reference only, not current migration authority.
   vercel.json         Vercel deployment config.
 
 Global design tokens:
@@ -905,7 +916,8 @@ Other key source dirs:
   src/types/          TypeScript definitions.
   src/hooks/          Custom React hooks.
   src/data/           Static JSON learning progressions.
-  drizzle/            Database migration files.
+  drizzle/            Legacy generator migration files retained for rollback
+                      reference; not the current migration source.
 
 ---
 
@@ -2509,7 +2521,8 @@ SUPABASE (Database)
     Used for: library book queries, reading progress data
   Legacy plan generator: @supabase/supabase-js via NEXT_PUBLIC_SUPABASE_* + Drizzle ORM
     Used for: user plans, family profiles, learning objectives, orbit reports
-  Schema: drizzle/ directory (migration files)
+  Legacy schema/migration record: drizzle/ directory. Rollback reference only;
+    current migration authority is wizkoo-app/apps/app/supabase/migrations/.
 
 CLERK (Authentication)
   Package: @clerk/nextjs
