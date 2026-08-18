@@ -13,7 +13,6 @@
 [build]
   publish = "_site"
   command = "node scripts/build-site.js"
-  functions = "netlify/functions"
 
 # moderation-digest retired 2026-07-31 (Excellence Round 1 addendum, ruling 3).
 # It read what validate-theme wrote; validate-theme died with the intake form,
