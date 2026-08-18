@@ -2132,7 +2132,7 @@
          position. */
       var hoverPend = false, hoveredTarget = null;
       var clearHoverTimeout = null;
-      section.addEventListener('pointermove', function (e) {
+      stage.addEventListener('pointermove', function (e) {
         if (e.pointerType && e.pointerType !== 'mouse') return;
         hoveredTarget = e.target;
         if (hoverPend) return;
@@ -2165,7 +2165,7 @@
           }
         });
       });
-      section.addEventListener('pointerleave', function () { 
+      stage.addEventListener('pointerleave', function () {
          clearTimeout(clearHoverTimeout);
          clearHoverTimeout = null;
          apply(null); 

@@ -170,8 +170,11 @@ a{background:transparent;border:none;box-shadow:none;outline:none;-webkit-appear
 html{scroll-behavior:smooth}
 body{font-family:'Sora',sans-serif;background:var(--linen);color:var(--ink);overflow-x:hidden;font-size:var(--body-size);line-height:1.6}
 @media(hover:hover){html,body,a,button,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.planned-dot{cursor:none}}
+/* While the custom cursor is active, no descendant may reinstate the native
+   cursor. Fine-pointer and motion gates preserve the native fallback. */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.page-home,.page-home *{cursor:none!important}}
 /* ═══ CUSTOM CURSOR ═══ */
-.cursor{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;mix-blend-mode:exclusion;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s,background-color .25s,border-color .25s;opacity:0}
+.cursor{position:fixed;left:0;top:0;width:8px;height:8px;border-radius:50%;background:var(--saffron);pointer-events:none;z-index:9999;mix-blend-mode:exclusion;transform:translate3d(0,0,0);will-change:transform;transition:width .25s var(--expo),height .25s var(--expo),margin .25s var(--expo),opacity .2s,background-color .25s,border-color .25s;opacity:0}
 .cursor.visible{opacity:1}
 .cursor.hover{width:28px;height:28px;margin:-10px 0 0 -10px;background:rgba(232,175,56,0.25);border:1.5px solid var(--saffron)}
 .cursor.on-saffron{background:rgba(35,85,195,0.25) !important;border-color:rgb(35,85,195) !important;mix-blend-mode:normal !important;}
@@ -2148,21 +2151,6 @@ body.page-home{
 .page-home .nav{transition:background-color .25s cubic-bezier(.25,.1,.25,1)!important}
 .page-home .nav.nav--scrolled{background:rgba(248,244,233,0.55)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
 .page-home .nav.nav--scrolled.nav--surface-dark{background:rgba(12,16,32,0.95)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-/* PERF, measured 2026-08-09: the certified sky at this aperture is 1,834 stars,
-   and hero-sky.css promotes every one to its own compositor layer
-   (will-change:opacity + infinite twinkle). ~2,300 layers held scroll through
-   this section at 12fps. Freezing the dim tiers — mid/faint/dust, whose twinkle
-   peaks below 0.35 opacity and is imperceptible star-by-star — halves frame
-   time (24fps measured, 36fps if every tier freezes). Anchors, brights and
-   filigree keep the certified twinkle, so the sky still reads alive per the
-   2026-08-02 ruling. Scoped to .linen-hero: the /start hero window runs the
-   same primitive at 376 stars and does not need this. */
-.linen-hero .wk-sky__star--mid,
-.linen-hero .wk-sky__star--faint,
-.linen-hero .wk-sky__star--dust {
-  animation: none !important;
-  will-change: auto !important;
-}
 </style>
 <!-- ═══ NAV SURFACE DETECTION ═══ -->
 <script>
@@ -2774,8 +2762,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 // ═══ CUSTOM CURSOR ═══
 (function(){
-  var c=document.getElementById('cursor'),cx=0,cy=0;window.mx=0;window.my=0;
-  document.addEventListener('mousemove',function(e){window.mx=e.clientX;window.my=e.clientY;c.classList.add('visible')});
+  var c=document.getElementById('cursor');window.mx=0;window.my=0;
+  document.addEventListener('mousemove',function(e){
+    window.mx=e.clientX;window.my=e.clientY;
+    c.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)';
+    c.classList.add('visible');
+  },{passive:true});
   document.addEventListener('mouseleave',function(){c.classList.remove('visible')});
   // Hover detection - only interactive elements, NOT generic spans
   var hoverEls='a,button,.footer-social span,.ech,.ach,.pc-more,.btn-main,.btn-circle,.btn-circle-dark,.nav-cta-sm,.panel-link,.week-card,.plan-card,.sr-track,.planned-dot,.wm,.nav-wm';
@@ -2787,8 +2779,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if(e.target.closest(hoverEls)) c.classList.remove('hover');
     if(e.target.closest('.lw-foot')) c.classList.remove('on-saffron');
   });
-  // Smooth follow with lag
-  (function tick(){cx+=(window.mx-cx)*0.15;cy+=(window.my-cy)*0.15;c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(tick)})();
 })();
 
 // ═══ K TICK SOUND ═══

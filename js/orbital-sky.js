@@ -113,6 +113,27 @@
       host.dataset.orbSkyMounted = '1';
       var r = renderLabSky(window.WizkooSky, host, Number(host.dataset.orbSkySeed) || SEED);
       host.dataset.orbSkyStars = String(r.stars);
+
+      /* CSS animations otherwise keep compositing this full-width, high-DPR
+         surface after it leaves the viewport. The frozen frame is already a
+         designed state, so pause every sky animation until the band is visible
+         and while the document is backgrounded. */
+      var inView = false;
+      function syncActive() {
+        host.dataset.orbSkyActive = String(inView && !document.hidden);
+      }
+      host.dataset.orbSkyActive = 'false';
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          inView = entries[0].isIntersecting;
+          syncActive();
+        }, { threshold: 0 });
+        io.observe(host);
+      } else {
+        inView = true;
+        syncActive();
+      }
+      document.addEventListener('visibilitychange', syncActive);
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
     else mount();

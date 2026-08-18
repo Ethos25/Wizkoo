@@ -189,6 +189,10 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  contain: layout paint style;
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .linen-hero::before { z-index: 1; }
@@ -224,6 +228,31 @@
 .orb-sky .wk-sky__layer--far .wk-sky__star:not(:nth-child(8n)) {
   animation: none;
   will-change: auto;
+}
+
+/* PERF, measured 2026-08-09: the certified sky at this aperture is 1,834
+   stars. Freezing the dim tiers changed the measured frame rate from 12fps to
+   24fps while keeping their exact inline mid-brightness. This rule previously
+   lived inside index.html's homepage-nav override block; it is consolidated
+   here so the orbital sky has one performance source of truth. */
+.orb-sky .wk-sky__star--mid,
+.orb-sky .wk-sky__star--faint,
+.orb-sky .wk-sky__star--dust {
+  animation: none !important;
+  will-change: auto !important;
+}
+
+/* The certified frozen frame is also the offscreen state. Intersection and
+   document-visibility state are written by js/orbital-sky.js. Pausing instead
+   of removing animations preserves phase and makes re-entry visually seamless. */
+.orb-sky[data-orb-sky-active='false'] .wk-sky__star,
+.orb-sky[data-orb-sky-active='false'] .wk-sky__nebula,
+.orb-sky[data-orb-sky-active='false'] .wk-sky__atmo-wash,
+.orb-sky[data-orb-sky-active='false'] .wk-sky__atmo-lobe,
+.orb-sky[data-orb-sky-active='false'] .wk-sky__airglow,
+.orb-sky[data-orb-sky-active='false'] .wk-sky__wisp,
+.orb-sky[data-orb-sky-active='false'] .wk-sky__shooter {
+  animation-play-state: paused !important;
 }
 
 
