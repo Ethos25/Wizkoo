@@ -71,7 +71,13 @@ publish:
   components/*.js               # nav.js, footer.js — injected into every page
 
   # ── Images ────────────────────────────────────────────────────────────────
-  images/*                      # the 3x2 responsive hero set (jpg + webp)
+  images/hero-child-science-600.jpg   # index.html responsive hero fallback, 600w
+  images/hero-child-science-600.webp  # index.html responsive hero WebP, 600w
+  images/hero-child-science-1000.jpg  # index.html responsive hero fallback, 1000w
+  images/hero-child-science-1000.webp # index.html responsive hero WebP, 1000w
+  images/hero-child-science-1200.jpg  # index.html responsive hero fallback, 1200w
+  images/hero-child-science-1200.webp # index.html responsive hero WebP, 1200w
+  images/turtle_discovery.jpg         # previously published image; retained explicitly
 
   # CORRECTED 2026-08-10. SUPERSEDES the text that stood in this block until
   # this date, which read: "assets/ is 422 files of internal design artefacts and is NEVER globbed."
