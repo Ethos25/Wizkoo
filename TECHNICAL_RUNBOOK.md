@@ -157,6 +157,10 @@ Enforces Standards §1.1 (Session Startup) via Wizkoo-specific confirmation item
 
 Every build session starts with one line from Amy: "Run the Technical Runbook"
 
+ORDER PREAMBLE REQUIREMENT. Every order sent to a build session must open with the line 'Run the Technical Runbook' before its TASK section. An order that opens directly with a task bypasses the startup ritual, and a bypassed ritual means the seven Operating Principles, the eight-section standard, the Preservation Locks Registry, and THE $200 STANDARD are present in the document but not active in the session.
+
+This applies to orders drafted by Amy, by a chat assistant, or carried forward from a prior session's baton. The executor enforces it on the receiving side: an order arriving without the preamble gets the startup ritual run anyway, and the executor states that it did so.
+
 Execute all four steps before touching any file. The global framework is in
 AMY_TECHNICAL_STANDARDS.md Section 1. Wizkoo-specific content follows.
 
@@ -173,7 +177,8 @@ State out loud:
      (3) Report superseded rules, (4) Three-strike reset rule,
      (5) Specificity hygiene, (6) One source of truth per component,
      (7) Viewport verification requirement.
-Do not begin work until all four are confirmed.
+  5. Confirm the EIGHT-SECTION PROMPT STANDARD is active by naming all eight sections in order, and confirm THE $200 STANDARD (Layer 4) is loaded.
+Do not begin work until all five are confirmed.
 
 STEP 2 — CHECK THE TRANSFER QUEUE (Wizkoo backlog mechanism)
 Use the Notion tool to fetch page:
@@ -356,6 +361,45 @@ SESSION-START INSTRUCTION (verbatim, every session):
    change in this session. Pre-flight audit before every non-trivial
    change. Report superseded rules as part of every change. If three
    consecutive tweaks fail, request a reset."
+
+---
+
+## EIGHT-SECTION PROMPT STANDARD — WIZKOO EXTENSION
+
+The Six-Section Prompt Standard becomes the EIGHT-SECTION PROMPT STANDARD. The existing six are unchanged in content and order. Two are added:
+
+  1. TASK
+  2. SCOPE
+  3. RECONCILIATION AUTHORIZED
+  4. PRESERVATION LOCKS
+  5. ANTI-INVENTION RAILS          (new)
+  6. REPORTING
+  7. VERIFICATION
+  8. THE BAR                        (new)
+
+### SECTION 5 — ANTI-INVENTION RAILS
+
+Purpose: close the gap between "what you may not touch" and "what you may not decide." PRESERVATION LOCKS protects code. This section protects judgement. Without it, an executor that hits an unanticipated situation resolves it plausibly and reports the resolution as though it were instructed.
+
+Contents, stated as standing text in every order:
+
+  "Execute what is on this page and only what is on this page. If you hit anything this order does not cover, STOP and report it. Do not infer intent. Do not choose between plausible options. Do not repair what you were not asked to repair. A stop-and-report is a success; an unasked-for decision is not.
+
+  If any section of this order appears truncated or missing, carry the standing locks forward and say so. An absence is never permission."
+
+The truncation clause is not hypothetical. During the sprint an order arrived cut off mid-sentence with six sections missing; the executor carried the standing locks forward rather than reading silence as permission, and said so. That behaviour is now required rather than commendable.
+
+### SECTION 8 — THE BAR
+
+Purpose: name the quality standard the work must meet, and name it last so it is the final thing read before execution begins.
+
+Contents: a reference to THE $200 STANDARD (Layer 4) by name, plus a short APPLIED clause — two to five sentences — stating which register governs this specific task and what failure would look like here. Do not reproduce the full directive; it is loaded at session start.
+
+A BAR section that says only "build it well" is a missing section. The APPLIED clause is what makes it enforceable, because it names the specific failure this task is prone to.
+
+THE RETURN RULE extends to all eight. A prompt missing any of the eight is not ready. Two-sided enforcement stands: drafter on the sending side, executor on the receiving side.
+
+MINIMUM VIABLE PROMPT extends to all eight, content compressed.
 
 ---
 
@@ -2520,3 +2564,4 @@ v4.7 — August 15, 2026: Retired the marketing Library importer's historical --
 v4.8 — August 15, 2026: Reconciled shared marketing-navigation documentation against components/nav.js and the build-time component renderer. Recorded announcement-text Bug 1 as resolved, corrected announcement surface/filter and mobile-boundary descriptions, documented build-time inlining versus runtime behavior, and replaced brittle nav line/count references with semantic component references. No navigation code or behavior changed.
 v4.9 — August 19, 2026: Homepage Form Preservation Locks Registry v3.0 superseded under the August 4 ruling. Twenty-two items retired with their reasons; Items 7, 8, and 32 remain as the only positive locks, and inverse locks 31 and 35 hold at zero. The registry header, current count, and surface now describe the surviving homepage hero rather than the deleted intake form.
 v5.0 — August 19, 2026: THE $200 STANDARD expanded in Layer 4 from summary paragraph to full quality directive (Pixar / New York / Copenhagen registers, the four-part value test, the four-seconds framing, invocation convention, and the explicit statement of what the standard cannot gate). Sourced from the August 3-4 build sprint, where the directive was being pasted verbatim into every Claude Code order. The August 19 ELEVATION reads it together with The Elite Standard and fixes its reference class at the 99.99th percentile of all software.
+v5.1 — August 19, 2026: Prompt Construction Discipline re-anchored to the v4.0+ Layer 1 structure as the Wizkoo eight-section extension over the inherited global six-section definitions. Added ANTI-INVENTION RAILS at position 5, THE BAR at position 8, Session Startup Step 1's fifth confirmation item, and the Order Preamble Requirement.
