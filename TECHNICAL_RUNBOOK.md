@@ -26,7 +26,7 @@ Read this file end to end. Confirm you have read it by stating the four items
 in the SESSION STARTUP INSTRUCTION. Then execute the startup sequence.
 ---
 
-Last updated: August 15, 2026
+Last updated: August 19, 2026
 Maintained by: Amy Oguntala
 
 ---
@@ -1527,38 +1527,7 @@ Why #F0F2F8 not white: Pure white floats on ultramarine. Cool-tinted white sits.
 
 ---
 
-## THE $200 STANDARD (Quality Floor Directive)
-
-Source document (Notion): 338335a8d33281f699d4d705f973d430
-Read the full document before any build session on the legacy plan generator.
-
-### What $200 Feels Like
-
-You know the feeling when you walk into a hotel and within 3 seconds you know it
-costs $400 a night? Nobody told you the price. The lighting is warmer than it needs
-to be. The spacing is more generous than it needs to be. Every surface communicates:
-someone spent more time on this than they had to.
-
-That is what Wizkoo must feel like.
-
-A parent opens the app. Within 3 seconds, before they read a word:
-the linen warmth. The weight of the typography. The saffron that appears
-in exactly two places and nowhere else. The silence where other apps
-would have confetti. The space between elements that says "we chose not to cram more in."
-
-They don't think "$200 product." They feel "this is unusually good."
-Then they see $50 and the gap between what they feel and what they pay
-becomes the story they tell their friend. THAT GAP IS THE PRODUCT.
-
-### What Kills the $200 Feeling (instantly, not gradually)
-
-A rounded corner where everything else is sharp. Dead.
-A system font where Sora should be. Dead.
-A green checkmark in a product that uses saffron. Dead.
-A "Loading..." where a breathing saffron dot should be. Dead.
-A bounce animation where editorial easing should be. Dead.
-An error message that says "Oops! Something went wrong!" Dead.
-A default Tailwind gray where the warm paper-crease border should be. Dead.
+## THE $200 STANDARD — QUALITY FLOOR DIRECTIVE
 
 One plastic cup and the entire illusion collapses.
 "Style the card nicely" is how plastic cups get in.
@@ -1566,78 +1535,47 @@ One plastic cup and the entire illusion collapses.
 pseudo-element shadow, sharp corners (2px), hover lifts translateY(-2px)
 with cubic-bezier(0.16,1,0.3,1) while shadow stays planted" is how you prevent them.
 
-### The Parent's Internal Monologue
-
-SECOND 1:  "Oh. This is warm. This doesn't look like an app. Stationery."
-SECOND 3:  "That font. Light but confident. Like a magazine, not a website."
-SECOND 5:  "Gold. Not yellow. Just a touch of it. Expensive feeling."
-SECOND 10: "The cursor changed. The card lifted. Someone built every detail."
-MINUTE 1:  "It's using my child's name. In a sentence a person wrote. While I watch."
-MINUTE 2:  "This plan looks like it came from a design studio. I want to print this."
-MINUTE 3:  "This is $50? How is this $50?"
-
-If any step breaks, the parent never reaches the last thought.
-
-### The Prompt Standard
-
 Before writing any Claude Code prompt, ask:
 "Will this produce a surface a parent would screenshot and send to a friend?"
 
 The answer must be "yes, because every color traces to a token, every font has
 a specific weight, every animation has a named curve, and every pixel has a reason."
 
-### THE BAR (deposited 2026-08-05, authority Notion)
+### WHAT WE ARE BUILDING
 
-Reproduced verbatim. **Authority is Notion**, per the system-of-record
-boundary at the top of this file; this is a carried copy for executors who
-arrive without an order in hand, NOT a second source of truth. If the two
-ever disagree, Notion governs and this copy is stale. **The composition
-template is governed by the Session Runbook in Notion** — this file carries
-the text so that an executor without an order in hand is not left with
-nothing.
+A product that looks like it came out of a Pixar studio with a New York agency and a Copenhagen studio behind it. That is the standard. Not "clean." Not "modern." That.
 
-What we are building: a product that looks like it came out of a Pixar
-studio with a New York agency and a Copenhagen studio behind it. Not
-"clean." Not "modern." That.
+PIXAR. Every frame has emotional intent. The composition tells the eye where to go and tells the body how to feel before a single word is read. Motion has weight and consequence: things arrive from somewhere, settle because something stopped them, and leave for a reason. Nothing eases in because easing is the default. If a movement cannot be explained as a physical event, it is wrong.
 
-PIXAR. Every frame has emotional intent. The composition tells the eye
-where to go and the body how to feel before a word is read. Motion has
-weight and consequence: things arrive from somewhere, settle because
-something stopped them, and leave for a reason. Nothing eases in because
-easing is the default. If a movement cannot be explained as a physical
-event, it is wrong.
+NEW YORK. Editorial confidence. Hierarchy that commands rather than suggests. Type that is set, not styled. One thing is the loudest thing on the surface and it is loud on purpose. Nothing is timid, nothing is hedged, nothing is centered because centering was easier than deciding.
 
-NEW YORK. Editorial confidence. Hierarchy that commands rather than
-suggests. Type that is set, not styled. One thing is the loudest thing on
-the surface and it is loud on purpose. Nothing timid, nothing hedged,
-nothing centered because centering was easier than deciding.
+COPENHAGEN. Material honesty and restraint. Surfaces behave like substances with real properties. Silence is composed as deliberately as content. The confidence to leave a thing plain. No decoration that is not structural.
 
-COPENHAGEN. Material honesty and restraint. Surfaces behave like substances
-with real properties. Silence is composed as deliberately as content. The
-confidence to leave a thing plain. No decoration that is not structural.
+### THE TEST FOR EVERY VALUE
 
-THE TEST FOR EVERY VALUE. Is this value authored, or is it a default? Every
-number — spacing, duration, opacity, radius, weight — must be a chosen value
-on a known scale for a stated reason. Framework defaults, browser defaults,
-and round numbers that arrived by habit all fail. Does it survive close
-inspection at 200% zoom, at the edge of every surface, the terminal of every
-letterform, the moment a shadow resolves? Are the unglamorous states
-composed — focus, hover, disabled, empty, loading, error, longest string,
-shortest? A default focus ring is a confession. Does it look webby? Rounded
-corners plus a drop shadow plus a blue link is not design, it is the absence
-of design.
+Is this value authored, or is it a default? Every number — spacing, duration, opacity, radius, weight — must be a chosen value on a known scale, for a stated reason. Framework defaults, browser defaults, and round numbers that arrived by habit all fail.
 
-WHAT IT IS FOR. A mother opens this at her kitchen table and decides in
-about four seconds whether the people who made it are serious. She will not
-articulate what she saw. She will just know.
+Does it survive close inspection? Zoom to 200%. Look at the edge of every surface, the terminal of every letterform, the moment a shadow resolves. Craft is what holds up when someone leans in.
 
-ONE PLASTIC CUP collapses the whole illusion, and the guest does not think
-the cup was cheap — they think the place is pretending.
+Are the unglamorous states composed? Focus, hover, disabled, empty, loading, error, the longest possible string, the shortest. These are where products reveal whether anyone actually cared. A default focus ring is a confession.
 
-THE LIMIT. Some of this is gateable and some is not. "Every value authored"
-cannot be checked by a script. Those clauses are held by Amy's eye, which is
-why the walk exists and why painted pixels outrank a passing test. A green
-suite is never evidence this standard was met.
+Does it look webby? Rounded corners plus a drop shadow plus a blue link is not design, it is the absence of design. If a choice could have been made by a framework, remake it.
+
+### WHAT THIS IS FOR
+
+A mother opens this at her kitchen table and decides in about four seconds whether the people who made it are serious. She will not articulate what she saw. She will just know. Everything above exists to make that four seconds land in our favor.
+
+### HOW ORDERS INVOKE IT
+
+Orders reference this standard by name rather than reproducing it: "Build to THE $200 STANDARD, Layer 4." Where an order needs to apply the standard to a specific task, it adds a short APPLIED clause naming which of the three registers governs and why — not a restatement of the whole directive.
+
+The standard is loaded at session start with the rest of the runbook. A prompt that pastes it in full is a prompt that does not trust the runbook, and the fix is to fix the loading, not to keep pasting.
+
+### THE LIMIT OF THIS STANDARD
+
+Some of this is gateable and some is not. "Every value authored" cannot be checked by a script. Those clauses are held by the founder's eye, which is why the walk exists and why painted-pixel verification outranks a passing test. Do not treat a green suite as evidence that this standard was met.
+
+ELEVATION (Aug 19, 2026): This directive is read together with The Elite Standard (Notion, under Wizkoo), which fixes the reference class — the 99.99th percentile of all software, calibrated against Linear, Arc, Apple product pages, Stripe, and Pixar title cards — and restates the dark-room test against that class. Category-level approval is a miscalibrated approval.
 
 ---
 
@@ -2089,95 +2027,43 @@ lock is known from session open. If a prompt appears to touch a registered surfa
 but does not reference the registry, apply the registry proactively and confirm with
 Amy before executing.
 
-### HOMEPAGE FORM PRESERVATION LOCKS
+### HOMEPAGE FORM PRESERVATION LOCKS — SUPERSEDED
 
-Surface: the intake form on the homepage hero (index.html).
-Registry version: v3.0 (2026-04-22). 35 items across Clusters A–F.
-Items 1–25 anchored against commit 2087f59. Items 26–35 added 2026-04-21 evening.
-Retired items (4, 10, 11, 14, 15, 25) remain as retirement markers.
+Surface: the surviving homepage hero content in index.html after the July 31, 2026 deletion of the intake form.
+Registry status: v3.0 (2026-04-22) is SUPERSEDED. Do not read it as current.
+Current count: three surviving positive locks (Items 7, 8, and 32) and two inverse locks (Items 31 and 35). Twenty-two named items retired under the August 4, 2026 ruling.
 
-ANCHORING CONVENTION: Every item lists semantic description (primary, stable),
-element ID or selector (stable), and line number (drifts — re-verify each session).
+WHY: v3.0 declared its surface as "the intake form on the homepage hero (index.html)." The July 31 Excellence Round 1 ruling deleted that surface. Protected status was protection from UNRULED edits. The July 31 supersessions are RULED, so they override. The retired copy was recorded in docs/archive/homepage-2026-07-31/KILLED-COPY.md before that archive was removed from the tree.
 
-CLUSTER A — STRUCTURAL LOCKS (SEO + ACCESSIBILITY)
+RETIRED — 22 items, with the reason each one died:
 
-Item 1  — Visually-hidden H1 for SEO. Selector: h1.visually-hidden. Line ~1565.
-Item 2  — novalidate on both forms. All validation is JS-driven. Line ~1592, 1669.
-Item 3  — Wiggly kid fieldset semantics. <fieldset> + <legend class="visually-hidden">
-           + radio inputs with default checked on yes. Selector: fieldset[name="wigglyKid"].
-Item 4  — RETIRED (2026-04-21 V14 Q6). Age combobox ARIA contract. Superseded by
-           Item 26 (native number input stepper).
+- Cluster A (structural): 1 visually-hidden H1, 2 novalidate, 3 wigglyKid fieldset semantics. Anchored to form DOM that no longer exists.
+- Cluster B (copy): 5 three-line H1 stack, 6 "...so you never wonder what's missing." Ruled superseded by the hero arrest/answer pair. KILLED-COPY.md section 1, strings 1-4.
+- Cluster C (theme field): 12 two-word cap via keydown, 13 paste sanitizer. Theme input retired.
+- Cluster D (age input): 16 age range placeholder, 26 Age Stepper Native-First Contract. Age input retired.
+- Cluster E (submit validation / the content gate): 17 capture-phase submit intercept, 18 client blocklist + leet normalization, 19 BLOCKLIST_EXACT, 20 server validation via /api/validate-theme, 21 error UI states, 22 blocked-theme recovery flow, 27 Content Gate Tier Structure, 28 3-second progress hairline, 29 Content Gate Error Register. The whole chain died with the form and with netlify/functions/validate-theme.js, which was archived rather than deleted.
+- Cluster F: 30 No Live Generation on Homepage Submit (there is no submit), 33 Sample Label Template, 34 Subscribe CTA "Start [Name]'s plan", 36 CTA + sub-CTA Unit Integrity.
 
-CLUSTER B — COPY LOCKS
+ITEM 34 — RETIRED ON A CORRECTED RULING, NOT A REVERSED ONE.
 
-Item 5  — H1 three-line composition: "Personalized weekly / homeschool plans. /
-           And tracking." Three lines. Not two. Not merged. Selectors: .nh-h1-line1/2/3.
-Item 6  — Subline: "...so you never wonder what's missing." Selector: .nh-subline.
-Item 7  — Desk note kernel: "What your child can't stop talking about. Dragons.
-           Tornadoes. Volcanoes." Three-noun cadence is the distinctive voice element.
-Item 8  — Desk signature pair: "— THE WIZKOO DESK" plus dateline. Both halves required.
-Item 9  — Proof line: "ONE PRICE · UP TO 4 CHILDREN" — locked wording, locked position.
+Item 34's anchor is a CTA whose name is bound to the form's name input. The form is ruled gone, so the anchor cannot exist. It is the twin of Item 33, already retired on the same reasoning.
 
-CLUSTER C — THEME FIELD MECHANICS
+Item 34 was first reported as surviving, and that report was wrong. The verification regex was `Start .{0,12}s plan|Start My Subscription`. Its second alternative matched "Start My Subscription" — a different string in the pricing block, unrelated to Item 34. The literal registry content ("Start [Name]'s plan" and its secondary link "How Wizkoo works") measures zero occurrences on both old production 261792a and merged main 59ac112. It never shipped on the homepage at all.
 
-Item 10 — RETIRES WITH V14. Theme-sizer auto-expand. Superseded by static placeholder.
-Item 11 — RETIRES WITH V14. Rotating placeholder system. Superseded by tag chips.
-Item 12 — Two-word cap via keydown. Hyphens and apostrophes are NOT word separators.
-Item 13 — Paste sanitizer: collapses whitespace, takes first two tokens, uses
-           execCommand('insertText') for cursor-aware insertion.
+Amy rejected adopting "Start My Subscription" as Item 34's survivor because that would make the registry agree with reality by editing what a lock means rather than its status: "A registry that redefines its own items to stay true is not a registry."
 
-CLUSTER D — AGE INPUT MECHANICS
+Consequence for future readers: nothing regressed at the merge — Item 34 is identically absent before and after — so this would never have surfaced from a diff. It was caught only by measuring the literal string.
 
-Item 14 — RETIRES WITH V14. Position:fixed anchoring for age panel.
-Item 15 — RETIRES WITH V14. Scroll-close on capture phase.
-Item 16 — Age range placeholder: 3-12. Status: RESOLVED automatically by V14 Prompt 1.
-Item 26 — Age Stepper Native-First Contract. Native <input type="number"> with
-           min=3, max=12, step=1, required, inputmode="numeric", autocomplete="off",
-           aria-describedby="age-error". readonly attribute added (2026-04-22):
-           no typing permitted. Steppers, wheel, keyboard arrows, touch-hold only.
-           Selector: #f-age, .age-box, .stepper-decrement, .stepper-increment, #age-error.
+SURVIVORS — THREE, NOT FOUR. All three were verified holding against the deployed page:
 
-CLUSTER E — SUBMIT VALIDATION CHAIN (THE CONTENT GATE)
+- Item 7 desk note kernel: "What your child can't stop talking about. Dragons. Tornadoes. Volcanoes." Three-noun cadence intact.
+- Item 8 desk signature pair: "— The Wizkoo Desk" plus the dynamic dateline (#desk-sig). Both halves present.
+- Item 32 primary CTA: `See a sample week<span class="arrow">&#x2192;</span>` — byte-identical markup to production 261792a.
 
-Item 17 — Capture-phase submit intercept. Two listeners, two phases, one validationPassed
-           flag. Do NOT consolidate without understanding this architecture.
-Item 18 — Client blocklist with leet normalization. BLOCKLIST + normalizeLeet() + isThemeBlocked().
-Item 19 — Exact-match blocklist. BLOCKLIST_EXACT + isExactBlocked(). Do NOT collapse into BLOCKLIST.
-Item 20 — Server-side validation via /api/validate-theme (Netlify function). 3-second timeout.
-Item 21 — Error UI states (UPDATED V14 Q7): two states — theme-error (blocked) and
-           theme-network-error (timeout). Both use aria-live="polite". See-suggestions link RETIRED.
-Item 22 — Blocked-theme recovery flow (UPDATED V14 Q7): clear input + show error + chip sweep.
-Item 27 — Content Gate Tier Structure. Tier 0 = safety-critical (ZERO UI feedback).
-           Tier 1 = age-appropriateness (chip sweep + saffron error). MUST SURVIVE.
-Item 28 — 3-Second Server Validation Progress Signal. Saffron progress hairline animates
-           during server validation. prefers-reduced-motion: static hairline. MUST SURVIVE.
-Item 29 — Content Gate Error Register. saffron #B88414 text, NO red, NO exclamation,
-           NO apology copy. Chip-row sweep 600ms on Tier 1 rejection. MUST SURVIVE.
+INVERSE LOCKS:
 
-CLUSTER F — GATE READY STATE + SAMPLE DISPLAY
-
-Item 23 — Two-stage gate (PARTIALLY SUPERSEDED V14 Q8): progress state retained
-           (single 3-second saffron hairline). Ready state: displays matched static
-           sample week, not a generated plan.
-Item 24 — Onboarding URL construction (CONTRACT EVOLVED V14 Q8+Q4):
-           Children stored as array; passed via sessionStorage OR query params
-           (decision pending). Email NOT captured at this handoff.
-Item 25 — RETIRED (V14 Q8). Email capture moved to Phase 2 subscription checkout.
-Item 30 — No Live Generation on Homepage Submit. Submit chain terminates at lookup
-           + render only. NO calls to generation API in public-path code. MUST SURVIVE.
-Item 31 — RETIRED (V14 Prompt 9). Homepage CTA Expectation Microcopy deleted.
-           Grep for class "cta-note" in index.html must return zero matches.
-Item 32 — Primary CTA Button Text: EXACTLY "See a sample week →". No substitutions.
-           Load-bearing honesty under Q8 product model.
-Item 33 — Sample Label Template: "This is a sample week for age [X]. Subscribe to
-           build [Name]'s plan around what they said in the car." MUST SURVIVE.
-Item 34 — Subscribe CTA: "Start [Name]'s plan →". Name bound to form input.
-           Secondary link "How Wizkoo works" below (typographic, not button). MUST SURVIVE.
-Item 35 — Email Capture at Subscription, Not Pre-Subscription. No email input on
-           homepage or gate ready state. Grep for type="email" must return zero. MUST SURVIVE.
-Item 36 — CTA + Sub-CTA Unit Integrity. Primary CTA and sub-CTA ("MORE KIDS? · ADD THEM NEXT")
-           are one visual unit. They move together, align together. Never separate them
-           independently. MUST SURVIVE.
+- Item 31: `.cta-note` holds at zero.
+- Item 35: `input type="email"` holds at zero.
 
 ### ADDING NEW REGISTRIES
 
@@ -2632,3 +2518,5 @@ v4.5 — August 5, 2026: Marketing deployment block corrected in Layer 3. It des
 v4.6 — August 5, 2026: Entry-file pointer added to this file, ahead of the Table of Contents. A session handed this runbook by name had no route to README.md; the new section sends it there, names AGENTS.md and GEMINI.md as the same door under other names, and maps the repository's governing documents by purpose without restating any of them. The section carries no SHAs, counts or version numbers by its own stated rule. GEMINI.md created at the root as a pointer to README.md; one line added to README.md recording that it exists. No other section of this file was touched. Branch docs/marketing-runbook-map.
 v4.7 — August 15, 2026: Retired the marketing Library importer's historical --schema execution path. sql/library-schema.sql and sql/add-amazon-link.sql are historical evidence only; current database, RLS, and migration authority is wizkoo-app/apps/app/supabase/migrations/. No database operation, SQL execution, or migration was performed.
 v4.8 — August 15, 2026: Reconciled shared marketing-navigation documentation against components/nav.js and the build-time component renderer. Recorded announcement-text Bug 1 as resolved, corrected announcement surface/filter and mobile-boundary descriptions, documented build-time inlining versus runtime behavior, and replaced brittle nav line/count references with semantic component references. No navigation code or behavior changed.
+v4.9 — August 19, 2026: Homepage Form Preservation Locks Registry v3.0 superseded under the August 4 ruling. Twenty-two items retired with their reasons; Items 7, 8, and 32 remain as the only positive locks, and inverse locks 31 and 35 hold at zero. The registry header, current count, and surface now describe the surviving homepage hero rather than the deleted intake form.
+v5.0 — August 19, 2026: THE $200 STANDARD expanded in Layer 4 from summary paragraph to full quality directive (Pixar / New York / Copenhagen registers, the four-part value test, the four-seconds framing, invocation convention, and the explicit statement of what the standard cannot gate). Sourced from the August 3-4 build sprint, where the directive was being pasted verbatim into every Claude Code order. The August 19 ELEVATION reads it together with The Elite Standard and fixes its reference class at the 99.99th percentile of all software.
