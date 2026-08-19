@@ -57,3 +57,12 @@ library/actual-size.html
 # embedded path instead: ASCII-only, root-anchored, and impossible to confuse
 # with CLAUDE.md or any real page.
 /*UsersamyogDesktopWizkoo*
+
+# Tool output, Aug 18 2026. Neither was ignored before this date despite the
+# Aug 3 ruling that both "stay untracked" — the ruling was recorded in memory
+# and never enforced in the tree. Not published either way: publish-allowlist
+# .txt names neither, and that is what decides.
+#   .netlify/      Netlify CLI link/state for this machine
+#   test-results/  Playwright run output
+.netlify/
+test-results/
