@@ -2093,27 +2093,6 @@ body.page-home{
 <link rel="stylesheet" href="css/hero-window.css">
 <link rel="stylesheet" href="css/constellation.css">
 <link rel="stylesheet" href="css/orbital.css">
-</head>
-<body class="page-home" data-footer-treatment="b">
-<!-- ═══ SKY SYSTEM: cream wash (fixed, behind all content) ═══ -->
-<div id="creamWash" aria-hidden="true"></div>
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="firefly" id="firefly"></div>
-
-<div id="wizkoo-nav"></div>
-<script src="/components/nav.js?v=5"></script>
-<!-- ═══ HOMEPAGE-ONLY NAV OVERRIDES ═══ -->
-<!-- JS direct-set: runs after nav.js, wins every cascade battle -->
-<script>
-(function(){
-  var ann = document.querySelector('.announce');
-  if(!ann) return;
-  ann.style.setProperty('background','#0C1020','important');
-  ann.style.setProperty('backdrop-filter','none','important');
-  ann.style.setProperty('-webkit-backdrop-filter','none','important');
-})();
-</script>
 <style id="hp-nav-overrides">
 /* Announcement bar — solid dark */
 .page-home .announce{
@@ -2162,6 +2141,27 @@ body.page-home{
 .page-home .nav.nav--scrolled{background:rgba(248,244,233,0.55)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}
 .page-home .nav.nav--scrolled.nav--surface-dark{background:rgba(12,16,32,0.95)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 </style>
+</head>
+<body class="page-home" data-footer-treatment="b">
+<!-- ═══ SKY SYSTEM: cream wash (fixed, behind all content) ═══ -->
+<div id="creamWash" aria-hidden="true"></div>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="firefly" id="firefly"></div>
+
+<div id="wizkoo-nav"></div>
+<script src="/components/nav.js?v=5"></script>
+<!-- ═══ HOMEPAGE-ONLY NAV OVERRIDES ═══ -->
+<!-- JS direct-set: runs after nav.js, wins every cascade battle -->
+<script>
+(function(){
+  var ann = document.querySelector('.announce');
+  if(!ann) return;
+  ann.style.setProperty('background','#0C1020','important');
+  ann.style.setProperty('backdrop-filter','none','important');
+  ann.style.setProperty('-webkit-backdrop-filter','none','important');
+})();
+</script>
 <!-- ═══ NAV SURFACE DETECTION ═══ -->
 <script>
 document.addEventListener('DOMContentLoaded',function(){
