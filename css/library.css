@@ -9,11 +9,11 @@
 }
 
 /* ── Scroll snap (desktop only) ──────────────────────────────────────────── */
-/* scroll-padding-top accounts for sticky nav (82px) so snap points land
+/* scroll-padding-top accounts for sticky nav (89px) so snap points land
    below the nav bar, not hidden behind it.                                  */
 html:has(#main-content) {
   scroll-snap-type: y proximity;
-  scroll-padding-top: 82px;
+  scroll-padding-top: 89px;
 }
 .lib-featured-cluster,
 .lib-hero,
@@ -188,9 +188,9 @@ body {
 
 /* ── Featured Cluster ────────────────────────────────────────────────────── */
 .lib-featured-cluster {
-  /* min-height fills viewport below nav (nav=82px), pushing hero below fold on all viewports */
+  /* min-height fills viewport below nav (nav=89px), pushing hero below fold on all viewports */
   padding: clamp(72px, 12vh, 96px) var(--content-pad) clamp(24px, 4vh, 48px);
-  min-height: calc(100vh - 82px);
+  min-height: calc(100vh - 89px);
   position: relative;
   z-index: 1;
 }

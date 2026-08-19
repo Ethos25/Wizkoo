@@ -3,6 +3,8 @@
  * THE 1440x800 LOCK
  *
  * 1440x800 is the approved hero frame and Amy ruled that composition good.
+ * Baseline updated to ba8ac1f geometry, ruled by Amy Aug 19, 2026. Previous
+ * Aug 2 baseline superseded by the Aug 6 ruled change.
  * This test exists so a future change to the --u scaling law (index.html, .hh)
  * cannot silently move it.
  *

@@ -5,7 +5,7 @@
  *
  * Structure (top to bottom inside #wizkoo-nav):
  *   1. .announce  — position:sticky top:0   z-index:21  (scrolls away on mobile)
- *   2. .nav        — position:sticky top:30px z-index:20  (always present, sticks below bar)
+ *   2. .nav        — position:sticky top:37px z-index:20  (always present, sticks below bar)
  *   3. #nav-mobile-menu — position:fixed, opens below nav
  *
  * Active link is detected automatically from window.location.pathname.
@@ -56,7 +56,7 @@
 
       /* ═══ ANNOUNCEMENT BAR ═══ */
       '.announce{',
-      '  height:30px;',
+      '  height:37px;',
       '  margin:0;',
       '  background:rgba(12,16,32,0.96);',
       '  backdrop-filter:none;',
@@ -78,10 +78,10 @@
       '}',
       '.announce-text{',
       '  font-family:\'Space Mono\',monospace;',
-      '  font-size:7px;',
-      '  letter-spacing:0.28em;',
+      '  font-size:9px;',
+      '  letter-spacing:0.12em;',
       '  text-transform:uppercase;',
-      '  color:rgba(232,175,56,0.75);',
+      '  color:#E8AF38;',
       '  position:relative;',
       '  z-index:1;',
       '}',
@@ -281,10 +281,10 @@
   }
 
   /* ── Container is the sticky element ──────────────────────────────── */
-  /* top:-30px = negative of announce bar height.                         */
-  /* As page scrolls 30px, bar clips above viewport, nav locks at top.   */
+  /* top:-37px = negative of announce bar height.                         */
+  /* As page scrolls 37px, bar clips above viewport, nav locks at top.   */
   el.style.position = 'sticky';
-  el.style.top      = '-30px';
+  el.style.top      = '-37px';
   el.style.zIndex   = '20';
 
   /* ── Path (needed for both HTML and active-link logic below) ─────── */
@@ -303,10 +303,10 @@
 
     /* 1. Announcement bar — sticky top:0, scrolls away on mobile */
     '<div class="announce" role="banner" aria-label="Site announcement">',
-    '  <span class="announce-text">Your homeschool, run on a system. Ages 3 to 12. Books. Games. Connected by one theme.</span>',
+    '  <span class="announce-text">Interest-led weekly homeschool plans, ages 3 to 12. Tracked to state standards.</span>',
     '</div>',
 
-    /* 2. Frosted glass nav — sticky top:30px, always present on desktop */
+    /* 2. Frosted glass nav — sticky top:37px, always present on desktop */
     '<div class="nav" id="site-nav" role="navigation" aria-label="Main navigation">',
     '  <a href="/" class="nav-wm" aria-label="Home">w<span class="i-fix">i</span>z<span class="k">k</span>o<span class="wm-dot">o</span></a>',
     '  <div class="nav-center">',
