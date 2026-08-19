@@ -403,6 +403,29 @@ MINIMUM VIABLE PROMPT extends to all eight, content compressed.
 
 ---
 
+## SEND AUTHORITY — PUSH, DEPLOY, DATABASE (Amy ruling, Aug 19, 2026)
+
+Amy is the only authority for externally visible actions. An order
+authorizes them as follows:
+
+- Pushes and deploys: an order from command that names the exact
+  commit SHA(s) or branch it authorizes constitutes Amy's explicit
+  approval. Execute without a further confirmation round. An order
+  without named SHAs/branch does not authorize a push; stop and
+  report.
+- Production database operations: never authorized by SHA-naming
+  alone. They require a dedicated line in the order: "EXPLICIT
+  AUTHORIZATION FOR PRODUCTION DATABASE OPERATIONS," present only
+  when Amy has knowingly granted it for that order. Absent that
+  line, stop.
+- The Ranti delegate's Exclusive Send Authority (v1.1) is
+  unchanged: the delegate never sends external communications or
+  executes transactions, regardless of this rule.
+- No phrase substitutes for the above. Supersedes all informal
+  "I SUPERSEDE RANTI" practice.
+
+---
+
 ## WIZKOO CODE HYGIENE PROMPTS
 Enforces Standards §4 (Code Hygiene) via templates pre-filled with Wizkoo file paths and scoped exclusion lists.
 
@@ -2566,3 +2589,4 @@ v4.9 — August 19, 2026: Homepage Form Preservation Locks Registry v3.0 superse
 v5.0 — August 19, 2026: THE $200 STANDARD expanded in Layer 4 from summary paragraph to full quality directive (Pixar / New York / Copenhagen registers, the four-part value test, the four-seconds framing, invocation convention, and the explicit statement of what the standard cannot gate). Sourced from the August 3-4 build sprint, where the directive was being pasted verbatim into every Claude Code order. The August 19 ELEVATION reads it together with The Elite Standard and fixes its reference class at the 99.99th percentile of all software.
 v5.1 — August 19, 2026: Prompt Construction Discipline re-anchored to the v4.0+ Layer 1 structure as the Wizkoo eight-section extension over the inherited global six-section definitions. Added ANTI-INVENTION RAILS at position 5, THE BAR at position 8, Session Startup Step 1's fifth confirmation item, and the Order Preamble Requirement.
 v5.2 — August 19, 2026: Sitewide footer headings renamed to "The whole house" / "Behind Wizkoo" / "Say hello" in the canonical component and reconciled in Locked Decisions. "Gift a Term" was not added because no live gift destination exists.
+v5.3 — August 19, 2026: Send Authority rule added to Layer 1, defining exact branch or commit naming as push/deploy approval, requiring a dedicated authorization line for production database operations, and preserving the Ranti delegate's Exclusive Send Authority.
