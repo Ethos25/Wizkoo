@@ -39,7 +39,6 @@ publish:
   ages.html                     # /ages
   contact.html                  # /contact      orphan: not in nav, footer or sitemap
   esa.html                      # /esa          hub for the 50 state pages below
-  games.html                    # /games
   library.html                  # /library
   methodology.html              # /methodology
   pricing.html                  # /pricing
@@ -54,9 +53,6 @@ publish:
   # ── ESA state pages ───────────────────────────────────────────────────────
   # 50 states, one directory each. All 50 are in sitemap.xml.
   esa/*/index.html              # /esa/alabama ... /esa/wyoming
-
-  # ── Game pages ────────────────────────────────────────────────────────────
-  games/*.html                  # /games/atlas, /games/elementum
 
   # ── Library book detail ───────────────────────────────────────────────────
   # One template behind a rewrite. netlify.toml and _redirects both send
@@ -107,4 +103,5 @@ declined:
   # Root-level .html files that are NOT pages. Seen, and deliberately not
   # shipped. Listing a file here does not exclude it — not being under
   # `publish:` already did that. This only tells the guard a human decided.
+  games.html                    # ORDER #41: preserved in repo, removed from the public surface
   lighthouse-report.html        # generated audit artefact, not a page

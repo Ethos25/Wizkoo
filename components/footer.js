@@ -485,7 +485,6 @@
     '    <nav class="wf-nav" aria-label="The whole house">',
     '      <div class="wf-col-header" aria-hidden="true">The whole house</div>',
     '      <a href="https://app.wizkoo.com/start">The Plan</a>',
-    '      <a href="/games">The Games</a>',
     '      <a href="/library">The Library</a>',
     '      <a href="/methodology">The Science</a>',
     '      <a href="/ages">The Ages</a>',
