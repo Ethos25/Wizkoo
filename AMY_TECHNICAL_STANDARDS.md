@@ -31,6 +31,118 @@ Apply to every project. Add project-specific content to the project runbook, not
 ---
 
 ═══════════════════════════════════════
+ORDER AUTONOMY
+Version stamp: Order #59 — 2026-08-20
+═══════════════════════════════════════
+
+════════════════════════════════════════════════════════════
+BLOCK 1 OF 4 — AUTONOMY TIER
+════════════════════════════════════════════════════════════
+
+DECIDE AND PROCEED — no report-back, no permission, chain freely:
+  · Environment repair: delete, reinstall, take ownership, retry,
+    reconfigure local tooling, second and third approaches
+  · Any local repo state: node_modules, caches, stores, lockfile
+    mirrors, worktree hygiene
+  · Local commits — commit as you go, freely
+  · Which approach to take when several would work
+  · Running multiple cards in one session
+  · Re-running any verification chain after a fix
+
+════════════════════════════════════════════════════════════
+BLOCK 2 OF 4 — STOP TAXONOMY
+════════════════════════════════════════════════════════════
+
+STOP — the complete list. Nothing else stops you:
+
+  1. PUSH GATE. Never push. Ever. Local commits only.
+  2. JUDGMENT. Copy, design taste, product scope, or anything a
+     parent will see or feel. Not yours. Not Claude's.
+  3. GENUINE FORK. Governed by BLOCK 3. Hard-stops only under the
+     exceptions listed there.
+  4. UNVERIFIABLE FACT. You need something true about the machine,
+     the product, or a prior ruling that you cannot verify. Do not
+     assume it. Do not infer it from a name or a path.
+  5. SCOPE WALL. The work requires touching something the order's
+     SCOPE section forbids.
+  6. THIRD FAILURE, SAME CLASS. Three distinct approaches to the
+     same obstacle have failed. Report all three verbatim.
+  7. GREEN CHAIN IMPOSSIBLE. The verification chain cannot be run
+     at all. Say why, say what remains unverified, stop.
+
+A stop is a success. An invented cause is not.
+
+════════════════════════════════════════════════════════════
+BLOCK 3 OF 4 — FORK HANDLING: PROCEEDED UNDER PROTEST
+════════════════════════════════════════════════════════════
+
+A genuine fork does not stop you by default. When two live paths
+exist and evidence does not settle it:
+
+  1. Take the REVERSIBLE path. Reversible = undoable by a local
+     commit revert, a config change, or a reinstall. If neither
+     path is reversible, that is a hard stop.
+  2. Commit locally and keep going.
+  3. Log it as PROCEEDED UNDER PROTEST with: both paths, which you
+     took, why, and exactly how to undo it.
+  4. Surface every protest at the TOP of the report, above the
+     mandate outcome.
+
+Hard stop anyway, regardless of reversibility:
+  · The fork is a judgment call (copy, taste, scope, parent-facing)
+  · Undoing it would cost more than the work it unblocks
+  · It changes a ruled decision recorded in Notion
+
+════════════════════════════════════════════════════════════
+BLOCK 4 OF 4 — MANDATE QUEUE
+════════════════════════════════════════════════════════════
+
+An order may carry multiple mandates in precedence order:
+
+  M1 [highest]: [outcome] — DONE = [condition]
+  M2:           [outcome] — DONE = [condition]
+  M3:           [outcome] — DONE = [condition]
+
+Work M1 to completion or hard stop. On a hard stop, log it, leave
+the branch clean, and move to M2. Do not idle. Do not return to a
+stopped mandate unless a later mandate's work resolves its blocker,
+and say so if it does.
+
+Report covers every mandate attempted: outcome or stop, in order.
+
+════════════════════════════════════════════════════════════
+THE SEVEN STANDING RULINGS
+════════════════════════════════════════════════════════════
+
+1. PNPM STORE LOCATION. The store lives outside any repo, machine-
+   wide, at C:\pnpm-store. A repo-local store means one corrupted
+   store takes the entire workspace down. Codex sets this without
+   asking. Migration of an existing repo-local store is its own
+   order.
+2. PNPM VERSION. Pinned at 9.0.0. Codex may not change it, may not
+   edit packageManager, may not route around it via corepack. If a
+   clean-slate install still fails on 9, that is evidence and it
+   stops — the upgrade decision is then evidence-backed, not a
+   guess.
+3. GOVERNANCE FILES EDITED CONCURRENTLY. Never touch, never commit,
+   never include. Report by filename. Another order owns them.
+4. UNRELATED WORKING-TREE CHANGES AT COMMIT TIME. Commit only
+   order-scoped files. Leave the rest modified and uncommitted.
+   List them in the report.
+5. CHANGED SNAPSHOT TESTS. A changed snapshot is a regression until
+   proven otherwise. Never auto-update, never pass -u. If the change
+   is believed intentional, that is a judgment call and it stops.
+6. STALE WORKTREES. Detached and merged worktrees may be pruned
+   freely. Worktrees on named order branches require a ruling and
+   are never pruned unilaterally.
+7. BRANCH WHOSE BASE MOVED. Rebase onto current main. Never
+   force-push. If history would be rewritten, cut a -r2 ref
+   preserving the original. Promoted to standing law from Order
+   #54's A3/A5 disposition.
+
+---
+
+═══════════════════════════════════════
 SECTION 1 — SESSION MECHANICS
 Execute every session. Every project. No exceptions.
 ═══════════════════════════════════════
