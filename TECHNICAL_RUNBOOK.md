@@ -6,7 +6,7 @@
 
 **Do not apply updates from this document to any other project's Technical Runbook.** If you find yourself reading this while working on Learnkoo or any other project, stop — you have the wrong file open.
 
-**Inherits from:** AMY_TECHNICAL_STANDARDS.md (located at C:\Users\amyog\Desktop\wizkoo\AMY_TECHNICAL_STANDARDS.md). Read that first.
+**Inherits from:** AMY_TECHNICAL_STANDARDS.md (located at C:\dev\standards\AMY_TECHNICAL_STANDARDS.md). Read that first.
 
 ---
 
@@ -789,7 +789,7 @@ Full entry with technical specs: LAYER 4 — NAV SYSTEM section.
 - Footer column placement for "Themes to Explore": BEHIND WIZKOO column (wf-learn), not THE WHOLE HOUSE column (wf-nav). Reconciled to the ruled headings August 19, 2026; original placement locked April 26, 2026.
 - Footer column headings: "The whole house" / "Behind Wizkoo" / "Say hello" in sentence-case source, rendered through the existing uppercase Space Mono treatment. Ruled August 19, 2026; supersedes the prior production headings and the unresolved Light Standard v5 naming discrepancy.
 - Canonical guard format — corrected August 15, 2026 after the product cutover: AMY_TECHNICAL_STANDARDS.md uses SCOPE GUARD (project-agnostic scope, Do NOT add project-specific content, Promotion rule). wizkoo/TECHNICAL_RUNBOOK.md uses PROJECT GUARD with explicit roles for the marketing repository, current wizkoo-app product authority, and legacy Stage 3 rollback generator. Learnkoo TECHNICAL_RUNBOOK.md uses PROJECT GUARD with Scope (Learnkoo only), Do not apply cross-project warning, full Standards path. Do not paraphrase or abbreviate guard text.
-- Standards path in guards: C:\Users\amyog\Desktop\wizkoo\AMY_TECHNICAL_STANDARDS.md — full absolute path used in both project guards. Do not shorten to filename-only.
+- Standards path in guards: C:\dev\standards\AMY_TECHNICAL_STANDARDS.md — full absolute path used in both project guards. Do not shorten to filename-only.
 - Band-Name Pairing Rule (locked April 29, 2026): band name must always appear with age range on any public-facing surface. Format: Name · Ages X-Y (e.g. Wonderer · Ages 3-4, Apprentice · Ages 5-6, Artisan · Ages 7-9, Scholar · Ages 10-12). Reserved bands follow same pattern when shipped. The Luminary takes no age pairing. Architecture-level lock — not a copy preference. Do not render bare band names on any public surface.
 - cover_quality field (locked April 29, 2026): TEXT DEFAULT 'standard' CHECK (cover_quality IN ('featured','standard','hidden')). Featured cluster in renderFeaturedCluster() gates exclusively on cover_quality = 'featured'. If no featured book is available for a band slot, that slot is omitted entirely — never fall back to standard-quality books. Starter set: 9 books as of April 29, 2026. Any expansion requires a curator pass, not a code change.
 - Two-tier cover height system (locked April 29, 2026): band grid cards: height: min(180px, 25vh); featured cluster cards: height: min(280px, 35vh). Both: object-fit: contain; background: var(--linen) for letterbox fill on non-portrait covers. The min() function self-adjusts across viewport sizes including 200% display scaling. Do not revert to fixed-px heights or aspect-ratio approach.
