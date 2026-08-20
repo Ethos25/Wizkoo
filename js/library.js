@@ -326,11 +326,6 @@
           '<p class="lib-featured-empty-eyebrow">From the Curator</p>' +
           '<p class="lib-featured-empty-quote">"I&rsquo;m rereading the next three picks this week. New featured books up Friday."</p>' +
           '<p class="lib-featured-empty-sig">— Amy, founder &amp; reader-in-chief</p>' +
-          '<div class="lib-mcta lib-featured-mcta">' +
-            '<div class="lib-mcta-primary-wrap">' +
-              '<a href="/notify" class="lib-mcta-primary">GET NOTIFIED</a>' +
-            '</div>' +
-          '</div>' +
         '</div>';
       return;
     }
