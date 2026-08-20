@@ -29,6 +29,8 @@ const { inlineInto } = require('./render-components');
 const REPO = path.resolve(__dirname, '..');
 const MANIFEST = 'publish-allowlist.txt';
 const OUT = '_site';
+const DEPLOY_SHA_VARIABLE = 'COMMIT_REF';
+const DEPLOY_SHA_META_NAME = 'wizkoo-deploy-sha';
 
 /**
  * Directories the inventory walk does not descend into.
@@ -139,6 +141,66 @@ function fail(lines) {
   process.exit(1);
 }
 
+/**
+ * Returns the immutable Git commit Netlify is building. A local build without
+ * Netlify's read-only COMMIT_REF is honest about that absence; it never invents
+ * a hash from the working tree or leaves a placeholder that looks authoritative.
+ */
+function deploySha() {
+  const value = process.env[DEPLOY_SHA_VARIABLE];
+  if (value === undefined || value.trim() === '') return 'unknown';
+
+  const sha = value.trim();
+  if (!/^[0-9a-f]{40}$/i.test(sha)) {
+    fail([
+      `${DEPLOY_SHA_VARIABLE} is not a full Git commit SHA`,
+      '',
+      `${DEPLOY_SHA_VARIABLE} must contain exactly 40 hexadecimal characters.`,
+      `Received: ${JSON.stringify(sha)}`,
+      '',
+      'The deploy stamp was not written. Refusing to publish ambiguous build metadata.',
+    ]);
+  }
+  return sha.toLowerCase();
+}
+
+/** Adds one source-readable, non-rendered deploy stamp to every published page. */
+function stampDeploySha(outDir, files, sha) {
+  const existingStamp = new RegExp(
+    `<meta\\s+[^>]*name=["']${DEPLOY_SHA_META_NAME}["'][^>]*>`,
+    'i'
+  );
+  let stamped = 0;
+
+  for (const rel of files) {
+    if (!rel.endsWith('.html')) continue;
+
+    const file = path.join(outDir, rel);
+    const html = fs.readFileSync(file, 'utf8');
+    if (existingStamp.test(html)) {
+      fail([
+        `${rel} already contains a ${DEPLOY_SHA_META_NAME} stamp`,
+        '',
+        'Deploy metadata is generated only by scripts/build-site.js.',
+        'Remove the source-authored stamp so the build has one source of truth.',
+      ]);
+    }
+    if (!/<\/head\s*>/i.test(html)) {
+      fail([
+        `${rel} has no closing </head> tag`,
+        '',
+        'Every published HTML entry point must carry the deploy stamp in its head.',
+      ]);
+    }
+
+    const stamp = `  <meta name="${DEPLOY_SHA_META_NAME}" content="${sha}">\n`;
+    fs.writeFileSync(file, html.replace(/<\/head\s*>/i, stamp + '</head>'));
+    stamped++;
+  }
+
+  return stamped;
+}
+
 // ── Build ───────────────────────────────────────────────────────────────────
 
 const manifest = readManifest(MANIFEST);
@@ -240,6 +302,8 @@ for (const rel of [...selected.keys()].sort()) {
 const inlined = inlineInto(outDir, [...selected.keys()]);
 const withNav = inlined.filter((r) => r.nav).length;
 const withFooter = inlined.filter((r) => r.footer).length;
+const sha = deploySha();
+const stamped = stampDeploySha(outDir, [...selected.keys()], sha);
 
 // ── Report ──────────────────────────────────────────────────────────────────
 
@@ -269,7 +333,8 @@ process.stdout.write(
   `   (${files.length - built.length} of ${files.length} stay out)\n\n` +
   `    ${rootHtmlSummary()}\n` +
   `    Nav and footer inlined into ${withNav} and ${withFooter} pages ` +
-  `from components/nav.js and components/footer.js.\n\n`
+  `from components/nav.js and components/footer.js.\n` +
+  `    Deploy SHA stamped into ${stamped} pages from ${DEPLOY_SHA_VARIABLE}: ${sha}\n\n`
 );
 
 function rootHtmlSummary() {
